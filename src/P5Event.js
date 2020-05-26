@@ -29,7 +29,8 @@ let mouseDecode = (p, g) => {
     if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
       // do nothing
     } else {
-      console.log('top area, indexAdjustedAndConstrained=' + cardSegmentIndexAdjusted);
+      //console.log('top area, indexAdjustedAndConstrained=' + cardSegmentIndexAdjusted);
+      convertAdjustedIndexToCardKey(cardSegmentIndexAdjusted, myHandArray);
     }
     break;
     // right (E?)
@@ -52,7 +53,8 @@ let mouseDecode = (p, g) => {
       if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
         // do nothing
       } else {
-        console.log('right area, indexAdjustedAndConstrained=' + cardSegmentIndexAdjusted);
+        //console.log('right area, indexAdjustedAndConstrained=' + cardSegmentIndexAdjusted);
+        convertAdjustedIndexToCardKey(cardSegmentIndexAdjusted, myHandArray);
       }
       break;
     // bottom (S?)
@@ -75,7 +77,7 @@ let mouseDecode = (p, g) => {
       if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
         // do nothing
       } else {
-        console.log('bottom area, indexAdjustedAndConstrained=' + cardSegmentIndexAdjusted);
+        //console.log('bottom area, indexAdjustedAndConstrained=' + cardSegmentIndexAdjusted);
         convertAdjustedIndexToCardKey(cardSegmentIndexAdjusted, myHandArray);
       }
     break;
@@ -99,7 +101,8 @@ let mouseDecode = (p, g) => {
       if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
         // do nothing
       } else {
-        console.log('left area, indexAdjustedAndConstrained=' + cardSegmentIndexAdjusted);
+        //console.log('left area, indexAdjustedAndConstrained=' + cardSegmentIndexAdjusted);
+        convertAdjustedIndexToCardKey(cardSegmentIndexAdjusted, myHandArray);
       }
       break;
     default:
@@ -111,7 +114,7 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   // sort the array in the same way as cards are displayed
   myHandArray.sort((a, b) => {return b.handOrder - a.handOrder});
   let myCard = myHandArray[cardSegmentIndexAdjusted];
-  console.log(myCard);
+  console.log(myCard.fileName);
 }
 
 exports.mouseDecode = mouseDecode;
