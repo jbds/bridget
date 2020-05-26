@@ -17,19 +17,23 @@ function FlipHand(Props) {
                 }, React.createElement("tbody", undefined, React.createElement("tr", undefined, React.createElement("td", undefined, " "), React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
                                   dispatch: dispatch,
                                   action: /* Flip */Block.__(1, [/* North */0]),
-                                  label: "North"
+                                  label: "North",
+                                  id: "btnNorth"
                                 })), React.createElement("td", undefined, " ")), React.createElement("tr", undefined, React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
                                   dispatch: dispatch,
                                   action: /* Flip */Block.__(1, [/* West */3]),
-                                  label: "West"
+                                  label: "West",
+                                  id: "btnWest"
                                 })), React.createElement("td", undefined, "< Flip >"), React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
                                   dispatch: dispatch,
                                   action: /* Flip */Block.__(1, [/* East */1]),
-                                  label: "East"
+                                  label: "East",
+                                  id: "btnEast"
                                 }))), React.createElement("tr", undefined, React.createElement("td", undefined, " "), React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
                                   dispatch: dispatch,
                                   action: /* Flip */Block.__(1, [/* South */2]),
-                                  label: "South"
+                                  label: "South",
+                                  id: "btnSouth"
                                 })), React.createElement("td", undefined, " ")))));
 }
 

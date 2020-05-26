@@ -19,7 +19,7 @@ let make = (~dispatch: Global.action => unit) => {
           (React.string(" "))
       </td>
       <td>
-        <ButtonStd dispatch action=Flip(North) label="North" />
+        <ButtonStd dispatch action=Flip(North) label="North" id="btnNorth"/>
       </td>
       <td>
         (React.string(" "))
@@ -27,14 +27,14 @@ let make = (~dispatch: Global.action => unit) => {
     </tr>
     <tr>
       <td>
-        <ButtonStd dispatch action=Flip(West) label="West" />
+        <ButtonStd dispatch action=Flip(West) label="West" id="btnWest"/>
       </td>
       <td
       >
         (React.string("< Flip >"))
       </td>
       <td>
-        <ButtonStd dispatch action=Flip(East) label="East" />
+        <ButtonStd dispatch action=Flip(East) label="East" id="btnEast"/>
       </td>
     </tr>
     <tr>
@@ -42,7 +42,7 @@ let make = (~dispatch: Global.action => unit) => {
           (React.string(" "))
       </td>
       <td>
-        <ButtonStd dispatch action=Flip(South) label="South" />
+        <ButtonStd dispatch action=Flip(South) label="South" id="btnSouth"/>
       </td>
       <td>
         (React.string(" "))

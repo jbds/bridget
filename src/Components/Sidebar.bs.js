@@ -8,7 +8,6 @@ var ButtonStd$ReasonReactExamples = require("./ButtonStd.bs.js");
 function Sidebar(Props) {
   var match = React.useReducer(Global$ReasonReactExamples.reducer, Global$ReasonReactExamples.initialState);
   var dispatch = match[1];
-  console.log(match[0]);
   ((window.gameState = match[0]));
   return React.createElement(React.Fragment, undefined, React.createElement("div", {
                   id: "sidebar1"
@@ -17,7 +16,8 @@ function Sidebar(Props) {
                     }, "Test P5"), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Shuffle */0,
-                      label: "Shuffle"
+                      label: "Shuffle",
+                      id: "btnShuffle"
                     })), React.createElement("div", {
                   id: "sidebar2"
                 }, "Sidebar2", React.createElement("br", undefined), React.createElement("button", {
@@ -25,7 +25,8 @@ function Sidebar(Props) {
                     }, "Test ReasonML"), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Discard */1,
-                      label: "Discard"
+                      label: "Discard",
+                      id: "btnDiscard"
                     })), React.createElement("div", {
                   id: "sidebar3"
                 }, "Sidebar3", React.createElement("br", undefined), React.createElement("span", {

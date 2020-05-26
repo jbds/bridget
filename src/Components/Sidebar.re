@@ -5,7 +5,7 @@ let make = () => {
   // 'dispatch' will not change between re-renders
   // useReducer expects to have passed in a reducer function and an initial state
   let (state, dispatch) = React.useReducer(Global.reducer, Global.initialState);
-  Js.log(state);
+  //Js.log(state);
   // if we ensure ALL changes to state go via actions, 
   // we can guarantee gameState below (for use by p5) will always be in sync
   // compiler warning 21 here unless we return unit specifically
@@ -17,13 +17,13 @@ let make = () => {
     <br/>
     <button id="btn1">(s2e("Test P5"))</button>
     <br/>
-    <ButtonStd dispatch action=Shuffle label="Shuffle"/>
+    <ButtonStd dispatch action=Shuffle label="Shuffle" id="btnShuffle"/>
   </div>
   <div id="sidebar2">
     (s2e("Sidebar2"))
     <br/>
     <button id="btn2">(s2e("Test ReasonML"))</button>
-    <ButtonStd dispatch action=Discard label="Discard"/>
+    <ButtonStd dispatch action=Discard label="Discard" id="btnDiscard"/>
   </div>
   <div id="sidebar3">
     (s2e("Sidebar3"))

@@ -7,7 +7,9 @@ function ButtonStd(Props) {
   var dispatch = Props.dispatch;
   var action = Props.action;
   var label = Props.label;
+  var id = Props.id;
   return React.createElement(React.Fragment, undefined, React.createElement("button", {
+                  id: id,
                   style: {
                     border: "1px solid #26653B",
                     color: "#26653B",
