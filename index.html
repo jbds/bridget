@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <!-- avoid zooming -->
+  <meta name="viewport" content="width=device-width, user-scalable=0">
+  <title>Bridget</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #e0e0e0;
+      font-family: 'Trebuchet MS'
+    }
+    /* TBLR are offsets from window edges */
+    /* Note left margin constraint to allow square card table */
+    #sidebar1 {
+    position: fixed;
+    top: 0;
+    bottom: 67%;
+    left: 100vh;
+    right: 0;
+    background: #e0e0e0;
+    color: gray;
+    text-align: center;
+  }
+  #sidebar2 {
+    position: fixed;
+    top: 33%;
+    bottom: 33%;
+    left: 100vh;
+    right: 0;
+    background: #f0f0f0;
+    color: gray;
+    text-align: center;
+  }
+  #sidebar3 {
+    position: fixed;
+    top: 67%;
+    bottom: 0;
+    left: 100vh;
+    right: 0;
+    background: #e0e0e0;
+    color: black;
+    text-align: center;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>
+    // stub a variable ReactJS checks. ReactJS assumes you're using a bundler, NodeJS or similar system that provides it the `process.env.NODE_ENV` variable.
+    window.process = {
+      env: {
+        NODE_ENV: 'development'
+      }
+    };
+  </script>
+  <!-- This is https://github.com/marijnh/moduleserve, the secret sauce that allows us not need to bundle things during development, and have instantaneous iteration feedback, without any hot-reloading or extra build pipeline needed. -->
+  <script src="/moduleserve/load.js" data-module="/src/Index.bs.js"></script>
+  <!-- Our little watcher. Super clean. Check it out! -->
+</body>
+
+</html>
