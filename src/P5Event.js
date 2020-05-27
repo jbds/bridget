@@ -115,6 +115,17 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   myHandArray.sort((a, b) => {return b.handOrder - a.handOrder});
   let myCard = myHandArray[cardSegmentIndexAdjusted];
   console.log(myCard.fileName);
+  // at this point we know which card was clicked
+  // so we can update the (mutable) js gameState object
+  // and then dispatch the Discard action via a hidden key on the sidebar
+  let pack = gameState.pack;
+  pack.find((value, index) => {
+    if (value.fileName === myCard.fileName) {
+      // lifecycle Discard = 1 in js
+      gameState.pack[index].lifecycle = 1;
+    }
+  });
+  console.log(gameState.pack.filter(x => x.fileName === myCard.fileName));
 }
 
 exports.mouseDecode = mouseDecode;
