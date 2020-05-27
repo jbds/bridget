@@ -157,17 +157,21 @@ let paintDiscardArray = (p, g) => {
       let p5img = g.imgMap.get(obj.fileName);
       // position of card depends on range of shuffleIndex
       switch (true) {
+        // N
         case (obj.shuffleIndex < 13):
           p.image(p5img, -cardWidth / 2, -cardHeight, cardWidth, cardHeight);
           break;
+        // E
         case (obj.shuffleIndex < 26):
           p.image(p5img, cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight);
           break;
+        // S
         case (obj.shuffleIndex < 39):
           p.image(p5img, -cardWidth / 2, 0, cardWidth, cardHeight);
           break;
+        // W
         case (obj.shuffleIndex < 52):
-          p.image(p5img, -cardWidth, -cardHeight / 2, cardWidth, cardHeight);
+          p.image(p5img, -cardWidth * 1.5, -cardHeight / 2, cardWidth, cardHeight);
           break;
         default:
         console.log('Unexpected shuffleIndex argument');
