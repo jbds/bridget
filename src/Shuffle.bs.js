@@ -574,6 +574,7 @@ function shufflePack(param) {
         };
 }
 
+exports.initialPack = initialPack;
 exports.initialHandVisible = initialHandVisible;
 exports.shufflePack = shufflePack;
 /* No side effect */

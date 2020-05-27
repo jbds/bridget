@@ -3,10 +3,8 @@
 var $$Array = require("bs-platform/lib/js/array.js");
 var Shuffle$ReasonReactExamples = require("./Shuffle.bs.js");
 
-var initialState_pack = [];
-
 var initialState = {
-  pack: initialState_pack,
+  pack: Shuffle$ReasonReactExamples.initialPack,
   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
   dealer: undefined,
   cardsDealtCount: 0

@@ -79,6 +79,8 @@ type state = {
 
 //let myArrayOfIndices: array(int);
 
+let initialPack: pack;
+
 let initialHandVisible: handVisible;
 
 let shufflePack: unit => state;

@@ -10,7 +10,7 @@ type action =
 
 // force to type Shuffle.state
 let initialState: Shuffle.state = {
-    pack: [||],
+    pack: Shuffle.initialPack,
     handVisible: Shuffle.initialHandVisible,
     dealer: None,
     cardsDealtCount: 0
