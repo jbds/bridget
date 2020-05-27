@@ -1,5 +1,5 @@
 {
-  "name": "p5-02c",
+  "name": "bridget",
   "version": "0.1.0",
   "scripts": {
     "build": "bsb -make-world",

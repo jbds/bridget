@@ -1,6 +1,6 @@
 'use strict';
 // p is p5 library, g is drawing global properties
-let drawHand = (p, g, pointOfCompass) => {
+let drawCards = (p, g, pointOfCompass) => {
   // std playing card is 3.5in x 2.25in and svg is 336px x 216px
   g.cardAspectRatio = 3.5 / 2.25;
   // For card segments on periphery to just meet without overlap
@@ -56,35 +56,35 @@ let drawHand = (p, g, pointOfCompass) => {
   switch (pointOfCompass) {
     case 'North':
       g.myHandArray = window.gameState.pack.filter(obj => {
-          return (obj.shuffleIndex >= 0 && obj.shuffleIndex <=12 && obj.lifecycle == 0)
+          return (obj.shuffleIndex >= 0 && obj.shuffleIndex <=12 && obj.lifecycle === 1)
         }
       ); 
       p.rotate(0); //p.rotate(p.PI); 
       break;
     case 'East':
       g.myHandArray = window.gameState.pack.filter(obj => {
-          return (obj.shuffleIndex >= 13 && obj.shuffleIndex <=25 && obj.lifecycle == 0)
+          return (obj.shuffleIndex >= 13 && obj.shuffleIndex <=25 && obj.lifecycle === 1)
         }
       ); 
       p.rotate(-p.HALF_PI);
       break;
     case "South":
       g.myHandArray = window.gameState.pack.filter(obj => {
-          return (obj.shuffleIndex >= 26 && obj.shuffleIndex <=38 && obj.lifecycle == 0)
+          return (obj.shuffleIndex >= 26 && obj.shuffleIndex <=38 && obj.lifecycle == 1)
         }
       );
       p.rotate(0);
       break;
     case 'West':
       g.myHandArray = window.gameState.pack.filter(obj => {
-          return (obj.shuffleIndex >= 39 && obj.shuffleIndex <=51 && obj.lifecycle == 0)
+          return (obj.shuffleIndex >= 39 && obj.shuffleIndex <=51 && obj.lifecycle == 1)
         }
       ); 
       p.rotate(p.HALF_PI);      
       break;
     case 'Centre':
       g.myDiscardArray = window.gameState.pack.filter(obj => {
-          return (obj.lifecycle == 1 /* Discard */)
+          return (obj.lifecycle === 2 )
         }
       );
       //console.log(g.myDiscardArray);
@@ -180,4 +180,4 @@ let paintDiscardArray = (p, g) => {
   )
 };
 
-exports.drawHand = drawHand;
+exports.drawCards = drawCards;

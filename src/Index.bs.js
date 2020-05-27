@@ -92,14 +92,11 @@ const callbackFunctionForP5 = (p) => {
   p.draw = () => {
     // main loop repeats at frame rate
     p.image(g.imgMap.get('GB'), 0, 0, g.canvasWidth, g.canvasHeight)
-    // avoid error on empty pack
-    if (window.gameState.pack.length > 0) {
-      SideEffect.drawHand(p, g, 'South');
-      SideEffect.drawHand(p, g, 'West');
-      SideEffect.drawHand(p, g, 'East');
-      SideEffect.drawHand(p, g, 'North');
-      SideEffect.drawHand(p, g, 'Centre');
-    }
+      SideEffect.drawCards(p, g, 'South');
+      SideEffect.drawCards(p, g, 'West');
+      SideEffect.drawCards(p, g, 'East');
+      SideEffect.drawCards(p, g, 'North');
+      SideEffect.drawCards(p, g, 'Centre');
   };
 
   p.windowResized = () => {

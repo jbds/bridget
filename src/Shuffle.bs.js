@@ -477,9 +477,9 @@ var initialPack = [
 
 var initialHandVisible = {
   north: true,
-  east: false,
+  east: true,
   south: true,
-  west: false
+  west: true
 };
 
 function impureGetTimeBasedSeedUpTo60k(param) {
@@ -563,7 +563,7 @@ function shufflePack(param) {
                   rank: card.rank,
                   suit: card.suit,
                   fileName: card.fileName,
-                  lifecycle: card.lifecycle
+                  lifecycle: /* Hand */1
                 };
         }), initialPack);
   return {

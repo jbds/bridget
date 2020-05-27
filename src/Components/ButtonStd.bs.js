@@ -11,6 +11,7 @@ function ButtonStd(Props) {
   return React.createElement(React.Fragment, undefined, React.createElement("button", {
                   id: id,
                   style: {
+                    backgroundColor: "#FFFFFF",
                     border: "1px solid #26653B",
                     color: "#26653B",
                     fontSize: "2.5vh",

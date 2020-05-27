@@ -40,7 +40,7 @@ type compassPoint =
 // winning hand takes the trick
 type lifecycle =
   | Dealer
-  | Hand(compassPoint)
+  | Hand
   | Discard
   | Trick(compassPoint)
 ;
@@ -135,7 +135,7 @@ let initialPack = [|
   {noTrumpValue: 0, handOrder: 13, shuffleIndex: 0, rank: Two, suit: Clubs, fileName: "2C", lifecycle: Dealer},
 |];
 
-let initialHandVisible = {north: true, east: false, south: true, west: false};
+let initialHandVisible = {north: true, east: true, south: true, west: true};
 
 let impureGetTimeBasedSeedUpTo60k = () => {
   let now = Js.Date.make();
@@ -166,12 +166,8 @@ let shuffleArrayInPlace = (arr, seed) => {
 let shufflePack = () => {
   // IMPURE!
   let () = shuffleArrayInPlace(myArrayOfIndices, impureGetTimeBasedSeedUpTo60k());
-  // randomize the shuffleIndex to return the "shuffled" pack
-  let shuffledPack = Array.map(card => {...card, shuffleIndex: myArrayOfIndices[card.noTrumpValue]}, initialPack);
-  // TEST ONLY - NO SHUFFLE
-  //let shuffledPack = initialPack;
-  //Js.log(shuffledPack);
-  // dealer is not known at time of shuffle
+  // randomize the shuffleIndex to return the "shuffled" pack, and move lifecycle to Hand
+  let shuffledPack = Array.map(card => {...card, shuffleIndex: myArrayOfIndices[card.noTrumpValue], lifecycle: Hand}, initialPack);
   {
     pack: shuffledPack,
     handVisible: initialHandVisible,

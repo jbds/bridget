@@ -6,6 +6,7 @@ type action =
   // | ShowAllCards
   // | Deal 
   | Discard
+  | Sync
 ;
 
 // force to type Shuffle.state
@@ -21,7 +22,10 @@ let reducer = (state, action) => {
       | Shuffle => {
         // Shuffle.rei is helpful here
         // returns an entirely new state, no need to use existing state passed in
-        Shuffle.shufflePack();
+        let result = Shuffle.shufflePack();
+        //Js.log(result);
+        result;
+
       }
       | DealerChange (shortLoc) => {
         switch (shortLoc) {
@@ -54,6 +58,12 @@ let reducer = (state, action) => {
           state.pack
         );
         {...state, pack: myPack}
+      }
+      | Sync => {
+        // replace existing state with gameState
+        let myNewState: Shuffle.state = [%bs.raw {| window.gameState |}]   //state;
+        Js.log(myNewState);
+        myNewState;
       }
     }
 };

@@ -12,30 +12,37 @@ var initialState = {
 
 function reducer(state, action) {
   if (typeof action === "number") {
-    if (action === /* Shuffle */0) {
-      return Shuffle$ReasonReactExamples.shufflePack(undefined);
+    switch (action) {
+      case /* Shuffle */0 :
+          return Shuffle$ReasonReactExamples.shufflePack(undefined);
+      case /* Discard */1 :
+          var myPack = $$Array.map((function (card) {
+                  if (card.shuffleIndex === 13) {
+                    return {
+                            noTrumpValue: card.noTrumpValue,
+                            handOrder: card.handOrder,
+                            shuffleIndex: card.shuffleIndex,
+                            rank: card.rank,
+                            suit: card.suit,
+                            fileName: card.fileName,
+                            lifecycle: /* Discard */2
+                          };
+                  } else {
+                    return card;
+                  }
+                }), state.pack);
+          return {
+                  pack: myPack,
+                  handVisible: state.handVisible,
+                  dealer: state.dealer,
+                  cardsDealtCount: state.cardsDealtCount
+                };
+      case /* Sync */2 :
+          var myNewState = window.gameState;
+          console.log(myNewState);
+          return myNewState;
+      
     }
-    var myPack = $$Array.map((function (card) {
-            if (card.shuffleIndex === 13) {
-              return {
-                      noTrumpValue: card.noTrumpValue,
-                      handOrder: card.handOrder,
-                      shuffleIndex: card.shuffleIndex,
-                      rank: card.rank,
-                      suit: card.suit,
-                      fileName: card.fileName,
-                      lifecycle: /* Discard */1
-                    };
-            } else {
-              return card;
-            }
-          }), state.pack);
-    return {
-            pack: myPack,
-            handVisible: state.handVisible,
-            dealer: state.dealer,
-            cardsDealtCount: state.cardsDealtCount
-          };
   } else if (action.tag) {
     switch (action[0]) {
       case /* North */0 :

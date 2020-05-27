@@ -40,7 +40,7 @@ type compassPoint =
 // winning hand takes the trick
 type lifecycle =
   | Dealer
-  | Hand(compassPoint)
+  | Hand
   | Discard
   | Trick(compassPoint)
 ;

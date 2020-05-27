@@ -27,6 +27,11 @@ function Sidebar(Props) {
                       action: /* Discard */1,
                       label: "Discard",
                       id: "btnDiscard"
+                    }), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                      dispatch: dispatch,
+                      action: /* Sync */2,
+                      label: "Sync state with gameState",
+                      id: "btnSync"
                     })), React.createElement("div", {
                   id: "sidebar3"
                 }, "Sidebar3", React.createElement("br", undefined), React.createElement("span", {

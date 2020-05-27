@@ -8,6 +8,7 @@ let mouseDecode = (p, g) => {
   let cardSegmentIndex;
   let myHandArray;
   let cardSegmentIndexAdjusted;
+  //console.log('mouse decode');
   switch (true) {
     // top (N?)
     case (p.mouseY <= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
@@ -23,7 +24,7 @@ let mouseDecode = (p, g) => {
     );
     // this floating number needs an offset based on hand array length
     myHandArray = window.gameState.pack.filter(obj => {
-      return (obj.shuffleIndex >= 0 && obj.shuffleIndex <= 12 && obj.lifecycle == 0)
+      return (obj.shuffleIndex >= 0 && obj.shuffleIndex <= 12 && obj.lifecycle === 1)
     });
     cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
     if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
@@ -47,7 +48,7 @@ let mouseDecode = (p, g) => {
       );
       // this floating number needs an offset based on hand array length
       myHandArray = window.gameState.pack.filter(obj => {
-        return (obj.shuffleIndex >= 13 && obj.shuffleIndex <= 25 && obj.lifecycle == 0)
+        return (obj.shuffleIndex >= 13 && obj.shuffleIndex <= 25 && obj.lifecycle === 1)
       });
       cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
       if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
@@ -71,7 +72,7 @@ let mouseDecode = (p, g) => {
       );
       // this floating number needs an offset based on hand array length
       myHandArray = window.gameState.pack.filter(obj => {
-        return (obj.shuffleIndex >= 26 && obj.shuffleIndex <=38 && obj.lifecycle == 0)
+        return (obj.shuffleIndex >= 26 && obj.shuffleIndex <=38 && obj.lifecycle === 1)
       });
       cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
       if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
@@ -95,7 +96,7 @@ let mouseDecode = (p, g) => {
       );
       // this floating number needs an offset based on hand array length
       myHandArray = window.gameState.pack.filter(obj => {
-        return (obj.shuffleIndex >= 39 && obj.shuffleIndex <= 51 && obj.lifecycle == 0)
+        return (obj.shuffleIndex >= 39 && obj.shuffleIndex <= 51 && obj.lifecycle === 1)
       });
       cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
       if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
@@ -114,18 +115,19 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   // sort the array in the same way as cards are displayed
   myHandArray.sort((a, b) => {return b.handOrder - a.handOrder});
   let myCard = myHandArray[cardSegmentIndexAdjusted];
-  console.log(myCard.fileName);
+  //console.log(myCard.fileName);
   // at this point we know which card was clicked
   // so we can update the (mutable) js gameState object
-  // and then dispatch the Discard action via a hidden key on the sidebar
   let pack = gameState.pack;
   pack.find((value, index) => {
     if (value.fileName === myCard.fileName) {
-      // lifecycle Discard = 1 in js
-      gameState.pack[index].lifecycle = 1;
+      // lifecycle Discard = 2 in js
+      gameState.pack[index].lifecycle = 2;
     }
   });
-  console.log(gameState.pack.filter(x => x.fileName === myCard.fileName));
+  //console.log(gameState.pack.filter(x => x.fileName === myCard.fileName));
+  // and then dispatch the Sync action via a hidden key on the sidebar
+  document.getElementById('btnSync').click();
 }
 
 exports.mouseDecode = mouseDecode;

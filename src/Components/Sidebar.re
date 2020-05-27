@@ -24,6 +24,7 @@ let make = () => {
     <br/>
     <button id="btn2">(s2e("Test ReasonML"))</button>
     <ButtonStd dispatch action=Discard label="Discard" id="btnDiscard"/>
+    <ButtonStd dispatch action=Sync label="Sync state with gameState" id="btnSync" />
   </div>
   <div id="sidebar3">
     (s2e("Sidebar3"))
