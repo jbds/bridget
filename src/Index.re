@@ -21,6 +21,7 @@ const callbackFunctionForP5 = (p) => {
   // decalare all other variables specific to drawing process
   // as properies of a 'global' object g
   const g = {};
+  const w = window;
   // maps 1 background image filename and 53 card filenames to full path
   g.imgMap = new Map();
 
@@ -91,7 +92,7 @@ const callbackFunctionForP5 = (p) => {
     let p5btn1 = p.select('#btn1');
     p5btn1.mousePressed(changeBgColor);
     // init userState
-    window.userState = {
+    w.userState = {
       tableRotationDegrees: 0
     }
     };
@@ -99,11 +100,11 @@ const callbackFunctionForP5 = (p) => {
   p.draw = () => {
     // main loop repeats at frame rate
     p.image(g.imgMap.get('GB'), 0, 0, g.canvasWidth, g.canvasHeight)
-      SideEffect.drawCards(p, g, 'South');
-      SideEffect.drawCards(p, g, 'West');
-      SideEffect.drawCards(p, g, 'East');
-      SideEffect.drawCards(p, g, 'North');
-      SideEffect.drawCards(p, g, 'Centre');
+      //SideEffect.drawCards(p, g, w, 'South');
+      //SideEffect.drawCards(p, g, w, 'West');
+      SideEffect.drawCards(p, g, w, 'East');
+       //SideEffect.drawCards(p, g, w, 'North');
+      // SideEffect.drawCards(p, g, w, 'Centre');
   };
 
   p.windowResized = () => {

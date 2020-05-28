@@ -1,6 +1,6 @@
 'use strict';
 // p is p5 library, g is drawing global properties
-let drawCards = (p, g, pointOfCompass) => {
+let drawCards = (p, g, w, pointOfCompass) => {
   // std playing card is 3.5in x 2.25in and svg is 336px x 216px
   g.cardAspectRatio = 3.5 / 2.25;
   // For card segments on periphery to just meet without overlap
@@ -11,43 +11,40 @@ let drawCards = (p, g, pointOfCompass) => {
   // 91px min height that allows visibility of rank and suit
   g.cardSegmentHeightToCardRatio = 91 / 336;
   let myDiscardArray;
-  p.push()
+  p.push();
   // origin is pointOfCompass dependent, Dummy (N?) is special case
-  switch (pointOfCompass) {
-    case 'North':
-      rotationOriginXPercent = 50; 
-      // offset by height of cardsegment 91px
-      rotationOriginYPercent = 0 + 
-        100 * g.cardSegmentHeightToCardRatio * g.cardHeightToCanvasHeightRatio; 
-      g.isHandVisible = gameState.handVisible.north;
-      break;
-    case 'East':
-      rotationOriginXPercent = 100; 
-      rotationOriginYPercent = 50; 
-      g.isHandVisible = gameState.handVisible.east;
-      break;
-    case "South":
-      rotationOriginXPercent = 50; 
-      rotationOriginYPercent = 100; 
-      g.isHandVisible = gameState.handVisible.south;
-      break;
-    case 'West':
-      rotationOriginXPercent = 0; 
-      rotationOriginYPercent = 50; 
-      g.isHandVisible = gameState.handVisible.west;
-      break;
-    case 'Centre':
-      rotationOriginXPercent = 50;
-      rotationOriginYPercent = 50;
-      break;
-    default:
-      console.log('Unexpected pointOfCompass argument');
-  }
-  let rotationOriginXPixels = rotationOriginXPercent * g.canvasWidth / 100;
-  let rotationOriginYPixels = rotationOriginYPercent * g.canvasHeight / 100;
-  // move the origin to this point
-  p.translate(rotationOriginXPixels, rotationOriginYPixels);
-  // for debug, indicate this (translated) point, which may or may not be off the canvas
+  // we want to use a common starting point (50%, 50%) or (canvasWidth /2, canvasHeight / 2)
+  // switch (pointOfCompass) {
+  //   case 'North':
+  //     rotationOriginXPercent = 50; 
+  //     // offset by height of cardsegment 91px
+  //     rotationOriginYPercent = 0 + 
+  //       100 * g.cardSegmentHeightToCardRatio * g.cardHeightToCanvasHeightRatio; 
+  //     break;
+  //   case 'East':
+  //     rotationOriginXPercent = 100; 
+  //     rotationOriginYPercent = 50; 
+  //     break;
+  //   case "South":
+  //     rotationOriginXPercent = 50; 
+  //     rotationOriginYPercent = 100; 
+  //     break;
+  //   case 'West':
+  //     rotationOriginXPercent = 0; 
+  //     rotationOriginYPercent = 50; 
+  //     break;
+  //   case 'Centre':
+  //     rotationOriginXPercent = 50;
+  //     rotationOriginYPercent = 50;
+  //     break;
+  //   default:
+  //     console.log('Unexpected pointOfCompass argument');
+  // }
+  // let rotationOriginXPixels = rotationOriginXPercent * g.canvasWidth / 100;
+  // let rotationOriginYPixels = rotationOriginYPercent * g.canvasHeight / 100;
+  // move the origin to table centre
+  p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
+  // for debug, indicate this point
   p.stroke(255);
   p.strokeWeight(5);
   p.point(0,0);
@@ -55,32 +52,112 @@ let drawCards = (p, g, pointOfCompass) => {
   // based on pointOfCompass
   switch (pointOfCompass) {
     case 'North':
+      g.isHandVisible = gameState.handVisible.north;
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 0 && obj.shuffleIndex <=12 && obj.lifecycle === 1)
         }
       ); 
-      p.rotate(0); //p.rotate(p.PI); 
+      switch (w.userState.tableRotationDegrees) {
+        case 0: 
+          p.translate(0, -g.canvasHeight / 2)
+          p.rotate(2 * p.HALF_PI); 
+          break;
+        case 90: 
+          p.translate(g.canvasWidth / 2, 0);
+          p.rotate(3 * p.HALF_PI);
+          break;
+        case 180:
+          p.translate(0, g.canvasHeight / 2);
+          p.rotate(0);
+          break;
+        case 270:
+          p.translate(-g.canvasWidth / 2, 0);
+          p.rotate(p.HALF_PI);
+          break;
+        default:
+          console.log('Unexpected tableRotation argument ');
+      }
       break;
     case 'East':
+      g.isHandVisible = gameState.handVisible.east;
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 13 && obj.shuffleIndex <=25 && obj.lifecycle === 1)
         }
       ); 
-      p.rotate(-p.HALF_PI);
+      switch (w.userState.tableRotationDegrees) {
+        case 0: 
+          p.translate(g.canvasWidth / 2, 0)
+          p.rotate(-p.HALF_PI); 
+          break;
+        case 90: 
+          p.translate(0, g.canvasHeight / 2);
+          p.rotate(0);
+          break;
+        case 180:
+          p.translate(-g.canvasWidth / 2, 0);
+          p.rotate(p.HALF_PI);
+          break;
+        case 270:
+          p.translate(0, -g.canvasHeight / 2);
+          p.rotate(2 * p.HALF_PI);
+          break;
+        default:
+          console.log('Unexpected tableRotation argument ');
+      }
       break;
     case "South":
+      g.isHandVisible = gameState.handVisible.south;
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 26 && obj.shuffleIndex <=38 && obj.lifecycle == 1)
         }
       );
-      p.rotate(0);
+      switch (w.userState.tableRotationDegrees) {
+        case 0: 
+          p.translate(0, g.canvasHeight / 2)
+          p.rotate(0); 
+          break;
+        case 90: 
+          p.translate(-g.canvasWidth / 2, 0);
+          p.rotate(p.HALF_PI);
+          break;
+        case 180:
+          p.translate(0, -g.canvasHeight / 2);
+          p.rotate(2 * p.HALF_PI);
+          break;
+        case 270:
+          p.translate(g.canvasWidth / 2, 0);
+          p.rotate(3 * p.HALF_PI);
+          break;
+        default:
+          console.log('Unexpected tableRotation argument ');
+      }
       break;
     case 'West':
+      g.isHandVisible = gameState.handVisible.west;
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 39 && obj.shuffleIndex <=51 && obj.lifecycle == 1)
         }
       ); 
-      p.rotate(p.HALF_PI);      
+      switch (w.userState.tableRotationDegrees) {
+        case 0: 
+          p.translate(-g.canvasWidth / 2, 0)
+          p.rotate(p.HALF_PI); 
+          break;
+        case 90: 
+          p.translate(0, -g.canvasHeight / 2);
+          p.rotate(p.PI);
+          break;
+        case 180:
+          p.translate(g.canvasWidth / 2, 0);
+          p.rotate(-p.HALF_PI);
+          break;
+        case 270:
+          p.translate(0, g.canvasHeight / 2);
+          p.rotate(0);
+          break;
+        default:
+          console.log('Unexpected tableRotation argument ');
+      }
       break;
     case 'Centre':
       g.myDiscardArray = window.gameState.pack.filter(obj => {
