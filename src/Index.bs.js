@@ -112,7 +112,7 @@ const callbackFunctionForP5 = (p) => {
 
   p.mousePressed = ()  => {
     if (p.mouseX <= g.canvasWidth && p.mouseY <= g.canvasHeight) {
-      P5Event.mouseDecode(p, g);
+      P5Event.mouseDecode(p, g, w);
     }
   }
 

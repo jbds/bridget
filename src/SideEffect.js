@@ -335,7 +335,7 @@ let paintDiscardArray = (p, g, w) => {
               break;
             case 90: 
               p.translate(-cardWidth / 2, -cardHeight / 2);
-              p.rotate(p.HALF_PI);
+              p.rotate(0);
               break;
             case 180:
               p.translate(-cardWidth / 2, -cardHeight / 2);

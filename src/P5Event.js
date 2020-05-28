@@ -1,16 +1,28 @@
 'use strict';
 
-let mouseDecode = (p, g) => {
+let mouseDecode = (p, g, w) => {
   // x and y ranges define 4 regions of interest
   // NB 13 segments means lower bound 0 and upper bound 13
   let cardSegmentHeightToCanvasHeightRatio =
     g.cardSegmentHeightToCardRatio * g.cardHeightToCanvasHeightRatio;
   let cardSegmentIndex;
-  let myHandArray;
   let cardSegmentIndexAdjusted;
-  //console.log('mouse decode');
+  let myHandArray;
+  const myHandArrayN = window.gameState.pack.filter(obj => {
+    return (obj.shuffleIndex >= 0 && obj.shuffleIndex <= 12 && obj.lifecycle === 1)
+  });
+  const myHandArrayE = window.gameState.pack.filter(obj => {
+    return (obj.shuffleIndex >= 13 && obj.shuffleIndex <= 25 && obj.lifecycle === 1)
+  });
+  const myHandArrayS = window.gameState.pack.filter(obj => {
+    return (obj.shuffleIndex >= 26 && obj.shuffleIndex <=38 && obj.lifecycle === 1)
+  });
+  const myHandArrayW = window.gameState.pack.filter(obj => {
+    return (obj.shuffleIndex >= 39 && obj.shuffleIndex <= 51 && obj.lifecycle === 1)
+  });
+//console.log('mouse decode');
   switch (true) {
-    // top (N?)
+    // TABLE TOP
     case (p.mouseY <= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
       p.mouseX >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
       p.mouseX < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
@@ -19,13 +31,27 @@ let mouseDecode = (p, g) => {
       p.mouseX, 
       cardSegmentHeightToCanvasHeightRatio * g.canvasHeight,
       (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight,
-      0,
-      13
+      13, // 0, Dummy hand will be reversed
+      0   // 13
     );
     // this floating number needs an offset based on hand array length
-    myHandArray = window.gameState.pack.filter(obj => {
-      return (obj.shuffleIndex >= 0 && obj.shuffleIndex <= 12 && obj.lifecycle === 1)
-    });
+    // fetch array dependent on card table rotation
+    switch(w.userState.tableRotationDegrees) {
+      case 0:
+        myHandArray = myHandArrayN;
+        break;
+      case 90:
+        myHandArray = myHandArrayW;
+        break;
+      case 180:
+        myHandArray = myHandArrayS;
+        break;
+      case 270:
+        myHandArray = myHandArrayE;
+      break;
+      default:
+        console.log('Unexpected tableRotationDegrees');
+    }
     cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
     if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
       // do nothing
@@ -34,7 +60,7 @@ let mouseDecode = (p, g) => {
       convertAdjustedIndexToCardKey(cardSegmentIndexAdjusted, myHandArray);
     }
     break;
-    // right (E?)
+    // TABLE RHS
     case (p.mouseX >= (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight &&
           p.mouseY >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
           p.mouseY < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
@@ -47,9 +73,23 @@ let mouseDecode = (p, g) => {
         0
       );
       // this floating number needs an offset based on hand array length
-      myHandArray = window.gameState.pack.filter(obj => {
-        return (obj.shuffleIndex >= 13 && obj.shuffleIndex <= 25 && obj.lifecycle === 1)
-      });
+    // fetch array dependent on card table rotation
+    switch(w.userState.tableRotationDegrees) {
+      case 0:
+        myHandArray = myHandArrayE;
+        break;
+      case 90:
+        myHandArray = myHandArrayN
+        break;
+      case 180:
+        myHandArray = myHandArrayW;
+        break;
+      case 270:
+        myHandArray = myHandArrayS;
+      break;
+      default:
+        console.log('Unexpected tableRotationDegrees');
+    }
       cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
       if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
         // do nothing
@@ -58,7 +98,7 @@ let mouseDecode = (p, g) => {
         convertAdjustedIndexToCardKey(cardSegmentIndexAdjusted, myHandArray);
       }
       break;
-    // bottom (S?)
+    // TABLE BOTTOM
     case (p.mouseY >= (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight &&
           p.mouseX >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
           p.mouseX < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
@@ -71,9 +111,23 @@ let mouseDecode = (p, g) => {
         13
       );
       // this floating number needs an offset based on hand array length
-      myHandArray = window.gameState.pack.filter(obj => {
-        return (obj.shuffleIndex >= 26 && obj.shuffleIndex <=38 && obj.lifecycle === 1)
-      });
+    // fetch array dependent on card table rotation
+    switch(w.userState.tableRotationDegrees) {
+      case 0:
+        myHandArray = myHandArrayS;
+        break;
+      case 90:
+        myHandArray = myHandArrayE;
+        break;
+      case 180:
+        myHandArray = myHandArrayN;
+        break;
+      case 270:
+        myHandArray = myHandArrayW;
+      break;
+      default:
+        console.log('Unexpected tableRotationDegrees');
+    }
       cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
       if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
         // do nothing
@@ -82,7 +136,7 @@ let mouseDecode = (p, g) => {
         convertAdjustedIndexToCardKey(cardSegmentIndexAdjusted, myHandArray);
       }
     break;
-    // left (W?)
+    // TABLE LHS
     case (p.mouseX <= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
           p.mouseY >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
           p.mouseY < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
@@ -95,9 +149,23 @@ let mouseDecode = (p, g) => {
         13
       );
       // this floating number needs an offset based on hand array length
-      myHandArray = window.gameState.pack.filter(obj => {
-        return (obj.shuffleIndex >= 39 && obj.shuffleIndex <= 51 && obj.lifecycle === 1)
-      });
+      // fetch array dependent on card table rotation
+      switch(w.userState.tableRotationDegrees) {
+        case 0:
+          myHandArray = myHandArrayW;
+          break;
+        case 90:
+          myHandArray = myHandArrayS;
+          break;
+        case 180:
+          myHandArray = myHandArrayE;
+          break;
+        case 270:
+          myHandArray = myHandArrayN;
+        break;
+        default:
+          console.log('Unexpected tableRotationDegrees');
+      }
       cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
       if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
         // do nothing
