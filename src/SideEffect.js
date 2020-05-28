@@ -164,98 +164,98 @@ let drawCards = (p, g, w, pointOfCompass) => {
           return (obj.lifecycle === 2 )
       });
       //console.log(g.myDiscardArray);
-      switch(pointOfCompass) {
-        case 'North':
-          switch (w.userState.tableRotationDegrees) {
-            case 0: 
-              p.translate(0, 0)
-              p.rotate(0); 
-              break;
-            case 90: 
-              p.translate(0, 0);
-              p.rotate(0);
-              break;
-            case 180:
-              p.translate(0, 0);
-              p.rotate(0);
-              break;
-            case 270:
-              p.translate(0, 0);
-              p.rotate(0);
-              break;
-            default:
-              console.log('Unexpected tableRotation argument ');
-          }
-        break;
-        case 'East':
-          switch (w.userState.tableRotationDegrees) {
-            case 0: 
-              p.translate(0, 0)
-              p.rotate(0); 
-              break;
-            case 90: 
-              p.translate(0, 0);
-              p.rotate(0);
-              break;
-            case 180:
-              p.translate(0, 0);
-              p.rotate(0);
-              break;
-            case 270:
-              p.translate(0, 0);
-              p.rotate(0);
-              break;
-            default:
-              console.log('Unexpected tableRotation argument ');
-          }
-        break;
-        case 'South':
-          switch (w.userState.tableRotationDegrees) {
-            case 0: 
-              p.translate(0, 0)
-              p.rotate(0); 
-              break;
-            case 90: 
-              p.translate(0, 0);
-              p.rotate(0);
-              break;
-            case 180:
-              p.translate(0, 0);
-              p.rotate(0);
-              break;
-            case 270:
-              p.translate(0, 0);
-              p.rotate(0);
-              break;
-            default:
-              console.log('Unexpected tableRotation argument ');
-          }
-        break;
-        case 'West':
-          switch (w.userState.tableRotationDegrees) {
-            case 0: 
-              p.translate(0, 0)
-              p.rotate(0); 
-              break;
-            case 90: 
-              p.translate(0, 0);
-              p.rotate(0);
-              break;
-            case 180:
-              p.translate(0, 0);
-              p.rotate(0);
-              break;
-            case 270:
-              p.translate(0, 0);
-              p.rotate(0);
-              break;
-            default:
-              console.log('Unexpected tableRotation argument ');
-          }
-        break;
-        default:
-          console.log('Unexpected pointOfCompass argument');
-      }
+      // switch(true) {
+      //   case g.myDiscardArray[0]:
+      //     switch (w.userState.tableRotationDegrees) {
+      //       case 0: 
+      //         p.translate(0, 0)
+      //         p.rotate(0); 
+      //         break;
+      //       case 90: 
+      //         p.translate(0, 0);
+      //         p.rotate(0);
+      //         break;
+      //       case 180:
+      //         p.translate(0, 0);
+      //         p.rotate(0);
+      //         break;
+      //       case 270:
+      //         p.translate(0, 0);
+      //         p.rotate(0);
+      //         break;
+      //       default:
+      //         console.log('Unexpected tableRotation argument ');
+      //     }
+      //   break;
+      //   case 'East':
+      //     switch (w.userState.tableRotationDegrees) {
+      //       case 0: 
+      //         p.translate(0, 0)
+      //         p.rotate(0); 
+      //         break;
+      //       case 90: 
+      //         p.translate(0, 0);
+      //         p.rotate(0);
+      //         break;
+      //       case 180:
+      //         p.translate(0, 0);
+      //         p.rotate(0);
+      //         break;
+      //       case 270:
+      //         p.translate(0, 0);
+      //         p.rotate(0);
+      //         break;
+      //       default:
+      //         console.log('Unexpected tableRotation argument ');
+      //     }
+      //   break;
+      //   case 'South':
+      //     switch (w.userState.tableRotationDegrees) {
+      //       case 0: 
+      //         p.translate(0, 0)
+      //         p.rotate(0); 
+      //         break;
+      //       case 90: 
+      //         p.translate(0, 0);
+      //         p.rotate(0);
+      //         break;
+      //       case 180:
+      //         p.translate(0, 0);
+      //         p.rotate(0);
+      //         break;
+      //       case 270:
+      //         p.translate(0, 0);
+      //         p.rotate(0);
+      //         break;
+      //       default:
+      //         console.log('Unexpected tableRotation argument ');
+      //     }
+      //   break;
+      //   case 'West':
+      //     switch (w.userState.tableRotationDegrees) {
+      //       case 0: 
+      //         p.translate(0, 0)
+      //         p.rotate(0); 
+      //         break;
+      //       case 90: 
+      //         p.translate(0, 0);
+      //         p.rotate(0);
+      //         break;
+      //       case 180:
+      //         p.translate(0, 0);
+      //         p.rotate(0);
+      //         break;
+      //       case 270:
+      //         p.translate(0, 0);
+      //         p.rotate(0);
+      //         break;
+      //       default:
+      //         console.log('Unexpected tableRotation argument ');
+      //     }
+      //   break;
+      //   default:
+      //     console.log('Unexpected pointOfCompass argument');
+      // }
       break;
     default:
       console.log('Unexpected pointOfCompass argument xx');
@@ -263,7 +263,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
   if (pointOfCompass != 'Discard') {
     paintHandArray(p, g);
   } else {
-    paintDiscardArray(p, g);
+    paintDiscardArray(p, g, w);
   }
   p.pop();
 }
@@ -315,56 +315,114 @@ let paintHandArray = (p, g) => {
   });
 };
 
-let paintDiscardArray = (p, g) => {
+let paintDiscardArray = (p, g, w) => {
   // scale to be reviewed
   let m = 0.55;
   let cardWidth = m * g.canvasHeight * g.cardHeightToCanvasHeightRatio / g.cardAspectRatio;
   let cardHeight = m * g.canvasHeight * g.cardHeightToCanvasHeightRatio;
   g.myDiscardArray.forEach((obj, i) => {
-      // now we can draw a card using each fileName in myHandArray
+      // now we can draw a card using each fileName in myDiscardArray
       let p5img = g.imgMap.get(obj.fileName);
-      // // position of card depends on range of shuffleIndex
-      // switch (true) {
-      //   // N
-      //   case (obj.shuffleIndex < 13):
-      //   //   switch (w.userState.tableRotationDegrees) {
-      //   //     case 0: 
-      //   //       p.translate(0, -g.canvasHeight / 2)
-      //   //       p.rotate(2 * p.HALF_PI); 
-      //   //       break;
-      //   //     case 90: 
-      //   //       p.translate(g.canvasWidth / 2, 0);
-      //   //       p.rotate(3 * p.HALF_PI);
-      //   //       break;
-      //   //     case 180:
-      //   //       p.translate(0, g.canvasHeight / 2);
-      //   //       p.rotate(0);
-      //   //       break;
-      //   //     case 270:
-      //   //       p.translate(-g.canvasWidth / 2, 0);
-      //   //       p.rotate(p.HALF_PI);
-      //   //       break;
-      //   //     default:
-      //   //       console.log('Unexpected tableRotation argument ');
-      //   //   }
-      //     p.image(p5img, 0, 0, cardWidth, cardHeight);
-      //     break;
-      //   // E
-      //   case (obj.shuffleIndex < 26):
-      //     p.image(p5img, 0, 0, cardWidth, cardHeight);
-      //     break;
-      //   // S
-      //   case (obj.shuffleIndex < 39):
-      //     p.image(p5img, 0, 0, cardWidth, cardHeight);
-      //     break;
-      //   // W
-      //   case (obj.shuffleIndex < 52):
-      //     p.image(p5img, 0, 0, cardWidth, cardHeight);
-      //     break;
-      //   default:
-      //   console.log('Unexpected shuffleIndex argument');
-      // }
+      // // position of card depends on range of shuffleIndex and rotation
+      p.push();
+      switch (true) {
+        // N
+        case (obj.shuffleIndex < 13):
+          switch (w.userState.tableRotationDegrees) {
+            case 0: 
+              p.translate(-cardWidth / 2, -cardHeight * 0.8)
+              p.rotate(0); 
+              break;
+            case 90: 
+              p.translate(-cardWidth / 2, -cardHeight / 2);
+              p.rotate(p.HALF_PI);
+              break;
+            case 180:
+              p.translate(-cardWidth / 2, -cardHeight / 2);
+              p.rotate(0);
+              break;
+            case 270:
+              p.translate(-cardWidth / 2, -cardHeight / 2);
+              p.rotate(0);
+              break;
+            default:
+              console.log('Unexpected tableRotation argument ');
+          }
+        break;
+        // E
+        case (obj.shuffleIndex < 26):
+          switch (w.userState.tableRotationDegrees) {
+            case 0: 
+              p.translate(-cardWidth * 0.2, -cardHeight / 2)
+              p.rotate(0); 
+              break;
+            case 90: 
+              p.translate(-cardWidth / 2, -cardHeight / 2);
+              p.rotate(0);
+              break;
+            case 180:
+              p.translate(-cardWidth / 2, -cardHeight / 2);
+              p.rotate(0);
+              break;
+            case 270:
+              p.translate(-cardWidth / 2, -cardHeight / 2);
+              p.rotate(0);
+              break;
+            default:
+              console.log('Unexpected tableRotation argument ');
+          }
+        break;
+        // S
+        case (obj.shuffleIndex < 39):
+          switch (w.userState.tableRotationDegrees) {
+            case 0: 
+              p.translate(-cardWidth / 2, -cardHeight * 0.2)
+              p.rotate(0); 
+              break;
+            case 90: 
+              p.translate(-cardWidth / 2, -cardHeight / 2);
+              p.rotate(0);
+              break;
+            case 180:
+              p.translate(-cardWidth / 2, -cardHeight / 2);
+              p.rotate(0);
+              break;
+            case 270:
+              p.translate(-cardWidth / 2, -cardHeight / 2);
+              p.rotate(0);
+              break;
+            default:
+              console.log('Unexpected tableRotation argument ');
+          }
+        break;
+        // W
+        case (obj.shuffleIndex < 52):
+          switch (w.userState.tableRotationDegrees) {
+            case 0: 
+              p.translate(-cardWidth * 0.8, -cardHeight / 2)
+              p.rotate(0); 
+              break;
+            case 90: 
+              p.translate(-cardWidth / 2, -cardHeight / 2);
+              p.rotate(0);
+              break;
+            case 180:
+              p.translate(-cardWidth / 2, -cardHeight / 2);
+              p.rotate(0);
+              break;
+            case 270:
+              p.translate(-cardWidth / 2, -cardHeight / 2);
+              p.rotate(0);
+              break;
+            default:
+              console.log('Unexpected tableRotation argument ');
+          }
+          break;
+        default:
+        console.log('Unexpected shuffleIndex argument');
+      }
       p.image(p5img, 0, 0, cardWidth, cardHeight);
+      p.pop();
   });
 };
 
