@@ -90,6 +90,10 @@ const callbackFunctionForP5 = (p) => {
     p.createCanvas(g.canvasWidth, g.canvasHeight);
     let p5btn1 = p.select('#btn1');
     p5btn1.mousePressed(changeBgColor);
+    // init userState
+    window.userState = {
+      tableRotationDegrees: 0
+    }
     };
 
   p.draw = () => {

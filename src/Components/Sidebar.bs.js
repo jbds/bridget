@@ -4,11 +4,17 @@ var React = require("react");
 var Global$ReasonReactExamples = require("../Global.bs.js");
 var FlipHand$ReasonReactExamples = require("./FlipHand.bs.js");
 var ButtonStd$ReasonReactExamples = require("./ButtonStd.bs.js");
+var ButtonStdJsx$ReasonReactExamples = require("./ButtonStdJsx.bs.js");
 
 function Sidebar(Props) {
   var match = React.useReducer(Global$ReasonReactExamples.reducer, Global$ReasonReactExamples.initialState);
   var dispatch = match[1];
   ((window.gameState = match[0]));
+  var handlerBtnRotateTable = function (_e) {
+    console.log("btnRotateTable clicked");
+    ((window.userState.tableRotationDegrees = ((window.userState.tableRotationDegrees + 90) % 360)));
+    
+  };
   return React.createElement(React.Fragment, undefined, React.createElement("div", {
                   id: "sidebar1"
                 }, "Sidebar1", React.createElement("br", undefined), React.createElement("button", {
@@ -38,6 +44,10 @@ function Sidebar(Props) {
                       id: "span1"
                     }), React.createElement(FlipHand$ReasonReactExamples.make, {
                       dispatch: dispatch
+                    }), React.createElement("br", undefined), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
+                      label: "Rotate table",
+                      id: "btnRotateTable",
+                      onClick: handlerBtnRotateTable
                     })));
 }
 

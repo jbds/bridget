@@ -10,6 +10,11 @@ let make = () => {
   // we can guarantee gameState below (for use by p5) will always be in sync
   // compiler warning 21 here unless we return unit specifically
   let () = [%raw "window.gameState = match[0]"];
+  // event handler
+  let handlerBtnRotateTable = (_e) => {
+    Js.log("btnRotateTable clicked");
+    let () = [%raw "window.userState.tableRotationDegrees = ((window.userState.tableRotationDegrees + 90) % 360)"];
+  };
   // fragment
   <>
   <div id="sidebar1">
@@ -31,6 +36,8 @@ let make = () => {
     <br/>
     <span id="span1"></span>
     <FlipHand dispatch/>
+    <br/>
+    <ButtonStdJsx id="btnRotateTable" label="Rotate table" onClick=handlerBtnRotateTable/>
   </div>
   </>
 };
