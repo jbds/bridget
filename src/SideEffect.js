@@ -249,19 +249,26 @@ let paintDiscardArray = (p, g, w) => {
 
 let paintLabel = (p, g, pointOfCompass) => {
   p.push();
-    p.textSize(g.canvasHeight / 50);
+    let textHeightToCanvasHeightRatio = g.canvasHeight / 30;
+    p.textSize(textHeightToCanvasHeightRatio);
     p.textFont('Trebuchet MS');
     p.textAlign(p.CENTER, p.CENTER);
-    p.fill(255);
+    // white, 50% transparent
+    p.fill(255, 128);
     // move the origin to table centre
     p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
+    let cardSegmentHeight = g.canvasHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio;
+    // translate
+    p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
+    // rotate about translated origin
+    p.rotate(p.HALF_PI);
     if (pointOfCompass === 'South') {
       p.text(
-        'South: Gill', 
+        'S: Gill', 
         -g.canvasWidth / 4, 
-        -g.canvasHeight / 50,
+        -textHeightToCanvasHeightRatio,
         g.canvasWidth / 2,
-        g.canvasHeight / 25 //-g.canvasHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio
+        textHeightToCanvasHeightRatio * 2 
       );
     }
   p.pop();
