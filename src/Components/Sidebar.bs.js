@@ -48,7 +48,7 @@ function Sidebar(Props) {
                       label: "Rotate table",
                       id: "btnRotateTable",
                       onClick: handlerBtnRotateTable
-                    })));
+                    }), React.createElement("br", undefined)));
 }
 
 var make = Sidebar;

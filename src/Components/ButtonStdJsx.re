@@ -11,7 +11,7 @@ let make = (~label: string, ~id: string, ~onClick) => {
         ~color={"#26653B"}, 
         ~fontSize={"2.5vh"},
         ~fontFamily={"Trebuchet MS"},
-        ~margin={"0vh"},
+        ~margin={"auto"},
         // bug - borderColor single attribute not recognised       
         ~border={"1px solid #26653B"}, 
         ~borderRadius={"5px"},

@@ -14,7 +14,7 @@ function ButtonStdJsx(Props) {
                     color: "#26653B",
                     fontFamily: "Trebuchet MS",
                     fontSize: "2.5vh",
-                    margin: "0vh",
+                    margin: "auto",
                     borderRadius: "5px"
                   },
                   onClick: onClick

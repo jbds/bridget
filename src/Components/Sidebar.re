@@ -38,6 +38,7 @@ let make = () => {
     <FlipHand dispatch/>
     <br/>
     <ButtonStdJsx id="btnRotateTable" label="Rotate table" onClick=handlerBtnRotateTable/>
+    <br/>
   </div>
   </>
 };
