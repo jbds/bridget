@@ -248,29 +248,74 @@ let paintDiscardArray = (p, g, w) => {
 };
 
 let paintLabel = (p, g, pointOfCompass) => {
+  let textHeightToCanvasHeightRatio = g.canvasHeight / 30;
+  let cardSegmentHeight = g.canvasHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio;
+  p.textSize(textHeightToCanvasHeightRatio);
+  p.textFont('Trebuchet MS');
+  p.textAlign(p.CENTER, p.CENTER);
+  // white, 50% transparent
+  p.fill(255, 128);
   p.push();
-    let textHeightToCanvasHeightRatio = g.canvasHeight / 30;
-    p.textSize(textHeightToCanvasHeightRatio);
-    p.textFont('Trebuchet MS');
-    p.textAlign(p.CENTER, p.CENTER);
-    // white, 50% transparent
-    p.fill(255, 128);
-    // move the origin to table centre
-    p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
-    let cardSegmentHeight = g.canvasHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio;
-    // translate
-    p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
-    // rotate about translated origin
-    p.rotate(p.HALF_PI);
-    if (pointOfCompass === 'South') {
-      p.text(
-        'S: Gill', 
-        -g.canvasWidth / 4, 
-        -textHeightToCanvasHeightRatio,
-        g.canvasWidth / 2,
-        textHeightToCanvasHeightRatio * 2 
-      );
-    }
+  // move the origin to table centre
+  p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
+  // // translate to West position
+  // p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
+  // // rotate about translated origin
+  // p.rotate(p.HALF_PI);
+  // translate to South position
+  p.translate(0, (g.canvasHeight / 2)  - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
+  p.text(
+    'S: Gill', 
+    -g.canvasWidth / 4, 
+    -textHeightToCanvasHeightRatio,
+    g.canvasWidth / 2,
+    textHeightToCanvasHeightRatio * 2 
+  );
+  p.pop();
+  p.push();
+  // move the origin to table centre
+  p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
+  // translate to West position
+  p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
+  // rotate about translated origin
+   p.rotate(p.HALF_PI);
+  p.text(
+    'W: Clare', 
+    -g.canvasWidth / 4, 
+    -textHeightToCanvasHeightRatio,
+    g.canvasWidth / 2,
+    textHeightToCanvasHeightRatio * 2 
+  );
+  p.pop();
+  p.push();
+  // move the origin to table centre
+  p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
+  // translate to North position
+  p.translate(0, (-g.canvasHeight / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
+  // rotate about translated origin
+   p.rotate(p.HALF_PI * 2);
+  p.text(
+    'N: Jon', 
+    -g.canvasWidth / 4, 
+    -textHeightToCanvasHeightRatio,
+    g.canvasWidth / 2,
+    textHeightToCanvasHeightRatio * 2 
+  );
+  p.pop();
+  p.push();
+  // move the origin to table centre
+  p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
+  // translate to East position
+  p.translate((g.canvasWidth / 2)  - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75), 0);
+  // rotate about translated origin
+   p.rotate(p.HALF_PI * 3);
+  p.text(
+    'E: Freddy', 
+    -g.canvasWidth / 4, 
+    -textHeightToCanvasHeightRatio,
+    g.canvasWidth / 2,
+    textHeightToCanvasHeightRatio * 2 
+  );
   p.pop();
 };
 
