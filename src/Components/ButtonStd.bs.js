@@ -14,6 +14,7 @@ function ButtonStd(Props) {
                     backgroundColor: "#FFFFFF",
                     border: "1px solid #26653B",
                     color: "#26653B",
+                    fontFamily: "Trebuchet MS",
                     fontSize: "2.5vh",
                     margin: "0vh",
                     borderRadius: "5px"
