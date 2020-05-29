@@ -197,108 +197,52 @@ let paintDiscardArray = (p, g, w) => {
   let m = 0.55;
   let cardWidth = m * g.canvasHeight * g.cardHeightToCanvasHeightRatio / g.cardAspectRatio;
   let cardHeight = m * g.canvasHeight * g.cardHeightToCanvasHeightRatio;
+  let cardHeightOffsetFraction = 0.275;
+  let cardWidthOffsetFraction = 0.275;
   g.myDiscardArray.forEach((obj, i) => {
       // now we can draw a card using each fileName in myDiscardArray
-      let p5img = g.imgMap.get(obj.fileName);
-      // // position of card depends on range of shuffleIndex and rotation
+      // position of card depends on range of shuffleIndex and rotation
+      // but these two variables are orthogonal
       p.push();
-      switch (true) {
-        // N
-        case (obj.shuffleIndex < 13):
-          switch (w.userState.tableRotationDegrees) {
-            case 0: 
-              //p.translate(-cardWidth / 2, -cardHeight * 0.8)
-              p.rotate(0); 
-              break;
-            case 90: 
-              //p.translate(-cardWidth / 2, -cardHeight / 2);
-              p.rotate(p.HALF_PI);
-              break;
-            case 180:
-              //p.translate(-cardWidth / 2, -cardHeight / 2);
-              p.rotate(0);
-              break;
-            case 270:
-              //p.translate(-cardWidth / 2, -cardHeight / 2);
-              p.rotate(0);
-              break;
-            default:
-              console.log('Unexpected tableRotation argument ');
-          }
-        break;
-        // E
-        case (obj.shuffleIndex < 26):
-          switch (w.userState.tableRotationDegrees) {
-            case 0: 
-              //p.translate(-cardWidth * 0.2, -cardHeight / 2)
-              p.rotate(0); 
-              break;
-            case 90: 
-              //p.translate(-cardWidth / 2, -cardHeight / 2);
-              p.rotate(0);
-              break;
-            case 180:
-              //p.translate(-cardWidth / 2, -cardHeight / 2);
-              p.rotate(0);
-              break;
-            case 270:
-              //p.translate(-cardWidth / 2, -cardHeight / 2);
-              p.rotate(0);
-              break;
-            default:
-              console.log('Unexpected tableRotation argument ');
-          }
-        break;
-        // S
-        case (obj.shuffleIndex < 39):
-          switch (w.userState.tableRotationDegrees) {
-            case 0: 
-              //p.translate(-cardWidth / 2, -cardHeight * 0.2)
-              p.rotate(0); 
-              break;
-            case 90: 
-              //p.translate(-cardWidth / 2, -cardHeight / 2);
-              p.rotate(0);
-              break;
-            case 180:
-              //p.translate(-cardWidth / 2, -cardHeight / 2);
-              p.rotate(0);
-              break;
-            case 270:
-              //p.translate(-cardWidth / 2, -cardHeight / 2);
-              p.rotate(0);
-              break;
-            default:
-              console.log('Unexpected tableRotation argument ');
-          }
-        break;
-        // W
-        case (obj.shuffleIndex < 52):
-          switch (w.userState.tableRotationDegrees) {
-            case 0: 
-              //p.translate(-cardWidth * 0.8, -cardHeight / 2)
-              p.rotate(0); 
-              break;
-            case 90: 
-              //p.translate(-cardWidth / 2, -cardHeight / 2);
-              p.rotate(0);
-              break;
-            case 180:
-              //p.translate(-cardWidth / 2, -cardHeight / 2);
-              p.rotate(0);
-              break;
-            case 270:
-              //p.translate(-cardWidth / 2, -cardHeight / 2);
-              p.rotate(0);
-              break;
-            default:
-              console.log('Unexpected tableRotation argument ');
-          }
+        switch (w.userState.tableRotationDegrees) {
+          case 0: 
+            p.rotate(0); 
+            break;
+          case 90: 
+            p.rotate(p.HALF_PI);
+            break;
+          case 180:
+            p.rotate(p.HALF_PI * 2);
+            break;
+          case 270:
+            p.rotate(p.HALF_PI * 3);
+            break;
+          default:
+            console.log('Unexpected tableRotation argument ');
+        }
+        switch (true) {
+          // N
+          case (obj.shuffleIndex < 13):
+            // good for all rotations, because x=x and y=y all angles
+            p.translate(0, -cardHeight * cardHeightOffsetFraction);
+            break;
+          // E
+          case (obj.shuffleIndex < 26):
+            p.translate(cardWidth * cardWidthOffsetFraction, 0);
+            break;
+          // S
+          case (obj.shuffleIndex < 39):
+            p.translate(0, cardHeight * cardHeightOffsetFraction);
           break;
-        default:
-        console.log('Unexpected shuffleIndex argument');
-      }
-      p.image(p5img, -cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight);
+          // W
+          case (obj.shuffleIndex < 52):
+            p.translate(-cardWidth * cardWidthOffsetFraction, 0);
+            break;
+          default:
+          console.log('Unexpected shuffleIndex argument');
+        }
+        let p5img = g.imgMap.get(obj.fileName);
+        p.image(p5img, -cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight);
       p.pop();
   });
 };
