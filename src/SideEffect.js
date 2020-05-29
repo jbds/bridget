@@ -247,4 +247,25 @@ let paintDiscardArray = (p, g, w) => {
   });
 };
 
+let paintLabel = (p, g, pointOfCompass) => {
+  p.push();
+    p.textSize(g.canvasHeight / 50);
+    p.textFont('Trebuchet MS');
+    p.textAlign(p.CENTER, p.CENTER);
+    p.fill(255);
+    // move the origin to table centre
+    p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
+    if (pointOfCompass === 'South') {
+      p.text(
+        'South: Gill', 
+        -g.canvasWidth / 4, 
+        -g.canvasHeight / 50,
+        g.canvasWidth / 2,
+        g.canvasHeight / 25 //-g.canvasHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio
+      );
+    }
+  p.pop();
+};
+
 exports.drawCards = drawCards;
+exports.paintLabel = paintLabel;

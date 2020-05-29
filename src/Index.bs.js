@@ -97,11 +97,13 @@ const callbackFunctionForP5 = (p) => {
   p.draw = () => {
     // main loop repeats at frame rate
     p.image(g.imgMap.get('GB'), 0, 0, g.canvasWidth, g.canvasHeight)
-      SideEffect.drawCards(p, g, w, 'South');
-      SideEffect.drawCards(p, g, w, 'West');
-      SideEffect.drawCards(p, g, w, 'East');
-      SideEffect.drawCards(p, g, w, 'North');
-      SideEffect.drawCards(p, g, w, 'Discard');
+     SideEffect.drawCards(p, g, w, 'South');
+    // SideEffect.drawCards(p, g, w, 'West');
+    // SideEffect.drawCards(p, g, w, 'East');
+    // SideEffect.drawCards(p, g, w, 'North');
+    // SideEffect.drawCards(p, g, w, 'Discard');
+    SideEffect.paintLabel(p, g, 'South');
+
   };
 
   p.windowResized = () => {
