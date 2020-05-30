@@ -1,16 +1,6 @@
 'use strict';
 // p is p5 library, g is drawing global properties
 let drawCards = (p, g, w, pointOfCompass) => {
-  // std playing card is 3.5in x 2.25in and svg is 336px x 216px
-  g.cardAspectRatio = 3.5 / 2.25;
-  // For card segments on periphery to just meet without overlap
-  // we need cardHeightToCanvasHeightRatio of 336 / (2 * 91 + 13 * 37) or approx 0.507
-  g.cardHeightToCanvasHeightRatio = 336 / 663;
-  let rotationOriginXPercent;
-  let rotationOriginYPercent;
-  // 91px min height that allows visibility of rank and suit
-  g.cardSegmentHeightToCardRatio = 91 / 336;
-  let myDiscardArray;
   p.push();
   // move the origin to table centre
   p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
@@ -247,7 +237,7 @@ let paintDiscardArray = (p, g, w) => {
   });
 };
 
-let paintLabel = (p, g, pointOfCompass) => {
+let paintLabels = (p, g) => {
   let textHeightToCanvasHeightRatio = g.canvasHeight / 30;
   let cardSegmentHeight = g.canvasHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio;
   p.textSize(textHeightToCanvasHeightRatio);
@@ -320,4 +310,4 @@ let paintLabel = (p, g, pointOfCompass) => {
 };
 
 exports.drawCards = drawCards;
-exports.paintLabel = paintLabel;
+exports.paintLabels = paintLabels;

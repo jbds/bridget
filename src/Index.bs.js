@@ -17,7 +17,16 @@ const callbackFunctionForP5 = (p) => {
   // p5 library functions available via injected libary object p 
   // decalare all other variables specific to drawing process
   // as properies of a 'global' object g
-  const g = {};
+  const g = {
+    // std playing card is 3.5in x 2.25in and svg is 336px x 216px
+    cardAspectRatio: 3.5 / 2.25,
+    // For card segments on periphery to just meet without overlap
+    // we need cardHeightToCanvasHeightRatio of 336 / (2 * 91 + 13 * 37) or approx 0.507
+    cardHeightToCanvasHeightRatio: 336 / 663,
+    // 91px min height that allows visibility of rank and suit
+    cardSegmentHeightToCardRatio: 91 / 336,
+  };
+
   const w = window;
   // maps 1 background image filename and 53 card filenames to full path
   g.imgMap = new Map();
@@ -98,11 +107,11 @@ const callbackFunctionForP5 = (p) => {
     // main loop repeats at frame rate
     p.image(g.imgMap.get('GB'), 0, 0, g.canvasWidth, g.canvasHeight)
     SideEffect.drawCards(p, g, w, 'South');
-    SideEffect.drawCards(p, g, w, 'West');
-    SideEffect.drawCards(p, g, w, 'East');
-    SideEffect.drawCards(p, g, w, 'North');
-    SideEffect.drawCards(p, g, w, 'Discard');
-    SideEffect.paintLabel(p, g, 'South');
+    // SideEffect.drawCards(p, g, w, 'West');
+    // SideEffect.drawCards(p, g, w, 'East');
+    //SideEffect.drawCards(p, g, w, 'North');
+    //SideEffect.drawCards(p, g, w, 'Discard');
+    SideEffect.paintLabels(p, g);
 
   };
 
