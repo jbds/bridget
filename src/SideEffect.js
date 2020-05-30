@@ -237,7 +237,7 @@ let paintDiscardArray = (p, g, w) => {
   });
 };
 
-let paintLabels = (p, g) => {
+let paintLabels = (p, g, w) => {
   let textHeightToCanvasHeightRatio = g.canvasHeight / 30;
   let cardSegmentHeight = g.canvasHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio;
   p.textSize(textHeightToCanvasHeightRatio);
@@ -248,12 +248,31 @@ let paintLabels = (p, g) => {
   p.push();
   // move the origin to table centre
   p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
-  // // translate to West position
-  // p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
-  // // rotate about translated origin
-  // p.rotate(p.HALF_PI);
-  // translate to South position
-  p.translate(0, (g.canvasHeight / 2)  - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
+  // then move from this known point to a point dependent upon table rotation
+  switch (w.userState.tableRotationDegrees) {
+    case 0: 
+      // S at bottom
+      p.translate(0, (g.canvasHeight / 2)  - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
+      p.rotate(0); 
+      break;
+    case 90: 
+      // S at LHS
+      p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
+      p.rotate(p.HALF_PI);
+      break;
+    case 180:
+      // S at top
+      p.translate(0, -(g.canvasHeight / 2)  + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
+      //p.rotate(p.HALF_PI * 2); 
+      break;
+    case 270:
+      // S at RHS
+      p.translate((g.canvasWidth / 2) - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75), 0);
+      p.rotate(p.HALF_PI * 3);
+      break;
+    default:
+      console.log('Unexpected tableRotation argument ');
+  }
   p.text(
     'S: Gill', 
     -g.canvasWidth / 4, 
@@ -265,12 +284,33 @@ let paintLabels = (p, g) => {
   p.push();
   // move the origin to table centre
   p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
-  // translate to West position
-  p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
-  // rotate about translated origin
-   p.rotate(p.HALF_PI);
+  // then move from this known point to a point dependent upon table rotation
+  switch (w.userState.tableRotationDegrees) {
+    case 0: 
+      // W at LHS
+      p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
+      p.rotate(p.HALF_PI);
+      break;
+    case 90: 
+      // W at Top
+      p.translate(0, -(g.canvasHeight / 2)  + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
+      //p.rotate(p.HALF_PI * 2); 
+      break;
+    case 180:
+      // W at RHS
+      p.translate((g.canvasWidth / 2) - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75), 0);
+      p.rotate(p.HALF_PI * 3);
+      break;
+    case 270:
+      // W at bottom
+      p.translate(0, (g.canvasHeight / 2)  - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
+      p.rotate(0); 
+      break;
+    default:
+      console.log('Unexpected tableRotation argument ');
+  }
   p.text(
-    'W: Clare', 
+    'W: Mary', 
     -g.canvasWidth / 4, 
     -textHeightToCanvasHeightRatio,
     g.canvasWidth / 2,
@@ -280,10 +320,31 @@ let paintLabels = (p, g) => {
   p.push();
   // move the origin to table centre
   p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
-  // translate to North position
-  p.translate(0, (-g.canvasHeight / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
-  // rotate about translated origin
-   p.rotate(p.HALF_PI * 2);
+  // then move from this known point to a point dependent upon table rotation
+  switch (w.userState.tableRotationDegrees) {
+    case 0: 
+      // N at top
+      p.translate(0, -(g.canvasHeight / 2)  + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
+      //p.rotate(p.HALF_PI * 2); 
+      break;
+    case 90: 
+      // N at RHS
+      p.translate((g.canvasWidth / 2) - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75), 0);
+      p.rotate(p.HALF_PI * 3);
+      break;
+    case 180:
+      // N at bottom
+      p.translate(0, (g.canvasHeight / 2)  - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
+      p.rotate(0); 
+      break;
+    case 270:
+      // N at LHS
+      p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
+      p.rotate(p.HALF_PI);
+      break;
+    default:
+      console.log('Unexpected tableRotation argument ');
+  }
   p.text(
     'N: Jon', 
     -g.canvasWidth / 4, 
@@ -295,10 +356,31 @@ let paintLabels = (p, g) => {
   p.push();
   // move the origin to table centre
   p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
-  // translate to East position
-  p.translate((g.canvasWidth / 2)  - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75), 0);
-  // rotate about translated origin
-   p.rotate(p.HALF_PI * 3);
+  // then move from this known point to a point dependent upon table rotation
+  switch (w.userState.tableRotationDegrees) {
+    case 0: 
+      // E at RHS
+      p.translate((g.canvasWidth / 2) - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75), 0);
+      p.rotate(p.HALF_PI * 3);
+      break;
+    case 90: 
+      // E at bottom
+      p.translate(0, (g.canvasHeight / 2)  - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
+      p.rotate(0); 
+      break;
+    case 180:
+      // E at LHS
+      p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
+      p.rotate(p.HALF_PI);
+      break;
+    case 270:
+      // E at top
+      p.translate(0, -(g.canvasHeight / 2)  + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
+      //p.rotate(p.HALF_PI * 2); 
+      break;
+    default:
+      console.log('Unexpected tableRotation argument ');
+  }
   p.text(
     'E: Freddy', 
     -g.canvasWidth / 4, 
