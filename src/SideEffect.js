@@ -8,9 +8,8 @@ let drawCards = (p, g, w, pointOfCompass) => {
   // for debug, indicate this point
   p.stroke(255);
   p.strokeWeight(5);
-  p.point(0,0);
-  // fetch 1/4 of the card pack or less, and move origin 
-  // based on pointOfCompass
+  //p.point(0,0);
+  // fetch 1/4 of the card pack or less
   switch (pointOfCompass) {
     case 'North':
       g.isHandVisible = gameState.handVisible.north;
@@ -22,28 +21,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'North'
         );
-      // translate and rotate by clock position
-      //console.log(clockPosition);
-      switch(clockPosition) {
-        case '12PM':
-          p.translate(0, -(g.canvasHeight / 2));
-          p.rotate(p.HALF_PI * 2); 
-        break;
-        case '3PM':
-          p.translate((g.canvasWidth / 2), 0);
-          p.rotate(p.HALF_PI * 3);
-        break;
-        case '6PM':
-          p.translate(0, (g.canvasHeight / 2));
-          p.rotate(0); 
-        break;
-        case '9PM':
-          p.translate((-g.canvasWidth / 2), 0);
-          p.rotate(p.HALF_PI);
-        break;
-        default:
-          console.log('Unexpected clockPosition argument');
-      };
+      translateAndRotateByClockPosition(clockPosition, p, g);
     break;
     case 'East':
       g.isHandVisible = gameState.handVisible.east;
@@ -55,28 +33,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'East'
         );
-      // translate and rotate by clock position
-      //console.log(clockPosition);
-      switch(clockPosition) {
-        case '12PM':
-          p.translate(0, -(g.canvasHeight / 2));
-          p.rotate(p.HALF_PI * 2); 
-        break;
-        case '3PM':
-          p.translate((g.canvasWidth / 2), 0);
-          p.rotate(p.HALF_PI * 3);
-        break;
-        case '6PM':
-          p.translate(0, (g.canvasHeight / 2));
-          p.rotate(0); 
-        break;
-        case '9PM':
-          p.translate((-g.canvasWidth / 2), 0);
-          p.rotate(p.HALF_PI);
-        break;
-        default:
-          console.log('Unexpected clockPosition argument');
-      };
+        translateAndRotateByClockPosition(clockPosition, p, g);
     break;
     case "South":
       g.isHandVisible = gameState.handVisible.south;
@@ -88,28 +45,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'South'
         );
-      // translate and rotate by clock position
-      //console.log(clockPosition);
-      switch(clockPosition) {
-        case '12PM':
-          p.translate(0, -(g.canvasHeight / 2));
-          p.rotate(p.HALF_PI * 2); 
-        break;
-        case '3PM':
-          p.translate((g.canvasWidth / 2), 0);
-          p.rotate(p.HALF_PI * 3);
-        break;
-        case '6PM':
-          p.translate(0, (g.canvasHeight / 2));
-          p.rotate(0); 
-        break;
-        case '9PM':
-          p.translate((-g.canvasWidth / 2), 0);
-          p.rotate(p.HALF_PI);
-        break;
-        default:
-          console.log('Unexpected clockPosition argument');
-      };
+        translateAndRotateByClockPosition(clockPosition, p, g);
     break;
     case 'West':
       g.isHandVisible = gameState.handVisible.west;
@@ -121,28 +57,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'West'
         );
-      // translate and rotate by clock position
-      //console.log(clockPosition);
-      switch(clockPosition) {
-        case '12PM':
-          p.translate(0, -(g.canvasHeight / 2));
-          p.rotate(p.HALF_PI * 2); 
-        break;
-        case '3PM':
-          p.translate((g.canvasWidth / 2), 0);
-          p.rotate(p.HALF_PI * 3);
-        break;
-        case '6PM':
-          p.translate(0, (g.canvasHeight / 2));
-          p.rotate(0); 
-        break;
-        case '9PM':
-          p.translate((-g.canvasWidth / 2), 0);
-          p.rotate(p.HALF_PI);
-        break;
-        default:
-          console.log('Unexpected clockPosition argument');
-      };
+        translateAndRotateByClockPosition(clockPosition, p, g);
     break;
     case 'Discard':
       g.myDiscardArray = window.gameState.pack.filter(obj => {
@@ -357,6 +272,30 @@ let rotationPlusPointOfCompassToClockPosition =
   };
   //console.log(clockPosition());
   return clockPosition();
+};
+
+// HELPER FUNCTION FOR drawCards
+let translateAndRotateByClockPosition = (clockPosition, p, g) => {
+  switch(clockPosition) {
+    case '12PM':
+      p.translate(0, -(g.canvasHeight / 2));
+      p.rotate(p.HALF_PI * 2); 
+    break;
+    case '3PM':
+      p.translate((g.canvasWidth / 2), 0);
+      p.rotate(p.HALF_PI * 3);
+    break;
+    case '6PM':
+      p.translate(0, (g.canvasHeight / 2));
+      p.rotate(0); 
+    break;
+    case '9PM':
+      p.translate((-g.canvasWidth / 2), 0);
+      p.rotate(p.HALF_PI);
+    break;
+    default:
+      console.log('Unexpected clockPosition argument');
+  };
 };
 
 exports.drawCards = drawCards;

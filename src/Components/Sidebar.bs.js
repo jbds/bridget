@@ -11,7 +11,6 @@ function Sidebar(Props) {
   var dispatch = match[1];
   ((window.gameState = match[0]));
   var handlerBtnRotateTable = function (_e) {
-    console.log("btnRotateTable clicked");
     ((window.userState.tableRotationDegrees = ((window.userState.tableRotationDegrees + 90) % 360)));
     
   };

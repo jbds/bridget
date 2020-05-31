@@ -38,9 +38,7 @@ function reducer(state, action) {
                   locationAndPlayers: state.locationAndPlayers
                 };
       case /* Sync */2 :
-          var myNewState = window.gameState;
-          console.log(myNewState);
-          return myNewState;
+          return window.gameState;
       
     }
   } else {

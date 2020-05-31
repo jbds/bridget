@@ -12,7 +12,7 @@ let make = () => {
   let () = [%raw "window.gameState = match[0]"];
   // event handler
   let handlerBtnRotateTable = (_e) => {
-    Js.log("btnRotateTable clicked");
+    //Js.log("btnRotateTable clicked");
     let () = [%raw "window.userState.tableRotationDegrees = ((window.userState.tableRotationDegrees + 90) % 360)"];
   };
   // fragment
