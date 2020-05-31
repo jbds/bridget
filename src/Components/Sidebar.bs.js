@@ -48,7 +48,7 @@ function Sidebar(Props) {
                       id: "btnRotateTable",
                       onClick: handlerBtnRotateTable
                     }), React.createElement("br", undefined)), React.createElement("div", {
-                  id: "test"
+                  id: "biddingWindow"
                 }, "TEST"));
 }
 

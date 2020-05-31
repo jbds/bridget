@@ -40,7 +40,7 @@ let make = () => {
     <ButtonStdJsx id="btnRotateTable" label="Rotate table" onClick=handlerBtnRotateTable/>
     <br/>
   </div>
-  <div id="test"> 
+  <div id="biddingWindow"> 
     (s2e("TEST"))
   </div>
   </>
