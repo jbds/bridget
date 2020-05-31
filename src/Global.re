@@ -1,6 +1,6 @@
 type action =
   | Shuffle
-  | DealerChange (string)
+  //| DealerChange (string)
   | Flip (Shuffle.compassPoint)
   // | HideAllCards
   // | ShowAllCards
@@ -13,11 +13,12 @@ type action =
 let initialState: Shuffle.state = {
     pack: Shuffle.initialPack,
     handVisible: Shuffle.initialHandVisible,
-    dealer: None,
-    cardsDealtCount: 0
+    //dealer: None,
+    //cardsDealtCount: 0,
+    locationAndPlayers: [||]
 };
 
-let reducer = (state, action) => {
+let reducer = (state: Shuffle.state, action) => {
     switch action {
       | Shuffle => {
         // Shuffle.rei is helpful here
@@ -27,15 +28,15 @@ let reducer = (state, action) => {
         result;
 
       }
-      | DealerChange (shortLoc) => {
-        switch (shortLoc) {
-          | "N" => {...state, dealer: Some(North)}
-          | "E" => {...state, dealer: Some(East)}
-          | "S" => {...state, dealer: Some(South)}
-          | "W" => {...state, dealer: Some(West)}
-          | _ => {...state, dealer: None}
-        }
-      }
+      // | DealerChange (shortLoc) => {
+      //   switch (shortLoc) {
+      //     | "N" => {...state, dealer: Some(North)}
+      //     | "E" => {...state, dealer: Some(East)}
+      //     | "S" => {...state, dealer: Some(South)}
+      //     | "W" => {...state, dealer: Some(West)}
+      //     | _ => {...state, dealer: None}
+      //   }
+      // }
       | Flip (compassPoint) => {
         switch (compassPoint) {
           | North => {...state, handVisible: {...state.handVisible, north: !state.handVisible.north} }

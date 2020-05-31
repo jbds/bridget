@@ -3,11 +3,12 @@
 var $$Array = require("bs-platform/lib/js/array.js");
 var Shuffle$ReasonReactExamples = require("./Shuffle.bs.js");
 
+var initialState_locationAndPlayers = [];
+
 var initialState = {
   pack: Shuffle$ReasonReactExamples.initialPack,
   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
-  dealer: undefined,
-  cardsDealtCount: 0
+  locationAndPlayers: initialState_locationAndPlayers
 };
 
 function reducer(state, action) {
@@ -34,8 +35,7 @@ function reducer(state, action) {
           return {
                   pack: myPack,
                   handVisible: state.handVisible,
-                  dealer: state.dealer,
-                  cardsDealtCount: state.cardsDealtCount
+                  locationAndPlayers: state.locationAndPlayers
                 };
       case /* Sync */2 :
           var myNewState = window.gameState;
@@ -43,7 +43,7 @@ function reducer(state, action) {
           return myNewState;
       
     }
-  } else if (action.tag) {
+  } else {
     switch (action[0]) {
       case /* North */0 :
           var init = state.handVisible;
@@ -55,8 +55,7 @@ function reducer(state, action) {
                     south: init.south,
                     west: init.west
                   },
-                  dealer: state.dealer,
-                  cardsDealtCount: state.cardsDealtCount
+                  locationAndPlayers: state.locationAndPlayers
                 };
       case /* East */1 :
           var init$1 = state.handVisible;
@@ -68,8 +67,7 @@ function reducer(state, action) {
                     south: init$1.south,
                     west: init$1.west
                   },
-                  dealer: state.dealer,
-                  cardsDealtCount: state.cardsDealtCount
+                  locationAndPlayers: state.locationAndPlayers
                 };
       case /* South */2 :
           var init$2 = state.handVisible;
@@ -81,8 +79,7 @@ function reducer(state, action) {
                     south: !state.handVisible.south,
                     west: init$2.west
                   },
-                  dealer: state.dealer,
-                  cardsDealtCount: state.cardsDealtCount
+                  locationAndPlayers: state.locationAndPlayers
                 };
       case /* West */3 :
           var init$3 = state.handVisible;
@@ -94,48 +91,9 @@ function reducer(state, action) {
                     south: init$3.south,
                     west: !state.handVisible.west
                   },
-                  dealer: state.dealer,
-                  cardsDealtCount: state.cardsDealtCount
+                  locationAndPlayers: state.locationAndPlayers
                 };
       
-    }
-  } else {
-    switch (action[0]) {
-      case "E" :
-          return {
-                  pack: state.pack,
-                  handVisible: state.handVisible,
-                  dealer: /* East */1,
-                  cardsDealtCount: state.cardsDealtCount
-                };
-      case "N" :
-          return {
-                  pack: state.pack,
-                  handVisible: state.handVisible,
-                  dealer: /* North */0,
-                  cardsDealtCount: state.cardsDealtCount
-                };
-      case "S" :
-          return {
-                  pack: state.pack,
-                  handVisible: state.handVisible,
-                  dealer: /* South */2,
-                  cardsDealtCount: state.cardsDealtCount
-                };
-      case "W" :
-          return {
-                  pack: state.pack,
-                  handVisible: state.handVisible,
-                  dealer: /* West */3,
-                  cardsDealtCount: state.cardsDealtCount
-                };
-      default:
-        return {
-                pack: state.pack,
-                handVisible: state.handVisible,
-                dealer: undefined,
-                cardsDealtCount: state.cardsDealtCount
-              };
     }
   }
 }

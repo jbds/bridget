@@ -34,6 +34,11 @@ type compassPoint =
   | West
 ;
 
+type locationAndPlayer = {
+  location: string,
+  player: string
+};
+
 // all cards start in the dealers hand
 // once shuffled they are in a hand defined by compass
 // then they are thrown to discard pile
@@ -69,8 +74,9 @@ type handVisible = {north: bool, east: bool, south: bool, west: bool};
 type state = {
   pack: pack,
   handVisible: handVisible,
-  dealer: option(compassPoint),
-  cardsDealtCount: int,
+  //dealer: option(compassPoint),
+  //cardsDealtCount: int,
+  locationAndPlayers: array(locationAndPlayer)
 };
 
 

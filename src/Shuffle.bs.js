@@ -482,6 +482,25 @@ var initialHandVisible = {
   west: true
 };
 
+var initialLocationAndPlayers = [
+  {
+    location: "North",
+    player: "?"
+  },
+  {
+    location: "East",
+    player: "??"
+  },
+  {
+    location: "South",
+    player: "???"
+  },
+  {
+    location: "West",
+    player: "????"
+  }
+];
+
 function impureGetTimeBasedSeedUpTo60k(param) {
   var now = new Date();
   return now.getSeconds() * 1000.0 + now.getMilliseconds() | 0;
@@ -569,8 +588,7 @@ function shufflePack(param) {
   return {
           pack: shuffledPack,
           handVisible: initialHandVisible,
-          dealer: undefined,
-          cardsDealtCount: 0
+          locationAndPlayers: initialLocationAndPlayers
         };
 }
 

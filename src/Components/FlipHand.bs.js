@@ -1,6 +1,5 @@
 'use strict';
 
-var Block = require("bs-platform/lib/js/block.js");
 var React = require("react");
 var ButtonStd$ReasonReactExamples = require("./ButtonStd.bs.js");
 
@@ -16,22 +15,22 @@ function FlipHand(Props) {
                   }
                 }, React.createElement("tbody", undefined, React.createElement("tr", undefined, React.createElement("td", undefined, " "), React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
                                   dispatch: dispatch,
-                                  action: /* Flip */Block.__(1, [/* North */0]),
+                                  action: /* Flip */[/* North */0],
                                   label: "North",
                                   id: "btnNorth"
                                 })), React.createElement("td", undefined, " ")), React.createElement("tr", undefined, React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
                                   dispatch: dispatch,
-                                  action: /* Flip */Block.__(1, [/* West */3]),
+                                  action: /* Flip */[/* West */3],
                                   label: "West",
                                   id: "btnWest"
                                 })), React.createElement("td", undefined, "< Flip >"), React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
                                   dispatch: dispatch,
-                                  action: /* Flip */Block.__(1, [/* East */1]),
+                                  action: /* Flip */[/* East */1],
                                   label: "East",
                                   id: "btnEast"
                                 }))), React.createElement("tr", undefined, React.createElement("td", undefined, " "), React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
                                   dispatch: dispatch,
-                                  action: /* Flip */Block.__(1, [/* South */2]),
+                                  action: /* Flip */[/* South */2],
                                   label: "South",
                                   id: "btnSouth"
                                 })), React.createElement("td", undefined, " ")))));

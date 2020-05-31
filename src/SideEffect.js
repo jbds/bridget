@@ -1,6 +1,7 @@
 'use strict';
 // p is p5 library, g is drawing global properties
 let drawCards = (p, g, w, pointOfCompass) => {
+  let clockPosition;
   p.push();
   // move the origin to table centre
   p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
@@ -17,108 +18,132 @@ let drawCards = (p, g, w, pointOfCompass) => {
           return (obj.shuffleIndex >= 0 && obj.shuffleIndex <=12 && obj.lifecycle === 1)
         }
       ); 
-      switch (w.userState.tableRotationDegrees) {
-        case 0: 
-          p.translate(0, -g.canvasHeight / 2)
-          p.rotate(2 * p.HALF_PI); 
-          break;
-        case 90: 
-          p.translate(g.canvasWidth / 2, 0);
-          p.rotate(3 * p.HALF_PI);
-          break;
-        case 180:
-          p.translate(0, g.canvasHeight / 2);
-          p.rotate(0);
-          break;
-        case 270:
-          p.translate(-g.canvasWidth / 2, 0);
+      clockPosition = rotationPlusPointOfCompassToClockPosition(
+        w.userState.tableRotationDegrees,
+        'North'
+        );
+      // translate and rotate by clock position
+      //console.log(clockPosition);
+      switch(clockPosition) {
+        case '12PM':
+          p.translate(0, -(g.canvasHeight / 2));
+          p.rotate(p.HALF_PI * 2); 
+        break;
+        case '3PM':
+          p.translate((g.canvasWidth / 2), 0);
+          p.rotate(p.HALF_PI * 3);
+        break;
+        case '6PM':
+          p.translate(0, (g.canvasHeight / 2));
+          p.rotate(0); 
+        break;
+        case '9PM':
+          p.translate((-g.canvasWidth / 2), 0);
           p.rotate(p.HALF_PI);
-          break;
+        break;
         default:
-          console.log('Unexpected tableRotation argument ');
-      }
-      break;
+          console.log('Unexpected clockPosition argument');
+      };
+    break;
     case 'East':
       g.isHandVisible = gameState.handVisible.east;
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 13 && obj.shuffleIndex <=25 && obj.lifecycle === 1)
         }
       ); 
-      switch (w.userState.tableRotationDegrees) {
-        case 0: 
-          p.translate(g.canvasWidth / 2, 0)
-          p.rotate(-p.HALF_PI); 
-          break;
-        case 90: 
-          p.translate(0, g.canvasHeight / 2);
-          p.rotate(0);
-          break;
-        case 180:
-          p.translate(-g.canvasWidth / 2, 0);
+      clockPosition = rotationPlusPointOfCompassToClockPosition(
+        w.userState.tableRotationDegrees,
+        'East'
+        );
+      // translate and rotate by clock position
+      //console.log(clockPosition);
+      switch(clockPosition) {
+        case '12PM':
+          p.translate(0, -(g.canvasHeight / 2));
+          p.rotate(p.HALF_PI * 2); 
+        break;
+        case '3PM':
+          p.translate((g.canvasWidth / 2), 0);
+          p.rotate(p.HALF_PI * 3);
+        break;
+        case '6PM':
+          p.translate(0, (g.canvasHeight / 2));
+          p.rotate(0); 
+        break;
+        case '9PM':
+          p.translate((-g.canvasWidth / 2), 0);
           p.rotate(p.HALF_PI);
-          break;
-        case 270:
-          p.translate(0, -g.canvasHeight / 2);
-          p.rotate(2 * p.HALF_PI);
-          break;
+        break;
         default:
-          console.log('Unexpected tableRotation argument ');
-      }
-      break;
+          console.log('Unexpected clockPosition argument');
+      };
+    break;
     case "South":
       g.isHandVisible = gameState.handVisible.south;
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 26 && obj.shuffleIndex <=38 && obj.lifecycle == 1)
         }
       );
-      switch (w.userState.tableRotationDegrees) {
-        case 0: 
-          p.translate(0, g.canvasHeight / 2)
+      clockPosition = rotationPlusPointOfCompassToClockPosition(
+        w.userState.tableRotationDegrees,
+        'South'
+        );
+      // translate and rotate by clock position
+      //console.log(clockPosition);
+      switch(clockPosition) {
+        case '12PM':
+          p.translate(0, -(g.canvasHeight / 2));
+          p.rotate(p.HALF_PI * 2); 
+        break;
+        case '3PM':
+          p.translate((g.canvasWidth / 2), 0);
+          p.rotate(p.HALF_PI * 3);
+        break;
+        case '6PM':
+          p.translate(0, (g.canvasHeight / 2));
           p.rotate(0); 
-          break;
-        case 90: 
-          p.translate(-g.canvasWidth / 2, 0);
+        break;
+        case '9PM':
+          p.translate((-g.canvasWidth / 2), 0);
           p.rotate(p.HALF_PI);
-          break;
-        case 180:
-          p.translate(0, -g.canvasHeight / 2);
-          p.rotate(2 * p.HALF_PI);
-          break;
-        case 270:
-          p.translate(g.canvasWidth / 2, 0);
-          p.rotate(3 * p.HALF_PI);
-          break;
+        break;
         default:
-          console.log('Unexpected tableRotation argument ');
-      }
-      break;
+          console.log('Unexpected clockPosition argument');
+      };
+    break;
     case 'West':
       g.isHandVisible = gameState.handVisible.west;
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 39 && obj.shuffleIndex <=51 && obj.lifecycle == 1)
         }
       ); 
-      switch (w.userState.tableRotationDegrees) {
-        case 0: 
-          p.translate(-g.canvasWidth / 2, 0)
-          p.rotate(p.HALF_PI); 
-          break;
-        case 90: 
-          p.translate(0, -g.canvasHeight / 2);
-          p.rotate(p.PI);
-          break;
-        case 180:
-          p.translate(g.canvasWidth / 2, 0);
-          p.rotate(-p.HALF_PI);
-          break;
-        case 270:
-          p.translate(0, g.canvasHeight / 2);
-          p.rotate(0);
-          break;
+      clockPosition = rotationPlusPointOfCompassToClockPosition(
+        w.userState.tableRotationDegrees,
+        'West'
+        );
+      // translate and rotate by clock position
+      //console.log(clockPosition);
+      switch(clockPosition) {
+        case '12PM':
+          p.translate(0, -(g.canvasHeight / 2));
+          p.rotate(p.HALF_PI * 2); 
+        break;
+        case '3PM':
+          p.translate((g.canvasWidth / 2), 0);
+          p.rotate(p.HALF_PI * 3);
+        break;
+        case '6PM':
+          p.translate(0, (g.canvasHeight / 2));
+          p.rotate(0); 
+        break;
+        case '9PM':
+          p.translate((-g.canvasWidth / 2), 0);
+          p.rotate(p.HALF_PI);
+        break;
         default:
-          console.log('Unexpected tableRotation argument ');
-      }
-      break;
+          console.log('Unexpected clockPosition argument');
+      };
+    break;
     case 'Discard':
       g.myDiscardArray = window.gameState.pack.filter(obj => {
           return (obj.lifecycle === 2 )
@@ -190,54 +215,54 @@ let paintDiscardArray = (p, g, w) => {
   let cardHeightOffsetFraction = 0.275;
   let cardWidthOffsetFraction = 0.275;
   g.myDiscardArray.forEach((obj, i) => {
-      // now we can draw a card using each fileName in myDiscardArray
-      // position of card depends on range of shuffleIndex and rotation
-      // but these two variables are orthogonal
-      p.push();
-        switch (w.userState.tableRotationDegrees) {
-          case 0: 
-            p.rotate(0); 
-            break;
-          case 90: 
-            p.rotate(p.HALF_PI);
-            break;
-          case 180:
-            p.rotate(p.HALF_PI * 2);
-            break;
-          case 270:
-            p.rotate(p.HALF_PI * 3);
-            break;
-          default:
-            console.log('Unexpected tableRotation argument ');
-        }
-        switch (true) {
-          // N
-          case (obj.shuffleIndex < 13):
-            // good for all rotations, because x=x and y=y all angles
-            p.translate(0, -cardHeight * cardHeightOffsetFraction);
-            break;
-          // E
-          case (obj.shuffleIndex < 26):
-            p.translate(cardWidth * cardWidthOffsetFraction, 0);
-            break;
-          // S
-          case (obj.shuffleIndex < 39):
-            p.translate(0, cardHeight * cardHeightOffsetFraction);
+    // now we can draw a card using each fileName in myDiscardArray
+    // position of card depends on range of shuffleIndex and rotation
+    // but these two variables are orthogonal
+    p.push();
+      switch (w.userState.tableRotationDegrees) {
+        case 0: 
+          p.rotate(0); 
           break;
-          // W
-          case (obj.shuffleIndex < 52):
-            p.translate(-cardWidth * cardWidthOffsetFraction, 0);
-            break;
-          default:
-          console.log('Unexpected shuffleIndex argument');
-        }
-        let p5img = g.imgMap.get(obj.fileName);
-        p.image(p5img, -cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight);
-      p.pop();
+        case 90: 
+          p.rotate(p.HALF_PI);
+          break;
+        case 180:
+          p.rotate(p.HALF_PI * 2);
+          break;
+        case 270:
+          p.rotate(p.HALF_PI * 3);
+          break;
+        default:
+          console.log('Unexpected tableRotation argument ');
+      }
+      switch (true) {
+        // N
+        case (obj.shuffleIndex < 13):
+          // good for all rotations, because x=x and y=y all angles
+          p.translate(0, -cardHeight * cardHeightOffsetFraction);
+          break;
+        // E
+        case (obj.shuffleIndex < 26):
+          p.translate(cardWidth * cardWidthOffsetFraction, 0);
+          break;
+        // S
+        case (obj.shuffleIndex < 39):
+          p.translate(0, cardHeight * cardHeightOffsetFraction);
+        break;
+        // W
+        case (obj.shuffleIndex < 52):
+          p.translate(-cardWidth * cardWidthOffsetFraction, 0);
+          break;
+        default:
+        console.log('Unexpected shuffleIndex argument');
+      }
+      let p5img = g.imgMap.get(obj.fileName);
+      p.image(p5img, -cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight);
+    p.pop();
   });
 };
 
-let paintLabels = (p, g, w) => {
+let drawLabels = (p, g, w) => {
   let textHeightToCanvasHeightRatio = g.canvasHeight / 30;
   let cardSegmentHeight = g.canvasHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio;
   p.textSize(textHeightToCanvasHeightRatio);
@@ -245,151 +270,94 @@ let paintLabels = (p, g, w) => {
   p.textAlign(p.CENTER, p.CENTER);
   // white, 50% transparent
   p.fill(255, 128);
-  p.push();
   // move the origin to table centre
   p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
-  // then move from this known point to a point dependent upon table rotation
-  switch (w.userState.tableRotationDegrees) {
-    case 0: 
-      // S at bottom
-      p.translate(0, (g.canvasHeight / 2)  - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
-      p.rotate(0); 
+  w.gameState.locationAndPlayers.forEach((obj, i) => {
+    let clockPosition = rotationPlusPointOfCompassToClockPosition(
+      w.userState.tableRotationDegrees,
+      obj.location
+      );
+    p.push();
+    // translate and rotate by clock position
+    switch(clockPosition) {
+      case '12PM':
+        p.translate(0, -(g.canvasHeight / 2)  + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
+        //p.rotate(p.HALF_PI * 2); 
       break;
-    case 90: 
-      // S at LHS
-      p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
-      p.rotate(p.HALF_PI);
+      case '3PM':
+        p.translate((g.canvasWidth / 2) - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75), 0);
+        p.rotate(p.HALF_PI * 3);
       break;
-    case 180:
-      // S at top
-      p.translate(0, -(g.canvasHeight / 2)  + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
-      //p.rotate(p.HALF_PI * 2); 
+      case '6PM':
+        p.translate(0, (g.canvasHeight / 2)  - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
+        p.rotate(0); 
       break;
-    case 270:
-      // S at RHS
-      p.translate((g.canvasWidth / 2) - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75), 0);
-      p.rotate(p.HALF_PI * 3);
+      case '9PM':
+        p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
+        p.rotate(p.HALF_PI);
       break;
-    default:
-      console.log('Unexpected tableRotation argument ');
-  }
-  p.text(
-    'S: Gill', 
-    -g.canvasWidth / 4, 
-    -textHeightToCanvasHeightRatio,
-    g.canvasWidth / 2,
-    textHeightToCanvasHeightRatio * 2 
-  );
-  p.pop();
-  p.push();
-  // move the origin to table centre
-  p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
-  // then move from this known point to a point dependent upon table rotation
-  switch (w.userState.tableRotationDegrees) {
-    case 0: 
-      // W at LHS
-      p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
-      p.rotate(p.HALF_PI);
-      break;
-    case 90: 
-      // W at Top
-      p.translate(0, -(g.canvasHeight / 2)  + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
-      //p.rotate(p.HALF_PI * 2); 
-      break;
-    case 180:
-      // W at RHS
-      p.translate((g.canvasWidth / 2) - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75), 0);
-      p.rotate(p.HALF_PI * 3);
-      break;
-    case 270:
-      // W at bottom
-      p.translate(0, (g.canvasHeight / 2)  - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
-      p.rotate(0); 
-      break;
-    default:
-      console.log('Unexpected tableRotation argument ');
-  }
-  p.text(
-    'W: Mary', 
-    -g.canvasWidth / 4, 
-    -textHeightToCanvasHeightRatio,
-    g.canvasWidth / 2,
-    textHeightToCanvasHeightRatio * 2 
-  );
-  p.pop();
-  p.push();
-  // move the origin to table centre
-  p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
-  // then move from this known point to a point dependent upon table rotation
-  switch (w.userState.tableRotationDegrees) {
-    case 0: 
-      // N at top
-      p.translate(0, -(g.canvasHeight / 2)  + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
-      //p.rotate(p.HALF_PI * 2); 
-      break;
-    case 90: 
-      // N at RHS
-      p.translate((g.canvasWidth / 2) - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75), 0);
-      p.rotate(p.HALF_PI * 3);
-      break;
-    case 180:
-      // N at bottom
-      p.translate(0, (g.canvasHeight / 2)  - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
-      p.rotate(0); 
-      break;
-    case 270:
-      // N at LHS
-      p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
-      p.rotate(p.HALF_PI);
-      break;
-    default:
-      console.log('Unexpected tableRotation argument ');
-  }
-  p.text(
-    'N: Jon', 
-    -g.canvasWidth / 4, 
-    -textHeightToCanvasHeightRatio,
-    g.canvasWidth / 2,
-    textHeightToCanvasHeightRatio * 2 
-  );
-  p.pop();
-  p.push();
-  // move the origin to table centre
-  p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
-  // then move from this known point to a point dependent upon table rotation
-  switch (w.userState.tableRotationDegrees) {
-    case 0: 
-      // E at RHS
-      p.translate((g.canvasWidth / 2) - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75), 0);
-      p.rotate(p.HALF_PI * 3);
-      break;
-    case 90: 
-      // E at bottom
-      p.translate(0, (g.canvasHeight / 2)  - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
-      p.rotate(0); 
-      break;
-    case 180:
-      // E at LHS
-      p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
-      p.rotate(p.HALF_PI);
-      break;
-    case 270:
-      // E at top
-      p.translate(0, -(g.canvasHeight / 2)  + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
-      //p.rotate(p.HALF_PI * 2); 
-      break;
-    default:
-      console.log('Unexpected tableRotation argument ');
-  }
-  p.text(
-    'E: Freddy', 
-    -g.canvasWidth / 4, 
-    -textHeightToCanvasHeightRatio,
-    g.canvasWidth / 2,
-    textHeightToCanvasHeightRatio * 2 
-  );
-  p.pop();
+      default:
+        console.log('Unexpected clockPosition argument');
+    };
+    p.text(
+      obj.location + ': ' + obj.player, 
+      -g.canvasWidth / 4, 
+      -textHeightToCanvasHeightRatio,
+      g.canvasWidth / 2,
+      textHeightToCanvasHeightRatio * 2 
+    );
+    p.pop();
+  });
+};
+
+// HELPER FUNCTION TO CALCULATE CLOCK POSITION
+// (tableRotationDegrees (0, 90 etc), pointOfCompass ('North' etc)) =>
+// clockPosition ('12PM' etc)
+let rotationPlusPointOfCompassToClockPosition = 
+  (tableRotationDegrees, pointOfCompass) => {
+  let pointOfCompassDegrees = () => {
+    switch(pointOfCompass) {
+      case 'North':
+        return 0;
+        break;
+      case 'East':
+        return 90;
+        break;
+      case 'South':
+        return 180;
+        break;
+      case 'West':
+        return 270
+        break;
+      default:
+        console.log('Unexpected pointOfCompass argument');
+        return null;
+    };
+  };
+  let degrees = (tableRotationDegrees + pointOfCompassDegrees()) % 360;
+  //console.log(degrees);
+  let clockPosition = () => {
+    switch (degrees){
+      case 0:
+        return '12PM';
+        break;
+      case 90:
+        return '3PM';
+        break;
+      case 180:
+        return '6PM';
+        break;
+      case 270:
+        return '9PM';
+        break;
+      default:
+        console.log('Unexoected degrees argument');
+        return null;
+    };
+  };
+  //console.log(clockPosition());
+  return clockPosition();
 };
 
 exports.drawCards = drawCards;
-exports.paintLabels = paintLabels;
+exports.drawLabels = drawLabels;

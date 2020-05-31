@@ -110,8 +110,8 @@ const callbackFunctionForP5 = (p) => {
     SideEffect.drawCards(p, g, w, 'West');
     SideEffect.drawCards(p, g, w, 'East');
     SideEffect.drawCards(p, g, w, 'North');
-    SideEffect.drawCards(p, g, w, 'Discard');
-    SideEffect.paintLabels(p, g, w);
+    // SideEffect.drawCards(p, g, w, 'Discard');
+    SideEffect.drawLabels(p, g, w);
 
   };
 

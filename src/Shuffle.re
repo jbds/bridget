@@ -34,6 +34,12 @@ type compassPoint =
   | West
 ;
 
+type locationAndPlayer = {
+  // consumed by js code, so use string rather than compassPoint
+  location: string,
+  player: string
+};
+
 // all cards start in the dealers hand
 // once shuffled they are in a hand defined by compass
 // then they are thrown to discard pile
@@ -67,8 +73,9 @@ type handVisible = {north: bool, east: bool, south: bool, west: bool};
 type state = {
   pack: pack,
   handVisible: handVisible,
-  dealer: option(compassPoint),
-  cardsDealtCount: int,
+  //dealer: option(compassPoint),
+  //cardsDealtCount: int,
+  locationAndPlayers: array(locationAndPlayer)
 };
 
 // keep for later move!
@@ -137,6 +144,14 @@ let initialPack = [|
 
 let initialHandVisible = {north: true, east: true, south: true, west: true};
 
+let initialLocationAndPlayers = [|
+  {location: "North", player: "?" },
+  {location: "East", player: "??"},
+  {location: "South", player: "???"},
+  {location: "West", player: "????"}
+|];
+
+
 let impureGetTimeBasedSeedUpTo60k = () => {
   let now = Js.Date.make();
   int_of_float((Js.Date.getSeconds(now) *. 1000.0) +. Js.Date.getMilliseconds(now));
@@ -171,7 +186,8 @@ let shufflePack = () => {
   {
     pack: shuffledPack,
     handVisible: initialHandVisible,
-    dealer: None,
-    cardsDealtCount: 0
+    //dealer: None,
+    //cardsDealtCount: 0,
+    locationAndPlayers: initialLocationAndPlayers
   }
 }
