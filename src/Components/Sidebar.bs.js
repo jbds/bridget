@@ -2,7 +2,9 @@
 
 var React = require("react");
 var Global$ReasonReactExamples = require("../Global.bs.js");
+var SpanStd$ReasonReactExamples = require("./SpanStd.bs.js");
 var FlipHand$ReasonReactExamples = require("./FlipHand.bs.js");
+var InputStd$ReasonReactExamples = require("./InputStd.bs.js");
 var ButtonStd$ReasonReactExamples = require("./ButtonStd.bs.js");
 var ButtonStdJsx$ReasonReactExamples = require("./ButtonStdJsx.bs.js");
 
@@ -14,11 +16,25 @@ function Sidebar(Props) {
     ((window.userState.tableRotationDegrees = ((window.userState.tableRotationDegrees + 90) % 360)));
     
   };
+  var handlerBtnLogin = function (_e) {
+    ((localStorage.setItem(
+                      'myLoginName',
+                      document.getElementById('txtMyLoginName').value
+                    )));
+    
+  };
   return React.createElement(React.Fragment, undefined, React.createElement("div", {
                   id: "sidebar1"
-                }, "Sidebar1", React.createElement("br", undefined), React.createElement("button", {
-                      id: "btn1"
-                    }, "Test P5"), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                }, React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
+                      id: "spanLabel1",
+                      text: "My username: "
+                    }), React.createElement(InputStd$ReasonReactExamples.make, {
+                      id: "txtMyLoginName"
+                    }), " ", React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
+                      label: "Login",
+                      id: "btnLogin",
+                      onClick: handlerBtnLogin
+                    }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Shuffle */0,
                       label: "Shuffle",

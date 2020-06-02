@@ -95,12 +95,15 @@ const callbackFunctionForP5 = (p) => {
     g.canvasWidth = p.windowHeight;
     g.canvasHeight = p.windowHeight;
     p.createCanvas(g.canvasWidth, g.canvasHeight);
-    let p5btn1 = p.select('#btn1');
-    p5btn1.mousePressed(changeBgColor);
+    //let p5btn1 = p.select('#btn1');
+    //p5btn1.mousePressed(changeBgColor);
     // init userState
     w.userState = {
       tableRotationDegrees: 0
     }
+    // fetch default username from persistent store
+    document.getElementById('txtMyLoginName').value = 
+      localStorage.getItem('myLoginName');
     };
 
   p.draw = () => {

@@ -10,17 +10,29 @@ let make = () => {
   // we can guarantee gameState below (for use by p5) will always be in sync
   // compiler warning 21 here unless we return unit specifically
   let () = [%raw "window.gameState = match[0]"];
-  // event handler
+  // event handlers
   let handlerBtnRotateTable = (_e) => {
     //Js.log("btnRotateTable clicked");
     let () = [%raw "window.userState.tableRotationDegrees = ((window.userState.tableRotationDegrees + 90) % 360)"];
   };
+  let handlerBtnLogin = (_e) => {
+    //Js.log("btnLogin clicked");
+    let () = [%raw "localStorage.setItem(
+                      'myLoginName',
+                      document.getElementById('txtMyLoginName').value
+                    )"
+             ];
+  };
   // fragment
   <>
   <div id="sidebar1">
-    (s2e("Sidebar1"))
     <br/>
-    <button id="btn1">(s2e("Test P5"))</button>
+    <SpanStd id="spanLabel1" text="My username: " />
+    <InputStd id="txtMyLoginName" />
+    (s2e(" "))
+    <ButtonStdJsx id="btnLogin" label="Login" onClick=handlerBtnLogin/>
+    //<br/>
+    //<button id="btn1">(s2e("Test P5"))</button>
     <br/>
     <ButtonStd dispatch action=Shuffle label="Shuffle" id="btnShuffle"/>
   </div>
