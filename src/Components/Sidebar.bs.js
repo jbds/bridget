@@ -8,6 +8,9 @@ var InputStd$ReasonReactExamples = require("./InputStd.bs.js");
 var ButtonStd$ReasonReactExamples = require("./ButtonStd.bs.js");
 var ButtonStdJsx$ReasonReactExamples = require("./ButtonStdJsx.bs.js");
 
+const Online = require('../Online.bs');
+;
+
 function Sidebar(Props) {
   var match = React.useReducer(Global$ReasonReactExamples.reducer, Global$ReasonReactExamples.initialState);
   var dispatch = match[1];
@@ -21,6 +24,7 @@ function Sidebar(Props) {
                       'myLoginName',
                       document.getElementById('txtMyLoginName').value
                     )));
+    ((Online.doLogin(document.getElementById('txtMyLoginName').value)));
     
   };
   return React.createElement(React.Fragment, undefined, React.createElement("div", {
@@ -77,4 +81,4 @@ function Sidebar(Props) {
 var make = Sidebar;
 
 exports.make = make;
-/* react Not a pure module */
+/*  Not a pure module */

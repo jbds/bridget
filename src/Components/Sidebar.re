@@ -1,3 +1,7 @@
+[%%raw {|
+  const Online = require('../Online.bs');
+|}];
+
 
 [@react.component]
 let make = () => {
@@ -22,6 +26,7 @@ let make = () => {
                       document.getElementById('txtMyLoginName').value
                     )"
              ];
+    let () = [%raw "Online.doLogin(document.getElementById('txtMyLoginName').value)"];
   };
   // fragment
   <>
