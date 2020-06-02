@@ -27,12 +27,12 @@ let make = () => {
   <>
   <div id="sidebar1">
     <br/>
-    <SpanStd id="spanLabel1" text="My username: " />
+    <SpanStd id="spn1" text="My username: " />
     <InputStd id="txtMyLoginName" />
-    (s2e(" "))
+    <SpanStd id="spn2" text=" " />
     <ButtonStdJsx id="btnLogin" label="Login" onClick=handlerBtnLogin/>
-    //<br/>
-    //<button id="btn1">(s2e("Test P5"))</button>
+    <br/>
+    <SpanStd id="spnOnline" text="Online:" />
     <br/>
     <ButtonStd dispatch action=Shuffle label="Shuffle" id="btnShuffle"/>
   </div>

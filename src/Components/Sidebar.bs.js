@@ -26,14 +26,20 @@ function Sidebar(Props) {
   return React.createElement(React.Fragment, undefined, React.createElement("div", {
                   id: "sidebar1"
                 }, React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
-                      id: "spanLabel1",
+                      id: "spn1",
                       text: "My username: "
                     }), React.createElement(InputStd$ReasonReactExamples.make, {
                       id: "txtMyLoginName"
-                    }), " ", React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
+                    }), React.createElement(SpanStd$ReasonReactExamples.make, {
+                      id: "spn2",
+                      text: " "
+                    }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "Login",
                       id: "btnLogin",
                       onClick: handlerBtnLogin
+                    }), React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
+                      id: "spnOnline",
+                      text: "Online:"
                     }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Shuffle */0,
