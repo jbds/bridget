@@ -8,7 +8,7 @@ function test() {
   alert('Online.test invoked!');
 }
 
-function showMessageInConsole() {
+function showMessageInConsole(message) {
   console.log(message);
 }
 
