@@ -3,12 +3,12 @@
 var $$Array = require("bs-platform/lib/js/array.js");
 var Shuffle$ReasonReactExamples = require("./Shuffle.bs.js");
 
-var initialState_locationAndPlayers = [];
+var initialState_pointOfCompassAndPlayers = [];
 
 var initialState = {
   pack: Shuffle$ReasonReactExamples.initialPack,
   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
-  locationAndPlayers: initialState_locationAndPlayers
+  pointOfCompassAndPlayers: initialState_pointOfCompassAndPlayers
 };
 
 function reducer(state, action) {
@@ -35,7 +35,7 @@ function reducer(state, action) {
           return {
                   pack: myPack,
                   handVisible: state.handVisible,
-                  locationAndPlayers: state.locationAndPlayers
+                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers
                 };
       case /* Sync */2 :
           return window.gameState;
@@ -53,7 +53,7 @@ function reducer(state, action) {
                     south: init.south,
                     west: init.west
                   },
-                  locationAndPlayers: state.locationAndPlayers
+                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers
                 };
       case /* East */1 :
           var init$1 = state.handVisible;
@@ -65,7 +65,7 @@ function reducer(state, action) {
                     south: init$1.south,
                     west: init$1.west
                   },
-                  locationAndPlayers: state.locationAndPlayers
+                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers
                 };
       case /* South */2 :
           var init$2 = state.handVisible;
@@ -77,7 +77,7 @@ function reducer(state, action) {
                     south: !state.handVisible.south,
                     west: init$2.west
                   },
-                  locationAndPlayers: state.locationAndPlayers
+                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers
                 };
       case /* West */3 :
           var init$3 = state.handVisible;
@@ -89,7 +89,7 @@ function reducer(state, action) {
                     south: init$3.south,
                     west: !state.handVisible.west
                   },
-                  locationAndPlayers: state.locationAndPlayers
+                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers
                 };
       
     }

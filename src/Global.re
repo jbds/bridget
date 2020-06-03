@@ -15,7 +15,7 @@ let initialState: Shuffle.state = {
     handVisible: Shuffle.initialHandVisible,
     //dealer: None,
     //cardsDealtCount: 0,
-    locationAndPlayers: [||]
+    pointOfCompassAndPlayers: [||]
 };
 
 let reducer = (state: Shuffle.state, action) => {

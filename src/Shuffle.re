@@ -34,9 +34,9 @@ type compassPoint =
   | West
 ;
 
-type locationAndPlayer = {
+type pointOfCompassAndPlayer = {
   // consumed by js code, so use string rather than compassPoint
-  location: string,
+  pointOfCompass: string,
   player: string
 };
 
@@ -75,7 +75,7 @@ type state = {
   handVisible: handVisible,
   //dealer: option(compassPoint),
   //cardsDealtCount: int,
-  locationAndPlayers: array(locationAndPlayer)
+  pointOfCompassAndPlayers: array(pointOfCompassAndPlayer)
 };
 
 // keep for later move!
@@ -144,11 +144,11 @@ let initialPack = [|
 
 let initialHandVisible = {north: true, east: true, south: true, west: true};
 
-let initialLocationAndPlayers = [|
-  {location: "North", player: "?" },
-  {location: "East", player: "??"},
-  {location: "South", player: "???"},
-  {location: "West", player: "????"}
+let initialPointOfCompassAndPlayers = [|
+  {pointOfCompass: "North", player: "Player1" },
+  {pointOfCompass: "East", player: "Player2"},
+  {pointOfCompass: "South", player: "Player3"},
+  {pointOfCompass: "West", player: "Player4"}
 |];
 
 
@@ -188,6 +188,6 @@ let shufflePack = () => {
     handVisible: initialHandVisible,
     //dealer: None,
     //cardsDealtCount: 0,
-    locationAndPlayers: initialLocationAndPlayers
+    pointOfCompassAndPlayers: initialPointOfCompassAndPlayers
   }
 }

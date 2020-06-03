@@ -187,10 +187,10 @@ let drawLabels = (p, g, w) => {
   p.fill(255, 128);
   // move the origin to table centre
   p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
-  w.gameState.locationAndPlayers.forEach((obj, i) => {
+  w.gameState.pointOfCompassAndPlayers.forEach((obj, i) => {
     let clockPosition = rotationPlusPointOfCompassToClockPosition(
       w.userState.tableRotationDegrees,
-      obj.location
+      obj.pointOfCompass
       );
     p.push();
     // translate and rotate by clock position
@@ -215,7 +215,7 @@ let drawLabels = (p, g, w) => {
         console.log('Unexpected clockPosition argument');
     };
     p.text(
-      obj.location + ': ' + obj.player, 
+      (obj.pointOfCompass).substring(0, 1) + ' - ' + obj.player, 
       -g.canvasWidth / 4, 
       -textHeightToCanvasHeightRatio,
       g.canvasWidth / 2,

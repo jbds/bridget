@@ -482,22 +482,22 @@ var initialHandVisible = {
   west: true
 };
 
-var initialLocationAndPlayers = [
+var initialPointOfCompassAndPlayers = [
   {
-    location: "North",
-    player: "?"
+    pointOfCompass: "North",
+    player: "Player1"
   },
   {
-    location: "East",
-    player: "??"
+    pointOfCompass: "East",
+    player: "Player2"
   },
   {
-    location: "South",
-    player: "???"
+    pointOfCompass: "South",
+    player: "Player3"
   },
   {
-    location: "West",
-    player: "????"
+    pointOfCompass: "West",
+    player: "Player4"
   }
 ];
 
@@ -588,7 +588,7 @@ function shufflePack(param) {
   return {
           pack: shuffledPack,
           handVisible: initialHandVisible,
-          locationAndPlayers: initialLocationAndPlayers
+          pointOfCompassAndPlayers: initialPointOfCompassAndPlayers
         };
 }
 

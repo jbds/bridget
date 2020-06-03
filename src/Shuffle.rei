@@ -34,8 +34,8 @@ type compassPoint =
   | West
 ;
 
-type locationAndPlayer = {
-  location: string,
+type pointOfCompassAndPlayer = {
+  pointOfCompass: string,
   player: string
 };
 
@@ -76,7 +76,7 @@ type state = {
   handVisible: handVisible,
   //dealer: option(compassPoint),
   //cardsDealtCount: int,
-  locationAndPlayers: array(locationAndPlayer)
+  pointOfCompassAndPlayers: array(pointOfCompassAndPlayer)
 };
 
 
