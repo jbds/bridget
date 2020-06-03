@@ -5,12 +5,10 @@ var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 var ButtonStd$ReasonReactExamples = require("./ButtonStd.bs.js");
 
 function TablePosition(Props) {
-  var arr = Props.arr;
+  var state = Props.state;
   var dispatch = Props.dispatch;
-  console.log(arr);
   return React.createElement(React.Fragment, undefined, React.createElement("table", {
                   style: {
-                    border: "1px solid #26653B",
                     borderCollapse: "collapse",
                     color: "#26653B",
                     fontFamily: "Trebuchet MS",
@@ -23,14 +21,16 @@ function TablePosition(Props) {
                   }
                 }, React.createElement("tbody", undefined, React.createElement("tr", undefined, React.createElement("td", {
                               style: {
+                                backgroundColor: "#FFFFFF",
                                 textAlign: "center",
                                 whiteSpace: "nowrap"
                               }
                             }, "Table Position"), React.createElement("td", {
                               style: {
+                                backgroundColor: "#FFFFFF",
                                 textAlign: "center"
                               }
-                            }, "Player")), Belt_Array.map(arr, (function (x) {
+                            }, "Player")), Belt_Array.map(state.pointOfCompassAndPlayers, (function (x) {
                             return React.createElement("tr", {
                                         key: x.player
                                       }, React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
@@ -53,7 +53,7 @@ function TablePosition(Props) {
                                                 action: /* Test */3,
                                                 label: "E",
                                                 id: "btnE" + x.player
-                                              })), React.createElement("td", undefined, "x" + x.player));
+                                              })), React.createElement("td", undefined, x.player));
                           })))));
 }
 

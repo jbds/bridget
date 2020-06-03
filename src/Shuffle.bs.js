@@ -485,19 +485,19 @@ var initialHandVisible = {
 var initialPointOfCompassAndPlayers = [
   {
     pointOfCompass: "North",
-    player: "Player1"
+    player: "1?"
   },
   {
     pointOfCompass: "East",
-    player: "Player2"
+    player: "2?"
   },
   {
     pointOfCompass: "South",
-    player: "Player3"
+    player: "3?"
   },
   {
     pointOfCompass: "West",
-    player: "Player4"
+    player: "4?"
   }
 ];
 

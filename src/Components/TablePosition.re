@@ -1,6 +1,5 @@
 [@react.component]
-let make = (~arr: array(Shuffle.pointOfCompassAndPlayer), ~dispatch) => {
-  Js.log(arr);
+let make = (~state: Shuffle.state, ~dispatch) => {
   <>
     <table
     style=(
@@ -10,7 +9,7 @@ let make = (~arr: array(Shuffle.pointOfCompassAndPlayer), ~dispatch) => {
         ~fontFamily={"Trebuchet MS"},
         ~margin={"auto"},
         // bug - borderColor single attribute not recognised       
-        ~border={"1px solid #26653B"}, 
+        //~border={"1px solid #26653B"}, 
         ~borderCollapse={"collapse"},
         //~borderRadius={"5px"},
         //~backgroundColor={"#FFFFFF"},
@@ -29,6 +28,7 @@ let make = (~arr: array(Shuffle.pointOfCompassAndPlayer), ~dispatch) => {
             ReactDOMRe.Style.make(
               ~textAlign={"center"},
               ~whiteSpace={"nowrap"},
+              ~backgroundColor={"#FFFFFF"},
               ()
             )
           )
@@ -39,6 +39,7 @@ let make = (~arr: array(Shuffle.pointOfCompassAndPlayer), ~dispatch) => {
           style=(
             ReactDOMRe.Style.make(
               ~textAlign={"center"},
+              ~backgroundColor={"#FFFFFF"},
               ()
             )
           )
@@ -48,7 +49,7 @@ let make = (~arr: array(Shuffle.pointOfCompassAndPlayer), ~dispatch) => {
       </tr>
       // ref RR examples
       {
-        arr
+        state.pointOfCompassAndPlayers
         -> Belt.Array.map(x =>
           <tr key={x.player}>
             <td>
@@ -57,7 +58,7 @@ let make = (~arr: array(Shuffle.pointOfCompassAndPlayer), ~dispatch) => {
               <ButtonStd dispatch action=Test label="W" id={"btnW" ++ x.player}/>
               <ButtonStd dispatch action=Test label="E" id={"btnE" ++ x.player}/>
             </td>
-            <td>{React.string("x" ++ x.player)}</td>
+            <td>{React.string(x.player)}</td>
           </tr>
         )
         -> React.array

@@ -145,10 +145,10 @@ let initialPack = [|
 let initialHandVisible = {north: true, east: true, south: true, west: true};
 
 let initialPointOfCompassAndPlayers = [|
-  {pointOfCompass: "North", player: "Player1" },
-  {pointOfCompass: "East", player: "Player2"},
-  {pointOfCompass: "South", player: "Player3"},
-  {pointOfCompass: "West", player: "Player4"}
+  {pointOfCompass: "North", player: "1?" },
+  {pointOfCompass: "East", player: "2?"},
+  {pointOfCompass: "South", player: "3?"},
+  {pointOfCompass: "West", player: "4?"}
 |];
 
 

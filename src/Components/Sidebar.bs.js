@@ -28,12 +28,11 @@ function Sidebar(Props) {
     ((Online.doLogin(document.getElementById('txtMyLoginName').value)));
     
   };
-  var pointOfCompassAndPlayers = match[0].pointOfCompassAndPlayers;
   return React.createElement(React.Fragment, undefined, React.createElement("div", {
                   id: "sidebar1"
                 }, React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn1",
-                      text: "My username: "
+                      text: "My name: "
                     }), React.createElement(InputStd$ReasonReactExamples.make, {
                       id: "txtMyLoginName"
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
@@ -43,17 +42,9 @@ function Sidebar(Props) {
                       label: "Login",
                       id: "btnLogin",
                       onClick: handlerBtnLogin
-                    }), React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
-                      id: "spnOnline",
-                      text: "Online:"
-                    }), React.createElement("br", undefined), React.createElement(TablePosition$ReasonReactExamples.make, {
-                      arr: pointOfCompassAndPlayers,
+                    }), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement(TablePosition$ReasonReactExamples.make, {
+                      state: match[0],
                       dispatch: dispatch
-                    }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
-                      dispatch: dispatch,
-                      action: /* Shuffle */0,
-                      label: "Shuffle",
-                      id: "btnShuffle"
                     })), React.createElement("div", {
                   id: "sidebar2"
                 }, "Sidebar2", React.createElement("br", undefined), React.createElement("button", {
@@ -68,6 +59,11 @@ function Sidebar(Props) {
                       action: /* Sync */2,
                       label: "Sync state with gameState",
                       id: "btnSync"
+                    }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                      dispatch: dispatch,
+                      action: /* Shuffle */0,
+                      label: "Shuffle",
+                      id: "btnShuffle"
                     })), React.createElement("div", {
                   id: "sidebar3"
                 }, "Sidebar3", React.createElement("br", undefined), React.createElement("span", {

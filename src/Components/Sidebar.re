@@ -28,21 +28,19 @@ let make = () => {
              ];
     let () = [%raw "Online.doLogin(document.getElementById('txtMyLoginName').value)"];
   };
-  let pointOfCompassAndPlayers = state.pointOfCompassAndPlayers;
+  //let pointOfCompassAndPlayers = state.pointOfCompassAndPlayers;
   // fragment
   <>
   <div id="sidebar1">
     <br/>
-    <SpanStd id="spn1" text="My username: " />
+    <SpanStd id="spn1" text="My name: " />
     <InputStd id="txtMyLoginName" />
     <SpanStd id="spn2" text=" " />
     <ButtonStdJsx id="btnLogin" label="Login" onClick=handlerBtnLogin/>
     <br/>
-    <SpanStd id="spnOnline" text="Online:" />
+    //<SpanStd id="spnOnline" text="Online:" />
     <br/>
-    <TablePosition arr=pointOfCompassAndPlayers dispatch />
-    <br/>
-    <ButtonStd dispatch action=Shuffle label="Shuffle" id="btnShuffle"/>
+    <TablePosition state dispatch />
   </div>
   <div id="sidebar2">
     (s2e("Sidebar2"))
@@ -50,6 +48,8 @@ let make = () => {
     <button id="btn2">(s2e("Test ReasonML"))</button>
     <ButtonStd dispatch action=Discard label="Discard" id="btnDiscard"/>
     <ButtonStd dispatch action=Sync label="Sync state with gameState" id="btnSync" />
+    <br/>
+    <ButtonStd dispatch action=Shuffle label="Shuffle" id="btnShuffle"/>
   </div>
   <div id="sidebar3">
     (s2e("Sidebar3"))
