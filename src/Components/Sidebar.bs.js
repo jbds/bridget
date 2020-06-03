@@ -7,6 +7,7 @@ var FlipHand$ReasonReactExamples = require("./FlipHand.bs.js");
 var InputStd$ReasonReactExamples = require("./InputStd.bs.js");
 var ButtonStd$ReasonReactExamples = require("./ButtonStd.bs.js");
 var ButtonStdJsx$ReasonReactExamples = require("./ButtonStdJsx.bs.js");
+var TablePosition$ReasonReactExamples = require("./TablePosition.bs.js");
 
 const Online = require('../Online.bs');
 ;
@@ -27,6 +28,7 @@ function Sidebar(Props) {
     ((Online.doLogin(document.getElementById('txtMyLoginName').value)));
     
   };
+  var pointOfCompassAndPlayers = match[0].pointOfCompassAndPlayers;
   return React.createElement(React.Fragment, undefined, React.createElement("div", {
                   id: "sidebar1"
                 }, React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
@@ -44,6 +46,9 @@ function Sidebar(Props) {
                     }), React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spnOnline",
                       text: "Online:"
+                    }), React.createElement("br", undefined), React.createElement(TablePosition$ReasonReactExamples.make, {
+                      arr: pointOfCompassAndPlayers,
+                      dispatch: dispatch
                     }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Shuffle */0,

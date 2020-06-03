@@ -39,6 +39,9 @@ function reducer(state, action) {
                 };
       case /* Sync */2 :
           return window.gameState;
+      case /* Test */3 :
+          console.log("benign action: 'Test'");
+          return state;
       
     }
   } else {

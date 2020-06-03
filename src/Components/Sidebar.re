@@ -28,6 +28,7 @@ let make = () => {
              ];
     let () = [%raw "Online.doLogin(document.getElementById('txtMyLoginName').value)"];
   };
+  let pointOfCompassAndPlayers = state.pointOfCompassAndPlayers;
   // fragment
   <>
   <div id="sidebar1">
@@ -38,6 +39,8 @@ let make = () => {
     <ButtonStdJsx id="btnLogin" label="Login" onClick=handlerBtnLogin/>
     <br/>
     <SpanStd id="spnOnline" text="Online:" />
+    <br/>
+    <TablePosition arr=pointOfCompassAndPlayers dispatch />
     <br/>
     <ButtonStd dispatch action=Shuffle label="Shuffle" id="btnShuffle"/>
   </div>

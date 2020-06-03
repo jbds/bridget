@@ -7,6 +7,7 @@ type action =
   // | Deal 
   | Discard
   | Sync
+  | Test
 ;
 
 // force to type Shuffle.state
@@ -65,6 +66,10 @@ let reducer = (state: Shuffle.state, action) => {
         let myNewState: Shuffle.state = [%bs.raw {| window.gameState |}]   //state;
         //Js.log(myNewState);
         myNewState;
+      }
+      | Test => {
+        Js.log("benign action: 'Test'");
+        state
       }
     }
 };
