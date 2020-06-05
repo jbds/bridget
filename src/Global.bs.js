@@ -38,7 +38,9 @@ function reducer(state, action) {
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers
                 };
       case /* Sync */2 :
-          return window.gameState;
+          var myNewState = window.gameState;
+          console.log(myNewState);
+          return myNewState;
       case /* Test */3 :
           console.log("benign action: 'Test'");
           return state;

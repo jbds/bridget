@@ -501,11 +501,11 @@ var initialPointOfCompassAndPlayers = [
   },
   {
     pointOfCompass: "West",
-    player: "4?"
+    player: "5?"
   },
   {
     pointOfCompass: "West",
-    player: "4?"
+    player: "6?"
   }
 ];
 

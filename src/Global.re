@@ -64,7 +64,7 @@ let reducer = (state: Shuffle.state, action) => {
       | Sync => {
         // replace existing state with gameState
         let myNewState: Shuffle.state = [%bs.raw {| window.gameState |}]   //state;
-        //Js.log(myNewState);
+        Js.log(myNewState);
         myNewState;
       }
       | Test => {

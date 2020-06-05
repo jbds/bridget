@@ -57,6 +57,7 @@ let make = (~state: Shuffle.state, ~dispatch) => {
               <ButtonStd dispatch action=Test label="S" id={"btnS" ++ x.player}/>
               <ButtonStd dispatch action=Test label="W" id={"btnW" ++ x.player}/>
               <ButtonStd dispatch action=Test label="E" id={"btnE" ++ x.player}/>
+              <ButtonObserver dispatch action=Test label="X" id={"btnO" ++ x.player}/>
             </td>
             <td>{React.string(x.player)}</td>
           </tr>

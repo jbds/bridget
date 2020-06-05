@@ -3,6 +3,7 @@
 var React = require("react");
 var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 var ButtonStd$ReasonReactExamples = require("./ButtonStd.bs.js");
+var ButtonObserver$ReasonReactExamples = require("./ButtonObserver.bs.js");
 
 function TablePosition(Props) {
   var state = Props.state;
@@ -53,6 +54,11 @@ function TablePosition(Props) {
                                                 action: /* Test */3,
                                                 label: "E",
                                                 id: "btnE" + x.player
+                                              }), React.createElement(ButtonObserver$ReasonReactExamples.make, {
+                                                dispatch: dispatch,
+                                                action: /* Test */3,
+                                                label: "X",
+                                                id: "btnO" + x.player
                                               })), React.createElement("td", undefined, x.player));
                           })))));
 }
