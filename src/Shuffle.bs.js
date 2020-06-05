@@ -488,12 +488,20 @@ var initialPointOfCompassAndPlayers = [
     player: "1?"
   },
   {
-    pointOfCompass: "East",
+    pointOfCompass: "South",
     player: "2?"
   },
   {
-    pointOfCompass: "South",
+    pointOfCompass: "West",
     player: "3?"
+  },
+  {
+    pointOfCompass: "East",
+    player: "4?"
+  },
+  {
+    pointOfCompass: "West",
+    player: "4?"
   },
   {
     pointOfCompass: "West",
