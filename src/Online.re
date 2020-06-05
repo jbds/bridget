@@ -40,6 +40,8 @@ function handleWsOpen(){
     showMessageInConsole(window.jbObj);
     showMessageInConsole('will now update gameState with jbObj');
     gameState = window.jbObj;
+    showMessageInConsole('dispatch Sync action via hidden key on sidebar');
+    document.getElementById('btnSync').click();
   };
 }
 

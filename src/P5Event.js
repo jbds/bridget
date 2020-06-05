@@ -194,7 +194,7 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
     }
   });
   //console.log(gameState.pack.filter(x => x.fileName === myCard.fileName));
-  // and then dispatch the Sync action via a hidden key on the sidebar
+  // dispatch the Sync action via a hidden key on the sidebar
   document.getElementById('btnSync').click();
 }
 
