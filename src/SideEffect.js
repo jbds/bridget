@@ -178,6 +178,11 @@ let paintDiscardArray = (p, g, w) => {
 };
 
 let drawLabels = (p, g, w) => {
+  // avoid error 
+  if(!w.gameState.pointOfCompassAndPlayers) {
+    //console.log('No labels defined, abort drawLabels');
+    return;
+  }
   let textHeightToCanvasHeightRatio = g.canvasHeight / 30;
   let cardSegmentHeight = g.canvasHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio;
   p.textSize(textHeightToCanvasHeightRatio);
@@ -214,13 +219,18 @@ let drawLabels = (p, g, w) => {
       default:
         console.log('Unexpected clockPosition argument');
     };
-    p.text(
-      (obj.pointOfCompass).substring(0, 1) + ' - ' + obj.player, 
-      -g.canvasWidth / 4, 
-      -textHeightToCanvasHeightRatio,
-      g.canvasWidth / 2,
-      textHeightToCanvasHeightRatio * 2 
-    );
+    // do not draw label if pointOfCompass is not known
+    if(obj.pointOfCompass != '') {
+      p.text(
+        (obj.pointOfCompass).substring(0, 1) + ' - ' + obj.player, 
+        -g.canvasWidth / 4, 
+        -textHeightToCanvasHeightRatio,
+        g.canvasWidth / 2,
+        textHeightToCanvasHeightRatio * 2 
+      );
+    } else {
+      // skip
+    }
     p.pop();
   });
 };
@@ -245,7 +255,8 @@ let rotationPlusPointOfCompassToClockPosition =
         return 270
         break;
       default:
-        console.log('Unexpected pointOfCompass argument');
+        // this can occur by design before players are assigned
+        //console.log('Unexpected pointOfCompass argument');
         return null;
     };
   };

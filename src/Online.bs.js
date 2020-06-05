@@ -26,18 +26,22 @@ function handleWsOpen(){
 
   ws = new WebSocket(`ws://${location.host}`);
   ws.onerror = function() {
-    showMessageInConsole('Websocket error');
+    showMessageInConsole('clent ws.onerror fired, so Websocket error');
   };
   ws.onopen = function() {
-    showMessageInConsole('Websocket connection established');
+    showMessageInConsole('client ws.onopen fired, so Websocket connection established');
   };
   ws.onclose = function() {
-    showMessageInConsole('Websocket connection closed');
+    showMessageInConsole('client ws.onclose fired, so Websocket connection closed');
     ws = null;
   };
-  // add detection of message received from server
   ws.onmessage = function(e) {
-    showMessageInConsole(e.data);
+    // add detection of message received from server
+    showMessageInConsole('client ws.onmessage fired, see Websocket message received below:');
+    window.jbObj = JSON.parse(e.data);
+    showMessageInConsole(window.jbObj);
+    showMessageInConsole('will now update gameState with jbObj');
+    gameState = window.jbObj;
   };
 }
 
@@ -54,6 +58,7 @@ function doLogin(myLoginNameValue) {
     },
     body: JSON.stringify({userName: myLoginNameValue})
   })
+  .then(handleResponse)
   .then(showMessageInConsole)
   // this replaces a separate button for "open websocket connection"
   .then(handleWsOpen)
