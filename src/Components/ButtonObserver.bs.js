@@ -9,17 +9,15 @@ function ButtonObserver(Props) {
   var label = Props.label;
   var id = Props.id;
   return React.createElement(React.Fragment, undefined, React.createElement("button", {
-                  className: "btnObserver",
                   id: id,
                   style: {
-                    backgroundImage: "url(assets/EyeForObserver000.png)",
+                    backgroundImage: "url(assets/EyeForObserverSpikey.png)",
                     border: "1px solid #26653B",
-                    color: "#26653B",
+                    color: "#FFFFFF",
                     fontFamily: "Trebuchet MS",
                     fontSize: "2.5vh",
-                    height: "50px",
                     margin: "0vh",
-                    width: "50px",
+                    backgroundSize: "100% 100%",
                     borderRadius: "5px"
                   },
                   onClick: (function (_e) {

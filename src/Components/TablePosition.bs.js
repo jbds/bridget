@@ -23,18 +23,18 @@ function TablePosition(Props) {
                 }, React.createElement("tbody", undefined, React.createElement("tr", undefined, React.createElement("td", {
                               style: {
                                 backgroundColor: "#FFFFFF",
+                                textAlign: "center"
+                              }
+                            }, "Player"), React.createElement("td", {
+                              style: {
+                                backgroundColor: "#FFFFFF",
                                 textAlign: "center",
                                 whiteSpace: "nowrap"
                               }
-                            }, "Table Position"), React.createElement("td", {
-                              style: {
-                                backgroundColor: "#FFFFFF",
-                                textAlign: "center"
-                              }
-                            }, "Player")), Belt_Array.map(state.pointOfCompassAndPlayers, (function (x) {
+                            }, "Table Position")), Belt_Array.map(state.pointOfCompassAndPlayers, (function (x) {
                             return React.createElement("tr", {
                                         key: x.player
-                                      }, React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
+                                      }, React.createElement("td", undefined, x.player), React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
                                                 dispatch: dispatch,
                                                 action: /* Test */3,
                                                 label: "N",
@@ -57,9 +57,9 @@ function TablePosition(Props) {
                                               }), React.createElement(ButtonObserver$ReasonReactExamples.make, {
                                                 dispatch: dispatch,
                                                 action: /* Test */3,
-                                                label: "X",
+                                                label: "_",
                                                 id: "btnO" + x.player
-                                              })), React.createElement("td", undefined, x.player));
+                                              })));
                           })))));
 }
 

@@ -27,6 +27,17 @@ let make = (~state: Shuffle.state, ~dispatch) => {
           style=(
             ReactDOMRe.Style.make(
               ~textAlign={"center"},
+              ~backgroundColor={"#FFFFFF"},
+              ()
+            )
+          )
+        >
+          (React.string("Player"))
+        </td>
+        <td
+          style=(
+            ReactDOMRe.Style.make(
+              ~textAlign={"center"},
               ~whiteSpace={"nowrap"},
               ~backgroundColor={"#FFFFFF"},
               ()
@@ -35,31 +46,20 @@ let make = (~state: Shuffle.state, ~dispatch) => {
         >
           (React.string("Table Position"))
         </td>
-        <td
-          style=(
-            ReactDOMRe.Style.make(
-              ~textAlign={"center"},
-              ~backgroundColor={"#FFFFFF"},
-              ()
-            )
-          )
-        >
-          (React.string("Player"))
-        </td>
       </tr>
       // ref RR examples
       {
         state.pointOfCompassAndPlayers
         -> Belt.Array.map(x =>
           <tr key={x.player}>
+            <td>{React.string(x.player)}</td>
             <td>
               <ButtonStd dispatch action=Test label="N" id={"btnN" ++ x.player}/>
               <ButtonStd dispatch action=Test label="S" id={"btnS" ++ x.player}/>
               <ButtonStd dispatch action=Test label="W" id={"btnW" ++ x.player}/>
               <ButtonStd dispatch action=Test label="E" id={"btnE" ++ x.player}/>
-              <ButtonObserver dispatch action=Test label="X" id={"btnO" ++ x.player}/>
+              <ButtonObserver dispatch action=Test label="_" id={"btnO" ++ x.player}/>
             </td>
-            <td>{React.string(x.player)}</td>
           </tr>
         )
         -> React.array
