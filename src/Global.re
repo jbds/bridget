@@ -8,6 +8,7 @@ type action =
   | Discard
   | Sync
   | Test
+  | AssignPlayer(Shuffle.pointOfCompassAndPlayer)
 ;
 
 // force to type Shuffle.state
@@ -70,6 +71,32 @@ let reducer = (state: Shuffle.state, action) => {
       | Test => {
         Js.log("benign action: 'Test'");
         state
+      }
+      | AssignPlayer(pOfCAndP) => {
+        //Js.log("action AssignPlayer " ++ pOfCAndP.player ++ " to " ++ pOfCAndP.pointOfCompass);
+        //let myNewArray = state.pointOfCompassAndPlayers;
+        //{...state, pointOfCompassAndPlayers: myNewArray}
+        let myArray1 = Array.map(
+          (pointOfCompassAndPlayer: Shuffle.pointOfCompassAndPlayer) => {
+            pointOfCompassAndPlayer.pointOfCompass == pOfCAndP.pointOfCompass
+            ?
+            {...pointOfCompassAndPlayer, pointOfCompass: ""}
+            :
+            {pointOfCompassAndPlayer}
+          },
+          state.pointOfCompassAndPlayers
+        );
+        let myArray2 = Array.map(
+          (pointOfCompassAndPlayer: Shuffle.pointOfCompassAndPlayer) => {
+            pointOfCompassAndPlayer.player == pOfCAndP.player
+            ?
+            {...pointOfCompassAndPlayer, pointOfCompass: pOfCAndP.pointOfCompass}
+            :
+            {pointOfCompassAndPlayer}
+          },
+          myArray1
+        );
+        {...state, pointOfCompassAndPlayers: myArray2}
       }
     }
 };

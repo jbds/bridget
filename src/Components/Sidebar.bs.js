@@ -53,17 +53,20 @@ function Sidebar(Props) {
                       dispatch: dispatch,
                       action: /* Discard */1,
                       label: "Discard",
-                      id: "btnDiscard"
+                      id: "btnDiscard",
+                      isActive: true
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Sync */2,
                       label: "Sync state with gameState",
-                      id: "btnSync"
+                      id: "btnSync",
+                      isActive: true
                     }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Shuffle */0,
                       label: "Shuffle",
-                      id: "btnShuffle"
+                      id: "btnShuffle",
+                      isActive: true
                     })), React.createElement("div", {
                   id: "sidebar3"
                 }, "Sidebar3", React.createElement("br", undefined), React.createElement("span", {

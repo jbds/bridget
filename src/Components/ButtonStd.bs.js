@@ -8,10 +8,11 @@ function ButtonStd(Props) {
   var action = Props.action;
   var label = Props.label;
   var id = Props.id;
+  var isActive = Props.isActive;
   return React.createElement(React.Fragment, undefined, React.createElement("button", {
                   id: id,
                   style: {
-                    backgroundColor: "#FFFFFF",
+                    backgroundColor: isActive ? "#ffffff" : "#ffe0e0",
                     border: "1px solid #26653B",
                     color: "#26653B",
                     fontFamily: "Trebuchet MS",

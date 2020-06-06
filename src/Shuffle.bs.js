@@ -482,32 +482,7 @@ var initialHandVisible = {
   west: true
 };
 
-var initialPointOfCompassAndPlayers = [
-  {
-    pointOfCompass: "North",
-    player: "1?"
-  },
-  {
-    pointOfCompass: "South",
-    player: "2?"
-  },
-  {
-    pointOfCompass: "West",
-    player: "3?"
-  },
-  {
-    pointOfCompass: "East",
-    player: "4?"
-  },
-  {
-    pointOfCompass: "",
-    player: "5?"
-  },
-  {
-    pointOfCompass: "",
-    player: "6?"
-  }
-];
+var initialPointOfCompassAndPlayers = [];
 
 function impureGetTimeBasedSeedUpTo60k(param) {
   var now = new Date();

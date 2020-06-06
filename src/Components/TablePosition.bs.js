@@ -1,5 +1,6 @@
 'use strict';
 
+var Block = require("bs-platform/lib/js/block.js");
 var React = require("react");
 var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 var ButtonStd$ReasonReactExamples = require("./ButtonStd.bs.js");
@@ -8,59 +9,83 @@ var ButtonObserver$ReasonReactExamples = require("./ButtonObserver.bs.js");
 function TablePosition(Props) {
   var state = Props.state;
   var dispatch = Props.dispatch;
-  return React.createElement(React.Fragment, undefined, React.createElement("table", {
-                  style: {
-                    borderCollapse: "collapse",
-                    color: "#26653B",
-                    fontFamily: "Trebuchet MS",
-                    fontSize: "2.5vh",
-                    margin: "auto",
-                    padding: "0px",
-                    textAlign: "center",
-                    whiteSpace: "nowrap",
-                    width: "30vh"
-                  }
-                }, React.createElement("tbody", undefined, React.createElement("tr", undefined, React.createElement("td", {
-                              style: {
-                                backgroundColor: "#FFFFFF",
-                                textAlign: "center"
-                              }
-                            }, "Player"), React.createElement("td", {
-                              style: {
-                                backgroundColor: "#FFFFFF",
-                                textAlign: "center",
-                                whiteSpace: "nowrap"
-                              }
-                            }, "Table Position")), Belt_Array.map(state.pointOfCompassAndPlayers, (function (x) {
-                            return React.createElement("tr", {
-                                        key: x.player
-                                      }, React.createElement("td", undefined, x.player), React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
-                                                dispatch: dispatch,
-                                                action: /* Test */3,
-                                                label: "N",
-                                                id: "btnN" + x.player
-                                              }), React.createElement(ButtonStd$ReasonReactExamples.make, {
-                                                dispatch: dispatch,
-                                                action: /* Test */3,
-                                                label: "S",
-                                                id: "btnS" + x.player
-                                              }), React.createElement(ButtonStd$ReasonReactExamples.make, {
-                                                dispatch: dispatch,
-                                                action: /* Test */3,
-                                                label: "W",
-                                                id: "btnW" + x.player
-                                              }), React.createElement(ButtonStd$ReasonReactExamples.make, {
-                                                dispatch: dispatch,
-                                                action: /* Test */3,
-                                                label: "E",
-                                                id: "btnE" + x.player
-                                              }), React.createElement(ButtonObserver$ReasonReactExamples.make, {
-                                                dispatch: dispatch,
-                                                action: /* Test */3,
-                                                label: "_",
-                                                id: "btnO" + x.player
-                                              })));
-                          })))));
+  if (state.pointOfCompassAndPlayers.length === 0) {
+    return null;
+  } else {
+    return React.createElement(React.Fragment, undefined, React.createElement("table", {
+                    style: {
+                      borderCollapse: "collapse",
+                      color: "#26653B",
+                      fontFamily: "Trebuchet MS",
+                      fontSize: "2.5vh",
+                      margin: "auto",
+                      padding: "0px",
+                      textAlign: "center",
+                      whiteSpace: "nowrap",
+                      width: "30vh"
+                    }
+                  }, React.createElement("tbody", undefined, React.createElement("tr", undefined, React.createElement("td", {
+                                style: {
+                                  backgroundColor: "#f8f8f8",
+                                  textAlign: "center"
+                                }
+                              }, "Player"), React.createElement("td", {
+                                style: {
+                                  backgroundColor: "#f8f8f8",
+                                  textAlign: "center",
+                                  whiteSpace: "nowrap"
+                                }
+                              }, "Table Position")), Belt_Array.map(state.pointOfCompassAndPlayers, (function (x) {
+                              return React.createElement("tr", {
+                                          key: x.player
+                                        }, React.createElement("td", undefined, x.player), React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
+                                                  dispatch: dispatch,
+                                                  action: /* AssignPlayer */Block.__(1, [{
+                                                        pointOfCompass: "North",
+                                                        player: x.player
+                                                      }]),
+                                                  label: "N",
+                                                  id: "btnN" + x.player,
+                                                  isActive: x.pointOfCompass === "North"
+                                                }), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                                                  dispatch: dispatch,
+                                                  action: /* AssignPlayer */Block.__(1, [{
+                                                        pointOfCompass: "South",
+                                                        player: x.player
+                                                      }]),
+                                                  label: "S",
+                                                  id: "btnS" + x.player,
+                                                  isActive: x.pointOfCompass === "South"
+                                                }), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                                                  dispatch: dispatch,
+                                                  action: /* AssignPlayer */Block.__(1, [{
+                                                        pointOfCompass: "West",
+                                                        player: x.player
+                                                      }]),
+                                                  label: "W",
+                                                  id: "btnW" + x.player,
+                                                  isActive: x.pointOfCompass === "West"
+                                                }), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                                                  dispatch: dispatch,
+                                                  action: /* AssignPlayer */Block.__(1, [{
+                                                        pointOfCompass: "East",
+                                                        player: x.player
+                                                      }]),
+                                                  label: "E",
+                                                  id: "btnE" + x.player,
+                                                  isActive: x.pointOfCompass === "East"
+                                                }), React.createElement(ButtonObserver$ReasonReactExamples.make, {
+                                                  dispatch: dispatch,
+                                                  action: /* AssignPlayer */Block.__(1, [{
+                                                        pointOfCompass: "",
+                                                        player: x.player
+                                                      }]),
+                                                  label: "_",
+                                                  id: "btnO" + x.player,
+                                                  isActive: x.pointOfCompass === ""
+                                                })));
+                            })))));
+  }
 }
 
 var make = TablePosition;

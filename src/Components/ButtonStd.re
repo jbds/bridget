@@ -1,5 +1,5 @@
 [@react.component]
-let make = (~dispatch: Global.action => unit, ~action: Global.action, ~label: string, ~id: string) => {
+let make = (~dispatch: Global.action => unit, ~action: Global.action, ~label: string, ~id: string, ~isActive: bool) => {
   <>
     <button 
     id=id
@@ -13,7 +13,7 @@ let make = (~dispatch: Global.action => unit, ~action: Global.action, ~label: st
         // bug - borderColor single attribute not recognised       
         ~border={"1px solid #26653B"}, 
         ~borderRadius={"5px"},
-        ~backgroundColor={"#FFFFFF"},
+        ~backgroundColor={isActive ? "#ffffff" : "#ffe0e0"},
         ()
       )
     )

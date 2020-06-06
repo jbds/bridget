@@ -47,6 +47,34 @@ function reducer(state, action) {
       
     }
   } else {
+    if (action.tag) {
+      var pOfCAndP = action[0];
+      var myArray1 = $$Array.map((function (pointOfCompassAndPlayer) {
+              if (pointOfCompassAndPlayer.pointOfCompass === pOfCAndP.pointOfCompass) {
+                return {
+                        pointOfCompass: "",
+                        player: pointOfCompassAndPlayer.player
+                      };
+              } else {
+                return pointOfCompassAndPlayer;
+              }
+            }), state.pointOfCompassAndPlayers);
+      var myArray2 = $$Array.map((function (pointOfCompassAndPlayer) {
+              if (pointOfCompassAndPlayer.player === pOfCAndP.player) {
+                return {
+                        pointOfCompass: pOfCAndP.pointOfCompass,
+                        player: pointOfCompassAndPlayer.player
+                      };
+              } else {
+                return pointOfCompassAndPlayer;
+              }
+            }), myArray1);
+      return {
+              pack: state.pack,
+              handVisible: state.handVisible,
+              pointOfCompassAndPlayers: myArray2
+            };
+    }
     switch (action[0]) {
       case /* North */0 :
           var init = state.handVisible;

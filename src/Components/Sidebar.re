@@ -46,10 +46,10 @@ let make = () => {
     (s2e("Sidebar2"))
     <br/>
     <button id="btn2">(s2e("Test ReasonML"))</button>
-    <ButtonStd dispatch action=Discard label="Discard" id="btnDiscard"/>
-    <ButtonStd dispatch action=Sync label="Sync state with gameState" id="btnSync" />
+    <ButtonStd dispatch action=Discard label="Discard" id="btnDiscard" isActive=true/>
+    <ButtonStd dispatch action=Sync label="Sync state with gameState" id="btnSync" isActive=true />
     <br/>
-    <ButtonStd dispatch action=Shuffle label="Shuffle" id="btnShuffle"/>
+    <ButtonStd dispatch action=Shuffle label="Shuffle" id="btnShuffle" isActive=true/>
   </div>
   <div id="sidebar3">
     (s2e("Sidebar3"))

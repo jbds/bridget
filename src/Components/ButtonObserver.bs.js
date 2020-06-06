@@ -8,12 +8,14 @@ function ButtonObserver(Props) {
   var action = Props.action;
   var label = Props.label;
   var id = Props.id;
+  var isActive = Props.isActive;
   return React.createElement(React.Fragment, undefined, React.createElement("button", {
                   id: id,
                   style: {
-                    backgroundImage: "url(assets/EyeForObserverSpikey.png)",
+                    backgroundColor: isActive ? "#ffffff" : "#ffe0e0",
+                    backgroundImage: "url(assets/EyeSpikeyTransparent.png)",
                     border: "1px solid #26653B",
-                    color: "#FFFFFF",
+                    color: isActive ? "#ffffff" : "#e0e0e0",
                     fontFamily: "Trebuchet MS",
                     fontSize: "2.5vh",
                     margin: "0vh",

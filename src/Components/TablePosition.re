@@ -1,5 +1,9 @@
 [@react.component]
 let make = (~state: Shuffle.state, ~dispatch) => {
+  Array.length(state.pointOfCompassAndPlayers) == 0
+  ?
+  React.null
+  :
   <>
     <table
     style=(
@@ -27,7 +31,7 @@ let make = (~state: Shuffle.state, ~dispatch) => {
           style=(
             ReactDOMRe.Style.make(
               ~textAlign={"center"},
-              ~backgroundColor={"#FFFFFF"},
+              ~backgroundColor={"#f8f8f8"},
               ()
             )
           )
@@ -39,7 +43,7 @@ let make = (~state: Shuffle.state, ~dispatch) => {
             ReactDOMRe.Style.make(
               ~textAlign={"center"},
               ~whiteSpace={"nowrap"},
-              ~backgroundColor={"#FFFFFF"},
+              ~backgroundColor={"#f8f8f8"},
               ()
             )
           )
@@ -54,11 +58,11 @@ let make = (~state: Shuffle.state, ~dispatch) => {
           <tr key={x.player}>
             <td>{React.string(x.player)}</td>
             <td>
-              <ButtonStd dispatch action=Test label="N" id={"btnN" ++ x.player}/>
-              <ButtonStd dispatch action=Test label="S" id={"btnS" ++ x.player}/>
-              <ButtonStd dispatch action=Test label="W" id={"btnW" ++ x.player}/>
-              <ButtonStd dispatch action=Test label="E" id={"btnE" ++ x.player}/>
-              <ButtonObserver dispatch action=Test label="_" id={"btnO" ++ x.player}/>
+              <ButtonStd dispatch action=AssignPlayer({pointOfCompass: "North", player: x.player}) label="N" id={"btnN" ++ x.player} isActive={x.pointOfCompass == "North" ? true : false}/>
+              <ButtonStd dispatch action=AssignPlayer({pointOfCompass: "South", player: x.player}) label="S" id={"btnS" ++ x.player} isActive={x.pointOfCompass == "South" ? true : false}/>
+              <ButtonStd dispatch action=AssignPlayer({pointOfCompass: "West", player: x.player}) label="W" id={"btnW" ++ x.player} isActive={x.pointOfCompass == "West" ? true : false}/>
+              <ButtonStd dispatch action=AssignPlayer({pointOfCompass: "East", player: x.player}) label="E" id={"btnE" ++ x.player} isActive={x.pointOfCompass == "East" ? true : false}/>
+              <ButtonObserver dispatch action=AssignPlayer({pointOfCompass: "", player: x.player}) label="_" id={"btnO" ++ x.player} isActive={x.pointOfCompass == "" ? true : false}/>
             </td>
           </tr>
         )
