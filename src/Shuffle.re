@@ -149,8 +149,8 @@ let initialPointOfCompassAndPlayers = [|
   {pointOfCompass: "South", player: "2?"},
   {pointOfCompass: "West", player: "3?"},
   {pointOfCompass: "East", player: "4?"},
-  {pointOfCompass: "West", player: "5?"},
-  {pointOfCompass: "West", player: "6?"}
+  {pointOfCompass: "", player: "5?"},
+  {pointOfCompass: "", player: "6?"}
 |];
 
 
