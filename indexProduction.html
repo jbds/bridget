@@ -21,7 +21,8 @@
     position: fixed;
     top: 0;
     bottom: 60%;
-    left: 100vh;
+    left: 100vh; /* fallback for no custom property support */
+    left: calc(var(--vh, 1vh) * 100);
     right: 0;
     background: #f8f8f8;
     color: gray;
@@ -31,7 +32,8 @@
     position: fixed;
     top: 33%;
     bottom: 40%;
-    left: 100vh;
+    left: 100vh; /* fallback for no custom property support */
+    left: calc(var(--vh, 1vh) * 100);
     right: 0;
     background: #f0f0f0;
     color: gray;
@@ -41,7 +43,8 @@
     position: fixed;
     top: 67%;
     bottom: 0;
-    left: 100vh;
+    left: 100vh; /* fallback for no custom property support */
+    left: calc(var(--vh, 1vh) * 100);
     right: 0;
     background: #e0e0e0;
     color: black;

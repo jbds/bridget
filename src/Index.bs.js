@@ -4,6 +4,15 @@ var React = require("react");
 var ReactDOMRe = require("reason-react/src/ReactDOMRe.js");
 var Sidebar$ReasonReactExamples = require("./Components/Sidebar.bs.js");
 
+const setVh = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
+
+  window.addEventListener('load', setVh);
+  window.addEventListener('resize', setVh);
+;
+
 ReactDOMRe.renderToElementWithId(React.createElement(Sidebar$ReasonReactExamples.make, { }), "root");
 
 'use strict';

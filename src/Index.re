@@ -3,6 +3,18 @@
 // test only, this forces this module to use a js import
 //Js.log(Extra.myName);
 
+// hack for iOS vh bug
+[%%raw {|
+  const setVh = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
+
+  window.addEventListener('load', setVh);
+  window.addEventListener('resize', setVh);
+|}];
+
+
 // all sidebar events are managed by ReasonReact components (ReasonML)
 ReactDOMRe.renderToElementWithId(<Sidebar />, "root");
 
