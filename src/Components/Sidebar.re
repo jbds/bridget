@@ -14,6 +14,13 @@ let make = () => {
   // we can guarantee gameState below (for use by p5) will always be in sync
   // compiler warning 21 here unless we return unit specifically
   let () = [%raw "window.gameState = match[0]"];
+  // any change to gameState must be messaged to the server too
+  // so that it can be re-broadcst to all
+  // potential for race condition here?
+  // but not as long as the new gameState does NOT trigger a state change
+  // aha, but if HAS to change the state on all except the initiator
+  // we can get round this by re-broadcasting to all EXCEPT the initiator
+  let () = [%raw "Online.doMessage()"];
   // event handlers
   let handlerBtnRotateTable = (_e) => {
     //Js.log("btnRotateTable clicked");
@@ -34,7 +41,6 @@ let make = () => {
     let () = [%raw "window.userState.player = '?'"];
     let () = [%raw "Online.doLogout(document.getElementById('txtMyLoginName').value)"];
   };
-  //let pointOfCompassAndPlayers = state.pointOfCompassAndPlayers;
   // fragment
   <>
   <div id="sidebar1">

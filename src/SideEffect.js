@@ -12,7 +12,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
   // fetch 1/4 of the card pack or less
   switch (pointOfCompass) {
     case 'North':
-      g.isHandVisible = gameState.handVisible.north;
+      g.isHandFaceUp = gameState.handVisible.north;
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 0 && obj.shuffleIndex <=12 && obj.lifecycle === 1)
         }
@@ -24,7 +24,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
       translateAndRotateByClockPosition(clockPosition, p, g);
     break;
     case 'East':
-      g.isHandVisible = gameState.handVisible.east;
+      g.isHandFaceUp = gameState.handVisible.east;
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 13 && obj.shuffleIndex <=25 && obj.lifecycle === 1)
         }
@@ -36,7 +36,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         translateAndRotateByClockPosition(clockPosition, p, g);
     break;
     case "South":
-      g.isHandVisible = gameState.handVisible.south;
+      g.isHandFaceUp = gameState.handVisible.south;
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 26 && obj.shuffleIndex <=38 && obj.lifecycle == 1)
         }
@@ -48,7 +48,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         translateAndRotateByClockPosition(clockPosition, p, g);
     break;
     case 'West':
-      g.isHandVisible = gameState.handVisible.west;
+      g.isHandFaceUp = gameState.handVisible.west;
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 39 && obj.shuffleIndex <=51 && obj.lifecycle == 1)
         }
@@ -87,7 +87,7 @@ let paintHandArray = (p, g) => {
   p.translate(-((g.myHandArray.length / 2.0))* cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
   g.myHandArray.forEach((obj, i) => {
     // now we can draw a card using each fileName in myHandArray
-    let p5img = g.isHandVisible ? g.imgMap.get(obj.fileName) : g.imgMap.get('1B');
+    let p5img = g.isHandFaceUp ? g.imgMap.get(obj.fileName) : g.imgMap.get('1B');
     // last card in hand is a special case, as we do not want the overlap
     i !== g.myHandArray.length - 1
     ?

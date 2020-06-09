@@ -49,7 +49,7 @@ function handleWsOpen(){
     showMessageInConsole(window.jbObj);
     showMessageInConsole('will now update gameState with jbObj');
     gameState = window.jbObj;
-    showMessageInConsole('ws.onmessage - dispatch Sync action via hidden key on sidebar');
+    showMessageInConsole('client ws.onmessage - dispatch Sync action via hidden key on sidebar');
     document.getElementById('btnSync').click();
   };
 }
@@ -92,7 +92,18 @@ function doLogout(myLoginNameValue) {
   });
 }
 
+function doMessage() {
+  if(!ws) {
+    showMessageInConsole('cannot send message - no websocket connection');
+    return;
+  }
+  ws.send(JSON.stringify(gameState));
+  showMessageInConsole('client doMessage - sent message to server as below:');
+  showMessageInConsole(JSON.stringify(gameState));
+}
+
 exports.test = test;
 exports.doLogin = doLogin;
 exports.doLogout = doLogout;
+exports.doMessage = doMessage;
 |}];

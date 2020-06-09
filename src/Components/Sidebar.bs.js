@@ -15,6 +15,7 @@ function Sidebar(Props) {
   var match = React.useReducer(Global$ReasonReactExamples.reducer, Global$ReasonReactExamples.initialState);
   var dispatch = match[1];
   ((window.gameState = match[0]));
+  ((Online.doMessage()));
   var handlerBtnRotateTable = function (_e) {
     ((window.userState.tableRotationDegrees = ((window.userState.tableRotationDegrees + 90) % 360)));
     
