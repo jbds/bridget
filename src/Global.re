@@ -31,7 +31,6 @@ let reducer = (state: Shuffle.state, action) => {
         let result = Shuffle.shufflePack();
         //Js.log(result);
         result;
-
       }
       // | DealerChange (shortLoc) => {
       //   switch (shortLoc) {
@@ -58,7 +57,8 @@ let reducer = (state: Shuffle.state, action) => {
         let () = [%raw "window.isLastActionSync = false"];
         // replace existing state with gameState
         let myNewState: Shuffle.state = [%bs.raw {| window.gameState |}];   //state;
-        myNewState;
+        let copy = myNewState;
+        copy;
       }
       | Sync => {
         // replace existing state with gameState

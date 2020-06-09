@@ -15,7 +15,7 @@ function Sidebar(Props) {
   var match = React.useReducer(Global$ReasonReactExamples.reducer, Global$ReasonReactExamples.initialState);
   var dispatch = match[1];
   var state = match[0];
-  ((window.gameState = match[0]));
+  ((!window.isLastActionSync ? window.gameState = match[0] : false));
   ((!window.isLastActionSync ? Online.doMessage() : console.log('Action-Sync: doMessage suppressed')));
   console.log(state.randomInt);
   var handlerBtnRotateTable = function (_e) {
@@ -68,7 +68,7 @@ function Sidebar(Props) {
                       action: /* Discard */1,
                       label: "Discard",
                       id: "btnDiscard",
-                      isVisible: false
+                      isVisible: true
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Sync */2,
