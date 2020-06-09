@@ -15,33 +15,18 @@ function reducer(state, action) {
   if (typeof action === "number") {
     switch (action) {
       case /* Shuffle */0 :
+          ((window.isLastActionSync = false));
           return Shuffle$ReasonReactExamples.shufflePack(undefined);
       case /* Discard */1 :
-          var myPack = $$Array.map((function (card) {
-                  if (card.shuffleIndex === 13) {
-                    return {
-                            noTrumpValue: card.noTrumpValue,
-                            handOrder: card.handOrder,
-                            shuffleIndex: card.shuffleIndex,
-                            rank: card.rank,
-                            suit: card.suit,
-                            fileName: card.fileName,
-                            lifecycle: /* Discard */2
-                          };
-                  } else {
-                    return card;
-                  }
-                }), state.pack);
-          return {
-                  pack: myPack,
-                  handVisible: state.handVisible,
-                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers
-                };
+          console.log("Action-Discard");
+          ((window.isLastActionSync = false));
+          return window.gameState;
       case /* Sync */2 :
           var myNewState = window.gameState;
-          console.log(myNewState);
+          ((window.isLastActionSync = true));
           return myNewState;
       case /* Test */3 :
+          ((window.isLastActionSync = true));
           console.log("benign action: 'Test'");
           return state;
       
@@ -49,6 +34,7 @@ function reducer(state, action) {
   } else {
     if (action.tag) {
       var pOfCAndP = action[0];
+      ((window.isLastActionSync = false));
       var myArray1 = $$Array.map((function (pointOfCompassAndPlayer) {
               if (pointOfCompassAndPlayer.pointOfCompass === pOfCAndP.pointOfCompass) {
                 return {
@@ -75,6 +61,7 @@ function reducer(state, action) {
               pointOfCompassAndPlayers: myArray2
             };
     }
+    ((window.isLastActionSync = false));
     switch (action[0]) {
       case /* North */0 :
           var init = state.handVisible;

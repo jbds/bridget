@@ -24,6 +24,8 @@ let reducer = (state: Shuffle.state, action) => {
     switch action {
       | Shuffle => {
         // Shuffle.rei is helpful here
+        // make sure doMessage is called in sidebar component
+        let () = [%raw "window.isLastActionSync = false"];
         // returns an entirely new state, no need to use existing state passed in
         let result = Shuffle.shufflePack();
         //Js.log(result);
@@ -40,6 +42,8 @@ let reducer = (state: Shuffle.state, action) => {
       //   }
       // }
       | Flip (compassPoint) => {
+        // make sure doMessage is called in sidebar component
+        let () = [%raw "window.isLastActionSync = false"];
         switch (compassPoint) {
           | North => {...state, handVisible: {...state.handVisible, north: !state.handVisible.north} }
           | East => {...state, handVisible: {...state.handVisible, east: !state.handVisible.east} }
@@ -48,31 +52,30 @@ let reducer = (state: Shuffle.state, action) => {
         }
       }
       | Discard => {
-        // help with card type, inc (), otherwise lifecycle is unbound
-        // test using shuffleIndex = 0
-        let myPack = Array.map(
-          (card: Shuffle.card) => {
-                  card.shuffleIndex === 13
-                  ?
-                  {...card, lifecycle: Discard} 
-                  :
-                  {card}
-                },
-          state.pack
-        );
-        {...state, pack: myPack}
+        Js.log("Action-Discard");
+        // make sure doMessage IS called in sidebar component
+        let () = [%raw "window.isLastActionSync = false"];
+        // replace existing state with gameState
+        let myNewState: Shuffle.state = [%bs.raw {| window.gameState |}];   //state;
+        myNewState;
       }
       | Sync => {
         // replace existing state with gameState
-        let myNewState: Shuffle.state = [%bs.raw {| window.gameState |}]   //state;
-        Js.log(myNewState);
+        let myNewState: Shuffle.state = [%bs.raw {| window.gameState |}];   //state;
+        //Js.log("Action - Sync");
+        // make sure doMessage is NOT called in sidebar component
+        let () = [%raw "window.isLastActionSync = true"];
         myNewState;
       }
       | Test => {
+        // make sure doMessage is NOT called in sidebar component
+        let () = [%raw "window.isLastActionSync = true"];
         Js.log("benign action: 'Test'");
         state
       }
       | AssignPlayer(pOfCAndP) => {
+        // make sure doMessage is called in sidebar component
+        let () = [%raw "window.isLastActionSync = false"];
         //Js.log("action AssignPlayer " ++ pOfCAndP.player ++ " to " ++ pOfCAndP.pointOfCompass);
         //let myNewArray = state.pointOfCompassAndPlayers;
         //{...state, pointOfCompassAndPlayers: myNewArray}

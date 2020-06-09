@@ -3,7 +3,7 @@
 // test only, this forces this module to use a js import
 //Js.log(Extra.myName);
 
-// hack for iOS vh bug
+// hack for iOS vh bug, and for detecting Action-Sync
 [%%raw {|
   const setVh = () => {
     const vh = window.innerHeight * 0.01;
@@ -12,6 +12,8 @@
 
   window.addEventListener('load', setVh);
   window.addEventListener('resize', setVh);
+
+  window.isLastActionSync = false;
 |}];
 
 

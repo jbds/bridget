@@ -11,6 +11,8 @@ const setVh = () => {
 
   window.addEventListener('load', setVh);
   window.addEventListener('resize', setVh);
+
+  window.isLastActionSync = false;
 ;
 
 ReactDOMRe.renderToElementWithId(React.createElement(Sidebar$ReasonReactExamples.make, { }), "root");
