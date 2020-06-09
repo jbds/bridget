@@ -8,15 +8,19 @@ function ButtonStd(Props) {
   var action = Props.action;
   var label = Props.label;
   var id = Props.id;
-  var isActive = Props.isActive;
+  var isActiveOpt = Props.isActive;
+  var isVisibleOpt = Props.isVisible;
+  var isActive = isActiveOpt !== undefined ? isActiveOpt : true;
+  var isVisible = isVisibleOpt !== undefined ? isVisibleOpt : true;
   return React.createElement(React.Fragment, undefined, React.createElement("button", {
                   id: id,
                   style: {
                     backgroundColor: isActive ? "#ffffff" : "#ffe0e0",
                     border: "1px solid #26653B",
                     color: "#26653B",
+                    display: isVisible ? "inline" : "none",
                     fontFamily: "Trebuchet MS",
-                    fontSize: "2.5vh",
+                    fontSize: "2.0vh",
                     margin: "0vh",
                     borderRadius: "5px"
                   },

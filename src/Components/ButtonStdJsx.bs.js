@@ -13,7 +13,7 @@ function ButtonStdJsx(Props) {
                     border: "1px solid #26653B",
                     color: "#26653B",
                     fontFamily: "Trebuchet MS",
-                    fontSize: "2.5vh",
+                    fontSize: "2.0vh",
                     margin: "auto",
                     borderRadius: "5px"
                   },

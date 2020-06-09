@@ -108,7 +108,8 @@ const callbackFunctionForP5 = (p) => {
     //p5btn1.mousePressed(changeBgColor);
     // init userState
     w.userState = {
-      tableRotationDegrees: 0
+      tableRotationDegrees: 0,
+      player: "?"
     }
     // fetch default username from persistent store
     document.getElementById('txtMyLoginName').value = 

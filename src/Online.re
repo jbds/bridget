@@ -30,6 +30,15 @@ function handleWsOpen(){
     showMessageInConsole('client ws.onopen fired, so Websocket connection established');
   };
   ws.onclose = function() {
+  // event fires at doLogout, we want to force gameState to nothing locally
+  gameState = {
+    pack: [],
+    handVisible: {},
+    pointOfCompassAndPlayers: []
+  }
+  // and sync state to this
+  showMessageInConsole('ws.onclose - dispatch Sync action via hidden key on sidebar');
+  document.getElementById('btnSync').click();
     showMessageInConsole('client ws.onclose fired, so Websocket connection closed');
     ws = null;
   };
@@ -40,7 +49,7 @@ function handleWsOpen(){
     showMessageInConsole(window.jbObj);
     showMessageInConsole('will now update gameState with jbObj');
     gameState = window.jbObj;
-    showMessageInConsole('dispatch Sync action via hidden key on sidebar');
+    showMessageInConsole('ws.onmessage - dispatch Sync action via hidden key on sidebar');
     document.getElementById('btnSync').click();
   };
 }
@@ -67,6 +76,23 @@ function doLogin(myLoginNameValue) {
   });
 }
 
+function doLogout(myLoginNameValue) {
+  fetch('/logout', {
+    method: 'DELETE',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({userName: myLoginNameValue})
+  })
+  .then(handleResponse)
+  .then(showMessageInConsole)
+  .catch(function(err) {
+    showMessageInConsole(err.message);
+  });
+}
+
 exports.test = test;
 exports.doLogin = doLogin;
+exports.doLogout = doLogout;
 |}];

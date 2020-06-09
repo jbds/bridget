@@ -3,7 +3,6 @@
 var React = require("react");
 var Global$ReasonReactExamples = require("../Global.bs.js");
 var SpanStd$ReasonReactExamples = require("./SpanStd.bs.js");
-var FlipHand$ReasonReactExamples = require("./FlipHand.bs.js");
 var InputStd$ReasonReactExamples = require("./InputStd.bs.js");
 var ButtonStd$ReasonReactExamples = require("./ButtonStd.bs.js");
 var ButtonStdJsx$ReasonReactExamples = require("./ButtonStdJsx.bs.js");
@@ -25,14 +24,21 @@ function Sidebar(Props) {
                       'myLoginName',
                       document.getElementById('txtMyLoginName').value
                     )));
+    ((window.userState.player = document.getElementById('txtMyLoginName').value));
     ((Online.doLogin(document.getElementById('txtMyLoginName').value)));
+    
+  };
+  var handlerBtnLogout = function (_e) {
+    console.log("btnLogout clicked");
+    ((window.userState.player = '?'));
+    ((Online.doLogout(document.getElementById('txtMyLoginName').value)));
     
   };
   return React.createElement(React.Fragment, undefined, React.createElement("div", {
                   id: "sidebar1"
                 }, React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn1",
-                      text: "My name: "
+                      text: "Player: "
                     }), React.createElement(InputStd$ReasonReactExamples.make, {
                       id: "txtMyLoginName"
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
@@ -42,38 +48,38 @@ function Sidebar(Props) {
                       label: "Login",
                       id: "btnLogin",
                       onClick: handlerBtnLogin
+                    }), React.createElement(SpanStd$ReasonReactExamples.make, {
+                      id: "spn2",
+                      text: " "
+                    }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
+                      label: "Logout",
+                      id: "btnLogout",
+                      onClick: handlerBtnLogout
                     }), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement(TablePosition$ReasonReactExamples.make, {
                       state: match[0],
                       dispatch: dispatch
                     })), React.createElement("div", {
                   id: "sidebar2"
-                }, "Sidebar2", React.createElement("br", undefined), React.createElement("button", {
-                      id: "btn2"
-                    }, "Test ReasonML"), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Discard */1,
                       label: "Discard",
                       id: "btnDiscard",
-                      isActive: true
+                      isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Sync */2,
                       label: "Sync state with gameState",
                       id: "btnSync",
-                      isActive: true
+                      isVisible: false
                     }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Shuffle */0,
                       label: "Shuffle",
-                      id: "btnShuffle",
-                      isActive: true
+                      id: "btnShuffle"
                     })), React.createElement("div", {
                   id: "sidebar3"
-                }, "Sidebar3", React.createElement("br", undefined), React.createElement("span", {
-                      id: "span1"
-                    }), React.createElement(FlipHand$ReasonReactExamples.make, {
-                      dispatch: dispatch
-                    }), React.createElement("br", undefined), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
+                }, React.createElement("br", undefined), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "Rotate table",
                       id: "btnRotateTable",
                       onClick: handlerBtnRotateTable

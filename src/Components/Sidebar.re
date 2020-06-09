@@ -26,36 +26,47 @@ let make = () => {
                       document.getElementById('txtMyLoginName').value
                     )"
              ];
+    let () = [%raw "window.userState.player = document.getElementById('txtMyLoginName').value"];
     let () = [%raw "Online.doLogin(document.getElementById('txtMyLoginName').value)"];
+  };
+  let handlerBtnLogout = (_e) => {
+    Js.log("btnLogout clicked");
+    let () = [%raw "window.userState.player = '?'"];
+    let () = [%raw "Online.doLogout(document.getElementById('txtMyLoginName').value)"];
   };
   //let pointOfCompassAndPlayers = state.pointOfCompassAndPlayers;
   // fragment
   <>
   <div id="sidebar1">
     <br/>
-    <SpanStd id="spn1" text="My name: " />
+    <SpanStd id="spn1" text="Player: " />
     <InputStd id="txtMyLoginName" />
     <SpanStd id="spn2" text=" " />
     <ButtonStdJsx id="btnLogin" label="Login" onClick=handlerBtnLogin/>
+    <SpanStd id="spn2" text=" " />
+    <ButtonStdJsx id="btnLogout" label="Logout" onClick=handlerBtnLogout/>
     <br/>
     //<SpanStd id="spnOnline" text="Online:" />
     <br/>
     <TablePosition state dispatch />
   </div>
   <div id="sidebar2">
-    (s2e("Sidebar2"))
+    //(s2e("Sidebar2"))
     <br/>
-    <button id="btn2">(s2e("Test ReasonML"))</button>
-    <ButtonStd dispatch action=Discard label="Discard" id="btnDiscard" isActive=true/>
-    <ButtonStd dispatch action=Sync label="Sync state with gameState" id="btnSync" isActive=true />
+    //<button id="btn1">(s2e("p5 click listener"))</button>
+    <ButtonStd dispatch action=Discard label="Discard" id="btnDiscard" isVisible=false/>
+    <ButtonStd dispatch action=Sync label="Sync state with gameState" id="btnSync" isVisible=false/>
     <br/>
-    <ButtonStd dispatch action=Shuffle label="Shuffle" id="btnShuffle" isActive=true/>
+    <ButtonStd dispatch action=Shuffle label="Shuffle" id="btnShuffle"/>
   </div>
   <div id="sidebar3">
-    (s2e("Sidebar3"))
+    // (s2e("Sidebar3"))
+    // <br/>
+    // <span id="span1"></span>
+    // <FlipHand dispatch/>
     <br/>
-    <span id="span1"></span>
-    <FlipHand dispatch/>
+    <br/>
+    <br/>
     <br/>
     <ButtonStdJsx id="btnRotateTable" label="Rotate table" onClick=handlerBtnRotateTable/>
     <br/>

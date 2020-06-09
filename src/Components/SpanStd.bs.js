@@ -10,7 +10,7 @@ function SpanStd(Props) {
                   style: {
                     color: "#26653B",
                     fontFamily: "Trebuchet MS",
-                    fontSize: "2.5vh",
+                    fontSize: "2.0vh",
                     margin: "0vh",
                     textAlign: "center",
                     width: "10vh"
