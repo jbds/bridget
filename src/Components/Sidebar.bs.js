@@ -14,8 +14,10 @@ const Online = require('../Online.bs');
 function Sidebar(Props) {
   var match = React.useReducer(Global$ReasonReactExamples.reducer, Global$ReasonReactExamples.initialState);
   var dispatch = match[1];
+  var state = match[0];
   ((window.gameState = match[0]));
   ((!window.isLastActionSync ? Online.doMessage() : console.log('Action-Sync: doMessage suppressed')));
+  console.log(state.randomInt);
   var handlerBtnRotateTable = function (_e) {
     ((window.userState.tableRotationDegrees = ((window.userState.tableRotationDegrees + 90) % 360)));
     
@@ -57,7 +59,7 @@ function Sidebar(Props) {
                       id: "btnLogout",
                       onClick: handlerBtnLogout
                     }), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement(TablePosition$ReasonReactExamples.make, {
-                      state: match[0],
+                      state: state,
                       dispatch: dispatch
                     })), React.createElement("div", {
                   id: "sidebar2"
@@ -78,7 +80,9 @@ function Sidebar(Props) {
                       action: /* Shuffle */0,
                       label: "Shuffle",
                       id: "btnShuffle"
-                    })), React.createElement("div", {
+                    }), React.createElement("div", {
+                      id: "spnGS"
+                    }, String(state.randomInt))), React.createElement("div", {
                   id: "sidebar3"
                 }, React.createElement("br", undefined), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "Rotate table",

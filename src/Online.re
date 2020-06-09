@@ -34,7 +34,8 @@ function handleWsOpen(){
   gameState = {
     pack: [],
     handVisible: {},
-    pointOfCompassAndPlayers: []
+    pointOfCompassAndPlayers: [],
+    randomInt: 0
   }
   // and sync state to this
   showMessageInConsole('ws.onclose - dispatch Sync action via hidden key on sidebar');

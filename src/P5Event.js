@@ -194,7 +194,9 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
       console.log('found card and set lifecycle to 2');
     }
   });
-  //console.log(gameState.pack.filter(x => x.fileName === myCard.fileName));
+  // force sidebar update hack
+  gameState.randomInt = Math.floor(Math.random() * 100000);
+
   // dispatch the Discard action via a hidden key on the sidebar
   document.getElementById('btnDiscard').click();
 }

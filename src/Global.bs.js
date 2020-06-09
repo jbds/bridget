@@ -8,7 +8,8 @@ var initialState_pointOfCompassAndPlayers = [];
 var initialState = {
   pack: Shuffle$ReasonReactExamples.initialPack,
   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
-  pointOfCompassAndPlayers: initialState_pointOfCompassAndPlayers
+  pointOfCompassAndPlayers: initialState_pointOfCompassAndPlayers,
+  randomInt: 0
 };
 
 function reducer(state, action) {
@@ -58,7 +59,8 @@ function reducer(state, action) {
       return {
               pack: state.pack,
               handVisible: state.handVisible,
-              pointOfCompassAndPlayers: myArray2
+              pointOfCompassAndPlayers: myArray2,
+              randomInt: state.randomInt
             };
     }
     ((window.isLastActionSync = false));
@@ -73,7 +75,8 @@ function reducer(state, action) {
                     south: init.south,
                     west: init.west
                   },
-                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers
+                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                  randomInt: state.randomInt
                 };
       case /* East */1 :
           var init$1 = state.handVisible;
@@ -85,7 +88,8 @@ function reducer(state, action) {
                     south: init$1.south,
                     west: init$1.west
                   },
-                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers
+                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                  randomInt: state.randomInt
                 };
       case /* South */2 :
           var init$2 = state.handVisible;
@@ -97,7 +101,8 @@ function reducer(state, action) {
                     south: !state.handVisible.south,
                     west: init$2.west
                   },
-                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers
+                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                  randomInt: state.randomInt
                 };
       case /* West */3 :
           var init$3 = state.handVisible;
@@ -109,7 +114,8 @@ function reducer(state, action) {
                     south: init$3.south,
                     west: !state.handVisible.west
                   },
-                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers
+                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                  randomInt: state.randomInt
                 };
       
     }

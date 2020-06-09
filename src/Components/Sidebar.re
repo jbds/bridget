@@ -22,6 +22,8 @@ let make = () => {
   // we can get round this by re-broadcasting to all EXCEPT the initiator
   // ALSO we do not want to send a message when the initiating action is Sync
   let () = [%raw "!window.isLastActionSync ? Online.doMessage() : console.log('Action-Sync: doMessage suppressed')"];
+  // force Sidebar to rerender on a discard
+  Js.log(state.randomInt);
   // event handlers
   let handlerBtnRotateTable = (_e) => {
     //Js.log("btnRotateTable clicked");
@@ -65,6 +67,9 @@ let make = () => {
     <ButtonStd dispatch action=Sync label="Sync state with gameState" id="btnSync" isVisible=false/>
     <br/>
     <ButtonStd dispatch action=Shuffle label="Shuffle" id="btnShuffle"/>
+    <div id="spnGS">
+      (s2e(string_of_int(state.randomInt)))
+    </div>
   </div>
   <div id="sidebar3">
     // (s2e("Sidebar3"))

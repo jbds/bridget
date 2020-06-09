@@ -75,7 +75,8 @@ type state = {
   handVisible: handVisible,
   //dealer: option(compassPoint),
   //cardsDealtCount: int,
-  pointOfCompassAndPlayers: array(pointOfCompassAndPlayer)
+  pointOfCompassAndPlayers: array(pointOfCompassAndPlayer),
+  randomInt: int
 };
 
 // keep for later move!
@@ -190,6 +191,7 @@ let shufflePack = () => {
     handVisible: initialHandVisible,
     //dealer: None,
     //cardsDealtCount: 0,
-    pointOfCompassAndPlayers: initialPointOfCompassAndPlayers
+    pointOfCompassAndPlayers: initialPointOfCompassAndPlayers,
+    randomInt: impureGetTimeBasedSeedUpTo60k()
   }
 }

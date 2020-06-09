@@ -571,11 +571,13 @@ function shufflePack(param) {
   return {
           pack: shuffledPack,
           handVisible: initialHandVisible,
-          pointOfCompassAndPlayers: initialPointOfCompassAndPlayers
+          pointOfCompassAndPlayers: initialPointOfCompassAndPlayers,
+          randomInt: impureGetTimeBasedSeedUpTo60k(undefined)
         };
 }
 
 exports.initialPack = initialPack;
 exports.initialHandVisible = initialHandVisible;
 exports.shufflePack = shufflePack;
+exports.impureGetTimeBasedSeedUpTo60k = impureGetTimeBasedSeedUpTo60k;
 /* No side effect */
