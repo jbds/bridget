@@ -21,7 +21,14 @@ let make = () => {
   // aha, but if HAS to change the state on all except the initiator
   // we can get round this by re-broadcasting to all EXCEPT the initiator
   // ALSO we do not want to send a message when the initiating action is Sync
-  let () = [%raw "!window.isLastActionSync ? Online.doMessage() : console.log('Action-Sync: doMessage suppressed')"];
+  let () = [%raw {|
+    !window.isLastActionSync 
+    ? 
+    Online.doMessage() 
+    : 
+    //console.log('Action-Sync: doMessage suppressed')
+    false
+  |}];
   // event handlers
   let handlerBtnRotateTable = (_e) => {
     //Js.log("btnRotateTable clicked");

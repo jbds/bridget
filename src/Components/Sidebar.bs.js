@@ -16,7 +16,12 @@ function Sidebar(Props) {
   var dispatch = match[1];
   var state = match[0];
   ((!window.isLastActionSync ? window.gameState = match[0] : false));
-  ((!window.isLastActionSync ? Online.doMessage() : console.log('Action-Sync: doMessage suppressed')));
+  ((!window.isLastActionSync 
+    ? 
+    Online.doMessage() 
+    : 
+    //console.log('Action-Sync: doMessage suppressed')
+    false));
   var handlerBtnRotateTable = function (_e) {
     ((window.userState.tableRotationDegrees = ((window.userState.tableRotationDegrees + 90) % 360)));
     

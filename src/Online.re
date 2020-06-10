@@ -27,7 +27,7 @@ function handleWsOpen(){
     showMessageInConsole('clent ws.onerror fired, so Websocket error');
   };
   ws.onopen = function() {
-    showMessageInConsole('client ws.onopen fired, so Websocket connection established');
+    //showMessageInConsole('client ws.onopen fired, so Websocket connection established');
   };
   ws.onclose = function() {
   // event fires at doLogout, we want to force gameState to nothing locally
@@ -45,12 +45,12 @@ function handleWsOpen(){
   };
   ws.onmessage = function(e) {
     // add detection of message received from server
-    showMessageInConsole('client ws.onmessage fired, see Websocket message received below:');
+    //showMessageInConsole('client ws.onmessage fired, see Websocket message received below:');
     window.jbObj = JSON.parse(e.data);
-    showMessageInConsole(window.jbObj);
-    showMessageInConsole('will now update gameState with jbObj');
+    //showMessageInConsole(window.jbObj);
+    //showMessageInConsole('will now update gameState with jbObj');
     gameState = window.jbObj;
-    showMessageInConsole('client ws.onmessage - dispatch Sync action via hidden key on sidebar');
+    //showMessageInConsole('client ws.onmessage - dispatch Sync action via hidden key on sidebar');
     document.getElementById('btnSync').click();
   };
 }
