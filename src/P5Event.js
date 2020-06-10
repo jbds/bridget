@@ -186,19 +186,21 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   console.log(myCard.fileName);
   // at this point we know which card was clicked
   // so we can update the (mutable) js gameState object
-  let pack = gameState.pack;
-  pack.find((value, index) => {
-    if (value.fileName === myCard.fileName) {
-      // lifecycle Discard = 2 in js
-      gameState.pack[index].lifecycle = 2;
-      console.log('found card and set lifecycle to 2');
-    }
-  });
+  // let pack = gameState.pack;
+  // pack.find((value, index) => {
+  //   if (value.fileName === myCard.fileName) {
+  //     // lifecycle Discard = 2 in js
+  //     gameState.pack[index].lifecycle = 2;
+  //     console.log('found card and set lifecycle to 2');
+  //   }
+  // });
+
+  window.discardFileName = myCard.fileName
   // force sidebar update hack
-  gameState.randomInt = Math.floor(Math.random() * 100000);
+  //gameState.randomInt = Math.floor(Math.random() * 100000);
 
   // dispatch the Discard action via a hidden key on the sidebar
-  //document.getElementById('btnDiscard').click();
+  document.getElementById('btnDiscard').click();
 }
 
 exports.mouseDecode = mouseDecode;

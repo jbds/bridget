@@ -3,6 +3,9 @@
 var $$Array = require("bs-platform/lib/js/array.js");
 var Shuffle$ReasonReactExamples = require("./Shuffle.bs.js");
 
+var Online = require('./Online.bs');
+;
+
 var initialState_pointOfCompassAndPlayers = [];
 
 var initialState = {
@@ -21,7 +24,28 @@ function reducer(state, action) {
       case /* Discard */1 :
           console.log("Action-Discard");
           ((window.isLastActionSync = false));
-          return window.gameState;
+          var discardFileName = window.discardFileName;
+          var myPack = $$Array.map((function (card) {
+                  if (card.fileName === discardFileName) {
+                    return {
+                            noTrumpValue: card.noTrumpValue,
+                            handOrder: card.handOrder,
+                            shuffleIndex: card.shuffleIndex,
+                            rank: card.rank,
+                            suit: card.suit,
+                            fileName: card.fileName,
+                            lifecycle: /* Discard */2
+                          };
+                  } else {
+                    return card;
+                  }
+                }), state.pack);
+          return {
+                  pack: myPack,
+                  handVisible: state.handVisible,
+                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                };
       case /* Sync */2 :
           var myNewState = window.gameState;
           ((window.isLastActionSync = true));
@@ -124,4 +148,4 @@ function reducer(state, action) {
 
 exports.initialState = initialState;
 exports.reducer = reducer;
-/* No side effect */
+/*  Not a pure module */

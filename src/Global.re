@@ -1,3 +1,7 @@
+[%%raw {|
+  var Online = require('./Online.bs');
+|}];
+
 type action =
   | Shuffle
   //| DealerChange (string)
@@ -56,9 +60,21 @@ let reducer = (state: Shuffle.state, action) => {
         // make sure doMessage IS called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
         // replace existing state with gameState
-        let myNewState: Shuffle.state = [%bs.raw {| window.gameState |}];   //state;
-        let copy = myNewState;
-        copy;
+        // let myNewState: Shuffle.state = [%bs.raw {| window.gameState |}]; 
+        // let copy = myNewState;
+        // copy;
+        let discardFileName: string = [%raw "window.discardFileName"];
+        let myPack = Array.map(
+          (card: Shuffle.card) => {
+            card.fileName === discardFileName
+            ?
+            {...card, lifecycle: Discard}
+            :
+            {card}
+          },
+          state.pack
+        );
+        {...state, pack: myPack, randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()}
       }
       | Sync => {
         // replace existing state with gameState
