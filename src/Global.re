@@ -32,9 +32,10 @@ let reducer = (state: Shuffle.state, action) => {
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
         // returns an entirely new state, no need to use existing state passed in
-        let result = Shuffle.shufflePack();
+        //let result = Shuffle.getShuffledPack();
         //Js.log(result);
-        result;
+        //result;
+        {...state, pack: Shuffle.getShuffledPack(), randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()}
       }
       // | DealerChange (shortLoc) => {
       //   switch (shortLoc) {

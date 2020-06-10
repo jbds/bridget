@@ -475,15 +475,6 @@ var initialPack = [
   }
 ];
 
-var initialHandVisible = {
-  north: true,
-  east: true,
-  south: true,
-  west: true
-};
-
-var initialPointOfCompassAndPlayers = [];
-
 function impureGetTimeBasedSeedUpTo60k(param) {
   var now = new Date();
   return now.getSeconds() * 1000.0 + now.getMilliseconds() | 0;
@@ -555,29 +546,30 @@ function shuffleArrayInPlace(arr, seed) {
   
 }
 
-function shufflePack(param) {
+function getShuffledPack(param) {
   shuffleArrayInPlace(myArrayOfIndices, impureGetTimeBasedSeedUpTo60k(undefined));
-  var shuffledPack = $$Array.map((function (card) {
-          return {
-                  noTrumpValue: card.noTrumpValue,
-                  handOrder: card.handOrder,
-                  shuffleIndex: Caml_array.caml_array_get(myArrayOfIndices, card.noTrumpValue),
-                  rank: card.rank,
-                  suit: card.suit,
-                  fileName: card.fileName,
-                  lifecycle: /* Hand */1
-                };
-        }), initialPack);
-  return {
-          pack: shuffledPack,
-          handVisible: initialHandVisible,
-          pointOfCompassAndPlayers: initialPointOfCompassAndPlayers,
-          randomInt: impureGetTimeBasedSeedUpTo60k(undefined)
-        };
+  return $$Array.map((function (card) {
+                return {
+                        noTrumpValue: card.noTrumpValue,
+                        handOrder: card.handOrder,
+                        shuffleIndex: Caml_array.caml_array_get(myArrayOfIndices, card.noTrumpValue),
+                        rank: card.rank,
+                        suit: card.suit,
+                        fileName: card.fileName,
+                        lifecycle: /* Hand */1
+                      };
+              }), initialPack);
 }
+
+var initialHandVisible = {
+  north: true,
+  east: true,
+  south: true,
+  west: true
+};
 
 exports.initialPack = initialPack;
 exports.initialHandVisible = initialHandVisible;
-exports.shufflePack = shufflePack;
+exports.getShuffledPack = getShuffledPack;
 exports.impureGetTimeBasedSeedUpTo60k = impureGetTimeBasedSeedUpTo60k;
 /* No side effect */

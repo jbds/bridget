@@ -20,7 +20,12 @@ function reducer(state, action) {
     switch (action) {
       case /* Shuffle */0 :
           ((window.isLastActionSync = false));
-          return Shuffle$ReasonReactExamples.shufflePack(undefined);
+          return {
+                  pack: Shuffle$ReasonReactExamples.getShuffledPack(undefined),
+                  handVisible: state.handVisible,
+                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                };
       case /* Discard */1 :
           console.log("Action-Discard");
           ((window.isLastActionSync = false));

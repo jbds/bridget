@@ -181,17 +181,18 @@ let shuffleArrayInPlace = (arr, seed) => {
   };
 };
 
-let shufflePack = () => {
+let getShuffledPack = () => {
   // IMPURE!
   let () = shuffleArrayInPlace(myArrayOfIndices, impureGetTimeBasedSeedUpTo60k());
   // randomize the shuffleIndex to return the "shuffled" pack, and move lifecycle to Hand
   let shuffledPack = Array.map(card => {...card, shuffleIndex: myArrayOfIndices[card.noTrumpValue], lifecycle: Hand}, initialPack);
-  {
-    pack: shuffledPack,
-    handVisible: initialHandVisible,
-    //dealer: None,
-    //cardsDealtCount: 0,
-    pointOfCompassAndPlayers: initialPointOfCompassAndPlayers,
-    randomInt: impureGetTimeBasedSeedUpTo60k()
-  }
+  // {
+  //   pack: shuffledPack,
+  //   handVisible: initialHandVisible,
+  //   //dealer: None,
+  //   //cardsDealtCount: 0,
+  //   pointOfCompassAndPlayers: initialPointOfCompassAndPlayers,
+  //   randomInt: impureGetTimeBasedSeedUpTo60k()
+  // }
+  shuffledPack;
 }

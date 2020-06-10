@@ -90,7 +90,7 @@ let initialPack: pack;
 
 let initialHandVisible: handVisible;
 
-let shufflePack: unit => state;
+let getShuffledPack: unit => pack;
 
 //let impureGetTimeBasedSeedUpTo60k: unit => int;
 
