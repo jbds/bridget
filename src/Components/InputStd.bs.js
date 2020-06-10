@@ -12,6 +12,7 @@ function InputStd(Props) {
                     color: "#808080",
                     fontFamily: "Trebuchet MS",
                     fontSize: "2.0vh",
+                    height: "4.0vh",
                     margin: "0vh",
                     textAlign: "center",
                     width: "10vh"

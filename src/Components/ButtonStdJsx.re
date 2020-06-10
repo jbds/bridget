@@ -10,6 +10,7 @@ let make = (~label: string, ~id: string, ~onClick) => {
       ReactDOMRe.Style.make(
         ~color={"#26653B"}, 
         ~fontSize={"2.0vh"},
+        ~height={"5.0vh"},
         ~fontFamily={"Trebuchet MS"},
         ~margin={"auto"},
         // bug - borderColor single attribute not recognised       

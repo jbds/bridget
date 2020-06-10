@@ -14,10 +14,12 @@ function ButtonObserver(Props) {
                   style: {
                     backgroundColor: isActive ? "#ffffff" : "#ffe0e0",
                     backgroundImage: "url(assets/EyeSpikeyTransparent.png)",
+                    backgroundRepeat: "no-repeat",
                     border: "1px solid #26653B",
                     color: isActive ? "#ffffff" : "#e0e0e0",
                     fontFamily: "Trebuchet MS",
                     fontSize: "2.5vh",
+                    height: "5.0vh",
                     margin: "0vh",
                     backgroundSize: "100% 100%",
                     borderRadius: "5px"

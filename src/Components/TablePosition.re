@@ -27,18 +27,19 @@ let make = (~state: Shuffle.state, ~dispatch) => {
     >
     <tbody>
       <tr>
+        // <td
+        //   style=(
+        //     ReactDOMRe.Style.make(
+        //       ~textAlign={"center"},
+        //       ~backgroundColor={"#f8f8f8"},
+        //       ()
+        //     )
+        //   )
+        // >
+        //   (React.string(" "))
+        // </td>
         <td
-          style=(
-            ReactDOMRe.Style.make(
-              ~textAlign={"center"},
-              ~backgroundColor={"#f8f8f8"},
-              ()
-            )
-          )
-        >
-          (React.string("Player"))
-        </td>
-        <td
+          colSpan={2}
           style=(
             ReactDOMRe.Style.make(
               ~textAlign={"center"},
@@ -48,7 +49,7 @@ let make = (~state: Shuffle.state, ~dispatch) => {
             )
           )
         >
-          (React.string("Table Position"))
+          (React.string("Table Seating"))
         </td>
       </tr>
       // ref RR examples

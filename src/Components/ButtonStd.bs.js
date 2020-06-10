@@ -21,7 +21,8 @@ function ButtonStd(Props) {
                     display: isVisible ? "inline" : "none",
                     fontFamily: "Trebuchet MS",
                     fontSize: "2.0vh",
-                    margin: "0vh",
+                    height: "5.0vh",
+                    margin: "0vh 0.5vh 0vh 0vh",
                     borderRadius: "5px"
                   },
                   onClick: (function (_e) {

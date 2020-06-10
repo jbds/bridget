@@ -27,15 +27,11 @@ function TablePosition(Props) {
                   }, React.createElement("tbody", undefined, React.createElement("tr", undefined, React.createElement("td", {
                                 style: {
                                   backgroundColor: "#f8f8f8",
-                                  textAlign: "center"
-                                }
-                              }, "Player"), React.createElement("td", {
-                                style: {
-                                  backgroundColor: "#f8f8f8",
                                   textAlign: "center",
                                   whiteSpace: "nowrap"
-                                }
-                              }, "Table Position")), Belt_Array.map(state.pointOfCompassAndPlayers, (function (x) {
+                                },
+                                colSpan: 2
+                              }, "Table Seating")), Belt_Array.map(state.pointOfCompassAndPlayers, (function (x) {
                               return React.createElement("tr", {
                                           key: x.player
                                         }, React.createElement("td", undefined, x.player), React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
