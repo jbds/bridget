@@ -16,7 +16,7 @@ function SpanStd(Props) {
                     width: "10vh"
                   },
                   onClick: (function (_e) {
-                      console.log("Clicked input element");
+                      console.log("Clicked span element");
                       
                     })
                 }, text));

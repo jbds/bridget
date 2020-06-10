@@ -17,7 +17,6 @@ function Sidebar(Props) {
   var state = match[0];
   ((!window.isLastActionSync ? window.gameState = match[0] : false));
   ((!window.isLastActionSync ? Online.doMessage() : console.log('Action-Sync: doMessage suppressed')));
-  console.log(state.randomInt);
   var handlerBtnRotateTable = function (_e) {
     ((window.userState.tableRotationDegrees = ((window.userState.tableRotationDegrees + 90) % 360)));
     
@@ -32,7 +31,6 @@ function Sidebar(Props) {
     
   };
   var handlerBtnLogout = function (_e) {
-    console.log("btnLogout clicked");
     ((window.userState.player = '?'));
     ((Online.doLogout(document.getElementById('txtMyLoginName').value)));
     
@@ -68,7 +66,7 @@ function Sidebar(Props) {
                       action: /* Discard */1,
                       label: "Discard",
                       id: "btnDiscard",
-                      isVisible: true
+                      isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Sync */2,

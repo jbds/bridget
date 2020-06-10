@@ -27,7 +27,6 @@ function reducer(state, action) {
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
       case /* Discard */1 :
-          console.log("Action-Discard");
           ((window.isLastActionSync = false));
           var discardFileName = window.discardFileName;
           var myPack = $$Array.map((function (card) {

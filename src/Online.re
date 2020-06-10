@@ -69,7 +69,7 @@ function doLogin(myLoginNameValue) {
     body: JSON.stringify({userName: myLoginNameValue})
   })
   .then(handleResponse)
-  .then(showMessageInConsole)
+  //.then(showMessageInConsole)
   // this replaces a separate button for "open websocket connection"
   .then(handleWsOpen)
   .catch(function(err){
@@ -95,7 +95,7 @@ function doLogout(myLoginNameValue) {
 
 function doMessage() {
   if(!ws) {
-    showMessageInConsole('cannot send message - no websocket connection');
+    //showMessageInConsole('cannot send message - no websocket connection');
     return;
   }
   ws.send(JSON.stringify(gameState));

@@ -28,13 +28,8 @@ let initialState: Shuffle.state = {
 let reducer = (state: Shuffle.state, action) => {
     switch action {
       | Shuffle => {
-        // Shuffle.rei is helpful here
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
-        // returns an entirely new state, no need to use existing state passed in
-        //let result = Shuffle.getShuffledPack();
-        //Js.log(result);
-        //result;
         {...state, pack: Shuffle.getShuffledPack(), randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()}
       }
       // | DealerChange (shortLoc) => {
@@ -57,13 +52,10 @@ let reducer = (state: Shuffle.state, action) => {
         }
       }
       | Discard => {
-        Js.log("Action-Discard");
+        //Js.log("Action-Discard");
         // make sure doMessage IS called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
-        // replace existing state with gameState
-        // let myNewState: Shuffle.state = [%bs.raw {| window.gameState |}]; 
-        // let copy = myNewState;
-        // copy;
+        // attempt to set state to gameState failed, must update state correctly
         let discardFileName: string = [%raw "window.discardFileName"];
         let myPack = Array.map(
           (card: Shuffle.card) => {

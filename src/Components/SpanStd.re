@@ -3,7 +3,7 @@ let make = (~id: string, ~text: string) => {
   <>
     <span
     id=id
-    onClick=((_e) => Js.log("Clicked input element"))
+    onClick=((_e) => Js.log("Clicked span element"))
     style=(
       ReactDOMRe.Style.make(
         ~color={"#26653B"}, 

@@ -22,8 +22,6 @@ let make = () => {
   // we can get round this by re-broadcasting to all EXCEPT the initiator
   // ALSO we do not want to send a message when the initiating action is Sync
   let () = [%raw "!window.isLastActionSync ? Online.doMessage() : console.log('Action-Sync: doMessage suppressed')"];
-  // force Sidebar to rerender on a discard
-  Js.log(state.randomInt);
   // event handlers
   let handlerBtnRotateTable = (_e) => {
     //Js.log("btnRotateTable clicked");
@@ -40,7 +38,7 @@ let make = () => {
     let () = [%raw "Online.doLogin(document.getElementById('txtMyLoginName').value)"];
   };
   let handlerBtnLogout = (_e) => {
-    Js.log("btnLogout clicked");
+    //Js.log("btnLogout clicked");
     let () = [%raw "window.userState.player = '?'"];
     let () = [%raw "Online.doLogout(document.getElementById('txtMyLoginName').value)"];
   };
@@ -63,11 +61,12 @@ let make = () => {
     //(s2e("Sidebar2"))
     <br/>
     //<button id="btn1">(s2e("p5 click listener"))</button>
-    <ButtonStd dispatch action=Discard label="Discard" id="btnDiscard" isVisible=true/>
+    <ButtonStd dispatch action=Discard label="Discard" id="btnDiscard" isVisible=false/>
     <ButtonStd dispatch action=Sync label="Sync state with gameState" id="btnSync" isVisible=false/>
     <br/>
     <ButtonStd dispatch action=Shuffle label="Shuffle" id="btnShuffle"/>
     <div id="spnGS">
+      // useful way of checking that re-render is occuring when expected
       (s2e(string_of_int(state.randomInt)))
     </div>
   </div>
