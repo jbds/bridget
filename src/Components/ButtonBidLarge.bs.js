@@ -3,28 +3,27 @@
 var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 
-function ButtonBidSmall(Props) {
+function ButtonBidLarge(Props) {
   var dispatch = Props.dispatch;
   var action = Props.action;
   var label = Props.label;
   var id = Props.id;
-  var color = Props.color;
-  var isActiveOpt = Props.isActive;
+  var backgroundColor = Props.backgroundColor;
+  Props.isActive;
   var isVisibleOpt = Props.isVisible;
-  var isActive = isActiveOpt !== undefined ? isActiveOpt : true;
   var isVisible = isVisibleOpt !== undefined ? isVisibleOpt : true;
   return React.createElement(React.Fragment, undefined, React.createElement("button", {
                   id: id,
                   style: {
-                    backgroundColor: isActive ? "#ffffff" : "#ffe0e0",
+                    backgroundColor: backgroundColor,
                     border: "1px solid #26653B",
-                    color: color,
+                    color: "white",
                     display: isVisible ? "inline" : "none",
                     fontFamily: "Trebuchet MS",
                     fontSize: "2.5vh",
                     height: "6.0vh",
                     margin: "0.25vh",
-                    width: "5.5vh",
+                    width: "11.5vh",
                     borderRadius: "5px"
                   },
                   onClick: (function (_e) {
@@ -33,7 +32,7 @@ function ButtonBidSmall(Props) {
                 }, label));
 }
 
-var make = ButtonBidSmall;
+var make = ButtonBidLarge;
 
 exports.make = make;
 /* react Not a pure module */

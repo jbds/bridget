@@ -7,6 +7,7 @@ var InputStd$ReasonReactExamples = require("./InputStd.bs.js");
 var ButtonStd$ReasonReactExamples = require("./ButtonStd.bs.js");
 var ButtonStdJsx$ReasonReactExamples = require("./ButtonStdJsx.bs.js");
 var TablePosition$ReasonReactExamples = require("./TablePosition.bs.js");
+var ButtonBidLarge$ReasonReactExamples = require("./ButtonBidLarge.bs.js");
 var ButtonBidSmall$ReasonReactExamples = require("./ButtonBidSmall.bs.js");
 
 const Online = require('../Online.bs');
@@ -93,8 +94,22 @@ function App(Props) {
                       id: "btnRotateTable",
                       onClick: handlerBtnRotateTable
                     }), React.createElement("br", undefined)), React.createElement("div", {
-                  id: "biddingWindow"
-                }, React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
+                  id: "bidTable",
+                  style: {
+                    padding: "4vh 0vh 0vh 4vh"
+                  }
+                }), React.createElement("div", {
+                  id: "biddingWindow",
+                  style: {
+                    padding: "4vh 0vh 0vh 4vh"
+                  }
+                }, React.createElement(ButtonBidLarge$ReasonReactExamples.make, {
+                      dispatch: dispatch,
+                      action: /* Test */3,
+                      label: "Pass",
+                      id: "btnBidPass",
+                      backgroundColor: "#26653B"
+                    }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Test */3,
                       label: "1",
@@ -136,6 +151,18 @@ function App(Props) {
                       label: "7",
                       id: "btnBid7",
                       color: "#606060"
+                    }), React.createElement("br", undefined), React.createElement(ButtonBidLarge$ReasonReactExamples.make, {
+                      dispatch: dispatch,
+                      action: /* Test */3,
+                      label: "X",
+                      id: "btnBidX",
+                      backgroundColor: "#E00000"
+                    }), React.createElement(ButtonBidLarge$ReasonReactExamples.make, {
+                      dispatch: dispatch,
+                      action: /* Test */3,
+                      label: "XX",
+                      id: "btnBidXX",
+                      backgroundColor: "#000080"
                     }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Test */3,
