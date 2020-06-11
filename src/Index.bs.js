@@ -2,7 +2,7 @@
 
 var React = require("react");
 var ReactDOMRe = require("reason-react/src/ReactDOMRe.js");
-var Sidebar$ReasonReactExamples = require("./Components/Sidebar.bs.js");
+var App$ReasonReactExamples = require("./Components/App.bs.js");
 
 const setVh = () => {
     const vh = window.innerHeight * 0.01;
@@ -15,7 +15,7 @@ const setVh = () => {
   window.isLastActionSync = false;
 ;
 
-ReactDOMRe.renderToElementWithId(React.createElement(Sidebar$ReasonReactExamples.make, { }), "root");
+ReactDOMRe.renderToElementWithId(React.createElement(App$ReasonReactExamples.make, { }), "root");
 
 'use strict';
 var p5 = require('p5');

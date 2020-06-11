@@ -11,7 +11,7 @@ var TablePosition$ReasonReactExamples = require("./TablePosition.bs.js");
 const Online = require('../Online.bs');
 ;
 
-function Sidebar(Props) {
+function App(Props) {
   var match = React.useReducer(Global$ReasonReactExamples.reducer, Global$ReasonReactExamples.initialState);
   var dispatch = match[1];
   var state = match[0];
@@ -96,7 +96,7 @@ function Sidebar(Props) {
                 }, "TEST"));
 }
 
-var make = Sidebar;
+var make = App;
 
 exports.make = make;
 /*  Not a pure module */

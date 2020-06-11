@@ -17,8 +17,8 @@
 |}];
 
 
-// all sidebar events are managed by ReasonReact components (ReasonML)
-ReactDOMRe.renderToElementWithId(<Sidebar />, "root");
+// all sidebar and biddingWindow events are managed by ReasonReact components (ReasonML)
+ReactDOMRe.renderToElementWithId(<App />, "root");
 
 
 // whereas all canvas related events are managed by p5 libary (Javascript)
