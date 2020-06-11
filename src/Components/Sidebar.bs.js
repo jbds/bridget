@@ -27,17 +27,17 @@ function Sidebar(Props) {
     
   };
   var handlerBtnLogin = function (_e) {
+    ((userState.player = (document.getElementById('txtMyLoginName').value).toUpperCase()));
     ((localStorage.setItem(
                       'myLoginName',
-                      document.getElementById('txtMyLoginName').value
+                      userState.player
                     )));
-    ((window.userState.player = document.getElementById('txtMyLoginName').value));
-    ((Online.doLogin(document.getElementById('txtMyLoginName').value)));
+    ((Online.doLogin(userState.player)));
     
   };
   var handlerBtnLogout = function (_e) {
     ((window.userState.player = '?'));
-    ((Online.doLogout(document.getElementById('txtMyLoginName').value)));
+    ((Online.doLogout((document.getElementById('txtMyLoginName').value).toUpperCase())));
     
   };
   return React.createElement(React.Fragment, undefined, React.createElement("div", {

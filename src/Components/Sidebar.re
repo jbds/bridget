@@ -36,18 +36,18 @@ let make = () => {
   };
   let handlerBtnLogin = (_e) => {
     //Js.log("btnLogin clicked");
+    let () = [%raw "userState.player = (document.getElementById('txtMyLoginName').value).toUpperCase()"];
     let () = [%raw "localStorage.setItem(
                       'myLoginName',
-                      document.getElementById('txtMyLoginName').value
+                      userState.player
                     )"
              ];
-    let () = [%raw "window.userState.player = document.getElementById('txtMyLoginName').value"];
-    let () = [%raw "Online.doLogin(document.getElementById('txtMyLoginName').value)"];
+    let () = [%raw "Online.doLogin(userState.player)"];
   };
   let handlerBtnLogout = (_e) => {
     //Js.log("btnLogout clicked");
     let () = [%raw "window.userState.player = '?'"];
-    let () = [%raw "Online.doLogout(document.getElementById('txtMyLoginName').value)"];
+    let () = [%raw "Online.doLogout((document.getElementById('txtMyLoginName').value).toUpperCase())"];
   };
   // fragment
   <>
