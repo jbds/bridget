@@ -5,7 +5,7 @@ let make = (
     <table 
     style=(
       ReactDOMRe.Style.make(
-        ~fontSize={"3.5vh"},
+        ~fontSize={"3.25vh"},
         ~fontFamily={"Trebuchet MS"},
         ~color={"#404040"},
         ~margin={"auto"},
@@ -17,9 +17,23 @@ let make = (
     >
     <thead>
       <tr>
-        <th>(React.string("West"))</th>
+        <th
+        style=(
+          ReactDOMRe.Style.make(
+            ~width={"25%"},
+            ()
+          )
+        )
+        >(React.string("West"))</th>
         <th>(React.string("North"))</th>
-        <th>(React.string("East"))</th>
+        <th
+        style=(
+          ReactDOMRe.Style.make(
+            ~width={"25%"},
+            ()
+          )
+        )
+        >(React.string("East"))</th>
         <th>(React.string("South"))</th>
       </tr>
     </thead>
