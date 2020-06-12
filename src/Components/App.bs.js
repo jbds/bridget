@@ -3,6 +3,7 @@
 var React = require("react");
 var Global$ReasonReactExamples = require("../Global.bs.js");
 var SpanStd$ReasonReactExamples = require("./SpanStd.bs.js");
+var BidTable$ReasonReactExamples = require("./BidTable.bs.js");
 var InputStd$ReasonReactExamples = require("./InputStd.bs.js");
 var ButtonStd$ReasonReactExamples = require("./ButtonStd.bs.js");
 var ButtonStdJsx$ReasonReactExamples = require("./ButtonStdJsx.bs.js");
@@ -96,12 +97,14 @@ function App(Props) {
                     }), React.createElement("br", undefined)), React.createElement("div", {
                   id: "bidTable",
                   style: {
-                    padding: "4vh 0vh 0vh 4vh"
+                    padding: "1vh 0vh 0vh 0vh",
+                    borderRadius: "5px"
                   }
-                }), React.createElement("div", {
+                }, React.createElement(BidTable$ReasonReactExamples.make, { })), React.createElement("div", {
                   id: "biddingWindow",
                   style: {
-                    padding: "4vh 0vh 0vh 4vh"
+                    padding: "1vh 1vh 1vh 3vh",
+                    borderRadius: "10px"
                   }
                 }, React.createElement(ButtonBidLarge$ReasonReactExamples.make, {
                       dispatch: dispatch,

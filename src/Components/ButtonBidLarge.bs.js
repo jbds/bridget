@@ -20,10 +20,10 @@ function ButtonBidLarge(Props) {
                     color: "white",
                     display: isVisible ? "inline" : "none",
                     fontFamily: "Trebuchet MS",
-                    fontSize: "2.5vh",
-                    height: "6.0vh",
+                    fontSize: "2.0vh",
+                    height: "6.25vh",
                     margin: "0.25vh",
-                    width: "11.5vh",
+                    width: "calc(var(--vh, 1vh) * 9)",
                     borderRadius: "5px"
                   },
                   onClick: (function (_e) {

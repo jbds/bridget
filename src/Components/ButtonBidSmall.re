@@ -17,9 +17,10 @@ let make = (
         ~color=color, 
         ~fontSize={"2.5vh"},
         ~fontFamily={"Trebuchet MS"},
-        ~height={"6.0vh"},
-        ~width={"5.5vh"},
-        ~margin={"0.25vh"},
+        ~height={"6.25vh"},
+        ~width={"calc(var(--vh, 1vh) * 6.25)"},
+        ~margin={"1vh 0.25vh 0.25vh 0.25vh"},
+        ~padding={"0vh"},
         // bug - borderColor single attribute not recognised       
         ~border={"1px solid #26653B"}, 
         ~borderRadius={"5px"},

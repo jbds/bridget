@@ -1,0 +1,72 @@
+[@react.component]
+let make = (
+  ) => {
+  <>
+    <table 
+    style=(
+      ReactDOMRe.Style.make(
+        ~fontSize={"3.5vh"},
+        ~fontFamily={"Trebuchet MS"},
+        ~color={"#404040"},
+        ~margin={"auto"},
+        ~width={"calc(var(--vh, 1vh) * 45)"},
+        ~textAlign={"center"},
+        ()
+      )
+    )
+    >
+    <thead>
+      <tr>
+        <th>(React.string("West"))</th>
+        <th>(React.string("North"))</th>
+        <th>(React.string("East"))</th>
+        <th>(React.string("South"))</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+      </tr>
+      <tr>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+      </tr>
+      <tr>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+      </tr>
+      <tr>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+      </tr>
+      <tr>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+      </tr>
+      <tr>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+      </tr>
+      <tr>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+        <td>(React.string("Pass"))</td>
+      </tr>
+    </tbody>
+    </table>
+  </>
+};

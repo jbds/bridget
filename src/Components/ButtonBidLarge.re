@@ -15,10 +15,10 @@ let make = (
     style=(
       ReactDOMRe.Style.make(
         ~color={"white"}, 
-        ~fontSize={"2.5vh"},
+        ~fontSize={"2.0vh"},
         ~fontFamily={"Trebuchet MS"},
-        ~height={"6.0vh"},
-        ~width={"11.5vh"},
+        ~height={"6.25vh"},
+        ~width={"calc(var(--vh, 1vh) * 9)"},
         ~margin={"0.25vh"},
         // bug - borderColor single attribute not recognised       
         ~border={"1px solid #26653B"}, 

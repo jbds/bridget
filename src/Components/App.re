@@ -92,14 +92,17 @@ let make = () => {
   <div 
     id="bidTable"
     style={ReactDOMRe.Style.make(
-      ~padding={"4vh 0vh 0vh 4vh"},
+      ~padding={"1vh 0vh 0vh 0vh"},
+      ~borderRadius={"5px"},
       ()
     )}> 
+    <BidTable />
   </div>
   <div 
     id="biddingWindow" 
     style={ReactDOMRe.Style.make(
-      ~padding={"4vh 0vh 0vh 4vh"},
+      ~padding={"1vh 1vh 1vh 3vh"},
+      ~borderRadius={"10px"},
       ()
     )}> 
     //(s2e("TEST"))

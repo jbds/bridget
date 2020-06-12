@@ -22,9 +22,10 @@ function ButtonBidSmall(Props) {
                     display: isVisible ? "inline" : "none",
                     fontFamily: "Trebuchet MS",
                     fontSize: "2.5vh",
-                    height: "6.0vh",
-                    margin: "0.25vh",
-                    width: "5.5vh",
+                    height: "6.25vh",
+                    margin: "1vh 0.25vh 0.25vh 0.25vh",
+                    padding: "0vh",
+                    width: "calc(var(--vh, 1vh) * 6.25)",
                     borderRadius: "5px"
                   },
                   onClick: (function (_e) {
