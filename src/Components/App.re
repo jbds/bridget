@@ -71,11 +71,7 @@ let make = () => {
     <ButtonStd dispatch action=Discard label="Discard" id="btnDiscard" isVisible=false/>
     <ButtonStd dispatch action=Sync label="Sync state with gameState" id="btnSync" isVisible=false/>
     <br/>
-    <ButtonStd dispatch action=Shuffle label="Shuffle" id="btnShuffle"/>
-    <div id="spnGS">
-      // useful way of checking that re-render is occuring when expected
-      (s2e(string_of_int(state.randomInt)))
-    </div>
+    <ButtonStd dispatch action=Shuffle label="Start Game" id="btnShuffle"/>
   </div>
   <div id="sidebar3">
     // (s2e("Sidebar3"))
@@ -83,11 +79,12 @@ let make = () => {
     // <span id="span1"></span>
     // <FlipHand dispatch/>
     <br/>
-    <br/>
-    <br/>
-    <br/>
     <ButtonStdJsx id="btnRotateTable" label="Rotate table" onClick=handlerBtnRotateTable/>
     <br/>
+    <div id="spnGS">
+      // useful way of checking that re-render is occuring when expected
+      (s2e(string_of_int(state.randomInt)))
+    </div>
   </div>
   <div 
     id="bidTable"

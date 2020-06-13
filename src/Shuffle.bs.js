@@ -561,6 +561,33 @@ function getShuffledPack(param) {
               }), initialPack);
 }
 
+function getRandomCompassPoint(seed) {
+  Random.init(seed);
+  var n = Random.$$int(4);
+  if (n > 2 || n < 0) {
+    return /* West */3;
+  } else {
+    return n;
+  }
+}
+
+function getNextDealerLocation(dealerLocation) {
+  if (dealerLocation === undefined) {
+    return getRandomCompassPoint(impureGetTimeBasedSeedUpTo60k(undefined));
+  }
+  switch (dealerLocation) {
+    case /* North */0 :
+        return /* East */1;
+    case /* East */1 :
+        return /* South */2;
+    case /* South */2 :
+        return /* West */3;
+    case /* West */3 :
+        return /* North */0;
+    
+  }
+}
+
 var initialHandVisible = {
   north: true,
   east: true,
@@ -572,4 +599,6 @@ exports.initialPack = initialPack;
 exports.initialHandVisible = initialHandVisible;
 exports.getShuffledPack = getShuffledPack;
 exports.impureGetTimeBasedSeedUpTo60k = impureGetTimeBasedSeedUpTo60k;
+exports.getNextDealerLocation = getNextDealerLocation;
+exports.getRandomCompassPoint = getRandomCompassPoint;
 /* No side effect */

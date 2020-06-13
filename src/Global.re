@@ -19,7 +19,7 @@ type action =
 let initialState: Shuffle.state = {
     pack: Shuffle.initialPack,
     handVisible: Shuffle.initialHandVisible,
-    //dealer: None,
+    dealer: None,
     //cardsDealtCount: 0,
     pointOfCompassAndPlayers: [||],
     randomInt: 0
@@ -30,8 +30,15 @@ let reducer = (state: Shuffle.state, action) => {
       | Shuffle => {
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
-        {...state, pack: Shuffle.getShuffledPack(), randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()}
+        {
+          ...state, 
+          pack: Shuffle.getShuffledPack(), 
+          randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
+          dealer: Some(Shuffle.getNextDealerLocation(state.dealer))
+        }
       }
+      // this is part of Start Game
+      // because to start game you have to assign the Dealer and then do a Shuffle
       // | DealerChange (shortLoc) => {
       //   switch (shortLoc) {
       //     | "N" => {...state, dealer: Some(North)}

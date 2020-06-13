@@ -84,17 +84,17 @@ function App(Props) {
                     }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Shuffle */0,
-                      label: "Shuffle",
+                      label: "Start Game",
                       id: "btnShuffle"
-                    }), React.createElement("div", {
-                      id: "spnGS"
-                    }, String(state.randomInt))), React.createElement("div", {
+                    })), React.createElement("div", {
                   id: "sidebar3"
-                }, React.createElement("br", undefined), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
+                }, React.createElement("br", undefined), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "Rotate table",
                       id: "btnRotateTable",
                       onClick: handlerBtnRotateTable
-                    }), React.createElement("br", undefined)), React.createElement("div", {
+                    }), React.createElement("br", undefined), React.createElement("div", {
+                      id: "spnGS"
+                    }, String(state.randomInt))), React.createElement("div", {
                   id: "bidTable",
                   style: {
                     padding: "1vh 0vh 0vh 0vh",

@@ -73,7 +73,7 @@ type handVisible = {north: bool, east: bool, south: bool, west: bool};
 type state = {
   pack: pack,
   handVisible: handVisible,
-  //dealer: option(compassPoint),
+  dealer: option(compassPoint),
   //cardsDealtCount: int,
   pointOfCompassAndPlayers: array(pointOfCompassAndPlayer),
   randomInt: int
@@ -145,14 +145,14 @@ let initialPack = [|
 
 let initialHandVisible = {north: true, east: true, south: true, west: true};
 
-let initialPointOfCompassAndPlayers = [|
+//let initialPointOfCompassAndPlayers = [|
   // {pointOfCompass: "North", player: "1?" },
   // {pointOfCompass: "South", player: "2?"},
   // {pointOfCompass: "West", player: "3?"},
   // {pointOfCompass: "East", player: "4?"},
   // {pointOfCompass: "", player: "5?"},
   // {pointOfCompass: "", player: "6?"}
-|];
+//|];
 
 
 let impureGetTimeBasedSeedUpTo60k = () => {
@@ -196,3 +196,28 @@ let getShuffledPack = () => {
   // }
   shuffledPack;
 }
+
+let getRandomCompassPoint = (seed) => {
+  Random.init(seed);
+  let n = Random.int(4);
+  switch (n) {
+    | 0 => North
+    | 1 => East
+    | 2 => South
+    | _ => West
+  }
+}
+
+let getNextDealerLocation = (dealerLocation) => {
+  switch (dealerLocation) {
+    | None => {
+      getRandomCompassPoint(impureGetTimeBasedSeedUpTo60k());
+    }
+    | Some(North) => East
+    | Some(East) => South
+    | Some(South) => West
+    | Some(West) => North
+  }
+}
+
+

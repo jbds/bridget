@@ -1,4 +1,3 @@
-/** TYPE DEFINITIONS */
 
 // original was playingCardRank
 // had extra value NoRank - code smell
@@ -74,7 +73,7 @@ type handVisible = {north: bool, east: bool, south: bool, west: bool};
 type state = {
   pack: pack,
   handVisible: handVisible,
-  //dealer: option(compassPoint),
+  dealer: option(compassPoint),
   //cardsDealtCount: int,
   pointOfCompassAndPlayers: array(pointOfCompassAndPlayer),
   randomInt: int
@@ -97,3 +96,7 @@ let getShuffledPack: unit => pack;
 //let shuffleArrayInPlace: (array('a), int) => unit;
 
 let impureGetTimeBasedSeedUpTo60k: unit => int;
+
+let getNextDealerLocation: (option(compassPoint)) => compassPoint;
+
+let getRandomCompassPoint: int => compassPoint;

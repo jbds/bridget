@@ -21,7 +21,7 @@ let make = (
         // bug - borderColor single attribute not recognised       
         ~border={"1px solid #26653B"}, 
         ~borderRadius={"5px"},
-        ~backgroundColor={isActive ? "#ffffff" : "#ffe0e0"},
+        ~backgroundColor={isActive ? "#ffffff" : "#60806040"},
         ~display={isVisible ? "inline" : "none"},
         ()
       )

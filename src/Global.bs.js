@@ -11,6 +11,7 @@ var initialState_pointOfCompassAndPlayers = [];
 var initialState = {
   pack: Shuffle$ReasonReactExamples.initialPack,
   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
+  dealer: undefined,
   pointOfCompassAndPlayers: initialState_pointOfCompassAndPlayers,
   randomInt: 0
 };
@@ -23,6 +24,7 @@ function reducer(state, action) {
           return {
                   pack: Shuffle$ReasonReactExamples.getShuffledPack(undefined),
                   handVisible: state.handVisible,
+                  dealer: Shuffle$ReasonReactExamples.getNextDealerLocation(state.dealer),
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
@@ -47,6 +49,7 @@ function reducer(state, action) {
           return {
                   pack: myPack,
                   handVisible: state.handVisible,
+                  dealer: state.dealer,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
@@ -87,6 +90,7 @@ function reducer(state, action) {
       return {
               pack: state.pack,
               handVisible: state.handVisible,
+              dealer: state.dealer,
               pointOfCompassAndPlayers: myArray2,
               randomInt: state.randomInt
             };
@@ -103,6 +107,7 @@ function reducer(state, action) {
                     south: init.south,
                     west: init.west
                   },
+                  dealer: state.dealer,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: state.randomInt
                 };
@@ -116,6 +121,7 @@ function reducer(state, action) {
                     south: init$1.south,
                     west: init$1.west
                   },
+                  dealer: state.dealer,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: state.randomInt
                 };
@@ -129,6 +135,7 @@ function reducer(state, action) {
                     south: !state.handVisible.south,
                     west: init$2.west
                   },
+                  dealer: state.dealer,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: state.randomInt
                 };
@@ -142,6 +149,7 @@ function reducer(state, action) {
                     south: init$3.south,
                     west: !state.handVisible.west
                   },
+                  dealer: state.dealer,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: state.randomInt
                 };

@@ -15,7 +15,7 @@ function ButtonStd(Props) {
   return React.createElement(React.Fragment, undefined, React.createElement("button", {
                   id: id,
                   style: {
-                    backgroundColor: isActive ? "#ffffff" : "#ffe0e0",
+                    backgroundColor: isActive ? "#ffffff" : "#60806040",
                     border: "1px solid #26653B",
                     color: "#26653B",
                     display: isVisible ? "inline" : "none",
