@@ -70,14 +70,15 @@ type handVisible = {north: bool, east: bool, south: bool, west: bool};
 
 // this is the game state that we will share amongst all users who are registered at the server
 // it is a single record which will be passed to and broadcast from the server
-type state = {
-  pack: pack,
-  handVisible: handVisible,
-  dealer: option(compassPoint),
-  //cardsDealtCount: int,
-  pointOfCompassAndPlayers: array(pointOfCompassAndPlayer),
-  randomInt: int
-};
+// type state = {
+//   pack: pack,
+//   handVisible: handVisible,
+//   dealer: option(compassPoint),
+//   //cardsDealtCount: int,
+//   pointOfCompassAndPlayers: array(pointOfCompassAndPlayer),
+//   randomInt: int,
+//   chicagoScoreSheet: array(Chicago.chicagoScoreSheetRecord)
+// };
 
 // keep for later move!
 // not needed until after the bidding

@@ -15,17 +15,31 @@ type action =
   | AssignPlayer(Shuffle.pointOfCompassAndPlayer)
 ;
 
+// this is the game state that we will share amongst all users who are registered at the server
+// it is a single record which will be passed to and broadcast from the server
+type state = {
+  pack: Shuffle.pack,
+  handVisible: Shuffle.handVisible,
+  dealer: option(Shuffle.compassPoint),
+  //cardsDealtCount: int,
+  pointOfCompassAndPlayers: array(Shuffle.pointOfCompassAndPlayer),
+  randomInt: int,
+  chicagoScoreSheet: array(Chicago.chicagoScoreSheetRecord)
+};
+
+
 // force to type Shuffle.state
-let initialState: Shuffle.state = {
+let initialState: state = {
     pack: Shuffle.initialPack,
     handVisible: Shuffle.initialHandVisible,
     dealer: None,
     //cardsDealtCount: 0,
     pointOfCompassAndPlayers: [||],
-    randomInt: 0
+    randomInt: 0,
+    chicagoScoreSheet: Chicago.initialChicagoScoreSheet
 };
 
-let reducer = (state: Shuffle.state, action) => {
+let reducer = (state: state, action) => {
     switch action {
       | Shuffle => {
         // make sure doMessage is called in sidebar component
@@ -78,7 +92,7 @@ let reducer = (state: Shuffle.state, action) => {
       }
       | Sync => {
         // replace existing state with gameState
-        let myNewState: Shuffle.state = [%bs.raw {| window.gameState |}];   //state;
+        let myNewState: state = [%bs.raw {| window.gameState |}];   //state;
         //Js.log("Action - Sync");
         // make sure doMessage is NOT called in sidebar component
         let () = [%raw "window.isLastActionSync = true"];

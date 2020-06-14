@@ -1,5 +1,5 @@
 [@react.component]
-let make = (~state: Shuffle.state, ~dispatch) => {
+let make = (~state: Global.state, ~dispatch) => {
   Array.length(state.pointOfCompassAndPlayers) == 0
   ?
   React.null

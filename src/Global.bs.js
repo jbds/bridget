@@ -1,6 +1,7 @@
 'use strict';
 
 var $$Array = require("bs-platform/lib/js/array.js");
+var Chicago$ReasonReactExamples = require("./Chicago.bs.js");
 var Shuffle$ReasonReactExamples = require("./Shuffle.bs.js");
 
 var Online = require('./Online.bs');
@@ -13,7 +14,8 @@ var initialState = {
   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
   dealer: undefined,
   pointOfCompassAndPlayers: initialState_pointOfCompassAndPlayers,
-  randomInt: 0
+  randomInt: 0,
+  chicagoScoreSheet: Chicago$ReasonReactExamples.initialChicagoScoreSheet
 };
 
 function reducer(state, action) {
@@ -26,7 +28,8 @@ function reducer(state, action) {
                   handVisible: state.handVisible,
                   dealer: Shuffle$ReasonReactExamples.getNextDealerLocation(state.dealer),
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
+                  chicagoScoreSheet: state.chicagoScoreSheet
                 };
       case /* Discard */1 :
           ((window.isLastActionSync = false));
@@ -51,7 +54,8 @@ function reducer(state, action) {
                   handVisible: state.handVisible,
                   dealer: state.dealer,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
+                  chicagoScoreSheet: state.chicagoScoreSheet
                 };
       case /* Sync */2 :
           var myNewState = window.gameState;
@@ -92,7 +96,8 @@ function reducer(state, action) {
               handVisible: state.handVisible,
               dealer: state.dealer,
               pointOfCompassAndPlayers: myArray2,
-              randomInt: state.randomInt
+              randomInt: state.randomInt,
+              chicagoScoreSheet: state.chicagoScoreSheet
             };
     }
     ((window.isLastActionSync = false));
@@ -109,7 +114,8 @@ function reducer(state, action) {
                   },
                   dealer: state.dealer,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: state.randomInt
+                  randomInt: state.randomInt,
+                  chicagoScoreSheet: state.chicagoScoreSheet
                 };
       case /* East */1 :
           var init$1 = state.handVisible;
@@ -123,7 +129,8 @@ function reducer(state, action) {
                   },
                   dealer: state.dealer,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: state.randomInt
+                  randomInt: state.randomInt,
+                  chicagoScoreSheet: state.chicagoScoreSheet
                 };
       case /* South */2 :
           var init$2 = state.handVisible;
@@ -137,7 +144,8 @@ function reducer(state, action) {
                   },
                   dealer: state.dealer,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: state.randomInt
+                  randomInt: state.randomInt,
+                  chicagoScoreSheet: state.chicagoScoreSheet
                 };
       case /* West */3 :
           var init$3 = state.handVisible;
@@ -151,7 +159,8 @@ function reducer(state, action) {
                   },
                   dealer: state.dealer,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: state.randomInt
+                  randomInt: state.randomInt,
+                  chicagoScoreSheet: state.chicagoScoreSheet
                 };
       
     }

@@ -15931,7 +15931,7 @@ let getScore = (
 
 // values for Chicago Score Sheet
 
-let initialChicagoScoreSheet = {|
+let initialChicagoScoreSheet: chicagoScoreSheet = [|
   {
     vulnerable: "None",
     contractLevel: None,
@@ -16112,4 +16112,4 @@ let initialChicagoScoreSheet = {|
     scoreNorthSouth: None,
     scoreWestEast: None
   }
-|};
+|];
