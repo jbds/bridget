@@ -5,6 +5,7 @@
 
 [@react.component]
 let make = () => {
+  //let testMe = Chicago.scoreTable;
   let s2e = React.string;
   // 'dispatch' will not change between re-renders
   // useReducer expects to have passed in a reducer function and an initial state
