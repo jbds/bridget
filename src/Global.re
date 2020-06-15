@@ -27,8 +27,6 @@ type state = {
   chicagoScoreSheet: array(Chicago.chicagoScoreSheetRecord)
 };
 
-
-// force to type Shuffle.state
 let initialState: state = {
     pack: Shuffle.initialPack,
     handVisible: Shuffle.initialHandVisible,
@@ -96,6 +94,7 @@ let reducer = (state: state, action) => {
         //Js.log("Action - Sync");
         // make sure doMessage is NOT called in sidebar component
         let () = [%raw "window.isLastActionSync = true"];
+        //Js.log(myNewState);
         myNewState;
       }
       | Test => {

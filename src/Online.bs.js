@@ -38,7 +38,8 @@ function handleWsOpen(){
     pack: [],
     handVisible: {},
     pointOfCompassAndPlayers: [],
-    randomInt: 0
+    randomInt: 0,
+    chicagoScoreSheet: []
   }
   // and sync state to this
   showMessageInConsole('ws.onclose - dispatch Sync action via hidden key on sidebar');

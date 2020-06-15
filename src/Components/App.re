@@ -11,11 +11,14 @@ let make = () => {
   // 'dispatch' will not change between re-renders
   // useReducer expects to have passed in a reducer function and an initial state
   let (state, dispatch) = React.useReducer(Global.reducer, Global.initialState);
-  //Js.log(state);
+  Js.log("State as below:");
+  Js.log(state);
   // if we ensure ALL changes to state go via actions, 
   // we can guarantee gameState below (for use by p5) will always be in sync
   // compiler warning 21 here unless we return unit specifically
   let () = [%raw "!window.isLastActionSync ? window.gameState = match[0] : false"];
+  Js.log("gameState as below");
+  Js.log([%raw "window.gameState"]);
   // any change to gameState must be messaged to the server too
   // so that it can be re-broadcst to all
   // potential for race condition here?
