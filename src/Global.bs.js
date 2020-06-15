@@ -10,12 +10,13 @@ var Online = require('./Online.bs');
 var initialState_pointOfCompassAndPlayers = [];
 
 var initialState = {
-  pack: Shuffle$ReasonReactExamples.initialPack,
-  handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
+  chicagoScoreSheet: Chicago$ReasonReactExamples.initialChicagoScoreSheet,
   dealer: undefined,
+  handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
+  lastAction: "None(fromClient)",
+  pack: Shuffle$ReasonReactExamples.initialPack,
   pointOfCompassAndPlayers: initialState_pointOfCompassAndPlayers,
-  randomInt: 0,
-  chicagoScoreSheet: Chicago$ReasonReactExamples.initialChicagoScoreSheet
+  randomInt: -111
 };
 
 function reducer(state, action) {
@@ -24,12 +25,13 @@ function reducer(state, action) {
       case /* Shuffle */0 :
           ((window.isLastActionSync = false));
           return {
-                  pack: Shuffle$ReasonReactExamples.getShuffledPack(undefined),
-                  handVisible: state.handVisible,
+                  chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: Shuffle$ReasonReactExamples.getNextDealerLocation(state.dealer),
+                  handVisible: state.handVisible,
+                  lastAction: "Shuffle",
+                  pack: Shuffle$ReasonReactExamples.getShuffledPack(undefined),
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
-                  chicagoScoreSheet: state.chicagoScoreSheet
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
       case /* Discard */1 :
           ((window.isLastActionSync = false));
@@ -50,21 +52,53 @@ function reducer(state, action) {
                   }
                 }), state.pack);
           return {
-                  pack: myPack,
-                  handVisible: state.handVisible,
+                  chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
+                  handVisible: state.handVisible,
+                  lastAction: "Discard",
+                  pack: myPack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
-                  chicagoScoreSheet: state.chicagoScoreSheet
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
       case /* Sync */2 :
-          var myNewState = window.gameState;
           ((window.isLastActionSync = true));
-          return myNewState;
-      case /* Test */3 :
+          return {
+                  chicagoScoreSheet: state.chicagoScoreSheet,
+                  dealer: state.dealer,
+                  handVisible: state.handVisible,
+                  lastAction: "LogoutOrServerDownSync",
+                  pack: state.pack,
+                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                };
+      case /* LoginSync */3 :
+          ((window.isLastActionSync = true));
+          var cSS = window.gameState.chicagoScoreSheet;
+          var dealer = window.gameState.dealer;
+          var hV = window.gameState.handVisible;
+          var pOCAP = window.gameState.pointOfCompassAndPlayers;
+          var pack = window.gameState.pack;
+          return {
+                  chicagoScoreSheet: cSS,
+                  dealer: dealer,
+                  handVisible: hV,
+                  lastAction: "LoginSync",
+                  pack: pack,
+                  pointOfCompassAndPlayers: pOCAP,
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                };
+      case /* Test */4 :
           ((window.isLastActionSync = true));
           console.log("benign action: 'Test'");
-          return state;
+          return {
+                  chicagoScoreSheet: state.chicagoScoreSheet,
+                  dealer: state.dealer,
+                  handVisible: state.handVisible,
+                  lastAction: "Test",
+                  pack: state.pack,
+                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                };
       
     }
   } else {
@@ -92,12 +126,13 @@ function reducer(state, action) {
               }
             }), myArray1);
       return {
-              pack: state.pack,
-              handVisible: state.handVisible,
+              chicagoScoreSheet: state.chicagoScoreSheet,
               dealer: state.dealer,
+              handVisible: state.handVisible,
+              lastAction: "AssignPlayer",
+              pack: state.pack,
               pointOfCompassAndPlayers: myArray2,
-              randomInt: state.randomInt,
-              chicagoScoreSheet: state.chicagoScoreSheet
+              randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
             };
     }
     ((window.isLastActionSync = false));
@@ -105,62 +140,66 @@ function reducer(state, action) {
       case /* North */0 :
           var init = state.handVisible;
           return {
-                  pack: state.pack,
+                  chicagoScoreSheet: state.chicagoScoreSheet,
+                  dealer: state.dealer,
                   handVisible: {
                     north: !state.handVisible.north,
                     east: init.east,
                     south: init.south,
                     west: init.west
                   },
-                  dealer: state.dealer,
+                  lastAction: "Flip",
+                  pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: state.randomInt,
-                  chicagoScoreSheet: state.chicagoScoreSheet
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
       case /* East */1 :
           var init$1 = state.handVisible;
           return {
-                  pack: state.pack,
+                  chicagoScoreSheet: state.chicagoScoreSheet,
+                  dealer: state.dealer,
                   handVisible: {
                     north: init$1.north,
                     east: !state.handVisible.east,
                     south: init$1.south,
                     west: init$1.west
                   },
-                  dealer: state.dealer,
+                  lastAction: "Flip",
+                  pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: state.randomInt,
-                  chicagoScoreSheet: state.chicagoScoreSheet
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
       case /* South */2 :
           var init$2 = state.handVisible;
           return {
-                  pack: state.pack,
+                  chicagoScoreSheet: state.chicagoScoreSheet,
+                  dealer: state.dealer,
                   handVisible: {
                     north: init$2.north,
                     east: init$2.east,
                     south: !state.handVisible.south,
                     west: init$2.west
                   },
-                  dealer: state.dealer,
+                  lastAction: "Flip",
+                  pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: state.randomInt,
-                  chicagoScoreSheet: state.chicagoScoreSheet
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
       case /* West */3 :
           var init$3 = state.handVisible;
           return {
-                  pack: state.pack,
+                  chicagoScoreSheet: state.chicagoScoreSheet,
+                  dealer: state.dealer,
                   handVisible: {
                     north: init$3.north,
                     east: init$3.east,
                     south: init$3.south,
                     west: !state.handVisible.west
                   },
-                  dealer: state.dealer,
+                  lastAction: "Flip",
+                  pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: state.randomInt,
-                  chicagoScoreSheet: state.chicagoScoreSheet
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
       
     }

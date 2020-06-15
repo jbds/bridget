@@ -33,29 +33,33 @@ function handleWsOpen(){
     //showMessageInConsole('client ws.onopen fired, so Websocket connection established');
   };
   ws.onclose = function() {
-  // event fires at doLogout, we want to force gameState to nothing locally
-  gameState = {
-    pack: [],
-    handVisible: {},
-    pointOfCompassAndPlayers: [],
-    randomInt: 0,
-    chicagoScoreSheet: []
-  }
-  // and sync state to this
-  showMessageInConsole('ws.onclose - dispatch Sync action via hidden key on sidebar');
-  document.getElementById('btnSync').click();
+    // event fires at doLogout, we want to force gameState to nothing locally
+    // it also fires if server goes down!
+    gameState = {
+      chicagoScoreSheet: [],
+      dealer: 0,
+      handVisible: {},
+      lastAction: 'ws.onclose',
+      pack: [],
+      pointOfCompassAndPlayers: [],
+      randomInt: -888,
+    }
+    // and sync state to this
+    showMessageInConsole('ws.onclose - dispatch Sync action via hidden key on sidebar');
+    document.getElementById('btnSync').click();
     showMessageInConsole('client ws.onclose fired, so Websocket connection closed');
     ws = null;
   };
   ws.onmessage = function(e) {
     // add detection of message received from server
-    //showMessageInConsole('client ws.onmessage fired, see Websocket message received below:');
+    showMessageInConsole('client ws.onmessage fired, see Websocket message received below:');
     window.jbObj = JSON.parse(e.data);
     //showMessageInConsole(window.jbObj);
-    //showMessageInConsole('will now update gameState with jbObj');
+    showMessageInConsole('will now update gameState with jbObj');
     gameState = window.jbObj;
-    //showMessageInConsole('client ws.onmessage - dispatch Sync action via hidden key on sidebar');
-    document.getElementById('btnSync').click();
+    showMessageInConsole(gameState);
+    showMessageInConsole('client ws.onmessage - dispatch LoginSync action via hidden key on sidebar');
+    document.getElementById('btnLoginSync').click();
   };
 }
 
@@ -73,7 +77,7 @@ function doLogin(myLoginNameValue) {
     body: JSON.stringify({userName: myLoginNameValue})
   })
   .then(handleResponse)
-  //.then(showMessageInConsole)
+  .then(showMessageInConsole)
   // this replaces a separate button for "open websocket connection"
   .then(handleWsOpen)
   .catch(function(err){

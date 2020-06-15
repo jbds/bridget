@@ -11,6 +11,7 @@ type action =
   // | Deal 
   | Discard
   | Sync
+  | LoginSync
   | Test
   | AssignPlayer(Shuffle.pointOfCompassAndPlayer)
 ;
@@ -18,35 +19,37 @@ type action =
 // this is the game state that we will share amongst all users who are registered at the server
 // it is a single record which will be passed to and broadcast from the server
 type state = {
-  pack: Shuffle.pack,
-  handVisible: Shuffle.handVisible,
+  chicagoScoreSheet: array(Chicago.chicagoScoreSheetRecord),
   dealer: option(Shuffle.compassPoint),
-  //cardsDealtCount: int,
+  handVisible: Shuffle.handVisible,
+  lastAction: string,
+  pack: Shuffle.pack,
   pointOfCompassAndPlayers: array(Shuffle.pointOfCompassAndPlayer),
   randomInt: int,
-  chicagoScoreSheet: array(Chicago.chicagoScoreSheetRecord)
 };
 
 let initialState: state = {
-    pack: Shuffle.initialPack,
-    handVisible: Shuffle.initialHandVisible,
+    chicagoScoreSheet: Chicago.initialChicagoScoreSheet,
     dealer: None,
-    //cardsDealtCount: 0,
+    handVisible: Shuffle.initialHandVisible,
+    lastAction: "None(fromClient)",
+    pack: Shuffle.initialPack,
     pointOfCompassAndPlayers: [||],
-    randomInt: 0,
-    chicagoScoreSheet: Chicago.initialChicagoScoreSheet
+    randomInt: -111,
 };
 
 let reducer = (state: state, action) => {
     switch action {
       | Shuffle => {
+        //Js.log("Action-Shuffle");
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
         {
           ...state, 
           pack: Shuffle.getShuffledPack(), 
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
-          dealer: Some(Shuffle.getNextDealerLocation(state.dealer))
+          dealer: Some(Shuffle.getNextDealerLocation(state.dealer)),
+          lastAction: "Shuffle"
         }
       }
       // this is part of Start Game
@@ -61,13 +64,14 @@ let reducer = (state: state, action) => {
       //   }
       // }
       | Flip (compassPoint) => {
+        //Js.log("Action-Flip");
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
         switch (compassPoint) {
-          | North => {...state, handVisible: {...state.handVisible, north: !state.handVisible.north} }
-          | East => {...state, handVisible: {...state.handVisible, east: !state.handVisible.east} }
-          | South => {...state, handVisible: {...state.handVisible, south: !state.handVisible.south} }
-          | West => {...state, handVisible: {...state.handVisible, west: !state.handVisible.west} }
+          | North => {...state, handVisible: {...state.handVisible, north: !state.handVisible.north}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()}
+          | East => {...state, handVisible: {...state.handVisible, east: !state.handVisible.east}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k() }
+          | South => {...state, handVisible: {...state.handVisible, south: !state.handVisible.south}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k() }
+          | West => {...state, handVisible: {...state.handVisible, west: !state.handVisible.west}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k() }
         }
       }
       | Discard => {
@@ -86,24 +90,59 @@ let reducer = (state: state, action) => {
           },
           state.pack
         );
-        {...state, pack: myPack, randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()}
+        {
+          ...state, 
+          pack: myPack, 
+          randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
+          lastAction: "Discard"  
+        }
       }
       | Sync => {
-        // replace existing state with gameState
-        let myNewState: state = [%bs.raw {| window.gameState |}];   //state;
         //Js.log("Action - Sync");
+        // replace existing state with gameState
+        // Below line does NOT work! Must use the spread operator with state
+        //let myNewState: state = [%bs.raw {| window.gameState |}];   //state;
         // make sure doMessage is NOT called in sidebar component
         let () = [%raw "window.isLastActionSync = true"];
-        //Js.log(myNewState);
-        myNewState;
+        {
+          ...state, 
+          randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
+          lastAction: "LogoutOrServerDownSync"
+        }
+      }
+      | LoginSync => {
+        // this is same as Sync above, and we do also want to suppress doMessage
+        let () = [%raw "window.isLastActionSync = true"];
+        // we must make sure that state is updated by every gameState field
+        let cSS: array(Chicago.chicagoScoreSheetRecord) = [%bs.raw "window.gameState.chicagoScoreSheet"];
+        let dealer: option(Shuffle.compassPoint) = [%bs.raw "window.gameState.dealer"];
+        let hV: Shuffle.handVisible = [%bs.raw "window.gameState.handVisible"];
+        let  pOCAP: array(Shuffle.pointOfCompassAndPlayer) = [%bs.raw "window.gameState.pointOfCompassAndPlayers"]; 
+        // lastAction is an exception, we always want to hard code this below
+        let pack: Shuffle.pack = [%bs.raw "window.gameState.pack"];
+        // randomInt ia another exception
+        // no need for ...state here as we are replacing all fields!
+        {
+          chicagoScoreSheet: cSS,
+          dealer: dealer,
+          handVisible: hV,
+          lastAction: "LoginSync",
+          pack: pack,
+          randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
+          pointOfCompassAndPlayers: pOCAP
+        }
       }
       | Test => {
+        //Js.log("Action-Test");
         // make sure doMessage is NOT called in sidebar component
         let () = [%raw "window.isLastActionSync = true"];
         Js.log("benign action: 'Test'");
-        state
+        {
+          ...state, lastAction: "Test", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
+        }
       }
       | AssignPlayer(pOfCAndP) => {
+        //Js.log("Action-AssignPlayer");
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
         //Js.log("action AssignPlayer " ++ pOfCAndP.player ++ " to " ++ pOfCAndP.pointOfCompass);
@@ -129,7 +168,12 @@ let reducer = (state: state, action) => {
           },
           myArray1
         );
-        {...state, pointOfCompassAndPlayers: myArray2}
+        {
+          ...state, 
+          pointOfCompassAndPlayers: myArray2, 
+          lastAction: "AssignPlayer",
+          randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
+        }
       }
     }
 };

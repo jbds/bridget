@@ -7,18 +7,20 @@
 let make = () => {
   // Js.log(Chicago.getScore(~level=7, ~denomination=NoTrumps, ~tricksTotal=13, 
   //   ~isVulnerable=true, ~isDoubled=true, ~isRedoubled=true));
-  let s2e = React.string;
+  //let s2e = React.string;
   // 'dispatch' will not change between re-renders
   // useReducer expects to have passed in a reducer function and an initial state
   let (state, dispatch) = React.useReducer(Global.reducer, Global.initialState);
-  Js.log("State as below:");
-  Js.log(state);
+  // Js.log("State as below:");
+  // Js.log(state);
   // if we ensure ALL changes to state go via actions, 
   // we can guarantee gameState below (for use by p5) will always be in sync
   // compiler warning 21 here unless we return unit specifically
-  let () = [%raw "!window.isLastActionSync ? window.gameState = match[0] : false"];
-  Js.log("gameState as below");
-  Js.log([%raw "window.gameState"]);
+  //let () = [%raw "!window.isLastActionSync ? window.gameState = match[0] : false"];
+  // we ALWAYS want gameState to sync up to state
+  let () = [%raw "window.gameState = match[0]"];
+  // Js.log("gameState as below");
+  // Js.log([%raw "window.gameState"]);
   // any change to gameState must be messaged to the server too
   // so that it can be re-broadcst to all
   // potential for race condition here?
@@ -31,8 +33,7 @@ let make = () => {
     ? 
     Online.doMessage() 
     : 
-    //console.log('Action-Sync: doMessage suppressed')
-    false
+    console.log('Action-Sync: doMessage suppressed')
   |}];
   // event handlers
   let handlerBtnRotateTable = (_e) => {
@@ -75,6 +76,7 @@ let make = () => {
     //<button id="btn1">(s2e("p5 click listener"))</button>
     <ButtonStd dispatch action=Discard label="Discard" id="btnDiscard" isVisible=false/>
     <ButtonStd dispatch action=Sync label="Sync state with gameState" id="btnSync" isVisible=false/>
+    <ButtonStd dispatch action=LoginSync label="Login sync with server" id="btnLoginSync" isVisible=false/>
     <br/>
     <ButtonStd dispatch action=Shuffle label="Start Game" id="btnShuffle"/>
   </div>
@@ -86,10 +88,9 @@ let make = () => {
     <br/>
     <ButtonStdJsx id="btnRotateTable" label="Rotate table" onClick=handlerBtnRotateTable/>
     <br/>
-    <div id="spnGS">
-      // useful way of checking that re-render is occuring when expected
-      (s2e(string_of_int(state.randomInt)))
-    </div>
+    <SpanStd id="spnRandomInt" text={string_of_int(state.randomInt)} />
+    <SpanStd id="spnRILA" text=" " />
+    <SpanStd id="spnLastAction" text={state.lastAction} />
   </div>
   <div 
     id="bidTable"

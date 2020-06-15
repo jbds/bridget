@@ -18,17 +18,12 @@ function App(Props) {
   var match = React.useReducer(Global$ReasonReactExamples.reducer, Global$ReasonReactExamples.initialState);
   var dispatch = match[1];
   var state = match[0];
-  console.log("State as below:");
-  console.log(state);
-  ((!window.isLastActionSync ? window.gameState = match[0] : false));
-  console.log("gameState as below");
-  console.log(window.gameState);
+  ((window.gameState = match[0]));
   ((!window.isLastActionSync 
     ? 
     Online.doMessage() 
     : 
-    //console.log('Action-Sync: doMessage suppressed')
-    false));
+    console.log('Action-Sync: doMessage suppressed')));
   var handlerBtnRotateTable = function (_e) {
     ((window.userState.tableRotationDegrees = ((window.userState.tableRotationDegrees + 90) % 360)));
     
@@ -85,6 +80,12 @@ function App(Props) {
                       label: "Sync state with gameState",
                       id: "btnSync",
                       isVisible: false
+                    }), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                      dispatch: dispatch,
+                      action: /* LoginSync */3,
+                      label: "Login sync with server",
+                      id: "btnLoginSync",
+                      isVisible: false
                     }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Shuffle */0,
@@ -96,9 +97,16 @@ function App(Props) {
                       label: "Rotate table",
                       id: "btnRotateTable",
                       onClick: handlerBtnRotateTable
-                    }), React.createElement("br", undefined), React.createElement("div", {
-                      id: "spnGS"
-                    }, String(state.randomInt))), React.createElement("div", {
+                    }), React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
+                      id: "spnRandomInt",
+                      text: String(state.randomInt)
+                    }), React.createElement(SpanStd$ReasonReactExamples.make, {
+                      id: "spnRILA",
+                      text: " "
+                    }), React.createElement(SpanStd$ReasonReactExamples.make, {
+                      id: "spnLastAction",
+                      text: state.lastAction
+                    })), React.createElement("div", {
                   id: "bidTable",
                   style: {
                     padding: "1vh 0vh 0vh 0vh",
@@ -112,91 +120,91 @@ function App(Props) {
                   }
                 }, React.createElement(ButtonBidLarge$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Test */3,
+                      action: /* Test */4,
                       label: "Pass",
                       id: "btnBidPass",
                       backgroundColor: "#26653B"
                     }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Test */3,
+                      action: /* Test */4,
                       label: "1",
                       id: "btnBid1",
                       color: "#606060"
                     }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Test */3,
+                      action: /* Test */4,
                       label: "2",
                       id: "btnBid2",
                       color: "#606060"
                     }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Test */3,
+                      action: /* Test */4,
                       label: "3",
                       id: "btnBid3",
                       color: "#606060"
                     }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Test */3,
+                      action: /* Test */4,
                       label: "4",
                       id: "btnBid4",
                       color: "#606060"
                     }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Test */3,
+                      action: /* Test */4,
                       label: "5",
                       id: "btnBid5",
                       color: "#606060"
                     }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Test */3,
+                      action: /* Test */4,
                       label: "6",
                       id: "btnBid6",
                       color: "#606060"
                     }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Test */3,
+                      action: /* Test */4,
                       label: "7",
                       id: "btnBid7",
                       color: "#606060"
                     }), React.createElement("br", undefined), React.createElement(ButtonBidLarge$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Test */3,
+                      action: /* Test */4,
                       label: "X",
                       id: "btnBidX",
                       backgroundColor: "#E00000"
                     }), React.createElement(ButtonBidLarge$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Test */3,
+                      action: /* Test */4,
                       label: "XX",
                       id: "btnBidXX",
                       backgroundColor: "#000080"
                     }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Test */3,
+                      action: /* Test */4,
                       label: "\u2663",
                       id: "btnBidC",
                       color: "black"
                     }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Test */3,
+                      action: /* Test */4,
                       label: "\u2666",
                       id: "btnBidD",
                       color: "red"
                     }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Test */3,
+                      action: /* Test */4,
                       label: "\u2665",
                       id: "btnBidH",
                       color: "red"
                     }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Test */3,
+                      action: /* Test */4,
                       label: "\u2660",
                       id: "btnBidS",
                       color: "black"
                     }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Test */3,
+                      action: /* Test */4,
                       label: "NT",
                       id: "btnBidNT",
                       color: "#606060"
