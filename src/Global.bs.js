@@ -22,7 +22,18 @@ var initialState = {
 function reducer(state, action) {
   if (typeof action === "number") {
     switch (action) {
-      case /* Shuffle */0 :
+      case /* NewGame */0 :
+          ((window.isLastActionSync = false));
+          return {
+                  chicagoScoreSheet: [],
+                  dealer: undefined,
+                  handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
+                  lastAction: "NewGame",
+                  pack: [],
+                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                };
+      case /* Shuffle */1 :
           ((window.isLastActionSync = false));
           return {
                   chicagoScoreSheet: state.chicagoScoreSheet,
@@ -33,7 +44,7 @@ function reducer(state, action) {
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
-      case /* Discard */1 :
+      case /* Discard */2 :
           ((window.isLastActionSync = false));
           var discardFileName = window.discardFileName;
           var myPack = $$Array.map((function (card) {
@@ -60,7 +71,7 @@ function reducer(state, action) {
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
-      case /* Sync */2 :
+      case /* Sync */3 :
           ((window.isLastActionSync = true));
           return {
                   chicagoScoreSheet: state.chicagoScoreSheet,
@@ -71,7 +82,7 @@ function reducer(state, action) {
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
-      case /* LoginSync */3 :
+      case /* LoginSync */4 :
           ((window.isLastActionSync = true));
           var cSS = window.gameState.chicagoScoreSheet;
           var dealer = window.gameState.dealer;
@@ -87,7 +98,7 @@ function reducer(state, action) {
                   pointOfCompassAndPlayers: pOCAP,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
-      case /* Test */4 :
+      case /* Test */5 :
           ((window.isLastActionSync = true));
           console.log("benign action: 'Test'");
           return {

@@ -33,8 +33,10 @@ type chicagoScoreSheet = array(chicagoScoreSheetRecord);
 // we want to access this structure by a composite key
 // Reason ml list is best because it supports filter and find
 // whereas array does not
-let scoreTable: list(scoreRecord)  =
-[
+// NO! the list causes a webpack stack overflow,
+// so use an array and concert it as needed to a list which can be filtered
+let scoreTable: array(scoreRecord)  =
+[|
  {
    level: 1,
    denomination: Minor,
@@ -15911,7 +15913,7 @@ let scoreTable: list(scoreRecord)  =
    isRedoubled: true,
    score: 2980
  }
-];
+|];
 
 let getScore = (
   ~level, ~denomination, ~tricksTotal, ~isVulnerable,
@@ -15924,7 +15926,7 @@ let getScore = (
     x.isDoubled == isDoubled &&
     x.isRedoubled === isRedoubled
   },
-  scoreTable
+  Array.to_list(scoreTable)
   )
   record.score;
 };

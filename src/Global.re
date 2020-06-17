@@ -3,6 +3,7 @@
 |}];
 
 type action =
+  | NewGame
   | Shuffle
   //| DealerChange (string)
   | Flip (Shuffle.compassPoint)
@@ -40,6 +41,21 @@ let initialState: state = {
 
 let reducer = (state: state, action) => {
     switch action {
+      | NewGame => {
+        // make sure doMessage is called in sidebar component
+        let () = [%raw "window.isLastActionSync = false"];
+        // force everything same as when server starts up,
+        // except leave logged in players and their pointsOfCompass
+        {
+          ...state,
+          chicagoScoreSheet: [||],
+          dealer: None,
+          handVisible: Shuffle.initialHandVisible,
+          lastAction: "NewGame",
+          pack: [||],
+          randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
+        }
+      }
       | Shuffle => {
         //Js.log("Action-Shuffle");
         // make sure doMessage is called in sidebar component

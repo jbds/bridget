@@ -5,8 +5,8 @@
 
 [@react.component]
 let make = () => {
-  // Js.log(Chicago.getScore(~level=7, ~denomination=NoTrumps, ~tricksTotal=13, 
-  //   ~isVulnerable=true, ~isDoubled=true, ~isRedoubled=true));
+  //  Js.log(Chicago.getScore(~level=7, ~denomination=NoTrumps, ~tricksTotal=13, 
+  //    ~isVulnerable=true, ~isDoubled=true, ~isRedoubled=true));
   //let s2e = React.string;
   // 'dispatch' will not change between re-renders
   // useReducer expects to have passed in a reducer function and an initial state
@@ -78,7 +78,9 @@ let make = () => {
     <ButtonStd dispatch action=Sync label="Sync state with gameState" id="btnSync" isVisible=false/>
     <ButtonStd dispatch action=LoginSync label="Login sync with server" id="btnLoginSync" isVisible=false/>
     <br/>
-    <ButtonStd dispatch action=Shuffle label="Start Game" id="btnShuffle"/>
+    <ButtonStd dispatch action=NewGame label="New Game" id="btnNewGame"/>
+    <br/>
+    <ButtonStd dispatch action=Shuffle label="New Deal" id="btnShuffle"/>
   </div>
   <div id="sidebar3">
     // (s2e("Sidebar3"))
