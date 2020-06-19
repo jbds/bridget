@@ -113,6 +113,9 @@ const callbackFunctionForP5 = (p) => {
     g.canvasHeight = p.windowHeight;
     //get a handle on the canvas so we can adjust z-index
     let cnv = p.createCanvas(g.canvasWidth, g.canvasHeight);
+    // z-index has no effect unless we set position to absolute too
+    cnv.style('position: absolute');
+    cnv.style('z-index: -1');
     //let p5btn1 = p.select('#btn1');
     //p5btn1.mousePressed(changeBgColor);
     // init userState
