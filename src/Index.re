@@ -112,10 +112,11 @@ const callbackFunctionForP5 = (p) => {
     g.canvasWidth = p.windowHeight;
     g.canvasHeight = p.windowHeight;
     //get a handle on the canvas so we can adjust z-index
-    let cnv = p.createCanvas(g.canvasWidth, g.canvasHeight);
+    g.cnv = p.createCanvas(g.canvasWidth, g.canvasHeight);
     // z-index has no effect unless we set position to absolute too
-    cnv.style('position: absolute');
-    cnv.style('z-index: -1');
+    g.cnv.style('position: absolute');
+    g.cnv.style('z-index: -1');
+    g.cnv.id('mycanvas');
     //let p5btn1 = p.select('#btn1');
     //p5btn1.mousePressed(changeBgColor);
     // init userState
@@ -129,6 +130,8 @@ const callbackFunctionForP5 = (p) => {
     };
 
   p.draw = () => {
+    // z-index of canvas is controlled by gameState
+    window.gameState.isBidding ? g.cnv.style('z-index: -1') : g.cnv.style('z-index: 1');
     // main loop repeats at frame rate
     p.image(g.imgMap.get('GB'), 0, 0, g.canvasWidth, g.canvasHeight)
     SideEffect.drawCards(p, g, w, 'South');

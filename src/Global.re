@@ -27,7 +27,8 @@ type state = {
   pack: Shuffle.pack,
   pointOfCompassAndPlayers: array(Shuffle.pointOfCompassAndPlayer),
   randomInt: int,
-  dealIndex: int
+  dealIndex: int,
+  isBiddingCycle: bool
 };
 
 let initialState: state = {
@@ -38,7 +39,8 @@ let initialState: state = {
     pack: Shuffle.initialPack,
     pointOfCompassAndPlayers: [||],
     randomInt: -111,
-    dealIndex: -1
+    dealIndex: -1,
+    isBiddingCycle: false
 };
 
 let reducer = (state: state, action) => {
@@ -142,6 +144,7 @@ let reducer = (state: state, action) => {
         let pack: Shuffle.pack = [%bs.raw "window.gameState.pack"];
         // randomInt ia another exception
         let dealIndex: int = [%bs.raw "window.gameState.dealIndex"];
+        let isBiddingCycle: bool = [%bs.raw "window.gameState.isBiddingCycle"];
         // no need for ...state here as we are replacing all fields with the server gameState fields
         {
           chicagoScoreSheet: cSS,
@@ -151,7 +154,8 @@ let reducer = (state: state, action) => {
           pack: pack,
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
           pointOfCompassAndPlayers: pOCAP,
-          dealIndex: dealIndex
+          dealIndex: dealIndex,
+          isBiddingCycle: isBiddingCycle
         }
       }
       | Test => {
