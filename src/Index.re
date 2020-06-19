@@ -111,7 +111,8 @@ const callbackFunctionForP5 = (p) => {
     // waits for preload to complete, then runs once
     g.canvasWidth = p.windowHeight;
     g.canvasHeight = p.windowHeight;
-    p.createCanvas(g.canvasWidth, g.canvasHeight);
+    //get a handle on the canvas so we can adjust z-index
+    let cnv = p.createCanvas(g.canvasWidth, g.canvasHeight);
     //let p5btn1 = p.select('#btn1');
     //p5btn1.mousePressed(changeBgColor);
     // init userState
