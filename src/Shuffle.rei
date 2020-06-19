@@ -97,6 +97,6 @@ let getShuffledPack: unit => pack;
 
 let impureGetTimeBasedSeedUpTo60k: unit => int;
 
-let getNextDealerLocation: (option(compassPoint)) => compassPoint;
+let getNextDealerLocation: (option(string)) => string;
 
-let getRandomCompassPoint: int => compassPoint;
+let getRandomCompassPoint: int => string;

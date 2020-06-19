@@ -220,9 +220,18 @@ let drawLabels = (p, g, w) => {
         console.log('Unexpected clockPosition argument');
     };
     // do not draw label if pointOfCompass is not known
+    // add dealer if appropriate
+    //let positionPlayerDealer = (obj.pointOfCompass).substring(0, 1) + ' - ' + obj.player;
+    //let positionPlayerDealer = w.gameState.dealer;
+    let positionPlayerDealer =
+    w.gameState.dealer === obj.pointOfCompass
+    ?
+    obj.pointOfCompass + ' ' + obj.player + ' Dealer'
+    :
+    (obj.pointOfCompass).substring(0, 1) + ' - ' + obj.player;
     if(obj.pointOfCompass != '') {
       p.text(
-        (obj.pointOfCompass).substring(0, 1) + ' - ' + obj.player, 
+        positionPlayerDealer, 
         -g.canvasWidth / 4, 
         -textHeightToCanvasHeightRatio,
         g.canvasWidth / 2,

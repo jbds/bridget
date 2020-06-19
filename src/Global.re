@@ -21,7 +21,7 @@ type action =
 // it is a single record which will be passed to and broadcast from the server
 type state = {
   chicagoScoreSheet: array(Chicago.chicagoScoreSheetRecord),
-  dealer: option(Shuffle.compassPoint),
+  dealer: option(string),
   handVisible: Shuffle.handVisible,
   lastAction: string,
   pack: Shuffle.pack,
@@ -137,7 +137,7 @@ let reducer = (state: state, action) => {
         let () = [%raw "window.isLastActionSync = true"];
         // we must make sure that state is updated by every gameState field
         let cSS: array(Chicago.chicagoScoreSheetRecord) = [%bs.raw "window.gameState.chicagoScoreSheet"];
-        let dealer: option(Shuffle.compassPoint) = [%bs.raw "window.gameState.dealer"];
+        let dealer: option(string) = [%bs.raw "window.gameState.dealer"];
         let hV: Shuffle.handVisible = [%bs.raw "window.gameState.handVisible"];
         let  pOCAP: array(Shuffle.pointOfCompassAndPlayer) = [%bs.raw "window.gameState.pointOfCompassAndPlayers"]; 
         // lastAction is an exception, we always want to hard code this below

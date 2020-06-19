@@ -564,10 +564,15 @@ function getShuffledPack(param) {
 function getRandomCompassPoint(seed) {
   Random.init(seed);
   var n = Random.$$int(4);
-  if (n > 2 || n < 0) {
-    return /* West */3;
-  } else {
-    return n;
+  switch (n) {
+    case 0 :
+        return "North";
+    case 1 :
+        return "East";
+    case 2 :
+        return "South";
+    default:
+      return "West";
   }
 }
 
@@ -576,15 +581,16 @@ function getNextDealerLocation(dealerLocation) {
     return getRandomCompassPoint(impureGetTimeBasedSeedUpTo60k(undefined));
   }
   switch (dealerLocation) {
-    case /* North */0 :
-        return /* East */1;
-    case /* East */1 :
-        return /* South */2;
-    case /* South */2 :
-        return /* West */3;
-    case /* West */3 :
-        return /* North */0;
-    
+    case "East" :
+        return "South";
+    case "North" :
+        return "East";
+    case "South" :
+        return "West";
+    case "West" :
+        return "North";
+    default:
+      return "East";
   }
 }
 

@@ -202,10 +202,10 @@ let getRandomCompassPoint = (seed) => {
   Random.init(seed);
   let n = Random.int(4);
   switch (n) {
-    | 0 => North
-    | 1 => East
-    | 2 => South
-    | _ => West
+    | 0 => "North"
+    | 1 => "East"
+    | 2 => "South"
+    | _ => "West"
   }
 }
 
@@ -214,10 +214,11 @@ let getNextDealerLocation = (dealerLocation) => {
     | None => {
       getRandomCompassPoint(impureGetTimeBasedSeedUpTo60k());
     }
-    | Some(North) => East
-    | Some(East) => South
-    | Some(South) => West
-    | Some(West) => North
+    | Some("North") => "East"
+    | Some("East") => "South"
+    | Some("South") => "West"
+    | Some("West") => "North"
+    | _ => "East"
   }
 }
 
