@@ -16,7 +16,8 @@ var initialState = {
   lastAction: "None(fromClient)",
   pack: Shuffle$ReasonReactExamples.initialPack,
   pointOfCompassAndPlayers: initialState_pointOfCompassAndPlayers,
-  randomInt: -111
+  randomInt: -111,
+  dealIndex: -1
 };
 
 function reducer(state, action) {
@@ -31,7 +32,8 @@ function reducer(state, action) {
                   lastAction: "NewGame",
                   pack: [],
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
+                  dealIndex: -1
                 };
       case /* Shuffle */1 :
           ((window.isLastActionSync = false));
@@ -42,7 +44,8 @@ function reducer(state, action) {
                   lastAction: "Shuffle",
                   pack: Shuffle$ReasonReactExamples.getShuffledPack(undefined),
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
+                  dealIndex: state.dealIndex + 1 | 0
                 };
       case /* Discard */2 :
           ((window.isLastActionSync = false));
@@ -69,7 +72,8 @@ function reducer(state, action) {
                   lastAction: "Discard",
                   pack: myPack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
+                  dealIndex: state.dealIndex
                 };
       case /* Sync */3 :
           ((window.isLastActionSync = true));
@@ -80,7 +84,8 @@ function reducer(state, action) {
                   lastAction: "LogoutOrServerDownSync",
                   pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
+                  dealIndex: state.dealIndex
                 };
       case /* LoginSync */4 :
           ((window.isLastActionSync = true));
@@ -89,6 +94,7 @@ function reducer(state, action) {
           var hV = window.gameState.handVisible;
           var pOCAP = window.gameState.pointOfCompassAndPlayers;
           var pack = window.gameState.pack;
+          var dealIndex = window.gameState.dealIndex;
           return {
                   chicagoScoreSheet: cSS,
                   dealer: dealer,
@@ -96,7 +102,8 @@ function reducer(state, action) {
                   lastAction: "LoginSync",
                   pack: pack,
                   pointOfCompassAndPlayers: pOCAP,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
+                  dealIndex: dealIndex
                 };
       case /* Test */5 :
           ((window.isLastActionSync = true));
@@ -108,7 +115,8 @@ function reducer(state, action) {
                   lastAction: "Test",
                   pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
+                  dealIndex: state.dealIndex
                 };
       
     }
@@ -143,7 +151,8 @@ function reducer(state, action) {
               lastAction: "AssignPlayer",
               pack: state.pack,
               pointOfCompassAndPlayers: myArray2,
-              randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+              randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
+              dealIndex: state.dealIndex
             };
     }
     ((window.isLastActionSync = false));
@@ -162,7 +171,8 @@ function reducer(state, action) {
                   lastAction: "Flip",
                   pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
+                  dealIndex: state.dealIndex
                 };
       case /* East */1 :
           var init$1 = state.handVisible;
@@ -178,7 +188,8 @@ function reducer(state, action) {
                   lastAction: "Flip",
                   pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
+                  dealIndex: state.dealIndex
                 };
       case /* South */2 :
           var init$2 = state.handVisible;
@@ -194,7 +205,8 @@ function reducer(state, action) {
                   lastAction: "Flip",
                   pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
+                  dealIndex: state.dealIndex
                 };
       case /* West */3 :
           var init$3 = state.handVisible;
@@ -210,7 +222,8 @@ function reducer(state, action) {
                   lastAction: "Flip",
                   pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
+                  dealIndex: state.dealIndex
                 };
       
     }

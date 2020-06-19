@@ -27,6 +27,7 @@ type state = {
   pack: Shuffle.pack,
   pointOfCompassAndPlayers: array(Shuffle.pointOfCompassAndPlayer),
   randomInt: int,
+  dealIndex: int
 };
 
 let initialState: state = {
@@ -37,6 +38,7 @@ let initialState: state = {
     pack: Shuffle.initialPack,
     pointOfCompassAndPlayers: [||],
     randomInt: -111,
+    dealIndex: -1
 };
 
 let reducer = (state: state, action) => {
@@ -54,6 +56,7 @@ let reducer = (state: state, action) => {
           lastAction: "NewGame",
           pack: [||],
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
+          dealIndex: -1
         }
       }
       | Shuffle => {
@@ -65,7 +68,8 @@ let reducer = (state: state, action) => {
           pack: Shuffle.getShuffledPack(), 
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
           dealer: Some(Shuffle.getNextDealerLocation(state.dealer)),
-          lastAction: "Shuffle"
+          lastAction: "Shuffle",
+          dealIndex: state.dealIndex + 1
         }
       }
       // this is part of Start Game
@@ -137,7 +141,8 @@ let reducer = (state: state, action) => {
         // lastAction is an exception, we always want to hard code this below
         let pack: Shuffle.pack = [%bs.raw "window.gameState.pack"];
         // randomInt ia another exception
-        // no need for ...state here as we are replacing all fields!
+        let dealIndex: int = [%bs.raw "window.gameState.dealIndex"];
+        // no need for ...state here as we are replacing all fields with the server gameState fields
         {
           chicagoScoreSheet: cSS,
           dealer: dealer,
@@ -145,7 +150,8 @@ let reducer = (state: state, action) => {
           lastAction: "LoginSync",
           pack: pack,
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
-          pointOfCompassAndPlayers: pOCAP
+          pointOfCompassAndPlayers: pOCAP,
+          dealIndex: dealIndex
         }
       }
       | Test => {
