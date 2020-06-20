@@ -209,9 +209,10 @@ let getRandomCompassPoint = (seed) => {
   }
 }
 
-let getNextDealerLocation = (dealerLocation) => {
-  switch (dealerLocation) {
+let getNextPointOfCompass = (poc) => {
+  switch (poc) {
     | None => {
+      // used on New Game only
       getRandomCompassPoint(impureGetTimeBasedSeedUpTo60k());
     }
     | Some("North") => "East"

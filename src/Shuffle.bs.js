@@ -576,11 +576,11 @@ function getRandomCompassPoint(seed) {
   }
 }
 
-function getNextDealerLocation(dealerLocation) {
-  if (dealerLocation === undefined) {
+function getNextPointOfCompass(poc) {
+  if (poc === undefined) {
     return getRandomCompassPoint(impureGetTimeBasedSeedUpTo60k(undefined));
   }
-  switch (dealerLocation) {
+  switch (poc) {
     case "East" :
         return "South";
     case "North" :
@@ -605,6 +605,6 @@ exports.initialPack = initialPack;
 exports.initialHandVisible = initialHandVisible;
 exports.getShuffledPack = getShuffledPack;
 exports.impureGetTimeBasedSeedUpTo60k = impureGetTimeBasedSeedUpTo60k;
-exports.getNextDealerLocation = getNextDealerLocation;
+exports.getNextPointOfCompass = getNextPointOfCompass;
 exports.getRandomCompassPoint = getRandomCompassPoint;
 /* No side effect */

@@ -20,27 +20,29 @@ type action =
 // this is the game state that we will share amongst all users who are registered at the server
 // it is a single record which will be passed to and broadcast from the server
 type state = {
+  activePointOfCompass: option(string),
   chicagoScoreSheet: array(Chicago.chicagoScoreSheetRecord),
   dealer: option(string),
+  dealIndex: int,
   handVisible: Shuffle.handVisible,
+  isBiddingCycle: bool,
   lastAction: string,
   pack: Shuffle.pack,
   pointOfCompassAndPlayers: array(Shuffle.pointOfCompassAndPlayer),
   randomInt: int,
-  dealIndex: int,
-  isBiddingCycle: bool
 };
 
 let initialState: state = {
+    activePointOfCompass: None,
     chicagoScoreSheet: Chicago.initialChicagoScoreSheet,
     dealer: None,
+    dealIndex: -1,
     handVisible: Shuffle.initialHandVisible,
+    isBiddingCycle: false,
     lastAction: "None(fromClient)",
     pack: Shuffle.initialPack,
     pointOfCompassAndPlayers: [||],
     randomInt: -111,
-    dealIndex: -1,
-    isBiddingCycle: false
 };
 
 let reducer = (state: state, action) => {
@@ -52,26 +54,30 @@ let reducer = (state: state, action) => {
         // except leave logged in players and their pointsOfCompass
         {
           ...state,
+          activePointOfCompass: None,
           chicagoScoreSheet: [||],
           dealer: None,
+          dealIndex: -1,
           handVisible: Shuffle.initialHandVisible,
           lastAction: "NewGame",
           pack: [||],
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
-          dealIndex: -1
         }
       }
       | Shuffle => {
         //Js.log("Action-Shuffle");
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
+        // dealer becomes activePointOfCompass too, because he starts the bidding
+        let poc = Some(Shuffle.getNextPointOfCompass(state.dealer));
         {
           ...state, 
+          activePointOfCompass: poc,
+          dealer: poc,
+          dealIndex: state.dealIndex + 1,
+          lastAction: "Shuffle",
           pack: Shuffle.getShuffledPack(), 
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
-          dealer: Some(Shuffle.getNextDealerLocation(state.dealer)),
-          lastAction: "Shuffle",
-          dealIndex: state.dealIndex + 1
         }
       }
       // this is part of Start Game
@@ -133,6 +139,7 @@ let reducer = (state: state, action) => {
         }
       }
       | LoginSync => {
+        // Client state is now ENTIRELY REPLACED with server gameState
         // this is same as Sync above, and we do also want to suppress doMessage
         let () = [%raw "window.isLastActionSync = true"];
         // we must make sure that state is updated by every gameState field
@@ -145,8 +152,10 @@ let reducer = (state: state, action) => {
         // randomInt ia another exception
         let dealIndex: int = [%bs.raw "window.gameState.dealIndex"];
         let isBiddingCycle: bool = [%bs.raw "window.gameState.isBiddingCycle"];
+        let poc: option(string) = [%bs.raw "window.gameState.activePointOfCompass"];
         // no need for ...state here as we are replacing all fields with the server gameState fields
         {
+          activePointOfCompass: poc,
           chicagoScoreSheet: cSS,
           dealer: dealer,
           handVisible: hV,

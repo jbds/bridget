@@ -228,7 +228,7 @@ let drawLabels = (p, g, w) => {
     ?
     obj.pointOfCompass + '  ' + obj.player + '  Dealer'
     :
-    (obj.pointOfCompass).substring(0, 1) + '  ' + obj.player;
+    obj.pointOfCompass + '  ' + obj.player;
     if(obj.pointOfCompass != '') {
       p.text(
         positionPlayerDealer, 
