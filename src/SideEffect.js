@@ -9,10 +9,23 @@ let drawCards = (p, g, w, pointOfCompass) => {
   p.stroke(255);
   p.strokeWeight(5);
   //p.point(0,0);
+  // helper function for deciding which way up cards are
+  let shouldHandBeUp = (poc) => {
+    // may return empty array
+    let userPointOfCompassWrappedInArray = gameState.pointOfCompassAndPlayers.filter(
+      x => x.player === userState.player
+    );
+    if (userPointOfCompassWrappedInArray.length === 0) {
+      return false;
+    }
+    let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
+    return userPointOfCompass === poc ? true : false;
+  };
   // fetch 1/4 of the card pack or less
   switch (pointOfCompass) {
     case 'North':
-      g.isHandFaceUp = gameState.handVisible.north;
+      //g.isHandFaceUp = gameState.handVisible.north;
+      g.isHandFaceUp = shouldHandBeUp('North');
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 0 && obj.shuffleIndex <=12 && obj.lifecycle === 1)
         }
@@ -24,7 +37,8 @@ let drawCards = (p, g, w, pointOfCompass) => {
       translateAndRotateByClockPosition(clockPosition, p, g);
     break;
     case 'East':
-      g.isHandFaceUp = gameState.handVisible.east;
+      //g.isHandFaceUp = gameState.handVisible.east;
+      g.isHandFaceUp = shouldHandBeUp('East');
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 13 && obj.shuffleIndex <=25 && obj.lifecycle === 1)
         }
@@ -36,7 +50,8 @@ let drawCards = (p, g, w, pointOfCompass) => {
         translateAndRotateByClockPosition(clockPosition, p, g);
     break;
     case "South":
-      g.isHandFaceUp = gameState.handVisible.south;
+      //g.isHandFaceUp = gameState.handVisible.south;
+      g.isHandFaceUp = shouldHandBeUp('South');
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 26 && obj.shuffleIndex <=38 && obj.lifecycle == 1)
         }
@@ -48,7 +63,8 @@ let drawCards = (p, g, w, pointOfCompass) => {
         translateAndRotateByClockPosition(clockPosition, p, g);
     break;
     case 'West':
-      g.isHandFaceUp = gameState.handVisible.west;
+      //g.isHandFaceUp = gameState.handVisible.west;
+      g.isHandFaceUp = shouldHandBeUp('West');
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 39 && obj.shuffleIndex <=51 && obj.lifecycle == 1)
         }
