@@ -226,9 +226,9 @@ let drawLabels = (p, g, w) => {
     let positionPlayerDealer =
     w.gameState.dealer === obj.pointOfCompass
     ?
-    obj.pointOfCompass + ' ' + obj.player + ' Dealer'
+    obj.pointOfCompass + '  ' + obj.player + '  Dealer'
     :
-    (obj.pointOfCompass).substring(0, 1) + ' - ' + obj.player;
+    (obj.pointOfCompass).substring(0, 1) + '  ' + obj.player;
     if(obj.pointOfCompass != '') {
       p.text(
         positionPlayerDealer, 
