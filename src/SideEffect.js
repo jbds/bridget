@@ -19,7 +19,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
       return false;
     }
     let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
-    return userPointOfCompass === poc ? true : false;
+    return userPointOfCompass === poc || userPointOfCompass === 'Observer' ? true : false;
   };
   // fetch 1/4 of the card pack or less
   switch (pointOfCompass) {
