@@ -56,7 +56,27 @@ let make = () => {
     let () = [%raw "Online.doLogout((document.getElementById('txtMyLoginName').value).toUpperCase())"];
   };
   let isBiddingWindowVisible = () => {
-    true;
+    // may return empty array
+    // let userPointOfCompassWrappedInArray = gameState.pointOfCompassAndPlayers.filter(
+    //   x => x.player === userState.player
+    // );
+    // if (userPointOfCompassWrappedInArray.length === 0) {
+    //   console.log('userPointOfCompassWrappedInArray is empty');
+    //   return false;
+    // }
+    // let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
+    //console.log('userPointOfCompass: ' + userPointOfCompass);
+    //true;
+    // wait until bidding cycle
+    if ((state.isBiddingCycle == true) && (Array.length(state.pointOfCompassAndPlayers) >= 4)) {
+      let localPlayer: string = [%bs.raw "window.userState.player"];
+      let userPointOfCompassWrappedInArray = Belt.Array.keep(state.pointOfCompassAndPlayers, obj => obj.player === localPlayer);
+      let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
+      Js.log("UserPointOfCompass=" ++ userPointOfCompass);
+      state.activePointOfCompass == Some(userPointOfCompass) ? true : false;
+    } else {
+      false;
+    };
   };
   // fragment
   <>

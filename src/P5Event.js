@@ -229,7 +229,7 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
     } else {
       console.log('Unexpected shuffleIndex in window.discardFileName');
     }
-    return userPointOfCompass === cardPointOfCompass ? true : false;
+    return userPointOfCompass === cardPointOfCompass && gameState.isBiddingCycle === false ? true : false;
   };
 
 

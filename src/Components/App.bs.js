@@ -1,6 +1,9 @@
 'use strict';
 
 var React = require("react");
+var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
+var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
+var Caml_array = require("bs-platform/lib/js/caml_array.js");
 var Global$ReasonReactExamples = require("../Global.bs.js");
 var SpanStd$ReasonReactExamples = require("./SpanStd.bs.js");
 var BidTable$ReasonReactExamples = require("./BidTable.bs.js");
@@ -40,6 +43,22 @@ function App(Props) {
     ((window.userState.player = '?'));
     ((Online.doLogout((document.getElementById('txtMyLoginName').value).toUpperCase())));
     
+  };
+  var isBiddingWindowVisible = function (param) {
+    if (!(state.isBiddingCycle === true && state.pointOfCompassAndPlayers.length >= 4)) {
+      return false;
+    }
+    var localPlayer = window.userState.player;
+    var userPointOfCompassWrappedInArray = Belt_Array.keep(state.pointOfCompassAndPlayers, (function (obj) {
+            return obj.player === localPlayer;
+          }));
+    var userPointOfCompass = Caml_array.caml_array_get(userPointOfCompassWrappedInArray, 0).pointOfCompass;
+    console.log("UserPointOfCompass=" + userPointOfCompass);
+    if (Caml_obj.caml_equal(state.activePointOfCompass, userPointOfCompass)) {
+      return true;
+    } else {
+      return false;
+    }
   };
   return React.createElement(React.Fragment, undefined, React.createElement("div", {
                   id: "sidebar1"
@@ -119,7 +138,7 @@ function App(Props) {
                 }, React.createElement(BidTable$ReasonReactExamples.make, { })), React.createElement("div", {
                   id: "biddingWindow",
                   style: {
-                    display: "inline",
+                    display: isBiddingWindowVisible(undefined) ? "inline" : "none",
                     padding: "1vh 1vh 1vh 3vh",
                     borderRadius: "10px"
                   }
