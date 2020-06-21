@@ -209,54 +209,57 @@ let drawLabels = (p, g, w) => {
   // move the origin to table centre
   p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
   w.gameState.pointOfCompassAndPlayers.forEach((obj, i) => {
-    let clockPosition = rotationPlusPointOfCompassToClockPosition(
-      w.userState.tableRotationDegrees,
-      obj.pointOfCompass
-      );
-    p.push();
-    // translate and rotate by clock position
-    switch(clockPosition) {
-      case '12PM':
-        p.translate(0, -(g.canvasHeight / 2)  + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
-        //p.rotate(p.HALF_PI * 2); 
-      break;
-      case '3PM':
-        p.translate((g.canvasWidth / 2) - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75), 0);
-        p.rotate(p.HALF_PI * 3);
-      break;
-      case '6PM':
-        p.translate(0, (g.canvasHeight / 2)  - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
-        p.rotate(0); 
-      break;
-      case '9PM':
-        p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
-        p.rotate(p.HALF_PI);
-      break;
-      default:
-        console.log('Unexpected clockPosition argument');
-    };
-    // do not draw label if pointOfCompass is not known
-    // add dealer if appropriate
-    //let positionPlayerDealer = (obj.pointOfCompass).substring(0, 1) + ' - ' + obj.player;
-    //let positionPlayerDealer = w.gameState.dealer;
-    let positionPlayerDealer =
-    w.gameState.dealer === obj.pointOfCompass
-    ?
-    obj.pointOfCompass + '  ' + obj.player + '  Dealer'
-    :
-    obj.pointOfCompass + '  ' + obj.player;
-    if(obj.pointOfCompass != '') {
-      p.text(
-        positionPlayerDealer, 
-        -g.canvasWidth / 4, 
-        -textHeightToCanvasHeightRatio,
-        g.canvasWidth / 2,
-        textHeightToCanvasHeightRatio * 2 
-      );
-    } else {
-      // skip
+    // ignore Observer
+    if (obj.pointOfCompass !== 'Observer') {
+      let clockPosition = rotationPlusPointOfCompassToClockPosition(
+        w.userState.tableRotationDegrees,
+        obj.pointOfCompass
+        );
+      p.push();
+      // translate and rotate by clock position
+      switch(clockPosition) {
+        case '12PM':
+          p.translate(0, -(g.canvasHeight / 2)  + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
+          //p.rotate(p.HALF_PI * 2); 
+        break;
+        case '3PM':
+          p.translate((g.canvasWidth / 2) - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75), 0);
+          p.rotate(p.HALF_PI * 3);
+        break;
+        case '6PM':
+          p.translate(0, (g.canvasHeight / 2)  - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
+          p.rotate(0); 
+        break;
+        case '9PM':
+          p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
+          p.rotate(p.HALF_PI);
+        break;
+        default:
+          console.log('Unexpected clockPosition argument');
+      };
+      // do not draw label if pointOfCompass is not known
+      // add dealer if appropriate
+      //let positionPlayerDealer = (obj.pointOfCompass).substring(0, 1) + ' - ' + obj.player;
+      //let positionPlayerDealer = w.gameState.dealer;
+      let positionPlayerDealer =
+      w.gameState.dealer === obj.pointOfCompass
+      ?
+      obj.pointOfCompass + '  ' + obj.player + '  Dealer'
+      :
+      obj.pointOfCompass + '  ' + obj.player;
+      if(obj.pointOfCompass != '') {
+        p.text(
+          positionPlayerDealer, 
+          -g.canvasWidth / 4, 
+          -textHeightToCanvasHeightRatio,
+          g.canvasWidth / 2,
+          textHeightToCanvasHeightRatio * 2 
+        );
+      } else {
+        // skip
+      }
+      p.pop();
     }
-    p.pop();
   });
 };
 
@@ -302,7 +305,7 @@ let rotationPlusPointOfCompassToClockPosition =
         return '9PM';
         break;
       default:
-        console.log('Unexoected degrees argument');
+        console.log('Unexpected degrees argument');
         return null;
     };
   };

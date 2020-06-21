@@ -87,15 +87,20 @@ function reducer(state, action) {
       case /* Sync */3 :
           ((window.isLastActionSync = true));
           return {
-                  activePointOfCompass: state.activePointOfCompass,
-                  chicagoScoreSheet: state.chicagoScoreSheet,
-                  dealer: state.dealer,
-                  dealIndex: state.dealIndex,
-                  handVisible: state.handVisible,
-                  isBiddingCycle: state.isBiddingCycle,
+                  activePointOfCompass: undefined,
+                  chicagoScoreSheet: [],
+                  dealer: undefined,
+                  dealIndex: -1,
+                  handVisible: {
+                    north: false,
+                    east: false,
+                    south: false,
+                    west: false
+                  },
+                  isBiddingCycle: false,
                   lastAction: "LogoutOrServerDownSync",
-                  pack: state.pack,
-                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                  pack: [],
+                  pointOfCompassAndPlayers: [],
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
       case /* LoginSync */4 :
@@ -141,8 +146,9 @@ function reducer(state, action) {
     if (action.tag) {
       var pOfCAndP = action[0];
       ((window.isLastActionSync = false));
+      console.log("action AssignPlayer " + (pOfCAndP.player + (" to " + pOfCAndP.pointOfCompass)));
       var myArray1 = $$Array.map((function (pointOfCompassAndPlayer) {
-              if (pointOfCompassAndPlayer.pointOfCompass === pOfCAndP.pointOfCompass) {
+              if (pointOfCompassAndPlayer.pointOfCompass === pOfCAndP.pointOfCompass && pointOfCompassAndPlayer.pointOfCompass !== "Observer") {
                 return {
                         pointOfCompass: "",
                         player: pointOfCompassAndPlayer.player

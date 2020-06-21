@@ -37,7 +37,7 @@ function TablePosition(Props) {
                                         }, React.createElement("td", undefined, x.player), React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
                                                   dispatch: dispatch,
                                                   action: /* AssignPlayer */Block.__(1, [{
-                                                        pointOfCompass: "North",
+                                                        pointOfCompass: x.pointOfCompass === "North" ? "" : "North",
                                                         player: x.player
                                                       }]),
                                                   label: "N",
@@ -46,7 +46,7 @@ function TablePosition(Props) {
                                                 }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                                                   dispatch: dispatch,
                                                   action: /* AssignPlayer */Block.__(1, [{
-                                                        pointOfCompass: "South",
+                                                        pointOfCompass: x.pointOfCompass === "South" ? "" : "South",
                                                         player: x.player
                                                       }]),
                                                   label: "S",
@@ -55,7 +55,7 @@ function TablePosition(Props) {
                                                 }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                                                   dispatch: dispatch,
                                                   action: /* AssignPlayer */Block.__(1, [{
-                                                        pointOfCompass: "West",
+                                                        pointOfCompass: x.pointOfCompass === "West" ? "" : "West",
                                                         player: x.player
                                                       }]),
                                                   label: "W",
@@ -64,7 +64,7 @@ function TablePosition(Props) {
                                                 }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                                                   dispatch: dispatch,
                                                   action: /* AssignPlayer */Block.__(1, [{
-                                                        pointOfCompass: "East",
+                                                        pointOfCompass: x.pointOfCompass === "East" ? "" : "East",
                                                         player: x.player
                                                       }]),
                                                   label: "E",
@@ -73,12 +73,12 @@ function TablePosition(Props) {
                                                 }), React.createElement(ButtonObserver$ReasonReactExamples.make, {
                                                   dispatch: dispatch,
                                                   action: /* AssignPlayer */Block.__(1, [{
-                                                        pointOfCompass: "",
+                                                        pointOfCompass: x.pointOfCompass === "Observer" ? "" : "Observer",
                                                         player: x.player
                                                       }]),
                                                   label: "_",
                                                   id: "btnO" + x.player,
-                                                  isActive: x.pointOfCompass === ""
+                                                  isActive: x.pointOfCompass === "Observer"
                                                 })));
                             })))));
   }

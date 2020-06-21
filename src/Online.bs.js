@@ -36,15 +36,19 @@ function handleWsOpen(){
     // event fires at doLogout, we want to force gameState to nothing locally
     // it also fires if server goes down!
     gameState = {
+      activePointOfCompass: "",
       chicagoScoreSheet: [],
       dealer: 0,
       handVisible: {},
-      lastAction: 'ws.onclose',
+      lastAction: 'ws.onclose',  //gets replaced by LogOutOrServerDownSync
       pack: [],
       pointOfCompassAndPlayers: [],
       randomInt: -888,
+      pointOfCompassAndPlayers: [],
+      dealIndex: -1,
+      isBiddingCycle: false
     }
-    // and sync state to this
+    // and sync state to this (actually, recreate state same as gameState)
     showMessageInConsole('ws.onclose - dispatch Sync action via hidden key on sidebar');
     document.getElementById('btnSync').click();
     showMessageInConsole('client ws.onclose fired, so Websocket connection closed');

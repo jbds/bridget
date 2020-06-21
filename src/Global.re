@@ -132,10 +132,18 @@ let reducer = (state: state, action) => {
         //let myNewState: state = [%bs.raw {| window.gameState |}];   //state;
         // make sure doMessage is NOT called in sidebar component
         let () = [%raw "window.isLastActionSync = true"];
+        // no need for ...state here as we are replacing all fields with the server gameState fields
         {
-          ...state, 
+          activePointOfCompass: None,
+          chicagoScoreSheet: [||],
+          dealer: None,
+          handVisible: {north: false, east: false, south: false, west: false},
+          lastAction: "LogoutOrServerDownSync",
+          pack: [||],
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
-          lastAction: "LogoutOrServerDownSync"
+          pointOfCompassAndPlayers: [||],
+          dealIndex: -1,
+          isBiddingCycle: false
         }
       }
       | LoginSync => {
@@ -180,12 +188,14 @@ let reducer = (state: state, action) => {
         //Js.log("Action-AssignPlayer");
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
-        //Js.log("action AssignPlayer " ++ pOfCAndP.player ++ " to " ++ pOfCAndP.pointOfCompass);
+        Js.log("action AssignPlayer " ++ pOfCAndP.player ++ " to " ++ pOfCAndP.pointOfCompass);
         //let myNewArray = state.pointOfCompassAndPlayers;
         //{...state, pointOfCompassAndPlayers: myNewArray}
+        // unassign any existing requested pointOfCompass
+        // unless it is an Observer...
         let myArray1 = Array.map(
           (pointOfCompassAndPlayer: Shuffle.pointOfCompassAndPlayer) => {
-            pointOfCompassAndPlayer.pointOfCompass == pOfCAndP.pointOfCompass
+            pointOfCompassAndPlayer.pointOfCompass == pOfCAndP.pointOfCompass && pointOfCompassAndPlayer.pointOfCompass != "Observer"
             ?
             {...pointOfCompassAndPlayer, pointOfCompass: ""}
             :
@@ -193,6 +203,7 @@ let reducer = (state: state, action) => {
           },
           state.pointOfCompassAndPlayers
         );
+        // assign the requested pointOfCompass to correct player
         let myArray2 = Array.map(
           (pointOfCompassAndPlayer: Shuffle.pointOfCompassAndPlayer) => {
             pointOfCompassAndPlayer.player == pOfCAndP.player
