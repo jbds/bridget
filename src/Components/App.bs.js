@@ -53,7 +53,6 @@ function App(Props) {
             return obj.player === localPlayer;
           }));
     var userPointOfCompass = Caml_array.caml_array_get(userPointOfCompassWrappedInArray, 0).pointOfCompass;
-    console.log("UserPointOfCompass=" + userPointOfCompass);
     if (Caml_obj.caml_equal(state.activePointOfCompass, userPointOfCompass)) {
       return true;
     } else {

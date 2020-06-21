@@ -1,18 +1,13 @@
 'use strict';
 
 var React = require("react");
+var SpacerStd$ReasonReactExamples = require("./SpacerStd.bs.js");
 var ButtonBidLarge$ReasonReactExamples = require("./ButtonBidLarge.bs.js");
 var ButtonBidSmall$ReasonReactExamples = require("./ButtonBidSmall.bs.js");
 
 function BiddingWindow(Props) {
   var dispatch = Props.dispatch;
-  return React.createElement(React.Fragment, undefined, React.createElement(ButtonBidLarge$ReasonReactExamples.make, {
-                  dispatch: dispatch,
-                  action: /* Test */5,
-                  label: "Pass",
-                  id: "btnBidPass",
-                  backgroundColor: "#26653B"
-                }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
+  return React.createElement(React.Fragment, undefined, React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* Test */5,
                   label: "1",
@@ -54,19 +49,13 @@ function BiddingWindow(Props) {
                   label: "7",
                   id: "btnBid7",
                   color: "#606060"
-                }), React.createElement("br", undefined), React.createElement(ButtonBidLarge$ReasonReactExamples.make, {
-                  dispatch: dispatch,
-                  action: /* Test */5,
-                  label: "X",
-                  id: "btnBidX",
-                  backgroundColor: "#E00000"
                 }), React.createElement(ButtonBidLarge$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* Test */5,
-                  label: "XX",
-                  id: "btnBidXX",
-                  backgroundColor: "#000080"
-                }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
+                  label: "Pass",
+                  id: "btnBidPass",
+                  backgroundColor: "#26653B"
+                }), React.createElement("br", undefined), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* Test */5,
                   label: "\u2663",
@@ -96,6 +85,20 @@ function BiddingWindow(Props) {
                   label: "NT",
                   id: "btnBidNT",
                   color: "#606060"
+                }), React.createElement(SpacerStd$ReasonReactExamples.make, {
+                  spacerWidth: "4vh"
+                }), React.createElement(ButtonBidLarge$ReasonReactExamples.make, {
+                  dispatch: dispatch,
+                  action: /* Test */5,
+                  label: "X",
+                  id: "btnBidX",
+                  backgroundColor: "#E00000"
+                }), React.createElement(ButtonBidLarge$ReasonReactExamples.make, {
+                  dispatch: dispatch,
+                  action: /* Test */5,
+                  label: "XX",
+                  id: "btnBidXX",
+                  backgroundColor: "#000080"
                 }));
 }
 

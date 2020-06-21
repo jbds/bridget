@@ -72,7 +72,7 @@ let make = () => {
       let localPlayer: string = [%bs.raw "window.userState.player"];
       let userPointOfCompassWrappedInArray = Belt.Array.keep(state.pointOfCompassAndPlayers, obj => obj.player === localPlayer);
       let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
-      Js.log("UserPointOfCompass=" ++ userPointOfCompass);
+      //Js.log("UserPointOfCompass=" ++ userPointOfCompass);
       state.activePointOfCompass == Some(userPointOfCompass) ? true : false;
     } else {
       false;
