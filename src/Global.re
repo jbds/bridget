@@ -59,12 +59,14 @@ let reducer = (state: state, action) => {
           dealer: None,
           dealIndex: -1,
           handVisible: Shuffle.initialHandVisible,
+          isBiddingCycle: false,
           lastAction: "NewGame",
           pack: [||],
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
         }
       }
       | Shuffle => {
+        // aka "New Deal"
         //Js.log("Action-Shuffle");
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
@@ -75,6 +77,7 @@ let reducer = (state: state, action) => {
           activePointOfCompass: poc,
           dealer: poc,
           dealIndex: state.dealIndex + 1,
+          isBiddingCycle: true,
           lastAction: "Shuffle",
           pack: Shuffle.getShuffledPack(), 
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
