@@ -15,12 +15,15 @@ type action =
   | LoginSync
   | Test
   | AssignPlayer(Shuffle.pointOfCompassAndPlayer)
+  | BidAdd(Chicago.bid)
+  | BidUpdate(Chicago.bid)
 ;
 
 // this is the game state that we will share amongst all users who are registered at the server
 // it is a single record which will be passed to and broadcast from the server
 type state = {
   activePointOfCompass: option(string),
+  bids: Chicago.bids,
   chicagoScoreSheet: array(Chicago.chicagoScoreSheetRecord),
   dealer: option(string),
   dealIndex: int,
@@ -34,6 +37,7 @@ type state = {
 
 let initialState: state = {
     activePointOfCompass: None,
+    bids: [],
     chicagoScoreSheet: Chicago.initialChicagoScoreSheet,
     dealer: None,
     dealIndex: -1,
@@ -129,6 +133,7 @@ let reducer = (state: state, action) => {
         }
       }
       | Sync => {
+        // aka Logout or perhaps Server Down
         //Js.log("Action - Sync");
         // replace existing state with gameState
         // Below line does NOT work! Must use the spread operator with state
@@ -138,6 +143,7 @@ let reducer = (state: state, action) => {
         // no need for ...state here as we are replacing all fields with the server gameState fields
         {
           activePointOfCompass: None,
+          bids: [],
           chicagoScoreSheet: [||],
           dealer: None,
           handVisible: {north: false, east: false, south: false, west: false},
@@ -164,9 +170,11 @@ let reducer = (state: state, action) => {
         let dealIndex: int = [%bs.raw "window.gameState.dealIndex"];
         let isBiddingCycle: bool = [%bs.raw "window.gameState.isBiddingCycle"];
         let poc: option(string) = [%bs.raw "window.gameState.activePointOfCompass"];
+        let bids: Chicago.bids = [%bs.raw "window.gameState.bids"];
         // no need for ...state here as we are replacing all fields with the server gameState fields
         {
           activePointOfCompass: poc,
+          bids: bids,
           chicagoScoreSheet: cSS,
           dealer: dealer,
           handVisible: hV,
@@ -222,6 +230,22 @@ let reducer = (state: state, action) => {
           pointOfCompassAndPlayers: myArray2, 
           lastAction: "AssignPlayer",
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
+        }
+      }
+      | BidAdd(bid) => {
+        Js.log("Action - BidAdd")
+        // make sure doMessage is NOT called in sidebar component
+        let () = [%raw "window.isLastActionSync = true"];
+        {
+          ...state, lastAction: "BidAdd", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
+        }
+      }
+      | BidUpdate(bid) => {
+        Js.log("Action - BidUpdate")
+        // make sure doMessage is NOT called in sidebar component
+        let () = [%raw "window.isLastActionSync = true"];
+        {
+          ...state, lastAction: "BidUpdate", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
         }
       }
     }

@@ -11,6 +11,7 @@ var initialState_pointOfCompassAndPlayers = [];
 
 var initialState = {
   activePointOfCompass: undefined,
+  bids: /* [] */0,
   chicagoScoreSheet: Chicago$ReasonReactExamples.initialChicagoScoreSheet,
   dealer: undefined,
   dealIndex: -1,
@@ -29,6 +30,7 @@ function reducer(state, action) {
           ((window.isLastActionSync = false));
           return {
                   activePointOfCompass: undefined,
+                  bids: state.bids,
                   chicagoScoreSheet: [],
                   dealer: undefined,
                   dealIndex: -1,
@@ -44,6 +46,7 @@ function reducer(state, action) {
           var poc = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.dealer);
           return {
                   activePointOfCompass: poc,
+                  bids: state.bids,
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: poc,
                   dealIndex: state.dealIndex + 1 | 0,
@@ -74,6 +77,7 @@ function reducer(state, action) {
                 }), state.pack);
           return {
                   activePointOfCompass: state.activePointOfCompass,
+                  bids: state.bids,
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
                   dealIndex: state.dealIndex,
@@ -88,6 +92,7 @@ function reducer(state, action) {
           ((window.isLastActionSync = true));
           return {
                   activePointOfCompass: undefined,
+                  bids: /* [] */0,
                   chicagoScoreSheet: [],
                   dealer: undefined,
                   dealIndex: -1,
@@ -113,8 +118,10 @@ function reducer(state, action) {
           var dealIndex = window.gameState.dealIndex;
           var isBiddingCycle = window.gameState.isBiddingCycle;
           var poc$1 = window.gameState.activePointOfCompass;
+          var bids = window.gameState.bids;
           return {
                   activePointOfCompass: poc$1,
+                  bids: bids,
                   chicagoScoreSheet: cSS,
                   dealer: dealer,
                   dealIndex: dealIndex,
@@ -130,6 +137,7 @@ function reducer(state, action) {
           console.log("benign action: 'Test'");
           return {
                   activePointOfCompass: state.activePointOfCompass,
+                  bids: state.bids,
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
                   dealIndex: state.dealIndex,
@@ -143,117 +151,157 @@ function reducer(state, action) {
       
     }
   } else {
-    if (action.tag) {
-      var pOfCAndP = action[0];
-      ((window.isLastActionSync = false));
-      console.log("action AssignPlayer " + (pOfCAndP.player + (" to " + pOfCAndP.pointOfCompass)));
-      var myArray1 = $$Array.map((function (pointOfCompassAndPlayer) {
-              if (pointOfCompassAndPlayer.pointOfCompass === pOfCAndP.pointOfCompass && pointOfCompassAndPlayer.pointOfCompass !== "Observer") {
+    switch (action.tag | 0) {
+      case /* Flip */0 :
+          ((window.isLastActionSync = false));
+          switch (action[0]) {
+            case /* North */0 :
+                var init = state.handVisible;
                 return {
-                        pointOfCompass: "",
-                        player: pointOfCompassAndPlayer.player
+                        activePointOfCompass: state.activePointOfCompass,
+                        bids: state.bids,
+                        chicagoScoreSheet: state.chicagoScoreSheet,
+                        dealer: state.dealer,
+                        dealIndex: state.dealIndex,
+                        handVisible: {
+                          north: !state.handVisible.north,
+                          east: init.east,
+                          south: init.south,
+                          west: init.west
+                        },
+                        isBiddingCycle: state.isBiddingCycle,
+                        lastAction: "Flip",
+                        pack: state.pack,
+                        pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                        randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                       };
-              } else {
-                return pointOfCompassAndPlayer;
-              }
-            }), state.pointOfCompassAndPlayers);
-      var myArray2 = $$Array.map((function (pointOfCompassAndPlayer) {
-              if (pointOfCompassAndPlayer.player === pOfCAndP.player) {
+            case /* East */1 :
+                var init$1 = state.handVisible;
                 return {
-                        pointOfCompass: pOfCAndP.pointOfCompass,
-                        player: pointOfCompassAndPlayer.player
+                        activePointOfCompass: state.activePointOfCompass,
+                        bids: state.bids,
+                        chicagoScoreSheet: state.chicagoScoreSheet,
+                        dealer: state.dealer,
+                        dealIndex: state.dealIndex,
+                        handVisible: {
+                          north: init$1.north,
+                          east: !state.handVisible.east,
+                          south: init$1.south,
+                          west: init$1.west
+                        },
+                        isBiddingCycle: state.isBiddingCycle,
+                        lastAction: "Flip",
+                        pack: state.pack,
+                        pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                        randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                       };
-              } else {
-                return pointOfCompassAndPlayer;
-              }
-            }), myArray1);
-      return {
-              activePointOfCompass: state.activePointOfCompass,
-              chicagoScoreSheet: state.chicagoScoreSheet,
-              dealer: state.dealer,
-              dealIndex: state.dealIndex,
-              handVisible: state.handVisible,
-              isBiddingCycle: state.isBiddingCycle,
-              lastAction: "AssignPlayer",
-              pack: state.pack,
-              pointOfCompassAndPlayers: myArray2,
-              randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-            };
-    }
-    ((window.isLastActionSync = false));
-    switch (action[0]) {
-      case /* North */0 :
-          var init = state.handVisible;
+            case /* South */2 :
+                var init$2 = state.handVisible;
+                return {
+                        activePointOfCompass: state.activePointOfCompass,
+                        bids: state.bids,
+                        chicagoScoreSheet: state.chicagoScoreSheet,
+                        dealer: state.dealer,
+                        dealIndex: state.dealIndex,
+                        handVisible: {
+                          north: init$2.north,
+                          east: init$2.east,
+                          south: !state.handVisible.south,
+                          west: init$2.west
+                        },
+                        isBiddingCycle: state.isBiddingCycle,
+                        lastAction: "Flip",
+                        pack: state.pack,
+                        pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                        randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                      };
+            case /* West */3 :
+                var init$3 = state.handVisible;
+                return {
+                        activePointOfCompass: state.activePointOfCompass,
+                        bids: state.bids,
+                        chicagoScoreSheet: state.chicagoScoreSheet,
+                        dealer: state.dealer,
+                        dealIndex: state.dealIndex,
+                        handVisible: {
+                          north: init$3.north,
+                          east: init$3.east,
+                          south: init$3.south,
+                          west: !state.handVisible.west
+                        },
+                        isBiddingCycle: state.isBiddingCycle,
+                        lastAction: "Flip",
+                        pack: state.pack,
+                        pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                        randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                      };
+            
+          }
+      case /* AssignPlayer */1 :
+          var pOfCAndP = action[0];
+          ((window.isLastActionSync = false));
+          console.log("action AssignPlayer " + (pOfCAndP.player + (" to " + pOfCAndP.pointOfCompass)));
+          var myArray1 = $$Array.map((function (pointOfCompassAndPlayer) {
+                  if (pointOfCompassAndPlayer.pointOfCompass === pOfCAndP.pointOfCompass && pointOfCompassAndPlayer.pointOfCompass !== "Observer") {
+                    return {
+                            pointOfCompass: "",
+                            player: pointOfCompassAndPlayer.player
+                          };
+                  } else {
+                    return pointOfCompassAndPlayer;
+                  }
+                }), state.pointOfCompassAndPlayers);
+          var myArray2 = $$Array.map((function (pointOfCompassAndPlayer) {
+                  if (pointOfCompassAndPlayer.player === pOfCAndP.player) {
+                    return {
+                            pointOfCompass: pOfCAndP.pointOfCompass,
+                            player: pointOfCompassAndPlayer.player
+                          };
+                  } else {
+                    return pointOfCompassAndPlayer;
+                  }
+                }), myArray1);
           return {
                   activePointOfCompass: state.activePointOfCompass,
+                  bids: state.bids,
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
                   dealIndex: state.dealIndex,
-                  handVisible: {
-                    north: !state.handVisible.north,
-                    east: init.east,
-                    south: init.south,
-                    west: init.west
-                  },
+                  handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
-                  lastAction: "Flip",
+                  lastAction: "AssignPlayer",
+                  pack: state.pack,
+                  pointOfCompassAndPlayers: myArray2,
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                };
+      case /* BidAdd */2 :
+          console.log("Action - BidAdd");
+          ((window.isLastActionSync = true));
+          return {
+                  activePointOfCompass: state.activePointOfCompass,
+                  bids: state.bids,
+                  chicagoScoreSheet: state.chicagoScoreSheet,
+                  dealer: state.dealer,
+                  dealIndex: state.dealIndex,
+                  handVisible: state.handVisible,
+                  isBiddingCycle: state.isBiddingCycle,
+                  lastAction: "BidAdd",
                   pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
-      case /* East */1 :
-          var init$1 = state.handVisible;
+      case /* BidUpdate */3 :
+          console.log("Action - BidUpdate");
+          ((window.isLastActionSync = true));
           return {
                   activePointOfCompass: state.activePointOfCompass,
+                  bids: state.bids,
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
                   dealIndex: state.dealIndex,
-                  handVisible: {
-                    north: init$1.north,
-                    east: !state.handVisible.east,
-                    south: init$1.south,
-                    west: init$1.west
-                  },
+                  handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
-                  lastAction: "Flip",
-                  pack: state.pack,
-                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-                };
-      case /* South */2 :
-          var init$2 = state.handVisible;
-          return {
-                  activePointOfCompass: state.activePointOfCompass,
-                  chicagoScoreSheet: state.chicagoScoreSheet,
-                  dealer: state.dealer,
-                  dealIndex: state.dealIndex,
-                  handVisible: {
-                    north: init$2.north,
-                    east: init$2.east,
-                    south: !state.handVisible.south,
-                    west: init$2.west
-                  },
-                  isBiddingCycle: state.isBiddingCycle,
-                  lastAction: "Flip",
-                  pack: state.pack,
-                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-                };
-      case /* West */3 :
-          var init$3 = state.handVisible;
-          return {
-                  activePointOfCompass: state.activePointOfCompass,
-                  chicagoScoreSheet: state.chicagoScoreSheet,
-                  dealer: state.dealer,
-                  dealIndex: state.dealIndex,
-                  handVisible: {
-                    north: init$3.north,
-                    east: init$3.east,
-                    south: init$3.south,
-                    west: !state.handVisible.west
-                  },
-                  isBiddingCycle: state.isBiddingCycle,
-                  lastAction: "Flip",
+                  lastAction: "BidUpdate",
                   pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
