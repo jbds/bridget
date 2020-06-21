@@ -184,6 +184,7 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   myHandArray.sort((a, b) => {return b.handOrder - a.handOrder});
   let myCard = myHandArray[cardSegmentIndexAdjusted];
   console.log(myCard.fileName);
+  // NO - always update via ReasonML action
   // at this point we know which card was clicked
   // so we can update the (mutable) js gameState object
   // let pack = gameState.pack;
@@ -196,11 +197,40 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   // });
 
   window.discardFileName = myCard.fileName
-  // force sidebar update hack
-  //gameState.randomInt = Math.floor(Math.random() * 100000);
+  if (isValidDiscardFromLocalPlayer()) {
+    // dispatch the Discard action via a hidden key on the sidebar
+    document.getElementById('btnDiscard').click();
+  }
+};
 
-  // dispatch the Discard action via a hidden key on the sidebar
-  document.getElementById('btnDiscard').click();
-}
+  // helper function for deciding which discard clicks are valid
+  let isValidDiscardFromLocalPlayer = () => {
+    // may return empty array
+    let userPointOfCompassWrappedInArray = gameState.pointOfCompassAndPlayers.filter(
+      x => x.player === userState.player
+    );
+    if (userPointOfCompassWrappedInArray.length === 0) {
+      console.log('userPointOfCompassWrappedInArray is empty');
+      return false;
+    }
+    let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
+    //console.log('userPointOfCompass: ' + userPointOfCompass);
+    // now we need to know cardPointOfCompass
+    let cardPointOfCompass;
+    let card = gameState.pack.find(obj => obj.fileName === window.discardFileName);
+    if (card.shuffleIndex >= 0 && card.shuffleIndex <= 12 && card.lifecycle === 1) {
+      cardPointOfCompass = 'North';
+    } else if (card.shuffleIndex >= 13 && card.shuffleIndex <= 25 && card.lifecycle === 1) {
+      cardPointOfCompass = 'East';
+    } else if (card.shuffleIndex >= 26 && card.shuffleIndex <= 38 && card.lifecycle === 1) {
+      cardPointOfCompass = 'South';
+    } else if (card.shuffleIndex >= 39 && card.shuffleIndex <= 51 && card.lifecycle === 1) {
+      cardPointOfCompass = 'West';
+    } else {
+      console.log('Unexpected shuffleIndex in window.discardFileName');
+    }
+    return userPointOfCompass === cardPointOfCompass ? true : false;
+  };
+
 
 exports.mouseDecode = mouseDecode;
