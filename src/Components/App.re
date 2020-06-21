@@ -67,13 +67,21 @@ let make = () => {
     // let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
     //console.log('userPointOfCompass: ' + userPointOfCompass);
     //true;
-    // wait until bidding cycle
-    if ((state.isBiddingCycle == true) && (Array.length(state.pointOfCompassAndPlayers) >= 4)) {
+    // wait until bidding cycle and check if logged out
+    if  (
+          (state.isBiddingCycle == true) && 
+          (Array.length(state.pointOfCompassAndPlayers) >= 4)
+        ) {
       let localPlayer: string = [%bs.raw "window.userState.player"];
+      Js.log("localPlayer=" ++ localPlayer);
       let userPointOfCompassWrappedInArray = Belt.Array.keep(state.pointOfCompassAndPlayers, obj => obj.player === localPlayer);
-      let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
-      //Js.log("UserPointOfCompass=" ++ userPointOfCompass);
-      state.activePointOfCompass == Some(userPointOfCompass) ? true : false;
+      if (Array.length(userPointOfCompassWrappedInArray) === 0) {
+        false;
+      } else {
+        let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
+        //Js.log("UserPointOfCompass=" ++ userPointOfCompass);
+        state.activePointOfCompass == Some(userPointOfCompass) ? true : false;
+      }
     } else {
       false;
     };

@@ -15,7 +15,7 @@ type action =
   | LoginSync
   | Test
   | AssignPlayer(Shuffle.pointOfCompassAndPlayer)
-  | BidAdd(Chicago.bid)
+  | BidAdd(option(int))
   | BidUpdate(Chicago.bid)
 ;
 
@@ -37,7 +37,7 @@ type state = {
 
 let initialState: state = {
     activePointOfCompass: None,
-    bids: [],
+    bids: [||],
     chicagoScoreSheet: Chicago.initialChicagoScoreSheet,
     dealer: None,
     dealIndex: -1,
@@ -143,7 +143,7 @@ let reducer = (state: state, action) => {
         // no need for ...state here as we are replacing all fields with the server gameState fields
         {
           activePointOfCompass: None,
-          bids: [],
+          bids: [||],
           chicagoScoreSheet: [||],
           dealer: None,
           handVisible: {north: false, east: false, south: false, west: false},

@@ -7,11 +7,13 @@ var Shuffle$ReasonReactExamples = require("./Shuffle.bs.js");
 var Online = require('./Online.bs');
 ;
 
+var initialState_bids = [];
+
 var initialState_pointOfCompassAndPlayers = [];
 
 var initialState = {
   activePointOfCompass: undefined,
-  bids: /* [] */0,
+  bids: initialState_bids,
   chicagoScoreSheet: Chicago$ReasonReactExamples.initialChicagoScoreSheet,
   dealer: undefined,
   dealIndex: -1,
@@ -92,7 +94,7 @@ function reducer(state, action) {
           ((window.isLastActionSync = true));
           return {
                   activePointOfCompass: undefined,
-                  bids: /* [] */0,
+                  bids: [],
                   chicagoScoreSheet: [],
                   dealer: undefined,
                   dealIndex: -1,

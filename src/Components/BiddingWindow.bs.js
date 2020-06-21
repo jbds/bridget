@@ -1,5 +1,6 @@
 'use strict';
 
+var Block = require("bs-platform/lib/js/block.js");
 var React = require("react");
 var SpacerStd$ReasonReactExamples = require("./SpacerStd.bs.js");
 var ButtonBidLarge$ReasonReactExamples = require("./ButtonBidLarge.bs.js");
@@ -9,7 +10,7 @@ function BiddingWindow(Props) {
   var dispatch = Props.dispatch;
   return React.createElement(React.Fragment, undefined, React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
-                  action: /* Test */5,
+                  action: /* BidAdd */Block.__(2, [1]),
                   label: "1",
                   id: "btnBid1",
                   color: "#606060"
@@ -51,7 +52,7 @@ function BiddingWindow(Props) {
                   color: "#606060"
                 }), React.createElement(ButtonBidLarge$ReasonReactExamples.make, {
                   dispatch: dispatch,
-                  action: /* Test */5,
+                  action: /* BidAdd */Block.__(2, [undefined]),
                   label: "Pass",
                   id: "btnBidPass",
                   backgroundColor: "#26653B"

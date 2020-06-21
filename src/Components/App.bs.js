@@ -49,9 +49,13 @@ function App(Props) {
       return false;
     }
     var localPlayer = window.userState.player;
+    console.log("localPlayer=" + localPlayer);
     var userPointOfCompassWrappedInArray = Belt_Array.keep(state.pointOfCompassAndPlayers, (function (obj) {
             return obj.player === localPlayer;
           }));
+    if (userPointOfCompassWrappedInArray.length === 0) {
+      return false;
+    }
     var userPointOfCompass = Caml_array.caml_array_get(userPointOfCompassWrappedInArray, 0).pointOfCompass;
     if (Caml_obj.caml_equal(state.activePointOfCompass, userPointOfCompass)) {
       return true;

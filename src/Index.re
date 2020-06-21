@@ -14,6 +14,7 @@
   window.addEventListener('resize', setVh);
 
   window.isLastActionSync = false;
+  window.userState = {}; // prevent undefined error before p5 starts up
 |}];
 
 

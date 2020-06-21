@@ -13,6 +13,7 @@ const setVh = () => {
   window.addEventListener('resize', setVh);
 
   window.isLastActionSync = false;
+  window.userState = {}; // prevent undefined error before p5 starts up
 ;
 
 ReactDOMRe.renderToElementWithId(React.createElement(App$ReasonReactExamples.make, { }), "root");

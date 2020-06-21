@@ -35,6 +35,7 @@ function handleWsOpen(){
     // it also fires if server goes down!
     gameState = {
       activePointOfCompass: "",
+      bids: [],
       chicagoScoreSheet: [],
       dealer: 0,
       handVisible: {},
