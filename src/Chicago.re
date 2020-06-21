@@ -1,3 +1,216 @@
+// type defs for bidding cycle
+type bid = {
+  contractLevel: option(int),
+  contractSuit: option(string),
+  contractPointOfCompass: option(string),
+  isDoubled: bool,
+  isRedoubled: bool,
+
+};
+
+type bids = list(bid);
+
+
+// type defs for score sheet
+type chicagoScoreSheetRecord = {
+  vulnerable: string,               // "None", "Dealer", "Dealer", "All" modulo 4
+  contractLevel: option(int),       // None | Some (1,2,3,4,5,6,7)
+  contractSuit: option(string),     // None | Some("Clubs", "Diamonds", "Hearts", "Spades", "NoTrumps")
+  contractDeclarer: option(string), // None | Some("North", "East", "South", "West")
+  totalTricks: option(int),         // None | 0 thru 13
+  scoreNorthSouth: option(int),     // calculated using Chicago.getScore if Declarer "North" or "South"
+  scoreWestEast: option(int)        // calculated using Chicago.getScore if Declarer "West" or "East"
+};
+
+type chicagoScoreSheet = array(chicagoScoreSheetRecord);
+
+// values for Chicago Score Sheet
+
+let initialChicagoScoreSheet: chicagoScoreSheet = [|
+  // first row created at end of bidding?
+  // {
+  //   vulnerable: "None",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "Dealer",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "Dealer",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "All",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "None",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "Dealer",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "Dealer",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "All",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "None",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "Dealer",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "Dealer",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "All",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "None",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "Dealer",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "Dealer",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "All",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "None",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "Dealer",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "Dealer",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // },
+  // {
+  //   vulnerable: "All",
+  //   contractLevel: None,
+  //   contractSuit: None,
+  //   contractDeclarer: None,
+  //   totalTricks: None,
+  //   scoreNorthSouth: None,
+  //   scoreWestEast: None
+  // }
+|];
+
+
 // type defs for scoring lookup table
 type denomination =
   | Minor
@@ -15,26 +228,12 @@ type scoreRecord = {
   score: int
 };
 
-// type defs for score sheet
-type chicagoScoreSheetRecord = {
-  vulnerable: string,
-  contractLevel: option(int),
-  contractSuit: option(Shuffle.suit),
-  contractDeclarer: option(Shuffle.compassPoint),
-  totalTricks: option(int),
-  scoreNorthSouth: option(int),
-  scoreWestEast: option(int)
-};
-
-type chicagoScoreSheet = array(chicagoScoreSheetRecord);
-
 // values for scoring lookup table
-
 // we want to access this structure by a composite key
 // Reason ml list is best because it supports filter and find
 // whereas array does not
 // NO! the list causes a webpack stack overflow,
-// so use an array and concert it as needed to a list which can be filtered
+// so use an array and convert it as needed to a list which can be filtered
 let scoreTable: array(scoreRecord)  =
 [|
  {
@@ -15931,187 +16130,3 @@ let getScore = (
   record.score;
 };
 
-// values for Chicago Score Sheet
-
-let initialChicagoScoreSheet: chicagoScoreSheet = [|
-  {
-    vulnerable: "None",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "Dealer",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "Dealer",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "All",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "None",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "Dealer",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "Dealer",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "All",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "None",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "Dealer",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "Dealer",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "All",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "None",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "Dealer",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "Dealer",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "All",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "None",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "Dealer",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "Dealer",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  },
-  {
-    vulnerable: "All",
-    contractLevel: None,
-    contractSuit: None,
-    contractDeclarer: None,
-    totalTricks: None,
-    scoreNorthSouth: None,
-    scoreWestEast: None
-  }
-|];
