@@ -49,7 +49,6 @@ function App(Props) {
       return false;
     }
     var localPlayer = window.userState.player;
-    console.log("localPlayer=" + localPlayer);
     var userPointOfCompassWrappedInArray = Belt_Array.keep(state.pointOfCompassAndPlayers, (function (obj) {
             return obj.player === localPlayer;
           }));

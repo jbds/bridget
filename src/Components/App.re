@@ -56,24 +56,13 @@ let make = () => {
     let () = [%raw "Online.doLogout((document.getElementById('txtMyLoginName').value).toUpperCase())"];
   };
   let isBiddingWindowVisible = () => {
-    // may return empty array
-    // let userPointOfCompassWrappedInArray = gameState.pointOfCompassAndPlayers.filter(
-    //   x => x.player === userState.player
-    // );
-    // if (userPointOfCompassWrappedInArray.length === 0) {
-    //   console.log('userPointOfCompassWrappedInArray is empty');
-    //   return false;
-    // }
-    // let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
-    //console.log('userPointOfCompass: ' + userPointOfCompass);
-    //true;
-    // wait until bidding cycle and check if logged out
+    // only check when in BiddingCycle and at least 4 players (TO DO - strictly should exclude Observers)
     if  (
           (state.isBiddingCycle == true) && 
           (Array.length(state.pointOfCompassAndPlayers) >= 4)
         ) {
       let localPlayer: string = [%bs.raw "window.userState.player"];
-      Js.log("localPlayer=" ++ localPlayer);
+      //Js.log("localPlayer=" ++ localPlayer);
       let userPointOfCompassWrappedInArray = Belt.Array.keep(state.pointOfCompassAndPlayers, obj => obj.player === localPlayer);
       if (Array.length(userPointOfCompassWrappedInArray) === 0) {
         false;
