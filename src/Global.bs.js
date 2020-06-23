@@ -1,5 +1,6 @@
 'use strict';
 
+var List = require("bs-platform/lib/js/list.js");
 var $$Array = require("bs-platform/lib/js/array.js");
 var Chicago$ReasonReactExamples = require("./Chicago.bs.js");
 var Shuffle$ReasonReactExamples = require("./Shuffle.bs.js");
@@ -7,13 +8,11 @@ var Shuffle$ReasonReactExamples = require("./Shuffle.bs.js");
 var Online = require('./Online.bs');
 ;
 
-var initialState_bids = [];
-
 var initialState_pointOfCompassAndPlayers = [];
 
 var initialState = {
   activePointOfCompass: undefined,
-  bids: initialState_bids,
+  bids: /* [] */0,
   chicagoScoreSheet: Chicago$ReasonReactExamples.initialChicagoScoreSheet,
   dealer: undefined,
   dealIndex: -1,
@@ -32,7 +31,7 @@ function reducer(state, action) {
           ((window.isLastActionSync = false));
           return {
                   activePointOfCompass: undefined,
-                  bids: state.bids,
+                  bids: /* [] */0,
                   chicagoScoreSheet: [],
                   dealer: undefined,
                   dealIndex: -1,
@@ -48,7 +47,7 @@ function reducer(state, action) {
           var poc = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.dealer);
           return {
                   activePointOfCompass: poc,
-                  bids: state.bids,
+                  bids: /* [] */0,
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: poc,
                   dealIndex: state.dealIndex + 1 | 0,
@@ -94,7 +93,7 @@ function reducer(state, action) {
           ((window.isLastActionSync = true));
           return {
                   activePointOfCompass: undefined,
-                  bids: [],
+                  bids: /* [] */0,
                   chicagoScoreSheet: [],
                   dealer: undefined,
                   dealIndex: -1,
@@ -278,10 +277,19 @@ function reducer(state, action) {
                 };
       case /* BidAdd */2 :
           console.log("Action - BidAdd");
-          ((window.isLastActionSync = true));
+          ((window.isLastActionSync = false));
           return {
                   activePointOfCompass: state.activePointOfCompass,
-                  bids: state.bids,
+                  bids: /* :: */[
+                    {
+                      contractLevel: action[0],
+                      contractSuit: "Fred",
+                      contractPointOfCompass: state.activePointOfCompass,
+                      isDoubled: false,
+                      isRedoubled: false
+                    },
+                    state.bids
+                  ],
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
                   dealIndex: state.dealIndex,
@@ -294,10 +302,30 @@ function reducer(state, action) {
                 };
       case /* BidUpdate */3 :
           console.log("Action - BidUpdate");
-          ((window.isLastActionSync = true));
+          ((window.isLastActionSync = false));
+          var bids$1 = state.bids;
+          var head = List.hd(bids$1);
+          var newHead_contractLevel = head.contractLevel;
+          var newHead_contractSuit = action[0];
+          var newHead_contractPointOfCompass = head.contractPointOfCompass;
+          var newHead_isDoubled = head.isDoubled;
+          var newHead_isRedoubled = head.isRedoubled;
+          var newHead = {
+            contractLevel: newHead_contractLevel,
+            contractSuit: newHead_contractSuit,
+            contractPointOfCompass: newHead_contractPointOfCompass,
+            isDoubled: newHead_isDoubled,
+            isRedoubled: newHead_isRedoubled
+          };
+          var tail = List.tl(bids$1);
+          var bidsUpdated = /* :: */[
+            newHead,
+            tail
+          ];
+          var poc$2 = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
           return {
-                  activePointOfCompass: state.activePointOfCompass,
-                  bids: state.bids,
+                  activePointOfCompass: poc$2,
+                  bids: bidsUpdated,
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
                   dealIndex: state.dealIndex,
@@ -308,6 +336,87 @@ function reducer(state, action) {
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
+      case /* BidAddSpecial */4 :
+          var special = action[0];
+          console.log("Action - BidAddSpecial");
+          ((window.isLastActionSync = false));
+          var poc$3 = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
+          if (special === undefined) {
+            return state;
+          }
+          switch (special) {
+            case "Pass" :
+                return {
+                        activePointOfCompass: poc$3,
+                        bids: /* :: */[
+                          {
+                            contractLevel: undefined,
+                            contractSuit: undefined,
+                            contractPointOfCompass: state.activePointOfCompass,
+                            isDoubled: false,
+                            isRedoubled: false
+                          },
+                          state.bids
+                        ],
+                        chicagoScoreSheet: state.chicagoScoreSheet,
+                        dealer: state.dealer,
+                        dealIndex: state.dealIndex,
+                        handVisible: state.handVisible,
+                        isBiddingCycle: state.isBiddingCycle,
+                        lastAction: "BidAddSpecial",
+                        pack: state.pack,
+                        pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                        randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                      };
+            case "X" :
+                return {
+                        activePointOfCompass: poc$3,
+                        bids: /* :: */[
+                          {
+                            contractLevel: undefined,
+                            contractSuit: undefined,
+                            contractPointOfCompass: state.activePointOfCompass,
+                            isDoubled: true,
+                            isRedoubled: false
+                          },
+                          state.bids
+                        ],
+                        chicagoScoreSheet: state.chicagoScoreSheet,
+                        dealer: state.dealer,
+                        dealIndex: state.dealIndex,
+                        handVisible: state.handVisible,
+                        isBiddingCycle: state.isBiddingCycle,
+                        lastAction: "BidAddSpecial",
+                        pack: state.pack,
+                        pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                        randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                      };
+            case "XX" :
+                return {
+                        activePointOfCompass: poc$3,
+                        bids: /* :: */[
+                          {
+                            contractLevel: undefined,
+                            contractSuit: undefined,
+                            contractPointOfCompass: state.activePointOfCompass,
+                            isDoubled: false,
+                            isRedoubled: true
+                          },
+                          state.bids
+                        ],
+                        chicagoScoreSheet: state.chicagoScoreSheet,
+                        dealer: state.dealer,
+                        dealIndex: state.dealIndex,
+                        handVisible: state.handVisible,
+                        isBiddingCycle: state.isBiddingCycle,
+                        lastAction: "BidAddSpecial",
+                        pack: state.pack,
+                        pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                        randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                      };
+            default:
+              return state;
+          }
       
     }
   }

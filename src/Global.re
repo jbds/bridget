@@ -16,7 +16,8 @@ type action =
   | Test
   | AssignPlayer(Shuffle.pointOfCompassAndPlayer)
   | BidAdd(option(int))
-  | BidUpdate(Chicago.bid)
+  | BidUpdate(option(string))
+  | BidAddSpecial(option(string))
 ;
 
 // this is the game state that we will share amongst all users who are registered at the server
@@ -37,7 +38,7 @@ type state = {
 
 let initialState: state = {
     activePointOfCompass: None,
-    bids: [||],
+    bids: [],
     chicagoScoreSheet: Chicago.initialChicagoScoreSheet,
     dealer: None,
     dealIndex: -1,
@@ -59,6 +60,7 @@ let reducer = (state: state, action) => {
         {
           ...state,
           activePointOfCompass: None,
+          bids: [],
           chicagoScoreSheet: [||],
           dealer: None,
           dealIndex: -1,
@@ -79,6 +81,7 @@ let reducer = (state: state, action) => {
         {
           ...state, 
           activePointOfCompass: poc,
+          bids: [],
           dealer: poc,
           dealIndex: state.dealIndex + 1,
           isBiddingCycle: true,
@@ -143,7 +146,7 @@ let reducer = (state: state, action) => {
         // no need for ...state here as we are replacing all fields with the server gameState fields
         {
           activePointOfCompass: None,
-          bids: [||],
+          bids: [],
           chicagoScoreSheet: [||],
           dealer: None,
           handVisible: {north: false, east: false, south: false, west: false},
@@ -232,20 +235,112 @@ let reducer = (state: state, action) => {
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
         }
       }
-      | BidAdd(bid) => {
+      | BidAdd(contractLevel) => {
         Js.log("Action - BidAdd")
-        // make sure doMessage is NOT called in sidebar component
-        let () = [%raw "window.isLastActionSync = true"];
+        // make sure doMessage is called in sidebar component
+        let () = [%raw "window.isLastActionSync = false"];
+        //Js.log(state.bids);
         {
-          ...state, lastAction: "BidAdd", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
+          ...state, 
+          bids: [
+            {
+              contractLevel: contractLevel,
+              contractSuit: Some("Fred"),
+              contractPointOfCompass: state.activePointOfCompass,
+              isDoubled: false,
+              isRedoubled: false
+            },
+            ...state.bids
+          ],
+          lastAction: "BidAdd", 
+          randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
         }
       }
-      | BidUpdate(bid) => {
+      | BidUpdate(contractSuit) => {
         Js.log("Action - BidUpdate")
-        // make sure doMessage is NOT called in sidebar component
-        let () = [%raw "window.isLastActionSync = true"];
+        // make sure doMessage is called in sidebar component
+        let () = [%raw "window.isLastActionSync = false"];
+        // we can do an immutable update
+        let bids = state.bids;
+        let head = List.hd(bids);
+        //Js.log(head);
+        let newHead = {
+          ...head,
+          contractSuit: contractSuit
+        };
+        //Js.log(newHead);
+        let tail = List.tl(bids);
+        let bidsUpdated = [newHead, ...tail];
+        //Js.log(bidsUpdated);
+        // move on to next poc!
+        let poc = Some(Shuffle.getNextPointOfCompass(state.activePointOfCompass));        
         {
-          ...state, lastAction: "BidUpdate", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
+          ...state, 
+          activePointOfCompass: poc,
+          bids: bidsUpdated,
+          lastAction: "BidUpdate", 
+          randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
+        }
+      }
+      | BidAddSpecial(special) => {
+        Js.log("Action - BidAddSpecial")
+        // make sure doMessage is called in sidebar component
+        let () = [%raw "window.isLastActionSync = false"];
+        // move on to next poc!
+        let poc = Some(Shuffle.getNextPointOfCompass(state.activePointOfCompass));        
+        switch (special) {
+          | Some("Pass") => {
+            ...state, 
+            activePointOfCompass: poc,
+            bids: [
+              {
+                contractLevel: None,
+                contractSuit: None,
+                contractPointOfCompass: state.activePointOfCompass,
+                isDoubled: false,
+                isRedoubled: false
+              },
+              ...state.bids
+            ],
+            lastAction: "BidAddSpecial", 
+            randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
+          }
+          | Some("X") => {
+            ...state, 
+            activePointOfCompass: poc,
+            bids: [
+              {
+                contractLevel: None,
+                contractSuit: None,
+                contractPointOfCompass: state.activePointOfCompass,
+                isDoubled: true,
+                isRedoubled: false
+              },
+              ...state.bids
+            ],
+            lastAction: "BidAddSpecial", 
+            randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
+          }
+          | Some("XX") => {
+            ...state, 
+            activePointOfCompass: poc,
+            bids: [
+              {
+                contractLevel: None,
+                contractSuit: None,
+                contractPointOfCompass: state.activePointOfCompass,
+                isDoubled: false,
+                isRedoubled: true
+              },
+              ...state.bids
+            ],
+            lastAction: "BidAddSpecial", 
+            randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
+          }
+          | _ => {
+            // should never occur, and no change in state
+            state
+          }
         }
       }
     }

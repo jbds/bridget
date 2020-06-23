@@ -8,7 +8,7 @@ type bid = {
 
 };
 
-type bids = array(bid);
+type bids = list(bid);
 
 
 // type defs for score sheet

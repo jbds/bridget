@@ -20,6 +20,8 @@ function App(Props) {
   var match = React.useReducer(Global$ReasonReactExamples.reducer, Global$ReasonReactExamples.initialState);
   var dispatch = match[1];
   var state = match[0];
+  console.log("State as below:");
+  console.log(state);
   ((window.gameState = match[0]));
   ((!window.isLastActionSync 
     ? 

@@ -9,7 +9,6 @@ function ButtonBidLarge(Props) {
   var label = Props.label;
   var id = Props.id;
   var backgroundColor = Props.backgroundColor;
-  Props.isActive;
   var isVisibleOpt = Props.isVisible;
   var isVisible = isVisibleOpt !== undefined ? isVisibleOpt : true;
   return React.createElement(React.Fragment, undefined, React.createElement("button", {

@@ -5,7 +5,6 @@ let make = (
   ~label: string, 
   ~id: string, 
   ~backgroundColor: string,
-  ~isActive: bool=true,
   ~isVisible: bool=true
   ) => {
   <>
