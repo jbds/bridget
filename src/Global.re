@@ -287,7 +287,8 @@ let reducer = (state: state, action) => {
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
         // move on to next poc!
-        let poc = Some(Shuffle.getNextPointOfCompass(state.activePointOfCompass));        
+        let poc = Some(Shuffle.getNextPointOfCompass(state.activePointOfCompass));   
+        Js.log(poc);   
         switch (special) {
           | Some("Pass") => {
             ...state, 

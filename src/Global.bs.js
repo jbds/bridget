@@ -341,6 +341,7 @@ function reducer(state, action) {
           console.log("Action - BidAddSpecial");
           ((window.isLastActionSync = false));
           var poc$3 = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
+          console.log(poc$3);
           if (special === undefined) {
             return state;
           }
