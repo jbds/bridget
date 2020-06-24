@@ -28,6 +28,7 @@ type state = {
   chicagoScoreSheet: array(Chicago.chicagoScoreSheetRecord),
   dealer: option(string),
   dealIndex: int,
+  declarer: option(string),
   handVisible: Shuffle.handVisible,
   isBiddingCycle: bool,
   lastAction: string,
@@ -42,6 +43,7 @@ let initialState: state = {
     chicagoScoreSheet: Chicago.initialChicagoScoreSheet,
     dealer: None,
     dealIndex: -1,
+    declarer: None,
     handVisible: Shuffle.initialHandVisible,
     isBiddingCycle: false,
     lastAction: "None(fromClient)",
@@ -64,6 +66,7 @@ let reducer = (state: state, action) => {
           chicagoScoreSheet: [||],
           dealer: None,
           dealIndex: -1,
+          declarer: None,
           handVisible: Shuffle.initialHandVisible,
           isBiddingCycle: false,
           lastAction: "NewGame",
@@ -84,23 +87,13 @@ let reducer = (state: state, action) => {
           bids: [],
           dealer: poc,
           dealIndex: state.dealIndex + 1,
+          declarer: None,
           isBiddingCycle: true,
           lastAction: "Shuffle",
           pack: Shuffle.getShuffledPack(), 
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
         }
       }
-      // this is part of Start Game
-      // because to start game you have to assign the Dealer and then do a Shuffle
-      // | DealerChange (shortLoc) => {
-      //   switch (shortLoc) {
-      //     | "N" => {...state, dealer: Some(North)}
-      //     | "E" => {...state, dealer: Some(East)}
-      //     | "S" => {...state, dealer: Some(South)}
-      //     | "W" => {...state, dealer: Some(West)}
-      //     | _ => {...state, dealer: None}
-      //   }
-      // }
       | Flip (compassPoint) => {
         //Js.log("Action-Flip");
         // make sure doMessage is called in sidebar component
@@ -149,6 +142,7 @@ let reducer = (state: state, action) => {
           bids: [],
           chicagoScoreSheet: [||],
           dealer: None,
+          declarer: None,
           handVisible: {north: false, east: false, south: false, west: false},
           lastAction: "LogoutOrServerDownSync",
           pack: [||],
@@ -165,6 +159,7 @@ let reducer = (state: state, action) => {
         // we must make sure that state is updated by every gameState field
         let cSS: array(Chicago.chicagoScoreSheetRecord) = [%bs.raw "window.gameState.chicagoScoreSheet"];
         let dealer: option(string) = [%bs.raw "window.gameState.dealer"];
+        let declarer: option(string) = [%bs.raw "window.gameState.declarer"];
         let hV: Shuffle.handVisible = [%bs.raw "window.gameState.handVisible"];
         let  pOCAP: array(Shuffle.pointOfCompassAndPlayer) = [%bs.raw "window.gameState.pointOfCompassAndPlayers"]; 
         // lastAction is an exception, we always want to hard code this below
@@ -180,6 +175,7 @@ let reducer = (state: state, action) => {
           bids: bids,
           chicagoScoreSheet: cSS,
           dealer: dealer,
+          declarer: declarer,
           handVisible: hV,
           lastAction: "LoginSync",
           pack: pack,
@@ -245,7 +241,7 @@ let reducer = (state: state, action) => {
           bids: [
             {
               contractLevel: contractLevel,
-              contractSuit: Some("Fred"),
+              contractSuit: Some(""),
               contractPointOfCompass: state.activePointOfCompass,
               isDoubled: false,
               isRedoubled: false

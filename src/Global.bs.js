@@ -16,6 +16,7 @@ var initialState = {
   chicagoScoreSheet: Chicago$ReasonReactExamples.initialChicagoScoreSheet,
   dealer: undefined,
   dealIndex: -1,
+  declarer: undefined,
   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
   isBiddingCycle: false,
   lastAction: "None(fromClient)",
@@ -35,6 +36,7 @@ function reducer(state, action) {
                   chicagoScoreSheet: [],
                   dealer: undefined,
                   dealIndex: -1,
+                  declarer: undefined,
                   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
                   isBiddingCycle: false,
                   lastAction: "NewGame",
@@ -51,6 +53,7 @@ function reducer(state, action) {
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: poc,
                   dealIndex: state.dealIndex + 1 | 0,
+                  declarer: undefined,
                   handVisible: state.handVisible,
                   isBiddingCycle: true,
                   lastAction: "Shuffle",
@@ -82,6 +85,7 @@ function reducer(state, action) {
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
                   dealIndex: state.dealIndex,
+                  declarer: state.declarer,
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
                   lastAction: "Discard",
@@ -97,6 +101,7 @@ function reducer(state, action) {
                   chicagoScoreSheet: [],
                   dealer: undefined,
                   dealIndex: -1,
+                  declarer: undefined,
                   handVisible: {
                     north: false,
                     east: false,
@@ -113,6 +118,7 @@ function reducer(state, action) {
           ((window.isLastActionSync = true));
           var cSS = window.gameState.chicagoScoreSheet;
           var dealer = window.gameState.dealer;
+          var declarer = window.gameState.declarer;
           var hV = window.gameState.handVisible;
           var pOCAP = window.gameState.pointOfCompassAndPlayers;
           var pack = window.gameState.pack;
@@ -126,6 +132,7 @@ function reducer(state, action) {
                   chicagoScoreSheet: cSS,
                   dealer: dealer,
                   dealIndex: dealIndex,
+                  declarer: declarer,
                   handVisible: hV,
                   isBiddingCycle: isBiddingCycle,
                   lastAction: "LoginSync",
@@ -142,6 +149,7 @@ function reducer(state, action) {
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
                   dealIndex: state.dealIndex,
+                  declarer: state.declarer,
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
                   lastAction: "Test",
@@ -164,6 +172,7 @@ function reducer(state, action) {
                         chicagoScoreSheet: state.chicagoScoreSheet,
                         dealer: state.dealer,
                         dealIndex: state.dealIndex,
+                        declarer: state.declarer,
                         handVisible: {
                           north: !state.handVisible.north,
                           east: init.east,
@@ -184,6 +193,7 @@ function reducer(state, action) {
                         chicagoScoreSheet: state.chicagoScoreSheet,
                         dealer: state.dealer,
                         dealIndex: state.dealIndex,
+                        declarer: state.declarer,
                         handVisible: {
                           north: init$1.north,
                           east: !state.handVisible.east,
@@ -204,6 +214,7 @@ function reducer(state, action) {
                         chicagoScoreSheet: state.chicagoScoreSheet,
                         dealer: state.dealer,
                         dealIndex: state.dealIndex,
+                        declarer: state.declarer,
                         handVisible: {
                           north: init$2.north,
                           east: init$2.east,
@@ -224,6 +235,7 @@ function reducer(state, action) {
                         chicagoScoreSheet: state.chicagoScoreSheet,
                         dealer: state.dealer,
                         dealIndex: state.dealIndex,
+                        declarer: state.declarer,
                         handVisible: {
                           north: init$3.north,
                           east: init$3.east,
@@ -268,6 +280,7 @@ function reducer(state, action) {
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
                   dealIndex: state.dealIndex,
+                  declarer: state.declarer,
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
                   lastAction: "AssignPlayer",
@@ -283,7 +296,7 @@ function reducer(state, action) {
                   bids: /* :: */[
                     {
                       contractLevel: action[0],
-                      contractSuit: "Fred",
+                      contractSuit: "",
                       contractPointOfCompass: state.activePointOfCompass,
                       isDoubled: false,
                       isRedoubled: false
@@ -293,6 +306,7 @@ function reducer(state, action) {
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
                   dealIndex: state.dealIndex,
+                  declarer: state.declarer,
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
                   lastAction: "BidAdd",
@@ -329,6 +343,7 @@ function reducer(state, action) {
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
                   dealIndex: state.dealIndex,
+                  declarer: state.declarer,
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
                   lastAction: "BidUpdate",
@@ -362,6 +377,7 @@ function reducer(state, action) {
                         chicagoScoreSheet: state.chicagoScoreSheet,
                         dealer: state.dealer,
                         dealIndex: state.dealIndex,
+                        declarer: state.declarer,
                         handVisible: state.handVisible,
                         isBiddingCycle: state.isBiddingCycle,
                         lastAction: "BidAddSpecial",
@@ -385,6 +401,7 @@ function reducer(state, action) {
                         chicagoScoreSheet: state.chicagoScoreSheet,
                         dealer: state.dealer,
                         dealIndex: state.dealIndex,
+                        declarer: state.declarer,
                         handVisible: state.handVisible,
                         isBiddingCycle: state.isBiddingCycle,
                         lastAction: "BidAddSpecial",
@@ -408,6 +425,7 @@ function reducer(state, action) {
                         chicagoScoreSheet: state.chicagoScoreSheet,
                         dealer: state.dealer,
                         dealIndex: state.dealIndex,
+                        declarer: state.declarer,
                         handVisible: state.handVisible,
                         isBiddingCycle: state.isBiddingCycle,
                         lastAction: "BidAddSpecial",
