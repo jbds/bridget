@@ -282,6 +282,7 @@ let reducer = (state: state, action) => {
           ...state, 
           activePointOfCompass: poc,
           bids: bidsUpdated,
+          isBiddingHideDenominationButtons: true,
           lastAction: "BidUpdate", 
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
         }

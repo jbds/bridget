@@ -360,7 +360,7 @@ function reducer(state, action) {
                   declarer: state.declarer,
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
-                  isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
+                  isBiddingHideDenominationButtons: true,
                   lastAction: "BidUpdate",
                   pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
