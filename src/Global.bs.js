@@ -19,6 +19,7 @@ var initialState = {
   declarer: undefined,
   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
   isBiddingCycle: false,
+  isBiddingHideDenominationButtons: true,
   lastAction: "None(fromClient)",
   pack: Shuffle$ReasonReactExamples.initialPack,
   pointOfCompassAndPlayers: initialState_pointOfCompassAndPlayers,
@@ -39,6 +40,7 @@ function reducer(state, action) {
                   declarer: undefined,
                   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
                   isBiddingCycle: false,
+                  isBiddingHideDenominationButtons: true,
                   lastAction: "NewGame",
                   pack: [],
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
@@ -56,6 +58,7 @@ function reducer(state, action) {
                   declarer: undefined,
                   handVisible: state.handVisible,
                   isBiddingCycle: true,
+                  isBiddingHideDenominationButtons: true,
                   lastAction: "Shuffle",
                   pack: Shuffle$ReasonReactExamples.getShuffledPack(undefined),
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
@@ -88,6 +91,7 @@ function reducer(state, action) {
                   declarer: state.declarer,
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
+                  isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                   lastAction: "Discard",
                   pack: myPack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
@@ -109,6 +113,7 @@ function reducer(state, action) {
                     west: false
                   },
                   isBiddingCycle: false,
+                  isBiddingHideDenominationButtons: true,
                   lastAction: "LogoutOrServerDownSync",
                   pack: [],
                   pointOfCompassAndPlayers: [],
@@ -126,6 +131,7 @@ function reducer(state, action) {
           var isBiddingCycle = window.gameState.isBiddingCycle;
           var poc$1 = window.gameState.activePointOfCompass;
           var bids = window.gameState.bids;
+          var isBiddingHideDenominationButtons = window.gameState.isBiddingHideDenominationButtons;
           return {
                   activePointOfCompass: poc$1,
                   bids: bids,
@@ -135,6 +141,7 @@ function reducer(state, action) {
                   declarer: declarer,
                   handVisible: hV,
                   isBiddingCycle: isBiddingCycle,
+                  isBiddingHideDenominationButtons: isBiddingHideDenominationButtons,
                   lastAction: "LoginSync",
                   pack: pack,
                   pointOfCompassAndPlayers: pOCAP,
@@ -152,6 +159,7 @@ function reducer(state, action) {
                   declarer: state.declarer,
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
+                  isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                   lastAction: "Test",
                   pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
@@ -180,6 +188,7 @@ function reducer(state, action) {
                           west: init.west
                         },
                         isBiddingCycle: state.isBiddingCycle,
+                        isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                         lastAction: "Flip",
                         pack: state.pack,
                         pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
@@ -201,6 +210,7 @@ function reducer(state, action) {
                           west: init$1.west
                         },
                         isBiddingCycle: state.isBiddingCycle,
+                        isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                         lastAction: "Flip",
                         pack: state.pack,
                         pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
@@ -222,6 +232,7 @@ function reducer(state, action) {
                           west: init$2.west
                         },
                         isBiddingCycle: state.isBiddingCycle,
+                        isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                         lastAction: "Flip",
                         pack: state.pack,
                         pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
@@ -243,6 +254,7 @@ function reducer(state, action) {
                           west: !state.handVisible.west
                         },
                         isBiddingCycle: state.isBiddingCycle,
+                        isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                         lastAction: "Flip",
                         pack: state.pack,
                         pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
@@ -283,6 +295,7 @@ function reducer(state, action) {
                   declarer: state.declarer,
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
+                  isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                   lastAction: "AssignPlayer",
                   pack: state.pack,
                   pointOfCompassAndPlayers: myArray2,
@@ -309,6 +322,7 @@ function reducer(state, action) {
                   declarer: state.declarer,
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
+                  isBiddingHideDenominationButtons: false,
                   lastAction: "BidAdd",
                   pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
@@ -346,6 +360,7 @@ function reducer(state, action) {
                   declarer: state.declarer,
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
+                  isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                   lastAction: "BidUpdate",
                   pack: state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
@@ -380,6 +395,7 @@ function reducer(state, action) {
                         declarer: state.declarer,
                         handVisible: state.handVisible,
                         isBiddingCycle: state.isBiddingCycle,
+                        isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                         lastAction: "BidAddSpecial",
                         pack: state.pack,
                         pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
@@ -404,6 +420,7 @@ function reducer(state, action) {
                         declarer: state.declarer,
                         handVisible: state.handVisible,
                         isBiddingCycle: state.isBiddingCycle,
+                        isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                         lastAction: "BidAddSpecial",
                         pack: state.pack,
                         pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
@@ -428,6 +445,7 @@ function reducer(state, action) {
                         declarer: state.declarer,
                         handVisible: state.handVisible,
                         isBiddingCycle: state.isBiddingCycle,
+                        isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                         lastAction: "BidAddSpecial",
                         pack: state.pack,
                         pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,

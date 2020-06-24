@@ -19,12 +19,12 @@ function ButtonBidSmall(Props) {
                     backgroundColor: isActive ? "#ffffff" : "#ffe0e0",
                     border: "1px solid #26653B",
                     color: color,
-                    display: isVisible ? "inline" : "none",
                     fontFamily: "Trebuchet MS",
                     fontSize: "2.5vh",
                     height: "6.25vh",
                     margin: "1vh 0.25vh 0.25vh 0.25vh",
                     padding: "0vh",
+                    visibility: isVisible ? "visible" : "hidden",
                     width: "calc(var(--vh, 1vh) * 6.25)",
                     borderRadius: "5px"
                   },

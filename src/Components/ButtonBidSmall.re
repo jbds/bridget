@@ -25,7 +25,9 @@ let make = (
         ~border={"1px solid #26653B"}, 
         ~borderRadius={"5px"},
         ~backgroundColor={isActive ? "#ffffff" : "#ffe0e0"},
-        ~display={isVisible ? "inline" : "none"},
+        // removes element from doc - NOT what we want
+        //~display={isVisible ? "inline" : "none"},
+        ~visibility={isVisible ? "visible" : "hidden"},
         ()
       )
     )

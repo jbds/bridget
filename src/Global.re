@@ -31,6 +31,7 @@ type state = {
   declarer: option(string),
   handVisible: Shuffle.handVisible,
   isBiddingCycle: bool,
+  isBiddingHideDenominationButtons: bool,
   lastAction: string,
   pack: Shuffle.pack,
   pointOfCompassAndPlayers: array(Shuffle.pointOfCompassAndPlayer),
@@ -46,6 +47,7 @@ let initialState: state = {
     declarer: None,
     handVisible: Shuffle.initialHandVisible,
     isBiddingCycle: false,
+    isBiddingHideDenominationButtons: true,
     lastAction: "None(fromClient)",
     pack: Shuffle.initialPack,
     pointOfCompassAndPlayers: [||],
@@ -69,6 +71,7 @@ let reducer = (state: state, action) => {
           declarer: None,
           handVisible: Shuffle.initialHandVisible,
           isBiddingCycle: false,
+          isBiddingHideDenominationButtons: true,
           lastAction: "NewGame",
           pack: [||],
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
@@ -89,6 +92,7 @@ let reducer = (state: state, action) => {
           dealIndex: state.dealIndex + 1,
           declarer: None,
           isBiddingCycle: true,
+          isBiddingHideDenominationButtons: true,
           lastAction: "Shuffle",
           pack: Shuffle.getShuffledPack(), 
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
@@ -142,14 +146,15 @@ let reducer = (state: state, action) => {
           bids: [],
           chicagoScoreSheet: [||],
           dealer: None,
+          dealIndex: -1,
           declarer: None,
           handVisible: {north: false, east: false, south: false, west: false},
+          isBiddingCycle: false,
+          isBiddingHideDenominationButtons: true,
           lastAction: "LogoutOrServerDownSync",
           pack: [||],
-          randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
           pointOfCompassAndPlayers: [||],
-          dealIndex: -1,
-          isBiddingCycle: false
+          randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
         }
       }
       | LoginSync => {
@@ -169,20 +174,22 @@ let reducer = (state: state, action) => {
         let isBiddingCycle: bool = [%bs.raw "window.gameState.isBiddingCycle"];
         let poc: option(string) = [%bs.raw "window.gameState.activePointOfCompass"];
         let bids: Chicago.bids = [%bs.raw "window.gameState.bids"];
+        let isBiddingHideDenominationButtons: bool = [%bs.raw "window.gameState.isBiddingHideDenominationButtons"];
         // no need for ...state here as we are replacing all fields with the server gameState fields
         {
           activePointOfCompass: poc,
           bids: bids,
           chicagoScoreSheet: cSS,
           dealer: dealer,
+          dealIndex: dealIndex,
           declarer: declarer,
           handVisible: hV,
+          isBiddingCycle: isBiddingCycle,
+          isBiddingHideDenominationButtons: isBiddingHideDenominationButtons,
           lastAction: "LoginSync",
           pack: pack,
-          randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
           pointOfCompassAndPlayers: pOCAP,
-          dealIndex: dealIndex,
-          isBiddingCycle: isBiddingCycle
+          randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
         }
       }
       | Test => {
@@ -248,6 +255,7 @@ let reducer = (state: state, action) => {
             },
             ...state.bids
           ],
+          isBiddingHideDenominationButtons: false,
           lastAction: "BidAdd", 
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
         }

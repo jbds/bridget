@@ -21,7 +21,7 @@ let make = (
     <ButtonBidLarge dispatch action=BidAddSpecial(Some("Pass")) label="Pass" id="btnBidPass" backgroundColor="#26653B"/>
     <br/>
     <ButtonBidSmall dispatch action=BidUpdate(Some("Clubs")) label={js|\u2663|js} id="btnBidC" color="black"/>
-    <ButtonBidSmall dispatch action=BidUpdate(Some("Diamonds")) label={js|\u2666|js} id="btnBidD" color="red"/>
+    <ButtonBidSmall isVisible=false dispatch action=BidUpdate(Some("Diamonds")) label={js|\u2666|js} id="btnBidD" color="red"/>
     <ButtonBidSmall dispatch action=BidUpdate(Some("Hearts")) label={js|\u2665|js} id="btnBidH" color="red"/>
     <ButtonBidSmall dispatch action=BidUpdate(Some("Spades")) label={js|\u2660|js} id="btnBidS" color="black"/>
     <ButtonBidSmall dispatch action=BidUpdate(Some("NoTrumps")) label="NT" id="btnBidNT" color="#606060"/>

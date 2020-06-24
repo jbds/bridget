@@ -67,7 +67,8 @@ function BiddingWindow(Props) {
                   action: /* BidUpdate */Block.__(3, ["Diamonds"]),
                   label: "\u2666",
                   id: "btnBidD",
-                  color: "red"
+                  color: "red",
+                  isVisible: false
                 }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* BidUpdate */Block.__(3, ["Hearts"]),
