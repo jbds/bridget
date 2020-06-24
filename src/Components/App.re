@@ -131,7 +131,7 @@ let make = () => {
       ~display={isBiddingWindowVisible() ? "inline" : "none"},
       ()
     )}> 
-    <BiddingWindow dispatch/>
+    <BiddingWindow dispatch state/>
   </div>
   </>
 };

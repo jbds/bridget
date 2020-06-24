@@ -147,7 +147,8 @@ function App(Props) {
                     borderRadius: "10px"
                   }
                 }, React.createElement(BiddingWindow$ReasonReactExamples.make, {
-                      dispatch: dispatch
+                      dispatch: dispatch,
+                      state: state
                     })));
 }
 

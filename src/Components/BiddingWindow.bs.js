@@ -8,6 +8,7 @@ var ButtonBidSmall$ReasonReactExamples = require("./ButtonBidSmall.bs.js");
 
 function BiddingWindow(Props) {
   var dispatch = Props.dispatch;
+  var state = Props.state;
   return React.createElement(React.Fragment, undefined, React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* BidAdd */Block.__(2, [1]),
@@ -61,32 +62,36 @@ function BiddingWindow(Props) {
                   action: /* BidUpdate */Block.__(3, ["Clubs"]),
                   label: "\u2663",
                   id: "btnBidC",
-                  color: "black"
+                  color: "black",
+                  isVisible: !state.isBiddingHideDenominationButtons
                 }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* BidUpdate */Block.__(3, ["Diamonds"]),
                   label: "\u2666",
                   id: "btnBidD",
                   color: "red",
-                  isVisible: false
+                  isVisible: !state.isBiddingHideDenominationButtons
                 }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* BidUpdate */Block.__(3, ["Hearts"]),
                   label: "\u2665",
                   id: "btnBidH",
-                  color: "red"
+                  color: "red",
+                  isVisible: !state.isBiddingHideDenominationButtons
                 }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* BidUpdate */Block.__(3, ["Spades"]),
                   label: "\u2660",
                   id: "btnBidS",
-                  color: "black"
+                  color: "black",
+                  isVisible: !state.isBiddingHideDenominationButtons
                 }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* BidUpdate */Block.__(3, ["NoTrumps"]),
                   label: "NT",
                   id: "btnBidNT",
-                  color: "#606060"
+                  color: "#606060",
+                  isVisible: !state.isBiddingHideDenominationButtons
                 }), React.createElement(SpacerStd$ReasonReactExamples.make, {
                   spacerWidth: "4vh"
                 }), React.createElement(ButtonBidLarge$ReasonReactExamples.make, {
