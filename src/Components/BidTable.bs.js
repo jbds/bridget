@@ -22,85 +22,66 @@ function BidTable(Props) {
                 flexWrap: "wrap",
                 justifyContent: "flex-start"
               }
-            }, React.createElement("div", {
-                  style: {
-                    backgroundColor: "#c0c0c0",
-                    border: "1px solid #c0c0c0",
-                    borderWidth: "0px 1px 1px 0",
-                    flex: "0 0 calc(var(--vh, 1vh) * 11)"
-                  }
-                }, "West"), React.createElement("div", {
-                  style: {
-                    backgroundColor: "#e8e8e8",
-                    border: "1px solid #c0c0c0",
-                    borderWidth: "0px 1px 1px 0",
-                    flex: "0 0 calc(var(--vh, 1vh) * 11)"
-                  }
-                }, "North"), React.createElement("div", {
-                  style: {
-                    backgroundColor: "#c0c0c0",
-                    border: "1px solid #c0c0c0",
-                    borderWidth: "0px 1px 1px 0",
-                    flex: "0 0 calc(var(--vh, 1vh) * 11)"
-                  }
-                }, "East"), React.createElement("div", {
-                  style: {
-                    backgroundColor: "#e8e8e8",
-                    border: "1px solid #c0c0c0",
-                    borderWidth: "0px 1px 1px 0",
-                    flex: "0 0 calc(var(--vh, 1vh) * 11)"
-                  }
-                }, "South"), React.createElement("div", {
-                  style: {
-                    backgroundColor: "#f8f8f800",
-                    border: "1px solid #c0c0c0",
-                    borderWidth: "0px 1px 1px 0",
-                    flex: "0 0 calc(var(--vh, 1vh) * 11)"
-                  }
-                }, React.createElement("span", undefined, "1"), React.createElement("span", {
-                      style: {
-                        color: "red",
-                        fontSize: "2.0vh"
-                      }
-                    }, "\u2665")), React.createElement("div", {
-                  style: {
-                    backgroundColor: "#f8f8f800",
-                    border: "1px solid #c0c0c0",
-                    borderWidth: "0px 1px 1px 0",
-                    flex: "0 0 calc(var(--vh, 1vh) * 11)"
-                  }
-                }, React.createElement("span", {
-                      style: {
-                        color: "#26653B"
-                      }
-                    }, "Pass")), React.createElement("div", {
-                  style: {
-                    backgroundColor: "#f8f8f800",
-                    border: "1px solid #c0c0c0",
-                    borderWidth: "0px 1px 1px 0",
-                    flex: "0 0 calc(var(--vh, 1vh) * 11)"
-                  }
-                }, React.createElement("span", {
-                      style: {
-                        color: "#E00000"
-                      }
-                    }, "X")), React.createElement("div", {
-                  style: {
-                    backgroundColor: "#f8f8f800",
-                    border: "1px solid #c0c0c0",
-                    borderWidth: "0px 1px 1px 0",
-                    flex: "0 0 calc(var(--vh, 1vh) * 11)"
-                  }
-                }, React.createElement("span", {
-                      style: {
-                        color: "#000080"
-                      }
-                    }, "XX")), React.createElement(BidFlexbox$ReasonReactExamples.make, {
-                  textValue: "2",
+            }, React.createElement(BidFlexbox$ReasonReactExamples.make, {
+                  textValue: "West",
+                  textColor: "#404040",
+                  denominationValue: "",
+                  denominationColor: "white",
+                  backgroundColor: "#c0c0c0"
+                }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
+                  textValue: "North",
+                  textColor: "#404040",
+                  denominationValue: "",
+                  denominationColor: "white",
+                  backgroundColor: "#e8e8e8"
+                }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
+                  textValue: "East",
+                  textColor: "#404040",
+                  denominationValue: "",
+                  denominationColor: "white",
+                  backgroundColor: "#c0c0c0"
+                }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
+                  textValue: "South",
+                  textColor: "#404040",
+                  denominationValue: "",
+                  denominationColor: "white",
+                  backgroundColor: "#e8e8e8"
+                }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
+                  textValue: "---",
+                  textColor: "#404040",
+                  denominationValue: "",
+                  denominationColor: "white",
+                  backgroundColor: "#ffffff00"
+                }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
+                  textValue: "4NT",
+                  textColor: "#404040",
+                  denominationValue: "",
+                  denominationColor: "#404040",
+                  backgroundColor: "#ffffff00"
+                }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
+                  textValue: "1",
+                  textColor: "#404040",
+                  denominationValue: "\u2665",
+                  denominationColor: "red",
+                  backgroundColor: "#ffffff00"
+                }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
+                  textValue: "Pass",
+                  textColor: "#26653B",
+                  denominationValue: "",
+                  denominationColor: "#404040",
+                  backgroundColor: "#ffffff00"
+                }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
+                  textValue: "X",
+                  textColor: "#E00000",
+                  denominationValue: "",
+                  denominationColor: "#404040",
+                  backgroundColor: "#ffffff00"
+                }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
+                  textValue: "XX",
                   textColor: "blue",
-                  denominationValue: "\u2666",
-                  denominationColor: "silver",
-                  backgroundColor: "#ffffffff"
+                  denominationValue: "",
+                  denominationColor: "#404040",
+                  backgroundColor: "#ffffff00"
                 }));
 }
 

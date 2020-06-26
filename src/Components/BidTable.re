@@ -25,181 +25,75 @@ let make = () => {
       )
     )
   >
-    <div
-      style=(
-        ReactDOMRe.Style.make(
-          // flex child attributes
-          ~backgroundColor={"#c0c0c0"},
-          // right and bottom on child
-          ~borderWidth={"0px 1px 1px 0"},
-          ~border={"1px solid #c0c0c0"}, 
-          ~flex={"0 0 calc(var(--vh, 1vh) * 11)"},
-          ()
-        )
-      )
-    >
-      (React.string("West"))
-    </div>
-    <div
-      style=(
-        ReactDOMRe.Style.make(
-          // flex child attributes
-          ~backgroundColor={"#e8e8e8"},
-          ~border={"1px solid #c0c0c0"}, 
-          // right and bottom on child
-          ~borderWidth={"0px 1px 1px 0"},
-          ~flex={"0 0 calc(var(--vh, 1vh) * 11)"},
-          ()
-        )
-      )
-    >
-      (React.string("North"))
-    </div>
-    <div
-      style=(
-        ReactDOMRe.Style.make(
-          // flex child attributes
-          ~backgroundColor={"#c0c0c0"},
-          ~border={"1px solid #c0c0c0"}, 
-          // right and bottom on child
-          ~borderWidth={"0px 1px 1px 0"},
-          ~flex={"0 0 calc(var(--vh, 1vh) * 11)"},
-          ()
-        )
-      )
-    >
-      (React.string("East"))
-    </div>
-    <div
-      style=(
-        ReactDOMRe.Style.make(
-          // flex child attributes
-          ~backgroundColor={"#e8e8e8"},
-          ~border={"1px solid #c0c0c0"}, 
-          // right and bottom on child
-          ~borderWidth={"0px 1px 1px 0"},
-          ~flex={"0 0 calc(var(--vh, 1vh) * 11)"},
-          ()
-        )
-      )
-    >
-      (React.string("South"))
-    </div>
-    // example bid display
-    <div
-      style=(
-        ReactDOMRe.Style.make(
-          // flex child attributes
-          // background transparent
-          ~backgroundColor={"#f8f8f800"},
-          ~border={"1px solid #c0c0c0"}, 
-          // right and bottom on child
-          ~borderWidth={"0px 1px 1px 0"},
-          ~flex={"0 0 calc(var(--vh, 1vh) * 11)"},
-          ()
-        )
-      )
-    >
-      <span>(React.string("1"))</span>
-      // unicode character requires a reduction in font size, reason unclear
-      <span 
-        style=(
-          ReactDOMRe.Style.make(
-            ~color={"red"},
-            ~fontSize={"2.0vh"},
-            ()
-          )
-        )
-      >
-        (React.string({js|\u2665|js}))
-      </span>
-    </div>
-    // example Pass
-    <div
-      style=(
-        ReactDOMRe.Style.make(
-          // flex child attributes
-          // background transparent
-          ~backgroundColor={"#f8f8f800"},
-          ~border={"1px solid #c0c0c0"}, 
-          // right and bottom on child
-          ~borderWidth={"0px 1px 1px 0"},
-          ~flex={"0 0 calc(var(--vh, 1vh) * 11)"},
-          ()
-        )
-      )
-    >
-      //<span>(React.string("1"))</span>
-      <span 
-        style=(
-          ReactDOMRe.Style.make(
-            ~color={"#26653B"},
-            ()
-          )
-        )
-      >
-        (React.string("Pass"))
-      </span>
-    </div>
-    // example X
-    <div
-      style=(
-        ReactDOMRe.Style.make(
-          // flex child attributes
-          // background transparent
-          ~backgroundColor={"#f8f8f800"},
-          ~border={"1px solid #c0c0c0"}, 
-          // right and bottom on child
-          ~borderWidth={"0px 1px 1px 0"},
-          ~flex={"0 0 calc(var(--vh, 1vh) * 11)"},
-          ()
-        )
-      )
-    >
-      //<span>(React.string("1"))</span>
-      <span 
-        style=(
-          ReactDOMRe.Style.make(
-            ~color={"#E00000"},
-            ()
-          )
-        )
-      >
-        (React.string("X"))
-      </span>
-    </div>
-    // example XX
-    <div
-      style=(
-        ReactDOMRe.Style.make(
-          // flex child attributes
-          // background transparent
-          ~backgroundColor={"#f8f8f800"},
-          ~border={"1px solid #c0c0c0"}, 
-          // right and bottom on child
-          ~borderWidth={"0px 1px 1px 0"},
-          ~flex={"0 0 calc(var(--vh, 1vh) * 11)"},
-          ()
-        )
-      )
-    >
-      <span 
-        style=(
-          ReactDOMRe.Style.make(
-            ~color={"#000080"},
-            ()
-          )
-        )
-      >
-        (React.string("XX"))
-      </span>
-    </div>
+    <BidFlexbox textValue="West" textColor="#404040" denominationValue="" denominationColor="white" backgroundColor="#c0c0c0" />
     <BidFlexbox 
-      textValue="2" 
+      textValue="North" 
+      textColor="#404040" 
+      denominationValue="" 
+      denominationColor="white" 
+      backgroundColor="#e8e8e8"
+    />
+    <BidFlexbox 
+      textValue="East" 
+      textColor="#404040" 
+      denominationValue="" 
+      denominationColor="white" 
+      backgroundColor="#c0c0c0"
+    />
+    <BidFlexbox 
+      textValue="South" 
+      textColor="#404040" 
+      denominationValue="" 
+      denominationColor="white" 
+      backgroundColor="#e8e8e8"
+    />
+    // example empty flexbox
+    <BidFlexbox 
+      textValue="---" 
+      textColor="#404040" 
+      denominationValue="" 
+      denominationColor="white" 
+      backgroundColor="#ffffff00"
+    />
+    // example bid display NT
+    <BidFlexbox 
+      textValue="4NT" 
+      textColor="#404040" 
+      denominationValue="" 
+      denominationColor="#404040" 
+      backgroundColor="#ffffff00"
+    />
+    // example bid display 1D
+    <BidFlexbox 
+      textValue="1" 
+      textColor="#404040" 
+      denominationValue={js|\u2665|js}
+      denominationColor="red" 
+      backgroundColor="#ffffff00"
+    />
+    // example Pass
+    <BidFlexbox 
+      textValue="Pass" 
+      textColor="#26653B" 
+      denominationValue="" 
+      denominationColor="#404040" 
+      backgroundColor="#ffffff00"
+    />
+    // example X
+    <BidFlexbox 
+      textValue="X" 
+      textColor="#E00000" 
+      denominationValue="" 
+      denominationColor="#404040" 
+      backgroundColor="#ffffff00"
+    />
+    // example XX
+    <BidFlexbox 
+      textValue="XX" 
       textColor="blue" 
-      denominationValue={js|\u2666|js} 
-      denominationColor="silver" 
-      backgroundColor="#ffffffff"
+      denominationValue="" 
+      denominationColor="#404040" 
+      backgroundColor="#ffffff00"
     />
   </div>
 };
