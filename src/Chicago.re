@@ -5,7 +5,7 @@ type bid = {
   contractPointOfCompass: option(string),
   isDoubled: bool,
   isRedoubled: bool,
-
+  isPass: bool
 };
 
 type bids = list(bid);

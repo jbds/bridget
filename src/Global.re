@@ -251,7 +251,8 @@ let reducer = (state: state, action) => {
               contractSuit: Some(""),
               contractPointOfCompass: state.activePointOfCompass,
               isDoubled: false,
-              isRedoubled: false
+              isRedoubled: false,
+              isPass: false
             },
             ...state.bids
           ],
@@ -293,23 +294,62 @@ let reducer = (state: state, action) => {
         let () = [%raw "window.isLastActionSync = false"];
         // move on to next poc!
         let poc = Some(Shuffle.getNextPointOfCompass(state.activePointOfCompass));   
-        Js.log(poc);   
+        //Js.log(poc);   
         switch (special) {
           | Some("Pass") => {
-            ...state, 
-            activePointOfCompass: poc,
-            bids: [
+            // check for end of bidding cycle
+            let bidsLength = List.length(state.bids);
+            Js.log(bidsLength);
+            if (bidsLength >= 3) {
+              let hd1 = List.hd(state.bids);
+              let tl = List.tl(state.bids);
+              let hd2 = List.hd(tl);
+              if (hd1.isPass === true && hd2.isPass === true) {
+                // return end of bidding
+                {
+                  ...state,
+                  isBiddingCycle: false,
+                  lastAction: "BidAddSpecial-3Passes",
+                  randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
+                }
+              } else {
+                {
+                  ...state, 
+                  activePointOfCompass: poc,
+                  bids: [
+                    {
+                      contractLevel: None,
+                      contractSuit: None,
+                      contractPointOfCompass: state.activePointOfCompass,
+                      isDoubled: false,
+                      isRedoubled: false,
+                      isPass: true
+                    },
+                    ...state.bids
+                  ],
+                  lastAction: "BidAddSpecial", 
+                  randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
+                }
+              }
+            } else {
               {
-                contractLevel: None,
-                contractSuit: None,
-                contractPointOfCompass: state.activePointOfCompass,
-                isDoubled: false,
-                isRedoubled: false
-              },
-              ...state.bids
-            ],
-            lastAction: "BidAddSpecial", 
-            randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
+                ...state, 
+                activePointOfCompass: poc,
+                bids: [
+                  {
+                    contractLevel: None,
+                    contractSuit: None,
+                    contractPointOfCompass: state.activePointOfCompass,
+                    isDoubled: false,
+                    isRedoubled: false,
+                    isPass: true
+                  },
+                  ...state.bids
+                ],
+                lastAction: "BidAddSpecial", 
+                randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
+              }
+            }
           }
           | Some("X") => {
             ...state, 
@@ -320,7 +360,8 @@ let reducer = (state: state, action) => {
                 contractSuit: None,
                 contractPointOfCompass: state.activePointOfCompass,
                 isDoubled: true,
-                isRedoubled: false
+                isRedoubled: false,
+                isPass: false
               },
               ...state.bids
             ],
@@ -336,7 +377,8 @@ let reducer = (state: state, action) => {
                 contractSuit: None,
                 contractPointOfCompass: state.activePointOfCompass,
                 isDoubled: false,
-                isRedoubled: true
+                isRedoubled: true,
+                isPass: false
               },
               ...state.bids
             ],
