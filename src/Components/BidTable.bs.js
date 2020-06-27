@@ -1,6 +1,10 @@
 'use strict';
 
+var List = require("bs-platform/lib/js/list.js");
+var $$Array = require("bs-platform/lib/js/array.js");
 var React = require("react");
+var Random = require("bs-platform/lib/js/random.js");
+var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 var BidFlexbox$ReasonReactExamples = require("./BidFlexbox.bs.js");
 
 function BidTable(Props) {
@@ -28,72 +32,124 @@ function BidTable(Props) {
                   textColor: "#404040",
                   denominationValue: "",
                   denominationColor: "white",
-                  backgroundColor: "#c0c0c0",
-                  state: state
+                  backgroundColor: "#c0c0c0"
                 }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
                   textValue: "North",
                   textColor: "#404040",
                   denominationValue: "",
                   denominationColor: "white",
-                  backgroundColor: "#e8e8e8",
-                  state: state
+                  backgroundColor: "#e8e8e8"
                 }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
                   textValue: "East",
                   textColor: "#404040",
                   denominationValue: "",
                   denominationColor: "white",
-                  backgroundColor: "#c0c0c0",
-                  state: state
+                  backgroundColor: "#c0c0c0"
                 }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
                   textValue: "South",
                   textColor: "#404040",
                   denominationValue: "",
                   denominationColor: "white",
-                  backgroundColor: "#e8e8e8",
-                  state: state
+                  backgroundColor: "#e8e8e8"
                 }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
                   textValue: "---",
                   textColor: "#404040",
                   denominationValue: "",
                   denominationColor: "white",
-                  backgroundColor: "#ffffff00",
-                  state: state
+                  backgroundColor: "#ffffff00"
                 }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
-                  textValue: "4NT",
+                  textValue: "---",
                   textColor: "#404040",
                   denominationValue: "",
-                  denominationColor: "#404040",
-                  backgroundColor: "#ffffff",
-                  state: state
-                }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
-                  textValue: "1",
-                  textColor: "#404040",
-                  denominationValue: "\u2665",
-                  denominationColor: "red",
-                  backgroundColor: "#ffffff",
-                  state: state
-                }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
-                  textValue: "Pass",
-                  textColor: "#26653B",
-                  denominationValue: "",
-                  denominationColor: "#404040",
-                  backgroundColor: "#ffffff",
-                  state: state
-                }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
-                  textValue: "X",
-                  textColor: "#E00000",
-                  denominationValue: "",
-                  denominationColor: "#404040",
-                  backgroundColor: "#ffffff",
-                  state: state
-                }), React.createElement(BidFlexbox$ReasonReactExamples.make, {
-                  textValue: "XX",
-                  textColor: "blue",
-                  denominationValue: "",
-                  denominationColor: "#404040",
-                  backgroundColor: "#ffffff",
-                  state: state
-                }));
+                  denominationColor: "white",
+                  backgroundColor: "#ffffff00"
+                }), Belt_Array.map($$Array.of_list(List.rev(state.bids)), (function (x) {
+                    var getLevelIfNone = x.isPass ? "Pass" : (
+                        x.isDoubled ? "X" : (
+                            x.isRedoubled ? "XX" : "Error"
+                          )
+                      );
+                    var getLevelPlusPossibleNT = function (n) {
+                      if (x.contractSuit === "NoTrumps") {
+                        return String(n) + "NT";
+                      } else {
+                        return String(n);
+                      }
+                    };
+                    var n = x.contractLevel;
+                    var textValue = n !== undefined ? getLevelPlusPossibleNT(n) : getLevelIfNone;
+                    var match = x.contractSuit;
+                    var denominationValue;
+                    if (match !== undefined) {
+                      switch (match) {
+                        case "Clubs" :
+                            denominationValue = "\u2663";
+                            break;
+                        case "Diamonds" :
+                            denominationValue = "\u2666";
+                            break;
+                        case "Hearts" :
+                            denominationValue = "\u2665";
+                            break;
+                        case "NoTrumps" :
+                            denominationValue = "";
+                            break;
+                        case "Spades" :
+                            denominationValue = "\u2660";
+                            break;
+                        default:
+                          denominationValue = "Error";
+                      }
+                    } else {
+                      denominationValue = "";
+                    }
+                    var textColor;
+                    switch (textValue) {
+                      case "" :
+                          textColor = "white";
+                          break;
+                      case "Pass" :
+                          textColor = "#26653B";
+                          break;
+                      case "X" :
+                          textColor = "#E00000";
+                          break;
+                      case "XX" :
+                          textColor = "blue";
+                          break;
+                      default:
+                        textColor = "#404040";
+                    }
+                    var match$1 = x.contractSuit;
+                    var denominationColor;
+                    if (match$1 !== undefined) {
+                      switch (match$1) {
+                        case "Diamonds" :
+                        case "Hearts" :
+                            denominationColor = "red";
+                            break;
+                        case "NoTrumps" :
+                            denominationColor = "white";
+                            break;
+                        case "Clubs" :
+                        case "Spades" :
+                            denominationColor = "#404040";
+                            break;
+                        default:
+                          denominationColor = "white";
+                      }
+                    } else {
+                      denominationColor = "white";
+                    }
+                    return React.createElement(BidFlexbox$ReasonReactExamples.make, {
+                                textValue: textValue,
+                                textColor: textColor,
+                                denominationValue: denominationValue,
+                                denominationColor: denominationColor,
+                                backgroundColor: "#ffffff",
+                                key: String(Random.$$int(1000000))
+                              });
+                  })));
 }
 
 var make = BidTable;
