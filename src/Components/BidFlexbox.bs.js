@@ -8,6 +8,7 @@ function BidFlexbox(Props) {
   var denominationValue = Props.denominationValue;
   var denominationColor = Props.denominationColor;
   var backgroundColor = Props.backgroundColor;
+  Props.state;
   return React.createElement("div", {
               style: {
                 backgroundColor: backgroundColor,

@@ -121,7 +121,7 @@ let make = () => {
       ~borderRadius={"5px"},
       ()
     )}> 
-    <BidTable />
+    <BidTable state />
   </div>
   <div 
     id="biddingWindow" 

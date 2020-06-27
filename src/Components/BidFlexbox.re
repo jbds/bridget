@@ -4,7 +4,8 @@ let make = (
   ~textColor: string,
   ~denominationValue: string,
   ~denominationColor: string,
-  ~backgroundColor: string
+  ~backgroundColor: string,
+  ~state: Global.state
 ) => {
     <div
       style=(

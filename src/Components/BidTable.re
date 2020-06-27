@@ -1,5 +1,7 @@
 [@react.component]
-let make = () => {
+let make = (
+  ~state: Global.state
+  ) => {
   <div
     style=(
       ReactDOMRe.Style.make(
@@ -25,13 +27,14 @@ let make = () => {
       )
     )
   >
-    <BidFlexbox textValue="West" textColor="#404040" denominationValue="" denominationColor="white" backgroundColor="#c0c0c0" />
+    <BidFlexbox textValue="West" textColor="#404040" denominationValue="" denominationColor="white" backgroundColor="#c0c0c0" state />
     <BidFlexbox 
       textValue="North" 
       textColor="#404040" 
       denominationValue="" 
       denominationColor="white" 
       backgroundColor="#e8e8e8"
+      state
     />
     <BidFlexbox 
       textValue="East" 
@@ -39,6 +42,7 @@ let make = () => {
       denominationValue="" 
       denominationColor="white" 
       backgroundColor="#c0c0c0"
+      state
     />
     <BidFlexbox 
       textValue="South" 
@@ -46,6 +50,7 @@ let make = () => {
       denominationValue="" 
       denominationColor="white" 
       backgroundColor="#e8e8e8"
+      state
     />
     // example empty flexbox
     <BidFlexbox 
@@ -54,6 +59,7 @@ let make = () => {
       denominationValue="" 
       denominationColor="white" 
       backgroundColor="#ffffff00"
+      state
     />
     // example bid display NT
     <BidFlexbox 
@@ -61,7 +67,8 @@ let make = () => {
       textColor="#404040" 
       denominationValue="" 
       denominationColor="#404040" 
-      backgroundColor="#ffffff00"
+      backgroundColor="#ffffff"
+      state
     />
     // example bid display 1D
     <BidFlexbox 
@@ -69,7 +76,8 @@ let make = () => {
       textColor="#404040" 
       denominationValue={js|\u2665|js}
       denominationColor="red" 
-      backgroundColor="#ffffff00"
+      backgroundColor="#ffffff"
+      state
     />
     // example Pass
     <BidFlexbox 
@@ -77,7 +85,8 @@ let make = () => {
       textColor="#26653B" 
       denominationValue="" 
       denominationColor="#404040" 
-      backgroundColor="#ffffff00"
+      backgroundColor="#ffffff"
+      state
     />
     // example X
     <BidFlexbox 
@@ -85,7 +94,8 @@ let make = () => {
       textColor="#E00000" 
       denominationValue="" 
       denominationColor="#404040" 
-      backgroundColor="#ffffff00"
+      backgroundColor="#ffffff"
+      state
     />
     // example XX
     <BidFlexbox 
@@ -93,7 +103,8 @@ let make = () => {
       textColor="blue" 
       denominationValue="" 
       denominationColor="#404040" 
-      backgroundColor="#ffffff00"
+      backgroundColor="#ffffff"
+      state
     />
   </div>
 };

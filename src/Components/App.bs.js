@@ -139,7 +139,9 @@ function App(Props) {
                     padding: "1vh 0vh 0vh 0vh",
                     borderRadius: "5px"
                   }
-                }, React.createElement(BidTable$ReasonReactExamples.make, { })), React.createElement("div", {
+                }, React.createElement(BidTable$ReasonReactExamples.make, {
+                      state: state
+                    })), React.createElement("div", {
                   id: "biddingWindow",
                   style: {
                     display: isBiddingWindowVisible(undefined) ? "inline" : "none",
