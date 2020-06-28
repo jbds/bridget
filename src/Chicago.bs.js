@@ -3,8 +3,6 @@
 var List = require("bs-platform/lib/js/list.js");
 var $$Array = require("bs-platform/lib/js/array.js");
 
-var initialChicagoScoreSheet = [];
-
 var scoreTable = [
   {
     level: 1,
@@ -15893,6 +15891,8 @@ function getScore(level, denomination, tricksTotal, isVulnerable, isDoubled, isR
                 }
               }), $$Array.to_list(scoreTable)).score;
 }
+
+var initialChicagoScoreSheet = /* [] */0;
 
 exports.initialChicagoScoreSheet = initialChicagoScoreSheet;
 exports.scoreTable = scoreTable;

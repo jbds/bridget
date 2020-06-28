@@ -22,11 +22,11 @@ type chicagoScoreSheetRecord = {
   scoreWestEast: option(int)        // calculated using Chicago.getScore if Declarer "West" or "East"
 };
 
-type chicagoScoreSheet = array(chicagoScoreSheetRecord);
+type chicagoScoreSheet = list(chicagoScoreSheetRecord);
 
 // values for Chicago Score Sheet
 
-let initialChicagoScoreSheet: chicagoScoreSheet = [|
+let initialChicagoScoreSheet: chicagoScoreSheet = [
   // first row created at end of bidding?
   // {
   //   vulnerable: "None",
@@ -208,7 +208,7 @@ let initialChicagoScoreSheet: chicagoScoreSheet = [|
   //   scoreNorthSouth: None,
   //   scoreWestEast: None
   // }
-|];
+];
 
 
 // type defs for scoring lookup table

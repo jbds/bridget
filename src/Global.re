@@ -25,7 +25,7 @@ type action =
 type state = {
   activePointOfCompass: option(string),
   bids: Chicago.bids,
-  chicagoScoreSheet: array(Chicago.chicagoScoreSheetRecord),
+  chicagoScoreSheet: list(Chicago.chicagoScoreSheetRecord),
   dealer: option(string),
   dealIndex: int,
   declarer: option(string),
@@ -65,7 +65,7 @@ let reducer = (state: state, action) => {
           ...state,
           activePointOfCompass: None,
           bids: [],
-          chicagoScoreSheet: [||],
+          chicagoScoreSheet: [],
           dealer: None,
           dealIndex: -1,
           declarer: None,
@@ -144,7 +144,7 @@ let reducer = (state: state, action) => {
         {
           activePointOfCompass: None,
           bids: [],
-          chicagoScoreSheet: [||],
+          chicagoScoreSheet: [],
           dealer: None,
           dealIndex: -1,
           declarer: None,
@@ -162,7 +162,7 @@ let reducer = (state: state, action) => {
         // this is same as Sync above, and we do also want to suppress doMessage
         let () = [%raw "window.isLastActionSync = true"];
         // we must make sure that state is updated by every gameState field
-        let cSS: array(Chicago.chicagoScoreSheetRecord) = [%bs.raw "window.gameState.chicagoScoreSheet"];
+        let cSS: list(Chicago.chicagoScoreSheetRecord) = [%bs.raw "window.gameState.chicagoScoreSheet"];
         let dealer: option(string) = [%bs.raw "window.gameState.dealer"];
         let declarer: option(string) = [%bs.raw "window.gameState.declarer"];
         let hV: Shuffle.handVisible = [%bs.raw "window.gameState.handVisible"];

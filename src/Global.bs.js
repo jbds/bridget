@@ -34,7 +34,7 @@ function reducer(state, action) {
           return {
                   activePointOfCompass: undefined,
                   bids: /* [] */0,
-                  chicagoScoreSheet: [],
+                  chicagoScoreSheet: /* [] */0,
                   dealer: undefined,
                   dealIndex: -1,
                   declarer: undefined,
@@ -102,7 +102,7 @@ function reducer(state, action) {
           return {
                   activePointOfCompass: undefined,
                   bids: /* [] */0,
-                  chicagoScoreSheet: [],
+                  chicagoScoreSheet: /* [] */0,
                   dealer: undefined,
                   dealIndex: -1,
                   declarer: undefined,

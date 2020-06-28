@@ -136,7 +136,7 @@ let make = (
       };
       if (List.length(state.bids) === 0) {
         // if bids length is zero, render nothing else
-        Js.log("Abort render on bids length zero");
+        //Js.log("Abort render on bids length zero");
         React.null;
       } else if ((List.hd(List.rev(state.bids))).contractPointOfCompass === Some("West")){
         arrayOfFlexboxes;
@@ -162,6 +162,7 @@ let make = (
         arrayOfFlexboxes
         </>
       } else {
+        // should never happen
         React.null;
       };
     }

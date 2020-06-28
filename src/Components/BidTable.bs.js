@@ -145,7 +145,7 @@ function BidTable(Props) {
                   denominationValue: "",
                   denominationColor: "white",
                   backgroundColor: "#e8e8e8"
-                }), List.length(state.bids) === 0 ? (console.log("Abort render on bids length zero"), null) : (
+                }), List.length(state.bids) === 0 ? null : (
                 List.hd(List.rev(state.bids)).contractPointOfCompass === "West" ? arrayOfFlexboxes : (
                     List.hd(List.rev(state.bids)).contractPointOfCompass === "North" ? React.createElement(React.Fragment, undefined, emptyFlexbox, arrayOfFlexboxes) : (
                         List.hd(List.rev(state.bids)).contractPointOfCompass === "East" ? React.createElement(React.Fragment, undefined, emptyFlexbox, emptyFlexbox, arrayOfFlexboxes) : (
