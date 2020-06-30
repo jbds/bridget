@@ -411,23 +411,7 @@ function reducer(state, action) {
                 var hd1 = List.hd(state.bids);
                 var tl = List.tl(state.bids);
                 var hd2 = List.hd(tl);
-                if (hd1.isPass === true && hd2.isPass === true) {
-                  return {
-                          activePointOfCompass: state.activePointOfCompass,
-                          bids: state.bids,
-                          chicagoScoreSheet: state.chicagoScoreSheet,
-                          dealer: state.dealer,
-                          dealIndex: state.dealIndex,
-                          declarer: state.declarer,
-                          handVisible: state.handVisible,
-                          isBiddingCycle: false,
-                          isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
-                          lastAction: "BidAddSpecial-3Passes",
-                          pack: state.pack,
-                          pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                          randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-                        };
-                } else {
+                if (!(hd1.isPass === true && hd2.isPass === true)) {
                   return {
                           activePointOfCompass: poc$3,
                           bids: /* :: */[
@@ -454,6 +438,38 @@ function reducer(state, action) {
                           randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                         };
                 }
+                var bidRecordOfInterest1 = List.hd(List.tl(tl));
+                console.log(bidRecordOfInterest1);
+                var contractLevel = bidRecordOfInterest1.contractLevel;
+                var contractSuit = bidRecordOfInterest1.contractSuit;
+                var chicagoScoreSheetRecord_contractDeclarer = "Test";
+                var chicagoScoreSheetRecord = {
+                  vulnerable: "None",
+                  contractLevel: contractLevel,
+                  contractSuit: contractSuit,
+                  contractDeclarer: chicagoScoreSheetRecord_contractDeclarer,
+                  totalTricks: 0,
+                  scoreNorthSouth: undefined,
+                  scoreWestEast: undefined
+                };
+                return {
+                        activePointOfCompass: state.activePointOfCompass,
+                        bids: state.bids,
+                        chicagoScoreSheet: /* :: */[
+                          chicagoScoreSheetRecord,
+                          state.chicagoScoreSheet
+                        ],
+                        dealer: state.dealer,
+                        dealIndex: state.dealIndex,
+                        declarer: state.declarer,
+                        handVisible: state.handVisible,
+                        isBiddingCycle: false,
+                        isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
+                        lastAction: "BidAddSpecial-3Passes",
+                        pack: state.pack,
+                        pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                        randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                      };
             case "X" :
                 return {
                         activePointOfCompass: poc$3,

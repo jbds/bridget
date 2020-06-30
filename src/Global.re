@@ -305,9 +305,29 @@ let reducer = (state: state, action) => {
               let tl = List.tl(state.bids);
               let hd2 = List.hd(tl);
               if (hd1.isPass === true && hd2.isPass === true) {
+                // we need to add a row to the Chicago score sheet here
+                let bidRecordOfInterest1 = List.hd(List.tl(tl));
+                Js.log(bidRecordOfInterest1);
+                let contractLevel = bidRecordOfInterest1.contractLevel;
+                let contractSuit = bidRecordOfInterest1.contractSuit;
+                let totalTricks = 0;
+                let scoreNorthSouth = None;
+                let scoreWestEast = None;
+                let vulnerable = "None"; // to do
+                let contractDeclarer = Some("Test");
+                let chicagoScoreSheetRecord: Chicago.chicagoScoreSheetRecord = {
+                  vulnerable: vulnerable,
+                  contractLevel: contractLevel,
+                  contractSuit: contractSuit,
+                  contractDeclarer: contractDeclarer,
+                  totalTricks: totalTricks,
+                  scoreNorthSouth: scoreNorthSouth,
+                  scoreWestEast: scoreWestEast
+                };
                 // return end of bidding
                 {
                   ...state,
+                  chicagoScoreSheet: [chicagoScoreSheetRecord ,...state.chicagoScoreSheet],
                   isBiddingCycle: false,
                   lastAction: "BidAddSpecial-3Passes",
                   randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
