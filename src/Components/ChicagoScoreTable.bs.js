@@ -17,111 +17,29 @@ function ChicagoScoreTable(Props) {
                           }
                         }, React.createElement("td", {
                               style: {
-                                fontFamily: "Arial Narrow"
+                                padding: "1vh 1vh 1vh 1vh"
                               }
-                            }, "Vulnerable"), React.createElement("td", {
+                            }, "Vuln"), React.createElement("td", {
                               style: {
-                                fontFamily: "Arial Narrow"
+                                padding: "1vh 1vh 1vh 1vh"
                               }
-                            }, "Declarer"), React.createElement("td", {
+                            }, "Decl"), React.createElement("td", {
                               style: {
-                                fontFamily: "Arial Narrow"
+                                padding: "1vh 2vh 1vh 2vh"
                               }
-                            }, "Contract"), React.createElement("td", {
+                            }, "Bid"), React.createElement("td", {
                               style: {
-                                fontFamily: "Arial Narrow"
+                                padding: "1vh 1vh 1vh 1vh"
                               }
                             }, "Tricks"), React.createElement("td", {
                               style: {
-                                fontFamily: "Arial Narrow",
-                                padding: "1vh 2.5vh 1vh 2.5vh"
+                                padding: "1vh 2vh 1vh 2vh"
                               }
                             }, "N-S"), React.createElement("td", {
                               style: {
-                                fontFamily: "Arial Narrow",
-                                padding: "1vh 2.5vh 1vh 2.5vh"
+                                padding: "1vh 2vh 1vh 2vh"
                               }
-                            }, "E-W")), React.createElement("tr", {
-                          style: {
-                            backgroundColor: "white"
-                          }
-                        }, React.createElement("td", undefined, "None"), React.createElement("td", undefined, "West"), React.createElement("td", undefined, "1C"), React.createElement("td", undefined, "13"), React.createElement("td", undefined, "9999"), React.createElement("td", undefined, "")), React.createElement("tr", {
-                          style: {
-                            backgroundColor: "white"
-                          }
-                        }, React.createElement("td", undefined, "West"), React.createElement("td", undefined, "Noth"), React.createElement("td", undefined, "6NT"), React.createElement("td", undefined, "8"), React.createElement("td", undefined, ""), React.createElement("td", undefined, "-777")), React.createElement("tr", {
-                          style: {
-                            backgroundColor: "white"
-                          }
-                        }, React.createElement("td", undefined, "North"), React.createElement("td", undefined, "North"), React.createElement("td", undefined, "3H"), React.createElement("td", undefined, "6"), React.createElement("td", undefined, "-25"), React.createElement("td", undefined, "")), React.createElement("tr", {
-                          style: {
-                            backgroundColor: "white"
-                          }
-                        }, React.createElement("td", undefined, "All"), React.createElement("td", undefined, "East"), React.createElement("td", undefined, "1NT"), React.createElement("td", undefined, "7"), React.createElement("td", undefined, "50"), React.createElement("td", undefined, "")), React.createElement("tr", {
-                          style: {
-                            backgroundColor: "white"
-                          }
-                        }, React.createElement("td", {
-                              style: {
-                                backgroundColor: "#f8f8f8",
-                                color: "#f8f8f8"
-                              }
-                            }, "."), React.createElement("td", {
-                              style: {
-                                backgroundColor: "#f8f8f8",
-                                color: "#f8f8f8"
-                              }
-                            }, ""), React.createElement("td", {
-                              style: {
-                                backgroundColor: "#f8f8f8",
-                                color: "#f8f8f8"
-                              }
-                            }, ""), React.createElement("td", {
-                              style: {
-                                backgroundColor: "#f8f8f8",
-                                color: "#f8f8f8"
-                              }
-                            }, ""), React.createElement("td", undefined, "1000"), React.createElement("td", undefined, "500")), React.createElement("tr", {
-                          style: {
-                            backgroundColor: "white"
-                          }
-                        }, React.createElement("td", undefined, "None"), React.createElement("td", undefined, "West"), React.createElement("td", undefined, "1C"), React.createElement("td", undefined, "13"), React.createElement("td", undefined, "9999"), React.createElement("td", undefined, "")), React.createElement("tr", {
-                          style: {
-                            backgroundColor: "white"
-                          }
-                        }, React.createElement("td", undefined, "West"), React.createElement("td", undefined, "Noth"), React.createElement("td", undefined, "6NT"), React.createElement("td", undefined, "8"), React.createElement("td", undefined, ""), React.createElement("td", undefined, "-777")), React.createElement("tr", {
-                          style: {
-                            backgroundColor: "white"
-                          }
-                        }, React.createElement("td", undefined, "North"), React.createElement("td", undefined, "North"), React.createElement("td", undefined, "3H"), React.createElement("td", undefined, "6"), React.createElement("td", undefined, "-25"), React.createElement("td", undefined, "")), React.createElement("tr", {
-                          style: {
-                            backgroundColor: "white"
-                          }
-                        }, React.createElement("td", undefined, "All"), React.createElement("td", undefined, "East"), React.createElement("td", undefined, "1NT"), React.createElement("td", undefined, "7"), React.createElement("td", undefined, "50"), React.createElement("td", undefined, "")), React.createElement("tr", {
-                          style: {
-                            backgroundColor: "white"
-                          }
-                        }, React.createElement("td", {
-                              style: {
-                                backgroundColor: "#f8f8f8",
-                                color: "#f8f8f8"
-                              }
-                            }, "."), React.createElement("td", {
-                              style: {
-                                backgroundColor: "#f8f8f8",
-                                color: "#f8f8f8"
-                              }
-                            }, ""), React.createElement("td", {
-                              style: {
-                                backgroundColor: "#f8f8f8",
-                                color: "#f8f8f8"
-                              }
-                            }, ""), React.createElement("td", {
-                              style: {
-                                backgroundColor: "#f8f8f8",
-                                color: "#f8f8f8"
-                              }
-                            }, ""), React.createElement("td", undefined, "1000"), React.createElement("td", undefined, "500")))));
+                            }, "E-W")))));
 }
 
 var make = ChicagoScoreTable;
