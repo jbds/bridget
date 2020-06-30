@@ -89,6 +89,14 @@ let make = () => {
     //<SpanStd id="spnOnline" text="Online:" />
     <br/>
     <TablePosition state dispatch />
+    <br/>
+    <ButtonStd dispatch action=NewGame label="New Game" id="btnNewGame"/>
+    //<br/>
+    <SpacerStd spacerWidth="1vh" />
+    <ButtonStd dispatch action=Shuffle label="New Deal" id="btnShuffle"/>
+    <br/>
+    <br/>
+    <ButtonStdJsx id="btnRotateTable" label="Rotate my table" onClick=handlerBtnRotateTable/>
   </div>
   <div id="sidebar2">
     //(s2e("Sidebar2"))
@@ -97,18 +105,13 @@ let make = () => {
     <ButtonStd dispatch action=Discard label="Discard" id="btnDiscard" isVisible=false/>
     <ButtonStd dispatch action=Sync label="Sync state with gameState" id="btnSync" isVisible=false/>
     <ButtonStd dispatch action=LoginSync label="Login sync with server" id="btnLoginSync" isVisible=false/>
-    <br/>
-    <ButtonStd dispatch action=NewGame label="New Game" id="btnNewGame"/>
-    <br/>
-    <ButtonStd dispatch action=Shuffle label="New Deal" id="btnShuffle"/>
+    <ChicagoScoreTable />
   </div>
   <div id="sidebar3">
     // (s2e("Sidebar3"))
     // <br/>
     // <span id="span1"></span>
     // <FlipHand dispatch/>
-    <br/>
-    <ButtonStdJsx id="btnRotateTable" label="Rotate table" onClick=handlerBtnRotateTable/>
     <br/>
     <SpanStd id="spnRandomInt" text={string_of_int(state.randomInt)} />
     <SpanStd id="spnRILA" text=" " />

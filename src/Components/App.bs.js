@@ -9,9 +9,11 @@ var SpanStd$ReasonReactExamples = require("./SpanStd.bs.js");
 var BidTable$ReasonReactExamples = require("./BidTable.bs.js");
 var InputStd$ReasonReactExamples = require("./InputStd.bs.js");
 var ButtonStd$ReasonReactExamples = require("./ButtonStd.bs.js");
+var SpacerStd$ReasonReactExamples = require("./SpacerStd.bs.js");
 var ButtonStdJsx$ReasonReactExamples = require("./ButtonStdJsx.bs.js");
 var BiddingWindow$ReasonReactExamples = require("./BiddingWindow.bs.js");
 var TablePosition$ReasonReactExamples = require("./TablePosition.bs.js");
+var ChicagoScoreTable$ReasonReactExamples = require("./ChicagoScoreTable.bs.js");
 
 const Online = require('../Online.bs');
 ;
@@ -88,6 +90,22 @@ function App(Props) {
                     }), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement(TablePosition$ReasonReactExamples.make, {
                       state: state,
                       dispatch: dispatch
+                    }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                      dispatch: dispatch,
+                      action: /* NewGame */0,
+                      label: "New Game",
+                      id: "btnNewGame"
+                    }), React.createElement(SpacerStd$ReasonReactExamples.make, {
+                      spacerWidth: "1vh"
+                    }), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                      dispatch: dispatch,
+                      action: /* Shuffle */1,
+                      label: "New Deal",
+                      id: "btnShuffle"
+                    }), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
+                      label: "Rotate my table",
+                      id: "btnRotateTable",
+                      onClick: handlerBtnRotateTable
                     })), React.createElement("div", {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
@@ -108,23 +126,9 @@ function App(Props) {
                       label: "Login sync with server",
                       id: "btnLoginSync",
                       isVisible: false
-                    }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
-                      dispatch: dispatch,
-                      action: /* NewGame */0,
-                      label: "New Game",
-                      id: "btnNewGame"
-                    }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
-                      dispatch: dispatch,
-                      action: /* Shuffle */1,
-                      label: "New Deal",
-                      id: "btnShuffle"
-                    })), React.createElement("div", {
+                    }), React.createElement(ChicagoScoreTable$ReasonReactExamples.make, { })), React.createElement("div", {
                   id: "sidebar3"
-                }, React.createElement("br", undefined), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
-                      label: "Rotate table",
-                      id: "btnRotateTable",
-                      onClick: handlerBtnRotateTable
-                    }), React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
+                }, React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spnRandomInt",
                       text: String(state.randomInt)
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
