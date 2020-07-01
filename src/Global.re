@@ -305,7 +305,7 @@ let reducer = (state: state, action) => {
               let tl = List.tl(state.bids);
               let hd2 = List.hd(tl);
               if (hd1.isPass === true && hd2.isPass === true) {
-                // we need to add a row to the Chicago score sheet here
+                // we need to add a row to the Chicago score sheet, so assemble here
                 let bidRecordOfInterest1 = List.hd(List.tl(tl));
                 Js.log(bidRecordOfInterest1);
                 let contractLevel = bidRecordOfInterest1.contractLevel;
@@ -314,7 +314,7 @@ let reducer = (state: state, action) => {
                 let scoreNorthSouth = None;
                 let scoreWestEast = None;
                 let vulnerable = "None"; // to do
-                let contractDeclarer = Some("Test");
+                let contractDeclarer = Some("Test"); // to do
                 let chicagoScoreSheetRecord: Chicago.chicagoScoreSheetRecord = {
                   vulnerable: vulnerable,
                   contractLevel: contractLevel,
