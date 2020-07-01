@@ -8,6 +8,8 @@ var Shuffle$ReasonReactExamples = require("./Shuffle.bs.js");
 var Online = require('./Online.bs');
 ;
 
+var initialState_pack = [];
+
 var initialState_pointOfCompassAndPlayers = [];
 
 var initialState = {
@@ -20,10 +22,10 @@ var initialState = {
   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
   isBiddingCycle: false,
   isBiddingHideDenominationButtons: true,
-  lastAction: "None(fromClient)",
-  pack: Shuffle$ReasonReactExamples.initialPack,
+  lastAction: "None (initialState from Client)",
+  pack: initialState_pack,
   pointOfCompassAndPlayers: initialState_pointOfCompassAndPlayers,
-  randomInt: -111
+  randomInt: 1
 };
 
 function reducer(state, action) {
@@ -34,17 +36,17 @@ function reducer(state, action) {
           return {
                   activePointOfCompass: undefined,
                   bids: /* [] */0,
-                  chicagoScoreSheet: /* [] */0,
+                  chicagoScoreSheet: Chicago$ReasonReactExamples.initialChicagoScoreSheet,
                   dealer: undefined,
                   dealIndex: -1,
                   declarer: undefined,
                   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
                   isBiddingCycle: false,
                   isBiddingHideDenominationButtons: true,
-                  lastAction: "NewGame",
+                  lastAction: "NewGame (clears scores)",
                   pack: [],
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                  randomInt: 2
                 };
       case /* Shuffle */1 :
           ((window.isLastActionSync = false));

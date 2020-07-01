@@ -38,6 +38,8 @@ type state = {
   randomInt: int,
 };
 
+// this is used by the reducer at app startup, before being overwritten
+// by 
 let initialState: state = {
     activePointOfCompass: None,
     bids: [],
@@ -48,10 +50,10 @@ let initialState: state = {
     handVisible: Shuffle.initialHandVisible,
     isBiddingCycle: false,
     isBiddingHideDenominationButtons: true,
-    lastAction: "None(fromClient)",
-    pack: Shuffle.initialPack,
+    lastAction: "None (initialState from Client)",
+    pack: [||], // Shuffle.initialPack,
     pointOfCompassAndPlayers: [||],
-    randomInt: -111,
+    randomInt: 1,
 };
 
 let reducer = (state: state, action) => {
@@ -65,16 +67,16 @@ let reducer = (state: state, action) => {
           ...state,
           activePointOfCompass: None,
           bids: [],
-          chicagoScoreSheet: [],
+          chicagoScoreSheet: Chicago.initialChicagoScoreSheet,
           dealer: None,
           dealIndex: -1,
           declarer: None,
           handVisible: Shuffle.initialHandVisible,
           isBiddingCycle: false,
           isBiddingHideDenominationButtons: true,
-          lastAction: "NewGame",
+          lastAction: "NewGame (clears scores)",
           pack: [||],
-          randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
+          randomInt: 2, 
         }
       }
       | Shuffle => {
