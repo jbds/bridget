@@ -48,6 +48,18 @@ function App(Props) {
     ((Online.doLogout((document.getElementById('txtMyLoginName').value).toUpperCase())));
     
   };
+  var isFourSeatsOccupied = function (param) {
+    var myShorterArray = Belt_Array.keep(state.pointOfCompassAndPlayers, (function (x) {
+            if (x.pointOfCompass !== "") {
+              return x.pointOfCompass !== "Observer";
+            } else {
+              return false;
+            }
+          }));
+    return myShorterArray.length === 4;
+  };
+  console.log("isFourSeatsOccupied:");
+  console.log(isFourSeatsOccupied(undefined));
   var isBiddingWindowVisible = function (param) {
     if (!(state.isBiddingCycle === true && state.pointOfCompassAndPlayers.length >= 4)) {
       return false;

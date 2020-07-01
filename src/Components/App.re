@@ -55,6 +55,13 @@ let make = () => {
     let () = [%raw "window.userState.player = '?'"];
     let () = [%raw "Online.doLogout((document.getElementById('txtMyLoginName').value).toUpperCase())"];
   };
+  // other utility functions
+  let isFourSeatsOccupied = () => {
+    let myShorterArray = Belt.Array.keep(state.pointOfCompassAndPlayers, x => {x.pointOfCompass != "" && x.pointOfCompass != "Observer"});
+    Belt.Array.length(myShorterArray) == 4 ? true : false;
+  };
+  Js.log("isFourSeatsOccupied:");
+  Js.log(isFourSeatsOccupied());
   let isBiddingWindowVisible = () => {
     // only check when in BiddingCycle and at least 4 players (TO DO - strictly should exclude Observers)
     if  (
