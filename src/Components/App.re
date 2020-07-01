@@ -60,8 +60,8 @@ let make = () => {
     let myShorterArray = Belt.Array.keep(state.pointOfCompassAndPlayers, x => {x.pointOfCompass != "" && x.pointOfCompass != "Observer"});
     Belt.Array.length(myShorterArray) == 4 ? true : false;
   };
-  Js.log("isFourSeatsOccupied:");
-  Js.log(isFourSeatsOccupied());
+  //Js.log("isFourSeatsOccupied:");
+  //Js.log(isFourSeatsOccupied());
   let isBiddingWindowVisible = () => {
     // only check when in BiddingCycle and at least 4 players (TO DO - strictly should exclude Observers)
     if  (
@@ -97,13 +97,12 @@ let make = () => {
     <br/>
     <TablePosition state dispatch />
     <br/>
-    <ButtonStd dispatch action=NewGame label="New Game" id="btnNewGame" isVisible=true/>
+    <ButtonStd dispatch action=NewGame label="New Game" id="btnNewGame" isVisible=isFourSeatsOccupied()/>
     //<br/>
     <SpacerStd spacerWidth="1vh" />
-    <ButtonStd dispatch action=Shuffle label="New Deal" id="btnShuffle" isVisible=true/>
-    <br/>
-    <br/>
-    <ButtonStdJsx id="btnRotateTable" label="Rotate my table" onClick=handlerBtnRotateTable isVisible=true/>
+    <ButtonStd dispatch action=Shuffle label="New Deal" id="btnShuffle" isVisible=isFourSeatsOccupied()/>
+    <SpacerStd spacerWidth="1vh" />
+    <ButtonStdJsx id="btnRotateTable" label="Rotate my table" onClick=handlerBtnRotateTable isVisible=isFourSeatsOccupied()/>
   </div>
   <div id="sidebar2">
     //(s2e("Sidebar2"))

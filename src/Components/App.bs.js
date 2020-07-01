@@ -58,8 +58,6 @@ function App(Props) {
           }));
     return myShorterArray.length === 4;
   };
-  console.log("isFourSeatsOccupied:");
-  console.log(isFourSeatsOccupied(undefined));
   var isBiddingWindowVisible = function (param) {
     if (!(state.isBiddingCycle === true && state.pointOfCompassAndPlayers.length >= 4)) {
       return false;
@@ -107,7 +105,7 @@ function App(Props) {
                       action: /* NewGame */0,
                       label: "New Game",
                       id: "btnNewGame",
-                      isVisible: true
+                      isVisible: isFourSeatsOccupied(undefined)
                     }), React.createElement(SpacerStd$ReasonReactExamples.make, {
                       spacerWidth: "1vh"
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
@@ -115,12 +113,14 @@ function App(Props) {
                       action: /* Shuffle */1,
                       label: "New Deal",
                       id: "btnShuffle",
-                      isVisible: true
-                    }), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
+                      isVisible: isFourSeatsOccupied(undefined)
+                    }), React.createElement(SpacerStd$ReasonReactExamples.make, {
+                      spacerWidth: "1vh"
+                    }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "Rotate my table",
                       id: "btnRotateTable",
                       onClick: handlerBtnRotateTable,
-                      isVisible: true
+                      isVisible: isFourSeatsOccupied(undefined)
                     })), React.createElement("div", {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
