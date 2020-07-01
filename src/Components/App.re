@@ -86,18 +86,17 @@ let make = () => {
   <>
   <div id="sidebar1">
     <br/>
-    <SpanStd id="spn1" text="Player: " />
+    <SpanStd id="spn1" text="Me: " />
     <InputStd id="txtMyLoginName" />
     <SpanStd id="spn2" text=" " />
     <ButtonStdJsx id="btnLogin" label="Login" onClick=handlerBtnLogin/>
     <SpanStd id="spn2" text=" " />
     <ButtonStdJsx id="btnLogout" label="Logout" onClick=handlerBtnLogout/>
-    <br/>
-    //<SpanStd id="spnOnline" text="Online:" />
+    <SpanStd id="spn2" text=" " />
+    <ButtonStd dispatch action=NewGame label="Reboot" id="btnNewGame" isVisible=true/>
     <br/>
     <TablePosition state dispatch />
     <br/>
-    <ButtonStd dispatch action=NewGame label="New Game" id="btnNewGame" isVisible=isFourSeatsOccupied()/>
     //<br/>
     <SpacerStd spacerWidth="1vh" />
     <ButtonStd dispatch action=Shuffle label="New Deal" id="btnShuffle" isVisible=isFourSeatsOccupied()/>

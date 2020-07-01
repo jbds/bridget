@@ -62,20 +62,22 @@ let reducer = (state: state, action) => {
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
         // force everything same as when server starts up,
-        // except leave logged in players and their pointsOfCompass
+        // except leave logged in players and their pointsOfCompass - NO!
+        // make this button a full reboot - clear players too
         {
-          ...state,
+          //...state,
           activePointOfCompass: None,
           bids: [],
-          chicagoScoreSheet: Chicago.initialChicagoScoreSheet,
+          chicagoScoreSheet: [], //Chicago.initialChicagoScoreSheet,
           dealer: None,
           dealIndex: -1,
           declarer: None,
           handVisible: Shuffle.initialHandVisible,
           isBiddingCycle: false,
           isBiddingHideDenominationButtons: true,
-          lastAction: "NewGame (clears scores)",
+          lastAction: "Reboot (clears scores & logins)",
           pack: [||],
+          pointOfCompassAndPlayers: [||],
           randomInt: 2, 
         }
       }

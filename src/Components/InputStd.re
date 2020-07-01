@@ -16,7 +16,7 @@ let make = (~id: string) => {
         ~border={"1px solid #26653B"}, 
         //~borderRadius={"5px"},
         ~backgroundColor={"#FFFFFF"},
-        ~width={"10vh"},
+        ~width={"8vh"},
         ~textAlign={"center"},
         ()
       )

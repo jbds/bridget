@@ -80,7 +80,7 @@ function App(Props) {
                   id: "sidebar1"
                 }, React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn1",
-                      text: "Player: "
+                      text: "Me: "
                     }), React.createElement(InputStd$ReasonReactExamples.make, {
                       id: "txtMyLoginName"
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
@@ -97,16 +97,19 @@ function App(Props) {
                       label: "Logout",
                       id: "btnLogout",
                       onClick: handlerBtnLogout
-                    }), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement(TablePosition$ReasonReactExamples.make, {
-                      state: state,
-                      dispatch: dispatch
-                    }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                    }), React.createElement(SpanStd$ReasonReactExamples.make, {
+                      id: "spn2",
+                      text: " "
+                    }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* NewGame */0,
-                      label: "New Game",
+                      label: "Reboot",
                       id: "btnNewGame",
-                      isVisible: isFourSeatsOccupied(undefined)
-                    }), React.createElement(SpacerStd$ReasonReactExamples.make, {
+                      isVisible: true
+                    }), React.createElement("br", undefined), React.createElement(TablePosition$ReasonReactExamples.make, {
+                      state: state,
+                      dispatch: dispatch
+                    }), React.createElement("br", undefined), React.createElement(SpacerStd$ReasonReactExamples.make, {
                       spacerWidth: "1vh"
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,

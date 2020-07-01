@@ -36,16 +36,16 @@ function reducer(state, action) {
           return {
                   activePointOfCompass: undefined,
                   bids: /* [] */0,
-                  chicagoScoreSheet: Chicago$ReasonReactExamples.initialChicagoScoreSheet,
+                  chicagoScoreSheet: /* [] */0,
                   dealer: undefined,
                   dealIndex: -1,
                   declarer: undefined,
                   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
                   isBiddingCycle: false,
                   isBiddingHideDenominationButtons: true,
-                  lastAction: "NewGame (clears scores)",
+                  lastAction: "Reboot (clears scores & logins)",
                   pack: [],
-                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                  pointOfCompassAndPlayers: [],
                   randomInt: 2
                 };
       case /* Shuffle */1 :
