@@ -90,13 +90,13 @@ let make = () => {
     <br/>
     <TablePosition state dispatch />
     <br/>
-    <ButtonStd dispatch action=NewGame label="New Game" id="btnNewGame"/>
+    <ButtonStd dispatch action=NewGame label="New Game" id="btnNewGame" isVisible=true/>
     //<br/>
     <SpacerStd spacerWidth="1vh" />
-    <ButtonStd dispatch action=Shuffle label="New Deal" id="btnShuffle"/>
+    <ButtonStd dispatch action=Shuffle label="New Deal" id="btnShuffle" isVisible=true/>
     <br/>
     <br/>
-    <ButtonStdJsx id="btnRotateTable" label="Rotate my table" onClick=handlerBtnRotateTable/>
+    <ButtonStdJsx id="btnRotateTable" label="Rotate my table" onClick=handlerBtnRotateTable isVisible=true/>
   </div>
   <div id="sidebar2">
     //(s2e("Sidebar2"))
@@ -113,7 +113,7 @@ let make = () => {
     // <span id="span1"></span>
     // <FlipHand dispatch/>
     <br/>
-    <SpanStd id="spnRandomInt" text={string_of_int(state.randomInt)} />
+    <SpanStd id="spnRandomInt" text="Last action:" />
     <SpanStd id="spnRILA" text=" " />
     <SpanStd id="spnLastAction" text={state.lastAction} />
   </div>

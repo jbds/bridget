@@ -1,7 +1,7 @@
 // identical to ButtonStd except for the event handler which does NOT dispatch an action
 // so inject the event handler
 [@react.component]
-let make = (~label: string, ~id: string, ~onClick) => {
+let make = (~label: string, ~id: string, ~onClick, ~isVisible: bool=true) => {
   <>
     <button 
     id=id
@@ -17,6 +17,7 @@ let make = (~label: string, ~id: string, ~onClick) => {
         ~border={"1px solid #26653B"}, 
         ~borderRadius={"5px"},
         ~backgroundColor={"#FFFFFF"},
+        ~display={isVisible ? "inline" : "none"},
         ()
       )
     )

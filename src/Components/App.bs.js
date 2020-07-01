@@ -94,18 +94,21 @@ function App(Props) {
                       dispatch: dispatch,
                       action: /* NewGame */0,
                       label: "New Game",
-                      id: "btnNewGame"
+                      id: "btnNewGame",
+                      isVisible: true
                     }), React.createElement(SpacerStd$ReasonReactExamples.make, {
                       spacerWidth: "1vh"
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Shuffle */1,
                       label: "New Deal",
-                      id: "btnShuffle"
+                      id: "btnShuffle",
+                      isVisible: true
                     }), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "Rotate my table",
                       id: "btnRotateTable",
-                      onClick: handlerBtnRotateTable
+                      onClick: handlerBtnRotateTable,
+                      isVisible: true
                     })), React.createElement("div", {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
@@ -130,7 +133,7 @@ function App(Props) {
                   id: "sidebar3"
                 }, React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spnRandomInt",
-                      text: String(state.randomInt)
+                      text: "Last action:"
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spnRILA",
                       text: " "
