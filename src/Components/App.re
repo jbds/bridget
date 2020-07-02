@@ -75,8 +75,8 @@ let make = () => {
       false;
     }
   };
-  Js.log("isDealButtonVisible");
-  Js.log(isDealButtonVisible());
+  //Js.log("isDealButtonVisible");
+  //Js.log(isDealButtonVisible());
   let isBiddingWindowVisible = () => {
     // only check when in BiddingCycle and at least 4 players (TO DO - strictly should exclude Observers)
     if  (

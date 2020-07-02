@@ -74,8 +74,6 @@ function App(Props) {
       return true;
     }
   };
-  console.log("isDealButtonVisible");
-  console.log(isDealButtonVisible(undefined));
   var isBiddingWindowVisible = function (param) {
     if (!(state.isBiddingCycle === true && state.pointOfCompassAndPlayers.length >= 4)) {
       return false;
