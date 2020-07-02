@@ -221,6 +221,20 @@ let getNextPointOfCompass = (poc) => {
     | Some("West") => "North"
     | _ => "East"
   }
-}
+};
+
+// added later
+let initialPoc = getNextPointOfCompass(None);
+
+let pocAsString = (poc) => {
+  switch (poc) {
+    | None => ""
+    | Some("North") => "North"
+    | Some("East") => "East"
+    | Some("South") => "South"
+    | Some("West") => "West"
+    | _ => "East"
+  }
+};
 
 

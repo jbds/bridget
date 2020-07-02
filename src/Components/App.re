@@ -62,6 +62,21 @@ let make = () => {
   };
   //Js.log("isFourSeatsOccupied:");
   //Js.log(isFourSeatsOccupied());
+  let isDealButtonVisible = () => {
+    let localPlayer: string = [%bs.raw "window.userState.player"];
+    let userPointOfCompassWrappedInArray = Belt.Array.keep(state.pointOfCompassAndPlayers, obj => {
+      obj.player === localPlayer && obj.pointOfCompass === Shuffle.pocAsString(state.dealer)
+    });
+    if (Array.length(userPointOfCompassWrappedInArray) === 0) {
+      false;
+    } else if (isFourSeatsOccupied()){
+      true;
+    } else {
+      false;
+    }
+  };
+  Js.log("isDealButtonVisible");
+  Js.log(isDealButtonVisible());
   let isBiddingWindowVisible = () => {
     // only check when in BiddingCycle and at least 4 players (TO DO - strictly should exclude Observers)
     if  (
@@ -93,15 +108,15 @@ let make = () => {
     <SpanStd id="spn2" text=" " />
     <ButtonStdJsx id="btnLogout" label="Logout" onClick=handlerBtnLogout/>
     <SpanStd id="spn2" text=" " />
-    <ButtonStd dispatch action=NewGame label="Reboot" id="btnNewGame" isVisible=true/>
+    <ButtonStd dispatch action=NewGame label="Reboot" id="btnNewGame" isWasteOfSpace={!state.isRebootVisible}/>
     <br/>
     <TablePosition state dispatch />
     <br/>
     //<br/>
     <SpacerStd spacerWidth="1vh" />
-    <ButtonStd dispatch action=Shuffle label="New Deal" id="btnShuffle" isVisible=isFourSeatsOccupied()/>
+    <ButtonStd dispatch action=Shuffle label="My Deal" id="btnShuffle" isWasteOfSpace={!isDealButtonVisible()}/>
     <SpacerStd spacerWidth="1vh" />
-    <ButtonStdJsx id="btnRotateTable" label="Rotate my table" onClick=handlerBtnRotateTable isVisible=isFourSeatsOccupied()/>
+    <ButtonStdJsx id="btnRotateTable" label="Rotate my table" onClick=handlerBtnRotateTable isWasteOfSpace={!isFourSeatsOccupied()}/>
   </div>
   <div id="sidebar2">
     //(s2e("Sidebar2"))
@@ -120,7 +135,7 @@ let make = () => {
     <br/>
     <SpanStd id="spnRandomInt" text="Last action:" />
     <SpanStd id="spnRILA" text=" " />
-    <SpanStd id="spnLastAction" text={state.lastAction} />
+    <SpanStd id="spnLastAction" text={state.lastAction} isWarning={state.lastAction == "Logout or Server Down" ? true : false}/>
   </div>
   <div 
     id="bidTable"

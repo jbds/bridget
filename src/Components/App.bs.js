@@ -5,6 +5,7 @@ var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 var Caml_array = require("bs-platform/lib/js/caml_array.js");
 var Global$ReasonReactExamples = require("../Global.bs.js");
+var Shuffle$ReasonReactExamples = require("../Shuffle.bs.js");
 var SpanStd$ReasonReactExamples = require("./SpanStd.bs.js");
 var BidTable$ReasonReactExamples = require("./BidTable.bs.js");
 var InputStd$ReasonReactExamples = require("./InputStd.bs.js");
@@ -58,6 +59,23 @@ function App(Props) {
           }));
     return myShorterArray.length === 4;
   };
+  var isDealButtonVisible = function (param) {
+    var localPlayer = window.userState.player;
+    var userPointOfCompassWrappedInArray = Belt_Array.keep(state.pointOfCompassAndPlayers, (function (obj) {
+            if (obj.player === localPlayer) {
+              return obj.pointOfCompass === Shuffle$ReasonReactExamples.pocAsString(state.dealer);
+            } else {
+              return false;
+            }
+          }));
+    if (userPointOfCompassWrappedInArray.length === 0 || !isFourSeatsOccupied(undefined)) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+  console.log("isDealButtonVisible");
+  console.log(isDealButtonVisible(undefined));
   var isBiddingWindowVisible = function (param) {
     if (!(state.isBiddingCycle === true && state.pointOfCompassAndPlayers.length >= 4)) {
       return false;
@@ -105,7 +123,7 @@ function App(Props) {
                       action: /* NewGame */0,
                       label: "Reboot",
                       id: "btnNewGame",
-                      isVisible: true
+                      isWasteOfSpace: !state.isRebootVisible
                     }), React.createElement("br", undefined), React.createElement(TablePosition$ReasonReactExamples.make, {
                       state: state,
                       dispatch: dispatch
@@ -114,16 +132,16 @@ function App(Props) {
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Shuffle */1,
-                      label: "New Deal",
+                      label: "My Deal",
                       id: "btnShuffle",
-                      isVisible: isFourSeatsOccupied(undefined)
+                      isWasteOfSpace: !isDealButtonVisible(undefined)
                     }), React.createElement(SpacerStd$ReasonReactExamples.make, {
                       spacerWidth: "1vh"
                     }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "Rotate my table",
                       id: "btnRotateTable",
                       onClick: handlerBtnRotateTable,
-                      isVisible: isFourSeatsOccupied(undefined)
+                      isWasteOfSpace: !isFourSeatsOccupied(undefined)
                     })), React.createElement("div", {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
@@ -154,7 +172,8 @@ function App(Props) {
                       text: " "
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spnLastAction",
-                      text: state.lastAction
+                      text: state.lastAction,
+                      isWarning: state.lastAction === "Logout or Server Down"
                     })), React.createElement("div", {
                   id: "bidTable",
                   style: {

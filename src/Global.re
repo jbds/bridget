@@ -32,6 +32,7 @@ type state = {
   handVisible: Shuffle.handVisible,
   isBiddingCycle: bool,
   isBiddingHideDenominationButtons: bool,
+  isRebootVisible: bool,
   lastAction: string,
   pack: Shuffle.pack,
   pointOfCompassAndPlayers: array(Shuffle.pointOfCompassAndPlayer),
@@ -39,17 +40,19 @@ type state = {
 };
 
 // this is used by the reducer at app startup, before being overwritten
-// by 
+// by later actions
+// Note the only thing we set here is the starting active poc and dealer
 let initialState: state = {
-    activePointOfCompass: None,
+    activePointOfCompass: None, // Some(Shuffle.initialPoc), - do this at server!
     bids: [],
     chicagoScoreSheet: Chicago.initialChicagoScoreSheet,
-    dealer: None,
+    dealer: None, // Some(Shuffle.initialPoc), - do this at server!
     dealIndex: -1,
     declarer: None,
     handVisible: Shuffle.initialHandVisible,
     isBiddingCycle: false,
     isBiddingHideDenominationButtons: true,
+    isRebootVisible: false,
     lastAction: "None (initialState from Client)",
     pack: [||], // Shuffle.initialPack,
     pointOfCompassAndPlayers: [||],
@@ -59,6 +62,7 @@ let initialState: state = {
 let reducer = (state: state, action) => {
     switch action {
       | NewGame => {
+        // aka Reboot
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
         // force everything same as when server starts up,
@@ -75,6 +79,7 @@ let reducer = (state: state, action) => {
           handVisible: Shuffle.initialHandVisible,
           isBiddingCycle: false,
           isBiddingHideDenominationButtons: true,
+          isRebootVisible: true,
           lastAction: "Reboot (clears scores & logins)",
           pack: [||],
           pointOfCompassAndPlayers: [||],
@@ -155,7 +160,8 @@ let reducer = (state: state, action) => {
           handVisible: {north: false, east: false, south: false, west: false},
           isBiddingCycle: false,
           isBiddingHideDenominationButtons: true,
-          lastAction: "LogoutOrServerDownSync",
+          isRebootVisible: false,
+          lastAction: "Logout or Server Down",
           pack: [||],
           pointOfCompassAndPlayers: [||],
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 
@@ -179,6 +185,7 @@ let reducer = (state: state, action) => {
         let poc: option(string) = [%bs.raw "window.gameState.activePointOfCompass"];
         let bids: Chicago.bids = [%bs.raw "window.gameState.bids"];
         let isBiddingHideDenominationButtons: bool = [%bs.raw "window.gameState.isBiddingHideDenominationButtons"];
+        let isRebootVisible: bool = [%bs.raw "window.gameState.isRebootVisible"];
         // no need for ...state here as we are replacing all fields with the server gameState fields
         {
           activePointOfCompass: poc,
@@ -190,6 +197,7 @@ let reducer = (state: state, action) => {
           handVisible: hV,
           isBiddingCycle: isBiddingCycle,
           isBiddingHideDenominationButtons: isBiddingHideDenominationButtons,
+          isRebootVisible: isRebootVisible,
           lastAction: "LoginSync",
           pack: pack,
           pointOfCompassAndPlayers: pOCAP,

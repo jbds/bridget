@@ -5,7 +5,8 @@ let make = (
   ~label: string, 
   ~id: string, 
   ~isActive: bool=true,
-  ~isVisible: bool=true
+  ~isVisible: bool=true,
+  ~isWasteOfSpace: bool=false,
   ) => {
   <>
     <button 
@@ -23,6 +24,7 @@ let make = (
         ~borderRadius={"5px"},
         ~backgroundColor={isActive ? "#ffffff" : "#60806040"},
         ~display={isVisible ? "inline" : "none"},
+        ~visibility={isWasteOfSpace ? "hidden" : "visible"},
         ()
       )
     )

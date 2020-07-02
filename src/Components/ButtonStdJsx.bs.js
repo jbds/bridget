@@ -7,7 +7,9 @@ function ButtonStdJsx(Props) {
   var id = Props.id;
   var onClick = Props.onClick;
   var isVisibleOpt = Props.isVisible;
+  var isWasteOfSpaceOpt = Props.isWasteOfSpace;
   var isVisible = isVisibleOpt !== undefined ? isVisibleOpt : true;
+  var isWasteOfSpace = isWasteOfSpaceOpt !== undefined ? isWasteOfSpaceOpt : false;
   return React.createElement(React.Fragment, undefined, React.createElement("button", {
                   id: id,
                   style: {
@@ -19,6 +21,7 @@ function ButtonStdJsx(Props) {
                     fontSize: "2.0vh",
                     height: "5.0vh",
                     margin: "auto",
+                    visibility: isWasteOfSpace ? "hidden" : "visible",
                     borderRadius: "5px"
                   },
                   onClick: onClick

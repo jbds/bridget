@@ -1,12 +1,12 @@
 [@react.component]
-let make = (~id: string, ~text: string) => {
+let make = (~id: string, ~text: string, ~isWarning: bool=false) => {
   <>
     <span
     id=id
     onClick=((_e) => Js.log("Clicked span element"))
     style=(
       ReactDOMRe.Style.make(
-        ~color={"#26653B"}, 
+        ~color={isWarning ? "#C00000" : "#26653B"}, 
         ~fontSize={"2.0vh"},
         ~fontFamily={"Trebuchet MS"},
         ~margin={"0vh"},

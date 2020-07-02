@@ -594,6 +594,26 @@ function getNextPointOfCompass(poc) {
   }
 }
 
+var initialPoc = getNextPointOfCompass(undefined);
+
+function pocAsString(poc) {
+  if (poc === undefined) {
+    return "";
+  }
+  switch (poc) {
+    case "East" :
+        return "East";
+    case "North" :
+        return "North";
+    case "South" :
+        return "South";
+    case "West" :
+        return "West";
+    default:
+      return "East";
+  }
+}
+
 var initialHandVisible = {
   north: true,
   east: true,
@@ -607,4 +627,6 @@ exports.getShuffledPack = getShuffledPack;
 exports.impureGetTimeBasedSeedUpTo60k = impureGetTimeBasedSeedUpTo60k;
 exports.getNextPointOfCompass = getNextPointOfCompass;
 exports.getRandomCompassPoint = getRandomCompassPoint;
-/* No side effect */
+exports.initialPoc = initialPoc;
+exports.pocAsString = pocAsString;
+/* initialPoc Not a pure module */

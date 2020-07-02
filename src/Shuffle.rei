@@ -100,3 +100,7 @@ let impureGetTimeBasedSeedUpTo60k: unit => int;
 let getNextPointOfCompass: (option(string)) => string;
 
 let getRandomCompassPoint: int => string;
+
+let initialPoc: string;
+
+let pocAsString: (option(string)) => string;
