@@ -5,11 +5,7 @@
 type action =
   | NewGame
   | Shuffle
-  //| DealerChange (string)
   | Flip (Shuffle.compassPoint)
-  // | HideAllCards
-  // | ShowAllCards
-  // | Deal 
   | Discard
   | Sync
   | LoginSync
@@ -87,17 +83,18 @@ let reducer = (state: state, action) => {
         }
       }
       | Shuffle => {
-        // aka "New Deal"
+        // aka "New Deal" aka "My Deal"
         //Js.log("Action-Shuffle");
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
         // dealer becomes activePointOfCompass too, because he starts the bidding
-        let poc = Some(Shuffle.getNextPointOfCompass(state.dealer));
+        // do change of dealer at end of deal ie 52 cards out TO D)
+        //let poc = Some(Shuffle.getNextPointOfCompass(state.dealer));
         {
           ...state, 
-          activePointOfCompass: poc,
+          //activePointOfCompass: poc,
           bids: [],
-          dealer: poc,
+          //dealer: poc,
           dealIndex: state.dealIndex + 1,
           declarer: None,
           isBiddingCycle: true,
@@ -319,7 +316,7 @@ let reducer = (state: state, action) => {
               if (hd1.isPass === true && hd2.isPass === true) {
                 // we need to add a row to the Chicago score sheet, so assemble here
                 let bidRecordOfInterest1 = List.hd(List.tl(tl));
-                Js.log(bidRecordOfInterest1);
+                //Js.log(bidRecordOfInterest1);
                 let contractLevel = bidRecordOfInterest1.contractLevel;
                 let contractSuit = bidRecordOfInterest1.contractSuit;
                 let totalTricks = 0;

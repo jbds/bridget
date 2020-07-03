@@ -52,12 +52,11 @@ function reducer(state, action) {
                 };
       case /* Shuffle */1 :
           ((window.isLastActionSync = false));
-          var poc = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.dealer);
           return {
-                  activePointOfCompass: poc,
+                  activePointOfCompass: state.activePointOfCompass,
                   bids: /* [] */0,
                   chicagoScoreSheet: state.chicagoScoreSheet,
-                  dealer: poc,
+                  dealer: state.dealer,
                   dealIndex: state.dealIndex + 1 | 0,
                   declarer: undefined,
                   handVisible: state.handVisible,
@@ -136,12 +135,12 @@ function reducer(state, action) {
           var pack = window.gameState.pack;
           var dealIndex = window.gameState.dealIndex;
           var isBiddingCycle = window.gameState.isBiddingCycle;
-          var poc$1 = window.gameState.activePointOfCompass;
+          var poc = window.gameState.activePointOfCompass;
           var bids = window.gameState.bids;
           var isBiddingHideDenominationButtons = window.gameState.isBiddingHideDenominationButtons;
           var isRebootVisible = window.gameState.isRebootVisible;
           return {
-                  activePointOfCompass: poc$1,
+                  activePointOfCompass: poc,
                   bids: bids,
                   chicagoScoreSheet: cSS,
                   dealer: dealer,
@@ -369,9 +368,9 @@ function reducer(state, action) {
             newHead,
             tail
           ];
-          var poc$2 = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
+          var poc$1 = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
           return {
-                  activePointOfCompass: poc$2,
+                  activePointOfCompass: poc$1,
                   bids: bidsUpdated,
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
@@ -390,7 +389,7 @@ function reducer(state, action) {
           var special = action[0];
           console.log("Action - BidAddSpecial");
           ((window.isLastActionSync = false));
-          var poc$3 = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
+          var poc$2 = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
           if (special === undefined) {
             return state;
           }
@@ -400,7 +399,7 @@ function reducer(state, action) {
                 console.log(bidsLength);
                 if (bidsLength < 3) {
                   return {
-                          activePointOfCompass: poc$3,
+                          activePointOfCompass: poc$2,
                           bids: /* :: */[
                             {
                               contractLevel: undefined,
@@ -431,7 +430,7 @@ function reducer(state, action) {
                 var hd2 = List.hd(tl);
                 if (!(hd1.isPass === true && hd2.isPass === true)) {
                   return {
-                          activePointOfCompass: poc$3,
+                          activePointOfCompass: poc$2,
                           bids: /* :: */[
                             {
                               contractLevel: undefined,
@@ -458,7 +457,6 @@ function reducer(state, action) {
                         };
                 }
                 var bidRecordOfInterest1 = List.hd(List.tl(tl));
-                console.log(bidRecordOfInterest1);
                 var contractLevel = bidRecordOfInterest1.contractLevel;
                 var contractSuit = bidRecordOfInterest1.contractSuit;
                 var chicagoScoreSheetRecord_contractDeclarer = "Test";
@@ -492,7 +490,7 @@ function reducer(state, action) {
                       };
             case "X" :
                 return {
-                        activePointOfCompass: poc$3,
+                        activePointOfCompass: poc$2,
                         bids: /* :: */[
                           {
                             contractLevel: undefined,
@@ -519,7 +517,7 @@ function reducer(state, action) {
                       };
             case "XX" :
                 return {
-                        activePointOfCompass: poc$3,
+                        activePointOfCompass: poc$2,
                         bids: /* :: */[
                           {
                             contractLevel: undefined,
