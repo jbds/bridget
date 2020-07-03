@@ -456,12 +456,18 @@ function reducer(state, action) {
                           randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                         };
                 }
+                var match = state.dealIndex % 4;
+                var vulnerable = match > 2 || match < 0 ? (
+                    match !== 3 ? "Error" : "All"
+                  ) : (
+                    match !== 0 ? Shuffle$ReasonReactExamples.pocAsString(state.dealer) : "None"
+                  );
                 var bidRecordOfInterest1 = List.hd(List.tl(tl));
                 var contractLevel = bidRecordOfInterest1.contractLevel;
                 var contractSuit = bidRecordOfInterest1.contractSuit;
                 var chicagoScoreSheetRecord_contractDeclarer = "Test";
                 var chicagoScoreSheetRecord = {
-                  vulnerable: "None",
+                  vulnerable: vulnerable,
                   contractLevel: contractLevel,
                   contractSuit: contractSuit,
                   contractDeclarer: chicagoScoreSheetRecord_contractDeclarer,

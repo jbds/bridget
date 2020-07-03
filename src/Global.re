@@ -314,6 +314,14 @@ let reducer = (state: state, action) => {
               let tl = List.tl(state.bids);
               let hd2 = List.hd(tl);
               if (hd1.isPass === true && hd2.isPass === true) {
+                // helper function to get vulnerability
+                let vulnerable = switch(state.dealIndex mod 4)  {
+                  | 0 => "None"
+                  | 1 => Shuffle.pocAsString(state.dealer)
+                  | 2 => Shuffle.pocAsString(state.dealer)
+                  | 3 => "All"
+                  | _ => "Error"
+                };
                 // we need to add a row to the Chicago score sheet, so assemble here
                 let bidRecordOfInterest1 = List.hd(List.tl(tl));
                 //Js.log(bidRecordOfInterest1);
@@ -322,7 +330,6 @@ let reducer = (state: state, action) => {
                 let totalTricks = 0;
                 let scoreNorthSouth = None;
                 let scoreWestEast = None;
-                let vulnerable = "None"; // to do
                 let contractDeclarer = Some("Test"); // to do
                 let chicagoScoreSheetRecord: Chicago.chicagoScoreSheetRecord = {
                   vulnerable: vulnerable,
