@@ -46,7 +46,7 @@ function handleWsOpen(){
       pointOfCompassAndPlayers: [],
       randomInt: -888,
       pointOfCompassAndPlayers: [],
-      dealIndex: 0,
+      dealIndex: -1,
       isBiddingCycle: false
     }
     // and sync state to this (actually, recreate state same as gameState)
