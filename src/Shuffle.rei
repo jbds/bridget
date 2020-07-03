@@ -104,3 +104,5 @@ let getRandomCompassPoint: int => string;
 let initialPoc: string;
 
 let pocAsString: (option(string)) => string;
+
+//let partnerPocAsString: (option(string)) => string;

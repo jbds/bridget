@@ -314,7 +314,7 @@ let reducer = (state: state, action) => {
               let tl = List.tl(state.bids);
               let hd2 = List.hd(tl);
               if (hd1.isPass === true && hd2.isPass === true) {
-                // helper function to get vulnerability
+                // get vulnerability
                 let vulnerable = switch(state.dealIndex mod 4)  {
                   | 0 => "None"
                   | 1 => Shuffle.pocAsString(state.dealer)
@@ -322,15 +322,35 @@ let reducer = (state: state, action) => {
                   | 3 => "All"
                   | _ => "Error"
                 };
+                // helper func
+                let partnerPocByPoc = (poc) => {
+                  switch (poc) {
+                    | Some("North") => Some("South")
+                    | Some("South") => Some("North")
+                    | Some("West") => Some("East")
+                    | Some("East") => Some("West")
+                    | _ => Some("Error")
+                  }
+                };
                 // we need to add a row to the Chicago score sheet, so assemble here
                 let bidRecordOfInterest1 = List.hd(List.tl(tl));
                 //Js.log(bidRecordOfInterest1);
                 let contractLevel = bidRecordOfInterest1.contractLevel;
                 let contractSuit = bidRecordOfInterest1.contractSuit;
+                let contractPoc = bidRecordOfInterest1.contractPointOfCompass;
                 let totalTricks = 0;
                 let scoreNorthSouth = None;
                 let scoreWestEast = None;
-                let contractDeclarer = Some("Test"); // to do
+                let bidsFilteredBySuitAnd2Poc = Belt.List.keep(state.bids, x => {
+                  x.contractSuit == contractSuit && (
+                    x.contractPointOfCompass == contractPoc
+                    ||
+                    x.contractPointOfCompass == partnerPocByPoc(contractPoc)
+                  )
+                });
+                let bidsFilteredBySuitAnd2PocReversed = Belt.List.reverse(bidsFilteredBySuitAnd2Poc);
+                let hd3 = List.hd(bidsFilteredBySuitAnd2PocReversed);
+                let contractDeclarer = hd3.contractPointOfCompass
                 let chicagoScoreSheetRecord: Chicago.chicagoScoreSheetRecord = {
                   vulnerable: vulnerable,
                   contractLevel: contractLevel,

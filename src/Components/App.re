@@ -125,7 +125,7 @@ let make = () => {
     <ButtonStd dispatch action=Discard label="Discard" id="btnDiscard" isVisible=false/>
     <ButtonStd dispatch action=Sync label="Sync state with gameState" id="btnSync" isVisible=false/>
     <ButtonStd dispatch action=LoginSync label="Login sync with server" id="btnLoginSync" isVisible=false/>
-    <ChicagoScoreTable />
+    <ChicagoScoreTable state />
   </div>
   <div id="sidebar3">
     // (s2e("Sidebar3"))

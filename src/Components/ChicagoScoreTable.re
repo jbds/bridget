@@ -1,5 +1,9 @@
 [@react.component]
-let make = () => {
+let make = (~state: Global.state) => {
+  List.length(state.chicagoScoreSheet) == 0
+  ?
+  React.null
+  :
   <>
     <table 
     style=(
@@ -17,25 +21,6 @@ let make = () => {
     <thead>
     </thead>
     <tbody>
-      // <tr style=(ReactDOMRe.Style.make(~backgroundColor={"#f8f8f8"}, ()))>
-      //   <td style=(ReactDOMRe.Style.make(~fontFamily={"Arial Narrow"}, ()))>
-      //     (React.string("Vulnerable"))
-      //   </td>
-      //   <td style=(ReactDOMRe.Style.make(~fontFamily={"Arial Narrow"}, ()))>
-      //     (React.string("Declarer"))
-      //   </td>
-      //   <td style=(ReactDOMRe.Style.make(~fontFamily={"Arial Narrow"}, ()))>
-      //     (React.string("Contract"))
-      //   </td>
-      //   <td style=(ReactDOMRe.Style.make(~fontFamily={"Arial Narrow"}, ()))>
-      //     (React.string("Tricks"))
-      //   </td>
-      //   <td style=(ReactDOMRe.Style.make(~fontFamily={"Arial Narrow"}, ~padding={"1vh 2.5vh 1vh 2.5vh"}, ()))>
-      //     (React.string("N-S"))
-      //   </td>
-      //   <td style=(ReactDOMRe.Style.make(~fontFamily={"Arial Narrow"}, ~padding={"1vh 2.5vh 1vh 2.5vh"}, ()))>
-      //     (React.string("E-W"))</td>
-      // </tr>
       <tr style=(ReactDOMRe.Style.make(~backgroundColor={"#f8f8f8"}, ()))>
         <td style=(ReactDOMRe.Style.make(~padding={"1vh 1vh 1vh 1vh"}, ()))>
           (React.string("Vuln"))

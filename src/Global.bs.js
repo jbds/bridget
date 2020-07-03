@@ -2,6 +2,8 @@
 
 var List = require("bs-platform/lib/js/list.js");
 var $$Array = require("bs-platform/lib/js/array.js");
+var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
+var Belt_List = require("bs-platform/lib/js/belt_List.js");
 var Chicago$ReasonReactExamples = require("./Chicago.bs.js");
 var Shuffle$ReasonReactExamples = require("./Shuffle.bs.js");
 
@@ -462,15 +464,46 @@ function reducer(state, action) {
                   ) : (
                     match !== 0 ? Shuffle$ReasonReactExamples.pocAsString(state.dealer) : "None"
                   );
+                var partnerPocByPoc = function (poc) {
+                  if (poc === undefined) {
+                    return "Error";
+                  }
+                  switch (poc) {
+                    case "East" :
+                        return "West";
+                    case "North" :
+                        return "South";
+                    case "South" :
+                        return "North";
+                    case "West" :
+                        return "East";
+                    default:
+                      return "Error";
+                  }
+                };
                 var bidRecordOfInterest1 = List.hd(List.tl(tl));
                 var contractLevel = bidRecordOfInterest1.contractLevel;
                 var contractSuit = bidRecordOfInterest1.contractSuit;
-                var chicagoScoreSheetRecord_contractDeclarer = "Test";
+                var contractPoc = bidRecordOfInterest1.contractPointOfCompass;
+                var bidsFilteredBySuitAnd2Poc = Belt_List.keep(state.bids, (function (x) {
+                        if (Caml_obj.caml_equal(x.contractSuit, contractSuit)) {
+                          if (Caml_obj.caml_equal(x.contractPointOfCompass, contractPoc)) {
+                            return true;
+                          } else {
+                            return Caml_obj.caml_equal(x.contractPointOfCompass, partnerPocByPoc(contractPoc));
+                          }
+                        } else {
+                          return false;
+                        }
+                      }));
+                var bidsFilteredBySuitAnd2PocReversed = Belt_List.reverse(bidsFilteredBySuitAnd2Poc);
+                var hd3 = List.hd(bidsFilteredBySuitAnd2PocReversed);
+                var contractDeclarer = hd3.contractPointOfCompass;
                 var chicagoScoreSheetRecord = {
                   vulnerable: vulnerable,
                   contractLevel: contractLevel,
                   contractSuit: contractSuit,
-                  contractDeclarer: chicagoScoreSheetRecord_contractDeclarer,
+                  contractDeclarer: contractDeclarer,
                   totalTricks: 0,
                   scoreNorthSouth: undefined,
                   scoreWestEast: undefined

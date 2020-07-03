@@ -237,4 +237,16 @@ let pocAsString = (poc) => {
   }
 };
 
+// added for finding declarer
+// let partnerPocAsString = (poc) => {
+//   switch (poc) {
+//     | None => "Error"
+//     | Some("North") => "South"
+//     | Some("South") => "North"
+//     | Some("West") => "East"
+//     | Some("East") => "West"
+//     | _ => "Error"
+//   }
+// };
+
 

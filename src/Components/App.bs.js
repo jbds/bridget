@@ -160,7 +160,9 @@ function App(Props) {
                       label: "Login sync with server",
                       id: "btnLoginSync",
                       isVisible: false
-                    }), React.createElement(ChicagoScoreTable$ReasonReactExamples.make, { })), React.createElement("div", {
+                    }), React.createElement(ChicagoScoreTable$ReasonReactExamples.make, {
+                      state: state
+                    })), React.createElement("div", {
                   id: "sidebar3"
                 }, React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spnRandomInt",
