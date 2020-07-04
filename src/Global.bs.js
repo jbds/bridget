@@ -55,17 +55,17 @@ function reducer(state, action) {
       case /* Shuffle */1 :
           ((window.isLastActionSync = false));
           return {
-                  activePointOfCompass: state.activePointOfCompass,
+                  activePointOfCompass: state.dealer,
                   bids: /* [] */0,
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
-                  dealIndex: state.dealIndex + 1 | 0,
+                  dealIndex: state.dealIndex,
                   declarer: undefined,
                   handVisible: state.handVisible,
                   isBiddingCycle: true,
                   isBiddingHideDenominationButtons: true,
                   isRebootVisible: state.isRebootVisible,
-                  lastAction: "Shuffle",
+                  lastAction: "Deal",
                   pack: Shuffle$ReasonReactExamples.getShuffledPack(undefined),
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)

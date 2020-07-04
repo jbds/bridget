@@ -90,16 +90,19 @@ let reducer = (state: state, action) => {
         // dealer becomes activePointOfCompass too, because he starts the bidding
         // do change of dealer at end of deal ie 52 cards out TO D)
         //let poc = Some(Shuffle.getNextPointOfCompass(state.dealer));
+        // also set BiddingCycle to true here
+        // not sure dealIndex is needed?
+        // force activePointOfCompass to be dealer
         {
           ...state, 
-          //activePointOfCompass: poc,
+          activePointOfCompass: state.dealer,
           bids: [],
           //dealer: poc,
-          dealIndex: state.dealIndex + 1,
+          //dealIndex: state.dealIndex + 1,
           declarer: None,
           isBiddingCycle: true,
           isBiddingHideDenominationButtons: true,
-          lastAction: "Shuffle",
+          lastAction: "Deal",
           pack: Shuffle.getShuffledPack(), 
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
         }
