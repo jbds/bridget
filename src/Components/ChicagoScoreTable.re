@@ -126,17 +126,61 @@ let make = (~state: Global.state) => {
       // </tr>
       // ref RR examples
       {
+        // let contractSuitAsString = (contractSuit) = {
+
+        // };
         Belt.List.toArray(Belt.List.reverse(state.chicagoScoreSheet))
-        -> Belt.Array.map(x =>
-          <tr key={string_of_int(Shuffle.impureGetTimeBasedSeedUpTo60k())} style=(ReactDOMRe.Style.make(~backgroundColor={"white"}, ()))>
+        -> Belt.Array.map(x => {
+          // need some helper funcs here like those in BidTable.re
+          let denominationValue =
+            switch(x.contractSuit) {
+              | None => "" //{js|\u2669|js}  // dummy glyph
+              | Some("Clubs") => {js|\u2663|js}
+              | Some("Diamonds") => {js|\u2666|js}
+              | Some("Hearts") => {js|\u2665|js}
+              | Some("Spades") => {js|\u2660|js}
+              | Some("NoTrumps") => ""
+              | Some(_) => "Error"
+            };
+          let denominationColor = {
+            switch (x.contractSuit) {
+              | None => "white"
+              | Some("Clubs") => "#404040"
+              | Some("Diamonds") => "red"
+              | Some("Hearts") => "red"
+              | Some("Spades") => "#404040"
+              | Some("NoTrumps") => "white"
+              | Some(_) => "white"
+            }
+          };
+          let getLevelPlusPossibleNT =  (n) => {
+            if (x.contractSuit === Some("NoTrumps")) {
+              string_of_int(n) ++ "NT"
+            } else {
+              string_of_int(n)
+            }
+          };
+          let textValue = 
+            switch (x.contractLevel) {
+              | None => "X"
+              | Some(n) => getLevelPlusPossibleNT(n)
+            };
+          <tr key={string_of_int(Random.int(1000000))} style=(ReactDOMRe.Style.make(~backgroundColor={"white"}, ()))>
             <td>{React.string(x.vulnerable)}</td>
             <td>{React.string(String.sub(Shuffle.pocAsString(x.contractDeclarer), 0, 1))}</td>
-            <td>{React.string(Shuffle.optionIntAsString(x.contractLevel))}</td>
+            //<td>{React.string(Shuffle.optionIntAsString(x.contractLevel))}</td>
+            <td>
+              <ChicagoBidTableCell 
+                textValue=textValue
+                denominationValue=denominationValue
+                denominationColor=denominationColor
+              />
+            </td>
             <td>{React.string(string_of_int(x.totalTricks))}</td>
             <td>{React.string(Shuffle.optionIntAsString(x.scoreNorthSouth))}</td>
             <td>{React.string(Shuffle.optionIntAsString(x.scoreWestEast))}</td>
           </tr>
-        )
+        })
         -> React.array
       }
     </tbody>

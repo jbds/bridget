@@ -2,10 +2,12 @@
 
 var List = require("bs-platform/lib/js/list.js");
 var React = require("react");
+var Random = require("bs-platform/lib/js/random.js");
 var $$String = require("bs-platform/lib/js/string.js");
 var Belt_List = require("bs-platform/lib/js/belt_List.js");
 var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 var Shuffle$ReasonReactExamples = require("../Shuffle.bs.js");
+var ChicagoBidTableCell$ReasonReactExamples = require("./ChicagoBidTableCell.bs.js");
 
 function ChicagoScoreTable(Props) {
   var state = Props.state;
@@ -49,12 +51,71 @@ function ChicagoScoreTable(Props) {
                                   padding: "1vh 2vh 1vh 2vh"
                                 }
                               }, "E-W")), Belt_Array.map(Belt_List.toArray(Belt_List.reverse(state.chicagoScoreSheet)), (function (x) {
+                              var match = x.contractSuit;
+                              var denominationValue;
+                              if (match !== undefined) {
+                                switch (match) {
+                                  case "Clubs" :
+                                      denominationValue = "\u2663";
+                                      break;
+                                  case "Diamonds" :
+                                      denominationValue = "\u2666";
+                                      break;
+                                  case "Hearts" :
+                                      denominationValue = "\u2665";
+                                      break;
+                                  case "NoTrumps" :
+                                      denominationValue = "";
+                                      break;
+                                  case "Spades" :
+                                      denominationValue = "\u2660";
+                                      break;
+                                  default:
+                                    denominationValue = "Error";
+                                }
+                              } else {
+                                denominationValue = "";
+                              }
+                              var match$1 = x.contractSuit;
+                              var denominationColor;
+                              if (match$1 !== undefined) {
+                                switch (match$1) {
+                                  case "Diamonds" :
+                                  case "Hearts" :
+                                      denominationColor = "red";
+                                      break;
+                                  case "NoTrumps" :
+                                      denominationColor = "white";
+                                      break;
+                                  case "Clubs" :
+                                  case "Spades" :
+                                      denominationColor = "#404040";
+                                      break;
+                                  default:
+                                    denominationColor = "white";
+                                }
+                              } else {
+                                denominationColor = "white";
+                              }
+                              var getLevelPlusPossibleNT = function (n) {
+                                if (x.contractSuit === "NoTrumps") {
+                                  return String(n) + "NT";
+                                } else {
+                                  return String(n);
+                                }
+                              };
+                              var n = x.contractLevel;
+                              var textValue = n !== undefined ? getLevelPlusPossibleNT(n) : "X";
                               return React.createElement("tr", {
-                                          key: String(Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)),
+                                          key: String(Random.$$int(1000000)),
                                           style: {
                                             backgroundColor: "white"
                                           }
-                                        }, React.createElement("td", undefined, x.vulnerable), React.createElement("td", undefined, $$String.sub(Shuffle$ReasonReactExamples.pocAsString(x.contractDeclarer), 0, 1)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.contractLevel)), React.createElement("td", undefined, String(x.totalTricks)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreNorthSouth)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreWestEast)));
+                                        }, React.createElement("td", undefined, x.vulnerable), React.createElement("td", undefined, $$String.sub(Shuffle$ReasonReactExamples.pocAsString(x.contractDeclarer), 0, 1)), React.createElement("td", undefined, React.createElement(ChicagoBidTableCell$ReasonReactExamples.make, {
+                                                  textValue: textValue,
+                                                  denominationValue: denominationValue,
+                                                  denominationColor: denominationColor
+                                                })), React.createElement("td", undefined, String(x.totalTricks)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreNorthSouth)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreWestEast)));
                             })))));
   }
 }
