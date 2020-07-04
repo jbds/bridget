@@ -314,8 +314,8 @@ let reducer = (state: state, action) => {
               let tl = List.tl(state.bids);
               let hd2 = List.hd(tl);
               if (hd1.isPass === true && hd2.isPass === true) {
-                // get vulnerability
-                let vulnerable = switch(state.dealIndex mod 4)  {
+                // get vulnerability based on number of scores so far
+                let vulnerable = switch(List.length(state.chicagoScoreSheet) mod 4)  {
                   | 0 => "None"
                   | 1 => Shuffle.pocAsString(state.dealer)
                   | 2 => Shuffle.pocAsString(state.dealer)

@@ -457,7 +457,7 @@ function reducer(state, action) {
                           randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                         };
                 }
-                var match = state.dealIndex % 4;
+                var match = List.length(state.chicagoScoreSheet) % 4;
                 var vulnerable = match > 2 || match < 0 ? (
                     match !== 3 ? "Error" : "All"
                   ) : (
