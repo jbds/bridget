@@ -124,6 +124,21 @@ let make = (~state: Global.state) => {
       //   <td>(React.string("1000"))</td>
       //   <td>(React.string("500"))</td>
       // </tr>
+      // ref RR examples
+      {
+        Belt.List.toArray(state.chicagoScoreSheet)
+        -> Belt.Array.map(x =>
+          <tr key={x.vulnerable} style=(ReactDOMRe.Style.make(~backgroundColor={"white"}, ()))>
+            <td>{React.string(x.vulnerable)}</td>
+            <td>{React.string(String.sub(Shuffle.pocAsString(x.contractDeclarer), 0, 1))}</td>
+            <td>{React.string(Shuffle.optionIntAsString(x.contractLevel))}</td>
+            <td>{React.string(string_of_int(x.totalTricks))}</td>
+            <td>{React.string(Shuffle.optionIntAsString(x.scoreNorthSouth))}</td>
+            <td>{React.string(Shuffle.optionIntAsString(x.scoreWestEast))}</td>
+          </tr>
+        )
+        -> React.array
+      }
     </tbody>
     </table>
   </>

@@ -106,3 +106,5 @@ let initialPoc: string;
 let pocAsString: (option(string)) => string;
 
 //let partnerPocAsString: (option(string)) => string;
+
+let optionIntAsString: (option(int)) => string;

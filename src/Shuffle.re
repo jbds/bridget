@@ -249,4 +249,24 @@ let pocAsString = (poc) => {
 //   }
 // };
 
+let optionIntAsString = (level) => {
+  switch (level) {
+    | None => ""
+    | Some(1) => "1"
+    | Some(2) => "2"
+    | Some(3) => "3"
+    | Some(4) => "4"
+    | Some(5) => "5"
+    | Some(6) => "6"
+    | Some(7) => "7"
+    | Some(8) => "8"
+    | Some(9) => "9"
+    | Some(10) => "10"
+    | Some(11) => "11"
+    | Some(12) => "12"
+    | Some(13) => "13"
+    | _ => "X"
+  }
+};
+
 
