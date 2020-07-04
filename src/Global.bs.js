@@ -496,6 +496,8 @@ function reducer(state, action) {
                           return false;
                         }
                       }));
+                console.log("bidsFilteredBySuitAnd2Poc:");
+                console.log(bidsFilteredBySuitAnd2Poc);
                 var bidsFilteredBySuitAnd2PocReversed = Belt_List.reverse(bidsFilteredBySuitAnd2Poc);
                 var hd3 = List.hd(bidsFilteredBySuitAnd2PocReversed);
                 var contractDeclarer = hd3.contractPointOfCompass;
@@ -517,7 +519,7 @@ function reducer(state, action) {
                         ],
                         dealer: state.dealer,
                         dealIndex: state.dealIndex,
-                        declarer: state.declarer,
+                        declarer: contractDeclarer,
                         handVisible: state.handVisible,
                         isBiddingCycle: false,
                         isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,

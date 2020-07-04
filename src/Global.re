@@ -348,6 +348,8 @@ let reducer = (state: state, action) => {
                     x.contractPointOfCompass == partnerPocByPoc(contractPoc)
                   )
                 });
+                Js.log("bidsFilteredBySuitAnd2Poc:");
+                Js.log(bidsFilteredBySuitAnd2Poc);
                 let bidsFilteredBySuitAnd2PocReversed = Belt.List.reverse(bidsFilteredBySuitAnd2Poc);
                 let hd3 = List.hd(bidsFilteredBySuitAnd2PocReversed);
                 let contractDeclarer = hd3.contractPointOfCompass
@@ -364,6 +366,7 @@ let reducer = (state: state, action) => {
                 {
                   ...state,
                   chicagoScoreSheet: [chicagoScoreSheetRecord ,...state.chicagoScoreSheet],
+                  declarer: contractDeclarer,
                   isBiddingCycle: false,
                   lastAction: "BidAddSpecial-3Passes",
                   randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
