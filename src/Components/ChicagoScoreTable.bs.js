@@ -48,9 +48,9 @@ function ChicagoScoreTable(Props) {
                                 style: {
                                   padding: "1vh 2vh 1vh 2vh"
                                 }
-                              }, "E-W")), Belt_Array.map(Belt_List.toArray(state.chicagoScoreSheet), (function (x) {
+                              }, "E-W")), Belt_Array.map(Belt_List.toArray(Belt_List.reverse(state.chicagoScoreSheet)), (function (x) {
                               return React.createElement("tr", {
-                                          key: x.vulnerable,
+                                          key: String(Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)),
                                           style: {
                                             backgroundColor: "white"
                                           }

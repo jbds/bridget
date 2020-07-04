@@ -2,6 +2,7 @@
 
 var List = require("bs-platform/lib/js/list.js");
 var $$Array = require("bs-platform/lib/js/array.js");
+var $$String = require("bs-platform/lib/js/string.js");
 var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 var Belt_List = require("bs-platform/lib/js/belt_List.js");
 var Chicago$ReasonReactExamples = require("./Chicago.bs.js");
@@ -461,7 +462,7 @@ function reducer(state, action) {
                 var vulnerable = match > 2 || match < 0 ? (
                     match !== 3 ? "Error" : "All"
                   ) : (
-                    match !== 0 ? Shuffle$ReasonReactExamples.pocAsString(state.dealer) : "None"
+                    match !== 0 ? $$String.sub(Shuffle$ReasonReactExamples.pocAsString(state.dealer), 0, 1) : "None"
                   );
                 var partnerPocByPoc = function (poc) {
                   if (poc === undefined) {
@@ -510,10 +511,10 @@ function reducer(state, action) {
                 return {
                         activePointOfCompass: state.activePointOfCompass,
                         bids: state.bids,
-                        chicagoScoreSheet: /* :: */[
-                          chicagoScoreSheetRecord,
-                          state.chicagoScoreSheet
-                        ],
+                        chicagoScoreSheet: contractLevel !== undefined ? /* :: */[
+                            chicagoScoreSheetRecord,
+                            state.chicagoScoreSheet
+                          ] : state.chicagoScoreSheet,
                         dealer: state.dealer,
                         dealIndex: state.dealIndex,
                         declarer: contractDeclarer,
@@ -521,7 +522,7 @@ function reducer(state, action) {
                         isBiddingCycle: false,
                         isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                         isRebootVisible: state.isRebootVisible,
-                        lastAction: "BidAddSpecial-3Passes",
+                        lastAction: contractLevel !== undefined ? "BidAddSpecial- 3 Passes" : "BidAddSpecial- 4 Passes",
                         pack: state.pack,
                         pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                         randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)

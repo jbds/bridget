@@ -320,8 +320,8 @@ let reducer = (state: state, action) => {
                 // get vulnerability based on number of scores so far
                 let vulnerable = switch(List.length(state.chicagoScoreSheet) mod 4)  {
                   | 0 => "None"
-                  | 1 => Shuffle.pocAsString(state.dealer)
-                  | 2 => Shuffle.pocAsString(state.dealer)
+                  | 1 => String.sub(Shuffle.pocAsString(state.dealer), 0, 1)
+                  | 2 => String.sub(Shuffle.pocAsString(state.dealer), 0, 1)
                   | 3 => "All"
                   | _ => "Error"
                 };
@@ -365,13 +365,23 @@ let reducer = (state: state, action) => {
                   scoreNorthSouth: scoreNorthSouth,
                   scoreWestEast: scoreWestEast
                 };
-                // return end of bidding
+                // return end of bidding, but avoid new row if 4 passes by checking contractLevel
                 {
                   ...state,
-                  chicagoScoreSheet: [chicagoScoreSheetRecord ,...state.chicagoScoreSheet],
+                  chicagoScoreSheet: 
+                    contractLevel != None 
+                    ?
+                    [chicagoScoreSheetRecord ,...state.chicagoScoreSheet]
+                    :
+                    state.chicagoScoreSheet,
                   declarer: contractDeclarer,
                   isBiddingCycle: false,
-                  lastAction: "BidAddSpecial-3Passes",
+                  lastAction: 
+                    contractLevel != None
+                    ?
+                    "BidAddSpecial- 3 Passes"
+                    :
+                    "BidAddSpecial- 4 Passes",
                   randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
                 }
               } else {
