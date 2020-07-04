@@ -241,12 +241,43 @@ let drawLabels = (p, g, w) => {
       // add dealer if appropriate
       //let positionPlayerDealer = (obj.pointOfCompass).substring(0, 1) + ' - ' + obj.player;
       //let positionPlayerDealer = w.gameState.dealer;
-      let positionPlayerDealer =
-      w.gameState.dealer === obj.pointOfCompass
-      ?
-      obj.pointOfCompass + '  ' + obj.player + '  Dealer'
-      :
-      obj.pointOfCompass + '  ' + obj.player;
+      let getDummyPointOfCompassFromDeclarer = (poc) => {
+        switch (poc) {
+          case 'West': 
+            return 'East';
+            break;
+          case 'North': 
+            return 'South';
+            break;
+          case 'East':
+            return 'West';
+            break;
+          case 'South':
+            return 'North';
+            break;
+          default:
+            return 'X'
+        }
+      };
+      let positionPlayerDealer; 
+      if (w.gameState.dealer === obj.pointOfCompass && w.gameState.declarer === obj.pointOfCompass) {
+        positionPlayerDealer = 'Dealer & Declarer ' + obj.pointOfCompass + ' ' + obj.player
+      } else if (w.gameState.dealer === obj.pointOfCompass && getDummyPointOfCompassFromDeclarer(w.gameState.declarer) === obj.pointOfCompass) {
+        positionPlayerDealer = 'Dealer + Dummy ' + obj.pointOfCompass + ' ' + obj.player
+      } else if (w.gameState.dealer === obj.pointOfCompass) {
+        positionPlayerDealer = 'Dealer ' + obj.pointOfCompass + ' ' + obj.player  
+      } else if (w.gameState.declarer === obj.pointOfCompass) { 
+        positionPlayerDealer = 'Declarer ' + obj.pointOfCompass + ' ' + obj.player
+      } else if (getDummyPointOfCompassFromDeclarer(w.gameState.declarer) === obj.pointOfCompass) {
+        positionPlayerDealer = 'Dummy ' + obj.pointOfCompass + ' ' + obj.player
+      } else {
+        positionPlayerDealer = obj.pointOfCompass + ' ' + obj.player;
+      }
+      // w.gameState.dealer === obj.pointOfCompass
+      // ?
+      // obj.pointOfCompass + '  ' + obj.player + '  Dealer'
+      // :
+      // obj.pointOfCompass + '  ' + obj.player;
       if(obj.pointOfCompass != '') {
         p.text(
           positionPlayerDealer, 
