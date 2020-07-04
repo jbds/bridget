@@ -398,7 +398,6 @@ function reducer(state, action) {
           switch (special) {
             case "Pass" :
                 var bidsLength = List.length(state.bids);
-                console.log(bidsLength);
                 if (bidsLength < 3) {
                   return {
                           activePointOfCompass: poc$2,
@@ -496,8 +495,6 @@ function reducer(state, action) {
                           return false;
                         }
                       }));
-                console.log("bidsFilteredBySuitAnd2Poc:");
-                console.log(bidsFilteredBySuitAnd2Poc);
                 var bidsFilteredBySuitAnd2PocReversed = Belt_List.reverse(bidsFilteredBySuitAnd2Poc);
                 var hd3 = List.hd(bidsFilteredBySuitAnd2PocReversed);
                 var contractDeclarer = hd3.contractPointOfCompass;

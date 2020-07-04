@@ -308,7 +308,7 @@ let reducer = (state: state, action) => {
           | Some("Pass") => {
             // check for end of bidding cycle
             let bidsLength = List.length(state.bids);
-            Js.log(bidsLength);
+            //Js.log(bidsLength);
             if (bidsLength >= 3) {
               let hd1 = List.hd(state.bids);
               let tl = List.tl(state.bids);
@@ -348,8 +348,8 @@ let reducer = (state: state, action) => {
                     x.contractPointOfCompass == partnerPocByPoc(contractPoc)
                   )
                 });
-                Js.log("bidsFilteredBySuitAnd2Poc:");
-                Js.log(bidsFilteredBySuitAnd2Poc);
+                //Js.log("bidsFilteredBySuitAnd2Poc:");
+                //Js.log(bidsFilteredBySuitAnd2Poc);
                 let bidsFilteredBySuitAnd2PocReversed = Belt.List.reverse(bidsFilteredBySuitAnd2Poc);
                 let hd3 = List.hd(bidsFilteredBySuitAnd2PocReversed);
                 let contractDeclarer = hd3.contractPointOfCompass
