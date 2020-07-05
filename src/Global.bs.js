@@ -5,6 +5,8 @@ var $$Array = require("bs-platform/lib/js/array.js");
 var $$String = require("bs-platform/lib/js/string.js");
 var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 var Belt_List = require("bs-platform/lib/js/belt_List.js");
+var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
+var Caml_array = require("bs-platform/lib/js/caml_array.js");
 var Chicago$ReasonReactExamples = require("./Chicago.bs.js");
 var Shuffle$ReasonReactExamples = require("./Shuffle.bs.js");
 
@@ -25,6 +27,7 @@ var initialState = {
   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
   isBiddingCycle: false,
   isBiddingHideDenominationButtons: true,
+  isDummyVisible: false,
   isRebootVisible: false,
   lastAction: "None (initialState from Client)",
   pack: initialState_pack,
@@ -47,6 +50,7 @@ function reducer(state, action) {
                   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
                   isBiddingCycle: false,
                   isBiddingHideDenominationButtons: true,
+                  isDummyVisible: false,
                   isRebootVisible: true,
                   lastAction: "Reboot (clears scores & logins)",
                   pack: [],
@@ -65,6 +69,7 @@ function reducer(state, action) {
                   handVisible: state.handVisible,
                   isBiddingCycle: true,
                   isBiddingHideDenominationButtons: true,
+                  isDummyVisible: state.isDummyVisible,
                   isRebootVisible: state.isRebootVisible,
                   lastAction: "Deal",
                   pack: Shuffle$ReasonReactExamples.getShuffledPack(undefined),
@@ -74,6 +79,17 @@ function reducer(state, action) {
       case /* Discard */2 :
           ((window.isLastActionSync = false));
           var discardFileName = window.discardFileName;
+          var cardWrappedInArray = Belt_Array.keep(state.pack, (function (x) {
+                  return x.fileName === discardFileName;
+                }));
+          var cardShuffleIndex = Caml_array.caml_array_get(cardWrappedInArray, 0).shuffleIndex;
+          var discardPoc = cardShuffleIndex < 13 ? "North" : (
+              cardShuffleIndex < 26 ? "East" : (
+                  cardShuffleIndex < 39 ? "South" : "West"
+                )
+            );
+          console.log("discardPoc:");
+          console.log(discardPoc);
           var myPack = $$Array.map((function (card) {
                   if (card.fileName === discardFileName) {
                     return {
@@ -99,6 +115,7 @@ function reducer(state, action) {
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
                   isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
+                  isDummyVisible: state.isDummyVisible,
                   isRebootVisible: state.isRebootVisible,
                   lastAction: "Discard",
                   pack: myPack,
@@ -122,6 +139,7 @@ function reducer(state, action) {
                   },
                   isBiddingCycle: false,
                   isBiddingHideDenominationButtons: true,
+                  isDummyVisible: false,
                   isRebootVisible: false,
                   lastAction: "Logout or Server Down",
                   pack: [],
@@ -142,6 +160,7 @@ function reducer(state, action) {
           var bids = window.gameState.bids;
           var isBiddingHideDenominationButtons = window.gameState.isBiddingHideDenominationButtons;
           var isRebootVisible = window.gameState.isRebootVisible;
+          var isDummyVisible = window.gameState.isDummyVisible;
           return {
                   activePointOfCompass: poc,
                   bids: bids,
@@ -152,6 +171,7 @@ function reducer(state, action) {
                   handVisible: hV,
                   isBiddingCycle: isBiddingCycle,
                   isBiddingHideDenominationButtons: isBiddingHideDenominationButtons,
+                  isDummyVisible: isDummyVisible,
                   isRebootVisible: isRebootVisible,
                   lastAction: "LoginSync",
                   pack: pack,
@@ -171,6 +191,7 @@ function reducer(state, action) {
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
                   isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
+                  isDummyVisible: state.isDummyVisible,
                   isRebootVisible: state.isRebootVisible,
                   lastAction: "Test",
                   pack: state.pack,
@@ -201,6 +222,7 @@ function reducer(state, action) {
                         },
                         isBiddingCycle: state.isBiddingCycle,
                         isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
+                        isDummyVisible: state.isDummyVisible,
                         isRebootVisible: state.isRebootVisible,
                         lastAction: "Flip",
                         pack: state.pack,
@@ -224,6 +246,7 @@ function reducer(state, action) {
                         },
                         isBiddingCycle: state.isBiddingCycle,
                         isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
+                        isDummyVisible: state.isDummyVisible,
                         isRebootVisible: state.isRebootVisible,
                         lastAction: "Flip",
                         pack: state.pack,
@@ -247,6 +270,7 @@ function reducer(state, action) {
                         },
                         isBiddingCycle: state.isBiddingCycle,
                         isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
+                        isDummyVisible: state.isDummyVisible,
                         isRebootVisible: state.isRebootVisible,
                         lastAction: "Flip",
                         pack: state.pack,
@@ -270,6 +294,7 @@ function reducer(state, action) {
                         },
                         isBiddingCycle: state.isBiddingCycle,
                         isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
+                        isDummyVisible: state.isDummyVisible,
                         isRebootVisible: state.isRebootVisible,
                         lastAction: "Flip",
                         pack: state.pack,
@@ -312,6 +337,7 @@ function reducer(state, action) {
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
                   isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
+                  isDummyVisible: state.isDummyVisible,
                   isRebootVisible: state.isRebootVisible,
                   lastAction: "AssignPlayer",
                   pack: state.pack,
@@ -341,6 +367,7 @@ function reducer(state, action) {
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
                   isBiddingHideDenominationButtons: false,
+                  isDummyVisible: state.isDummyVisible,
                   isRebootVisible: state.isRebootVisible,
                   lastAction: "BidAdd",
                   pack: state.pack,
@@ -382,6 +409,7 @@ function reducer(state, action) {
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
                   isBiddingHideDenominationButtons: true,
+                  isDummyVisible: state.isDummyVisible,
                   isRebootVisible: state.isRebootVisible,
                   lastAction: "BidUpdate",
                   pack: state.pack,
@@ -420,6 +448,7 @@ function reducer(state, action) {
                           handVisible: state.handVisible,
                           isBiddingCycle: state.isBiddingCycle,
                           isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
+                          isDummyVisible: state.isDummyVisible,
                           isRebootVisible: state.isRebootVisible,
                           lastAction: "BidAddSpecial",
                           pack: state.pack,
@@ -451,6 +480,7 @@ function reducer(state, action) {
                           handVisible: state.handVisible,
                           isBiddingCycle: state.isBiddingCycle,
                           isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
+                          isDummyVisible: state.isDummyVisible,
                           isRebootVisible: state.isRebootVisible,
                           lastAction: "BidAddSpecial",
                           pack: state.pack,
@@ -521,6 +551,7 @@ function reducer(state, action) {
                         handVisible: state.handVisible,
                         isBiddingCycle: false,
                         isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
+                        isDummyVisible: state.isDummyVisible,
                         isRebootVisible: state.isRebootVisible,
                         lastAction: contractLevel !== undefined ? "BidAddSpecial- 3 Passes" : "BidAddSpecial- 4 Passes",
                         pack: state.pack,
@@ -548,6 +579,7 @@ function reducer(state, action) {
                         handVisible: state.handVisible,
                         isBiddingCycle: state.isBiddingCycle,
                         isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
+                        isDummyVisible: state.isDummyVisible,
                         isRebootVisible: state.isRebootVisible,
                         lastAction: "BidAddSpecial",
                         pack: state.pack,
@@ -575,6 +607,7 @@ function reducer(state, action) {
                         handVisible: state.handVisible,
                         isBiddingCycle: state.isBiddingCycle,
                         isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
+                        isDummyVisible: state.isDummyVisible,
                         isRebootVisible: state.isRebootVisible,
                         lastAction: "BidAddSpecial",
                         pack: state.pack,

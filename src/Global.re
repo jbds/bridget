@@ -28,6 +28,7 @@ type state = {
   handVisible: Shuffle.handVisible,
   isBiddingCycle: bool,
   isBiddingHideDenominationButtons: bool,
+  isDummyVisible: bool,
   isRebootVisible: bool,
   lastAction: string,
   pack: Shuffle.pack,
@@ -48,6 +49,7 @@ let initialState: state = {
     handVisible: Shuffle.initialHandVisible,
     isBiddingCycle: false,
     isBiddingHideDenominationButtons: true,
+    isDummyVisible: false,
     isRebootVisible: false,
     lastAction: "None (initialState from Client)",
     pack: [||], // Shuffle.initialPack,
@@ -75,6 +77,7 @@ let reducer = (state: state, action) => {
           handVisible: Shuffle.initialHandVisible,
           isBiddingCycle: false,
           isBiddingHideDenominationButtons: true,
+          isDummyVisible: false,
           isRebootVisible: true,
           lastAction: "Reboot (clears scores & logins)",
           pack: [||],
@@ -124,6 +127,20 @@ let reducer = (state: state, action) => {
         let () = [%raw "window.isLastActionSync = false"];
         // attempt to set state to gameState failed, must update state correctly
         let discardFileName: string = [%raw "window.discardFileName"];
+        let cardWrappedInArray = Belt.Array.keep(state.pack, x => x.fileName === discardFileName);
+        let cardShuffleIndex = cardWrappedInArray[0].shuffleIndex;
+        let discardPoc = 
+          if (cardShuffleIndex < 13) {
+            "North"
+          } else if (cardShuffleIndex < 26) {
+            "East"
+          } else if (cardShuffleIndex < 39) {
+            "South"
+          } else {
+            "West"
+          };
+        Js.log("discardPoc:");
+        Js.log(discardPoc);
         let myPack = Array.map(
           (card: Shuffle.card) => {
             card.fileName === discardFileName
@@ -160,6 +177,7 @@ let reducer = (state: state, action) => {
           handVisible: {north: false, east: false, south: false, west: false},
           isBiddingCycle: false,
           isBiddingHideDenominationButtons: true,
+          isDummyVisible: false,
           isRebootVisible: false,
           lastAction: "Logout or Server Down",
           pack: [||],
@@ -186,6 +204,7 @@ let reducer = (state: state, action) => {
         let bids: Chicago.bids = [%bs.raw "window.gameState.bids"];
         let isBiddingHideDenominationButtons: bool = [%bs.raw "window.gameState.isBiddingHideDenominationButtons"];
         let isRebootVisible: bool = [%bs.raw "window.gameState.isRebootVisible"];
+        let isDummyVisible: bool = [%bs.raw "window.gameState.isDummyVisible"];
         // no need for ...state here as we are replacing all fields with the server gameState fields
         {
           activePointOfCompass: poc,
@@ -197,6 +216,7 @@ let reducer = (state: state, action) => {
           handVisible: hV,
           isBiddingCycle: isBiddingCycle,
           isBiddingHideDenominationButtons: isBiddingHideDenominationButtons,
+          isDummyVisible: isDummyVisible,
           isRebootVisible: isRebootVisible,
           lastAction: "LoginSync",
           pack: pack,

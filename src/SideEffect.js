@@ -241,27 +241,27 @@ let drawLabels = (p, g, w) => {
       // add dealer if appropriate
       //let positionPlayerDealer = (obj.pointOfCompass).substring(0, 1) + ' - ' + obj.player;
       //let positionPlayerDealer = w.gameState.dealer;
-      let getDummyPointOfCompassFromDeclarer = (poc) => {
-        switch (poc) {
-          case 'West': 
-            return 'East';
-            break;
-          case 'North': 
-            return 'South';
-            break;
-          case 'East':
-            return 'West';
-            break;
-          case 'South':
-            return 'North';
-            break;
-          default:
-            return 'X'
-        }
-      };
+      // let getDummyPointOfCompassFromDeclarer = (poc) => {
+      //   switch (poc) {
+      //     case 'West': 
+      //       return 'East';
+      //       break;
+      //     case 'North': 
+      //       return 'South';
+      //       break;
+      //     case 'East':
+      //       return 'West';
+      //       break;
+      //     case 'South':
+      //       return 'North';
+      //       break;
+      //     default:
+      //       return 'X'
+      //   }
+      // };
       let positionPlayerDealer; 
       if (w.gameState.dealer === obj.pointOfCompass && w.gameState.declarer === obj.pointOfCompass) {
-        positionPlayerDealer = 'Dealer & Declarer ' + obj.pointOfCompass + ' ' + obj.player
+        positionPlayerDealer = 'Dealer + Declarer ' + obj.pointOfCompass + ' ' + obj.player
       } else if (w.gameState.dealer === obj.pointOfCompass && getDummyPointOfCompassFromDeclarer(w.gameState.declarer) === obj.pointOfCompass) {
         positionPlayerDealer = 'Dealer + Dummy ' + obj.pointOfCompass + ' ' + obj.player
       } else if (w.gameState.dealer === obj.pointOfCompass) {
@@ -366,6 +366,46 @@ let translateAndRotateByClockPosition = (clockPosition, p, g) => {
     default:
       console.log('Unexpected clockPosition argument');
   };
+};
+
+// HELPER FUNC FOR drawLabels
+let getDummyPointOfCompassFromDeclarer = (poc) => {
+  switch (poc) {
+    case 'West': 
+      return 'East';
+      break;
+    case 'North': 
+      return 'South';
+      break;
+    case 'East':
+      return 'West';
+      break;
+    case 'South':
+      return 'North';
+      break;
+    default:
+      return 'X'
+  }
+};
+
+// HELPER FUNC FOR drawCards
+let getLeadPointOfCompassFromDeclarer = (poc) => {
+  switch (poc) {
+    case 'West': 
+      return 'North';
+      break;
+    case 'North': 
+      return 'East';
+      break;
+    case 'East':
+      return 'South';
+      break;
+    case 'South':
+      return 'West';
+      break;
+    default:
+      return 'X'
+  }
 };
 
 exports.drawCards = drawCards;
