@@ -122,7 +122,6 @@ let reducer = (state: state, action) => {
         }
       }
       | Discard => {
-        //Js.log("Action-Discard");
         // make sure doMessage IS called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
         // attempt to set state to gameState failed, must update state correctly
@@ -139,8 +138,8 @@ let reducer = (state: state, action) => {
           } else {
             "West"
           };
-        Js.log("discardPoc:");
-        Js.log(discardPoc);
+        //Js.log("discardPoc:");
+        //Js.log(discardPoc);
         // we need to know which poc folows declarer
         let pocFollowingDeclarer =
           if (state.declarer == Some("North")) {
@@ -154,8 +153,9 @@ let reducer = (state: state, action) => {
           } else {
             ""
           };
-        Js.log("pocFollowingDeclarer:")
-        Js.log(pocFollowingDeclarer);
+        //Js.log("pocFollowingDeclarer:")
+        //Js.log(pocFollowingDeclarer);
+        // move the selected card into the discard pile
         let myPack = Array.map(
           (card: Shuffle.card) => {
             card.fileName === discardFileName
@@ -168,6 +168,7 @@ let reducer = (state: state, action) => {
         );
         {
           ...state, 
+          activePointOfCompass: Shuffle.getNextActivePointOfCompass(state.activePointOfCompass),
           isDummyVisible: 
             discardPoc === pocFollowingDeclarer ? true : state.isDummyVisible,
           pack: myPack, 

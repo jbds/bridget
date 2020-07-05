@@ -88,8 +88,6 @@ function reducer(state, action) {
                   cardShuffleIndex < 39 ? "South" : "West"
                 )
             );
-          console.log("discardPoc:");
-          console.log(discardPoc);
           var pocFollowingDeclarer = Caml_obj.caml_equal(state.declarer, "North") ? "East" : (
               Caml_obj.caml_equal(state.declarer, "East") ? "South" : (
                   Caml_obj.caml_equal(state.declarer, "South") ? "West" : (
@@ -97,8 +95,6 @@ function reducer(state, action) {
                     )
                 )
             );
-          console.log("pocFollowingDeclarer:");
-          console.log(pocFollowingDeclarer);
           var myPack = $$Array.map((function (card) {
                   if (card.fileName === discardFileName) {
                     return {
@@ -115,7 +111,7 @@ function reducer(state, action) {
                   }
                 }), state.pack);
           return {
-                  activePointOfCompass: state.activePointOfCompass,
+                  activePointOfCompass: Shuffle$ReasonReactExamples.getNextActivePointOfCompass(state.activePointOfCompass),
                   bids: state.bids,
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
