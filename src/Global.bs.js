@@ -90,6 +90,15 @@ function reducer(state, action) {
             );
           console.log("discardPoc:");
           console.log(discardPoc);
+          var pocFollowingDeclarer = Caml_obj.caml_equal(state.declarer, "North") ? "East" : (
+              Caml_obj.caml_equal(state.declarer, "East") ? "South" : (
+                  Caml_obj.caml_equal(state.declarer, "South") ? "West" : (
+                      Caml_obj.caml_equal(state.declarer, "West") ? "North" : ""
+                    )
+                )
+            );
+          console.log("pocFollowingDeclarer:");
+          console.log(pocFollowingDeclarer);
           var myPack = $$Array.map((function (card) {
                   if (card.fileName === discardFileName) {
                     return {
@@ -115,7 +124,7 @@ function reducer(state, action) {
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
                   isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
-                  isDummyVisible: state.isDummyVisible,
+                  isDummyVisible: discardPoc === pocFollowingDeclarer ? true : state.isDummyVisible,
                   isRebootVisible: state.isRebootVisible,
                   lastAction: "Discard",
                   pack: myPack,

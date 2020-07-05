@@ -141,6 +141,21 @@ let reducer = (state: state, action) => {
           };
         Js.log("discardPoc:");
         Js.log(discardPoc);
+        // we need to know which poc folows declarer
+        let pocFollowingDeclarer =
+          if (state.declarer == Some("North")) {
+            "East"
+          } else if (state.declarer == Some("East")) {
+            "South"
+          } else if (state.declarer == Some("South")) {
+            "West"
+          } else if (state.declarer == Some("West")) {
+            "North"
+          } else {
+            ""
+          };
+        Js.log("pocFollowingDeclarer:")
+        Js.log(pocFollowingDeclarer);
         let myPack = Array.map(
           (card: Shuffle.card) => {
             card.fileName === discardFileName
@@ -153,6 +168,8 @@ let reducer = (state: state, action) => {
         );
         {
           ...state, 
+          isDummyVisible: 
+            discardPoc === pocFollowingDeclarer ? true : state.isDummyVisible,
           pack: myPack, 
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
           lastAction: "Discard"  
