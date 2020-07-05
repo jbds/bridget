@@ -509,7 +509,7 @@ function reducer(state, action) {
                   scoreWestEast: undefined
                 };
                 return {
-                        activePointOfCompass: state.activePointOfCompass,
+                        activePointOfCompass: Shuffle$ReasonReactExamples.getNextActivePointOfCompass(contractDeclarer),
                         bids: state.bids,
                         chicagoScoreSheet: contractLevel !== undefined ? /* :: */[
                             chicagoScoreSheetRecord,
@@ -529,7 +529,7 @@ function reducer(state, action) {
                       };
             case "X" :
                 return {
-                        activePointOfCompass: poc$2,
+                        activePointOfCompass: state.activePointOfCompass,
                         bids: /* :: */[
                           {
                             contractLevel: undefined,
@@ -556,7 +556,7 @@ function reducer(state, action) {
                       };
             case "XX" :
                 return {
-                        activePointOfCompass: poc$2,
+                        activePointOfCompass: state.activePointOfCompass,
                         bids: /* :: */[
                           {
                             contractLevel: undefined,

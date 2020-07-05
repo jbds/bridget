@@ -650,6 +650,24 @@ function optionIntAsString(level) {
   }
 }
 
+function getNextActivePointOfCompass(poc) {
+  if (poc === undefined) {
+    return "East";
+  }
+  switch (poc) {
+    case "East" :
+        return "South";
+    case "North" :
+        return "East";
+    case "South" :
+        return "West";
+    case "West" :
+        return "North";
+    default:
+      return "East";
+  }
+}
+
 var initialHandVisible = {
   north: true,
   east: true,
@@ -666,4 +684,5 @@ exports.getRandomCompassPoint = getRandomCompassPoint;
 exports.initialPoc = initialPoc;
 exports.pocAsString = pocAsString;
 exports.optionIntAsString = optionIntAsString;
+exports.getNextActivePointOfCompass = getNextActivePointOfCompass;
 /* initialPoc Not a pure module */

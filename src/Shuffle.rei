@@ -108,3 +108,5 @@ let pocAsString: (option(string)) => string;
 //let partnerPocAsString: (option(string)) => string;
 
 let optionIntAsString: (option(int)) => string;
+
+let getNextActivePointOfCompass: (option(string)) => option(string);

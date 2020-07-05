@@ -304,7 +304,7 @@ let reducer = (state: state, action) => {
         Js.log("Action - BidAddSpecial")
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
-        // move on to next poc!
+        // move on to next poc
         let poc = Some(Shuffle.getNextPointOfCompass(state.activePointOfCompass));   
         //Js.log(poc);   
         switch (special) {
@@ -368,6 +368,7 @@ let reducer = (state: state, action) => {
                 // return end of bidding, but avoid new row if 4 passes by checking contractLevel
                 {
                   ...state,
+                  activePointOfCompass: Shuffle.getNextActivePointOfCompass(contractDeclarer),
                   chicagoScoreSheet: 
                     contractLevel != None 
                     ?
@@ -425,7 +426,7 @@ let reducer = (state: state, action) => {
           }
           | Some("X") => {
             ...state, 
-            activePointOfCompass: poc,
+            //activePointOfCompass: poc, TBC
             bids: [
               {
                 contractLevel: None,
@@ -442,7 +443,7 @@ let reducer = (state: state, action) => {
           }
           | Some("XX") => {
             ...state, 
-            activePointOfCompass: poc,
+            //activePointOfCompass: poc, TBC
             bids: [
               {
                 contractLevel: None,

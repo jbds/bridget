@@ -269,4 +269,14 @@ let optionIntAsString = (level) => {
   }
 };
 
+let getNextActivePointOfCompass = (poc) => {
+  switch (poc) {
+    | Some("North") => Some("East")
+    | Some("East") => Some("South")
+    | Some("South") => Some("West")
+    | Some("West") => Some("North")
+    | _ => Some("East")
+  }
+};
+
 
