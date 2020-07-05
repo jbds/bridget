@@ -25,6 +25,7 @@ type state = {
   dealer: option(string),
   dealIndex: int,
   declarer: option(string),
+  discardIndex: int,
   handVisible: Shuffle.handVisible,
   isBiddingCycle: bool,
   isBiddingHideDenominationButtons: bool,
@@ -46,6 +47,7 @@ let initialState: state = {
     dealer: None, // Some(Shuffle.initialPoc), - do this at server!
     dealIndex: -1,
     declarer: None,
+    discardIndex: -1,
     handVisible: Shuffle.initialHandVisible,
     isBiddingCycle: false,
     isBiddingHideDenominationButtons: true,
@@ -74,6 +76,7 @@ let reducer = (state: state, action) => {
           dealer: None,
           dealIndex: -1,
           declarer: None,
+          discardIndex: -1,
           handVisible: Shuffle.initialHandVisible,
           isBiddingCycle: false,
           isBiddingHideDenominationButtons: true,
@@ -169,6 +172,7 @@ let reducer = (state: state, action) => {
         {
           ...state, 
           activePointOfCompass: Shuffle.getNextActivePointOfCompass(state.activePointOfCompass),
+          discardIndex: state.discardIndex + 1,
           isDummyVisible: 
             discardPoc === pocFollowingDeclarer ? true : state.isDummyVisible,
           pack: myPack, 
@@ -192,6 +196,7 @@ let reducer = (state: state, action) => {
           dealer: None,
           dealIndex: -1,
           declarer: None,
+          discardIndex: -1,
           handVisible: {north: false, east: false, south: false, west: false},
           isBiddingCycle: false,
           isBiddingHideDenominationButtons: true,
@@ -223,6 +228,7 @@ let reducer = (state: state, action) => {
         let isBiddingHideDenominationButtons: bool = [%bs.raw "window.gameState.isBiddingHideDenominationButtons"];
         let isRebootVisible: bool = [%bs.raw "window.gameState.isRebootVisible"];
         let isDummyVisible: bool = [%bs.raw "window.gameState.isDummyVisible"];
+        let discardIndex: int = [%bs.raw "window.gameState.discardIndex"];
         // no need for ...state here as we are replacing all fields with the server gameState fields
         {
           activePointOfCompass: poc,
@@ -231,6 +237,7 @@ let reducer = (state: state, action) => {
           dealer: dealer,
           dealIndex: dealIndex,
           declarer: declarer,
+          discardIndex: discardIndex,
           handVisible: hV,
           isBiddingCycle: isBiddingCycle,
           isBiddingHideDenominationButtons: isBiddingHideDenominationButtons,
