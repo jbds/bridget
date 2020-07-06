@@ -197,6 +197,8 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   // });
 
   window.discardFileName = myCard.fileName
+  console.log('isValidDiscardFromLocalPlayer:');
+  console.log(isValidDiscardFromLocalPlayer());
   if (isValidDiscardFromLocalPlayer()) {
     // dispatch the Discard action via a hidden key on the sidebar
     document.getElementById('btnDiscard').click();

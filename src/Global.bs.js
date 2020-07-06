@@ -98,6 +98,9 @@ function reducer(state, action) {
                     )
                 )
             );
+          var isAnotherFourCardsDiscarded = state.discardIndex % 4 === 2;
+          console.log("isAnotherFourCardsDiscarded");
+          console.log(isAnotherFourCardsDiscarded);
           var myPack = $$Array.map((function (card) {
                   if (card.fileName === discardFileName) {
                     return {
@@ -113,8 +116,9 @@ function reducer(state, action) {
                     return card;
                   }
                 }), state.pack);
+          var poc = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
           return {
-                  activePointOfCompass: Shuffle$ReasonReactExamples.getNextActivePointOfCompass(state.activePointOfCompass),
+                  activePointOfCompass: poc,
                   bids: state.bids,
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
@@ -166,14 +170,14 @@ function reducer(state, action) {
           var pack = window.gameState.pack;
           var dealIndex = window.gameState.dealIndex;
           var isBiddingCycle = window.gameState.isBiddingCycle;
-          var poc = window.gameState.activePointOfCompass;
+          var poc$1 = window.gameState.activePointOfCompass;
           var bids = window.gameState.bids;
           var isBiddingHideDenominationButtons = window.gameState.isBiddingHideDenominationButtons;
           var isRebootVisible = window.gameState.isRebootVisible;
           var isDummyVisible = window.gameState.isDummyVisible;
           var discardIndex = window.gameState.discardIndex;
           return {
-                  activePointOfCompass: poc,
+                  activePointOfCompass: poc$1,
                   bids: bids,
                   chicagoScoreSheet: cSS,
                   dealer: dealer,
@@ -417,9 +421,9 @@ function reducer(state, action) {
             newHead,
             tail
           ];
-          var poc$1 = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
+          var poc$2 = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
           return {
-                  activePointOfCompass: poc$1,
+                  activePointOfCompass: poc$2,
                   bids: bidsUpdated,
                   chicagoScoreSheet: state.chicagoScoreSheet,
                   dealer: state.dealer,
@@ -440,7 +444,7 @@ function reducer(state, action) {
           var special = action[0];
           console.log("Action - BidAddSpecial");
           ((window.isLastActionSync = false));
-          var poc$2 = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
+          var poc$3 = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
           if (special === undefined) {
             return state;
           }
@@ -449,7 +453,7 @@ function reducer(state, action) {
                 var bidsLength = List.length(state.bids);
                 if (bidsLength < 3) {
                   return {
-                          activePointOfCompass: poc$2,
+                          activePointOfCompass: poc$3,
                           bids: /* :: */[
                             {
                               contractLevel: undefined,
@@ -482,7 +486,7 @@ function reducer(state, action) {
                 var hd2 = List.hd(tl);
                 if (!(hd1.isPass === true && hd2.isPass === true)) {
                   return {
-                          activePointOfCompass: poc$2,
+                          activePointOfCompass: poc$3,
                           bids: /* :: */[
                             {
                               contractLevel: undefined,

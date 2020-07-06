@@ -46,7 +46,7 @@ type lifecycle =
   | Dealer
   | Hand
   | Discard
-  | Trick(compassPoint)
+  | Trick
 ;
 
 

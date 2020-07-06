@@ -158,6 +158,11 @@ let reducer = (state: state, action) => {
           };
         //Js.log("pocFollowingDeclarer:")
         //Js.log(pocFollowingDeclarer);
+        // not sure why this === 2 here, discardIndex starts at -1
+        let isAnotherFourCardsDiscarded = 
+          state.discardIndex mod 4 === 2 ? true : false;
+        Js.log("isAnotherFourCardsDiscarded");
+        Js.log(isAnotherFourCardsDiscarded);
         // move the selected card into the discard pile
         let myPack = Array.map(
           (card: Shuffle.card) => {
@@ -169,9 +174,11 @@ let reducer = (state: state, action) => {
           },
           state.pack
         );
+        // move on to next poc!
+        let poc = Some(Shuffle.getNextPointOfCompass(state.activePointOfCompass));        
         {
           ...state, 
-          activePointOfCompass: Shuffle.getNextActivePointOfCompass(state.activePointOfCompass),
+          activePointOfCompass: poc,
           discardIndex: state.discardIndex + 1,
           isDummyVisible: 
             discardPoc === pocFollowingDeclarer ? true : state.isDummyVisible,

@@ -43,12 +43,12 @@ type pointOfCompassAndPlayer = {
 // all cards start in the dealers hand
 // once shuffled they are in a hand defined by compass
 // then they are thrown to discard pile
-// winning hand takes the trick
+// every 4th discard, discards move to trick
 type lifecycle =
   | Dealer
   | Hand
   | Discard
-  | Trick(compassPoint)
+  | Trick
 ;
 
 // define an individual card as a record type, rather than tuple
