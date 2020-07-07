@@ -256,6 +256,13 @@ let optionIntAsString = (level) => {
   }
 };
 
+let optionIntAsInt = (oint) => {
+  switch (oint) {
+    | None => -99999
+    | Some(n) => n
+  }
+};
+
 let getNextActivePointOfCompass = (poc) => {
   switch (poc) {
     | Some("North") => Some("East")

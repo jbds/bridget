@@ -622,6 +622,14 @@ function optionIntAsString(level) {
   }
 }
 
+function optionIntAsInt(oint) {
+  if (oint !== undefined) {
+    return oint;
+  } else {
+    return -99999;
+  }
+}
+
 function getNextActivePointOfCompass(poc) {
   if (poc === undefined) {
     return "East";
@@ -672,4 +680,5 @@ exports.pocAsString = pocAsString;
 exports.optionIntAsString = optionIntAsString;
 exports.getNextActivePointOfCompass = getNextActivePointOfCompass;
 exports.getSuitAsOptionString = getSuitAsOptionString;
+exports.optionIntAsInt = optionIntAsInt;
 /* initialPoc Not a pure module */

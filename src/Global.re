@@ -526,8 +526,8 @@ let reducer = (state: state, action) => {
       // make sure doMessage is called in sidebar component
       let () = [%raw "window.isLastActionSync = false"];
       // check contract suit
-      let hd = List.hd(state.chicagoScoreSheet);
-      let contractSuit = hd.contractSuit;
+      let scoreSheetRecord = List.hd(state.chicagoScoreSheet);
+      let contractSuit = scoreSheetRecord.contractSuit;
       // get adjusted value of the cards
       let myAdjustedPackValue = Array.map(
         (card: Shuffle.card) => {
@@ -592,7 +592,7 @@ let reducer = (state: state, action) => {
         }
       };
       let declarerTrickIncrement = 
-        isPocDeclarerOrDummy(winningDiscardPoc, Shuffle.pocAsString(hd.contractDeclarer))
+        isPocDeclarerOrDummy(winningDiscardPoc, Shuffle.pocAsString(scoreSheetRecord.contractDeclarer))
         ?
         1
         :
@@ -610,29 +610,55 @@ let reducer = (state: state, action) => {
       let myChicagoScoreSheetRecordWithOptionalScore =
         if (
           state.discardIndex === 51 
-          && 
-          (
-            state.declarer === Some("South")
-            ||
-            state.declarer === Some("North")
-          )
-        ) {
-          ...myChicagoScoreSheetRecord, scoreNorthSouth: Some(999)
-        } else if (
-          state.discardIndex === 51 
-          && 
-          (
-            state.declarer === Some("East")
-            ||
-            state.declarer === Some("West")
-          )
-        ) {
-          ...myChicagoScoreSheetRecord, scoreWestEast: Some(444)
+          ) {
+          let myScoreLookupDenomination: Chicago.denomination =
+            if (scoreSheetRecord.contractSuit === Some("Clubs") || scoreSheetRecord.contractSuit === Some("Diamonds")) {
+              Minor
+            } else if (scoreSheetRecord.contractSuit === Some("Hearts") || scoreSheetRecord.contractSuit === Some("Spades")) {
+              Major
+            } else if (scoreSheetRecord.contractSuit === Some("NoTrumps")) {
+              NoTrumps
+            } else {
+              NoTrumps // should be unreachable code
+            };
+          let isVulnerable =
+            if (scoreSheetRecord.vulnerable === "None") {
+              false
+            } else if (
+                (scoreSheetRecord.vulnerable === "N" || scoreSheetRecord.vulnerable === "S")
+                &&
+                (scoreSheetRecord.contractDeclarer === Some("North") || scoreSheetRecord.contractDeclarer === Some("South"))
+              ) {
+              true
+            } else if (
+                (scoreSheetRecord.vulnerable === "W" || scoreSheetRecord.vulnerable === "E")
+                &&
+                (scoreSheetRecord.contractDeclarer === Some("West") || scoreSheetRecord.contractDeclarer === Some("East"))
+              ) {
+              true
+            } else if (scoreSheetRecord.vulnerable === "All") {
+              true
+            } else {
+              false   // catchall should never happen
+            };
+          let scoreLookup = Chicago.getScore(
+            ~level = Shuffle.optionIntAsInt(scoreSheetRecord.contractLevel),
+            ~denomination = myScoreLookupDenomination,
+            ~tricksTotal = scoreSheetRecord.totalTricks, // oops naming
+            ~isVulnerable = isVulnerable,
+            ~isDoubled = false, // TO DO
+            ~isRedoubled = false // TO DO
+          );
+          {
+            ...myChicagoScoreSheetRecord, 
+            scoreNorthSouth: (state.declarer === Some("North")) || (state.declarer === Some("South")) ? Some(scoreLookup) : None,
+            scoreWestEast: (state.declarer === Some("West")) || (state.declarer === Some("East")) ? Some(scoreLookup) : None
+          }
         } else {
           myChicagoScoreSheetRecord
         };
-      Js.log("discardIndex:");
-      Js.log(state.discardIndex);
+      //Js.log("discardIndex:");
+      //Js.log(state.discardIndex);
       // move all (should be 4 always) discarded cards into lifecycle Trick
       let myPack = Array.map(
         (card: Shuffle.card) => {

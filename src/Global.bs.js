@@ -214,8 +214,8 @@ function reducer(state, action) {
                 };
       case /* EndTrick */6 :
           ((window.isLastActionSync = false));
-          var hd = List.hd(state.chicagoScoreSheet);
-          var contractSuit = hd.contractSuit;
+          var scoreSheetRecord = List.hd(state.chicagoScoreSheet);
+          var contractSuit = scoreSheetRecord.contractSuit;
           var myAdjustedPackValue = $$Array.map((function (card) {
                   if (Shuffle$ReasonReactExamples.getSuitAsOptionString(card.suit) === contractSuit) {
                     return {
@@ -277,7 +277,7 @@ function reducer(state, action) {
               
             }
           };
-          var declarerTrickIncrement = isPocDeclarerOrDummy(winningDiscardPoc, Shuffle$ReasonReactExamples.pocAsString(hd.contractDeclarer)) ? 1 : 0;
+          var declarerTrickIncrement = isPocDeclarerOrDummy(winningDiscardPoc, Shuffle$ReasonReactExamples.pocAsString(scoreSheetRecord.contractDeclarer)) ? 1 : 0;
           console.log("declarerTrickIncrement:");
           console.log(declarerTrickIncrement);
           var chicagoScoreSheetHead = Belt_List.headExn(state.chicagoScoreSheet);
@@ -298,27 +298,27 @@ function reducer(state, action) {
             scoreNorthSouth: myChicagoScoreSheetRecord_scoreNorthSouth,
             scoreWestEast: myChicagoScoreSheetRecord_scoreWestEast
           };
-          var myChicagoScoreSheetRecordWithOptionalScore = state.discardIndex === 51 && (state.declarer === "South" || state.declarer === "North") ? ({
-                vulnerable: myChicagoScoreSheetRecord_vulnerable,
-                contractLevel: myChicagoScoreSheetRecord_contractLevel,
-                contractSuit: myChicagoScoreSheetRecord_contractSuit,
-                contractDeclarer: myChicagoScoreSheetRecord_contractDeclarer,
-                totalTricks: myChicagoScoreSheetRecord_totalTricks,
-                scoreNorthSouth: 999,
-                scoreWestEast: myChicagoScoreSheetRecord_scoreWestEast
-              }) : (
-              state.discardIndex === 51 && (state.declarer === "East" || state.declarer === "West") ? ({
-                    vulnerable: myChicagoScoreSheetRecord_vulnerable,
-                    contractLevel: myChicagoScoreSheetRecord_contractLevel,
-                    contractSuit: myChicagoScoreSheetRecord_contractSuit,
-                    contractDeclarer: myChicagoScoreSheetRecord_contractDeclarer,
-                    totalTricks: myChicagoScoreSheetRecord_totalTricks,
-                    scoreNorthSouth: myChicagoScoreSheetRecord_scoreNorthSouth,
-                    scoreWestEast: 444
-                  }) : myChicagoScoreSheetRecord
-            );
-          console.log("discardIndex:");
-          console.log(state.discardIndex);
+          var myChicagoScoreSheetRecordWithOptionalScore;
+          if (state.discardIndex === 51) {
+            var myScoreLookupDenomination = scoreSheetRecord.contractSuit === "Clubs" || scoreSheetRecord.contractSuit === "Diamonds" ? /* Minor */0 : (
+                scoreSheetRecord.contractSuit === "Hearts" || scoreSheetRecord.contractSuit === "Spades" ? /* Major */1 : (scoreSheetRecord.contractSuit === "NoTrumps", /* NoTrumps */2)
+              );
+            var isVulnerable = scoreSheetRecord.vulnerable === "None" ? false : (
+                (scoreSheetRecord.vulnerable === "N" || scoreSheetRecord.vulnerable === "S") && (scoreSheetRecord.contractDeclarer === "North" || scoreSheetRecord.contractDeclarer === "South") || (scoreSheetRecord.vulnerable === "W" || scoreSheetRecord.vulnerable === "E") && (scoreSheetRecord.contractDeclarer === "West" || scoreSheetRecord.contractDeclarer === "East") ? true : scoreSheetRecord.vulnerable === "All"
+              );
+            var scoreLookup = Chicago$ReasonReactExamples.getScore(Shuffle$ReasonReactExamples.optionIntAsInt(scoreSheetRecord.contractLevel), myScoreLookupDenomination, scoreSheetRecord.totalTricks, isVulnerable, false, false);
+            myChicagoScoreSheetRecordWithOptionalScore = {
+              vulnerable: myChicagoScoreSheetRecord_vulnerable,
+              contractLevel: myChicagoScoreSheetRecord_contractLevel,
+              contractSuit: myChicagoScoreSheetRecord_contractSuit,
+              contractDeclarer: myChicagoScoreSheetRecord_contractDeclarer,
+              totalTricks: myChicagoScoreSheetRecord_totalTricks,
+              scoreNorthSouth: state.declarer === "North" || state.declarer === "South" ? scoreLookup : undefined,
+              scoreWestEast: state.declarer === "West" || state.declarer === "East" ? scoreLookup : undefined
+            };
+          } else {
+            myChicagoScoreSheetRecordWithOptionalScore = myChicagoScoreSheetRecord;
+          }
           var myPack$1 = $$Array.map((function (card) {
                   if (card.lifecycle === /* Discard */2) {
                     return {
