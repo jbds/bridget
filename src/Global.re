@@ -607,7 +607,12 @@ let reducer = (state: state, action) => {
       // now we must check for end of round/deal by looking for countOfCardsWithLifecycleTrick = 48
       //let countOfCardsWithLifecycleTrick = Belt.Array.length(Belt.Array.keep(state.pack, x => x.lifecycle === Discard));
       // use discardIndex as this is really a cards clicked counter and more robust
-
+      let myChicagoScoreSheetRecordWithOptionalScore =
+        if (state.discardIndex === 51) {
+          ...myChicagoScoreSheetRecord, scoreNorthSouth: Some(999)
+        } else {
+          myChicagoScoreSheetRecord
+        };
       Js.log("discardIndex:");
       Js.log(state.discardIndex);
       // move all (should be 4 always) discarded cards into lifecycle Trick
@@ -623,9 +628,11 @@ let reducer = (state: state, action) => {
       );
       // only clear discard pile every 4 discards
       // actually this action is now only called once every 4 discards
+      // so we do not need that constraint
       {
         ...state, 
-        chicagoScoreSheet: [myChicagoScoreSheetRecord, ...chicagoScoreSheetTail],
+        activePointOfCompass: Some(winningDiscardPoc),
+        chicagoScoreSheet: [myChicagoScoreSheetRecordWithOptionalScore, ...chicagoScoreSheetTail],
         //pack: (state.discardIndex mod 4 ) === 3 ? myPack : state.pack,
         pack: myPack,
         lastAction: declarerTrickIncrement === 0 ? "Trick LOST" : "Trick WON",

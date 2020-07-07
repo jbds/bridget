@@ -298,6 +298,15 @@ function reducer(state, action) {
             scoreNorthSouth: myChicagoScoreSheetRecord_scoreNorthSouth,
             scoreWestEast: myChicagoScoreSheetRecord_scoreWestEast
           };
+          var myChicagoScoreSheetRecordWithOptionalScore = state.discardIndex === 51 ? ({
+                vulnerable: myChicagoScoreSheetRecord_vulnerable,
+                contractLevel: myChicagoScoreSheetRecord_contractLevel,
+                contractSuit: myChicagoScoreSheetRecord_contractSuit,
+                contractDeclarer: myChicagoScoreSheetRecord_contractDeclarer,
+                totalTricks: myChicagoScoreSheetRecord_totalTricks,
+                scoreNorthSouth: 999,
+                scoreWestEast: myChicagoScoreSheetRecord_scoreWestEast
+              }) : myChicagoScoreSheetRecord;
           console.log("discardIndex:");
           console.log(state.discardIndex);
           var myPack$1 = $$Array.map((function (card) {
@@ -316,10 +325,10 @@ function reducer(state, action) {
                   }
                 }), state.pack);
           return {
-                  activePointOfCompass: state.activePointOfCompass,
+                  activePointOfCompass: winningDiscardPoc,
                   bids: state.bids,
                   chicagoScoreSheet: /* :: */[
-                    myChicagoScoreSheetRecord,
+                    myChicagoScoreSheetRecordWithOptionalScore,
                     chicagoScoreSheetTail
                   ],
                   dealer: state.dealer,
