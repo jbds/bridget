@@ -608,8 +608,26 @@ let reducer = (state: state, action) => {
       //let countOfCardsWithLifecycleTrick = Belt.Array.length(Belt.Array.keep(state.pack, x => x.lifecycle === Discard));
       // use discardIndex as this is really a cards clicked counter and more robust
       let myChicagoScoreSheetRecordWithOptionalScore =
-        if (state.discardIndex === 51) {
+        if (
+          state.discardIndex === 51 
+          && 
+          (
+            state.declarer === Some("South")
+            ||
+            state.declarer === Some("North")
+          )
+        ) {
           ...myChicagoScoreSheetRecord, scoreNorthSouth: Some(999)
+        } else if (
+          state.discardIndex === 51 
+          && 
+          (
+            state.declarer === Some("East")
+            ||
+            state.declarer === Some("West")
+          )
+        ) {
+          ...myChicagoScoreSheetRecord, scoreWestEast: Some(444)
         } else {
           myChicagoScoreSheetRecord
         };
