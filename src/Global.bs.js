@@ -277,7 +277,29 @@ function reducer(state, action) {
               
             }
           };
-          isPocDeclarerOrDummy(winningDiscardPoc, Shuffle$ReasonReactExamples.pocAsString(hd.contractDeclarer));
+          var declarerTrickIncrement = isPocDeclarerOrDummy(winningDiscardPoc, Shuffle$ReasonReactExamples.pocAsString(hd.contractDeclarer)) ? 1 : 0;
+          console.log("declarerTrickIncrement:");
+          console.log(declarerTrickIncrement);
+          var chicagoScoreSheetHead = Belt_List.headExn(state.chicagoScoreSheet);
+          var chicagoScoreSheetTail = Belt_List.tailExn(state.chicagoScoreSheet);
+          var myChicagoScoreSheetRecord_vulnerable = chicagoScoreSheetHead.vulnerable;
+          var myChicagoScoreSheetRecord_contractLevel = chicagoScoreSheetHead.contractLevel;
+          var myChicagoScoreSheetRecord_contractSuit = chicagoScoreSheetHead.contractSuit;
+          var myChicagoScoreSheetRecord_contractDeclarer = chicagoScoreSheetHead.contractDeclarer;
+          var myChicagoScoreSheetRecord_totalTricks = chicagoScoreSheetHead.totalTricks + declarerTrickIncrement | 0;
+          var myChicagoScoreSheetRecord_scoreNorthSouth = chicagoScoreSheetHead.scoreNorthSouth;
+          var myChicagoScoreSheetRecord_scoreWestEast = chicagoScoreSheetHead.scoreWestEast;
+          var myChicagoScoreSheetRecord = {
+            vulnerable: myChicagoScoreSheetRecord_vulnerable,
+            contractLevel: myChicagoScoreSheetRecord_contractLevel,
+            contractSuit: myChicagoScoreSheetRecord_contractSuit,
+            contractDeclarer: myChicagoScoreSheetRecord_contractDeclarer,
+            totalTricks: myChicagoScoreSheetRecord_totalTricks,
+            scoreNorthSouth: myChicagoScoreSheetRecord_scoreNorthSouth,
+            scoreWestEast: myChicagoScoreSheetRecord_scoreWestEast
+          };
+          console.log("discardIndex:");
+          console.log(state.discardIndex);
           var myPack$1 = $$Array.map((function (card) {
                   if (card.lifecycle === /* Discard */2) {
                     return {
@@ -296,7 +318,10 @@ function reducer(state, action) {
           return {
                   activePointOfCompass: state.activePointOfCompass,
                   bids: state.bids,
-                  chicagoScoreSheet: state.chicagoScoreSheet,
+                  chicagoScoreSheet: /* :: */[
+                    myChicagoScoreSheetRecord,
+                    chicagoScoreSheetTail
+                  ],
                   dealer: state.dealer,
                   dealIndex: state.dealIndex,
                   declarer: state.declarer,
@@ -306,7 +331,7 @@ function reducer(state, action) {
                   isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                   isDummyVisible: state.isDummyVisible,
                   isRebootVisible: state.isRebootVisible,
-                  lastAction: "End of Trick",
+                  lastAction: declarerTrickIncrement === 0 ? "Trick LOST" : "Trick WON",
                   pack: myPack$1,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)

@@ -598,8 +598,18 @@ let reducer = (state: state, action) => {
         :
         0
       ;
-      // Js.log("declarerTrickIncrement:");
-      // Js.log(declarerTrickIncrement);
+      Js.log("declarerTrickIncrement:");
+      Js.log(declarerTrickIncrement);
+      // prepare for the score sheet update - we only want to update the head of the list
+      let chicagoScoreSheetHead = Belt.List.headExn(state.chicagoScoreSheet);
+      let chicagoScoreSheetTail: Chicago.chicagoScoreSheet = Belt.List.tailExn(state.chicagoScoreSheet);
+      let myChicagoScoreSheetRecord = {...chicagoScoreSheetHead, totalTricks: chicagoScoreSheetHead.totalTricks + declarerTrickIncrement}
+      // now we must check for end of round/deal by looking for countOfCardsWithLifecycleTrick = 48
+      //let countOfCardsWithLifecycleTrick = Belt.Array.length(Belt.Array.keep(state.pack, x => x.lifecycle === Discard));
+      // use discardIndex as this is really a cards clicked counter and more robust
+
+      Js.log("discardIndex:");
+      Js.log(state.discardIndex);
       // move all (should be 4 always) discarded cards into lifecycle Trick
       let myPack = Array.map(
         (card: Shuffle.card) => {
@@ -615,9 +625,10 @@ let reducer = (state: state, action) => {
       // actually this action is now only called once every 4 discards
       {
         ...state, 
+        chicagoScoreSheet: [myChicagoScoreSheetRecord, ...chicagoScoreSheetTail],
         //pack: (state.discardIndex mod 4 ) === 3 ? myPack : state.pack,
         pack: myPack,
-        lastAction: "End of Trick", 
+        lastAction: declarerTrickIncrement === 0 ? "Trick LOST" : "Trick WON",
         randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
       }
     }
