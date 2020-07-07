@@ -668,6 +668,20 @@ function getNextActivePointOfCompass(poc) {
   }
 }
 
+function getSuitAsOptionString(suit) {
+  switch (suit) {
+    case /* Spades */0 :
+        return "Spades";
+    case /* Hearts */1 :
+        return "Hearts";
+    case /* Diamonds */2 :
+        return "Diamonds";
+    case /* Clubs */3 :
+        return "Clubs";
+    
+  }
+}
+
 var initialHandVisible = {
   north: true,
   east: true,
@@ -685,4 +699,5 @@ exports.initialPoc = initialPoc;
 exports.pocAsString = pocAsString;
 exports.optionIntAsString = optionIntAsString;
 exports.getNextActivePointOfCompass = getNextActivePointOfCompass;
+exports.getSuitAsOptionString = getSuitAsOptionString;
 /* initialPoc Not a pure module */

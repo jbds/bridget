@@ -279,4 +279,13 @@ let getNextActivePointOfCompass = (poc) => {
   }
 };
 
+let getSuitAsOptionString = (suit: suit) => {
+  switch (suit) {
+    | Spades => Some("Spades")
+    | Hearts => Some("Hearts")
+    | Diamonds => Some("Diamonds")
+    | Clubs => Some("Clubs")
+  }
+}
+
 

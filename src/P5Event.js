@@ -200,6 +200,9 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   console.log('isValidDiscardFromLocalPlayer:');
   console.log(isValidDiscardFromLocalPlayer());
   if (isValidDiscardFromLocalPlayer()) {
+    // prepare a second action after a delay
+    //setTimeout(function(){alert('Yay');}, 750);
+    setTimeout(function(){document.getElementById('btnEndTrick').click();}, 750);
     // dispatch the Discard action via a hidden key on the sidebar
     document.getElementById('btnDiscard').click();
   }

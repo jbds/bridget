@@ -122,6 +122,7 @@ let make = () => {
     //(s2e("Sidebar2"))
     <br/>
     //<button id="btn1">(s2e("p5 click listener"))</button>
+    <ButtonStd dispatch action=EndTrick label="End Trick" id="btnEndTrick" isVisible=true/>
     <ButtonStd dispatch action=Discard label="Discard" id="btnDiscard" isVisible=false/>
     <ButtonStd dispatch action=Sync label="Sync state with gameState" id="btnSync" isVisible=false/>
     <ButtonStd dispatch action=LoginSync label="Login sync with server" id="btnLoginSync" isVisible=false/>

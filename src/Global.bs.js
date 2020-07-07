@@ -98,9 +98,6 @@ function reducer(state, action) {
                     )
                 )
             );
-          var isAnotherFourCardsDiscarded = state.discardIndex % 4 === 2;
-          console.log("isAnotherFourCardsDiscarded");
-          console.log(isAnotherFourCardsDiscarded);
           var myPack = $$Array.map((function (card) {
                   if (card.fileName === discardFileName) {
                     return {
@@ -212,6 +209,114 @@ function reducer(state, action) {
                   isRebootVisible: state.isRebootVisible,
                   lastAction: "Test",
                   pack: state.pack,
+                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                };
+      case /* EndTrick */6 :
+          ((window.isLastActionSync = false));
+          var hd = List.hd(state.chicagoScoreSheet);
+          var contractSuit = hd.contractSuit;
+          var myAdjustedPackValue = $$Array.map((function (card) {
+                  if (Shuffle$ReasonReactExamples.getSuitAsOptionString(card.suit) === contractSuit) {
+                    return {
+                            noTrumpValue: card.noTrumpValue + 52 | 0,
+                            handOrder: card.handOrder,
+                            shuffleIndex: card.shuffleIndex,
+                            rank: card.rank,
+                            suit: card.suit,
+                            fileName: card.fileName,
+                            lifecycle: card.lifecycle
+                          };
+                  } else {
+                    return card;
+                  }
+                }), state.pack);
+          var myFourCards = Belt_Array.keep(myAdjustedPackValue, (function (x) {
+                  return x.lifecycle === /* Discard */2;
+                }));
+          var myFourCardsAsList = Belt_List.fromArray(myFourCards);
+          var myFourCardsAsListSorted = Belt_List.sort(myFourCardsAsList, (function (a, b) {
+                  return b.noTrumpValue - a.noTrumpValue | 0;
+                }));
+          var optionWinningCard = Belt_List.head(myFourCardsAsListSorted);
+          var winningCardFileName = optionWinningCard !== undefined ? optionWinningCard.fileName : "";
+          console.log("winningCard:");
+          console.log(winningCardFileName);
+          var winningCardShuffleIndex = optionWinningCard !== undefined ? optionWinningCard.shuffleIndex : -1;
+          console.log("winningCardShuffleIndex:");
+          console.log(winningCardShuffleIndex);
+          var winningDiscardPoc = winningCardShuffleIndex === -1 ? "Error" : (
+              winningCardShuffleIndex < 13 ? "North" : (
+                  winningCardShuffleIndex < 26 ? "East" : (
+                      winningCardShuffleIndex < 39 ? "South" : "West"
+                    )
+                )
+            );
+          console.log("winningDiscardPoc:");
+          console.log(winningDiscardPoc);
+          var isPocDeclarerOrDummy = function (poc, declarer) {
+            var exit = 0;
+            switch (poc) {
+              case "North" :
+              case "South" :
+                  exit = 1;
+                  break;
+              case "East" :
+              case "West" :
+                  exit = 2;
+                  break;
+              default:
+                return false;
+            }
+            switch (exit) {
+              case 1 :
+                  if (declarer === "North") {
+                    return true;
+                  } else {
+                    return declarer === "South";
+                  }
+              case 2 :
+                  if (declarer === "East") {
+                    return true;
+                  } else {
+                    return declarer === "West";
+                  }
+              
+            }
+          };
+          var declarerTrickIncrement = isPocDeclarerOrDummy(winningDiscardPoc, Shuffle$ReasonReactExamples.pocAsString(hd.contractDeclarer)) ? 1 : 0;
+          console.log("declarerTrickIncrement:");
+          console.log(declarerTrickIncrement);
+          var myPack$1 = $$Array.map((function (card) {
+                  if (card.lifecycle === /* Discard */2) {
+                    return {
+                            noTrumpValue: card.noTrumpValue,
+                            handOrder: card.handOrder,
+                            shuffleIndex: card.shuffleIndex,
+                            rank: card.rank,
+                            suit: card.suit,
+                            fileName: card.fileName,
+                            lifecycle: /* Trick */3
+                          };
+                  } else {
+                    return card;
+                  }
+                }), state.pack);
+          return {
+                  activePointOfCompass: state.activePointOfCompass,
+                  bids: state.bids,
+                  chicagoScoreSheet: state.chicagoScoreSheet,
+                  dealer: state.dealer,
+                  dealIndex: state.dealIndex,
+                  declarer: state.declarer,
+                  discardIndex: state.discardIndex,
+                  handVisible: state.handVisible,
+                  isBiddingCycle: state.isBiddingCycle,
+                  isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
+                  isDummyVisible: state.isDummyVisible,
+                  isRebootVisible: state.isRebootVisible,
+                  lastAction: "End of Trick",
+                  pack: state.discardIndex % 4 === 3 ? myPack$1 : state.pack,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
@@ -539,10 +644,10 @@ function reducer(state, action) {
                 };
                 var bidRecordOfInterest1 = List.hd(List.tl(tl));
                 var contractLevel = bidRecordOfInterest1.contractLevel;
-                var contractSuit = bidRecordOfInterest1.contractSuit;
+                var contractSuit$1 = bidRecordOfInterest1.contractSuit;
                 var contractPoc = bidRecordOfInterest1.contractPointOfCompass;
                 var bidsFilteredBySuitAnd2Poc = Belt_List.keep(state.bids, (function (x) {
-                        if (Caml_obj.caml_equal(x.contractSuit, contractSuit)) {
+                        if (Caml_obj.caml_equal(x.contractSuit, contractSuit$1)) {
                           if (Caml_obj.caml_equal(x.contractPointOfCompass, contractPoc)) {
                             return true;
                           } else {
@@ -558,7 +663,7 @@ function reducer(state, action) {
                 var chicagoScoreSheetRecord = {
                   vulnerable: vulnerable,
                   contractLevel: contractLevel,
-                  contractSuit: contractSuit,
+                  contractSuit: contractSuit$1,
                   contractDeclarer: contractDeclarer,
                   totalTricks: 0,
                   scoreNorthSouth: undefined,

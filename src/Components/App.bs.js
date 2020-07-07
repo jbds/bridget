@@ -144,6 +144,12 @@ function App(Props) {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
+                      action: /* EndTrick */6,
+                      label: "End Trick",
+                      id: "btnEndTrick",
+                      isVisible: true
+                    }), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                      dispatch: dispatch,
                       action: /* Discard */2,
                       label: "Discard",
                       id: "btnDiscard",
