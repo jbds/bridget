@@ -288,11 +288,13 @@ let drawLabels = (p, g, w) => {
       } else {
         positionPlayerDealer = obj.pointOfCompass + ' ' + obj.player;
       }
-      // w.gameState.dealer === obj.pointOfCompass
-      // ?
-      // obj.pointOfCompass + '  ' + obj.player + '  Dealer'
-      // :
-      // obj.pointOfCompass + '  ' + obj.player;
+      if (w.gameState.activePointOfCompass === obj.pointOfCompass) {
+        // white, 25% transparent
+        p.fill(255, 192);
+      } else {
+        // white, 50% transparent
+        p.fill(255, 128);
+      }
       if(obj.pointOfCompass != '') {
         p.text(
           positionPlayerDealer, 
