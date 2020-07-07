@@ -334,16 +334,17 @@ function reducer(state, action) {
                     return card;
                   }
                 }), state.pack);
+          var endOfDealNextPoc = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.dealer);
           return {
-                  activePointOfCompass: winningDiscardPoc,
+                  activePointOfCompass: state.discardIndex !== 51 ? winningDiscardPoc : endOfDealNextPoc,
                   bids: state.bids,
                   chicagoScoreSheet: /* :: */[
                     myChicagoScoreSheetRecordWithOptionalScore,
                     chicagoScoreSheetTail
                   ],
-                  dealer: state.dealer,
+                  dealer: state.discardIndex !== 51 ? state.dealer : endOfDealNextPoc,
                   dealIndex: state.dealIndex,
-                  declarer: state.declarer,
+                  declarer: state.discardIndex !== 51 ? state.declarer : undefined,
                   discardIndex: state.discardIndex,
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,

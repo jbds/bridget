@@ -95,7 +95,7 @@ let reducer = (state: state, action) => {
       // make sure doMessage is called in sidebar component
       let () = [%raw "window.isLastActionSync = false"];
       // dealer becomes activePointOfCompass too, because he starts the bidding
-      // do change of dealer at end of deal ie 52 cards out TO D)
+      // do change of dealer at end of deal ie 52 cards out TO DO)
       //let poc = Some(Shuffle.getNextPointOfCompass(state.dealer));
       // also set BiddingCycle to true here
       // not sure dealIndex is needed?
@@ -522,7 +522,7 @@ let reducer = (state: state, action) => {
       }
     }
     | EndTrick => {
-      // only triggered on imminent 4 dicards - see P5Event.js line 207
+      // only triggered on imminent 4 discards - see P5Event.js line 207
       // make sure doMessage is called in sidebar component
       let () = [%raw "window.isLastActionSync = false"];
       // check contract suit
@@ -673,10 +673,14 @@ let reducer = (state: state, action) => {
       // only clear discard pile every 4 discards
       // actually this action is now only called once every 4 discards
       // so we do not need that constraint
+      // conditional end-of-round update to poc signified by discardIndex = 51
+      let endOfDealNextPoc = Shuffle.getNextPointOfCompass(state.dealer);
       {
         ...state, 
-        activePointOfCompass: Some(winningDiscardPoc),
+        activePointOfCompass: state.discardIndex !== 51 ? Some(winningDiscardPoc) : Some(endOfDealNextPoc),
         chicagoScoreSheet: [myChicagoScoreSheetRecordWithOptionalScore, ...chicagoScoreSheetTail],
+        dealer: state.discardIndex !== 51 ? state.dealer : Some(endOfDealNextPoc),
+        declarer: state.discardIndex !== 51 ? state.declarer : None,
         //pack: (state.discardIndex mod 4 ) === 3 ? myPack : state.pack,
         pack: myPack,
         lastAction: declarerTrickIncrement === 0 ? "Trick LOST" : "Trick WON",
