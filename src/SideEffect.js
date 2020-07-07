@@ -290,7 +290,7 @@ let drawLabels = (p, g, w) => {
       }
       if (w.gameState.activePointOfCompass === obj.pointOfCompass) {
         // white, 25% transparent
-        p.fill(255, 192);
+        p.fill(255, 224);
       } else {
         // white, 50% transparent
         p.fill(255, 128);
