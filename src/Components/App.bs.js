@@ -147,7 +147,7 @@ function App(Props) {
                       action: /* EndTrick */6,
                       label: "End Trick",
                       id: "btnEndTrick",
-                      isVisible: true
+                      isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Discard */2,

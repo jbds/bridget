@@ -239,12 +239,7 @@ function reducer(state, action) {
                   return b.noTrumpValue - a.noTrumpValue | 0;
                 }));
           var optionWinningCard = Belt_List.head(myFourCardsAsListSorted);
-          var winningCardFileName = optionWinningCard !== undefined ? optionWinningCard.fileName : "";
-          console.log("winningCard:");
-          console.log(winningCardFileName);
           var winningCardShuffleIndex = optionWinningCard !== undefined ? optionWinningCard.shuffleIndex : -1;
-          console.log("winningCardShuffleIndex:");
-          console.log(winningCardShuffleIndex);
           var winningDiscardPoc = winningCardShuffleIndex === -1 ? "Error" : (
               winningCardShuffleIndex < 13 ? "North" : (
                   winningCardShuffleIndex < 26 ? "East" : (
@@ -252,8 +247,6 @@ function reducer(state, action) {
                     )
                 )
             );
-          console.log("winningDiscardPoc:");
-          console.log(winningDiscardPoc);
           var isPocDeclarerOrDummy = function (poc, declarer) {
             var exit = 0;
             switch (poc) {
@@ -284,9 +277,7 @@ function reducer(state, action) {
               
             }
           };
-          var declarerTrickIncrement = isPocDeclarerOrDummy(winningDiscardPoc, Shuffle$ReasonReactExamples.pocAsString(hd.contractDeclarer)) ? 1 : 0;
-          console.log("declarerTrickIncrement:");
-          console.log(declarerTrickIncrement);
+          isPocDeclarerOrDummy(winningDiscardPoc, Shuffle$ReasonReactExamples.pocAsString(hd.contractDeclarer));
           var myPack$1 = $$Array.map((function (card) {
                   if (card.lifecycle === /* Discard */2) {
                     return {
@@ -316,7 +307,7 @@ function reducer(state, action) {
                   isDummyVisible: state.isDummyVisible,
                   isRebootVisible: state.isRebootVisible,
                   lastAction: "End of Trick",
-                  pack: state.discardIndex % 4 === 3 ? myPack$1 : state.pack,
+                  pack: myPack$1,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };

@@ -522,6 +522,7 @@ let reducer = (state: state, action) => {
       }
     }
     | EndTrick => {
+      // only triggered on imminent 4 dicards - see P5Event.js line 207
       // make sure doMessage is called in sidebar component
       let () = [%raw "window.isLastActionSync = false"];
       // check contract suit
@@ -548,18 +549,18 @@ let reducer = (state: state, action) => {
       // just sort the list with Belt!
       let myFourCardsAsListSorted = Belt.List.sort(myFourCardsAsList, (a, b) => {b.noTrumpValue - a.noTrumpValue})
       let optionWinningCard = Belt.List.head(myFourCardsAsListSorted);
-      let winningCardFileName =
-        switch (optionWinningCard) {
-          | None => ""
-          | Some(x) => x.fileName
-        }
-      Js.log("winningCard:");
-      Js.log(winningCardFileName);
-      let winningCardValue =
-        switch (optionWinningCard) {
-          | None => -1
-          | Some(x) => x.noTrumpValue
-        }
+      // let winningCardFileName =
+      //   switch (optionWinningCard) {
+      //     | None => ""
+      //     | Some(x) => x.fileName
+      //   }
+      // Js.log("winningCard:");
+      // Js.log(winningCardFileName);
+      // let winningCardValue =
+      //   switch (optionWinningCard) {
+      //     | None => -1
+      //     | Some(x) => x.noTrumpValue
+      //   }
       // Js.log("winningCardValue:");
       // Js.log(winningCardValue);
       let winningCardShuffleIndex =
@@ -567,8 +568,8 @@ let reducer = (state: state, action) => {
           | None => -1
           | Some(x) => x.shuffleIndex
         }
-      Js.log("winningCardShuffleIndex:");
-      Js.log(winningCardShuffleIndex);
+      // Js.log("winningCardShuffleIndex:");
+      // Js.log(winningCardShuffleIndex);
       let winningDiscardPoc = 
         if (winningCardShuffleIndex === -1) {
           "Error"
@@ -581,8 +582,8 @@ let reducer = (state: state, action) => {
         } else {
           "West"
         };
-      Js.log("winningDiscardPoc:");
-      Js.log(winningDiscardPoc);
+      // Js.log("winningDiscardPoc:");
+      // Js.log(winningDiscardPoc);
       let isPocDeclarerOrDummy = (poc, declarer) => {
         switch (poc) {
           | "North" | "South" => declarer === "North" || declarer === "South" ? true : false
@@ -597,8 +598,8 @@ let reducer = (state: state, action) => {
         :
         0
       ;
-      Js.log("declarerTrickIncrement:");
-      Js.log(declarerTrickIncrement);
+      // Js.log("declarerTrickIncrement:");
+      // Js.log(declarerTrickIncrement);
       // move all (should be 4 always) discarded cards into lifecycle Trick
       let myPack = Array.map(
         (card: Shuffle.card) => {
@@ -611,9 +612,11 @@ let reducer = (state: state, action) => {
         state.pack
       );
       // only clear discard pile every 4 discards
+      // actually this action is now only called once every 4 discards
       {
         ...state, 
-        pack: (state.discardIndex mod 4 ) === 3 ? myPack : state.pack,
+        //pack: (state.discardIndex mod 4 ) === 3 ? myPack : state.pack,
+        pack: myPack,
         lastAction: "End of Trick", 
         randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
       }

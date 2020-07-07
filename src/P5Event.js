@@ -200,9 +200,12 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   console.log('isValidDiscardFromLocalPlayer:');
   console.log(isValidDiscardFromLocalPlayer());
   if (isValidDiscardFromLocalPlayer()) {
-    // prepare a second action after a delay
-    //setTimeout(function(){alert('Yay');}, 750);
-    setTimeout(function(){document.getElementById('btnEndTrick').click();}, 750);
+    // prepare a second action after a delay if 3 cards are already discarded
+    // because we are about to discard the 4th
+    if (gameState.pack.filter(obj => {return (obj.lifecycle === 2)}).length === 3) {
+      //setTimeout(function(){alert('Yay');}, 750);
+      setTimeout(function(){document.getElementById('btnEndTrick').click();}, 750);
+    }
     // dispatch the Discard action via a hidden key on the sidebar
     document.getElementById('btnDiscard').click();
   }
