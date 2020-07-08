@@ -15,6 +15,9 @@
 
   window.isLastActionSync = false;
   window.userState = {}; // prevent undefined error before p5 starts up
+
+  // be certain we have the correct version of bundled file aka index.js
+  document.title = 'Bridget v0.03';
 |}];
 
 
