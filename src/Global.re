@@ -185,6 +185,7 @@ let reducer = (state: state, action) => {
         ...state, 
         activePointOfCompass: poc,
         discardIndex: state.discardIndex + 1,
+        discardSuit: ((state.discardIndex + 1) mod 4) === 0 ? Some(cardDiscardSuit) : state.discardSuit,
         isDummyVisible: 
           discardPoc === pocFollowingDeclarer ? true : state.isDummyVisible,
         pack: myPack, 

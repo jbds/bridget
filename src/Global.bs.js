@@ -128,7 +128,7 @@ function reducer(state, action) {
                   dealIndex: state.dealIndex,
                   declarer: state.declarer,
                   discardIndex: state.discardIndex + 1 | 0,
-                  discardSuit: state.discardSuit,
+                  discardSuit: (state.discardIndex + 1 | 0) % 4 === 0 ? cardDiscardSuit : state.discardSuit,
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
                   isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
