@@ -197,8 +197,8 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   // });
 
   window.discardFileName = myCard.fileName
-  console.log('isValidDiscardFromLocalPlayer:');
-  console.log(isValidDiscardFromLocalPlayer());
+  //console.log('isValidDiscardFromLocalPlayer:');
+  //console.log(isValidDiscardFromLocalPlayer());
   if (isValidDiscardFromLocalPlayer() && isCardDiscardFollowingSuitWhenPossible()) {
     // prepare a second action after a delay if 3 cards are already discarded
     // because we are about to discard the 4th
@@ -305,8 +305,8 @@ let isCardDiscardFollowingSuitWhenPossible = () => {
 
 let countOfCardsInHandWithDiscardSuit = (card) => {
   let index = card.shuffleIndex;
-  console.log('card shuffle index:');
-  console.log(index);
+  //console.log('card shuffle index:');
+  //console.log(index);
   let hand;
   if (index < 13) {
     hand = window.gameState.pack.filter(obj => {
@@ -326,8 +326,8 @@ let countOfCardsInHandWithDiscardSuit = (card) => {
     });
   }
   let handFilteredBySuit = hand.filter(obj => {return obj.suit === gameState.discardSuit});
-  console.log('handFilteredBySuit.length');
-  console.log(handFilteredBySuit.length);
+  //console.log('handFilteredBySuit.length');
+  //console.log(handFilteredBySuit.length);
   return handFilteredBySuit.length;
 }
 
