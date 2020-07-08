@@ -89,6 +89,9 @@ function reducer(state, action) {
                   return x.fileName === discardFileName;
                 }));
           var cardShuffleIndex = Caml_array.caml_array_get(cardWrappedInArray, 0).shuffleIndex;
+          var cardDiscardSuit = Caml_array.caml_array_get(cardWrappedInArray, 0).suit;
+          console.log("cardDiscardSuit:");
+          console.log(cardDiscardSuit);
           var discardPoc = cardShuffleIndex < 13 ? "North" : (
               cardShuffleIndex < 26 ? "East" : (
                   cardShuffleIndex < 39 ? "South" : "West"

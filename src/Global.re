@@ -135,6 +135,10 @@ let reducer = (state: state, action) => {
       let discardFileName: string = [%raw "window.discardFileName"];
       let cardWrappedInArray = Belt.Array.keep(state.pack, x => x.fileName === discardFileName);
       let cardShuffleIndex = cardWrappedInArray[0].shuffleIndex;
+      // we need to capture the discard suit for use on first discard only
+      let cardDiscardSuit = cardWrappedInArray[0].suit;
+      Js.log("cardDiscardSuit:");
+      Js.log(cardDiscardSuit);
       // discardPoc here and pocFollowingDeclarer after are used to decide
       // whether to make the Dummy hand visible
       let discardPoc = 
@@ -164,14 +168,6 @@ let reducer = (state: state, action) => {
         };
       //Js.log("pocFollowingDeclarer:")
       //Js.log(pocFollowingDeclarer);
-      // if there are 4 cards discarded,
-      // we need to see who has won the trick,
-      // then add to scoreSheet totalTicks if declarer's trick
-      // not sure why this === 2 here, discardIndex starts at -1
-      // let isAnotherFourCardsDiscarded = 
-      //   state.discardIndex mod 4 === 2 ? true : false;
-      // Js.log("isAnotherFourCardsDiscarded");
-      // Js.log(isAnotherFourCardsDiscarded);
       // move the selected card into the discard pile
       let myPack = Array.map(
         (card: Shuffle.card) => {
