@@ -27,6 +27,7 @@ type state = {
   dealIndex: int,
   declarer: option(string),
   discardIndex: int,
+  discardSuit: option(Shuffle.suit),
   handVisible: Shuffle.handVisible,
   isBiddingCycle: bool,
   isBiddingHideDenominationButtons: bool,
@@ -49,6 +50,7 @@ let initialState: state = {
     dealIndex: -1,
     declarer: None,
     discardIndex: -1,
+    discardSuit: None,
     handVisible: Shuffle.initialHandVisible,
     isBiddingCycle: false,
     isBiddingHideDenominationButtons: true,
@@ -78,6 +80,7 @@ let reducer = (state: state, action) => {
         dealIndex: -1,
         declarer: None,
         discardIndex: -1,
+        discardSuit: None,
         handVisible: Shuffle.initialHandVisible,
         isBiddingCycle: false,
         isBiddingHideDenominationButtons: true,
@@ -210,6 +213,7 @@ let reducer = (state: state, action) => {
         dealIndex: -1,
         declarer: None,
         discardIndex: -1,
+        discardSuit: None,
         handVisible: {north: false, east: false, south: false, west: false},
         isBiddingCycle: false,
         isBiddingHideDenominationButtons: true,
@@ -242,6 +246,7 @@ let reducer = (state: state, action) => {
       let isRebootVisible: bool = [%bs.raw "window.gameState.isRebootVisible"];
       let isDummyVisible: bool = [%bs.raw "window.gameState.isDummyVisible"];
       let discardIndex: int = [%bs.raw "window.gameState.discardIndex"];
+      let discardSuit: option(Shuffle.suit) = [%bs.raw "window.gameState.discardSuit"];
       // no need for ...state here as we are replacing all fields with the server gameState fields
       {
         activePointOfCompass: poc,
@@ -251,6 +256,7 @@ let reducer = (state: state, action) => {
         dealIndex: dealIndex,
         declarer: declarer,
         discardIndex: discardIndex,
+        discardSuit: discardSuit,
         handVisible: hV,
         isBiddingCycle: isBiddingCycle,
         isBiddingHideDenominationButtons: isBiddingHideDenominationButtons,

@@ -289,11 +289,11 @@ let drawLabels = (p, g, w) => {
         positionPlayerDealer = obj.pointOfCompass + ' ' + obj.player;
       }
       if (w.gameState.activePointOfCompass === obj.pointOfCompass) {
-        // white, 25% transparent
-        p.fill(255, 224);
+        // white, 12% transparent
+        p.fill(255, 240);
       } else {
-        // white, 50% transparent
-        p.fill(255, 128);
+        // white, 62% transparent
+        p.fill(255, 96);
       }
       if(obj.pointOfCompass != '') {
         p.text(
