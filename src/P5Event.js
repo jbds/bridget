@@ -238,12 +238,23 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
       console.log('Unexpected shuffleIndex in window.discardFileName');
     }
     return (
-      userPointOfCompass === cardPointOfCompass 
-      && 
-      gameState.isBiddingCycle === false 
-      // add extra constraint here to avoid multiple discards
-      &&
-      gameState.activePointOfCompass === userPointOfCompass
+      (
+        userPointOfCompass === cardPointOfCompass 
+        && 
+        gameState.isBiddingCycle === false 
+        // add extra constraint here to avoid multiple discards
+        &&
+        gameState.activePointOfCompass === userPointOfCompass
+      )
+      ||
+      (
+        // relax constraint to allow Dummy to be selected by Declarer
+        gameState.activePointOfCompass === getDummyPocByDeclarer()
+        &&
+        userPointOfCompass === gameState.declarer
+        &&
+        gameState.isBiddingCycle === false
+      )
       ? 
       true 
       : 
@@ -251,5 +262,24 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
     );
   };
 
+// helper function for relaxed constraint on dummy when declarer & user coincide
+let getDummyPocByDeclarer = () => {
+  switch (gameState.declarer) {
+    case "North":
+      "South";
+      break;
+    case "East":
+      "West";
+      break;
+    case "South":
+      "North";
+      break;
+    case "West":
+      "East";
+      break;
+    default: 
+      "Error";
+  }
+};
 
 exports.mouseDecode = mouseDecode;
