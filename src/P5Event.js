@@ -254,6 +254,9 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
         userPointOfCompass === gameState.declarer
         &&
         gameState.isBiddingCycle === false
+        // but ensure declarer cannot discard from their own hand
+        &&
+        cardPointOfCompass !== gameState.declarer
       )
       ? 
       true 
@@ -266,19 +269,19 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
 let getDummyPocByDeclarer = () => {
   switch (gameState.declarer) {
     case "North":
-      "South";
+      return "South";
       break;
     case "East":
-      "West";
+      return "West";
       break;
     case "South":
-      "North";
+      return "North";
       break;
     case "West":
-      "East";
+      return "East";
       break;
     default: 
-      "Error";
+      return "Error";
   }
 };
 
