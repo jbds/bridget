@@ -199,7 +199,7 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   window.discardFileName = myCard.fileName
   console.log('isValidDiscardFromLocalPlayer:');
   console.log(isValidDiscardFromLocalPlayer());
-  if (isValidDiscardFromLocalPlayer()) {
+  if (isValidDiscardFromLocalPlayer() && isCardDiscardFollowingSuitWhenPossible()) {
     // prepare a second action after a delay if 3 cards are already discarded
     // because we are about to discard the 4th
     if (gameState.pack.filter(obj => {return (obj.lifecycle === 2)}).length === 3) {
@@ -284,5 +284,51 @@ let getDummyPocByDeclarer = () => {
       return "Error";
   }
 };
+
+// we also need to check if user discard is following suit 
+let isCardDiscardFollowingSuitWhenPossible = () => {
+  let card = gameState.pack.find(obj => obj.fileName === window.discardFileName);
+  // we always allow the first discard, whatever the suit
+  if ((gameState.discardIndex + 1) % 4 === 0){
+    return true;
+  // if card follows suit, allow
+  } else if (card.suit === gameState.discardSuit) {
+    return true;
+  // if card does not follow suit, only allow if countOfCardsInHandWithDiscardSuit = 0
+  } else if (countOfCardsInHandWithDiscardSuit(card) === 0) {
+    return true;
+  } else {
+    // disallow
+    return false;
+  }
+};
+
+let countOfCardsInHandWithDiscardSuit = (card) => {
+  let index = card.shuffleIndex;
+  console.log('card shuffle index:');
+  console.log(index);
+  let hand;
+  if (index < 13) {
+    hand = window.gameState.pack.filter(obj => {
+      return (obj.shuffleIndex >= 0 && obj.shuffleIndex <= 12 && obj.lifecycle === 1)
+    });
+  } else if (index < 26) {
+    hand = window.gameState.pack.filter(obj => {
+      return (obj.shuffleIndex >= 13 && obj.shuffleIndex <= 25 && obj.lifecycle === 1)
+    });
+  } else if (index < 39) {
+    hand = window.gameState.pack.filter(obj => {
+      return (obj.shuffleIndex >= 26 && obj.shuffleIndex <=38 && obj.lifecycle === 1)
+    });
+  } else {
+    hand = window.gameState.pack.filter(obj => {
+      return (obj.shuffleIndex >= 39 && obj.shuffleIndex <= 51 && obj.lifecycle === 1)
+    });
+  }
+  let handFilteredBySuit = hand.filter(obj => {return obj.suit === gameState.discardSuit});
+  console.log('handFilteredBySuit.length');
+  console.log(handFilteredBySuit.length);
+  return handFilteredBySuit.length;
+}
 
 exports.mouseDecode = mouseDecode;
