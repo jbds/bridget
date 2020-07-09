@@ -3,7 +3,7 @@ let make = (~dispatch: Global.action => unit, ~action: Global.action, ~label: st
   <>
     <button 
     id=id
-    onClick=((_e) => dispatch(action))//Js.log("Clicked shuffle"))//
+    onClick=((_e) => dispatch(action)) //Js.log("Clicked shuffle"))
     style=(
       ReactDOMRe.Style.make(
         // hide the dummy underscore text

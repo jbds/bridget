@@ -3,7 +3,7 @@ let make = (~id: string, ~text: string, ~isWarning: bool=false) => {
   <>
     <span
     id=id
-    onClick=((_e) => Js.log("Clicked span element"))
+    //onClick=((_e) => Js.log("Clicked span element"))
     style=(
       ReactDOMRe.Style.make(
         ~color={isWarning ? "#C00000" : "#26653B"}, 

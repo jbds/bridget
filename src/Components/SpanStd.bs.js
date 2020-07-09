@@ -16,11 +16,7 @@ function SpanStd(Props) {
                     margin: "0vh",
                     textAlign: "center",
                     width: "10vh"
-                  },
-                  onClick: (function (_e) {
-                      console.log("Clicked span element");
-                      
-                    })
+                  }
                 }, text));
 }
 

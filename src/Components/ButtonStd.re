@@ -11,7 +11,7 @@ let make = (
   <>
     <button 
     id=id
-    onClick=((_e) => dispatch(action))//Js.log("Clicked shuffle"))//
+    onClick=((_e) => dispatch(action)) //Js.log("Clicked shuffle"))
     style=(
       ReactDOMRe.Style.make(
         ~color={"#26653B"}, 

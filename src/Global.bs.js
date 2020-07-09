@@ -90,8 +90,6 @@ function reducer(state, action) {
                 }));
           var cardShuffleIndex = Caml_array.caml_array_get(cardWrappedInArray, 0).shuffleIndex;
           var cardDiscardSuit = Caml_array.caml_array_get(cardWrappedInArray, 0).suit;
-          console.log("cardDiscardSuit:");
-          console.log(cardDiscardSuit);
           var discardPoc = cardShuffleIndex < 13 ? "North" : (
               cardShuffleIndex < 26 ? "East" : (
                   cardShuffleIndex < 39 ? "South" : "West"
@@ -203,7 +201,6 @@ function reducer(state, action) {
                 };
       case /* Test */5 :
           ((window.isLastActionSync = true));
-          console.log("benign action: 'Test'");
           return {
                   activePointOfCompass: state.activePointOfCompass,
                   bids: state.bids,
@@ -289,8 +286,6 @@ function reducer(state, action) {
             }
           };
           var declarerTrickIncrement = isPocDeclarerOrDummy(winningDiscardPoc, Shuffle$ReasonReactExamples.pocAsString(scoreSheetRecord.contractDeclarer)) ? 1 : 0;
-          console.log("declarerTrickIncrement:");
-          console.log(declarerTrickIncrement);
           var chicagoScoreSheetHead = Belt_List.headExn(state.chicagoScoreSheet);
           var chicagoScoreSheetTail = Belt_List.tailExn(state.chicagoScoreSheet);
           var myChicagoScoreSheetRecord_vulnerable = chicagoScoreSheetHead.vulnerable;
@@ -484,7 +479,6 @@ function reducer(state, action) {
       case /* AssignPlayer */1 :
           var pOfCAndP = action[0];
           ((window.isLastActionSync = false));
-          console.log("action AssignPlayer " + (pOfCAndP.player + (" to " + pOfCAndP.pointOfCompass)));
           var myArray1 = $$Array.map((function (pointOfCompassAndPlayer) {
                   if (pointOfCompassAndPlayer.pointOfCompass === pOfCAndP.pointOfCompass && pointOfCompassAndPlayer.pointOfCompass !== "Observer") {
                     return {
@@ -525,7 +519,6 @@ function reducer(state, action) {
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
       case /* BidAdd */2 :
-          console.log("Action - BidAdd");
           ((window.isLastActionSync = false));
           return {
                   activePointOfCompass: state.activePointOfCompass,
@@ -557,7 +550,6 @@ function reducer(state, action) {
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
       case /* BidUpdate */3 :
-          console.log("Action - BidUpdate");
           ((window.isLastActionSync = false));
           var bids$1 = state.bids;
           var head = List.hd(bids$1);
@@ -602,7 +594,6 @@ function reducer(state, action) {
                 };
       case /* BidAddSpecial */4 :
           var special = action[0];
-          console.log("Action - BidAddSpecial");
           ((window.isLastActionSync = false));
           var poc$3 = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
           if (special === undefined) {

@@ -137,8 +137,8 @@ let reducer = (state: state, action) => {
       let cardShuffleIndex = cardWrappedInArray[0].shuffleIndex;
       // we need to capture the discard suit for use on first discard only
       let cardDiscardSuit = cardWrappedInArray[0].suit;
-      Js.log("cardDiscardSuit:");
-      Js.log(cardDiscardSuit);
+      //Js.log("cardDiscardSuit:");
+      //Js.log(cardDiscardSuit);
       // discardPoc here and pocFollowingDeclarer after are used to decide
       // whether to make the Dummy hand visible
       let discardPoc = 
@@ -268,7 +268,7 @@ let reducer = (state: state, action) => {
     | Test => {
       // make sure doMessage is NOT called in sidebar component
       let () = [%raw "window.isLastActionSync = true"];
-      Js.log("benign action: 'Test'");
+      //Js.log("benign action: 'Test'");
       {
         ...state, lastAction: "Test", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
       }
@@ -277,7 +277,7 @@ let reducer = (state: state, action) => {
       //Js.log("Action-AssignPlayer");
       // make sure doMessage is called in sidebar component
       let () = [%raw "window.isLastActionSync = false"];
-      Js.log("action AssignPlayer " ++ pOfCAndP.player ++ " to " ++ pOfCAndP.pointOfCompass);
+      //Js.log("action AssignPlayer " ++ pOfCAndP.player ++ " to " ++ pOfCAndP.pointOfCompass);
       //let myNewArray = state.pointOfCompassAndPlayers;
       //{...state, pointOfCompassAndPlayers: myNewArray}
       // unassign any existing requested pointOfCompass
@@ -311,7 +311,7 @@ let reducer = (state: state, action) => {
       }
     }
     | BidAdd(contractLevel) => {
-      Js.log("Action - BidAdd")
+      //Js.log("Action - BidAdd")
       // make sure doMessage is called in sidebar component
       let () = [%raw "window.isLastActionSync = false"];
       //Js.log(state.bids);
@@ -334,7 +334,7 @@ let reducer = (state: state, action) => {
       }
     }
     | BidUpdate(contractSuit) => {
-      Js.log("Action - BidUpdate")
+      //Js.log("Action - BidUpdate")
       // make sure doMessage is called in sidebar component
       let () = [%raw "window.isLastActionSync = false"];
       // we can do an immutable update
@@ -361,7 +361,7 @@ let reducer = (state: state, action) => {
       }
     }
     | BidAddSpecial(special) => {
-      Js.log("Action - BidAddSpecial")
+      //Js.log("Action - BidAddSpecial")
       // make sure doMessage is called in sidebar component
       let () = [%raw "window.isLastActionSync = false"];
       // move on to next poc
@@ -601,8 +601,8 @@ let reducer = (state: state, action) => {
         :
         0
       ;
-      Js.log("declarerTrickIncrement:");
-      Js.log(declarerTrickIncrement);
+      //Js.log("declarerTrickIncrement:");
+      //Js.log(declarerTrickIncrement);
       // prepare for the score sheet update - we only want to update the head of the list
       let chicagoScoreSheetHead = Belt.List.headExn(state.chicagoScoreSheet);
       let chicagoScoreSheetTail: Chicago.chicagoScoreSheet = Belt.List.tailExn(state.chicagoScoreSheet);

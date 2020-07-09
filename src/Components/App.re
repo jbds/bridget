@@ -11,7 +11,7 @@ let make = () => {
   // 'dispatch' will not change between re-renders
   // useReducer expects to have passed in a reducer function and an initial state
   let (state, dispatch) = React.useReducer(Global.reducer, Global.initialState);
-   Js.log("State as below:");
+   Js.log("App.re react component re-render with state as below:");
    Js.log(state);
   // if we ensure ALL changes to state go via actions, 
   // we can guarantee gameState below (for use by p5) will always be in sync
