@@ -157,7 +157,7 @@ const callbackFunctionForP5 = (p) => {
 
   function changeBgColor() {
     //bgColor = p.color(p.random(255), p.random(255), p.random(255));
-    console.log('Test P5 clicked');
+    //console.log('Test P5 clicked');
   }
 
   // draws 4 hand fans - keep for possible re-use

@@ -30,7 +30,8 @@ function App(Props) {
     ? 
     Online.doMessage() 
     : 
-    console.log('Action-Sync: doMessage suppressed')));
+    //console.log('Action-Sync: doMessage suppressed')
+    null));
   var handlerBtnRotateTable = function (_e) {
     ((window.userState.tableRotationDegrees = ((window.userState.tableRotationDegrees + 90) % 360)));
     

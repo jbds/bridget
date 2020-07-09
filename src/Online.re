@@ -55,12 +55,12 @@ function handleWsOpen(){
   };
   ws.onmessage = function(e) {
     // add detection of message received from server
-    showMessageInConsole('client ws.onmessage fired, see Websocket message received below:');
+    //showMessageInConsole('client ws.onmessage fired, see Websocket message received below:');
     window.jbObj = JSON.parse(e.data);
     //showMessageInConsole(window.jbObj);
-    showMessageInConsole('will now update gameState with jbObj');
+    //showMessageInConsole('will now update gameState with jbObj');
     gameState = window.jbObj;
-    showMessageInConsole(gameState);
+    //showMessageInConsole(gameState);
     showMessageInConsole('client ws.onmessage - dispatch LoginSync action via hidden key on sidebar');
     document.getElementById('btnLoginSync').click();
   };

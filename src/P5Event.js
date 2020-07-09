@@ -183,7 +183,7 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   // sort the array in the same way as cards are displayed
   myHandArray.sort((a, b) => {return b.handOrder - a.handOrder});
   let myCard = myHandArray[cardSegmentIndexAdjusted];
-  console.log(myCard.fileName);
+  //console.log(myCard.fileName);
   // NO - always update via ReasonML action
   // at this point we know which card was clicked
   // so we can update the (mutable) js gameState object

@@ -33,7 +33,8 @@ let make = () => {
     ? 
     Online.doMessage() 
     : 
-    console.log('Action-Sync: doMessage suppressed')
+    //console.log('Action-Sync: doMessage suppressed')
+    null
   |}];
   // event handlers
   let handlerBtnRotateTable = (_e) => {
