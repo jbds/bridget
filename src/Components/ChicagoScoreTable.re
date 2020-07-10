@@ -137,9 +137,9 @@ let make = (~state: Global.state) => {
                 denominationColor=denominationColor
               />
             </td>
-            <td>{React.string(string_of_int(x.totalTricks))}</td>
+            <td>{React.string(string_of_int(x.totalTricksNorthSouth))}</td>
             <td>{React.string(Shuffle.optionIntAsString(x.scoreNorthSouth))}</td>
-            <td>{React.string(string_of_int(0))}</td>
+            <td>{React.string(string_of_int(x.totalTricksWestEast))}</td>
             <td>{React.string(Shuffle.optionIntAsString(x.scoreWestEast))}</td>
           </tr>
         })

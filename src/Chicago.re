@@ -17,8 +17,9 @@ type chicagoScoreSheetRecord = {
   contractLevel: option(int),       // None | Some (1,2,3,4,5,6,7)
   contractSuit: option(string),     // None | Some("Clubs", "Diamonds", "Hearts", "Spades", "NoTrumps")
   contractDeclarer: option(string), // None | Some("North", "East", "South", "West")
-  totalTricks: int,         // None | 0 thru 13
+  totalTricksNorthSouth: int,       // 0 thru 13
   scoreNorthSouth: option(int),     // calculated using Chicago.getScore if Declarer "North" or "South"
+  totalTricksWestEast: int,         // 0 thru 13
   scoreWestEast: option(int)        // calculated using Chicago.getScore if Declarer "West" or "East"
 };
 

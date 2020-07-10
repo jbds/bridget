@@ -138,6 +138,7 @@ let reducer = (state: state, action) => {
       let cardShuffleIndex = cardWrappedInArray[0].shuffleIndex;
       // we need to capture the discard suit for use on first discard only
       let cardDiscardSuit = cardWrappedInArray[0].suit;
+      // the discard suit of the first card for each trick is put into state
       //Js.log("cardDiscardSuit:");
       //Js.log(cardDiscardSuit);
       // discardPoc here and pocFollowingDeclarer after are used to decide
@@ -402,8 +403,9 @@ let reducer = (state: state, action) => {
               let contractLevel = bidRecordOfInterest1.contractLevel;
               let contractSuit = bidRecordOfInterest1.contractSuit;
               let contractPoc = bidRecordOfInterest1.contractPointOfCompass;
-              let totalTricks = 0;
+              let totalTricksNorthSouth = 0;
               let scoreNorthSouth = None;
+              let totalTricksWestEast = 0;
               let scoreWestEast = None;
               let bidsFilteredBySuitAnd2Poc = Belt.List.keep(state.bids, x => {
                 x.contractSuit == contractSuit && (
@@ -422,8 +424,9 @@ let reducer = (state: state, action) => {
                 contractLevel: contractLevel,
                 contractSuit: contractSuit,
                 contractDeclarer: contractDeclarer,
-                totalTricks: totalTricks,
+                totalTricksNorthSouth: totalTricksNorthSouth,
                 scoreNorthSouth: scoreNorthSouth,
+                totalTricksWestEast: totalTricksWestEast,
                 scoreWestEast: scoreWestEast
               };
               // return end of bidding, but avoid new row if 4 passes by checking contractLevel
@@ -588,26 +591,71 @@ let reducer = (state: state, action) => {
         };
       // Js.log("winningDiscardPoc:");
       // Js.log(winningDiscardPoc);
-      let isPocDeclarerOrDummy = (poc, declarer) => {
-        switch (poc) {
-          | "North" | "South" => declarer === "North" || declarer === "South" ? true : false
-          | "East" | "West" => declarer === "East" || declarer === "West" ? true : false
-          | _ => false
-        }
-      };
-      let declarerTrickIncrement = 
-        isPocDeclarerOrDummy(winningDiscardPoc, Shuffle.pocAsString(scoreSheetRecord.contractDeclarer))
+      // let isPocDeclarerOrDummy = (poc, declarer) => {
+      //   switch (poc) {
+      //     | "North" | "South" => declarer === "North" || declarer === "South" ? true : false
+      //     | "East" | "West" => declarer === "East" || declarer === "West" ? true : false
+      //     | _ => false
+      //   }
+      // };
+      // let declarerTrickIncrement = 
+      //   isPocDeclarerOrDummy(winningDiscardPoc, Shuffle.pocAsString(scoreSheetRecord.contractDeclarer))
+      //   ?
+      //   1
+      //   :
+      //   0
+      // ;
+      //Js.log("declarerTrickIncrement:");
+      //Js.log(declarerTrickIncrement);
+      //let totalTricksNorthSouthIncrement = 0;
+      //let totalTricksWestEastIncrement = 0;
+      let totalTricksNorthSouthIncrement =
+        (
+          scoreSheetRecord.contractDeclarer === Some("North")
+          ||
+          scoreSheetRecord.contractDeclarer === Some("South")
+        )
+        &&
+        (
+          winningDiscardPoc === "North"
+          ||
+          winningDiscardPoc === "South"
+        )
         ?
         1
         :
         0
       ;
-      //Js.log("declarerTrickIncrement:");
-      //Js.log(declarerTrickIncrement);
+      let totalTricksWestEastIncrement =
+        (
+          scoreSheetRecord.contractDeclarer === Some("West")
+          ||
+          scoreSheetRecord.contractDeclarer === Some("East")
+        )
+        &&
+        (
+          winningDiscardPoc === "West"
+          ||
+          winningDiscardPoc === "East"
+        )
+        ?
+        1
+        :
+        0
+      ;
+      Js.log("totalTricksNorthSouthIncrement:");
+      Js.log(totalTricksNorthSouthIncrement);
+      Js.log("totalTricksWestEastIncrement:");
+      Js.log(totalTricksWestEastIncrement);
       // prepare for the score sheet update - we only want to update the head of the list
       let chicagoScoreSheetHead = Belt.List.headExn(state.chicagoScoreSheet);
       let chicagoScoreSheetTail: Chicago.chicagoScoreSheet = Belt.List.tailExn(state.chicagoScoreSheet);
-      let myChicagoScoreSheetRecord = {...chicagoScoreSheetHead, totalTricks: chicagoScoreSheetHead.totalTricks + declarerTrickIncrement}
+      let myChicagoScoreSheetRecord = 
+        {
+          ...chicagoScoreSheetHead, 
+          totalTricksNorthSouth: chicagoScoreSheetHead.totalTricksNorthSouth + totalTricksNorthSouthIncrement,
+          totalTricksWestEast: chicagoScoreSheetHead.totalTricksWestEast + totalTricksWestEastIncrement
+        }
       // now we must check for end of round/deal by looking for countOfCardsWithLifecycleTrick = 48
       //let countOfCardsWithLifecycleTrick = Belt.Array.length(Belt.Array.keep(state.pack, x => x.lifecycle === Discard));
       // use discardIndex as this is really a cards clicked counter and more robust
@@ -648,11 +696,20 @@ let reducer = (state: state, action) => {
           let scoreLookup = Chicago.getScore(
             ~level = Shuffle.optionIntAsInt(scoreSheetRecord.contractLevel),
             ~denomination = myScoreLookupDenomination,
-            ~tricksTotal = scoreSheetRecord.totalTricks, // oops naming
+            ~tricksTotal = 
+              (scoreSheetRecord.contractDeclarer === Some("North"))
+              || 
+              (scoreSheetRecord.contractDeclarer === Some("South"))
+              ?
+              chicagoScoreSheetHead.totalTricksNorthSouth + totalTricksNorthSouthIncrement
+              :
+              chicagoScoreSheetHead.totalTricksWestEast + totalTricksWestEastIncrement,
             ~isVulnerable = isVulnerable,
             ~isDoubled = false, // TO DO
             ~isRedoubled = false // TO DO
           );
+          // some redundancy here, possibility of a bug
+          // state.declarer and contract.declarer SHOULD always be the same
           {
             ...myChicagoScoreSheetRecord, 
             scoreNorthSouth: (state.declarer === Some("North")) || (state.declarer === Some("South")) ? Some(scoreLookup) : None,
@@ -687,7 +744,7 @@ let reducer = (state: state, action) => {
         declarer: state.discardIndex !== 51 ? state.declarer : None,
         //pack: (state.discardIndex mod 4 ) === 3 ? myPack : state.pack,
         pack: myPack,
-        lastAction: declarerTrickIncrement === 0 ? "Trick LOST" : "Trick WON",
+        lastAction: "End of Trick",
         randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
       }
     }

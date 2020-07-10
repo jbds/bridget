@@ -255,53 +255,30 @@ function reducer(state, action) {
                     )
                 )
             );
-          var isPocDeclarerOrDummy = function (poc, declarer) {
-            var exit = 0;
-            switch (poc) {
-              case "North" :
-              case "South" :
-                  exit = 1;
-                  break;
-              case "East" :
-              case "West" :
-                  exit = 2;
-                  break;
-              default:
-                return false;
-            }
-            switch (exit) {
-              case 1 :
-                  if (declarer === "North") {
-                    return true;
-                  } else {
-                    return declarer === "South";
-                  }
-              case 2 :
-                  if (declarer === "East") {
-                    return true;
-                  } else {
-                    return declarer === "West";
-                  }
-              
-            }
-          };
-          var declarerTrickIncrement = isPocDeclarerOrDummy(winningDiscardPoc, Shuffle$ReasonReactExamples.pocAsString(scoreSheetRecord.contractDeclarer)) ? 1 : 0;
+          var totalTricksNorthSouthIncrement = (scoreSheetRecord.contractDeclarer === "North" || scoreSheetRecord.contractDeclarer === "South") && (winningDiscardPoc === "North" || winningDiscardPoc === "South") ? 1 : 0;
+          var totalTricksWestEastIncrement = (scoreSheetRecord.contractDeclarer === "West" || scoreSheetRecord.contractDeclarer === "East") && (winningDiscardPoc === "West" || winningDiscardPoc === "East") ? 1 : 0;
+          console.log("totalTricksNorthSouthIncrement:");
+          console.log(totalTricksNorthSouthIncrement);
+          console.log("totalTricksWestEastIncrement:");
+          console.log(totalTricksWestEastIncrement);
           var chicagoScoreSheetHead = Belt_List.headExn(state.chicagoScoreSheet);
           var chicagoScoreSheetTail = Belt_List.tailExn(state.chicagoScoreSheet);
           var myChicagoScoreSheetRecord_vulnerable = chicagoScoreSheetHead.vulnerable;
           var myChicagoScoreSheetRecord_contractLevel = chicagoScoreSheetHead.contractLevel;
           var myChicagoScoreSheetRecord_contractSuit = chicagoScoreSheetHead.contractSuit;
           var myChicagoScoreSheetRecord_contractDeclarer = chicagoScoreSheetHead.contractDeclarer;
-          var myChicagoScoreSheetRecord_totalTricks = chicagoScoreSheetHead.totalTricks + declarerTrickIncrement | 0;
+          var myChicagoScoreSheetRecord_totalTricksNorthSouth = chicagoScoreSheetHead.totalTricksNorthSouth + totalTricksNorthSouthIncrement | 0;
           var myChicagoScoreSheetRecord_scoreNorthSouth = chicagoScoreSheetHead.scoreNorthSouth;
+          var myChicagoScoreSheetRecord_totalTricksWestEast = chicagoScoreSheetHead.totalTricksWestEast + totalTricksWestEastIncrement | 0;
           var myChicagoScoreSheetRecord_scoreWestEast = chicagoScoreSheetHead.scoreWestEast;
           var myChicagoScoreSheetRecord = {
             vulnerable: myChicagoScoreSheetRecord_vulnerable,
             contractLevel: myChicagoScoreSheetRecord_contractLevel,
             contractSuit: myChicagoScoreSheetRecord_contractSuit,
             contractDeclarer: myChicagoScoreSheetRecord_contractDeclarer,
-            totalTricks: myChicagoScoreSheetRecord_totalTricks,
+            totalTricksNorthSouth: myChicagoScoreSheetRecord_totalTricksNorthSouth,
             scoreNorthSouth: myChicagoScoreSheetRecord_scoreNorthSouth,
+            totalTricksWestEast: myChicagoScoreSheetRecord_totalTricksWestEast,
             scoreWestEast: myChicagoScoreSheetRecord_scoreWestEast
           };
           var myChicagoScoreSheetRecordWithOptionalScore;
@@ -312,14 +289,15 @@ function reducer(state, action) {
             var isVulnerable = scoreSheetRecord.vulnerable === "None" ? false : (
                 (scoreSheetRecord.vulnerable === "N" || scoreSheetRecord.vulnerable === "S") && (scoreSheetRecord.contractDeclarer === "North" || scoreSheetRecord.contractDeclarer === "South") || (scoreSheetRecord.vulnerable === "W" || scoreSheetRecord.vulnerable === "E") && (scoreSheetRecord.contractDeclarer === "West" || scoreSheetRecord.contractDeclarer === "East") ? true : scoreSheetRecord.vulnerable === "All"
               );
-            var scoreLookup = Chicago$ReasonReactExamples.getScore(Shuffle$ReasonReactExamples.optionIntAsInt(scoreSheetRecord.contractLevel), myScoreLookupDenomination, scoreSheetRecord.totalTricks, isVulnerable, false, false);
+            var scoreLookup = Chicago$ReasonReactExamples.getScore(Shuffle$ReasonReactExamples.optionIntAsInt(scoreSheetRecord.contractLevel), myScoreLookupDenomination, scoreSheetRecord.contractDeclarer === "North" || scoreSheetRecord.contractDeclarer === "South" ? chicagoScoreSheetHead.totalTricksNorthSouth + totalTricksNorthSouthIncrement | 0 : chicagoScoreSheetHead.totalTricksWestEast + totalTricksWestEastIncrement | 0, isVulnerable, false, false);
             myChicagoScoreSheetRecordWithOptionalScore = {
               vulnerable: myChicagoScoreSheetRecord_vulnerable,
               contractLevel: myChicagoScoreSheetRecord_contractLevel,
               contractSuit: myChicagoScoreSheetRecord_contractSuit,
               contractDeclarer: myChicagoScoreSheetRecord_contractDeclarer,
-              totalTricks: myChicagoScoreSheetRecord_totalTricks,
+              totalTricksNorthSouth: myChicagoScoreSheetRecord_totalTricksNorthSouth,
               scoreNorthSouth: state.declarer === "North" || state.declarer === "South" ? scoreLookup : undefined,
+              totalTricksWestEast: myChicagoScoreSheetRecord_totalTricksWestEast,
               scoreWestEast: state.declarer === "West" || state.declarer === "East" ? scoreLookup : undefined
             };
           } else {
@@ -358,7 +336,7 @@ function reducer(state, action) {
                   isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                   isDummyVisible: state.isDummyVisible,
                   isRebootVisible: state.isRebootVisible,
-                  lastAction: declarerTrickIncrement === 0 ? "Trick LOST" : "Trick WON",
+                  lastAction: "End of Trick",
                   pack: myPack$1,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
@@ -713,8 +691,9 @@ function reducer(state, action) {
                   contractLevel: contractLevel,
                   contractSuit: contractSuit$1,
                   contractDeclarer: contractDeclarer,
-                  totalTricks: 0,
+                  totalTricksNorthSouth: 0,
                   scoreNorthSouth: undefined,
+                  totalTricksWestEast: 0,
                   scoreWestEast: undefined
                 };
                 return {

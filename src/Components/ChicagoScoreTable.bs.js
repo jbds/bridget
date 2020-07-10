@@ -123,7 +123,7 @@ function ChicagoScoreTable(Props) {
                                                   textValue: textValue,
                                                   denominationValue: denominationValue,
                                                   denominationColor: denominationColor
-                                                })), React.createElement("td", undefined, String(x.totalTricks)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreNorthSouth)), React.createElement("td", undefined, String(0)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreWestEast)));
+                                                })), React.createElement("td", undefined, String(x.totalTricksNorthSouth)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreNorthSouth)), React.createElement("td", undefined, String(x.totalTricksWestEast)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreWestEast)));
                             })))));
   }
 }
