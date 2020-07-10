@@ -110,8 +110,9 @@ function doMessage() {
     return;
   }
   ws.send(JSON.stringify(gameState));
-  showMessageInConsole('client doMessage - sent message to server as below:');
-  showMessageInConsole(JSON.stringify(gameState));
+  //showMessageInConsole('client doMessage - sent message to server as below:');
+  //showMessageInConsole(JSON.stringify(gameState));
+  showMessageInConsole('client doMessage - sent gameState to server as above');
 }
 
 exports.test = test;
