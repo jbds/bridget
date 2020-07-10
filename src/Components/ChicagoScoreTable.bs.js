@@ -40,17 +40,25 @@ function ChicagoScoreTable(Props) {
                                 }
                               }, "Bid"), React.createElement("td", {
                                 style: {
-                                  padding: "1vh 1vh 1vh 1vh"
+                                  padding: "1vh 0vh 1vh 0vh",
+                                  width: "7vh"
                                 }
-                              }, "Tricks"), React.createElement("td", {
+                              }, "N-S Tricks"), React.createElement("td", {
                                 style: {
-                                  padding: "1vh 2vh 1vh 2vh"
+                                  padding: "1vh 0vh 1vh 0vh",
+                                  width: "7vh"
                                 }
-                              }, "N-S"), React.createElement("td", {
+                              }, "N-S Score"), React.createElement("td", {
                                 style: {
-                                  padding: "1vh 2vh 1vh 2vh"
+                                  padding: "1vh 0vh 1vh 0vh",
+                                  width: "7vh"
                                 }
-                              }, "E-W")), Belt_Array.map(Belt_List.toArray(Belt_List.reverse(state.chicagoScoreSheet)), (function (x) {
+                              }, "E-W Tricks"), React.createElement("td", {
+                                style: {
+                                  padding: "1vh 0vh 1vh 0vh",
+                                  width: "7vh"
+                                }
+                              }, "E-W Score")), Belt_Array.map(Belt_List.toArray(Belt_List.reverse(state.chicagoScoreSheet)), (function (x) {
                               var match = x.contractSuit;
                               var denominationValue;
                               if (match !== undefined) {
@@ -115,7 +123,7 @@ function ChicagoScoreTable(Props) {
                                                   textValue: textValue,
                                                   denominationValue: denominationValue,
                                                   denominationColor: denominationColor
-                                                })), React.createElement("td", undefined, String(x.totalTricks)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreNorthSouth)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreWestEast)));
+                                                })), React.createElement("td", undefined, String(x.totalTricks)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreNorthSouth)), React.createElement("td", undefined, String(0)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreWestEast)));
                             })))));
   }
 }

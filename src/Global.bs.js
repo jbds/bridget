@@ -75,7 +75,7 @@ function reducer(state, action) {
                   handVisible: state.handVisible,
                   isBiddingCycle: true,
                   isBiddingHideDenominationButtons: true,
-                  isDummyVisible: state.isDummyVisible,
+                  isDummyVisible: false,
                   isRebootVisible: state.isRebootVisible,
                   lastAction: "Deal",
                   pack: Shuffle$ReasonReactExamples.getShuffledPack(undefined),

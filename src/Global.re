@@ -98,11 +98,11 @@ let reducer = (state: state, action) => {
       // make sure doMessage is called in sidebar component
       let () = [%raw "window.isLastActionSync = false"];
       // dealer becomes activePointOfCompass too, because he starts the bidding
-      // do change of dealer at end of deal ie 52 cards out TO DO)
-      //let poc = Some(Shuffle.getNextPointOfCompass(state.dealer));
+      // do change of dealer at end of deal ie 52 cards out 
       // also set BiddingCycle to true here
       // not sure dealIndex is needed?
       // force activePointOfCompass to be dealer
+      // hide Dummy hand
       {
         ...state, 
         activePointOfCompass: state.dealer,
@@ -112,6 +112,7 @@ let reducer = (state: state, action) => {
         declarer: None,
         isBiddingCycle: true,
         isBiddingHideDenominationButtons: true,
+        isDummyVisible: false,
         lastAction: "Deal",
         pack: Shuffle.getShuffledPack(), 
         randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),

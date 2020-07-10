@@ -31,46 +31,30 @@ let make = (~state: Global.state) => {
         <td style=(ReactDOMRe.Style.make(~padding={"1vh 2vh 1vh 2vh"}, ()))>
           (React.string("Bid"))
         </td>
-        <td style=(ReactDOMRe.Style.make(~padding={"1vh 1vh 1vh 1vh"}, ()))>
-          (React.string("Tricks"))
+        <td style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"7vh"}, ()))>
+          (React.string("N-S Tricks"))
         </td>
-        <td style=(ReactDOMRe.Style.make(~padding={"1vh 2vh 1vh 2vh"}, ()))>
-          (React.string("N-S"))
+        <td style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"7vh"}, ()))>
+          (React.string("N-S Score"))
         </td>
-        <td style=(ReactDOMRe.Style.make(~padding={"1vh 2vh 1vh 2vh"}, ()))>
-          (React.string("E-W"))</td>
+        <td style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"7vh"}, ()))>
+          (React.string("E-W Tricks"))
+        </td>
+        <td 
+          style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"7vh"}, ()))
+        >
+          //(React.string("E-W" ++ {js|\u0026\u006c\u0074\u003b\u0062\u0072\u002f\u0026\u0067\u0074\u003b|js} ++"Score"))
+          (React.string("E-W Score"))
+        </td>
       </tr>
       // some example rows
-      // <tr style=(ReactDOMRe.Style.make(~backgroundColor={"white"}, ()))>
-      //   <td>(React.string("None"))</td>
-      //   <td>(React.string("W"))</td>
-      //   <td>(React.string("1C"))</td>
-      //   <td>(React.string("13"))</td>
-      //   <td>(React.string("9999"))</td>
-      //   <td>(React.string(""))</td>
-      // </tr>
-      // <tr style=(ReactDOMRe.Style.make(~backgroundColor={"white"}, ()))>
-      //   <td>(React.string("W"))</td>
-      //   <td>(React.string("N"))</td>
-      //   <td>(React.string("6NT"))</td>
-      //   <td>(React.string("8"))</td>
-      //   <td>(React.string(""))</td>
-      //   <td>(React.string("-777"))</td>
-      // </tr>
-      // <tr style=(ReactDOMRe.Style.make(~backgroundColor={"white"}, ()))>
-      //   <td>(React.string("N"))</td>
-      //   <td>(React.string("N"))</td>
-      //   <td>(React.string("3H"))</td>
-      //   <td>(React.string("6"))</td>
-      //   <td>(React.string("-25"))</td>
-      //   <td>(React.string(""))</td>
-      // </tr>
       // <tr style=(ReactDOMRe.Style.make(~backgroundColor={"white"}, ()))>
       //   <td>(React.string("All"))</td>
       //   <td>(React.string("E"))</td>
       //   <td>(React.string("1NT"))</td>
       //   <td>(React.string("7"))</td>
       //   <td>(React.string("50"))</td>
+      //   <td>(React.string("6"))</td>
       //   <td>(React.string(""))</td>
       // </tr>
       // a subtotal row
@@ -80,6 +64,7 @@ let make = (~state: Global.state) => {
       //   <td style=(ReactDOMRe.Style.make(~backgroundColor={"#f8f8f8"}, ~color={"#f8f8f8"}, ()))>(React.string(""))</td>
       //   <td style=(ReactDOMRe.Style.make(~backgroundColor={"#f8f8f8"}, ~color={"#f8f8f8"}, ()))>(React.string(""))</td>
       //   <td>(React.string("1000"))</td>
+      //   <td style=(ReactDOMRe.Style.make(~backgroundColor={"#f8f8f8"}, ~color={"#f8f8f8"}, ()))>(React.string(""))</td>
       //   <td>(React.string("500"))</td>
       // </tr>
       // // some example rows
@@ -89,30 +74,6 @@ let make = (~state: Global.state) => {
       //   <td>(React.string("1C"))</td>
       //   <td>(React.string("13"))</td>
       //   <td>(React.string("9999"))</td>
-      //   <td>(React.string(""))</td>
-      // </tr>
-      // <tr style=(ReactDOMRe.Style.make(~backgroundColor={"white"}, ()))>
-      //   <td>(React.string("W"))</td>
-      //   <td>(React.string("N"))</td>
-      //   <td>(React.string("6NT"))</td>
-      //   <td>(React.string("8"))</td>
-      //   <td>(React.string(""))</td>
-      //   <td>(React.string("-777"))</td>
-      // </tr>
-      // <tr style=(ReactDOMRe.Style.make(~backgroundColor={"white"}, ()))>
-      //   <td>(React.string("N"))</td>
-      //   <td>(React.string("N"))</td>
-      //   <td>(React.string("3H"))</td>
-      //   <td>(React.string("6"))</td>
-      //   <td>(React.string("-25"))</td>
-      //   <td>(React.string(""))</td>
-      // </tr>
-      // <tr style=(ReactDOMRe.Style.make(~backgroundColor={"white"}, ()))>
-      //   <td>(React.string("All"))</td>
-      //   <td>(React.string("E"))</td>
-      //   <td>(React.string("1NT"))</td>
-      //   <td>(React.string("7"))</td>
-      //   <td>(React.string("50"))</td>
       //   <td>(React.string(""))</td>
       // </tr>
       // // a subtotal row
@@ -178,6 +139,7 @@ let make = (~state: Global.state) => {
             </td>
             <td>{React.string(string_of_int(x.totalTricks))}</td>
             <td>{React.string(Shuffle.optionIntAsString(x.scoreNorthSouth))}</td>
+            <td>{React.string(string_of_int(0))}</td>
             <td>{React.string(Shuffle.optionIntAsString(x.scoreWestEast))}</td>
           </tr>
         })
