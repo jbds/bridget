@@ -110,6 +110,7 @@ let reducer = (state: state, action) => {
         //dealer: poc,
         //dealIndex: state.dealIndex + 1,
         declarer: None,
+        discardIndex: -1,
         isBiddingCycle: true,
         isBiddingHideDenominationButtons: true,
         isDummyVisible: false,

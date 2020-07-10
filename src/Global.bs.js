@@ -70,7 +70,7 @@ function reducer(state, action) {
                   dealer: state.dealer,
                   dealIndex: state.dealIndex,
                   declarer: undefined,
-                  discardIndex: state.discardIndex,
+                  discardIndex: -1,
                   discardSuit: state.discardSuit,
                   handVisible: state.handVisible,
                   isBiddingCycle: true,

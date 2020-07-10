@@ -138,9 +138,35 @@ let make = (~state: Global.state) => {
               />
             </td>
             <td>{React.string(string_of_int(x.totalTricksNorthSouth))}</td>
-            <td>{React.string(Shuffle.optionIntAsString(x.scoreNorthSouth))}</td>
+            <td
+              // style=(ReactDOMRe.Style.make(~backgroundColor={
+              //   (x.contractDeclarer === Some("North")) 
+              //   || 
+              //   (x.contractDeclarer === Some("South")) 
+              //   ||
+              //   (x.scoreWestEast === None)
+              //   ? 
+              //   "white" 
+              //   : 
+              //   "#f0f0f0"}, ()))            
+            >
+              {React.string(Shuffle.optionIntAsString(x.scoreNorthSouth))}
+            </td>
             <td>{React.string(string_of_int(x.totalTricksWestEast))}</td>
-            <td>{React.string(Shuffle.optionIntAsString(x.scoreWestEast))}</td>
+            <td
+              // style=(ReactDOMRe.Style.make(~backgroundColor={
+              //   (x.contractDeclarer === Some("West")) 
+              //   || 
+              //   (x.contractDeclarer === Some("East"))
+              //   ||
+              //   (x.scoreNorthSouth === None)
+              //   ? 
+              //   "white" 
+              //   : 
+              //   "#f0f0f0"}, ()))            
+            >
+              {React.string(Shuffle.optionIntAsString(x.scoreWestEast))}
+            </td>
           </tr>
         })
         -> React.array
