@@ -255,8 +255,8 @@ function reducer(state, action) {
                     )
                 )
             );
-          var totalTricksNorthSouthIncrement = (scoreSheetRecord.contractDeclarer === "North" || scoreSheetRecord.contractDeclarer === "South") && (winningDiscardPoc === "North" || winningDiscardPoc === "South") ? 1 : 0;
-          var totalTricksWestEastIncrement = (scoreSheetRecord.contractDeclarer === "West" || scoreSheetRecord.contractDeclarer === "East") && (winningDiscardPoc === "West" || winningDiscardPoc === "East") ? 1 : 0;
+          var totalTricksNorthSouthIncrement = winningDiscardPoc === "North" || winningDiscardPoc === "South" ? 1 : 0;
+          var totalTricksWestEastIncrement = winningDiscardPoc === "West" || winningDiscardPoc === "East" ? 1 : 0;
           console.log("totalTricksNorthSouthIncrement:");
           console.log(totalTricksNorthSouthIncrement);
           console.log("totalTricksWestEastIncrement:");

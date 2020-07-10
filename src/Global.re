@@ -589,8 +589,8 @@ let reducer = (state: state, action) => {
         } else {
           "West"
         };
-      // Js.log("winningDiscardPoc:");
-      // Js.log(winningDiscardPoc);
+      //Js.log("winningDiscardPoc:");
+      //Js.log(winningDiscardPoc);
       // let isPocDeclarerOrDummy = (poc, declarer) => {
       //   switch (poc) {
       //     | "North" | "South" => declarer === "North" || declarer === "South" ? true : false
@@ -610,12 +610,12 @@ let reducer = (state: state, action) => {
       //let totalTricksNorthSouthIncrement = 0;
       //let totalTricksWestEastIncrement = 0;
       let totalTricksNorthSouthIncrement =
-        (
-          scoreSheetRecord.contractDeclarer === Some("North")
-          ||
-          scoreSheetRecord.contractDeclarer === Some("South")
-        )
-        &&
+        // (
+        //   scoreSheetRecord.contractDeclarer === Some("North")
+        //   ||
+        //   scoreSheetRecord.contractDeclarer === Some("South")
+        // )
+        // &&
         (
           winningDiscardPoc === "North"
           ||
@@ -627,12 +627,12 @@ let reducer = (state: state, action) => {
         0
       ;
       let totalTricksWestEastIncrement =
-        (
-          scoreSheetRecord.contractDeclarer === Some("West")
-          ||
-          scoreSheetRecord.contractDeclarer === Some("East")
-        )
-        &&
+        // (
+        //   scoreSheetRecord.contractDeclarer === Some("West")
+        //   ||
+        //   scoreSheetRecord.contractDeclarer === Some("East")
+        // )
+        // &&
         (
           winningDiscardPoc === "West"
           ||
