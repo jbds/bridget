@@ -670,7 +670,10 @@ function reducer(state, action) {
                       return "Error";
                   }
                 };
-                var bidRecordOfInterest1 = List.hd(List.tl(tl));
+                var bidsListFiltered = Belt_List.keep(state.bids, (function (x) {
+                        return x.isPass === false;
+                      }));
+                var bidRecordOfInterest1 = List.hd(bidsListFiltered);
                 var tailOfInterest = List.tl(List.tl(tl));
                 console.log("bidRecordOfinterest1:");
                 console.log(bidRecordOfInterest1);

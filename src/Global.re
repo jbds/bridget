@@ -399,7 +399,10 @@ let reducer = (state: state, action) => {
                 }
               };
               // we need to add a row to the Chicago score sheet, so assemble here
-              let bidRecordOfInterest1 = List.hd(List.tl(tl));
+              // filter out all Pass records
+              let bidsListFiltered = Belt.List.keep(state.bids, x => x.isPass === false);
+              //let bidRecordOfInterest1 = List.hd(List.tl(tl));
+              let bidRecordOfInterest1 = List.hd(bidsListFiltered);
               let tailOfInterest = List.tl(List.tl(tl));
               Js.log("bidRecordOfinterest1:");
               Js.log(bidRecordOfInterest1);
