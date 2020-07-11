@@ -11,9 +11,8 @@ let make = (
       | Some(x) => x.contractSuit !== Some("") ? true : false
     }
   ;
-  Js.log("isShowXAndXX");
-  Js.log(isShowXAndXX);
-
+  //Js.log("isShowXAndXX");
+  //Js.log(isShowXAndXX);
   <>
     //<span>(React.string("BiddingWindowComp"))</span>
     //(s2e("TEST"))

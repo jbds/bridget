@@ -90,8 +90,6 @@ function reducer(state, action) {
                 }));
           var cardShuffleIndex = Caml_array.caml_array_get(cardWrappedInArray, 0).shuffleIndex;
           var cardDiscardSuit = Caml_array.caml_array_get(cardWrappedInArray, 0).suit;
-          console.log("cardDiscardSuit:");
-          console.log(cardDiscardSuit);
           var discardPoc = cardShuffleIndex < 13 ? "North" : (
               cardShuffleIndex < 26 ? "East" : (
                   cardShuffleIndex < 39 ? "South" : "West"
@@ -241,20 +239,14 @@ function reducer(state, action) {
                     return card;
                   }
                 }), state.pack);
-          console.log("myAdjustedPackValue:");
-          console.log(myAdjustedPackValue);
           var myFourCards = Belt_Array.keep(myAdjustedPackValue, (function (x) {
                   return x.lifecycle === /* Discard */2;
                 }));
-          console.log("myFourCards:");
-          console.log(myFourCards);
           var myFourCardsAsList = Belt_List.fromArray(myFourCards);
           var myFourCardsAsListSorted = Belt_List.sort(myFourCardsAsList, (function (a, b) {
                   return b.noTrumpValue - a.noTrumpValue | 0;
                 }));
           var optionWinningCard = Belt_List.head(myFourCardsAsListSorted);
-          console.log("optionWinningCard");
-          console.log(optionWinningCard);
           var winningCardShuffleIndex = optionWinningCard !== undefined ? optionWinningCard.shuffleIndex : -1;
           var winningDiscardPoc = winningCardShuffleIndex === -1 ? "Error" : (
               winningCardShuffleIndex < 13 ? "North" : (
@@ -263,20 +255,16 @@ function reducer(state, action) {
                     )
                 )
             );
-          console.log("winningDiscardPoc:");
-          console.log(winningDiscardPoc);
           var totalTricksNorthSouthIncrement = winningDiscardPoc === "North" || winningDiscardPoc === "South" ? 1 : 0;
           var totalTricksWestEastIncrement = winningDiscardPoc === "West" || winningDiscardPoc === "East" ? 1 : 0;
-          console.log("totalTricksNorthSouthIncrement:");
-          console.log(totalTricksNorthSouthIncrement);
-          console.log("totalTricksWestEastIncrement:");
-          console.log(totalTricksWestEastIncrement);
           var chicagoScoreSheetHead = Belt_List.headExn(state.chicagoScoreSheet);
           var chicagoScoreSheetTail = Belt_List.tailExn(state.chicagoScoreSheet);
           var myChicagoScoreSheetRecord_vulnerable = chicagoScoreSheetHead.vulnerable;
           var myChicagoScoreSheetRecord_contractLevel = chicagoScoreSheetHead.contractLevel;
           var myChicagoScoreSheetRecord_contractSuit = chicagoScoreSheetHead.contractSuit;
           var myChicagoScoreSheetRecord_contractDeclarer = chicagoScoreSheetHead.contractDeclarer;
+          var myChicagoScoreSheetRecord_isDoubled = chicagoScoreSheetHead.isDoubled;
+          var myChicagoScoreSheetRecord_isRedoubled = chicagoScoreSheetHead.isRedoubled;
           var myChicagoScoreSheetRecord_totalTricksNorthSouth = chicagoScoreSheetHead.totalTricksNorthSouth + totalTricksNorthSouthIncrement | 0;
           var myChicagoScoreSheetRecord_scoreNorthSouth = chicagoScoreSheetHead.scoreNorthSouth;
           var myChicagoScoreSheetRecord_totalTricksWestEast = chicagoScoreSheetHead.totalTricksWestEast + totalTricksWestEastIncrement | 0;
@@ -286,6 +274,8 @@ function reducer(state, action) {
             contractLevel: myChicagoScoreSheetRecord_contractLevel,
             contractSuit: myChicagoScoreSheetRecord_contractSuit,
             contractDeclarer: myChicagoScoreSheetRecord_contractDeclarer,
+            isDoubled: myChicagoScoreSheetRecord_isDoubled,
+            isRedoubled: myChicagoScoreSheetRecord_isRedoubled,
             totalTricksNorthSouth: myChicagoScoreSheetRecord_totalTricksNorthSouth,
             scoreNorthSouth: myChicagoScoreSheetRecord_scoreNorthSouth,
             totalTricksWestEast: myChicagoScoreSheetRecord_totalTricksWestEast,
@@ -305,6 +295,8 @@ function reducer(state, action) {
               contractLevel: myChicagoScoreSheetRecord_contractLevel,
               contractSuit: myChicagoScoreSheetRecord_contractSuit,
               contractDeclarer: myChicagoScoreSheetRecord_contractDeclarer,
+              isDoubled: myChicagoScoreSheetRecord_isDoubled,
+              isRedoubled: myChicagoScoreSheetRecord_isRedoubled,
               totalTricksNorthSouth: myChicagoScoreSheetRecord_totalTricksNorthSouth,
               scoreNorthSouth: state.declarer === "North" || state.declarer === "South" ? scoreLookup : undefined,
               totalTricksWestEast: myChicagoScoreSheetRecord_totalTricksWestEast,
@@ -701,6 +693,8 @@ function reducer(state, action) {
                   contractLevel: contractLevel,
                   contractSuit: contractSuit$1,
                   contractDeclarer: contractDeclarer,
+                  isDoubled: false,
+                  isRedoubled: false,
                   totalTricksNorthSouth: 0,
                   scoreNorthSouth: undefined,
                   totalTricksWestEast: 0,

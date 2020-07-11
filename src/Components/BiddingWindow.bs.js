@@ -12,8 +12,6 @@ function BiddingWindow(Props) {
   var state = Props.state;
   var bidListHead = Belt_List.head(state.bids);
   var isShowXAndXX = bidListHead !== undefined ? bidListHead.contractSuit !== "" : false;
-  console.log("isShowXAndXX");
-  console.log(isShowXAndXX);
   return React.createElement(React.Fragment, undefined, React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* BidAdd */Block.__(2, [1]),
