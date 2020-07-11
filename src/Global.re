@@ -403,7 +403,8 @@ let reducer = (state: state, action) => {
               let bidsListFiltered = Belt.List.keep(state.bids, x => x.isPass === false);
               //let bidRecordOfInterest1 = List.hd(List.tl(tl));
               let bidRecordOfInterest1 = List.hd(bidsListFiltered);
-              let tailOfInterest = List.tl(List.tl(tl));
+              //let tailOfInterest = List.tl(List.tl(tl));
+              let tailOfInterest = List.tl(bidsListFiltered);
               Js.log("bidRecordOfinterest1:");
               Js.log(bidRecordOfInterest1);
               let bidRecordOfInterest2 = 

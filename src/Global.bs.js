@@ -674,7 +674,7 @@ function reducer(state, action) {
                         return x.isPass === false;
                       }));
                 var bidRecordOfInterest1 = List.hd(bidsListFiltered);
-                var tailOfInterest = List.tl(List.tl(tl));
+                var tailOfInterest = List.tl(bidsListFiltered);
                 console.log("bidRecordOfinterest1:");
                 console.log(bidRecordOfInterest1);
                 var bidRecordOfInterest2 = bidRecordOfInterest1.contractLevel === undefined && bidRecordOfInterest1.isDoubled === true ? List.hd(tailOfInterest) : bidRecordOfInterest1;
