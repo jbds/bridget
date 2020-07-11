@@ -140,8 +140,8 @@ let reducer = (state: state, action) => {
       // we need to capture the discard suit for use on first discard only
       let cardDiscardSuit = cardWrappedInArray[0].suit;
       // the discard suit of the first card for each trick is put into state
-      //Js.log("cardDiscardSuit:");
-      //Js.log(cardDiscardSuit);
+      Js.log("cardDiscardSuit:");
+      Js.log(cardDiscardSuit);
       // discardPoc here and pocFollowingDeclarer after are used to decide
       // whether to make the Dummy hand visible
       let discardPoc = 
@@ -547,16 +547,18 @@ let reducer = (state: state, action) => {
         },
         state.pack
       );
-      //Js.log("myAdjustedPackValue:");
-      //Js.log(myAdjustedPackValue);
+      Js.log("myAdjustedPackValue:");
+      Js.log(myAdjustedPackValue);
       // filter by lifecycle
       let myFourCards = Belt.Array.keep(myAdjustedPackValue, x => x.lifecycle === Discard);
-      //Js.log("myFourCards:");
-      //Js.log(myFourCards);
+      Js.log("myFourCards:");
+      Js.log(myFourCards);
       let myFourCardsAsList = Belt.List.fromArray(myFourCards);
       // just sort the list with Belt!
       let myFourCardsAsListSorted = Belt.List.sort(myFourCardsAsList, (a, b) => {b.noTrumpValue - a.noTrumpValue})
       let optionWinningCard = Belt.List.head(myFourCardsAsListSorted);
+      Js.log("optionWinningCard");
+      Js.log(optionWinningCard);
       // let winningCardFileName =
       //   switch (optionWinningCard) {
       //     | None => ""
@@ -590,8 +592,8 @@ let reducer = (state: state, action) => {
         } else {
           "West"
         };
-      //Js.log("winningDiscardPoc:");
-      //Js.log(winningDiscardPoc);
+      Js.log("winningDiscardPoc:");
+      Js.log(winningDiscardPoc);
       // let isPocDeclarerOrDummy = (poc, declarer) => {
       //   switch (poc) {
       //     | "North" | "South" => declarer === "North" || declarer === "South" ? true : false

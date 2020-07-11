@@ -20,15 +20,25 @@ let drawCards = (p, g, w, pointOfCompass) => {
     }
     let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
     return (
+      // every player can see their own hand
       userPointOfCompass === poc 
       || 
+      // observers can see all hands
       userPointOfCompass === 'Observer' 
       ||
+      // every player can see Dummy once lead card has been played
       // check for poc equal to Dummy poc AND isDummyVisible
       (
         poc === getDummyPointOfCompassFromDeclarer(w.gameState.declarer)
         &&
         gameState.isDummyVisible === true
+      )
+      ||
+      // the dummy can observer the declarer's hand for interest only
+      (
+        poc === w.gameState.declarer
+        &&
+        userPointOfCompass === getDummyPointOfCompassFromDeclarer(w.gameState.declarer)
       )
       ? 
       true 
