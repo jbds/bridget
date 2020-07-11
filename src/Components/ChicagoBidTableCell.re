@@ -6,6 +6,7 @@ let make = (
   ~denominationValue: string,
   ~denominationColor: string,
   // ~backgroundColor: string,
+  ~suffixTextValue: string
 ) => {
     <div
       // style=(
@@ -52,6 +53,17 @@ let make = (
       >
         (React.string({denominationValue}))
         //(React.string({js|\u2665|js}))
+      </span>
+      <span
+        style=(
+          ReactDOMRe.Style.make(
+            //~color={textColor},
+            ~color={"#404040"},
+            ()
+          )
+        )
+      >
+        (React.string({suffixTextValue}))
       </span>
     </div>
 };

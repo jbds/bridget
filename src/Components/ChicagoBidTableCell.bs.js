@@ -6,6 +6,7 @@ function ChicagoBidTableCell(Props) {
   var textValue = Props.textValue;
   var denominationValue = Props.denominationValue;
   var denominationColor = Props.denominationColor;
+  var suffixTextValue = Props.suffixTextValue;
   return React.createElement("div", undefined, React.createElement("span", {
                   style: {
                     color: "#404040"
@@ -14,7 +15,11 @@ function ChicagoBidTableCell(Props) {
                   style: {
                     color: denominationColor
                   }
-                }, denominationValue));
+                }, denominationValue), React.createElement("span", {
+                  style: {
+                    color: "#404040"
+                  }
+                }, suffixTextValue));
 }
 
 var make = ChicagoBidTableCell;

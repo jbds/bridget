@@ -32,31 +32,31 @@ function ChicagoScoreTable(Props) {
                                 }
                               }, "Vuln"), React.createElement("td", {
                                 style: {
-                                  padding: "1vh 1vh 1vh 1vh"
+                                  padding: "1vh 0.5vh 1vh 0.5vh"
                                 }
                               }, "Decl"), React.createElement("td", {
                                 style: {
-                                  padding: "1vh 2vh 1vh 2vh"
+                                  padding: "1vh 1.5vh 1vh 1.5vh"
                                 }
                               }, "Bid"), React.createElement("td", {
                                 style: {
                                   padding: "1vh 0vh 1vh 0vh",
-                                  width: "7vh"
+                                  width: "6.5vh"
                                 }
                               }, "N-S Tricks"), React.createElement("td", {
                                 style: {
                                   padding: "1vh 0vh 1vh 0vh",
-                                  width: "7vh"
+                                  width: "6.5vh"
                                 }
                               }, "N-S Score"), React.createElement("td", {
                                 style: {
                                   padding: "1vh 0vh 1vh 0vh",
-                                  width: "7vh"
+                                  width: "6.5vh"
                                 }
                               }, "E-W Tricks"), React.createElement("td", {
                                 style: {
                                   padding: "1vh 0vh 1vh 0vh",
-                                  width: "7vh"
+                                  width: "6.5vh"
                                 }
                               }, "E-W Score")), Belt_Array.map(Belt_List.toArray(Belt_List.reverse(state.chicagoScoreSheet)), (function (x) {
                               var match = x.contractSuit;
@@ -113,7 +113,7 @@ function ChicagoScoreTable(Props) {
                                 }
                               };
                               var n = x.contractLevel;
-                              var textValue = n !== undefined ? getLevelPlusPossibleNT(n) : "X";
+                              var textValue = n !== undefined ? getLevelPlusPossibleNT(n) : "Err";
                               return React.createElement("tr", {
                                           key: String(Random.$$int(1000000)),
                                           style: {
@@ -122,7 +122,8 @@ function ChicagoScoreTable(Props) {
                                         }, React.createElement("td", undefined, x.vulnerable), React.createElement("td", undefined, $$String.sub(Shuffle$ReasonReactExamples.pocAsString(x.contractDeclarer), 0, 1)), React.createElement("td", undefined, React.createElement(ChicagoBidTableCell$ReasonReactExamples.make, {
                                                   textValue: textValue,
                                                   denominationValue: denominationValue,
-                                                  denominationColor: denominationColor
+                                                  denominationColor: denominationColor,
+                                                  suffixTextValue: x.isDoubled ? "x" : ""
                                                 })), React.createElement("td", undefined, String(x.totalTricksNorthSouth)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreNorthSouth)), React.createElement("td", undefined, String(x.totalTricksWestEast)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreWestEast)));
                             })))));
   }

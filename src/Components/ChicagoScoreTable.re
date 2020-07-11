@@ -25,23 +25,23 @@ let make = (~state: Global.state) => {
         <td style=(ReactDOMRe.Style.make(~padding={"1vh 1vh 1vh 1vh"}, ()))>
           (React.string("Vuln"))
         </td>
-        <td style=(ReactDOMRe.Style.make(~padding={"1vh 1vh 1vh 1vh"}, ()))>
+        <td style=(ReactDOMRe.Style.make(~padding={"1vh 0.5vh 1vh 0.5vh"}, ()))>
           (React.string("Decl"))
         </td>
-        <td style=(ReactDOMRe.Style.make(~padding={"1vh 2vh 1vh 2vh"}, ()))>
+        <td style=(ReactDOMRe.Style.make(~padding={"1vh 1.5vh 1vh 1.5vh"}, ()))>
           (React.string("Bid"))
         </td>
-        <td style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"7vh"}, ()))>
+        <td style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"6.5vh"}, ()))>
           (React.string("N-S Tricks"))
         </td>
-        <td style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"7vh"}, ()))>
+        <td style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"6.5vh"}, ()))>
           (React.string("N-S Score"))
         </td>
-        <td style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"7vh"}, ()))>
+        <td style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"6.5vh"}, ()))>
           (React.string("E-W Tricks"))
         </td>
         <td 
-          style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"7vh"}, ()))
+          style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"6.5vh"}, ()))
         >
           //(React.string("E-W" ++ {js|\u0026\u006c\u0074\u003b\u0062\u0072\u002f\u0026\u0067\u0074\u003b|js} ++"Score"))
           (React.string("E-W Score"))
@@ -123,7 +123,7 @@ let make = (~state: Global.state) => {
           };
           let textValue = 
             switch (x.contractLevel) {
-              | None => "X"
+              | None => "Err"
               | Some(n) => getLevelPlusPossibleNT(n)
             };
           <tr key={string_of_int(Random.int(1000000))} style=(ReactDOMRe.Style.make(~backgroundColor={"white"}, ()))>
@@ -135,6 +135,7 @@ let make = (~state: Global.state) => {
                 textValue=textValue
                 denominationValue=denominationValue
                 denominationColor=denominationColor
+                suffixTextValue={x.isDoubled ? "x" : ""}
               />
             </td>
             <td>{React.string(string_of_int(x.totalTricksNorthSouth))}</td>
