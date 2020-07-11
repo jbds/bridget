@@ -123,7 +123,9 @@ function ChicagoScoreTable(Props) {
                                                   textValue: textValue,
                                                   denominationValue: denominationValue,
                                                   denominationColor: denominationColor,
-                                                  suffixTextValue: x.isDoubled ? "x" : ""
+                                                  suffixTextValue: x.isDoubled ? "x" : (
+                                                      x.isRedoubled ? "xx" : ""
+                                                    )
                                                 })), React.createElement("td", undefined, String(x.totalTricksNorthSouth)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreNorthSouth)), React.createElement("td", undefined, String(x.totalTricksWestEast)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreWestEast)));
                             })))));
   }

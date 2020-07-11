@@ -401,16 +401,18 @@ let reducer = (state: state, action) => {
               // we need to add a row to the Chicago score sheet, so assemble here
               // filter out all Pass records
               let bidsListFiltered = Belt.List.keep(state.bids, x => x.isPass === false);
-              //let bidRecordOfInterest1 = List.hd(List.tl(tl));
               let bidRecordOfInterest1 = List.hd(bidsListFiltered);
-              //let tailOfInterest = List.tl(List.tl(tl));
               let tailOfInterest = List.tl(bidsListFiltered);
               Js.log("bidRecordOfinterest1:");
               Js.log(bidRecordOfInterest1);
               let bidRecordOfInterest2 = 
                 (bidRecordOfInterest1.contractLevel === None) 
                 && 
-                (bidRecordOfInterest1.isDoubled === true)
+                (
+                  (bidRecordOfInterest1.isDoubled === true)
+                  ||
+                  (bidRecordOfInterest1.isRedoubled === true)
+                )
                 ?
                 List.hd(tailOfInterest)
                 :
@@ -420,6 +422,7 @@ let reducer = (state: state, action) => {
               let contractSuit = bidRecordOfInterest2.contractSuit;
               let contractPoc = bidRecordOfInterest2.contractPointOfCompass;
               let isDoubled = (bidRecordOfInterest1.contractLevel === None) && (bidRecordOfInterest1.isDoubled === true);
+              let isRedoubled = (bidRecordOfInterest1.contractLevel === None) && (bidRecordOfInterest1.isRedoubled === true);
               let totalTricksNorthSouth = 0;
               let scoreNorthSouth = None;
               let totalTricksWestEast = 0;
@@ -442,7 +445,7 @@ let reducer = (state: state, action) => {
                 contractSuit: contractSuit,
                 contractDeclarer: contractDeclarer,
                 isDoubled: isDoubled, 
-                isRedoubled: false, // TO DO
+                isRedoubled: isRedoubled, 
                 totalTricksNorthSouth: totalTricksNorthSouth,
                 scoreNorthSouth: scoreNorthSouth,
                 totalTricksWestEast: totalTricksWestEast,

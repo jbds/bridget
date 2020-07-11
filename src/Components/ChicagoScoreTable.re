@@ -135,7 +135,7 @@ let make = (~state: Global.state) => {
                 textValue=textValue
                 denominationValue=denominationValue
                 denominationColor=denominationColor
-                suffixTextValue={x.isDoubled ? "x" : ""}
+                suffixTextValue={x.isDoubled ? "x" : (x.isRedoubled ? "xx" : "")}
               />
             </td>
             <td>{React.string(string_of_int(x.totalTricksNorthSouth))}</td>

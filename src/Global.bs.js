@@ -677,11 +677,12 @@ function reducer(state, action) {
                 var tailOfInterest = List.tl(bidsListFiltered);
                 console.log("bidRecordOfinterest1:");
                 console.log(bidRecordOfInterest1);
-                var bidRecordOfInterest2 = bidRecordOfInterest1.contractLevel === undefined && bidRecordOfInterest1.isDoubled === true ? List.hd(tailOfInterest) : bidRecordOfInterest1;
+                var bidRecordOfInterest2 = bidRecordOfInterest1.contractLevel === undefined && (bidRecordOfInterest1.isDoubled === true || bidRecordOfInterest1.isRedoubled === true) ? List.hd(tailOfInterest) : bidRecordOfInterest1;
                 var contractLevel = bidRecordOfInterest2.contractLevel;
                 var contractSuit$1 = bidRecordOfInterest2.contractSuit;
                 var contractPoc = bidRecordOfInterest2.contractPointOfCompass;
                 var isDoubled = bidRecordOfInterest1.contractLevel === undefined && bidRecordOfInterest1.isDoubled === true;
+                var isRedoubled = bidRecordOfInterest1.contractLevel === undefined && bidRecordOfInterest1.isRedoubled === true;
                 var bidsFilteredBySuitAnd2Poc = Belt_List.keep(state.bids, (function (x) {
                         if (Caml_obj.caml_equal(x.contractSuit, contractSuit$1)) {
                           if (Caml_obj.caml_equal(x.contractPointOfCompass, contractPoc)) {
@@ -702,7 +703,7 @@ function reducer(state, action) {
                   contractSuit: contractSuit$1,
                   contractDeclarer: contractDeclarer,
                   isDoubled: isDoubled,
-                  isRedoubled: false,
+                  isRedoubled: isRedoubled,
                   totalTricksNorthSouth: 0,
                   scoreNorthSouth: undefined,
                   totalTricksWestEast: 0,
