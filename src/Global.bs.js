@@ -671,9 +671,14 @@ function reducer(state, action) {
                   }
                 };
                 var bidRecordOfInterest1 = List.hd(List.tl(tl));
-                var contractLevel = bidRecordOfInterest1.contractLevel;
-                var contractSuit$1 = bidRecordOfInterest1.contractSuit;
-                var contractPoc = bidRecordOfInterest1.contractPointOfCompass;
+                var tailOfInterest = List.tl(List.tl(tl));
+                console.log("bidRecordOfinterest1:");
+                console.log(bidRecordOfInterest1);
+                var bidRecordOfInterest2 = bidRecordOfInterest1.contractLevel === undefined && bidRecordOfInterest1.isDoubled === true ? List.hd(tailOfInterest) : bidRecordOfInterest1;
+                var contractLevel = bidRecordOfInterest2.contractLevel;
+                var contractSuit$1 = bidRecordOfInterest2.contractSuit;
+                var contractPoc = bidRecordOfInterest2.contractPointOfCompass;
+                var isDoubled = bidRecordOfInterest1.contractLevel === undefined && bidRecordOfInterest1.isDoubled === true;
                 var bidsFilteredBySuitAnd2Poc = Belt_List.keep(state.bids, (function (x) {
                         if (Caml_obj.caml_equal(x.contractSuit, contractSuit$1)) {
                           if (Caml_obj.caml_equal(x.contractPointOfCompass, contractPoc)) {
@@ -693,7 +698,7 @@ function reducer(state, action) {
                   contractLevel: contractLevel,
                   contractSuit: contractSuit$1,
                   contractDeclarer: contractDeclarer,
-                  isDoubled: false,
+                  isDoubled: isDoubled,
                   isRedoubled: false,
                   totalTricksNorthSouth: 0,
                   scoreNorthSouth: undefined,

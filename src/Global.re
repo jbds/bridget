@@ -400,10 +400,22 @@ let reducer = (state: state, action) => {
               };
               // we need to add a row to the Chicago score sheet, so assemble here
               let bidRecordOfInterest1 = List.hd(List.tl(tl));
-              //Js.log(bidRecordOfInterest1);
-              let contractLevel = bidRecordOfInterest1.contractLevel;
-              let contractSuit = bidRecordOfInterest1.contractSuit;
-              let contractPoc = bidRecordOfInterest1.contractPointOfCompass;
+              let tailOfInterest = List.tl(List.tl(tl));
+              Js.log("bidRecordOfinterest1:");
+              Js.log(bidRecordOfInterest1);
+              let bidRecordOfInterest2 = 
+                (bidRecordOfInterest1.contractLevel === None) 
+                && 
+                (bidRecordOfInterest1.isDoubled === true)
+                ?
+                List.hd(tailOfInterest)
+                :
+                bidRecordOfInterest1
+              ;
+              let contractLevel = bidRecordOfInterest2.contractLevel;
+              let contractSuit = bidRecordOfInterest2.contractSuit;
+              let contractPoc = bidRecordOfInterest2.contractPointOfCompass;
+              let isDoubled = (bidRecordOfInterest1.contractLevel === None) && (bidRecordOfInterest1.isDoubled === true);
               let totalTricksNorthSouth = 0;
               let scoreNorthSouth = None;
               let totalTricksWestEast = 0;
@@ -425,7 +437,7 @@ let reducer = (state: state, action) => {
                 contractLevel: contractLevel,
                 contractSuit: contractSuit,
                 contractDeclarer: contractDeclarer,
-                isDoubled: false, // TO DO
+                isDoubled: isDoubled, 
                 isRedoubled: false, // TO DO
                 totalTricksNorthSouth: totalTricksNorthSouth,
                 scoreNorthSouth: scoreNorthSouth,
