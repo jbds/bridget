@@ -110,6 +110,12 @@ let make = (
               | "XX" => "blue"
               | _ => "#404040"
             };
+          let backgroundColor =
+            switch (textValue) {
+              | "X" => "#800000"
+              | "XX" => "#000080"
+              | _ => "white"
+            };
           let denominationColor = {
             switch (x.contractSuit) {
               | None => "white"
@@ -128,7 +134,7 @@ let make = (
             textColor=textColor 
             denominationValue=denominationValue
             denominationColor=denominationColor
-            backgroundColor="#ffffff"
+            backgroundColor=backgroundColor
           />
         }
         )

@@ -73,6 +73,17 @@ function BidTable(Props) {
             default:
               textColor = "#404040";
           }
+          var backgroundColor;
+          switch (textValue) {
+            case "X" :
+                backgroundColor = "#800000";
+                break;
+            case "XX" :
+                backgroundColor = "#000080";
+                break;
+            default:
+              backgroundColor = "white";
+          }
           var match$1 = x.contractSuit;
           var denominationColor;
           if (match$1 !== undefined) {
@@ -99,7 +110,7 @@ function BidTable(Props) {
                       textColor: textColor,
                       denominationValue: denominationValue,
                       denominationColor: denominationColor,
-                      backgroundColor: "#ffffff",
+                      backgroundColor: backgroundColor,
                       key: String(Random.$$int(1000000))
                     });
         }));
