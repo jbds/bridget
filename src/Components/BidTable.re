@@ -106,13 +106,13 @@ let make = (
             switch (textValue) {
               | "" => "white"
               | "Pass" => "#26653B"
-              | "X" => "#E00000"
-              | "XX" => "blue"
+              | "X" => "white"
+              | "XX" => "white"
               | _ => "#404040"
             };
           let backgroundColor =
             switch (textValue) {
-              | "X" => "#800000"
+              | "X" => "#E00000"
               | "XX" => "#000080"
               | _ => "white"
             };

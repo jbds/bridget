@@ -491,24 +491,24 @@ let reducer = (state: state, action) => {
         }
         | Some("X") => {
           ...state, 
-          //activePointOfCompass: poc, TBC
+          activePointOfCompass: poc,
           bids: [
             {
               contractLevel: None,
               contractSuit: None,
-              contractPointOfCompass: state.activePointOfCompass,
+              contractPointOfCompass: None,
               isDoubled: true,
               isRedoubled: false,
               isPass: false
             },
             ...state.bids
           ],
-          lastAction: "BidAddSpecial", 
+          lastAction: "BidAddSpecial - X", 
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
         }
         | Some("XX") => {
           ...state, 
-          //activePointOfCompass: poc, TBC
+          activePointOfCompass: poc,
           bids: [
             {
               contractLevel: None,
@@ -520,7 +520,7 @@ let reducer = (state: state, action) => {
             },
             ...state.bids
           ],
-          lastAction: "BidAddSpecial", 
+          lastAction: "BidAddSpecial - XX", 
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
         }
         | _ => {

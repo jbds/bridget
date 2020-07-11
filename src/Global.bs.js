@@ -730,12 +730,12 @@ function reducer(state, action) {
                       };
             case "X" :
                 return {
-                        activePointOfCompass: state.activePointOfCompass,
+                        activePointOfCompass: poc$3,
                         bids: /* :: */[
                           {
                             contractLevel: undefined,
                             contractSuit: undefined,
-                            contractPointOfCompass: state.activePointOfCompass,
+                            contractPointOfCompass: undefined,
                             isDoubled: true,
                             isRedoubled: false,
                             isPass: false
@@ -753,14 +753,14 @@ function reducer(state, action) {
                         isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                         isDummyVisible: state.isDummyVisible,
                         isRebootVisible: state.isRebootVisible,
-                        lastAction: "BidAddSpecial",
+                        lastAction: "BidAddSpecial - X",
                         pack: state.pack,
                         pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                         randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                       };
             case "XX" :
                 return {
-                        activePointOfCompass: state.activePointOfCompass,
+                        activePointOfCompass: poc$3,
                         bids: /* :: */[
                           {
                             contractLevel: undefined,
@@ -783,7 +783,7 @@ function reducer(state, action) {
                         isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                         isDummyVisible: state.isDummyVisible,
                         isRebootVisible: state.isRebootVisible,
-                        lastAction: "BidAddSpecial",
+                        lastAction: "BidAddSpecial - XX",
                         pack: state.pack,
                         pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                         randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)

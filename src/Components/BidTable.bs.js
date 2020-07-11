@@ -58,17 +58,13 @@ function BidTable(Props) {
           }
           var textColor;
           switch (textValue) {
-            case "" :
-                textColor = "white";
-                break;
             case "Pass" :
                 textColor = "#26653B";
                 break;
+            case "" :
             case "X" :
-                textColor = "#E00000";
-                break;
             case "XX" :
-                textColor = "blue";
+                textColor = "white";
                 break;
             default:
               textColor = "#404040";
@@ -76,7 +72,7 @@ function BidTable(Props) {
           var backgroundColor;
           switch (textValue) {
             case "X" :
-                backgroundColor = "#800000";
+                backgroundColor = "#E00000";
                 break;
             case "XX" :
                 backgroundColor = "#000080";
