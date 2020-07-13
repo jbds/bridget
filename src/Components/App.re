@@ -57,7 +57,8 @@ let make = () => {
     let () = [%raw "Online.doLogout((document.getElementById('txtMyLoginName').value).toUpperCase())"];
   };
   let handlerBtnUndo = (_e) => {
-    Js.log("btnUndo clicked");
+    //Js.log("btnUndo clicked");
+    let () = [%raw "Online.doMessage('Undo')"];
   };
   // other utility functions
   let isFourSeatsOccupied = () => {

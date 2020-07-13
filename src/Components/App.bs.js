@@ -49,7 +49,7 @@ function App(Props) {
     
   };
   var handlerBtnUndo = function (_e) {
-    console.log("btnUndo clicked");
+    ((Online.doMessage('Undo')));
     
   };
   var isFourSeatsOccupied = function (param) {
