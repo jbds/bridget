@@ -106,12 +106,23 @@ function doLogout(myLoginNameValue) {
   });
 }
 
-function doMessage() {
+// function doMessage() {
+//   if(!ws) {
+//     //showMessageInConsole('cannot send message - no websocket connection');
+//     return;
+//   }
+//   ws.send(JSON.stringify(gameState));
+//   //showMessageInConsole('client doMessage - sent message to server as below:');
+//   //showMessageInConsole(JSON.stringify(gameState));
+//   showMessageInConsole('client doMessage - sent gameState to server as above');
+// }
+
+function doMessage(msg) {
   if(!ws) {
     //showMessageInConsole('cannot send message - no websocket connection');
     return;
   }
-  ws.send(JSON.stringify(gameState));
+  ws.send(JSON.stringify(msg));
   //showMessageInConsole('client doMessage - sent message to server as below:');
   //showMessageInConsole(JSON.stringify(gameState));
   showMessageInConsole('client doMessage - sent gameState to server as above');

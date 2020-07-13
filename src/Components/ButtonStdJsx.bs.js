@@ -20,7 +20,7 @@ function ButtonStdJsx(Props) {
                     fontFamily: "Trebuchet MS",
                     fontSize: "2.0vh",
                     height: "5.0vh",
-                    margin: "auto",
+                    margin: "0vh 0.5vh 0vh 0vh",
                     visibility: isWasteOfSpace ? "hidden" : "visible",
                     borderRadius: "5px"
                   },

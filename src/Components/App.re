@@ -31,7 +31,7 @@ let make = () => {
   let () = [%raw {|
     !window.isLastActionSync 
     ? 
-    Online.doMessage() 
+    Online.doMessage(gameState) 
     : 
     //console.log('Action-Sync: doMessage suppressed')
     null
@@ -55,6 +55,9 @@ let make = () => {
     //Js.log("btnLogout clicked");
     let () = [%raw "window.userState.player = '?'"];
     let () = [%raw "Online.doLogout((document.getElementById('txtMyLoginName').value).toUpperCase())"];
+  };
+  let handlerBtnUndo = (_e) => {
+    Js.log("btnUndo clicked");
   };
   // other utility functions
   let isFourSeatsOccupied = () => {
@@ -114,10 +117,13 @@ let make = () => {
     <TablePosition state dispatch />
     <br/>
     //<br/>
-    <SpacerStd spacerWidth="1vh" />
     <ButtonStd dispatch action=Shuffle label="My Deal" id="btnShuffle" isWasteOfSpace={!isDealButtonVisible()}/>
-    <SpacerStd spacerWidth="1vh" />
+    //<SpacerStd spacerWidth="1vh" />
+    <SpanStd id="spn2" text=" " />
     <ButtonStdJsx id="btnRotateTable" label="Rotate my table" onClick=handlerBtnRotateTable isWasteOfSpace={!isFourSeatsOccupied()}/>
+    //<SpacerStd spacerWidth="1.5vh" />
+    <SpanStd id="spn2" text=" " />
+    <ButtonStdJsx id="btnUndo" label="Undo" onClick=handlerBtnUndo isWasteOfSpace={!isFourSeatsOccupied()}/>
   </div>
   <div id="sidebar2">
     //(s2e("Sidebar2"))

@@ -10,7 +10,6 @@ var SpanStd$ReasonReactExamples = require("./SpanStd.bs.js");
 var BidTable$ReasonReactExamples = require("./BidTable.bs.js");
 var InputStd$ReasonReactExamples = require("./InputStd.bs.js");
 var ButtonStd$ReasonReactExamples = require("./ButtonStd.bs.js");
-var SpacerStd$ReasonReactExamples = require("./SpacerStd.bs.js");
 var ButtonStdJsx$ReasonReactExamples = require("./ButtonStdJsx.bs.js");
 var BiddingWindow$ReasonReactExamples = require("./BiddingWindow.bs.js");
 var TablePosition$ReasonReactExamples = require("./TablePosition.bs.js");
@@ -27,7 +26,7 @@ function App(Props) {
   ((window.gameState = match[0]));
   ((!window.isLastActionSync 
     ? 
-    Online.doMessage() 
+    Online.doMessage(gameState) 
     : 
     //console.log('Action-Sync: doMessage suppressed')
     null));
@@ -47,6 +46,10 @@ function App(Props) {
   var handlerBtnLogout = function (_e) {
     ((window.userState.player = '?'));
     ((Online.doLogout((document.getElementById('txtMyLoginName').value).toUpperCase())));
+    
+  };
+  var handlerBtnUndo = function (_e) {
+    console.log("btnUndo clicked");
     
   };
   var isFourSeatsOccupied = function (param) {
@@ -125,20 +128,27 @@ function App(Props) {
                     }), React.createElement("br", undefined), React.createElement(TablePosition$ReasonReactExamples.make, {
                       state: state,
                       dispatch: dispatch
-                    }), React.createElement("br", undefined), React.createElement(SpacerStd$ReasonReactExamples.make, {
-                      spacerWidth: "1vh"
-                    }), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                    }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Shuffle */1,
                       label: "My Deal",
                       id: "btnShuffle",
                       isWasteOfSpace: !isDealButtonVisible(undefined)
-                    }), React.createElement(SpacerStd$ReasonReactExamples.make, {
-                      spacerWidth: "1vh"
+                    }), React.createElement(SpanStd$ReasonReactExamples.make, {
+                      id: "spn2",
+                      text: " "
                     }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "Rotate my table",
                       id: "btnRotateTable",
                       onClick: handlerBtnRotateTable,
+                      isWasteOfSpace: !isFourSeatsOccupied(undefined)
+                    }), React.createElement(SpanStd$ReasonReactExamples.make, {
+                      id: "spn2",
+                      text: " "
+                    }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
+                      label: "Undo",
+                      id: "btnUndo",
+                      onClick: handlerBtnUndo,
                       isWasteOfSpace: !isFourSeatsOccupied(undefined)
                     })), React.createElement("div", {
                   id: "sidebar2"
