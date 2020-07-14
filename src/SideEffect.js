@@ -264,26 +264,6 @@ let drawLabels = (p, g, w) => {
       };
       // do not draw label if pointOfCompass is not known
       // add dealer if appropriate
-      //let positionPlayerDealer = (obj.pointOfCompass).substring(0, 1) + ' - ' + obj.player;
-      //let positionPlayerDealer = w.gameState.dealer;
-      // let getDummyPocByDeclarer = (poc) => {
-      //   switch (poc) {
-      //     case 'West': 
-      //       return 'East';
-      //       break;
-      //     case 'North': 
-      //       return 'South';
-      //       break;
-      //     case 'East':
-      //       return 'West';
-      //       break;
-      //     case 'South':
-      //       return 'North';
-      //       break;
-      //     default:
-      //       return 'X'
-      //   }
-      // };
       let positionPlayerDealer; 
       if (w.gameState.dealer === obj.pointOfCompass && w.gameState.declarer === obj.pointOfCompass) {
         positionPlayerDealer = 'Dealer + Declarer ' + obj.pointOfCompass + ' ' + obj.player
