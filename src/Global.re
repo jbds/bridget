@@ -403,8 +403,8 @@ let reducer = (state: state, action) => {
               let bidsListFiltered = Belt.List.keep(state.bids, x => x.isPass === false);
               let bidRecordOfInterest1 = List.hd(bidsListFiltered);
               let tailOfInterest = List.tl(bidsListFiltered);
-              Js.log("bidRecordOfinterest1:");
-              Js.log(bidRecordOfInterest1);
+              //Js.log("bidRecordOfinterest1:");
+              //Js.log(bidRecordOfInterest1);
               let bidRecordOfInterest2 = 
                 (bidRecordOfInterest1.contractLevel === None) 
                 && 
@@ -570,23 +570,31 @@ let reducer = (state: state, action) => {
       );
       //Js.log("myAdjustedPackValue:");
       //Js.log(myAdjustedPackValue);
-      // filter by lifecycle
-      let myFourCards = Belt.Array.keep(myAdjustedPackValue, x => x.lifecycle === Discard);
-      //Js.log("myFourCards:");
-      //Js.log(myFourCards);
+      // filter by lifecycle and also lead discard suit / trump suit
+      let myFourCards = Belt.Array.keep(myAdjustedPackValue, x => {
+        x.lifecycle === Discard
+        &&
+        (
+          Some(x.suit) === state.discardSuit
+          ||
+          Shuffle.getSuitAsOptionString(x.suit) === contractSuit
+        )
+      });
+      Js.log("myFourCards:");
+      Js.log(myFourCards);
       let myFourCardsAsList = Belt.List.fromArray(myFourCards);
       // just sort the list with Belt!
       let myFourCardsAsListSorted = Belt.List.sort(myFourCardsAsList, (a, b) => {b.noTrumpValue - a.noTrumpValue})
       let optionWinningCard = Belt.List.head(myFourCardsAsListSorted);
       //Js.log("optionWinningCard");
       //Js.log(optionWinningCard);
-      // let winningCardFileName =
-      //   switch (optionWinningCard) {
-      //     | None => ""
-      //     | Some(x) => x.fileName
-      //   }
-      // Js.log("winningCard:");
-      // Js.log(winningCardFileName);
+      let winningCardFileName =
+        switch (optionWinningCard) {
+          | None => ""
+          | Some(x) => x.fileName
+        }
+      Js.log("winningCard:");
+      Js.log(winningCardFileName);
       // let winningCardValue =
       //   switch (optionWinningCard) {
       //     | None => -1

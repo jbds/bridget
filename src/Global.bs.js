@@ -240,13 +240,26 @@ function reducer(state, action) {
                   }
                 }), state.pack);
           var myFourCards = Belt_Array.keep(myAdjustedPackValue, (function (x) {
-                  return x.lifecycle === /* Discard */2;
+                  if (x.lifecycle === /* Discard */2) {
+                    if (x.suit === state.discardSuit) {
+                      return true;
+                    } else {
+                      return Shuffle$ReasonReactExamples.getSuitAsOptionString(x.suit) === contractSuit;
+                    }
+                  } else {
+                    return false;
+                  }
                 }));
+          console.log("myFourCards:");
+          console.log(myFourCards);
           var myFourCardsAsList = Belt_List.fromArray(myFourCards);
           var myFourCardsAsListSorted = Belt_List.sort(myFourCardsAsList, (function (a, b) {
                   return b.noTrumpValue - a.noTrumpValue | 0;
                 }));
           var optionWinningCard = Belt_List.head(myFourCardsAsListSorted);
+          var winningCardFileName = optionWinningCard !== undefined ? optionWinningCard.fileName : "";
+          console.log("winningCard:");
+          console.log(winningCardFileName);
           var winningCardShuffleIndex = optionWinningCard !== undefined ? optionWinningCard.shuffleIndex : -1;
           var winningDiscardPoc = winningCardShuffleIndex === -1 ? "Error" : (
               winningCardShuffleIndex < 13 ? "North" : (
@@ -675,8 +688,6 @@ function reducer(state, action) {
                       }));
                 var bidRecordOfInterest1 = List.hd(bidsListFiltered);
                 var tailOfInterest = List.tl(bidsListFiltered);
-                console.log("bidRecordOfinterest1:");
-                console.log(bidRecordOfInterest1);
                 var bidRecordOfInterest2 = bidRecordOfInterest1.contractLevel === undefined && (bidRecordOfInterest1.isDoubled === true || bidRecordOfInterest1.isRedoubled === true) ? List.hd(tailOfInterest) : bidRecordOfInterest1;
                 var contractLevel = bidRecordOfInterest2.contractLevel;
                 var contractSuit$1 = bidRecordOfInterest2.contractSuit;

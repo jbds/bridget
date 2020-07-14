@@ -26,8 +26,8 @@ let make = (
       | None => 0
       | Some(n) => n
     };
-  Js.log("currentContractLevel:");
-  Js.log(currentContractLevel);
+  //Js.log("currentContractLevel:");
+  //Js.log(currentContractLevel);
   // we need currentContractSuit too
   let optionCurrentContractSuit =
     switch (optionCurrentContractLevelBid) {
@@ -48,8 +48,8 @@ let make = (
       | "NoTrumps" => 4
       | _ => -1
     };
-  Js.log("currentContractSuitAsRank:");
-  Js.log(currentContractSuitAsRank);
+  //Js.log("currentContractSuitAsRank:");
+  //Js.log(currentContractSuitAsRank);
   // helper to decide highest denomination - we have to look at a previous bid record
   let optionBidListTail = Belt.List.tail(bidsListFilteredByContractLevel);
   let bidListTail =
@@ -79,8 +79,8 @@ let make = (
       | "NoTrumps" => 4
       | _ => -1
     };
-  Js.log("previousContractSuitAsRank:");
-  Js.log(previousContractSuitAsRank);
+  //Js.log("previousContractSuitAsRank:");
+  //Js.log(previousContractSuitAsRank);
 
   <>
     //<span>(React.string("BiddingWindowComp"))</span>

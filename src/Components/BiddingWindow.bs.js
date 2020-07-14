@@ -18,8 +18,6 @@ function BiddingWindow(Props) {
   var optionCurrentContractLevelBid = Belt_List.head(bidsListFilteredByContractLevel);
   var optionCurrentContractLevel = optionCurrentContractLevelBid !== undefined ? optionCurrentContractLevelBid.contractLevel : undefined;
   var currentContractLevel = optionCurrentContractLevel !== undefined ? optionCurrentContractLevel : 0;
-  console.log("currentContractLevel:");
-  console.log(currentContractLevel);
   var optionCurrentContractSuit = optionCurrentContractLevelBid !== undefined ? optionCurrentContractLevelBid.contractSuit : undefined;
   var currentContractSuitAsString = optionCurrentContractSuit !== undefined ? optionCurrentContractSuit : "";
   var currentContractSuitAsRank;
@@ -42,8 +40,6 @@ function BiddingWindow(Props) {
     default:
       currentContractSuitAsRank = -1;
   }
-  console.log("currentContractSuitAsRank:");
-  console.log(currentContractSuitAsRank);
   var optionBidListTail = Belt_List.tail(bidsListFilteredByContractLevel);
   var bidListTail = optionBidListTail !== undefined ? optionBidListTail : /* [] */0;
   var optionPreviousBid = Belt_List.head(bidListTail);
@@ -69,8 +65,6 @@ function BiddingWindow(Props) {
     default:
       previousContractSuitAsRank = -1;
   }
-  console.log("previousContractSuitAsRank:");
-  console.log(previousContractSuitAsRank);
   return React.createElement(React.Fragment, undefined, React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* BidAdd */Block.__(2, [1]),
