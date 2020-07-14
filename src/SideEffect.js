@@ -29,7 +29,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
       // every player can see Dummy once lead card has been played
       // check for poc equal to Dummy poc AND isDummyVisible
       (
-        poc === getDummyPointOfCompassFromDeclarer(w.gameState.declarer)
+        poc === getDummyPocByDeclarer(w.gameState.declarer)
         &&
         gameState.isDummyVisible === true
       )
@@ -38,7 +38,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
       (
         poc === w.gameState.declarer
         &&
-        userPointOfCompass === getDummyPointOfCompassFromDeclarer(w.gameState.declarer)
+        userPointOfCompass === getDummyPocByDeclarer(w.gameState.declarer)
       )
       ? 
       true 
@@ -266,7 +266,7 @@ let drawLabels = (p, g, w) => {
       // add dealer if appropriate
       //let positionPlayerDealer = (obj.pointOfCompass).substring(0, 1) + ' - ' + obj.player;
       //let positionPlayerDealer = w.gameState.dealer;
-      // let getDummyPointOfCompassFromDeclarer = (poc) => {
+      // let getDummyPocByDeclarer = (poc) => {
       //   switch (poc) {
       //     case 'West': 
       //       return 'East';
@@ -287,13 +287,13 @@ let drawLabels = (p, g, w) => {
       let positionPlayerDealer; 
       if (w.gameState.dealer === obj.pointOfCompass && w.gameState.declarer === obj.pointOfCompass) {
         positionPlayerDealer = 'Dealer + Declarer ' + obj.pointOfCompass + ' ' + obj.player
-      } else if (w.gameState.dealer === obj.pointOfCompass && getDummyPointOfCompassFromDeclarer(w.gameState.declarer) === obj.pointOfCompass) {
+      } else if (w.gameState.dealer === obj.pointOfCompass && getDummyPocByDeclarer(w.gameState.declarer) === obj.pointOfCompass) {
         positionPlayerDealer = 'Dealer + Dummy ' + obj.pointOfCompass + ' ' + obj.player
       } else if (w.gameState.dealer === obj.pointOfCompass) {
         positionPlayerDealer = 'Dealer ' + obj.pointOfCompass + ' ' + obj.player  
       } else if (w.gameState.declarer === obj.pointOfCompass) { 
         positionPlayerDealer = 'Declarer ' + obj.pointOfCompass + ' ' + obj.player
-      } else if (getDummyPointOfCompassFromDeclarer(w.gameState.declarer) === obj.pointOfCompass) {
+      } else if (getDummyPocByDeclarer(w.gameState.declarer) === obj.pointOfCompass) {
         positionPlayerDealer = 'Dummy ' + obj.pointOfCompass + ' ' + obj.player
       } else {
         positionPlayerDealer = obj.pointOfCompass + ' ' + obj.player;
@@ -396,7 +396,7 @@ let translateAndRotateByClockPosition = (clockPosition, p, g) => {
 };
 
 // HELPER FUNC FOR drawLabels
-let getDummyPointOfCompassFromDeclarer = (poc) => {
+let getDummyPocByDeclarer = (poc) => {
   switch (poc) {
     case 'West': 
       return 'East';
