@@ -82,6 +82,17 @@ function App(Props) {
       return true;
     }
   };
+  var isUndoVisible = function (param) {
+    var localPlayer = window.userState.player;
+    var userPointOfCompassWrappedInArray = Belt_Array.keep(state.pointOfCompassAndPlayers, (function (obj) {
+            if (obj.player === localPlayer) {
+              return obj.pointOfCompass !== "";
+            } else {
+              return false;
+            }
+          }));
+    return userPointOfCompassWrappedInArray.length !== 0;
+  };
   var isBiddingWindowVisible = function (param) {
     if (!(state.isBiddingCycle === true && state.pointOfCompassAndPlayers.length >= 4)) {
       return false;
@@ -153,7 +164,7 @@ function App(Props) {
                       label: "Undo",
                       id: "btnUndo",
                       onClick: handlerBtnUndo,
-                      isWasteOfSpace: !isFourSeatsOccupied(undefined)
+                      isWasteOfSpace: !isUndoVisible(undefined)
                     })), React.createElement("div", {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {

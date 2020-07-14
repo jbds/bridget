@@ -84,6 +84,13 @@ let make = () => {
       false;
     }
   };
+  let isUndoVisible = () => {
+    let localPlayer: string = [%bs.raw "window.userState.player"];
+    let userPointOfCompassWrappedInArray = Belt.Array.keep(state.pointOfCompassAndPlayers, obj => {
+      obj.player === localPlayer && obj.pointOfCompass !== ""
+    });
+    Array.length(userPointOfCompassWrappedInArray) === 0 ? false : true;
+  };
   //Js.log("isDealButtonVisible");
   //Js.log(isDealButtonVisible());
   let isBiddingWindowVisible = () => {
@@ -129,7 +136,7 @@ let make = () => {
     <ButtonStdJsx id="btnRotateTable" label="Rotate my table" onClick=handlerBtnRotateTable isWasteOfSpace={!isFourSeatsOccupied()}/>
     //<SpacerStd spacerWidth="1.5vh" />
     <SpanStd id="spn2" text=" " />
-    <ButtonStdJsx id="btnUndo" label="Undo" onClick=handlerBtnUndo isWasteOfSpace={!isFourSeatsOccupied()}/>
+    <ButtonStdJsx id="btnUndo" label="Undo" onClick=handlerBtnUndo isWasteOfSpace={!isUndoVisible()}/>
   </div>
   <div id="sidebar2">
     //(s2e("Sidebar2"))
