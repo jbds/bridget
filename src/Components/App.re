@@ -60,6 +60,10 @@ let make = () => {
     //Js.log("btnUndo clicked");
     let () = [%raw "Online.doMessage('Undo')"];
   };
+  let handlerBtnReboot2 = (_e) => {
+    Js.log("btnReboot2 clicked");
+    let () = [%raw "Online.doMessage('Reboot')"];
+  };
   // other utility functions
   let isFourSeatsOccupied = () => {
     let myShorterArray = Belt.Array.keep(state.pointOfCompassAndPlayers, x => {x.pointOfCompass != "" && x.pointOfCompass != "Observer"});
@@ -113,7 +117,8 @@ let make = () => {
     <SpanStd id="spn2" text=" " />
     <ButtonStdJsx id="btnLogout" label="Logout" onClick=handlerBtnLogout/>
     <SpanStd id="spn2" text=" " />
-    <ButtonStd dispatch action=NewGame label="Reboot" id="btnNewGame" isWasteOfSpace={!state.isRebootVisible}/>
+    //<ButtonStd dispatch action=NewGame label="Reboot" id="btnNewGame" isWasteOfSpace={!state.isRebootVisible}/>
+    <ButtonStdJsx id="btnReboot2" label="Reboot" onClick=handlerBtnReboot2 isWasteOfSpace={!state.isRebootVisible}/>
     <br/>
     <TablePosition state dispatch />
     <br/>

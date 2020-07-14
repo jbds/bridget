@@ -3,7 +3,7 @@
 |}];
 
 type action =
-  | NewGame
+  //| NewGame
   | Shuffle
   | Flip (Shuffle.compassPoint)
   | Discard
@@ -64,34 +64,35 @@ let initialState: state = {
 
 let reducer = (state: state, action) => {
   switch action {
-    | NewGame => {
-      // aka Reboot
-      // make sure doMessage is called in sidebar component
-      let () = [%raw "window.isLastActionSync = false"];
-      // force everything same as when server starts up,
-      // except leave logged in players and their pointsOfCompass - NO!
-      // make this button a full reboot - clear players too
-      {
-        //...state,
-        activePointOfCompass: None,
-        bids: [],
-        chicagoScoreSheet: [], //Chicago.initialChicagoScoreSheet,
-        dealer: None,
-        dealIndex: -1,
-        declarer: None,
-        discardIndex: -1,
-        discardSuit: None,
-        handVisible: Shuffle.initialHandVisible,
-        isBiddingCycle: false,
-        isBiddingHideDenominationButtons: true,
-        isDummyVisible: false,
-        isRebootVisible: true,
-        lastAction: "Reboot (clears scores & logins)",
-        pack: [||],
-        pointOfCompassAndPlayers: [||],
-        randomInt: 2, 
-      }
-    }
+    // superseded by Reboot as ws message sent direct to server
+    // | NewGame => {
+    //   // aka Reboot
+    //   // make sure doMessage is called in sidebar component
+    //   let () = [%raw "window.isLastActionSync = false"];
+    //   // force everything same as when server starts up,
+    //   // except leave logged in players and their pointsOfCompass - NO!
+    //   // make this button a full reboot - clear players too
+    //   {
+    //     //...state,
+    //     activePointOfCompass: None,
+    //     bids: [],
+    //     chicagoScoreSheet: [], //Chicago.initialChicagoScoreSheet,
+    //     dealer: None,
+    //     dealIndex: -1,
+    //     declarer: None,
+    //     discardIndex: -1,
+    //     discardSuit: None,
+    //     handVisible: Shuffle.initialHandVisible,
+    //     isBiddingCycle: false,
+    //     isBiddingHideDenominationButtons: true,
+    //     isDummyVisible: false,
+    //     isRebootVisible: true,
+    //     lastAction: "Reboot (clears scores & logins)",
+    //     pack: [||],
+    //     pointOfCompassAndPlayers: [||],
+    //     randomInt: 2, 
+    //   }
+    // }
     | Shuffle => {
       // aka "New Deal" aka "My Deal"
       //Js.log("Action-Shuffle");
@@ -247,6 +248,7 @@ let reducer = (state: state, action) => {
       let isDummyVisible: bool = [%bs.raw "window.gameState.isDummyVisible"];
       let discardIndex: int = [%bs.raw "window.gameState.discardIndex"];
       let discardSuit: option(Shuffle.suit) = [%bs.raw "window.gameState.discardSuit"];
+      let lastAction: string = [%bs.raw "window.gameState.lastAction"];
       // no need for ...state here as we are replacing all fields with the server gameState fields
       {
         activePointOfCompass: poc,
@@ -262,7 +264,7 @@ let reducer = (state: state, action) => {
         isBiddingHideDenominationButtons: isBiddingHideDenominationButtons,
         isDummyVisible: isDummyVisible,
         isRebootVisible: isRebootVisible,
-        lastAction: "LoginSync",
+        lastAction: lastAction,
         pack: pack,
         pointOfCompassAndPlayers: pOCAP,
         randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(), 

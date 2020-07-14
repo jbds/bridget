@@ -52,6 +52,11 @@ function App(Props) {
     ((Online.doMessage('Undo')));
     
   };
+  var handlerBtnReboot2 = function (_e) {
+    console.log("btnReboot2 clicked");
+    ((Online.doMessage('Reboot')));
+    
+  };
   var isFourSeatsOccupied = function (param) {
     var myShorterArray = Belt_Array.keep(state.pointOfCompassAndPlayers, (function (x) {
             if (x.pointOfCompass !== "") {
@@ -119,18 +124,17 @@ function App(Props) {
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn2",
                       text: " "
-                    }), React.createElement(ButtonStd$ReasonReactExamples.make, {
-                      dispatch: dispatch,
-                      action: /* NewGame */0,
+                    }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "Reboot",
-                      id: "btnNewGame",
+                      id: "btnReboot2",
+                      onClick: handlerBtnReboot2,
                       isWasteOfSpace: !state.isRebootVisible
                     }), React.createElement("br", undefined), React.createElement(TablePosition$ReasonReactExamples.make, {
                       state: state,
                       dispatch: dispatch
                     }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Shuffle */1,
+                      action: /* Shuffle */0,
                       label: "My Deal",
                       id: "btnShuffle",
                       isWasteOfSpace: !isDealButtonVisible(undefined)
@@ -154,25 +158,25 @@ function App(Props) {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* EndTrick */6,
+                      action: /* EndTrick */5,
                       label: "End Trick",
                       id: "btnEndTrick",
                       isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Discard */2,
+                      action: /* Discard */1,
                       label: "Discard",
                       id: "btnDiscard",
                       isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Sync */3,
+                      action: /* Sync */2,
                       label: "Sync state with gameState",
                       id: "btnSync",
                       isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* LoginSync */4,
+                      action: /* LoginSync */3,
                       label: "Login sync with server",
                       id: "btnLoginSync",
                       isVisible: false

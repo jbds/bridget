@@ -40,28 +40,7 @@ var initialState = {
 function reducer(state, action) {
   if (typeof action === "number") {
     switch (action) {
-      case /* NewGame */0 :
-          ((window.isLastActionSync = false));
-          return {
-                  activePointOfCompass: undefined,
-                  bids: /* [] */0,
-                  chicagoScoreSheet: /* [] */0,
-                  dealer: undefined,
-                  dealIndex: -1,
-                  declarer: undefined,
-                  discardIndex: -1,
-                  discardSuit: undefined,
-                  handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
-                  isBiddingCycle: false,
-                  isBiddingHideDenominationButtons: true,
-                  isDummyVisible: false,
-                  isRebootVisible: true,
-                  lastAction: "Reboot (clears scores & logins)",
-                  pack: [],
-                  pointOfCompassAndPlayers: [],
-                  randomInt: 2
-                };
-      case /* Shuffle */1 :
+      case /* Shuffle */0 :
           ((window.isLastActionSync = false));
           return {
                   activePointOfCompass: state.dealer,
@@ -82,7 +61,7 @@ function reducer(state, action) {
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
-      case /* Discard */2 :
+      case /* Discard */1 :
           ((window.isLastActionSync = false));
           var discardFileName = window.discardFileName;
           var cardWrappedInArray = Belt_Array.keep(state.pack, (function (x) {
@@ -137,7 +116,7 @@ function reducer(state, action) {
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
-      case /* Sync */3 :
+      case /* Sync */2 :
           ((window.isLastActionSync = true));
           return {
                   activePointOfCompass: undefined,
@@ -163,7 +142,7 @@ function reducer(state, action) {
                   pointOfCompassAndPlayers: [],
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
-      case /* LoginSync */4 :
+      case /* LoginSync */3 :
           ((window.isLastActionSync = true));
           var cSS = window.gameState.chicagoScoreSheet;
           var dealer = window.gameState.dealer;
@@ -180,6 +159,7 @@ function reducer(state, action) {
           var isDummyVisible = window.gameState.isDummyVisible;
           var discardIndex = window.gameState.discardIndex;
           var discardSuit = window.gameState.discardSuit;
+          var lastAction = window.gameState.lastAction;
           return {
                   activePointOfCompass: poc$1,
                   bids: bids,
@@ -194,12 +174,12 @@ function reducer(state, action) {
                   isBiddingHideDenominationButtons: isBiddingHideDenominationButtons,
                   isDummyVisible: isDummyVisible,
                   isRebootVisible: isRebootVisible,
-                  lastAction: "LoginSync",
+                  lastAction: lastAction,
                   pack: pack,
                   pointOfCompassAndPlayers: pOCAP,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
-      case /* Test */5 :
+      case /* Test */4 :
           ((window.isLastActionSync = true));
           return {
                   activePointOfCompass: state.activePointOfCompass,
@@ -220,7 +200,7 @@ function reducer(state, action) {
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                 };
-      case /* EndTrick */6 :
+      case /* EndTrick */5 :
           ((window.isLastActionSync = false));
           var scoreSheetRecord = List.hd(state.chicagoScoreSheet);
           var contractSuit = scoreSheetRecord.contractSuit;
