@@ -22,19 +22,20 @@ let mouseDecode = (p, g, w) => {
   });
 //console.log('mouse decode');
   switch (true) {
-    // TABLE TOP
+    // TABLE TOP aka 12PM
     case (p.mouseY <= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
       p.mouseX >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
       p.mouseX < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
     ):
+    // 12PM cards are ALWAYS 'inverted' aka the correct way up as viewed on device
+    // the map parameters 13, 0 are therefore reversed to 0, 13 to match
     cardSegmentIndex = p.map(
       p.mouseX, 
       cardSegmentHeightToCanvasHeightRatio * g.canvasHeight,
       (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight,
-      13, // 0, Dummy hand will be reversed
-      0   // 13
+      0, // 0, Dummy hand will be reversed
+      13   // 13
     );
-    // this floating number needs an offset based on hand array length
     // fetch array dependent on card table rotation
     switch(w.userState.tableRotationDegrees) {
       case 0:
@@ -52,6 +53,7 @@ let mouseDecode = (p, g, w) => {
       default:
         console.log('Unexpected tableRotationDegrees');
     }
+    // this floating number needs an offset based on hand array length
     cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
     if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
       // do nothing

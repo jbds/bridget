@@ -34,7 +34,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         gameState.isDummyVisible === true
       )
       ||
-      // the dummy can observer the declarer's hand for interest only
+      // the dummy can observe the declarer's hand for interest only
       (
         poc === w.gameState.declarer
         &&
@@ -46,6 +46,9 @@ let drawCards = (p, g, w, pointOfCompass) => {
       false
     );
   };
+  // helper function to see if this is the Dummy hand
+  let isDummyHand = 
+    pointOfCompass === getDummyPocByDeclarer(w.gameState.declarer) ? true : false;
   // fetch 1/4 of the card pack or less
   switch (pointOfCompass) {
     case 'North':
@@ -59,7 +62,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'North'
         );
-      translateAndRotateByClockPosition(clockPosition, p, g);
+      translateAndRotateByClockPosition(clockPosition, p, g, isDummyHand);
     break;
     case 'East':
       //g.isHandFaceUp = gameState.handVisible.east;
@@ -72,7 +75,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'East'
         );
-        translateAndRotateByClockPosition(clockPosition, p, g);
+        translateAndRotateByClockPosition(clockPosition, p, g, isDummyHand);
     break;
     case "South":
       //g.isHandFaceUp = gameState.handVisible.south;
@@ -85,7 +88,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'South'
         );
-        translateAndRotateByClockPosition(clockPosition, p, g);
+        translateAndRotateByClockPosition(clockPosition, p, g, isDummyHand);
     break;
     case 'West':
       //g.isHandFaceUp = gameState.handVisible.west;
@@ -98,7 +101,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'West'
         );
-        translateAndRotateByClockPosition(clockPosition, p, g);
+        translateAndRotateByClockPosition(clockPosition, p, g, isDummyHand);
     break;
     case 'Discard':
       g.myDiscardArray = window.gameState.pack.filter(obj => {
@@ -352,11 +355,23 @@ let rotationPlusPointOfCompassToClockPosition =
 };
 
 // HELPER FUNCTION FOR drawCards
-let translateAndRotateByClockPosition = (clockPosition, p, g) => {
+let translateAndRotateByClockPosition = (clockPosition, p, g, isDummyHand) => {
   switch(clockPosition) {
     case '12PM':
-      p.translate(0, -(g.canvasHeight / 2));
-      p.rotate(p.HALF_PI * 2); 
+      // isDummyHand 
+      // ? 
+      // p.translate(0, -(g.canvasHeight / 2) + (g.canvasHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio)) 
+      // : 
+      // p.translate(0, -(g.canvasHeight / 2));
+      // isDummyHand 
+      // ? 
+      // p.rotate(p.HALF_PI * 4) 
+      // : 
+      // p.rotate(p.HALF_PI * 2); 
+      // we always want cards at 12PM to be inverted!
+      // tweak offset appropriately
+      p.translate(0, -(g.canvasHeight / 2) + (g.canvasHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio));
+      // no rotation!
     break;
     case '3PM':
       p.translate((g.canvasWidth / 2), 0);
