@@ -575,6 +575,37 @@ function reducer(state, action) {
           switch (special) {
             case "Pass" :
                 var bidsLength = List.length(state.bids);
+                console.log("bidsLength:");
+                console.log(bidsLength);
+                console.log("state.bids keep by isPass===false:");
+                console.log(Belt_List.keep(state.bids, (function (x) {
+                            return x.isPass === false;
+                          })) === /* [] */0);
+                if (bidsLength === 3 && Belt_List.keep(state.bids, (function (x) {
+                          return x.isPass === false;
+                        })) === /* [] */0) {
+                  console.log("detected 4 passes");
+                  ((window.isLastActionSync = false));
+                  return {
+                          activePointOfCompass: state.dealer,
+                          bids: /* [] */0,
+                          chicagoScoreSheet: state.chicagoScoreSheet,
+                          dealer: state.dealer,
+                          dealIndex: state.dealIndex,
+                          declarer: undefined,
+                          discardIndex: -1,
+                          discardSuit: state.discardSuit,
+                          handVisible: state.handVisible,
+                          isBiddingCycle: true,
+                          isBiddingHideDenominationButtons: true,
+                          isDummyVisible: false,
+                          isRebootVisible: state.isRebootVisible,
+                          lastAction: "4 Passes - so New Deal",
+                          pack: Shuffle$ReasonReactExamples.getShuffledPack(undefined),
+                          pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
+                          randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                        };
+                }
                 if (bidsLength < 3) {
                   return {
                           activePointOfCompass: poc$3,

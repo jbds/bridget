@@ -91,8 +91,8 @@ let make = (
       | None => -1
       | Some(n) => n
     };
-  Js.log("previousContractLevel:");
-  Js.log(previousContractLevel);
+  // Js.log("previousContractLevel:");
+  // Js.log(previousContractLevel);
   <>
     //<span>(React.string("BiddingWindowComp"))</span>
     //(s2e("TEST"))

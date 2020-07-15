@@ -127,6 +127,7 @@ let make = () => {
     //<ButtonStd dispatch action=NewGame label="Reboot" id="btnNewGame" isWasteOfSpace={!state.isRebootVisible}/>
     <ButtonStdJsx id="btnReboot2" label="Reboot" onClick=handlerBtnReboot2 isWasteOfSpace={!state.isRebootVisible}/>
     <br/>
+    <br/>
     <TablePosition state dispatch />
     <br/>
     //<br/>

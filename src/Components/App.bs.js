@@ -140,7 +140,7 @@ function App(Props) {
                       id: "btnReboot2",
                       onClick: handlerBtnReboot2,
                       isWasteOfSpace: !state.isRebootVisible
-                    }), React.createElement("br", undefined), React.createElement(TablePosition$ReasonReactExamples.make, {
+                    }), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement(TablePosition$ReasonReactExamples.make, {
                       state: state,
                       dispatch: dispatch
                     }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {

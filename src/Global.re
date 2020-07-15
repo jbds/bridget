@@ -376,8 +376,32 @@ let reducer = (state: state, action) => {
         | Some("Pass") => {
           // check for end of bidding cycle
           let bidsLength = List.length(state.bids);
-          //Js.log(bidsLength);
-          if (bidsLength >= 3) {
+          Js.log("bidsLength:");
+          Js.log(bidsLength);
+          Js.log("state.bids keep by isPass===false:");
+          Js.log(Belt.List.keep(state.bids, x => x.isPass === false) === []);
+          // special case 4 passes at start, beware bidslength will only be 3!
+          if (bidsLength === 3 && Belt.List.keep(state.bids, x => x.isPass === false) === []) {
+            Js.log("detected 4 passes");
+            // do same as new deal aka Shuffle
+            // make sure doMessage is called in sidebar component
+            let () = [%raw "window.isLastActionSync = false"];
+            {
+              ...state, 
+              activePointOfCompass: state.dealer,
+              bids: [],
+              //dealer: poc,
+              //dealIndex: state.dealIndex + 1,
+              declarer: None,
+              discardIndex: -1,
+              isBiddingCycle: true,
+              isBiddingHideDenominationButtons: true,
+              isDummyVisible: false,
+              lastAction: "4 Passes - so New Deal",
+              pack: Shuffle.getShuffledPack(), 
+              randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
+            }
+          } else if (bidsLength >= 3) {
             let hd1 = List.hd(state.bids);
             let tl = List.tl(state.bids);
             let hd2 = List.hd(tl);

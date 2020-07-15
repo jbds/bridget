@@ -69,8 +69,6 @@ function BiddingWindow(Props) {
   }
   var optionPreviousContractLevel = optionPreviousBid !== undefined ? optionPreviousBid.contractLevel : undefined;
   var previousContractLevel = optionPreviousContractLevel !== undefined ? optionPreviousContractLevel : -1;
-  console.log("previousContractLevel:");
-  console.log(previousContractLevel);
   return React.createElement(React.Fragment, undefined, React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* BidAdd */Block.__(2, [1]),
