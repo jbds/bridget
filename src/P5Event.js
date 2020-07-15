@@ -247,6 +247,9 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
         // add extra constraint here to avoid multiple discards
         &&
         gameState.activePointOfCompass === userPointOfCompass
+        &&
+        // never allow Dummy to discard, Declarer must control
+        gameState.activePointOfCompass !== getDummyPocByDeclarer()
       )
       ||
       (
