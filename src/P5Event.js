@@ -199,8 +199,10 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   // });
 
   window.discardFileName = myCard.fileName
-  //console.log('isValidDiscardFromLocalPlayer:');
-  //console.log(isValidDiscardFromLocalPlayer());
+  // console.log('isValidDiscardFromLocalPlayer:');
+  // console.log(isValidDiscardFromLocalPlayer());
+  // console.log('isCardDiscardFollowingSuitWhenPossible:');
+  // console.log(isCardDiscardFollowingSuitWhenPossible());
   if (isValidDiscardFromLocalPlayer() && isCardDiscardFollowingSuitWhenPossible()) {
     // prepare a second action after a delay if 3 cards are already discarded
     // because we are about to discard the 4th
