@@ -26,8 +26,8 @@ let make = (
       | None => 0
       | Some(n) => n
     };
-  //Js.log("currentContractLevel:");
-  //Js.log(currentContractLevel);
+  Js.log("currentContractLevel:");
+  Js.log(currentContractLevel);
   // we need currentContractSuit too
   let optionCurrentContractSuit =
     switch (optionCurrentContractLevelBid) {
@@ -81,7 +81,18 @@ let make = (
     };
   //Js.log("previousContractSuitAsRank:");
   //Js.log(previousContractSuitAsRank);
-
+  let optionPreviousContractLevel =
+    switch (optionPreviousBid) {
+      | None => None
+      | Some(x) => x.contractLevel
+    };
+  let previousContractLevel =
+    switch (optionPreviousContractLevel) {
+      | None => -1
+      | Some(n) => n
+    };
+  Js.log("previousContractLevel:");
+  Js.log(previousContractLevel);
   <>
     //<span>(React.string("BiddingWindowComp"))</span>
     //(s2e("TEST"))
@@ -156,11 +167,61 @@ let make = (
     } dispatch action=BidAdd(Some(7)) label="7" id="btnBid7" color="#606060"/>
     <ButtonBidLarge isVisible={state.isBiddingHideDenominationButtons} dispatch action=BidAddSpecial(Some("Pass")) label="Pass" id="btnBidPass" backgroundColor="#26653B"/>
     <br/>
-    <ButtonBidSmall isVisible={!state.isBiddingHideDenominationButtons && (previousContractSuitAsRank < 0 || previousContractSuitAsRank === 4)} dispatch action=BidUpdate(Some("Clubs")) label={js|\u2663|js} id="btnBidC" color="black"/>
-    <ButtonBidSmall isVisible={!state.isBiddingHideDenominationButtons && (previousContractSuitAsRank < 1 || previousContractSuitAsRank === 4)} dispatch action=BidUpdate(Some("Diamonds")) label={js|\u2666|js} id="btnBidD" color="red"/>
-    <ButtonBidSmall isVisible={!state.isBiddingHideDenominationButtons && (previousContractSuitAsRank < 2 || previousContractSuitAsRank === 4)} dispatch action=BidUpdate(Some("Hearts")) label={js|\u2665|js} id="btnBidH" color="red"/>
-    <ButtonBidSmall isVisible={!state.isBiddingHideDenominationButtons && (previousContractSuitAsRank < 3 || previousContractSuitAsRank === 4)} dispatch action=BidUpdate(Some("Spades")) label={js|\u2660|js} id="btnBidS" color="black"/>
-    <ButtonBidSmall isVisible={!state.isBiddingHideDenominationButtons && (previousContractSuitAsRank < 4 || previousContractSuitAsRank === 4)} dispatch action=BidUpdate(Some("NoTrumps")) label="NT" id="btnBidNT" color="#606060"/>
+    <ButtonBidSmall isVisible={
+      !state.isBiddingHideDenominationButtons 
+      && 
+      (
+        previousContractSuitAsRank < 0 
+        || 
+        previousContractSuitAsRank === 4
+        ||
+        currentContractLevel > previousContractLevel
+      )
+    } dispatch action=BidUpdate(Some("Clubs")) label={js|\u2663|js} id="btnBidC" color="black"/>
+    <ButtonBidSmall isVisible={
+      !state.isBiddingHideDenominationButtons 
+      && 
+      (
+        previousContractSuitAsRank < 1 
+        || 
+        previousContractSuitAsRank === 4
+        ||
+        currentContractLevel > previousContractLevel
+      )
+    } dispatch action=BidUpdate(Some("Diamonds")) label={js|\u2666|js} id="btnBidD" color="red"/>
+    <ButtonBidSmall isVisible={
+      !state.isBiddingHideDenominationButtons 
+      && 
+      (
+        previousContractSuitAsRank < 2 
+        || 
+        previousContractSuitAsRank === 4
+        ||
+        currentContractLevel > previousContractLevel
+      )
+    } dispatch action=BidUpdate(Some("Hearts")) label={js|\u2665|js} id="btnBidH" color="red"/>
+    <ButtonBidSmall isVisible={
+      !state.isBiddingHideDenominationButtons 
+      && 
+      (
+        previousContractSuitAsRank < 3 
+        || 
+        previousContractSuitAsRank === 4
+        ||
+        currentContractLevel > previousContractLevel
+      )
+    } dispatch action=BidUpdate(Some("Spades")) label={js|\u2660|js} id="btnBidS" color="black"/>
+    <ButtonBidSmall isVisible={
+      !state.isBiddingHideDenominationButtons 
+      && 
+      (
+        previousContractSuitAsRank < 4 
+        || 
+        previousContractSuitAsRank === 4
+        ||
+        currentContractLevel > previousContractLevel
+      )
+    } dispatch action=BidUpdate(Some("NoTrumps")) label="NT" id="btnBidNT" color="#606060"/>
     <SpacerStd spacerWidth="4vh" />
     <ButtonBidLarge isVisible=isShowXAndXX dispatch action=BidAddSpecial(Some("X")) label="X" id="btnBidX" backgroundColor="#E00000"/>
     <ButtonBidLarge isVisible=isShowXAndXX dispatch action=BidAddSpecial(Some("XX")) label="XX" id="btnBidXX" backgroundColor="#000080"/>

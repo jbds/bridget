@@ -18,6 +18,8 @@ function BiddingWindow(Props) {
   var optionCurrentContractLevelBid = Belt_List.head(bidsListFilteredByContractLevel);
   var optionCurrentContractLevel = optionCurrentContractLevelBid !== undefined ? optionCurrentContractLevelBid.contractLevel : undefined;
   var currentContractLevel = optionCurrentContractLevel !== undefined ? optionCurrentContractLevel : 0;
+  console.log("currentContractLevel:");
+  console.log(currentContractLevel);
   var optionCurrentContractSuit = optionCurrentContractLevelBid !== undefined ? optionCurrentContractLevelBid.contractSuit : undefined;
   var currentContractSuitAsString = optionCurrentContractSuit !== undefined ? optionCurrentContractSuit : "";
   var currentContractSuitAsRank;
@@ -65,6 +67,10 @@ function BiddingWindow(Props) {
     default:
       previousContractSuitAsRank = -1;
   }
+  var optionPreviousContractLevel = optionPreviousBid !== undefined ? optionPreviousBid.contractLevel : undefined;
+  var previousContractLevel = optionPreviousContractLevel !== undefined ? optionPreviousContractLevel : -1;
+  console.log("previousContractLevel:");
+  console.log(previousContractLevel);
   return React.createElement(React.Fragment, undefined, React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* BidAdd */Block.__(2, [1]),
@@ -127,35 +133,35 @@ function BiddingWindow(Props) {
                   label: "\u2663",
                   id: "btnBidC",
                   color: "black",
-                  isVisible: !state.isBiddingHideDenominationButtons && (previousContractSuitAsRank < 0 || previousContractSuitAsRank === 4)
+                  isVisible: !state.isBiddingHideDenominationButtons && (previousContractSuitAsRank < 0 || previousContractSuitAsRank === 4 || currentContractLevel > previousContractLevel)
                 }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* BidUpdate */Block.__(3, ["Diamonds"]),
                   label: "\u2666",
                   id: "btnBidD",
                   color: "red",
-                  isVisible: !state.isBiddingHideDenominationButtons && (previousContractSuitAsRank < 1 || previousContractSuitAsRank === 4)
+                  isVisible: !state.isBiddingHideDenominationButtons && (previousContractSuitAsRank < 1 || previousContractSuitAsRank === 4 || currentContractLevel > previousContractLevel)
                 }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* BidUpdate */Block.__(3, ["Hearts"]),
                   label: "\u2665",
                   id: "btnBidH",
                   color: "red",
-                  isVisible: !state.isBiddingHideDenominationButtons && (previousContractSuitAsRank < 2 || previousContractSuitAsRank === 4)
+                  isVisible: !state.isBiddingHideDenominationButtons && (previousContractSuitAsRank < 2 || previousContractSuitAsRank === 4 || currentContractLevel > previousContractLevel)
                 }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* BidUpdate */Block.__(3, ["Spades"]),
                   label: "\u2660",
                   id: "btnBidS",
                   color: "black",
-                  isVisible: !state.isBiddingHideDenominationButtons && (previousContractSuitAsRank < 3 || previousContractSuitAsRank === 4)
+                  isVisible: !state.isBiddingHideDenominationButtons && (previousContractSuitAsRank < 3 || previousContractSuitAsRank === 4 || currentContractLevel > previousContractLevel)
                 }), React.createElement(ButtonBidSmall$ReasonReactExamples.make, {
                   dispatch: dispatch,
                   action: /* BidUpdate */Block.__(3, ["NoTrumps"]),
                   label: "NT",
                   id: "btnBidNT",
                   color: "#606060",
-                  isVisible: !state.isBiddingHideDenominationButtons && (previousContractSuitAsRank < 4 || previousContractSuitAsRank === 4)
+                  isVisible: !state.isBiddingHideDenominationButtons && (previousContractSuitAsRank < 4 || previousContractSuitAsRank === 4 || currentContractLevel > previousContractLevel)
                 }), React.createElement(SpacerStd$ReasonReactExamples.make, {
                   spacerWidth: "4vh"
                 }), React.createElement(ButtonBidLarge$ReasonReactExamples.make, {
