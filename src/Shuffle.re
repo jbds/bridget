@@ -144,7 +144,7 @@ let initialPack = [|
   {noTrumpValue: 0, handOrder: 13, shuffleIndex: 0, rank: Two, suit: Clubs, fileName: "2C", lifecycle: Dealer},
 |];
 
-let initialHandVisible = {north: true, east: true, south: true, west: true};
+let initialHandVisible = {north: false, east: false, south: false, west: false};
 
 //let initialPointOfCompassAndPlayers = [|
   // {pointOfCompass: "North", player: "1?" },

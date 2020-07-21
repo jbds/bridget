@@ -663,10 +663,10 @@ function getSuitAsOptionString(suit) {
 }
 
 var initialHandVisible = {
-  north: true,
-  east: true,
-  south: true,
-  west: true
+  north: false,
+  east: false,
+  south: false,
+  west: false
 };
 
 exports.initialPack = initialPack;
