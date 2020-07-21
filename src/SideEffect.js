@@ -52,8 +52,9 @@ let drawCards = (p, g, w, pointOfCompass) => {
   // fetch 1/4 of the card pack or less
   switch (pointOfCompass) {
     case 'North':
+      // handVisible is now used to show all cards on "ReviewDeal" message
       //g.isHandFaceUp = gameState.handVisible.north;
-      g.isHandFaceUp = shouldHandBeUp('North');
+      g.isHandFaceUp = shouldHandBeUp('North') || gameState.handVisible.north;
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 0 && obj.shuffleIndex <=12 && obj.lifecycle === 1)
         }
@@ -66,7 +67,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
     break;
     case 'East':
       //g.isHandFaceUp = gameState.handVisible.east;
-      g.isHandFaceUp = shouldHandBeUp('East');
+      g.isHandFaceUp = shouldHandBeUp('East') || gameState.handVisible.east;
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 13 && obj.shuffleIndex <=25 && obj.lifecycle === 1)
         }
@@ -79,7 +80,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
     break;
     case "South":
       //g.isHandFaceUp = gameState.handVisible.south;
-      g.isHandFaceUp = shouldHandBeUp('South');
+      g.isHandFaceUp = shouldHandBeUp('South') || gameState.handVisible.south;
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 26 && obj.shuffleIndex <=38 && obj.lifecycle == 1)
         }
@@ -92,7 +93,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
     break;
     case 'West':
       //g.isHandFaceUp = gameState.handVisible.west;
-      g.isHandFaceUp = shouldHandBeUp('West');
+      g.isHandFaceUp = shouldHandBeUp('West') || gameState.handVisible.west;
       g.myHandArray = window.gameState.pack.filter(obj => {
           return (obj.shuffleIndex >= 39 && obj.shuffleIndex <=51 && obj.lifecycle == 1)
         }
