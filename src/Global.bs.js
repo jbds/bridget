@@ -42,6 +42,7 @@ function reducer(state, action) {
     switch (action) {
       case /* Shuffle */0 :
           ((window.isLastActionSync = false));
+          ((setTimeout(function(){Online.doMessage('StoreDeal');}, 750)));
           return {
                   activePointOfCompass: state.dealer,
                   bids: /* [] */0,
