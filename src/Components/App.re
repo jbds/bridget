@@ -64,6 +64,10 @@ let make = () => {
     Js.log("btnReboot2 clicked");
     let () = [%raw "Online.doMessage('Reboot')"];
   };
+  let handlerBtnReviewDeal = (_e) => {
+    Js.log("btnReviewDeal clicked");
+    let () = [%raw "Online.doMessage('ReviewDeal')"];
+  };
   // other utility functions
   let isFourSeatsOccupied = () => {
     let myShorterArray = Belt.Array.keep(state.pointOfCompassAndPlayers, x => {x.pointOfCompass != "" && x.pointOfCompass != "Observer"});
@@ -121,9 +125,9 @@ let make = () => {
     <InputStd id="txtMyLoginName" />
     <SpanStd id="spn2" text=" " />
     <ButtonStdJsx id="btnLogin" label="Login" onClick=handlerBtnLogin/>
-    <SpanStd id="spn2" text=" " />
+    <SpanStd id="spn3" text=" " />
     <ButtonStdJsx id="btnLogout" label="Logout" onClick=handlerBtnLogout/>
-    <SpanStd id="spn2" text=" " />
+    <SpanStd id="spn4" text=" " />
     //<ButtonStd dispatch action=NewGame label="Reboot" id="btnNewGame" isWasteOfSpace={!state.isRebootVisible}/>
     <ButtonStdJsx id="btnReboot2" label="Reboot" onClick=handlerBtnReboot2 isWasteOfSpace={!state.isRebootVisible}/>
     <br/>
@@ -133,11 +137,13 @@ let make = () => {
     //<br/>
     <ButtonStd dispatch action=Shuffle label="My Deal" id="btnShuffle" isWasteOfSpace={!isDealButtonVisible()}/>
     //<SpacerStd spacerWidth="1vh" />
-    <SpanStd id="spn2" text=" " />
+    <SpanStd id="spn5" text=" " />
     <ButtonStdJsx id="btnRotateTable" label={js|\u27F3|js} onClick=handlerBtnRotateTable isWasteOfSpace={!isFourSeatsOccupied()}/>
     //<SpacerStd spacerWidth="1.5vh" />
-    <SpanStd id="spn2" text=" " />
+    <SpanStd id="spn6" text=" " />
     <ButtonStdJsx id="btnUndo" label="Undo" onClick=handlerBtnUndo isWasteOfSpace={!isUndoVisible()}/>
+    <SpanStd id="spn7" text=" " />
+    <ButtonStdJsx id="btnReviewDeal" label="Review" onClick=handlerBtnReviewDeal isWasteOfSpace=false/>
   </div>
   <div id="sidebar2">
     //(s2e("Sidebar2"))

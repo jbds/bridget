@@ -57,6 +57,11 @@ function App(Props) {
     ((Online.doMessage('Reboot')));
     
   };
+  var handlerBtnReviewDeal = function (_e) {
+    console.log("btnReviewDeal clicked");
+    ((Online.doMessage('ReviewDeal')));
+    
+  };
   var isFourSeatsOccupied = function (param) {
     var myShorterArray = Belt_Array.keep(state.pointOfCompassAndPlayers, (function (x) {
             if (x.pointOfCompass !== "") {
@@ -126,14 +131,14 @@ function App(Props) {
                       id: "btnLogin",
                       onClick: handlerBtnLogin
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
-                      id: "spn2",
+                      id: "spn3",
                       text: " "
                     }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "Logout",
                       id: "btnLogout",
                       onClick: handlerBtnLogout
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
-                      id: "spn2",
+                      id: "spn4",
                       text: " "
                     }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "Reboot",
@@ -150,7 +155,7 @@ function App(Props) {
                       id: "btnShuffle",
                       isWasteOfSpace: !isDealButtonVisible(undefined)
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
-                      id: "spn2",
+                      id: "spn5",
                       text: " "
                     }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "\u27F3",
@@ -158,13 +163,21 @@ function App(Props) {
                       onClick: handlerBtnRotateTable,
                       isWasteOfSpace: !isFourSeatsOccupied(undefined)
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
-                      id: "spn2",
+                      id: "spn6",
                       text: " "
                     }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "Undo",
                       id: "btnUndo",
                       onClick: handlerBtnUndo,
                       isWasteOfSpace: !isUndoVisible(undefined)
+                    }), React.createElement(SpanStd$ReasonReactExamples.make, {
+                      id: "spn7",
+                      text: " "
+                    }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
+                      label: "Review",
+                      id: "btnReviewDeal",
+                      onClick: handlerBtnReviewDeal,
+                      isWasteOfSpace: false
                     })), React.createElement("div", {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
