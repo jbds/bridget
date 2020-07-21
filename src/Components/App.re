@@ -134,7 +134,7 @@ let make = () => {
     <ButtonStd dispatch action=Shuffle label="My Deal" id="btnShuffle" isWasteOfSpace={!isDealButtonVisible()}/>
     //<SpacerStd spacerWidth="1vh" />
     <SpanStd id="spn2" text=" " />
-    <ButtonStdJsx id="btnRotateTable" label="Rotate my table" onClick=handlerBtnRotateTable isWasteOfSpace={!isFourSeatsOccupied()}/>
+    <ButtonStdJsx id="btnRotateTable" label={js|\u27F3|js} onClick=handlerBtnRotateTable isWasteOfSpace={!isFourSeatsOccupied()}/>
     //<SpacerStd spacerWidth="1.5vh" />
     <SpanStd id="spn2" text=" " />
     <ButtonStdJsx id="btnUndo" label="Undo" onClick=handlerBtnUndo isWasteOfSpace={!isUndoVisible()}/>

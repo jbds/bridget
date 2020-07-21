@@ -153,7 +153,7 @@ function App(Props) {
                       id: "spn2",
                       text: " "
                     }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
-                      label: "Rotate my table",
+                      label: "\u27F3",
                       id: "btnRotateTable",
                       onClick: handlerBtnRotateTable,
                       isWasteOfSpace: !isFourSeatsOccupied(undefined)
