@@ -208,7 +208,7 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
     // because we are about to discard the 4th
     if (gameState.pack.filter(obj => {return (obj.lifecycle === 2)}).length === 3) {
       //setTimeout(function(){alert('Yay');}, 750);
-      setTimeout(function(){document.getElementById('btnEndTrick').click();}, 750);
+      setTimeout(function(){document.getElementById('btnEndTrick').click();}, 1250);
     }
     // dispatch the Discard action via a hidden key on the sidebar
     document.getElementById('btnDiscard').click();
