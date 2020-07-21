@@ -14,7 +14,6 @@ function ButtonStdJsx(Props) {
                   id: id,
                   style: {
                     backgroundColor: "#FFFFFF",
-                    border: "1px solid #26653B",
                     color: "#26653B",
                     display: isVisible ? "inline" : "none",
                     fontFamily: "Trebuchet MS",

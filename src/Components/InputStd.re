@@ -14,7 +14,7 @@ let make = (~id: string) => {
         ~margin={"0vh"},
         // bug - borderColor single attribute not recognised       
         ~border={"1px solid #26653B"}, 
-        //~borderRadius={"5px"},
+        ~borderRadius={"5px"},
         ~backgroundColor={"#FFFFFF"},
         ~width={"8vh"},
         ~textAlign={"center"},

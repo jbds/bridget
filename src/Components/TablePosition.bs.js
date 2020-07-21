@@ -14,6 +14,7 @@ function TablePosition(Props) {
   } else {
     return React.createElement(React.Fragment, undefined, React.createElement("table", {
                     style: {
+                      border: "1px solid #800000",
                       borderCollapse: "collapse",
                       color: "#26653B",
                       fontFamily: "Trebuchet MS",
@@ -27,14 +28,28 @@ function TablePosition(Props) {
                   }, React.createElement("tbody", undefined, React.createElement("tr", undefined, React.createElement("td", {
                                 style: {
                                   backgroundColor: "#f8f8f8",
+                                  border: "1px solid #f8f8f8",
+                                  borderCollapse: "collapse",
+                                  fontSize: "2.0vh",
                                   textAlign: "center",
                                   whiteSpace: "nowrap"
                                 },
                                 colSpan: 2
-                              }, "Table Seating")), Belt_Array.map(state.pointOfCompassAndPlayers, (function (x) {
+                              }, "---------- Table Seating ----------")), Belt_Array.map(state.pointOfCompassAndPlayers, (function (x) {
                               return React.createElement("tr", {
                                           key: x.player
-                                        }, React.createElement("td", undefined, x.player), React.createElement("td", undefined, React.createElement(ButtonStd$ReasonReactExamples.make, {
+                                        }, React.createElement("td", {
+                                              style: {
+                                                border: "1px solid #f8f8f8",
+                                                borderCollapse: "collapse",
+                                                textAlign: "right"
+                                              }
+                                            }, x.player), React.createElement("td", {
+                                              style: {
+                                                border: "1px solid #f8f8f8",
+                                                borderCollapse: "collapse"
+                                              }
+                                            }, React.createElement(ButtonStd$ReasonReactExamples.make, {
                                                   dispatch: dispatch,
                                                   action: /* AssignPlayer */Block.__(1, [{
                                                         pointOfCompass: x.pointOfCompass === "West" ? "" : "West",

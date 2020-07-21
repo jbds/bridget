@@ -20,7 +20,7 @@ let make = (
         ~fontFamily={"Trebuchet MS"},
         ~margin={"0vh 0.5vh 0vh 0vh"},
         // bug - borderColor single attribute not recognised       
-        ~border={"1px solid #26653B"}, 
+        //~border={"1px solid #26653B"}, 
         ~borderRadius={"5px"},
         ~backgroundColor={"#FFFFFF"},
         ~display={isVisible ? "inline" : "none"},

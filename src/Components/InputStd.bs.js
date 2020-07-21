@@ -15,7 +15,8 @@ function InputStd(Props) {
                     height: "4.0vh",
                     margin: "0vh",
                     textAlign: "center",
-                    width: "8vh"
+                    width: "8vh",
+                    borderRadius: "5px"
                   }
                 }));
 }
