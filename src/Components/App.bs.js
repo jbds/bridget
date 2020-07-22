@@ -177,7 +177,7 @@ function App(Props) {
                       label: "Review",
                       id: "btnReviewDeal",
                       onClick: handlerBtnReviewDeal,
-                      isWasteOfSpace: false
+                      isWasteOfSpace: !state.isReviewDealVisible
                     })), React.createElement("div", {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {

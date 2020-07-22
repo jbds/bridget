@@ -120,6 +120,7 @@ let reducer = (state: state, action) => {
         isBiddingCycle: true,
         isBiddingHideDenominationButtons: true,
         isDummyVisible: false,
+        isReviewDealVisible: false,
         lastAction: "Deal",
         pack: Shuffle.getShuffledPack(), 
         randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),

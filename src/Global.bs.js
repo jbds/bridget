@@ -58,7 +58,7 @@ function reducer(state, action) {
                   isBiddingHideDenominationButtons: true,
                   isDummyVisible: false,
                   isRebootVisible: state.isRebootVisible,
-                  isReviewDealVisible: state.isReviewDealVisible,
+                  isReviewDealVisible: false,
                   lastAction: "Deal",
                   pack: Shuffle$ReasonReactExamples.getShuffledPack(undefined),
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
