@@ -33,6 +33,7 @@ type state = {
   isBiddingHideDenominationButtons: bool,
   isDummyVisible: bool,
   isRebootVisible: bool,
+  isReviewDealVisible: bool,
   lastAction: string,
   pack: Shuffle.pack,
   pointOfCompassAndPlayers: array(Shuffle.pointOfCompassAndPlayer),
@@ -56,6 +57,7 @@ let initialState: state = {
     isBiddingHideDenominationButtons: true,
     isDummyVisible: false,
     isRebootVisible: false,
+    isReviewDealVisible: false,
     lastAction: "None (initialState from Client)",
     pack: [||], // Shuffle.initialPack,
     pointOfCompassAndPlayers: [||],
@@ -223,6 +225,7 @@ let reducer = (state: state, action) => {
         isBiddingHideDenominationButtons: true,
         isDummyVisible: false,
         isRebootVisible: false,
+        isReviewDealVisible: false,
         lastAction: "Logout or Server Down",
         pack: [||],
         pointOfCompassAndPlayers: [||],
@@ -248,6 +251,7 @@ let reducer = (state: state, action) => {
       let bids: Chicago.bids = [%bs.raw "window.gameState.bids"];
       let isBiddingHideDenominationButtons: bool = [%bs.raw "window.gameState.isBiddingHideDenominationButtons"];
       let isRebootVisible: bool = [%bs.raw "window.gameState.isRebootVisible"];
+      let isReviewDealVisible: bool = [%bs.raw "window.gameState.isReviewDealVisible"];
       let isDummyVisible: bool = [%bs.raw "window.gameState.isDummyVisible"];
       let discardIndex: int = [%bs.raw "window.gameState.discardIndex"];
       let discardSuit: option(Shuffle.suit) = [%bs.raw "window.gameState.discardSuit"];
@@ -267,6 +271,7 @@ let reducer = (state: state, action) => {
         isBiddingHideDenominationButtons: isBiddingHideDenominationButtons,
         isDummyVisible: isDummyVisible,
         isRebootVisible: isRebootVisible,
+        isReviewDealVisible: isReviewDealVisible,
         lastAction: lastAction,
         pack: pack,
         pointOfCompassAndPlayers: pOCAP,

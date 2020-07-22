@@ -143,7 +143,7 @@ let make = () => {
     <SpanStd id="spn6" text=" " />
     <ButtonStdJsx id="btnUndo" label="Undo" onClick=handlerBtnUndo isWasteOfSpace={!isUndoVisible()}/>
     <SpanStd id="spn7" text=" " />
-    <ButtonStdJsx id="btnReviewDeal" label="Review" onClick=handlerBtnReviewDeal isWasteOfSpace=true/>
+    <ButtonStdJsx id="btnReviewDeal" label="Review" onClick=handlerBtnReviewDeal isWasteOfSpace=false/>
   </div>
   <div id="sidebar2">
     //(s2e("Sidebar2"))
