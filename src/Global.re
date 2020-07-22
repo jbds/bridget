@@ -808,6 +808,7 @@ let reducer = (state: state, action) => {
         chicagoScoreSheet: [myChicagoScoreSheetRecordWithOptionalScore, ...chicagoScoreSheetTail],
         dealer: state.discardIndex !== 51 ? state.dealer : Some(endOfDealNextPoc),
         declarer: state.discardIndex !== 51 ? state.declarer : None,
+        isReviewDealVisible: state.discardIndex !== 51 ? false : true,
         //pack: (state.discardIndex mod 4 ) === 3 ? myPack : state.pack,
         pack: myPack,
         lastAction: "End of Trick",

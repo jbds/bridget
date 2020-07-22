@@ -339,7 +339,7 @@ function reducer(state, action) {
                   isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
                   isDummyVisible: state.isDummyVisible,
                   isRebootVisible: state.isRebootVisible,
-                  isReviewDealVisible: state.isReviewDealVisible,
+                  isReviewDealVisible: state.discardIndex === 51,
                   lastAction: "End of Trick",
                   pack: myPack$1,
                   pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
