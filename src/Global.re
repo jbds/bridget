@@ -109,6 +109,7 @@ let reducer = (state: state, action) => {
       // not sure dealIndex is needed?
       // force activePointOfCompass to be dealer
       // hide Dummy hand
+      // set handVisible all to false in case previous deal has been Reviewed
       {
         ...state, 
         activePointOfCompass: state.dealer,
@@ -117,6 +118,7 @@ let reducer = (state: state, action) => {
         //dealIndex: state.dealIndex + 1,
         declarer: None,
         discardIndex: -1,
+        handVisible: Shuffle.initialHandVisible,
         isBiddingCycle: true,
         isBiddingHideDenominationButtons: true,
         isDummyVisible: false,

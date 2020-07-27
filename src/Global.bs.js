@@ -53,7 +53,7 @@ function reducer(state, action) {
                   declarer: undefined,
                   discardIndex: -1,
                   discardSuit: state.discardSuit,
-                  handVisible: state.handVisible,
+                  handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
                   isBiddingCycle: true,
                   isBiddingHideDenominationButtons: true,
                   isDummyVisible: false,
