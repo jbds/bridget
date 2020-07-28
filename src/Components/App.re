@@ -124,12 +124,12 @@ let make = () => {
     <SpanStd id="spn1" text="Me: " />
     <InputStd id="txtMyLoginName" />
     <SpanStd id="spn2" text=" " />
-    <ButtonStdJsx id="btnLogin" label="Login" onClick=handlerBtnLogin/>
+    <ButtonStdJsx id="btnLogin" label="Join" onClick=handlerBtnLogin/>
     <SpanStd id="spn3" text=" " />
-    <ButtonStdJsx id="btnLogout" label="Logout" onClick=handlerBtnLogout/>
+    <ButtonStdJsx id="btnLogout" label="Leave" onClick=handlerBtnLogout/>
     <SpanStd id="spn4" text=" " />
     //<ButtonStd dispatch action=NewGame label="Reboot" id="btnNewGame" isWasteOfSpace={!state.isRebootVisible}/>
-    <ButtonStdJsx id="btnReboot2" label="Reboot" onClick=handlerBtnReboot2 isWasteOfSpace={!state.isRebootVisible}/>
+    <ButtonStdJsx id="btnReboot2" label="Restart" onClick=handlerBtnReboot2 isWasteOfSpace={!state.isRebootVisible}/>
     <br/>
     <br/>
     <TablePosition state dispatch />

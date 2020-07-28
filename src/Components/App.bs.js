@@ -127,21 +127,21 @@ function App(Props) {
                       id: "spn2",
                       text: " "
                     }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
-                      label: "Login",
+                      label: "Join",
                       id: "btnLogin",
                       onClick: handlerBtnLogin
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn3",
                       text: " "
                     }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
-                      label: "Logout",
+                      label: "Leave",
                       id: "btnLogout",
                       onClick: handlerBtnLogout
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn4",
                       text: " "
                     }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
-                      label: "Reboot",
+                      label: "Restart",
                       id: "btnReboot2",
                       onClick: handlerBtnReboot2,
                       isWasteOfSpace: !state.isRebootVisible
