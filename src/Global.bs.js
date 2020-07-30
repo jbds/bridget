@@ -7,6 +7,7 @@ var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 var Belt_List = require("bs-platform/lib/js/belt_List.js");
 var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 var Caml_array = require("bs-platform/lib/js/caml_array.js");
+var MyDeal$ReasonReactExamples = require("./Actions/MyDeal.bs.js");
 var Chicago$ReasonReactExamples = require("./Chicago.bs.js");
 var Shuffle$ReasonReactExamples = require("./Shuffle.bs.js");
 
@@ -42,28 +43,7 @@ function reducer(state, action) {
   if (typeof action === "number") {
     switch (action) {
       case /* Shuffle */0 :
-          ((window.isLastActionSync = false));
-          ((setTimeout(function(){Online.doMessage('StoreDeal');}, 750)));
-          return {
-                  activePointOfCompass: state.dealer,
-                  bids: /* [] */0,
-                  chicagoScoreSheet: state.chicagoScoreSheet,
-                  dealer: state.dealer,
-                  dealIndex: state.dealIndex,
-                  declarer: undefined,
-                  discardIndex: -1,
-                  discardSuit: state.discardSuit,
-                  handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
-                  isBiddingCycle: true,
-                  isBiddingHideDenominationButtons: true,
-                  isDummyVisible: false,
-                  isRebootVisible: state.isRebootVisible,
-                  isReviewDealVisible: false,
-                  lastAction: "Deal",
-                  pack: Shuffle$ReasonReactExamples.getShuffledPack(undefined),
-                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-                };
+          return MyDeal$ReasonReactExamples.execute(state);
       case /* Discard */1 :
           ((window.isLastActionSync = false));
           var discardFileName = window.discardFileName;
