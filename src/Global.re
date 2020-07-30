@@ -5,7 +5,7 @@
 type action =
   //| NewGame
   | Shuffle
-  | Flip (Shuffle.compassPoint)
+  //| Flip (Shuffle.compassPoint)
   | Discard
   | Sync
   | LoginSync
@@ -17,28 +17,7 @@ type action =
   | EndTrick
 ;
 
-// this is the game state that we will share amongst all users who are registered at the server
-// it is a single record which will be passed to and broadcast from the server
-// type state = {
-//   activePointOfCompass: option(string),
-//   bids: Chicago.bids,
-//   chicagoScoreSheet: list(Chicago.chicagoScoreSheetRecord),
-//   dealer: option(string),
-//   dealIndex: int,
-//   declarer: option(string),
-//   discardIndex: int,
-//   discardSuit: option(Shuffle.suit),
-//   handVisible: Shuffle.handVisible,
-//   isBiddingCycle: bool,
-//   isBiddingHideDenominationButtons: bool,
-//   isDummyVisible: bool,
-//   isRebootVisible: bool,
-//   isReviewDealVisible: bool,
-//   lastAction: string,
-//   pack: Shuffle.pack,
-//   pointOfCompassAndPlayers: array(Shuffle.pointOfCompassAndPlayer),
-//   randomInt: int,
-// };
+// type state is degined in TopLevel.re to avoid a circular dependency error
 
 // this is used by the reducer at app startup, before being overwritten
 // by later actions
@@ -66,80 +45,24 @@ let initialState: TopLevel.state = {
 
 let reducer = (state: TopLevel.state, action) => {
   switch action {
-    // superseded by Reboot as ws message sent direct to server
+    // superseded by Restart as ws message sent direct to server
     // | NewGame => {
-    //   // aka Reboot
-    //   // make sure doMessage is called in sidebar component
-    //   let () = [%raw "window.isLastActionSync = false"];
-    //   // force everything same as when server starts up,
-    //   // except leave logged in players and their pointsOfCompass - NO!
-    //   // make this button a full reboot - clear players too
-    //   {
-    //     //...state,
-    //     activePointOfCompass: None,
-    //     bids: [],
-    //     chicagoScoreSheet: [], //Chicago.initialChicagoScoreSheet,
-    //     dealer: None,
-    //     dealIndex: -1,
-    //     declarer: None,
-    //     discardIndex: -1,
-    //     discardSuit: None,
-    //     handVisible: Shuffle.initialHandVisible,
-    //     isBiddingCycle: false,
-    //     isBiddingHideDenominationButtons: true,
-    //     isDummyVisible: false,
-    //     isRebootVisible: true,
-    //     lastAction: "Reboot (clears scores & logins)",
-    //     pack: [||],
-    //     pointOfCompassAndPlayers: [||],
-    //     randomInt: 2, 
-    //   }
+    //   // aka Reboot aka Restart
     // }
     | Shuffle => {
         MyDeal.execute(state);
-      // // aka "New Deal" aka "My Deal"
-      // //Js.log("Action-Shuffle");
-      // // make sure doMessage is called in sidebar component
-      // let () = [%raw "window.isLastActionSync = false"];
-      // // prepare another message alerting server to store the pack as dealt
-      // //let () = [%raw "setTimeout(function(){alert('StoreDeal');}, 750)"];
-      // let () = [%raw "setTimeout(function(){Online.doMessage('StoreDeal');}, 750)"];
-      // // dealer becomes activePointOfCompass too, because he starts the bidding
-      // // do change of dealer at end of deal ie 52 cards out 
-      // // also set BiddingCycle to true here
-      // // not sure dealIndex is needed?
-      // // force activePointOfCompass to be dealer
-      // // hide Dummy hand
-      // // set handVisible all to false in case previous deal has been Reviewed
-      // {
-      //   ...state, 
-      //   activePointOfCompass: state.dealer,
-      //   bids: [],
-      //   //dealer: poc,
-      //   //dealIndex: state.dealIndex + 1,
-      //   declarer: None,
-      //   discardIndex: -1,
-      //   handVisible: Shuffle.initialHandVisible,
-      //   isBiddingCycle: true,
-      //   isBiddingHideDenominationButtons: true,
-      //   isDummyVisible: false,
-      //   isReviewDealVisible: false,
-      //   lastAction: "Deal",
-      //   pack: Shuffle.getShuffledPack(), 
-      //   randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
-      // }
     }
-    | Flip (compassPoint) => {
-      //Js.log("Action-Flip");
-      // make sure doMessage is called in sidebar component
-      let () = [%raw "window.isLastActionSync = false"];
-      switch (compassPoint) {
-        | North => {...state, handVisible: {...state.handVisible, north: !state.handVisible.north}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()}
-        | East => {...state, handVisible: {...state.handVisible, east: !state.handVisible.east}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k() }
-        | South => {...state, handVisible: {...state.handVisible, south: !state.handVisible.south}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k() }
-        | West => {...state, handVisible: {...state.handVisible, west: !state.handVisible.west}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k() }
-      }
-    }
+    // | Flip (compassPoint) => {
+    //   //Js.log("Action-Flip");
+    //   // make sure doMessage is called in sidebar component
+    //   let () = [%raw "window.isLastActionSync = false"];
+    //   switch (compassPoint) {
+    //     | North => {...state, handVisible: {...state.handVisible, north: !state.handVisible.north}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()}
+    //     | East => {...state, handVisible: {...state.handVisible, east: !state.handVisible.east}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k() }
+    //     | South => {...state, handVisible: {...state.handVisible, south: !state.handVisible.south}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k() }
+    //     | West => {...state, handVisible: {...state.handVisible, west: !state.handVisible.west}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k() }
+    //   }
+    // }
     | Discard => {
       // make sure doMessage IS called in sidebar component
       let () = [%raw "window.isLastActionSync = false"];

@@ -156,10 +156,6 @@ let make = () => {
     <ChicagoScoreTable state />
   </div>
   <div id="sidebar3">
-    // (s2e("Sidebar3"))
-    // <br/>
-    // <span id="span1"></span>
-    // <FlipHand dispatch/>
     <br/>
     <SpanStd id="spnRandomInt" text="Last action:" />
     <SpanStd id="spnRILA" text=" " />
