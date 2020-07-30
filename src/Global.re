@@ -53,15 +53,7 @@ let reducer = (state: TopLevel.state, action) => {
         MyDeal.execute(state);
     }
     // | Flip (compassPoint) => {
-    //   //Js.log("Action-Flip");
-    //   // make sure doMessage is called in sidebar component
-    //   let () = [%raw "window.isLastActionSync = false"];
-    //   switch (compassPoint) {
-    //     | North => {...state, handVisible: {...state.handVisible, north: !state.handVisible.north}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()}
-    //     | East => {...state, handVisible: {...state.handVisible, east: !state.handVisible.east}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k() }
-    //     | South => {...state, handVisible: {...state.handVisible, south: !state.handVisible.south}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k() }
-    //     | West => {...state, handVisible: {...state.handVisible, west: !state.handVisible.west}, lastAction: "Flip", randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k() }
-    //   }
+    //  became redundant
     // }
     | Discard => {
       // make sure doMessage IS called in sidebar component
@@ -512,235 +504,236 @@ let reducer = (state: TopLevel.state, action) => {
       }
     }
     | EndTrick => {
-      // only triggered on imminent 4 discards - see P5Event.js line 207
-      // make sure doMessage is called in sidebar component
-      let () = [%raw "window.isLastActionSync = false"];
-      // check contract suit
-      let scoreSheetRecord = List.hd(state.chicagoScoreSheet);
-      let contractSuit = scoreSheetRecord.contractSuit;
-      // get adjusted value of the cards
-      let myAdjustedPackValue = Array.map(
-        (card: Shuffle.card) => {
-          Shuffle.getSuitAsOptionString(card.suit) === contractSuit
-          ?
-          {...card, noTrumpValue: card.noTrumpValue + 52}
-          :
-          {card}
-        },
-        state.pack
-      );
-      //Js.log("myAdjustedPackValue:");
-      //Js.log(myAdjustedPackValue);
-      // filter by lifecycle and also lead discard suit / trump suit
-      let myFourCards = Belt.Array.keep(myAdjustedPackValue, x => {
-        x.lifecycle === Discard
-        &&
-        (
-          Some(x.suit) === state.discardSuit
-          ||
-          Shuffle.getSuitAsOptionString(x.suit) === contractSuit
-        )
-      });
-      Js.log("myFourCards:");
-      Js.log(myFourCards);
-      let myFourCardsAsList = Belt.List.fromArray(myFourCards);
-      // just sort the list with Belt!
-      let myFourCardsAsListSorted = Belt.List.sort(myFourCardsAsList, (a, b) => {b.noTrumpValue - a.noTrumpValue})
-      let optionWinningCard = Belt.List.head(myFourCardsAsListSorted);
-      //Js.log("optionWinningCard");
-      //Js.log(optionWinningCard);
-      let winningCardFileName =
-        switch (optionWinningCard) {
-          | None => ""
-          | Some(x) => x.fileName
-        }
-      Js.log("winningCard:");
-      Js.log(winningCardFileName);
-      // let winningCardValue =
+      EndTrick.execute(state);
+      // // only triggered on imminent 4 discards - see P5Event.js line 207
+      // // make sure doMessage is called in sidebar component
+      // let () = [%raw "window.isLastActionSync = false"];
+      // // check contract suit
+      // let scoreSheetRecord = List.hd(state.chicagoScoreSheet);
+      // let contractSuit = scoreSheetRecord.contractSuit;
+      // // get adjusted value of the cards
+      // let myAdjustedPackValue = Array.map(
+      //   (card: Shuffle.card) => {
+      //     Shuffle.getSuitAsOptionString(card.suit) === contractSuit
+      //     ?
+      //     {...card, noTrumpValue: card.noTrumpValue + 52}
+      //     :
+      //     {card}
+      //   },
+      //   state.pack
+      // );
+      // //Js.log("myAdjustedPackValue:");
+      // //Js.log(myAdjustedPackValue);
+      // // filter by lifecycle and also lead discard suit / trump suit
+      // let myFourCards = Belt.Array.keep(myAdjustedPackValue, x => {
+      //   x.lifecycle === Discard
+      //   &&
+      //   (
+      //     Some(x.suit) === state.discardSuit
+      //     ||
+      //     Shuffle.getSuitAsOptionString(x.suit) === contractSuit
+      //   )
+      // });
+      // Js.log("myFourCards:");
+      // Js.log(myFourCards);
+      // let myFourCardsAsList = Belt.List.fromArray(myFourCards);
+      // // just sort the list with Belt!
+      // let myFourCardsAsListSorted = Belt.List.sort(myFourCardsAsList, (a, b) => {b.noTrumpValue - a.noTrumpValue})
+      // let optionWinningCard = Belt.List.head(myFourCardsAsListSorted);
+      // //Js.log("optionWinningCard");
+      // //Js.log(optionWinningCard);
+      // let winningCardFileName =
+      //   switch (optionWinningCard) {
+      //     | None => ""
+      //     | Some(x) => x.fileName
+      //   }
+      // Js.log("winningCard:");
+      // Js.log(winningCardFileName);
+      // // let winningCardValue =
+      // //   switch (optionWinningCard) {
+      // //     | None => -1
+      // //     | Some(x) => x.noTrumpValue
+      // //   }
+      // // Js.log("winningCardValue:");
+      // // Js.log(winningCardValue);
+      // let winningCardShuffleIndex =
       //   switch (optionWinningCard) {
       //     | None => -1
-      //     | Some(x) => x.noTrumpValue
+      //     | Some(x) => x.shuffleIndex
       //   }
-      // Js.log("winningCardValue:");
-      // Js.log(winningCardValue);
-      let winningCardShuffleIndex =
-        switch (optionWinningCard) {
-          | None => -1
-          | Some(x) => x.shuffleIndex
-        }
-      // Js.log("winningCardShuffleIndex:");
-      // Js.log(winningCardShuffleIndex);
-      let winningDiscardPoc = 
-        if (winningCardShuffleIndex === -1) {
-          "Error"
-        } else if (winningCardShuffleIndex < 13) {
-          "North"
-        } else if (winningCardShuffleIndex < 26) {
-          "East"
-        } else if (winningCardShuffleIndex < 39) {
-          "South"
-        } else {
-          "West"
-        };
-      //Js.log("winningDiscardPoc:");
-      //Js.log(winningDiscardPoc);
-      // let isPocDeclarerOrDummy = (poc, declarer) => {
-      //   switch (poc) {
-      //     | "North" | "South" => declarer === "North" || declarer === "South" ? true : false
-      //     | "East" | "West" => declarer === "East" || declarer === "West" ? true : false
-      //     | _ => false
-      //   }
-      // };
-      // let declarerTrickIncrement = 
-      //   isPocDeclarerOrDummy(winningDiscardPoc, Shuffle.pocAsString(scoreSheetRecord.contractDeclarer))
+      // // Js.log("winningCardShuffleIndex:");
+      // // Js.log(winningCardShuffleIndex);
+      // let winningDiscardPoc = 
+      //   if (winningCardShuffleIndex === -1) {
+      //     "Error"
+      //   } else if (winningCardShuffleIndex < 13) {
+      //     "North"
+      //   } else if (winningCardShuffleIndex < 26) {
+      //     "East"
+      //   } else if (winningCardShuffleIndex < 39) {
+      //     "South"
+      //   } else {
+      //     "West"
+      //   };
+      // //Js.log("winningDiscardPoc:");
+      // //Js.log(winningDiscardPoc);
+      // // let isPocDeclarerOrDummy = (poc, declarer) => {
+      // //   switch (poc) {
+      // //     | "North" | "South" => declarer === "North" || declarer === "South" ? true : false
+      // //     | "East" | "West" => declarer === "East" || declarer === "West" ? true : false
+      // //     | _ => false
+      // //   }
+      // // };
+      // // let declarerTrickIncrement = 
+      // //   isPocDeclarerOrDummy(winningDiscardPoc, Shuffle.pocAsString(scoreSheetRecord.contractDeclarer))
+      // //   ?
+      // //   1
+      // //   :
+      // //   0
+      // // ;
+      // //Js.log("declarerTrickIncrement:");
+      // //Js.log(declarerTrickIncrement);
+      // //let totalTricksNorthSouthIncrement = 0;
+      // //let totalTricksWestEastIncrement = 0;
+      // let totalTricksNorthSouthIncrement =
+      //   // (
+      //   //   scoreSheetRecord.contractDeclarer === Some("North")
+      //   //   ||
+      //   //   scoreSheetRecord.contractDeclarer === Some("South")
+      //   // )
+      //   // &&
+      //   (
+      //     winningDiscardPoc === "North"
+      //     ||
+      //     winningDiscardPoc === "South"
+      //   )
       //   ?
       //   1
       //   :
       //   0
       // ;
-      //Js.log("declarerTrickIncrement:");
-      //Js.log(declarerTrickIncrement);
-      //let totalTricksNorthSouthIncrement = 0;
-      //let totalTricksWestEastIncrement = 0;
-      let totalTricksNorthSouthIncrement =
-        // (
-        //   scoreSheetRecord.contractDeclarer === Some("North")
-        //   ||
-        //   scoreSheetRecord.contractDeclarer === Some("South")
-        // )
-        // &&
-        (
-          winningDiscardPoc === "North"
-          ||
-          winningDiscardPoc === "South"
-        )
-        ?
-        1
-        :
-        0
-      ;
-      let totalTricksWestEastIncrement =
-        // (
-        //   scoreSheetRecord.contractDeclarer === Some("West")
-        //   ||
-        //   scoreSheetRecord.contractDeclarer === Some("East")
-        // )
-        // &&
-        (
-          winningDiscardPoc === "West"
-          ||
-          winningDiscardPoc === "East"
-        )
-        ?
-        1
-        :
-        0
-      ;
-      //Js.log("totalTricksNorthSouthIncrement:");
-      //Js.log(totalTricksNorthSouthIncrement);
-      //Js.log("totalTricksWestEastIncrement:");
-      //Js.log(totalTricksWestEastIncrement);
-      // prepare for the score sheet update - we only want to update the head of the list
-      let chicagoScoreSheetHead = Belt.List.headExn(state.chicagoScoreSheet);
-      let chicagoScoreSheetTail: Chicago.chicagoScoreSheet = Belt.List.tailExn(state.chicagoScoreSheet);
-      let myChicagoScoreSheetRecord = 
-        {
-          ...chicagoScoreSheetHead, 
-          totalTricksNorthSouth: chicagoScoreSheetHead.totalTricksNorthSouth + totalTricksNorthSouthIncrement,
-          totalTricksWestEast: chicagoScoreSheetHead.totalTricksWestEast + totalTricksWestEastIncrement
-        }
-      // now we must check for end of round/deal by looking for countOfCardsWithLifecycleTrick = 48
-      //let countOfCardsWithLifecycleTrick = Belt.Array.length(Belt.Array.keep(state.pack, x => x.lifecycle === Discard));
-      // use discardIndex as this is really a cards clicked counter and more robust
-      let myChicagoScoreSheetRecordWithOptionalScore =
-        if (
-          state.discardIndex === 51 
-          ) {
-          let myScoreLookupDenomination: Chicago.denomination =
-            if (scoreSheetRecord.contractSuit === Some("Clubs") || scoreSheetRecord.contractSuit === Some("Diamonds")) {
-              Minor
-            } else if (scoreSheetRecord.contractSuit === Some("Hearts") || scoreSheetRecord.contractSuit === Some("Spades")) {
-              Major
-            } else if (scoreSheetRecord.contractSuit === Some("NoTrumps")) {
-              NoTrumps
-            } else {
-              NoTrumps // should be unreachable code
-            };
-          let isVulnerable =
-            if (scoreSheetRecord.vulnerable === "None") {
-              false
-            } else if (
-                (scoreSheetRecord.vulnerable === "N" || scoreSheetRecord.vulnerable === "S")
-                &&
-                (scoreSheetRecord.contractDeclarer === Some("North") || scoreSheetRecord.contractDeclarer === Some("South"))
-              ) {
-              true
-            } else if (
-                (scoreSheetRecord.vulnerable === "W" || scoreSheetRecord.vulnerable === "E")
-                &&
-                (scoreSheetRecord.contractDeclarer === Some("West") || scoreSheetRecord.contractDeclarer === Some("East"))
-              ) {
-              true
-            } else if (scoreSheetRecord.vulnerable === "All") {
-              true
-            } else {
-              false   // catchall should never happen
-            };
-          let scoreLookup = Chicago.getScore(
-            ~level = Shuffle.optionIntAsInt(scoreSheetRecord.contractLevel),
-            ~denomination = myScoreLookupDenomination,
-            ~tricksTotal = 
-              (scoreSheetRecord.contractDeclarer === Some("North"))
-              || 
-              (scoreSheetRecord.contractDeclarer === Some("South"))
-              ?
-              chicagoScoreSheetHead.totalTricksNorthSouth + totalTricksNorthSouthIncrement
-              :
-              chicagoScoreSheetHead.totalTricksWestEast + totalTricksWestEastIncrement,
-            ~isVulnerable = isVulnerable,
-            ~isDoubled = false, // TO DO
-            ~isRedoubled = false // TO DO
-          );
-          // some redundancy here, possibility of a bug
-          // state.declarer and contract.declarer SHOULD always be the same
-          {
-            ...myChicagoScoreSheetRecord, 
-            scoreNorthSouth: (state.declarer === Some("North")) || (state.declarer === Some("South")) ? Some(scoreLookup) : None,
-            scoreWestEast: (state.declarer === Some("West")) || (state.declarer === Some("East")) ? Some(scoreLookup) : None
-          }
-        } else {
-          myChicagoScoreSheetRecord
-        };
-      //Js.log("discardIndex:");
-      //Js.log(state.discardIndex);
-      // move all (should be 4 always) discarded cards into lifecycle Trick
-      let myPack = Array.map(
-        (card: Shuffle.card) => {
-          card.lifecycle === Discard
-          ?
-          {...card, lifecycle: Trick}
-          :
-          {card}
-        },
-        state.pack
-      );
-      // only clear discard pile every 4 discards
-      // actually this action is now only called once every 4 discards
-      // so we do not need that constraint
-      // conditional end-of-round update to poc signified by discardIndex = 51
-      let endOfDealNextPoc = Shuffle.getNextPointOfCompass(state.dealer);
-      {
-        ...state, 
-        activePointOfCompass: state.discardIndex !== 51 ? Some(winningDiscardPoc) : Some(endOfDealNextPoc),
-        chicagoScoreSheet: [myChicagoScoreSheetRecordWithOptionalScore, ...chicagoScoreSheetTail],
-        dealer: state.discardIndex !== 51 ? state.dealer : Some(endOfDealNextPoc),
-        declarer: state.discardIndex !== 51 ? state.declarer : None,
-        isReviewDealVisible: state.discardIndex !== 51 ? false : true,
-        //pack: (state.discardIndex mod 4 ) === 3 ? myPack : state.pack,
-        pack: myPack,
-        lastAction: "End of Trick",
-        randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
-      }
+      // let totalTricksWestEastIncrement =
+      //   // (
+      //   //   scoreSheetRecord.contractDeclarer === Some("West")
+      //   //   ||
+      //   //   scoreSheetRecord.contractDeclarer === Some("East")
+      //   // )
+      //   // &&
+      //   (
+      //     winningDiscardPoc === "West"
+      //     ||
+      //     winningDiscardPoc === "East"
+      //   )
+      //   ?
+      //   1
+      //   :
+      //   0
+      // ;
+      // //Js.log("totalTricksNorthSouthIncrement:");
+      // //Js.log(totalTricksNorthSouthIncrement);
+      // //Js.log("totalTricksWestEastIncrement:");
+      // //Js.log(totalTricksWestEastIncrement);
+      // // prepare for the score sheet update - we only want to update the head of the list
+      // let chicagoScoreSheetHead = Belt.List.headExn(state.chicagoScoreSheet);
+      // let chicagoScoreSheetTail: Chicago.chicagoScoreSheet = Belt.List.tailExn(state.chicagoScoreSheet);
+      // let myChicagoScoreSheetRecord = 
+      //   {
+      //     ...chicagoScoreSheetHead, 
+      //     totalTricksNorthSouth: chicagoScoreSheetHead.totalTricksNorthSouth + totalTricksNorthSouthIncrement,
+      //     totalTricksWestEast: chicagoScoreSheetHead.totalTricksWestEast + totalTricksWestEastIncrement
+      //   }
+      // // now we must check for end of round/deal by looking for countOfCardsWithLifecycleTrick = 48
+      // //let countOfCardsWithLifecycleTrick = Belt.Array.length(Belt.Array.keep(state.pack, x => x.lifecycle === Discard));
+      // // use discardIndex as this is really a cards clicked counter and more robust
+      // let myChicagoScoreSheetRecordWithOptionalScore =
+      //   if (
+      //     state.discardIndex === 51 
+      //     ) {
+      //     let myScoreLookupDenomination: Chicago.denomination =
+      //       if (scoreSheetRecord.contractSuit === Some("Clubs") || scoreSheetRecord.contractSuit === Some("Diamonds")) {
+      //         Minor
+      //       } else if (scoreSheetRecord.contractSuit === Some("Hearts") || scoreSheetRecord.contractSuit === Some("Spades")) {
+      //         Major
+      //       } else if (scoreSheetRecord.contractSuit === Some("NoTrumps")) {
+      //         NoTrumps
+      //       } else {
+      //         NoTrumps // should be unreachable code
+      //       };
+      //     let isVulnerable =
+      //       if (scoreSheetRecord.vulnerable === "None") {
+      //         false
+      //       } else if (
+      //           (scoreSheetRecord.vulnerable === "N" || scoreSheetRecord.vulnerable === "S")
+      //           &&
+      //           (scoreSheetRecord.contractDeclarer === Some("North") || scoreSheetRecord.contractDeclarer === Some("South"))
+      //         ) {
+      //         true
+      //       } else if (
+      //           (scoreSheetRecord.vulnerable === "W" || scoreSheetRecord.vulnerable === "E")
+      //           &&
+      //           (scoreSheetRecord.contractDeclarer === Some("West") || scoreSheetRecord.contractDeclarer === Some("East"))
+      //         ) {
+      //         true
+      //       } else if (scoreSheetRecord.vulnerable === "All") {
+      //         true
+      //       } else {
+      //         false   // catchall should never happen
+      //       };
+      //     let scoreLookup = Chicago.getScore(
+      //       ~level = Shuffle.optionIntAsInt(scoreSheetRecord.contractLevel),
+      //       ~denomination = myScoreLookupDenomination,
+      //       ~tricksTotal = 
+      //         (scoreSheetRecord.contractDeclarer === Some("North"))
+      //         || 
+      //         (scoreSheetRecord.contractDeclarer === Some("South"))
+      //         ?
+      //         chicagoScoreSheetHead.totalTricksNorthSouth + totalTricksNorthSouthIncrement
+      //         :
+      //         chicagoScoreSheetHead.totalTricksWestEast + totalTricksWestEastIncrement,
+      //       ~isVulnerable = isVulnerable,
+      //       ~isDoubled = false, // TO DO
+      //       ~isRedoubled = false // TO DO
+      //     );
+      //     // some redundancy here, possibility of a bug
+      //     // state.declarer and contract.declarer SHOULD always be the same
+      //     {
+      //       ...myChicagoScoreSheetRecord, 
+      //       scoreNorthSouth: (state.declarer === Some("North")) || (state.declarer === Some("South")) ? Some(scoreLookup) : None,
+      //       scoreWestEast: (state.declarer === Some("West")) || (state.declarer === Some("East")) ? Some(scoreLookup) : None
+      //     }
+      //   } else {
+      //     myChicagoScoreSheetRecord
+      //   };
+      // //Js.log("discardIndex:");
+      // //Js.log(state.discardIndex);
+      // // move all (should be 4 always) discarded cards into lifecycle Trick
+      // let myPack = Array.map(
+      //   (card: Shuffle.card) => {
+      //     card.lifecycle === Discard
+      //     ?
+      //     {...card, lifecycle: Trick}
+      //     :
+      //     {card}
+      //   },
+      //   state.pack
+      // );
+      // // only clear discard pile every 4 discards
+      // // actually this action is now only called once every 4 discards
+      // // so we do not need that constraint
+      // // conditional end-of-round update to poc signified by discardIndex = 51
+      // let endOfDealNextPoc = Shuffle.getNextPointOfCompass(state.dealer);
+      // {
+      //   ...state, 
+      //   activePointOfCompass: state.discardIndex !== 51 ? Some(winningDiscardPoc) : Some(endOfDealNextPoc),
+      //   chicagoScoreSheet: [myChicagoScoreSheetRecordWithOptionalScore, ...chicagoScoreSheetTail],
+      //   dealer: state.discardIndex !== 51 ? state.dealer : Some(endOfDealNextPoc),
+      //   declarer: state.discardIndex !== 51 ? state.declarer : None,
+      //   isReviewDealVisible: state.discardIndex !== 51 ? false : true,
+      //   //pack: (state.discardIndex mod 4 ) === 3 ? myPack : state.pack,
+      //   pack: myPack,
+      //   lastAction: "End of Trick",
+      //   randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k()
+      // }
     }
   }
 };
