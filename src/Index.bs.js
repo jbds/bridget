@@ -16,7 +16,7 @@ const setVh = () => {
   window.userState = {}; // prevent undefined error before p5 starts up
 
   // be certain we have the correct version of bundled file aka index.js
-  document.title = 'Bridget v0.28';
+  document.title = 'Bridget v0.29';
 ;
 
 ReactDOMRe.renderToElementWithId(React.createElement(App$ReasonReactExamples.make, { }), "root");
