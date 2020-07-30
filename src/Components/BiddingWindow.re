@@ -1,7 +1,7 @@
 [@react.component]
 let make = (
   ~dispatch: Global.action => unit, 
-  ~state: Global.state
+  ~state: TopLevel.state
   ) => {
   // need helper to decide visibility of X and XX buttons
   let bidListHead = Belt.List.head(state.bids);

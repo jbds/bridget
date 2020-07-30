@@ -1,5 +1,5 @@
 [@react.component]
-let make = (~state: Global.state) => {
+let make = (~state: TopLevel.state) => {
   List.length(state.chicagoScoreSheet) == 0
   ?
   React.null

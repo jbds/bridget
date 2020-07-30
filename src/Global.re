@@ -19,31 +19,31 @@ type action =
 
 // this is the game state that we will share amongst all users who are registered at the server
 // it is a single record which will be passed to and broadcast from the server
-type state = {
-  activePointOfCompass: option(string),
-  bids: Chicago.bids,
-  chicagoScoreSheet: list(Chicago.chicagoScoreSheetRecord),
-  dealer: option(string),
-  dealIndex: int,
-  declarer: option(string),
-  discardIndex: int,
-  discardSuit: option(Shuffle.suit),
-  handVisible: Shuffle.handVisible,
-  isBiddingCycle: bool,
-  isBiddingHideDenominationButtons: bool,
-  isDummyVisible: bool,
-  isRebootVisible: bool,
-  isReviewDealVisible: bool,
-  lastAction: string,
-  pack: Shuffle.pack,
-  pointOfCompassAndPlayers: array(Shuffle.pointOfCompassAndPlayer),
-  randomInt: int,
-};
+// type state = {
+//   activePointOfCompass: option(string),
+//   bids: Chicago.bids,
+//   chicagoScoreSheet: list(Chicago.chicagoScoreSheetRecord),
+//   dealer: option(string),
+//   dealIndex: int,
+//   declarer: option(string),
+//   discardIndex: int,
+//   discardSuit: option(Shuffle.suit),
+//   handVisible: Shuffle.handVisible,
+//   isBiddingCycle: bool,
+//   isBiddingHideDenominationButtons: bool,
+//   isDummyVisible: bool,
+//   isRebootVisible: bool,
+//   isReviewDealVisible: bool,
+//   lastAction: string,
+//   pack: Shuffle.pack,
+//   pointOfCompassAndPlayers: array(Shuffle.pointOfCompassAndPlayer),
+//   randomInt: int,
+// };
 
 // this is used by the reducer at app startup, before being overwritten
 // by later actions
 // Note the only thing we set here is the starting active poc and dealer
-let initialState: state = {
+let initialState: TopLevel.state = {
     activePointOfCompass: None, // Some(Shuffle.initialPoc), - do this at server!
     bids: [],
     chicagoScoreSheet: Chicago.initialChicagoScoreSheet,
@@ -64,7 +64,7 @@ let initialState: state = {
     randomInt: 1,
 };
 
-let reducer = (state: state, action) => {
+let reducer = (state: TopLevel.state, action) => {
   switch action {
     // superseded by Reboot as ws message sent direct to server
     // | NewGame => {
@@ -96,6 +96,7 @@ let reducer = (state: state, action) => {
     //   }
     // }
     | Shuffle => {
+        //MyDeal.execute(state);
       // aka "New Deal" aka "My Deal"
       //Js.log("Action-Shuffle");
       // make sure doMessage is called in sidebar component

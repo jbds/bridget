@@ -1,6 +1,6 @@
 [@react.component]
 let make = (
-  ~state: Global.state
+  ~state: TopLevel.state
   ) => {
   <div
     style=(
