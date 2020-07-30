@@ -43,13 +43,6 @@ let execute = (state: TopLevel.state) => {
     }
   Js.log("winningCard:");
   Js.log(winningCardFileName);
-  // let winningCardValue =
-  //   switch (optionWinningCard) {
-  //     | None => -1
-  //     | Some(x) => x.noTrumpValue
-  //   }
-  // Js.log("winningCardValue:");
-  // Js.log(winningCardValue);
   let winningCardShuffleIndex =
     switch (optionWinningCard) {
       | None => -1
@@ -71,31 +64,7 @@ let execute = (state: TopLevel.state) => {
     };
   //Js.log("winningDiscardPoc:");
   //Js.log(winningDiscardPoc);
-  // let isPocDeclarerOrDummy = (poc, declarer) => {
-  //   switch (poc) {
-  //     | "North" | "South" => declarer === "North" || declarer === "South" ? true : false
-  //     | "East" | "West" => declarer === "East" || declarer === "West" ? true : false
-  //     | _ => false
-  //   }
-  // };
-  // let declarerTrickIncrement = 
-  //   isPocDeclarerOrDummy(winningDiscardPoc, Shuffle.pocAsString(scoreSheetRecord.contractDeclarer))
-  //   ?
-  //   1
-  //   :
-  //   0
-  // ;
-  //Js.log("declarerTrickIncrement:");
-  //Js.log(declarerTrickIncrement);
-  //let totalTricksNorthSouthIncrement = 0;
-  //let totalTricksWestEastIncrement = 0;
   let totalTricksNorthSouthIncrement =
-    // (
-    //   scoreSheetRecord.contractDeclarer === Some("North")
-    //   ||
-    //   scoreSheetRecord.contractDeclarer === Some("South")
-    // )
-    // &&
     (
       winningDiscardPoc === "North"
       ||
@@ -107,12 +76,6 @@ let execute = (state: TopLevel.state) => {
     0
   ;
   let totalTricksWestEastIncrement =
-    // (
-    //   scoreSheetRecord.contractDeclarer === Some("West")
-    //   ||
-    //   scoreSheetRecord.contractDeclarer === Some("East")
-    // )
-    // &&
     (
       winningDiscardPoc === "West"
       ||
@@ -136,9 +99,7 @@ let execute = (state: TopLevel.state) => {
       totalTricksNorthSouth: chicagoScoreSheetHead.totalTricksNorthSouth + totalTricksNorthSouthIncrement,
       totalTricksWestEast: chicagoScoreSheetHead.totalTricksWestEast + totalTricksWestEastIncrement
     }
-  // now we must check for end of round/deal by looking for countOfCardsWithLifecycleTrick = 48
-  //let countOfCardsWithLifecycleTrick = Belt.Array.length(Belt.Array.keep(state.pack, x => x.lifecycle === Discard));
-  // use discardIndex as this is really a cards clicked counter and more robust
+  // now we must check for end of round/deal using discardIndex
   let myChicagoScoreSheetRecordWithOptionalScore =
     if (
       state.discardIndex === 51 
