@@ -177,10 +177,28 @@ let execute = (state: TopLevel.state) => {
   // so we do not need that constraint
   // conditional end-of-round update to poc signified by discardIndex = 51
   let endOfDealNextPoc = Shuffle.getNextPointOfCompass(state.dealer);
+  // conditional end-of-round subtotal occurs on discardIndex = 51 and Vuln = "All"
+  let chicagoScoreSheetRecordSubTotal: Chicago.chicagoScoreSheetRecord = {
+    vulnerable: "",
+    contractLevel: None,
+    contractSuit: None,
+    contractDeclarer: None,
+    isDoubled: false,
+    isRedoubled: false,
+    totalTricksNorthSouth: 0,
+    scoreNorthSouth: Some(999),
+    totalTricksWestEast: 0,
+    scoreWestEast: Some(888)
+  };
   {
     ...state, 
     activePointOfCompass: state.discardIndex !== 51 ? Some(winningDiscardPoc) : Some(endOfDealNextPoc),
-    chicagoScoreSheet: [myChicagoScoreSheetRecordWithOptionalScore, ...chicagoScoreSheetTail],
+    chicagoScoreSheet: 
+      state.discardIndex !==51 || scoreSheetRecord.vulnerable !== "All" 
+      ? 
+      [myChicagoScoreSheetRecordWithOptionalScore, ...chicagoScoreSheetTail]
+      :
+      [chicagoScoreSheetRecordSubTotal, myChicagoScoreSheetRecordWithOptionalScore, ...chicagoScoreSheetTail],
     dealer: state.discardIndex !== 51 ? state.dealer : Some(endOfDealNextPoc),
     declarer: state.discardIndex !== 51 ? state.declarer : None,
     isReviewDealVisible: state.discardIndex !== 51 ? false : true,

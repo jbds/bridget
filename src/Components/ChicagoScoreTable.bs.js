@@ -113,13 +113,13 @@ function ChicagoScoreTable(Props) {
                                 }
                               };
                               var n = x.contractLevel;
-                              var textValue = n !== undefined ? getLevelPlusPossibleNT(n) : "Err";
+                              var textValue = n !== undefined ? getLevelPlusPossibleNT(n) : "";
                               return React.createElement("tr", {
                                           key: String(Random.$$int(1000000)),
                                           style: {
                                             backgroundColor: "white"
                                           }
-                                        }, React.createElement("td", undefined, x.vulnerable), React.createElement("td", undefined, $$String.sub(Shuffle$ReasonReactExamples.pocAsString(x.contractDeclarer), 0, 1)), React.createElement("td", undefined, React.createElement(ChicagoBidTableCell$ReasonReactExamples.make, {
+                                        }, React.createElement("td", undefined, x.vulnerable), React.createElement("td", undefined, x.contractDeclarer === undefined ? "" : $$String.sub(Shuffle$ReasonReactExamples.pocAsString(x.contractDeclarer), 0, 1)), React.createElement("td", undefined, React.createElement(ChicagoBidTableCell$ReasonReactExamples.make, {
                                                   textValue: textValue,
                                                   denominationValue: denominationValue,
                                                   denominationColor: denominationColor,

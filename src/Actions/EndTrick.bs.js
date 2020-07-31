@@ -124,10 +124,27 @@ function execute(state) {
   return {
           activePointOfCompass: state.discardIndex !== 51 ? winningDiscardPoc : endOfDealNextPoc,
           bids: state.bids,
-          chicagoScoreSheet: /* :: */[
-            myChicagoScoreSheetRecordWithOptionalScore,
-            chicagoScoreSheetTail
-          ],
+          chicagoScoreSheet: state.discardIndex !== 51 || scoreSheetRecord.vulnerable !== "All" ? /* :: */[
+              myChicagoScoreSheetRecordWithOptionalScore,
+              chicagoScoreSheetTail
+            ] : /* :: */[
+              {
+                vulnerable: "",
+                contractLevel: undefined,
+                contractSuit: undefined,
+                contractDeclarer: undefined,
+                isDoubled: false,
+                isRedoubled: false,
+                totalTricksNorthSouth: 0,
+                scoreNorthSouth: 999,
+                totalTricksWestEast: 0,
+                scoreWestEast: 888
+              },
+              /* :: */[
+                myChicagoScoreSheetRecordWithOptionalScore,
+                chicagoScoreSheetTail
+              ]
+            ],
           dealer: state.discardIndex !== 51 ? state.dealer : endOfDealNextPoc,
           dealIndex: state.dealIndex,
           declarer: state.discardIndex !== 51 ? state.declarer : undefined,

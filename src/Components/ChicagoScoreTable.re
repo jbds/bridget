@@ -123,13 +123,20 @@ let make = (~state: TopLevel.state) => {
           };
           let textValue = 
             switch (x.contractLevel) {
-              | None => "Err"
+              | None => ""
               | Some(n) => getLevelPlusPossibleNT(n)
             };
           <tr key={string_of_int(Random.int(1000000))} style=(ReactDOMRe.Style.make(~backgroundColor={"white"}, ()))>
             <td>{React.string(x.vulnerable)}</td>
-            <td>{React.string(String.sub(Shuffle.pocAsString(x.contractDeclarer), 0, 1))}</td>
-            //<td>{React.string(Shuffle.optionIntAsString(x.contractLevel))}</td>
+            <td>
+              {
+                x.contractDeclarer === None 
+                ? 
+                React.string("") 
+                : 
+                React.string(String.sub(Shuffle.pocAsString(x.contractDeclarer), 0, 1))
+              }
+            </td>
             <td>
               <ChicagoBidTableCell 
                 textValue=textValue
