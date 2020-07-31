@@ -9,7 +9,7 @@ function ChicagoBidTableCell(Props) {
   var suffixTextValue = Props.suffixTextValue;
   return React.createElement("div", undefined, React.createElement("span", {
                   style: {
-                    color: "#404040"
+                    color: "#606060"
                   }
                 }, textValue), React.createElement("span", {
                   style: {
@@ -17,7 +17,7 @@ function ChicagoBidTableCell(Props) {
                   }
                 }, denominationValue), React.createElement("span", {
                   style: {
-                    color: "#404040"
+                    color: "#606060"
                   }
                 }, suffixTextValue));
 }

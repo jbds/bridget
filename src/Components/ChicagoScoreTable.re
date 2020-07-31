@@ -106,10 +106,10 @@ let make = (~state: TopLevel.state) => {
           let denominationColor = {
             switch (x.contractSuit) {
               | None => "white"
-              | Some("Clubs") => "#404040"
-              | Some("Diamonds") => "red"
-              | Some("Hearts") => "red"
-              | Some("Spades") => "#404040"
+              | Some("Clubs") => "#606060"
+              | Some("Diamonds") => "#FF0000A0"
+              | Some("Hearts") => "#FF0000A0"
+              | Some("Spades") => "#606060"
               | Some("NoTrumps") => "white"
               | Some(_) => "white"
             }
@@ -126,7 +126,7 @@ let make = (~state: TopLevel.state) => {
               | None => ""
               | Some(n) => getLevelPlusPossibleNT(n)
             };
-          <tr key={string_of_int(Random.int(1000000))} style=(ReactDOMRe.Style.make(~backgroundColor={"white"}, ()))>
+          <tr key={string_of_int(Random.int(1000000))} style=(ReactDOMRe.Style.make(~backgroundColor={"white"}, ~color="#606060", ()))>
             <td
               style=(ReactDOMRe.Style.make(~backgroundColor={
                 (x.vulnerable !== "") 
@@ -194,7 +194,13 @@ let make = (~state: TopLevel.state) => {
               //   "white" 
               //   : 
               //   "#f0f0f0"}, ()))    
-              style=(ReactDOMRe.Style.make(~textAlign={"right"}, ~paddingRight={"1vh"}, ()))   
+              style=(ReactDOMRe.Style.make(
+                ~textAlign={"right"}, 
+                ~paddingRight={"1vh"}, 
+                ~color={x.vulnerable !== "" ? "#606060" : "#000000"},
+                ()
+                )
+              )   
             >
               {React.string(Shuffle.optionIntAsString(x.scoreNorthSouth))}
             </td>
@@ -214,7 +220,13 @@ let make = (~state: TopLevel.state) => {
               }
             </td>
             <td
-              style=(ReactDOMRe.Style.make(~textAlign={"right"}, ~paddingRight={"1vh"}, ()))   
+              style=(ReactDOMRe.Style.make(
+                ~textAlign={"right"}, 
+                ~paddingRight={"1vh"}, 
+                ~color={x.vulnerable !== "" ? "#606060" : "#000000"},
+                ()
+                )
+              )   
             >
               {React.string(Shuffle.optionIntAsString(x.scoreWestEast))}
             </td>

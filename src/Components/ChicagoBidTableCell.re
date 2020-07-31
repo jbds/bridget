@@ -31,7 +31,7 @@ let make = (
         style=(
           ReactDOMRe.Style.make(
             //~color={textColor},
-            ~color={"#404040"},
+            ~color={"#606060"},
             ()
           )
         )
@@ -58,7 +58,7 @@ let make = (
         style=(
           ReactDOMRe.Style.make(
             //~color={textColor},
-            ~color={"#404040"},
+            ~color={"#606060"},
             ()
           )
         )

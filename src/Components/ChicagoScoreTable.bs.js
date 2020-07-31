@@ -90,14 +90,14 @@ function ChicagoScoreTable(Props) {
                                 switch (match$1) {
                                   case "Diamonds" :
                                   case "Hearts" :
-                                      denominationColor = "red";
+                                      denominationColor = "#FF0000A0";
                                       break;
                                   case "NoTrumps" :
                                       denominationColor = "white";
                                       break;
                                   case "Clubs" :
                                   case "Spades" :
-                                      denominationColor = "#404040";
+                                      denominationColor = "#606060";
                                       break;
                                   default:
                                     denominationColor = "white";
@@ -119,7 +119,8 @@ function ChicagoScoreTable(Props) {
                               return React.createElement("tr", {
                                           key: String(Random.$$int(1000000)),
                                           style: {
-                                            backgroundColor: "white"
+                                            backgroundColor: "white",
+                                            color: "#606060"
                                           }
                                         }, React.createElement("td", {
                                               style: {
@@ -146,6 +147,7 @@ function ChicagoScoreTable(Props) {
                                               }
                                             }, n$1 !== undefined ? String(n$1) : ""), React.createElement("td", {
                                               style: {
+                                                color: x.vulnerable !== "" ? "#606060" : "#000000",
                                                 paddingRight: "1vh",
                                                 textAlign: "right"
                                               }
@@ -155,6 +157,7 @@ function ChicagoScoreTable(Props) {
                                               }
                                             }, n$2 !== undefined ? String(n$2) : ""), React.createElement("td", {
                                               style: {
+                                                color: x.vulnerable !== "" ? "#606060" : "#000000",
                                                 paddingRight: "1vh",
                                                 textAlign: "right"
                                               }
