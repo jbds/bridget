@@ -32,19 +32,19 @@ let make = (~state: TopLevel.state) => {
           (React.string("Bid"))
         </td>
         <td style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"6.5vh"}, ()))>
-          (React.string("N-S Tricks"))
+          (React.string("NS Tricks"))
         </td>
         <td style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"6.5vh"}, ()))>
-          (React.string("N-S Score"))
+          (React.string("NS Score"))
         </td>
         <td style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"6.5vh"}, ()))>
-          (React.string("E-W Tricks"))
+          (React.string("EW Tricks"))
         </td>
         <td 
           style=(ReactDOMRe.Style.make(~padding={"1vh 0vh 1vh 0vh"}, ~width={"6.5vh"}, ()))
         >
           //(React.string("E-W" ++ {js|\u0026\u006c\u0074\u003b\u0062\u0072\u002f\u0026\u0067\u0074\u003b|js} ++"Score"))
-          (React.string("E-W Score"))
+          (React.string("EW Score"))
         </td>
       </tr>
       // some example rows
@@ -127,8 +127,24 @@ let make = (~state: TopLevel.state) => {
               | Some(n) => getLevelPlusPossibleNT(n)
             };
           <tr key={string_of_int(Random.int(1000000))} style=(ReactDOMRe.Style.make(~backgroundColor={"white"}, ()))>
-            <td>{React.string(x.vulnerable)}</td>
-            <td>
+            <td
+              style=(ReactDOMRe.Style.make(~backgroundColor={
+                (x.vulnerable !== "") 
+                ? 
+                "white" 
+                : 
+                "#f0f0f0"}, ()))            
+            >
+              {React.string(x.vulnerable)}
+            </td>
+            <td
+              style=(ReactDOMRe.Style.make(~backgroundColor={
+                (x.vulnerable !== "") 
+                ? 
+                "white" 
+                : 
+                "#f0f0f0"}, ()))            
+            >
               {
                 x.contractDeclarer === None 
                 ? 
@@ -137,7 +153,14 @@ let make = (~state: TopLevel.state) => {
                 React.string(String.sub(Shuffle.pocAsString(x.contractDeclarer), 0, 1))
               }
             </td>
-            <td>
+            <td
+              style=(ReactDOMRe.Style.make(~backgroundColor={
+                (x.vulnerable !== "") 
+                ? 
+                "white" 
+                : 
+                "#f0f0f0"}, ()))            
+            >
               <ChicagoBidTableCell 
                 textValue=textValue
                 denominationValue=denominationValue
@@ -145,7 +168,21 @@ let make = (~state: TopLevel.state) => {
                 suffixTextValue={x.isDoubled ? "x" : (x.isRedoubled ? "xx" : "")}
               />
             </td>
-            <td>{React.string(string_of_int(x.totalTricksNorthSouth))}</td>
+            <td
+              style=(ReactDOMRe.Style.make(~backgroundColor={
+                (x.vulnerable !== "") 
+                ? 
+                "white" 
+                : 
+                "#f0f0f0"}, ()))            
+            >
+              {
+                switch (x.totalTricksNorthSouth) {
+                  | None => React.string("")
+                  | Some(n) => React.string(string_of_int(n))
+                }
+              }
+            </td>
             <td
               // style=(ReactDOMRe.Style.make(~backgroundColor={
               //   (x.contractDeclarer === Some("North")) 
@@ -156,22 +193,28 @@ let make = (~state: TopLevel.state) => {
               //   ? 
               //   "white" 
               //   : 
-              //   "#f0f0f0"}, ()))            
+              //   "#f0f0f0"}, ()))    
+              style=(ReactDOMRe.Style.make(~textAlign={"right"}, ~paddingRight={"1vh"}, ()))   
             >
               {React.string(Shuffle.optionIntAsString(x.scoreNorthSouth))}
             </td>
-            <td>{React.string(string_of_int(x.totalTricksWestEast))}</td>
             <td
-              // style=(ReactDOMRe.Style.make(~backgroundColor={
-              //   (x.contractDeclarer === Some("West")) 
-              //   || 
-              //   (x.contractDeclarer === Some("East"))
-              //   ||
-              //   (x.scoreNorthSouth === None)
-              //   ? 
-              //   "white" 
-              //   : 
-              //   "#f0f0f0"}, ()))            
+              style=(ReactDOMRe.Style.make(~backgroundColor={
+                (x.vulnerable !== "") 
+                ? 
+                "white" 
+                : 
+                "#f0f0f0"}, ()))            
+            >
+              {
+                switch (x.totalTricksWestEast) {
+                  | None => React.string("")
+                  | Some(n) => React.string(string_of_int(n))
+                }
+              }
+            </td>
+            <td
+              style=(ReactDOMRe.Style.make(~textAlign={"right"}, ~paddingRight={"1vh"}, ()))   
             >
               {React.string(Shuffle.optionIntAsString(x.scoreWestEast))}
             </td>

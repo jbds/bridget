@@ -43,22 +43,22 @@ function ChicagoScoreTable(Props) {
                                   padding: "1vh 0vh 1vh 0vh",
                                   width: "6.5vh"
                                 }
-                              }, "N-S Tricks"), React.createElement("td", {
+                              }, "NS Tricks"), React.createElement("td", {
                                 style: {
                                   padding: "1vh 0vh 1vh 0vh",
                                   width: "6.5vh"
                                 }
-                              }, "N-S Score"), React.createElement("td", {
+                              }, "NS Score"), React.createElement("td", {
                                 style: {
                                   padding: "1vh 0vh 1vh 0vh",
                                   width: "6.5vh"
                                 }
-                              }, "E-W Tricks"), React.createElement("td", {
+                              }, "EW Tricks"), React.createElement("td", {
                                 style: {
                                   padding: "1vh 0vh 1vh 0vh",
                                   width: "6.5vh"
                                 }
-                              }, "E-W Score")), Belt_Array.map(Belt_List.toArray(Belt_List.reverse(state.chicagoScoreSheet)), (function (x) {
+                              }, "EW Score")), Belt_Array.map(Belt_List.toArray(Belt_List.reverse(state.chicagoScoreSheet)), (function (x) {
                               var match = x.contractSuit;
                               var denominationValue;
                               if (match !== undefined) {
@@ -114,19 +114,51 @@ function ChicagoScoreTable(Props) {
                               };
                               var n = x.contractLevel;
                               var textValue = n !== undefined ? getLevelPlusPossibleNT(n) : "";
+                              var n$1 = x.totalTricksNorthSouth;
+                              var n$2 = x.totalTricksWestEast;
                               return React.createElement("tr", {
                                           key: String(Random.$$int(1000000)),
                                           style: {
                                             backgroundColor: "white"
                                           }
-                                        }, React.createElement("td", undefined, x.vulnerable), React.createElement("td", undefined, x.contractDeclarer === undefined ? "" : $$String.sub(Shuffle$ReasonReactExamples.pocAsString(x.contractDeclarer), 0, 1)), React.createElement("td", undefined, React.createElement(ChicagoBidTableCell$ReasonReactExamples.make, {
+                                        }, React.createElement("td", {
+                                              style: {
+                                                backgroundColor: x.vulnerable !== "" ? "white" : "#f0f0f0"
+                                              }
+                                            }, x.vulnerable), React.createElement("td", {
+                                              style: {
+                                                backgroundColor: x.vulnerable !== "" ? "white" : "#f0f0f0"
+                                              }
+                                            }, x.contractDeclarer === undefined ? "" : $$String.sub(Shuffle$ReasonReactExamples.pocAsString(x.contractDeclarer), 0, 1)), React.createElement("td", {
+                                              style: {
+                                                backgroundColor: x.vulnerable !== "" ? "white" : "#f0f0f0"
+                                              }
+                                            }, React.createElement(ChicagoBidTableCell$ReasonReactExamples.make, {
                                                   textValue: textValue,
                                                   denominationValue: denominationValue,
                                                   denominationColor: denominationColor,
                                                   suffixTextValue: x.isDoubled ? "x" : (
                                                       x.isRedoubled ? "xx" : ""
                                                     )
-                                                })), React.createElement("td", undefined, String(x.totalTricksNorthSouth)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreNorthSouth)), React.createElement("td", undefined, String(x.totalTricksWestEast)), React.createElement("td", undefined, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreWestEast)));
+                                                })), React.createElement("td", {
+                                              style: {
+                                                backgroundColor: x.vulnerable !== "" ? "white" : "#f0f0f0"
+                                              }
+                                            }, n$1 !== undefined ? String(n$1) : ""), React.createElement("td", {
+                                              style: {
+                                                paddingRight: "1vh",
+                                                textAlign: "right"
+                                              }
+                                            }, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreNorthSouth)), React.createElement("td", {
+                                              style: {
+                                                backgroundColor: x.vulnerable !== "" ? "white" : "#f0f0f0"
+                                              }
+                                            }, n$2 !== undefined ? String(n$2) : ""), React.createElement("td", {
+                                              style: {
+                                                paddingRight: "1vh",
+                                                textAlign: "right"
+                                              }
+                                            }, Shuffle$ReasonReactExamples.optionIntAsString(x.scoreWestEast)));
                             })))));
   }
 }

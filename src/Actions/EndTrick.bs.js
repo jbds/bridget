@@ -59,15 +59,17 @@ function execute(state) {
   var totalTricksWestEastIncrement = winningDiscardPoc === "West" || winningDiscardPoc === "East" ? 1 : 0;
   var chicagoScoreSheetHead = Belt_List.headExn(state.chicagoScoreSheet);
   var chicagoScoreSheetTail = Belt_List.tailExn(state.chicagoScoreSheet);
+  var n = chicagoScoreSheetHead.totalTricksNorthSouth;
+  var n$1 = chicagoScoreSheetHead.totalTricksWestEast;
   var myChicagoScoreSheetRecord_vulnerable = chicagoScoreSheetHead.vulnerable;
   var myChicagoScoreSheetRecord_contractLevel = chicagoScoreSheetHead.contractLevel;
   var myChicagoScoreSheetRecord_contractSuit = chicagoScoreSheetHead.contractSuit;
   var myChicagoScoreSheetRecord_contractDeclarer = chicagoScoreSheetHead.contractDeclarer;
   var myChicagoScoreSheetRecord_isDoubled = chicagoScoreSheetHead.isDoubled;
   var myChicagoScoreSheetRecord_isRedoubled = chicagoScoreSheetHead.isRedoubled;
-  var myChicagoScoreSheetRecord_totalTricksNorthSouth = chicagoScoreSheetHead.totalTricksNorthSouth + totalTricksNorthSouthIncrement | 0;
+  var myChicagoScoreSheetRecord_totalTricksNorthSouth = n !== undefined ? n + totalTricksNorthSouthIncrement | 0 : undefined;
   var myChicagoScoreSheetRecord_scoreNorthSouth = chicagoScoreSheetHead.scoreNorthSouth;
-  var myChicagoScoreSheetRecord_totalTricksWestEast = chicagoScoreSheetHead.totalTricksWestEast + totalTricksWestEastIncrement | 0;
+  var myChicagoScoreSheetRecord_totalTricksWestEast = n$1 !== undefined ? n$1 + totalTricksWestEastIncrement | 0 : undefined;
   var myChicagoScoreSheetRecord_scoreWestEast = chicagoScoreSheetHead.scoreWestEast;
   var myChicagoScoreSheetRecord = {
     vulnerable: myChicagoScoreSheetRecord_vulnerable,
@@ -89,7 +91,15 @@ function execute(state) {
     var isVulnerable = scoreSheetRecord.vulnerable === "None" ? false : (
         (scoreSheetRecord.vulnerable === "N" || scoreSheetRecord.vulnerable === "S") && (scoreSheetRecord.contractDeclarer === "North" || scoreSheetRecord.contractDeclarer === "South") || (scoreSheetRecord.vulnerable === "W" || scoreSheetRecord.vulnerable === "E") && (scoreSheetRecord.contractDeclarer === "West" || scoreSheetRecord.contractDeclarer === "East") ? true : scoreSheetRecord.vulnerable === "All"
       );
-    var scoreLookup = Chicago$ReasonReactExamples.getScore(Shuffle$ReasonReactExamples.optionIntAsInt(scoreSheetRecord.contractLevel), myScoreLookupDenomination, scoreSheetRecord.contractDeclarer === "North" || scoreSheetRecord.contractDeclarer === "South" ? chicagoScoreSheetHead.totalTricksNorthSouth + totalTricksNorthSouthIncrement | 0 : chicagoScoreSheetHead.totalTricksWestEast + totalTricksWestEastIncrement | 0, isVulnerable, false, false);
+    var tmp;
+    if (scoreSheetRecord.contractDeclarer === "North" || scoreSheetRecord.contractDeclarer === "South") {
+      var n$2 = chicagoScoreSheetHead.totalTricksNorthSouth;
+      tmp = n$2 !== undefined ? n$2 + totalTricksNorthSouthIncrement | 0 : -1;
+    } else {
+      var n$3 = chicagoScoreSheetHead.totalTricksWestEast;
+      tmp = n$3 !== undefined ? n$3 + totalTricksWestEastIncrement | 0 : -1;
+    }
+    var scoreLookup = Chicago$ReasonReactExamples.getScore(Shuffle$ReasonReactExamples.optionIntAsInt(scoreSheetRecord.contractLevel), myScoreLookupDenomination, tmp, isVulnerable, false, false);
     myChicagoScoreSheetRecordWithOptionalScore = {
       vulnerable: myChicagoScoreSheetRecord_vulnerable,
       contractLevel: myChicagoScoreSheetRecord_contractLevel,
@@ -135,9 +145,9 @@ function execute(state) {
                 contractDeclarer: undefined,
                 isDoubled: false,
                 isRedoubled: false,
-                totalTricksNorthSouth: 0,
+                totalTricksNorthSouth: undefined,
                 scoreNorthSouth: 999,
-                totalTricksWestEast: 0,
+                totalTricksWestEast: undefined,
                 scoreWestEast: 888
               },
               /* :: */[

@@ -376,9 +376,9 @@ let reducer = (state: TopLevel.state, action) => {
               let contractPoc = bidRecordOfInterest2.contractPointOfCompass;
               let isDoubled = (bidRecordOfInterest1.contractLevel === None) && (bidRecordOfInterest1.isDoubled === true);
               let isRedoubled = (bidRecordOfInterest1.contractLevel === None) && (bidRecordOfInterest1.isRedoubled === true);
-              let totalTricksNorthSouth = 0;
+              let totalTricksNorthSouth = None;
               let scoreNorthSouth = None;
-              let totalTricksWestEast = 0;
+              let totalTricksWestEast = None;
               let scoreWestEast = None;
               let bidsFilteredBySuitAnd2Poc = Belt.List.keep(state.bids, x => {
                 x.contractSuit == contractSuit && (

@@ -96,8 +96,16 @@ let execute = (state: TopLevel.state) => {
   let myChicagoScoreSheetRecord = 
     {
       ...chicagoScoreSheetHead, 
-      totalTricksNorthSouth: chicagoScoreSheetHead.totalTricksNorthSouth + totalTricksNorthSouthIncrement,
-      totalTricksWestEast: chicagoScoreSheetHead.totalTricksWestEast + totalTricksWestEastIncrement
+      totalTricksNorthSouth: 
+        switch (chicagoScoreSheetHead.totalTricksNorthSouth) {
+          | None => None 
+          | Some(n) => Some(n + totalTricksNorthSouthIncrement)
+        },
+      totalTricksWestEast: 
+        switch (chicagoScoreSheetHead.totalTricksWestEast) {
+          | None => None 
+          | Some(n) => Some(n + totalTricksWestEastIncrement)
+        }
     }
   // now we must check for end of round/deal using discardIndex
   let myChicagoScoreSheetRecordWithOptionalScore =
@@ -142,9 +150,19 @@ let execute = (state: TopLevel.state) => {
           || 
           (scoreSheetRecord.contractDeclarer === Some("South"))
           ?
-          chicagoScoreSheetHead.totalTricksNorthSouth + totalTricksNorthSouthIncrement
+          (
+            switch (chicagoScoreSheetHead.totalTricksNorthSouth) {
+              | None => -1 
+              | Some(n) => n + totalTricksNorthSouthIncrement
+            }
+          )
           :
-          chicagoScoreSheetHead.totalTricksWestEast + totalTricksWestEastIncrement,
+          (
+            switch (chicagoScoreSheetHead.totalTricksWestEast) {
+              | None => -1 
+              | Some(n) => n + totalTricksWestEastIncrement
+            }
+          ),
         ~isVulnerable = isVulnerable,
         ~isDoubled = false, // TO DO
         ~isRedoubled = false // TO DO
@@ -185,9 +203,9 @@ let execute = (state: TopLevel.state) => {
     contractDeclarer: None,
     isDoubled: false,
     isRedoubled: false,
-    totalTricksNorthSouth: 0,
+    totalTricksNorthSouth: None,
     scoreNorthSouth: Some(999),
-    totalTricksWestEast: 0,
+    totalTricksWestEast: None,
     scoreWestEast: Some(888)
   };
   {

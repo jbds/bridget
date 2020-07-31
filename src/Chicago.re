@@ -13,16 +13,16 @@ type bids = list(bid);
 
 // type defs for score sheet
 type chicagoScoreSheetRecord = {
-  vulnerable: string,               // "None", "Dealer", "Dealer", "All" modulo 4
-  contractLevel: option(int),       // None | Some (1,2,3,4,5,6,7)
-  contractSuit: option(string),     // None | Some("Clubs", "Diamonds", "Hearts", "Spades", "NoTrumps")
-  contractDeclarer: option(string), // None | Some("North", "East", "South", "West")
+  vulnerable: string,                 // "None", "Dealer", "Dealer", "All" modulo 4
+  contractLevel: option(int),         // None | Some (1,2,3,4,5,6,7)
+  contractSuit: option(string),       // None | Some("Clubs", "Diamonds", "Hearts", "Spades", "NoTrumps")
+  contractDeclarer: option(string),   // None | Some("North", "East", "South", "West")
   isDoubled: bool,
   isRedoubled: bool,
-  totalTricksNorthSouth: int,       // 0 thru 13
-  scoreNorthSouth: option(int),     // calculated using Chicago.getScore if Declarer "North" or "South"
-  totalTricksWestEast: int,         // 0 thru 13
-  scoreWestEast: option(int)        // calculated using Chicago.getScore if Declarer "West" or "East"
+  totalTricksNorthSouth: option(int), // None | Some(0 thru 13) 
+  scoreNorthSouth: option(int),       // calculated using Chicago.getScore if Declarer "North" or "South"
+  totalTricksWestEast: option(int),   // None | Some(0 thru 13) 
+  scoreWestEast: option(int)          // calculated using Chicago.getScore if Declarer "West" or "East"
 };
 
 type chicagoScoreSheet = list(chicagoScoreSheetRecord);

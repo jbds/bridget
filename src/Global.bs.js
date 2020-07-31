@@ -478,9 +478,9 @@ function reducer(state, action) {
                   contractDeclarer: contractDeclarer,
                   isDoubled: isDoubled,
                   isRedoubled: isRedoubled,
-                  totalTricksNorthSouth: 0,
+                  totalTricksNorthSouth: undefined,
                   scoreNorthSouth: undefined,
-                  totalTricksWestEast: 0,
+                  totalTricksWestEast: undefined,
                   scoreWestEast: undefined
                 };
                 return {
