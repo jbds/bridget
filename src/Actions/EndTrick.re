@@ -196,6 +196,17 @@ let execute = (state: TopLevel.state) => {
   // conditional end-of-round update to poc signified by discardIndex = 51
   let endOfDealNextPoc = Shuffle.getNextPointOfCompass(state.dealer);
   // conditional end-of-round subtotal occurs on discardIndex = 51 and Vuln = "All"
+  // helpers to get subtotals
+  let optionLast4ScoreSheetRecordsMinusLatest = chicagoScoreSheetTail -> Belt.List.take(3);
+  let last4ScoreSheetRecordsMinusLatest =
+    switch (optionLast4ScoreSheetRecordsMinusLatest) {
+      | None => [] //should never happen
+      | Some (arr) => arr
+    }
+  let last4ScoreSheetRecords = [myChicagoScoreSheetRecordWithOptionalScore, ...last4ScoreSheetRecordsMinusLatest];
+  Js.log("last4ScoreSheetRecords");
+  Js.log(last4ScoreSheetRecords);
+  //let scoreNorthSouth = 
   let chicagoScoreSheetRecordSubTotal: Chicago.chicagoScoreSheetRecord = {
     vulnerable: "",
     contractLevel: None,

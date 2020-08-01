@@ -131,6 +131,14 @@ function execute(state) {
           }
         }), state.pack);
   var endOfDealNextPoc = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.dealer);
+  var optionLast4ScoreSheetRecordsMinusLatest = Belt_List.take(chicagoScoreSheetTail, 3);
+  var last4ScoreSheetRecordsMinusLatest = optionLast4ScoreSheetRecordsMinusLatest !== undefined ? optionLast4ScoreSheetRecordsMinusLatest : /* [] */0;
+  var last4ScoreSheetRecords = /* :: */[
+    myChicagoScoreSheetRecordWithOptionalScore,
+    last4ScoreSheetRecordsMinusLatest
+  ];
+  console.log("last4ScoreSheetRecords");
+  console.log(last4ScoreSheetRecords);
   return {
           activePointOfCompass: state.discardIndex !== 51 ? winningDiscardPoc : endOfDealNextPoc,
           bids: state.bids,
