@@ -91,7 +91,9 @@ let make = () => {
   let isUndoVisible = () => {
     let localPlayer: string = [%bs.raw "window.userState.player"];
     let userPointOfCompassWrappedInArray = Belt.Array.keep(state.pointOfCompassAndPlayers, obj => {
-      obj.player === localPlayer && obj.pointOfCompass !== ""
+      // for debug, better to always allow undo whether player is seated or not
+      //obj.player === localPlayer && obj.pointOfCompass !== ""
+      obj.player === localPlayer 
     });
     Array.length(userPointOfCompassWrappedInArray) === 0 ? false : true;
   };

@@ -90,11 +90,7 @@ function App(Props) {
   var isUndoVisible = function (param) {
     var localPlayer = window.userState.player;
     var userPointOfCompassWrappedInArray = Belt_Array.keep(state.pointOfCompassAndPlayers, (function (obj) {
-            if (obj.player === localPlayer) {
-              return obj.pointOfCompass !== "";
-            } else {
-              return false;
-            }
+            return obj.player === localPlayer;
           }));
     return userPointOfCompassWrappedInArray.length !== 0;
   };
