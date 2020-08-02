@@ -8,7 +8,7 @@ let make = (~state: TopLevel.state, ~dispatch) => {
     <table
     style=(
       ReactDOMRe.Style.make(
-        ~color={"#26653B"}, 
+        ~color={"#404040"}, // was 26653B
         ~fontSize={"2.5vh"},
         ~fontFamily={"Trebuchet MS"},
         ~margin={"auto"},
@@ -81,10 +81,10 @@ let make = (~state: TopLevel.state, ~dispatch) => {
                 )
               )
             >
-              <ButtonStd dispatch action=AssignPlayer({pointOfCompass: {x.pointOfCompass === "West" ? "" : "West"}, player: x.player}) label="W" id={"btnW" ++ x.player} isActive={x.pointOfCompass == "West" ? true : false}/>
-              <ButtonStd dispatch action=AssignPlayer({pointOfCompass: {x.pointOfCompass === "North" ? "" : "North"}, player: x.player}) label="N" id={"btnN" ++ x.player} isActive={x.pointOfCompass == "North" ? true : false}/>
-              <ButtonStd dispatch action=AssignPlayer({pointOfCompass: {x.pointOfCompass === "East" ? "" : "East"}, player: x.player}) label="E" id={"btnE" ++ x.player} isActive={x.pointOfCompass == "East" ? true : false}/>
-              <ButtonStd dispatch action=AssignPlayer({pointOfCompass: {x.pointOfCompass === "South" ? "" : "South"}, player: x.player}) label="S" id={"btnS" ++ x.player} isActive={x.pointOfCompass == "South" ? true : false}/>
+              <ButtonStd color="#404040" dispatch action=AssignPlayer({pointOfCompass: {x.pointOfCompass === "West" ? "" : "West"}, player: x.player}) label="W" id={"btnW" ++ x.player} isActive={x.pointOfCompass == "West" ? true : false}/>
+              <ButtonStd color="#404040" dispatch action=AssignPlayer({pointOfCompass: {x.pointOfCompass === "North" ? "" : "North"}, player: x.player}) label="N" id={"btnN" ++ x.player} isActive={x.pointOfCompass == "North" ? true : false}/>
+              <ButtonStd color="#404040" dispatch action=AssignPlayer({pointOfCompass: {x.pointOfCompass === "East" ? "" : "East"}, player: x.player}) label="E" id={"btnE" ++ x.player} isActive={x.pointOfCompass == "East" ? true : false}/>
+              <ButtonStd color="#404040" dispatch action=AssignPlayer({pointOfCompass: {x.pointOfCompass === "South" ? "" : "South"}, player: x.player}) label="S" id={"btnS" ++ x.player} isActive={x.pointOfCompass == "South" ? true : false}/>
               <ButtonObserver dispatch action=AssignPlayer({pointOfCompass: {x.pointOfCompass === "Observer" ? "" : "Observer"}, player: x.player}) label="_" id={"btnO" ++ x.player} isActive={x.pointOfCompass == "Observer" ? true : false}/>
             </td>
           </tr>

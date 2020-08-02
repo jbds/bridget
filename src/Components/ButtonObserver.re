@@ -15,7 +15,8 @@ let make = (~dispatch: Global.action => unit, ~action: Global.action, ~label: st
         // bug - borderColor single attribute not recognised       
         ~border={"1px solid #26653B"}, 
         ~borderRadius={"5px"},
-        ~backgroundColor={isActive ? "#ffffff" : "#60806040"},
+        // green "#60806040" changed to #e0e0e0
+        ~backgroundColor={isActive ? "#ffffff" : "#e0e0e0"},
         ~backgroundImage={"url(assets/EyeSpikeyTransparent.png)"},
         ~backgroundRepeat={"no-repeat"},
         ~backgroundSize={"100% 100%"},

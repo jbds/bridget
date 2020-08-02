@@ -206,7 +206,31 @@ let execute = (state: TopLevel.state) => {
   let last4ScoreSheetRecords = [myChicagoScoreSheetRecordWithOptionalScore, ...last4ScoreSheetRecordsMinusLatest];
   Js.log("last4ScoreSheetRecords");
   Js.log(last4ScoreSheetRecords);
-  //let scoreNorthSouth = 
+  // could not get this to work!
+  //let scoreNorthSouth = last4ScoreSheetRecords -> Belt.List.reduce(Some(0), (scoreNorthSouth) => Some(0) + scoreNorthSouth);
+  // so use alternative std library
+  let scoreNorthSouth = List.fold_left(
+    (acc, x: Chicago.chicagoScoreSheetRecord) => {
+      acc + switch(x.scoreNorthSouth) {
+        | None => 0
+        | Some(n) => n
+      }
+    },
+    0,
+    last4ScoreSheetRecords
+  );
+  Js.log("scoreNorthSouth");
+  Js.log(scoreNorthSouth);
+  let scoreWestEast = List.fold_left(
+    (acc, x: Chicago.chicagoScoreSheetRecord) => {
+      acc + switch(x.scoreWestEast) {
+        | None => 0
+        | Some(n) => n
+      }
+    },
+    0,
+    last4ScoreSheetRecords
+  );
   let chicagoScoreSheetRecordSubTotal: Chicago.chicagoScoreSheetRecord = {
     vulnerable: "",
     contractLevel: None,
@@ -215,9 +239,9 @@ let execute = (state: TopLevel.state) => {
     isDoubled: false,
     isRedoubled: false,
     totalTricksNorthSouth: None,
-    scoreNorthSouth: Some(999),
+    scoreNorthSouth: Some(scoreNorthSouth),
     totalTricksWestEast: None,
-    scoreWestEast: Some(888)
+    scoreWestEast: Some(scoreWestEast)
   };
   {
     ...state, 

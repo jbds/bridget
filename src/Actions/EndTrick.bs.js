@@ -139,6 +139,34 @@ function execute(state) {
   ];
   console.log("last4ScoreSheetRecords");
   console.log(last4ScoreSheetRecords);
+  var scoreNorthSouth = List.fold_left((function (acc, x) {
+          var n = x.scoreNorthSouth;
+          return acc + (
+                  n !== undefined ? n : 0
+                ) | 0;
+        }), 0, last4ScoreSheetRecords);
+  console.log("scoreNorthSouth");
+  console.log(scoreNorthSouth);
+  var scoreWestEast = List.fold_left((function (acc, x) {
+          var n = x.scoreWestEast;
+          return acc + (
+                  n !== undefined ? n : 0
+                ) | 0;
+        }), 0, last4ScoreSheetRecords);
+  var chicagoScoreSheetRecordSubTotal_scoreNorthSouth = scoreNorthSouth;
+  var chicagoScoreSheetRecordSubTotal_scoreWestEast = scoreWestEast;
+  var chicagoScoreSheetRecordSubTotal = {
+    vulnerable: "",
+    contractLevel: undefined,
+    contractSuit: undefined,
+    contractDeclarer: undefined,
+    isDoubled: false,
+    isRedoubled: false,
+    totalTricksNorthSouth: undefined,
+    scoreNorthSouth: chicagoScoreSheetRecordSubTotal_scoreNorthSouth,
+    totalTricksWestEast: undefined,
+    scoreWestEast: chicagoScoreSheetRecordSubTotal_scoreWestEast
+  };
   return {
           activePointOfCompass: state.discardIndex !== 51 ? winningDiscardPoc : endOfDealNextPoc,
           bids: state.bids,
@@ -146,18 +174,7 @@ function execute(state) {
               myChicagoScoreSheetRecordWithOptionalScore,
               chicagoScoreSheetTail
             ] : /* :: */[
-              {
-                vulnerable: "",
-                contractLevel: undefined,
-                contractSuit: undefined,
-                contractDeclarer: undefined,
-                isDoubled: false,
-                isRedoubled: false,
-                totalTricksNorthSouth: undefined,
-                scoreNorthSouth: 999,
-                totalTricksWestEast: undefined,
-                scoreWestEast: 888
-              },
+              chicagoScoreSheetRecordSubTotal,
               /* :: */[
                 myChicagoScoreSheetRecordWithOptionalScore,
                 chicagoScoreSheetTail

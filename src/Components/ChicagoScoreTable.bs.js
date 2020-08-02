@@ -24,7 +24,8 @@ function ChicagoScoreTable(Props) {
                     }
                   }, React.createElement("thead", undefined), React.createElement("tbody", undefined, React.createElement("tr", {
                             style: {
-                              backgroundColor: "#f8f8f8"
+                              backgroundColor: "#f8f8f8",
+                              color: "#000000"
                             }
                           }, React.createElement("td", {
                                 style: {

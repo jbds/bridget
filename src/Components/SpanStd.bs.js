@@ -6,13 +6,15 @@ function SpanStd(Props) {
   var id = Props.id;
   var text = Props.text;
   var isWarningOpt = Props.isWarning;
+  var fontSizeOpt = Props.fontSize;
   var isWarning = isWarningOpt !== undefined ? isWarningOpt : false;
+  var fontSize = fontSizeOpt !== undefined ? fontSizeOpt : "2.0vh";
   return React.createElement(React.Fragment, undefined, React.createElement("span", {
                   id: id,
                   style: {
-                    color: isWarning ? "#C00000" : "#26653B",
+                    color: isWarning ? "#C00000" : "#404040",
                     fontFamily: "Trebuchet MS",
-                    fontSize: "2.0vh",
+                    fontSize: fontSize,
                     margin: "0vh",
                     textAlign: "center",
                     width: "10vh"

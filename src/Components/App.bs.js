@@ -204,16 +204,19 @@ function App(Props) {
                       state: state
                     })), React.createElement("div", {
                   id: "sidebar3"
-                }, React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
+                }, React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spnRandomInt",
-                      text: "Last action:"
+                      text: "Last action:",
+                      fontSize: "1.5vh"
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spnRILA",
-                      text: " "
+                      text: " ",
+                      fontSize: "1.5vh"
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spnLastAction",
                       text: state.lastAction,
-                      isWarning: state.lastAction === "Logout or Server Down"
+                      isWarning: state.lastAction === "Logout or Server Down",
+                      fontSize: "1.5vh"
                     })), React.createElement("div", {
                   id: "bidTable",
                   style: {

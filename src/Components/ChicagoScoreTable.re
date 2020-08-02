@@ -21,7 +21,7 @@ let make = (~state: TopLevel.state) => {
     <thead>
     </thead>
     <tbody>
-      <tr style=(ReactDOMRe.Style.make(~backgroundColor={"#f8f8f8"}, ()))>
+      <tr style=(ReactDOMRe.Style.make(~backgroundColor={"#f8f8f8"}, ~color={"#000000"}, ()))>
         <td style=(ReactDOMRe.Style.make(~padding={"1vh 1vh 1vh 1vh"}, ()))>
           (React.string("Vuln"))
         </td>

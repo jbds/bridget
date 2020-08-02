@@ -158,10 +158,9 @@ let make = () => {
     <ChicagoScoreTable state />
   </div>
   <div id="sidebar3">
-    <br/>
-    <SpanStd id="spnRandomInt" text="Last action:" />
-    <SpanStd id="spnRILA" text=" " />
-    <SpanStd id="spnLastAction" text={state.lastAction} isWarning={state.lastAction == "Logout or Server Down" ? true : false}/>
+    <SpanStd id="spnRandomInt" fontSize="1.5vh" text="Last action:" />
+    <SpanStd id="spnRILA" fontSize="1.5vh" text=" " />
+    <SpanStd id="spnLastAction" fontSize="1.5vh" text={state.lastAction} isWarning={state.lastAction == "Logout or Server Down" ? true : false}/>
   </div>
   <div 
     id="bidTable"

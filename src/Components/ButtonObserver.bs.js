@@ -12,7 +12,7 @@ function ButtonObserver(Props) {
   return React.createElement(React.Fragment, undefined, React.createElement("button", {
                   id: id,
                   style: {
-                    backgroundColor: isActive ? "#ffffff" : "#60806040",
+                    backgroundColor: isActive ? "#ffffff" : "#e0e0e0",
                     backgroundImage: "url(assets/EyeSpikeyTransparent.png)",
                     backgroundRepeat: "no-repeat",
                     border: "1px solid #26653B",

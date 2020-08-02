@@ -7,7 +7,7 @@ let make = (~id: string) => {
     //onChange=((_e) => Js.log("Changed input element"))
     style=(
       ReactDOMRe.Style.make(
-        ~color={"#808080"},
+        ~color={"#404040"},
         ~fontSize={"2.0vh"},
         ~height={"4.0vh"},
         ~fontFamily={"Trebuchet MS"},

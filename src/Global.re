@@ -334,7 +334,9 @@ let reducer = (state: TopLevel.state, action) => {
             let hd2 = List.hd(tl);
             if (hd1.isPass === true && hd2.isPass === true) {
               // get vulnerability based on number of scores so far
-              let vulnerable = switch(List.length(state.chicagoScoreSheet) mod 4)  {
+              // was mod 4 until subtotal row to account for
+              // now mod 5
+              let vulnerable = switch(List.length(state.chicagoScoreSheet) mod 5)  {
                 | 0 => "None"
                 | 1 => String.sub(Shuffle.pocAsString(state.dealer), 0, 1)
                 | 2 => String.sub(Shuffle.pocAsString(state.dealer), 0, 1)

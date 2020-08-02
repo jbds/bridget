@@ -9,7 +9,7 @@ function InputStd(Props) {
                   style: {
                     backgroundColor: "#FFFFFF",
                     border: "1px solid #26653B",
-                    color: "#808080",
+                    color: "#404040",
                     fontFamily: "Trebuchet MS",
                     fontSize: "2.0vh",
                     height: "4.0vh",

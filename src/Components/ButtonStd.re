@@ -7,6 +7,7 @@ let make = (
   ~isActive: bool=true,
   ~isVisible: bool=true,
   ~isWasteOfSpace: bool=false,
+  ~color: string = "#26653B"
   ) => {
   <>
     <button 
@@ -14,7 +15,7 @@ let make = (
     onClick=((_e) => dispatch(action)) //Js.log("Clicked shuffle"))
     style=(
       ReactDOMRe.Style.make(
-        ~color={"#26653B"}, 
+        ~color={color}, 
         ~fontSize={"2.0vh"},
         ~fontFamily={"Trebuchet MS"},
         ~height={"5.0vh"},
@@ -22,7 +23,9 @@ let make = (
         // bug - borderColor single attribute not recognised       
         ~border={"1px solid #26653B"}, 
         ~borderRadius={"5px"},
-        ~backgroundColor={isActive ? "#ffffff" : "#60806040"},
+        // inactive background color was 60806040 but too greeney
+        // try e0e0e0
+        ~backgroundColor={isActive ? "#ffffff" : "#e0e0e0"},
         ~display={isVisible ? "inline" : "none"},
         ~visibility={isWasteOfSpace ? "hidden" : "visible"},
         ()

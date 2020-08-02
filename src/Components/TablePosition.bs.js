@@ -16,7 +16,7 @@ function TablePosition(Props) {
                     style: {
                       border: "1px solid #800000",
                       borderCollapse: "collapse",
-                      color: "#26653B",
+                      color: "#404040",
                       fontFamily: "Trebuchet MS",
                       fontSize: "2.5vh",
                       margin: "auto",
@@ -57,7 +57,8 @@ function TablePosition(Props) {
                                                       }]),
                                                   label: "W",
                                                   id: "btnW" + x.player,
-                                                  isActive: x.pointOfCompass === "West"
+                                                  isActive: x.pointOfCompass === "West",
+                                                  color: "#404040"
                                                 }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                                                   dispatch: dispatch,
                                                   action: /* AssignPlayer */Block.__(0, [{
@@ -66,7 +67,8 @@ function TablePosition(Props) {
                                                       }]),
                                                   label: "N",
                                                   id: "btnN" + x.player,
-                                                  isActive: x.pointOfCompass === "North"
+                                                  isActive: x.pointOfCompass === "North",
+                                                  color: "#404040"
                                                 }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                                                   dispatch: dispatch,
                                                   action: /* AssignPlayer */Block.__(0, [{
@@ -75,7 +77,8 @@ function TablePosition(Props) {
                                                       }]),
                                                   label: "E",
                                                   id: "btnE" + x.player,
-                                                  isActive: x.pointOfCompass === "East"
+                                                  isActive: x.pointOfCompass === "East",
+                                                  color: "#404040"
                                                 }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                                                   dispatch: dispatch,
                                                   action: /* AssignPlayer */Block.__(0, [{
@@ -84,7 +87,8 @@ function TablePosition(Props) {
                                                       }]),
                                                   label: "S",
                                                   id: "btnS" + x.player,
-                                                  isActive: x.pointOfCompass === "South"
+                                                  isActive: x.pointOfCompass === "South",
+                                                  color: "#404040"
                                                 }), React.createElement(ButtonObserver$ReasonReactExamples.make, {
                                                   dispatch: dispatch,
                                                   action: /* AssignPlayer */Block.__(0, [{
