@@ -99,7 +99,7 @@ function execute(state) {
       var n$3 = chicagoScoreSheetHead.totalTricksWestEast;
       tmp = n$3 !== undefined ? n$3 + totalTricksWestEastIncrement | 0 : -1;
     }
-    var scoreLookup = Chicago$ReasonReactExamples.getScore(Shuffle$ReasonReactExamples.optionIntAsInt(scoreSheetRecord.contractLevel), myScoreLookupDenomination, tmp, isVulnerable, false, false);
+    var scoreLookup = Chicago$ReasonReactExamples.getScore(Shuffle$ReasonReactExamples.optionIntAsInt(scoreSheetRecord.contractLevel), myScoreLookupDenomination, tmp, isVulnerable, scoreSheetRecord.isDoubled, scoreSheetRecord.isRedoubled);
     myChicagoScoreSheetRecordWithOptionalScore = {
       vulnerable: myChicagoScoreSheetRecord_vulnerable,
       contractLevel: myChicagoScoreSheetRecord_contractLevel,

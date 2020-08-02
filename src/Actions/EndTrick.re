@@ -164,8 +164,8 @@ let execute = (state: TopLevel.state) => {
             }
           ),
         ~isVulnerable = isVulnerable,
-        ~isDoubled = false, // TO DO
-        ~isRedoubled = false // TO DO
+        ~isDoubled = scoreSheetRecord.isDoubled, //false, // TO DO
+        ~isRedoubled = scoreSheetRecord.isRedoubled //false // TO DO
       );
       // some redundancy here, possibility of a bug
       // state.declarer and contract.declarer SHOULD always be the same
