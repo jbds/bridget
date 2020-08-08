@@ -57,6 +57,10 @@ function execute(state) {
     );
   var totalTricksNorthSouthIncrement = winningDiscardPoc === "North" || winningDiscardPoc === "South" ? 1 : 0;
   var totalTricksWestEastIncrement = winningDiscardPoc === "West" || winningDiscardPoc === "East" ? 1 : 0;
+  console.log("totalTricksNorthSouthIncrement:");
+  console.log(totalTricksNorthSouthIncrement);
+  console.log("totalTricksWestEastIncrement:");
+  console.log(totalTricksWestEastIncrement);
   var chicagoScoreSheetHead = Belt_List.headExn(state.chicagoScoreSheet);
   var chicagoScoreSheetTail = Belt_List.tailExn(state.chicagoScoreSheet);
   var n = chicagoScoreSheetHead.totalTricksNorthSouth;
@@ -145,8 +149,6 @@ function execute(state) {
                   n !== undefined ? n : 0
                 ) | 0;
         }), 0, last4ScoreSheetRecords);
-  console.log("scoreNorthSouth");
-  console.log(scoreNorthSouth);
   var scoreWestEast = List.fold_left((function (acc, x) {
           var n = x.scoreWestEast;
           return acc + (

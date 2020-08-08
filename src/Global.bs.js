@@ -471,6 +471,8 @@ function reducer(state, action) {
                 var bidsFilteredBySuitAnd2PocReversed = Belt_List.reverse(bidsFilteredBySuitAnd2Poc);
                 var hd3 = List.hd(bidsFilteredBySuitAnd2PocReversed);
                 var contractDeclarer = hd3.contractPointOfCompass;
+                var chicagoScoreSheetRecord_totalTricksNorthSouth = 0;
+                var chicagoScoreSheetRecord_totalTricksWestEast = 0;
                 var chicagoScoreSheetRecord = {
                   vulnerable: vulnerable,
                   contractLevel: contractLevel,
@@ -478,9 +480,9 @@ function reducer(state, action) {
                   contractDeclarer: contractDeclarer,
                   isDoubled: isDoubled,
                   isRedoubled: isRedoubled,
-                  totalTricksNorthSouth: undefined,
+                  totalTricksNorthSouth: chicagoScoreSheetRecord_totalTricksNorthSouth,
                   scoreNorthSouth: undefined,
-                  totalTricksWestEast: undefined,
+                  totalTricksWestEast: chicagoScoreSheetRecord_totalTricksWestEast,
                   scoreWestEast: undefined
                 };
                 return {

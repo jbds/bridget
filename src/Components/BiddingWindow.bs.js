@@ -18,8 +18,6 @@ function BiddingWindow(Props) {
   var optionCurrentContractLevelBid = Belt_List.head(bidsListFilteredByContractLevel);
   var optionCurrentContractLevel = optionCurrentContractLevelBid !== undefined ? optionCurrentContractLevelBid.contractLevel : undefined;
   var currentContractLevel = optionCurrentContractLevel !== undefined ? optionCurrentContractLevel : 0;
-  console.log("currentContractLevel:");
-  console.log(currentContractLevel);
   var optionCurrentContractSuit = optionCurrentContractLevelBid !== undefined ? optionCurrentContractLevelBid.contractSuit : undefined;
   var currentContractSuitAsString = optionCurrentContractSuit !== undefined ? optionCurrentContractSuit : "";
   var currentContractSuitAsRank;

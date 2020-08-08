@@ -26,8 +26,8 @@ let make = (
       | None => 0
       | Some(n) => n
     };
-  Js.log("currentContractLevel:");
-  Js.log(currentContractLevel);
+  // Js.log("currentContractLevel:");
+  // Js.log(currentContractLevel);
   // we need currentContractSuit too
   let optionCurrentContractSuit =
     switch (optionCurrentContractLevelBid) {

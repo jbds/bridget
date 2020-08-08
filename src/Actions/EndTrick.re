@@ -86,10 +86,10 @@ let execute = (state: TopLevel.state) => {
     :
     0
   ;
-  //Js.log("totalTricksNorthSouthIncrement:");
-  //Js.log(totalTricksNorthSouthIncrement);
-  //Js.log("totalTricksWestEastIncrement:");
-  //Js.log(totalTricksWestEastIncrement);
+  Js.log("totalTricksNorthSouthIncrement:");
+  Js.log(totalTricksNorthSouthIncrement);
+  Js.log("totalTricksWestEastIncrement:");
+  Js.log(totalTricksWestEastIncrement);
   // prepare for the score sheet update - we only want to update the head of the list
   let chicagoScoreSheetHead = Belt.List.headExn(state.chicagoScoreSheet);
   let chicagoScoreSheetTail: Chicago.chicagoScoreSheet = Belt.List.tailExn(state.chicagoScoreSheet);
@@ -219,8 +219,8 @@ let execute = (state: TopLevel.state) => {
     0,
     last4ScoreSheetRecords
   );
-  Js.log("scoreNorthSouth");
-  Js.log(scoreNorthSouth);
+  // Js.log("scoreNorthSouth");
+  // Js.log(scoreNorthSouth);
   let scoreWestEast = List.fold_left(
     (acc, x: Chicago.chicagoScoreSheetRecord) => {
       acc + switch(x.scoreWestEast) {
@@ -231,6 +231,8 @@ let execute = (state: TopLevel.state) => {
     0,
     last4ScoreSheetRecords
   );
+  // Js.log("scoreWestEast");
+  // Js.log(scoreWestEast);
   let chicagoScoreSheetRecordSubTotal: Chicago.chicagoScoreSheetRecord = {
     vulnerable: "",
     contractLevel: None,
