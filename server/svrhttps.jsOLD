@@ -1,7 +1,5 @@
 'use strict';
 
-// Last update: 08/08/20
-
 const session = require('express-session');
 const express = require('express');
 const http = require('http');
@@ -38,12 +36,11 @@ let gameState = {
   declarer: undefined,
   discardIndex: -1,
   discardSuit: undefined,
-  handVisible: {north: false, east: false, south: false, west: false},
+  handVisible: {north: true, east: true, south: true, west: true},
   isBiddingCycle: false,
   isBiddingHideDenominationButtons: true,
   isDummyVisible: false,
   isRebootVisible: true,
-  isReviewDealVisible: false,
   lastAction: "None(fromServer) then LoginSync(client)",
   pack: [],
   pointOfCompassAndPlayers: [],
@@ -57,8 +54,6 @@ rebootGameState.pointOfCompassAndPlayers = [];
 // Undo requires an array of gameState objects, initialised to just the above
 let arrGameStates = [gameState];
 
-// ReviewDeal requires an array for pack
-let packAsDealt = [];
 
 // and a global function for rebroadcast, called by login and logout
 function broadcastGameStateToAll(gS){
@@ -277,12 +272,9 @@ wss.on('connection', function(ws, req) {
     //broadcastUserList();
 
     if (message === '"Undo"') {
-      console.log('Undo - check arrGameStates.length');
-      console.log(arrGameStates.length);
-      if(arrGameStates.length !== 0) {
-        gameState = arrGameStates.pop();
-        broadcastGameStateToAll(gameState);
-      }
+      //console.log('Undo not yet implemented')
+      gameState = arrGameStates.pop();
+      broadcastGameStateToAll(gameState);
     } else if (message === '"Reboot"') {
       console.log('about to Reboot, and broadcast to ALL');
       // destroy all history to free up memory
@@ -292,14 +284,6 @@ wss.on('connection', function(ws, req) {
       arrGameStates.length = 0;
       // shallow copy? - is good enough to make pointOfCompassAndPlayers = []
       gameState = JSON.parse(JSON.stringify(rebootGameState));
-      broadcastGameStateToAll(gameState);
-    } else if (message === '"StoreDeal"') {
-      // deepcopy array of objects
-      packAsDealt = JSON.parse(JSON.stringify(gameState.pack));
-    } else if (message === '"ReviewDeal"') {
-      // restore the pack
-      gameState.pack = packAsDealt;
-      gameState.handVisible = {north: true, east: true, south: true, west: true};
       broadcastGameStateToAll(gameState);
     } else {
       // push the state on to the history stack
