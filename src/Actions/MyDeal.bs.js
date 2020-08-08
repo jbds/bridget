@@ -2,6 +2,9 @@
 
 var Shuffle$ReasonReactExamples = require("../Shuffle.bs.js");
 
+var Online = require('../Online.bs');
+;
+
 function execute(state) {
   ((window.isLastActionSync = false));
   ((setTimeout(function(){Online.doMessage('StoreDeal');}, 750)));
@@ -28,4 +31,4 @@ function execute(state) {
 }
 
 exports.execute = execute;
-/* Shuffle-ReasonReactExamples Not a pure module */
+/*  Not a pure module */

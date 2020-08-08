@@ -1,3 +1,9 @@
+// Online used in execute below
+[%%raw {|
+  var Online = require('../Online.bs');
+|}];
+
+
 let execute = (state: TopLevel.state) => {
       // aka "New Deal" aka "My Deal"
       //Js.log("Action-Shuffle");
