@@ -75,7 +75,8 @@ function doLogin(myLoginNameValue) {
     return;
   }
   //fetch('http://98765.co.uk/login', {
-  fetch('https://98765.co.uk/login', {
+  //fetch('https://98765.co.uk/login', {
+  fetch(`https://${location.host}/login`, {
     method: 'POST',
     credentials: 'same-origin',
     headers: {
