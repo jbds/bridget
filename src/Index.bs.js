@@ -16,7 +16,7 @@ const setVh = () => {
   window.userState = {}; // prevent undefined error before p5 starts up
 
   // be certain we have the correct version of bundled file aka index.js
-  document.title = 'Bridget v0.33';
+  document.title = 'Bridget v0.34';
 ;
 
 ReactDOMRe.renderToElementWithId(React.createElement(App$ReasonReactExamples.make, { }), "root");
@@ -29,7 +29,7 @@ const P5Event = require('./P5Event');
 
 
 const callbackFunctionForP5 = (p) => {
-  // p5 library functions available via injected libary object p 
+  // p5 library functions available via injected libary object p
   // decalare all other variables specific to drawing process
   // as properies of a 'global' object g
   const g = {
@@ -123,7 +123,7 @@ const callbackFunctionForP5 = (p) => {
       player: "?"
     }
     // fetch default username from persistent store
-    document.getElementById('txtMyLoginName').value = 
+    document.getElementById('txtMyLoginName').value =
       localStorage.getItem('myLoginName');
     };
 
@@ -153,7 +153,7 @@ const callbackFunctionForP5 = (p) => {
     }
   }
 
-  // project specific functions 
+  // project specific functions
 
   function changeBgColor() {
     //bgColor = p.color(p.random(255), p.random(255), p.random(255));
@@ -162,27 +162,27 @@ const callbackFunctionForP5 = (p) => {
 
   // draws 4 hand fans - keep for possible re-use
   // function drawHand(pointOfCompass) {
-  //   let rotationOriginXPercent, rotationOriginYPercent, 
+  //   let rotationOriginXPercent, rotationOriginYPercent,
   //       cardWidth, cardHeight,
   //       myHandArray;
   //   p.push()
   //   switch (pointOfCompass) {
   //     case 'North':
-  //       rotationOriginXPercent = 50; 
-  //       rotationOriginYPercent = 0; 
+  //       rotationOriginXPercent = 50;
+  //       rotationOriginYPercent = 0;
   //       break;
   //     case 'East':
-  //       rotationOriginXPercent = 100; 
-  //       rotationOriginYPercent = 50; 
+  //       rotationOriginXPercent = 100;
+  //       rotationOriginYPercent = 50;
   //       break;
   //     case "South":
-  //       rotationOriginXPercent = 50; 
-  //       //rotationOriginYPercent = 500; 
-  //       rotationOriginYPercent = 100; 
+  //       rotationOriginXPercent = 50;
+  //       //rotationOriginYPercent = 500;
+  //       rotationOriginYPercent = 100;
   //       break;
   //     case 'West':
-  //       rotationOriginXPercent = 0; 
-  //       rotationOriginYPercent = 50; 
+  //       rotationOriginXPercent = 0;
+  //       rotationOriginYPercent = 50;
   //       break;
   //     default:
   //       console.log('Unexpected pointOfCompass argument');
@@ -195,8 +195,8 @@ const callbackFunctionForP5 = (p) => {
   //   p.stroke(255);
   //   p.strokeWeight(3);
   //   p.point(0,0);
-  //   // draw the card with 
-  //   // an x offset from origin of 1/4 of card width 
+  //   // draw the card with
+  //   // an x offset from origin of 1/4 of card width
   //   // a y offeset from origin of N * card height
   //   // (found by trial and error to give realistic card fan shape)
   //   cardWidth = g.canvasHeight * g.cardHeightToCanvasHeightRatio / g.cardAspectRatio;
@@ -206,25 +206,25 @@ const callbackFunctionForP5 = (p) => {
   //       myHandArray = window.gameState.pack.filter(obj => {
   //           return (obj.shuffleIndex >= 0 && obj.shuffleIndex <=12)
   //         }
-  //       ); 
+  //       );
   //       break;
   //     case 'East':
   //       myHandArray = window.gameState.pack.filter(obj => {
   //           return (obj.shuffleIndex >= 13 && obj.shuffleIndex <=25)
   //         }
-  //       ); 
+  //       );
   //       break;
   //     case "South":
   //       myHandArray = window.gameState.pack.filter(obj => {
   //           return (obj.shuffleIndex >= 26 && obj.shuffleIndex <=38)
   //         }
-  //       ); 
+  //       );
   //       break;
   //     case 'West':
   //       myHandArray = window.gameState.pack.filter(obj => {
   //           return (obj.shuffleIndex >= 39 && obj.shuffleIndex <=51)
   //         }
-  //       ); 
+  //       );
   //       break;
   //     default:
   //       console.log('Unexpected pointOfCompass argument');
@@ -232,7 +232,7 @@ const callbackFunctionForP5 = (p) => {
   //   // 13 records selected, but we need to reorder by handOrder
   //   myHandArray.sort((a, b) => {return b.handOrder - a.handOrder});
   //   // 13 records in correct hand order by suit and rank.
-  //   // setup the rotation angle increment 
+  //   // setup the rotation angle increment
   //   //let rotationDeltaRadians = p.radians(0.95);
   //   let rotationDeltaRadians = p.radians(3.5);
   //   // apply an initial rotation offset based on array length and pointOfCompass

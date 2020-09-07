@@ -24,8 +24,8 @@ function handleWsOpen(){
   }
 
   //ws = new WebSocket(`ws://${location.host}`);
-  ws = new WebSocket(`ws://98765.co.uk`);
-  //ws = new WebSocket(`wss://98765.co.uk`);
+  //ws = new WebSocket(`ws://98765.co.uk`);
+  ws = new WebSocket(`wss://98765.co.uk`);
   ws.onerror = function() {
     showMessageInConsole('clent ws.onerror fired, so Websocket error');
   };
@@ -73,8 +73,8 @@ function doLogin(myLoginNameValue) {
     alert('Please enter your name before you login');
     return;
   }
-  fetch('http://98765.co.uk/login', {
-  //fetch('https://98765.co.uk/login', {
+  //fetch('http://98765.co.uk/login', {
+  fetch('https://98765.co.uk/login', {
     method: 'POST',
     credentials: 'same-origin',
     headers: {
@@ -92,8 +92,8 @@ function doLogin(myLoginNameValue) {
 }
 
 function doLogout(myLoginNameValue) {
-  fetch('http://98765.co.uk/logout', {
-  //fetch('https://98765.co.uk/logout', {
+  //fetch('http://98765.co.uk/logout', {
+  fetch('https://98765.co.uk/logout', {
     method: 'DELETE',
     credentials: 'same-origin',
     headers: {
