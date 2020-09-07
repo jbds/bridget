@@ -26,7 +26,8 @@ function handleWsOpen(){
 
   //ws = new WebSocket(`ws://${location.host}`);
   //ws = new WebSocket(`ws://98765.co.uk`);
-  ws = new WebSocket(`wss://98765.co.uk`);
+  //ws = new WebSocket(`wss://98765.co.uk`);
+  ws = new WebSocket(`wss://${location.host}`);
   ws.onerror = function() {
     showMessageInConsole('clent ws.onerror fired, so Websocket error');
   };
