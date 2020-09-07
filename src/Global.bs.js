@@ -2,7 +2,6 @@
 
 var List = require("bs-platform/lib/js/list.js");
 var $$Array = require("bs-platform/lib/js/array.js");
-var $$String = require("bs-platform/lib/js/string.js");
 var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 var Belt_List = require("bs-platform/lib/js/belt_List.js");
 var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
@@ -424,11 +423,34 @@ function reducer(state, action) {
                         };
                 }
                 var match = List.length(state.chicagoScoreSheet) % 5;
-                var vulnerable = match > 2 || match < 0 ? (
-                    match !== 3 ? "Error" : "All"
-                  ) : (
-                    match !== 0 ? $$String.sub(Shuffle$ReasonReactExamples.pocAsString(state.dealer), 0, 1) : "None"
-                  );
+                var vulnerable;
+                if (match > 2 || match < 0) {
+                  vulnerable = match !== 3 ? "Error" : "All";
+                } else if (match !== 0) {
+                  var match$1 = state.dealer;
+                  if (match$1 !== undefined) {
+                    switch (match$1) {
+                      case "East" :
+                          vulnerable = "EW";
+                          break;
+                      case "North" :
+                          vulnerable = "NS";
+                          break;
+                      case "South" :
+                          vulnerable = "SN";
+                          break;
+                      case "West" :
+                          vulnerable = "WE";
+                          break;
+                      default:
+                        vulnerable = "Err";
+                    }
+                  } else {
+                    vulnerable = "Err";
+                  }
+                } else {
+                  vulnerable = "None";
+                }
                 var partnerPocByPoc = function (poc) {
                   if (poc === undefined) {
                     return "Error";
