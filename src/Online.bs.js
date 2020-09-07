@@ -96,7 +96,8 @@ function doLogin(myLoginNameValue) {
 
 function doLogout(myLoginNameValue) {
   //fetch('http://98765.co.uk/logout', {
-  fetch('https://98765.co.uk/logout', {
+  //fetch('https://98765.co.uk/logout', {
+  fetch(`https://${location.host}/logout`, {
     method: 'DELETE',
     credentials: 'same-origin',
     headers: {
