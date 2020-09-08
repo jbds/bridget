@@ -104,18 +104,29 @@ function execute(state) {
       tmp = n$3 !== undefined ? n$3 + totalTricksWestEastIncrement | 0 : -1;
     }
     var scoreLookup = Chicago$ReasonReactExamples.getScore(Shuffle$ReasonReactExamples.optionIntAsInt(scoreSheetRecord.contractLevel), myScoreLookupDenomination, tmp, isVulnerable, scoreSheetRecord.isDoubled, scoreSheetRecord.isRedoubled);
-    myChicagoScoreSheetRecordWithOptionalScore = {
-      vulnerable: myChicagoScoreSheetRecord_vulnerable,
-      contractLevel: myChicagoScoreSheetRecord_contractLevel,
-      contractSuit: myChicagoScoreSheetRecord_contractSuit,
-      contractDeclarer: myChicagoScoreSheetRecord_contractDeclarer,
-      isDoubled: myChicagoScoreSheetRecord_isDoubled,
-      isRedoubled: myChicagoScoreSheetRecord_isRedoubled,
-      totalTricksNorthSouth: myChicagoScoreSheetRecord_totalTricksNorthSouth,
-      scoreNorthSouth: state.declarer === "North" || state.declarer === "South" ? scoreLookup : undefined,
-      totalTricksWestEast: myChicagoScoreSheetRecord_totalTricksWestEast,
-      scoreWestEast: state.declarer === "West" || state.declarer === "East" ? scoreLookup : undefined
-    };
+    myChicagoScoreSheetRecordWithOptionalScore = scoreLookup >= 0 ? ({
+          vulnerable: myChicagoScoreSheetRecord_vulnerable,
+          contractLevel: myChicagoScoreSheetRecord_contractLevel,
+          contractSuit: myChicagoScoreSheetRecord_contractSuit,
+          contractDeclarer: myChicagoScoreSheetRecord_contractDeclarer,
+          isDoubled: myChicagoScoreSheetRecord_isDoubled,
+          isRedoubled: myChicagoScoreSheetRecord_isRedoubled,
+          totalTricksNorthSouth: myChicagoScoreSheetRecord_totalTricksNorthSouth,
+          scoreNorthSouth: state.declarer === "North" || state.declarer === "South" ? scoreLookup : undefined,
+          totalTricksWestEast: myChicagoScoreSheetRecord_totalTricksWestEast,
+          scoreWestEast: state.declarer === "West" || state.declarer === "East" ? scoreLookup : undefined
+        }) : ({
+          vulnerable: myChicagoScoreSheetRecord_vulnerable,
+          contractLevel: myChicagoScoreSheetRecord_contractLevel,
+          contractSuit: myChicagoScoreSheetRecord_contractSuit,
+          contractDeclarer: myChicagoScoreSheetRecord_contractDeclarer,
+          isDoubled: myChicagoScoreSheetRecord_isDoubled,
+          isRedoubled: myChicagoScoreSheetRecord_isRedoubled,
+          totalTricksNorthSouth: myChicagoScoreSheetRecord_totalTricksNorthSouth,
+          scoreNorthSouth: state.declarer === "West" || state.declarer === "East" ? scoreLookup : undefined,
+          totalTricksWestEast: myChicagoScoreSheetRecord_totalTricksWestEast,
+          scoreWestEast: state.declarer === "North" || state.declarer === "South" ? scoreLookup : undefined
+        });
   } else {
     myChicagoScoreSheetRecordWithOptionalScore = myChicagoScoreSheetRecord;
   }
