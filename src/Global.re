@@ -357,29 +357,23 @@ let reducer = (state: TopLevel.state, action) => {
           // get vulnerability based on number of scores so far
           // was mod 4 until subtotal row to account for
           // now mod 5
-          // let vulnerable = switch(List.length(state.chicagoScoreSheet) mod 5)  {
+          // show partner as well as declarer
+          // vulnerability is now set at deal time
+          // let vulnerable =
+          //   switch (List.length(state.chicagoScoreSheet) mod 5) {
           //   | 0 => "None"
-          //   | 1 => String.sub(Shuffle.pocAsString(state.dealer), 0, 1)
-          //   | 2 => String.sub(Shuffle.pocAsString(state.dealer), 0, 1)
+          //   | 1
+          //   | 2 =>
+          //     switch (state.dealer) {
+          //     | Some("North") => "NS"
+          //     | Some("South") => "SN"
+          //     | Some("East") => "EW"
+          //     | Some("West") => "WE"
+          //     | _ => "Err"
+          //     }
           //   | 3 => "All"
           //   | _ => "Error"
-          // };
-          // show partner as well as declarer
-          let vulnerable =
-            switch (List.length(state.chicagoScoreSheet) mod 5) {
-            | 0 => "None"
-            | 1
-            | 2 =>
-              switch (state.dealer) {
-              | Some("North") => "NS"
-              | Some("South") => "SN"
-              | Some("East") => "EW"
-              | Some("West") => "WE"
-              | _ => "Err"
-              }
-            | 3 => "All"
-            | _ => "Error"
-            };
+          //   };
           // helper func
           let partnerPocByPoc = poc => {
             switch (poc) {
@@ -433,8 +427,14 @@ let reducer = (state: TopLevel.state, action) => {
             Belt.List.reverse(bidsFilteredBySuitAnd2Poc);
           let hd3 = List.hd(bidsFilteredBySuitAnd2PocReversed);
           let contractDeclarer = hd3.contractPointOfCompass;
-          let chicagoScoreSheetRecord: Chicago.chicagoScoreSheetRecord = {
-            vulnerable,
+          // fetch existing record from scoresheet
+          // prepare for the score sheet update - we only want to update the head of the list
+          let chicagoScoreSheetHead =
+            Belt.List.headExn(state.chicagoScoreSheet);
+          let chicagoScoreSheetTail: Chicago.chicagoScoreSheet =
+            Belt.List.tailExn(state.chicagoScoreSheet);
+          let myChicagoScoreSheetRecord = {
+            ...chicagoScoreSheetHead,
             contractLevel,
             contractSuit,
             contractDeclarer,
@@ -445,15 +445,33 @@ let reducer = (state: TopLevel.state, action) => {
             totalTricksWestEast,
             scoreWestEast,
           };
+          // replaced with the above
+          // let chicagoScoreSheetRecord: Chicago.chicagoScoreSheetRecord = {
+          //   vulnerable,
+          //   contractLevel,
+          //   contractSuit,
+          //   contractDeclarer,
+          //   isDoubled,
+          //   isRedoubled,
+          //   totalTricksNorthSouth,
+          //   scoreNorthSouth,
+          //   totalTricksWestEast,
+          //   scoreWestEast,
+          // };
           // return end of bidding, but avoid new row if 4 passes by checking contractLevel
           {
             ...state,
             activePointOfCompass:
               Shuffle.getNextActivePointOfCompass(contractDeclarer),
+            // chicagoScoreSheet:
+            //   contractLevel != None
+            //     ? [chicagoScoreSheetRecord, ...state.chicagoScoreSheet]
+            //     : state.chicagoScoreSheet,
+            // if no contract level, then lose the row created at deal time
             chicagoScoreSheet:
               contractLevel != None
-                ? [chicagoScoreSheetRecord, ...state.chicagoScoreSheet]
-                : state.chicagoScoreSheet,
+                ? [myChicagoScoreSheetRecord, ...chicagoScoreSheetTail]
+                : chicagoScoreSheetTail,
             declarer: contractDeclarer,
             isBiddingCycle: false,
             lastAction:

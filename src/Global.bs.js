@@ -422,35 +422,6 @@ function reducer(state, action) {
                           randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
                         };
                 }
-                var match = List.length(state.chicagoScoreSheet) % 5;
-                var vulnerable;
-                if (match > 2 || match < 0) {
-                  vulnerable = match !== 3 ? "Error" : "All";
-                } else if (match !== 0) {
-                  var match$1 = state.dealer;
-                  if (match$1 !== undefined) {
-                    switch (match$1) {
-                      case "East" :
-                          vulnerable = "EW";
-                          break;
-                      case "North" :
-                          vulnerable = "NS";
-                          break;
-                      case "South" :
-                          vulnerable = "SN";
-                          break;
-                      case "West" :
-                          vulnerable = "WE";
-                          break;
-                      default:
-                        vulnerable = "Err";
-                    }
-                  } else {
-                    vulnerable = "Err";
-                  }
-                } else {
-                  vulnerable = "None";
-                }
                 var partnerPocByPoc = function (poc) {
                   if (poc === undefined) {
                     return "Error";
@@ -493,27 +464,30 @@ function reducer(state, action) {
                 var bidsFilteredBySuitAnd2PocReversed = Belt_List.reverse(bidsFilteredBySuitAnd2Poc);
                 var hd3 = List.hd(bidsFilteredBySuitAnd2PocReversed);
                 var contractDeclarer = hd3.contractPointOfCompass;
-                var chicagoScoreSheetRecord_totalTricksNorthSouth = 0;
-                var chicagoScoreSheetRecord_totalTricksWestEast = 0;
-                var chicagoScoreSheetRecord = {
-                  vulnerable: vulnerable,
+                var chicagoScoreSheetHead = Belt_List.headExn(state.chicagoScoreSheet);
+                var chicagoScoreSheetTail = Belt_List.tailExn(state.chicagoScoreSheet);
+                var myChicagoScoreSheetRecord_vulnerable = chicagoScoreSheetHead.vulnerable;
+                var myChicagoScoreSheetRecord_totalTricksNorthSouth = 0;
+                var myChicagoScoreSheetRecord_totalTricksWestEast = 0;
+                var myChicagoScoreSheetRecord = {
+                  vulnerable: myChicagoScoreSheetRecord_vulnerable,
                   contractLevel: contractLevel,
                   contractSuit: contractSuit,
                   contractDeclarer: contractDeclarer,
                   isDoubled: isDoubled,
                   isRedoubled: isRedoubled,
-                  totalTricksNorthSouth: chicagoScoreSheetRecord_totalTricksNorthSouth,
+                  totalTricksNorthSouth: myChicagoScoreSheetRecord_totalTricksNorthSouth,
                   scoreNorthSouth: undefined,
-                  totalTricksWestEast: chicagoScoreSheetRecord_totalTricksWestEast,
+                  totalTricksWestEast: myChicagoScoreSheetRecord_totalTricksWestEast,
                   scoreWestEast: undefined
                 };
                 return {
                         activePointOfCompass: Shuffle$ReasonReactExamples.getNextActivePointOfCompass(contractDeclarer),
                         bids: state.bids,
                         chicagoScoreSheet: contractLevel !== undefined ? /* :: */[
-                            chicagoScoreSheetRecord,
-                            state.chicagoScoreSheet
-                          ] : state.chicagoScoreSheet,
+                            myChicagoScoreSheetRecord,
+                            chicagoScoreSheetTail
+                          ] : chicagoScoreSheetTail,
                         dealer: state.dealer,
                         dealIndex: state.dealIndex,
                         declarer: contractDeclarer,
