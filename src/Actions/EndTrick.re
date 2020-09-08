@@ -109,12 +109,13 @@ let execute = (state: TopLevel.state) => {
         } else {
           NoTrumps; // should be unreachable code
         };
+      // vulnerability check was N|S|W|E now NS|SN|WE|EW
       let isVulnerable =
         if (scoreSheetRecord.vulnerable === "None") {
           false;
         } else if ((
-                     scoreSheetRecord.vulnerable === "N"
-                     || scoreSheetRecord.vulnerable === "S"
+                     scoreSheetRecord.vulnerable === "NS"
+                     || scoreSheetRecord.vulnerable === "SN"
                    )
                    && (
                      scoreSheetRecord.contractDeclarer === Some("North")
@@ -122,8 +123,8 @@ let execute = (state: TopLevel.state) => {
                    )) {
           true;
         } else if ((
-                     scoreSheetRecord.vulnerable === "W"
-                     || scoreSheetRecord.vulnerable === "E"
+                     scoreSheetRecord.vulnerable === "WE"
+                     || scoreSheetRecord.vulnerable === "EW"
                    )
                    && (
                      scoreSheetRecord.contractDeclarer === Some("West")

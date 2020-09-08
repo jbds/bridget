@@ -93,7 +93,7 @@ function execute(state) {
         scoreSheetRecord.contractSuit === "Hearts" || scoreSheetRecord.contractSuit === "Spades" ? /* Major */1 : (scoreSheetRecord.contractSuit === "NoTrumps", /* NoTrumps */2)
       );
     var isVulnerable = scoreSheetRecord.vulnerable === "None" ? false : (
-        (scoreSheetRecord.vulnerable === "N" || scoreSheetRecord.vulnerable === "S") && (scoreSheetRecord.contractDeclarer === "North" || scoreSheetRecord.contractDeclarer === "South") || (scoreSheetRecord.vulnerable === "W" || scoreSheetRecord.vulnerable === "E") && (scoreSheetRecord.contractDeclarer === "West" || scoreSheetRecord.contractDeclarer === "East") ? true : scoreSheetRecord.vulnerable === "All"
+        (scoreSheetRecord.vulnerable === "NS" || scoreSheetRecord.vulnerable === "SN") && (scoreSheetRecord.contractDeclarer === "North" || scoreSheetRecord.contractDeclarer === "South") || (scoreSheetRecord.vulnerable === "WE" || scoreSheetRecord.vulnerable === "EW") && (scoreSheetRecord.contractDeclarer === "West" || scoreSheetRecord.contractDeclarer === "East") ? true : scoreSheetRecord.vulnerable === "All"
       );
     var tmp;
     if (scoreSheetRecord.contractDeclarer === "North" || scoreSheetRecord.contractDeclarer === "South") {
