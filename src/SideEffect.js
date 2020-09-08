@@ -174,6 +174,9 @@ let paintDiscardArray = (p, g, w) => {
   let cardHeight = m * g.canvasHeight * g.cardHeightToCanvasHeightRatio;
   let cardHeightOffsetFraction = 0.275;
   let cardWidthOffsetFraction = 0.275;
+  // we need to paint the discarded cards in a specific order
+  // so sort in-place
+  g.myDiscardArray.sort((a, b) => (a.shuffleIndex < b.shuffleIndex ? 1 : -1));
   g.myDiscardArray.forEach((obj, i) => {
     // now we can draw a card using each fileName in myDiscardArray
     // position of card depends on range of shuffleIndex and rotation
