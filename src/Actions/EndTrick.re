@@ -176,11 +176,11 @@ let execute = (state: TopLevel.state) => {
           scoreNorthSouth:
             state.declarer === Some("West")
             || state.declarer === Some("East")
-              ? Some(scoreLookup) : None,
+              ? Some(- scoreLookup) : None,
           scoreWestEast:
             state.declarer === Some("North")
             || state.declarer === Some("South")
-              ? Some(scoreLookup) : None,
+              ? Some(- scoreLookup) : None,
         };
     } else {
       myChicagoScoreSheetRecord;

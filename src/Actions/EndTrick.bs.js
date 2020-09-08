@@ -123,9 +123,9 @@ function execute(state) {
           isDoubled: myChicagoScoreSheetRecord_isDoubled,
           isRedoubled: myChicagoScoreSheetRecord_isRedoubled,
           totalTricksNorthSouth: myChicagoScoreSheetRecord_totalTricksNorthSouth,
-          scoreNorthSouth: state.declarer === "West" || state.declarer === "East" ? scoreLookup : undefined,
+          scoreNorthSouth: state.declarer === "West" || state.declarer === "East" ? -scoreLookup | 0 : undefined,
           totalTricksWestEast: myChicagoScoreSheetRecord_totalTricksWestEast,
-          scoreWestEast: state.declarer === "North" || state.declarer === "South" ? scoreLookup : undefined
+          scoreWestEast: state.declarer === "North" || state.declarer === "South" ? -scoreLookup | 0 : undefined
         });
   } else {
     myChicagoScoreSheetRecordWithOptionalScore = myChicagoScoreSheetRecord;
