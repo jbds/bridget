@@ -38,8 +38,6 @@ function execute(state) {
   } else {
     vulnerable = "None";
   }
-  var chicagoScoreSheetRecord_totalTricksNorthSouth = 0;
-  var chicagoScoreSheetRecord_totalTricksWestEast = 0;
   var chicagoScoreSheetRecord = {
     vulnerable: vulnerable,
     contractLevel: undefined,
@@ -47,9 +45,9 @@ function execute(state) {
     contractDeclarer: undefined,
     isDoubled: false,
     isRedoubled: false,
-    totalTricksNorthSouth: chicagoScoreSheetRecord_totalTricksNorthSouth,
+    totalTricksNorthSouth: undefined,
     scoreNorthSouth: undefined,
-    totalTricksWestEast: chicagoScoreSheetRecord_totalTricksWestEast,
+    totalTricksWestEast: undefined,
     scoreWestEast: undefined
   };
   return {

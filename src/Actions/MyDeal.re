@@ -43,9 +43,9 @@ let execute = (state: TopLevel.state) => {
     contractDeclarer: None,
     isDoubled: false,
     isRedoubled: false,
-    totalTricksNorthSouth: Some(0),
+    totalTricksNorthSouth: None, //Some(0),
     scoreNorthSouth: None,
-    totalTricksWestEast: Some(0),
+    totalTricksWestEast: None, //Some(0),
     scoreWestEast: None,
   };
   {
