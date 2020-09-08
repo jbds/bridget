@@ -1,5 +1,6 @@
 'use strict';
 
+var List = require("bs-platform/lib/js/list.js");
 var Shuffle$ReasonReactExamples = require("../Shuffle.bs.js");
 
 var Online = require('../Online.bs');
@@ -8,10 +9,56 @@ var Online = require('../Online.bs');
 function execute(state) {
   ((window.isLastActionSync = false));
   ((setTimeout(function(){Online.doMessage('StoreDeal');}, 750)));
+  var match = List.length(state.chicagoScoreSheet) % 5;
+  var vulnerable;
+  if (match > 2 || match < 0) {
+    vulnerable = match !== 3 ? "Error" : "All";
+  } else if (match !== 0) {
+    var match$1 = state.dealer;
+    if (match$1 !== undefined) {
+      switch (match$1) {
+        case "East" :
+            vulnerable = "EW";
+            break;
+        case "North" :
+            vulnerable = "NS";
+            break;
+        case "South" :
+            vulnerable = "SN";
+            break;
+        case "West" :
+            vulnerable = "WE";
+            break;
+        default:
+          vulnerable = "Err";
+      }
+    } else {
+      vulnerable = "Err";
+    }
+  } else {
+    vulnerable = "None";
+  }
+  var chicagoScoreSheetRecord_totalTricksNorthSouth = 0;
+  var chicagoScoreSheetRecord_totalTricksWestEast = 0;
+  var chicagoScoreSheetRecord = {
+    vulnerable: vulnerable,
+    contractLevel: undefined,
+    contractSuit: undefined,
+    contractDeclarer: undefined,
+    isDoubled: false,
+    isRedoubled: false,
+    totalTricksNorthSouth: chicagoScoreSheetRecord_totalTricksNorthSouth,
+    scoreNorthSouth: undefined,
+    totalTricksWestEast: chicagoScoreSheetRecord_totalTricksWestEast,
+    scoreWestEast: undefined
+  };
   return {
           activePointOfCompass: state.dealer,
           bids: /* [] */0,
-          chicagoScoreSheet: state.chicagoScoreSheet,
+          chicagoScoreSheet: /* :: */[
+            chicagoScoreSheetRecord,
+            state.chicagoScoreSheet
+          ],
           dealer: state.dealer,
           dealIndex: state.dealIndex,
           declarer: undefined,
