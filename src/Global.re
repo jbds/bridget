@@ -345,7 +345,7 @@ let reducer = (state: TopLevel.state, action) => {
           isBiddingCycle: true,
           isBiddingHideDenominationButtons: true,
           isDummyVisible: false,
-          lastAction: "4 Passes - so New Deal",
+          lastAction: "4 Passes - so fresh cards dealt",
           pack: Shuffle.getShuffledPack(),
           randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
         };

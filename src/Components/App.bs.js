@@ -24,10 +24,10 @@ function App(Props) {
   var state = match[0];
   console.log(state);
   ((window.gameState = match[0]));
-  ((!window.isLastActionSync 
-    ? 
-    Online.doMessage(gameState) 
-    : 
+  ((!window.isLastActionSync
+    ?
+    Online.doMessage(gameState)
+    :
     //console.log('Action-Sync: doMessage suppressed')
     null));
   var handlerBtnRotateTable = function (_e) {
@@ -84,7 +84,7 @@ function App(Props) {
     if (userPointOfCompassWrappedInArray.length === 0 || !isFourSeatsOccupied(undefined)) {
       return false;
     } else {
-      return true;
+      return state.lastAction !== "4 Passes - so fresh cards dealt";
     }
   };
   var isUndoVisible = function (param) {

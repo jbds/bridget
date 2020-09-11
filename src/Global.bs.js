@@ -349,7 +349,7 @@ function reducer(state, action) {
                           isDummyVisible: false,
                           isRebootVisible: state.isRebootVisible,
                           isReviewDealVisible: state.isReviewDealVisible,
-                          lastAction: "4 Passes - so New Deal",
+                          lastAction: "4 Passes - so fresh cards dealt",
                           pack: Shuffle$ReasonReactExamples.getShuffledPack(undefined),
                           pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
                           randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
