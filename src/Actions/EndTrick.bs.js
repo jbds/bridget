@@ -197,6 +197,7 @@ function execute(state) {
           dealIndex: state.dealIndex,
           declarer: state.discardIndex !== 51 ? state.declarer : undefined,
           discardIndex: state.discardIndex,
+          discardPointOfCompass: state.discardPointOfCompass,
           discardSuit: state.discardSuit,
           handVisible: state.handVisible,
           isBiddingCycle: state.isBiddingCycle,

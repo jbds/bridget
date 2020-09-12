@@ -7,6 +7,7 @@ type state = {
   dealIndex: int,
   declarer: option(string),
   discardIndex: int,
+  discardPointOfCompass: option(string),
   discardSuit: option(Shuffle.suit),
   handVisible: Shuffle.handVisible,
   isBiddingCycle: bool,
@@ -19,4 +20,3 @@ type state = {
   pointOfCompassAndPlayers: array(Shuffle.pointOfCompassAndPlayer),
   randomInt: int,
 };
-

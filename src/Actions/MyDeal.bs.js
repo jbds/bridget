@@ -61,6 +61,7 @@ function execute(state) {
           dealIndex: state.dealIndex,
           declarer: undefined,
           discardIndex: -1,
+          discardPointOfCompass: state.discardPointOfCompass,
           discardSuit: state.discardSuit,
           handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
           isBiddingCycle: true,

@@ -18,7 +18,7 @@
   window.userState = {}; // prevent undefined error before p5 starts up
 
   // be certain we have the correct version of bundled file aka index.js
-  document.title = 'Bridget v0.56';
+  document.title = 'Bridget v0.57';
 |};
 
 // all sidebar and biddingWindow events are managed by ReasonReact components (ReasonML)

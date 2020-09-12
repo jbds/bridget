@@ -31,6 +31,7 @@ let initialState: TopLevel.state = {
   declarer: None,
   discardIndex: (-1),
   discardSuit: None,
+  discardPointOfCompass: None,
   handVisible: Shuffle.initialHandVisible,
   isBiddingCycle: false,
   isBiddingHideDenominationButtons: true,
@@ -114,6 +115,9 @@ let reducer = (state: TopLevel.state, action) => {
       ...state,
       activePointOfCompass: poc,
       discardIndex: state.discardIndex + 1,
+      discardPointOfCompass:
+        (state.discardIndex + 1) mod 4 === 0
+          ? Some(discardPoc) : state.discardPointOfCompass,
       discardSuit:
         (state.discardIndex + 1) mod 4 === 0
           ? Some(cardDiscardSuit) : state.discardSuit,
@@ -140,6 +144,7 @@ let reducer = (state: TopLevel.state, action) => {
       dealIndex: (-1),
       declarer: None,
       discardIndex: (-1),
+      discardPointOfCompass: None,
       discardSuit: None,
       handVisible: {
         north: false,
@@ -202,6 +207,7 @@ let reducer = (state: TopLevel.state, action) => {
       dealIndex,
       declarer,
       discardIndex,
+      discardPointOfCompass: None,
       discardSuit,
       handVisible: hV,
       isBiddingCycle,
