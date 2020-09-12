@@ -169,15 +169,43 @@ let paintHandArray = (p, g) => {
 
 let paintDiscardArray = (p, g, w) => {
   // scale to be reviewed
-  let m = 0.55;
+  let m = 0.75; //0.55;
   let cardWidth = m * g.canvasHeight * g.cardHeightToCanvasHeightRatio / g.cardAspectRatio;
   let cardHeight = m * g.canvasHeight * g.cardHeightToCanvasHeightRatio;
   let cardHeightOffsetFraction = 0.275;
   let cardWidthOffsetFraction = 0.275;
   // we need to paint the discarded cards in a specific order
-  // so sort in-place
-  g.myDiscardArray.sort((a, b) => (a.shuffleIndex < b.shuffleIndex ? 1 : -1));
-  g.myDiscardArray.forEach((obj, i) => {
+  // so sort in-place N, E, S, W for shuffleIndex <=12, <=25, <=38, <=51
+  g.myDiscardArray.sort((a, b) => (a.shuffleIndex > b.shuffleIndex ? 1 : -1));
+  // now deep copy to avoid messing with myDiscardArray
+  let arr = JSON.parse(JSON.stringify(g.myDiscardArray));
+  let poc = w.gameState.activePointOfCompass; // 'North' etc
+  // arr can be any length between 0 and 4
+  switch (arr.length) {
+    case 0:
+      // do nothing
+      break;
+    case 1:
+      // first card will always be 'on top' which is what we want, so do nothing
+      break;
+    case 2:
+      if (arr[1].shuffleIndex <= 12 && poc === 'North') {
+        // this card is in the correct place
+      } else {
+        // shift right
+        let card = arr.pop();
+        arr.unshift(card);
+      }
+      break;
+    case 3:
+      // to do
+      break;
+    case 4:
+      // to do
+      break;
+  }
+  //  g.myDiscardArray.forEach((obj, i) => {
+  arr.forEach((obj, i) => {
     // now we can draw a card using each fileName in myDiscardArray
     // position of card depends on range of shuffleIndex and rotation
     // but these two variables are orthogonal
