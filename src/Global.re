@@ -117,7 +117,7 @@ let reducer = (state: TopLevel.state, action) => {
       discardIndex: state.discardIndex + 1,
       discardPointOfCompass:
         (state.discardIndex + 1) mod 4 === 0
-          ? Some(discardPoc) : state.discardPointOfCompass,
+          ? Some("Fred") : state.discardPointOfCompass,
       discardSuit:
         (state.discardIndex + 1) mod 4 === 0
           ? Some(cardDiscardSuit) : state.discardSuit,
