@@ -189,7 +189,12 @@ let paintDiscardArray = (p, g, w) => {
       // first card will always be 'on top' which is what we want, so do nothing
       break;
     case 2:
-      if (arr[1].shuffleIndex <= 12 && poc === 'North') {
+      if (
+        (arr[1].shuffleIndex >= 0 && arr[1].shuffleIndex <= 12 && poc === 'North') ||
+        (arr[1].shuffleIndex >= 13 && arr[1].shuffleIndex <= 25 && poc === 'East') ||
+        (arr[1].shuffleIndex >= 26 && arr[1].shuffleIndex <= 38 && poc === 'South') ||
+        (arr[1].shuffleIndex >= 39 && arr[1].shuffleIndex <= 51 && poc === 'West')
+      ) {
         // this card is in the correct place
       } else {
         // shift right
