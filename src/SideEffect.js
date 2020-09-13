@@ -305,8 +305,8 @@ let paintDiscardArray = (p, g, w) => {
         // good for all rotations, because x=x and y=y all angles
         //p.translate(0, -cardHeight * cardHeightOffsetFraction);
         //p.translate(0, g.northDiscardInitialY);
-        w.northDiscardY = p.lerp(w.northDiscardY, -cardHeight * cardHeightOffsetFraction, 0.01);
-        p.translate(0, w.northDiscardY);
+        w.gameState.transition.northDiscardY = p.lerp(w.gameState.transition.northDiscardY, -cardHeight * cardHeightOffsetFraction, 0.01);
+        p.translate(0, w.gameState.transition.northDiscardY);
         break;
       // E
       case (obj.shuffleIndex < 26):
