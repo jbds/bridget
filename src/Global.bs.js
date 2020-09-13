@@ -88,8 +88,34 @@ function reducer(state, action) {
                     return card;
                   }
                 }), state.pack);
+          var baizeHeight = window.innerHeight;
+          var halfBaizeHeight = baizeHeight / 2.0;
+          var tR;
+          switch (discardPoc) {
+            case "East" :
+                var init = state.transition;
+                tR = {
+                  northDiscardY: init.northDiscardY,
+                  eastDiscardX: halfBaizeHeight,
+                  southDiscardY: init.southDiscardY,
+                  westDiscardX: init.westDiscardX
+                };
+                break;
+            case "North" :
+                var init$1 = state.transition;
+                tR = {
+                  northDiscardY: -halfBaizeHeight,
+                  eastDiscardX: init$1.eastDiscardX,
+                  southDiscardY: init$1.southDiscardY,
+                  westDiscardX: init$1.westDiscardX
+                };
+                break;
+            default:
+              tR = state.transition;
+          }
           var poc = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
           var newrecord = Caml_obj.caml_obj_dup(state);
+          newrecord.transition = tR;
           newrecord.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
           newrecord.pack = myPack;
           newrecord.lastAction = "Discard";
@@ -139,7 +165,7 @@ function reducer(state, action) {
           var dealer = window.gameState.dealer;
           var declarer = window.gameState.declarer;
           var hV = window.gameState.handVisible;
-          var tR = window.gameState.transition;
+          var tR$1 = window.gameState.transition;
           var pOCAP = window.gameState.pointOfCompassAndPlayers;
           var pack = window.gameState.pack;
           var dealIndex = window.gameState.dealIndex;
@@ -174,7 +200,7 @@ function reducer(state, action) {
                   pack: pack,
                   pointOfCompassAndPlayers: pOCAP,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
-                  transition: tR
+                  transition: tR$1
                 };
       case /* Test */4 :
           ((window.isLastActionSync = true));

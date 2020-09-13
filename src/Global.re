@@ -114,6 +114,18 @@ let reducer = (state: TopLevel.state, action) => {
         },
         state.pack,
       );
+    // transition
+    let baizeHeight: int = [%raw "window.innerHeight"];
+    let halfBaizeHeight = float_of_int(baizeHeight) /. 2.0;
+    //Js.log("halfBaizeHeight");
+    //Js.log(halfBaizeHeight);
+    let tR = {
+      switch (discardPoc) {
+      | "North" => {...state.transition, northDiscardY: -. halfBaizeHeight}
+      | "East" => {...state.transition, eastDiscardX: halfBaizeHeight}
+      | _ => state.transition
+      };
+    };
     // move on to next poc!
     let poc =
       Some(Shuffle.getNextPointOfCompass(state.activePointOfCompass));
@@ -132,6 +144,7 @@ let reducer = (state: TopLevel.state, action) => {
       pack: myPack,
       randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
       lastAction: "Discard",
+      transition: tR,
     };
   | Sync =>
     // aka Logout or perhaps Server Down
