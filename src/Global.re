@@ -131,6 +131,10 @@ let reducer = (state: TopLevel.state, action) => {
     // move on to next poc!
     let poc =
       Some(Shuffle.getNextPointOfCompass(state.activePointOfCompass));
+    // have we got 4 in the discard pile?
+    let myDiscardArray = Belt.Array.keep(myPack, x => x.lifecycle === Discard);
+    Js.log("QtyDiscards");
+    Js.log(Array.length(myDiscardArray));
     {
       ...state,
       activePointOfCompass: poc,

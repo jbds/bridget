@@ -132,6 +132,11 @@ function reducer(state, action) {
               tR = state.transition;
           }
           var poc = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
+          var myDiscardArray = Belt_Array.keep(myPack, (function (x) {
+                  return x.lifecycle === /* Discard */2;
+                }));
+          console.log("QtyDiscards");
+          console.log(myDiscardArray.length);
           var newrecord = Caml_obj.caml_obj_dup(state);
           newrecord.transition = tR;
           newrecord.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);

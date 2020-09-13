@@ -15,83 +15,83 @@ let mouseDecode = (p, g, w) => {
     return (obj.shuffleIndex >= 13 && obj.shuffleIndex <= 25 && obj.lifecycle === 1)
   });
   const myHandArrayS = window.gameState.pack.filter(obj => {
-    return (obj.shuffleIndex >= 26 && obj.shuffleIndex <=38 && obj.lifecycle === 1)
+    return (obj.shuffleIndex >= 26 && obj.shuffleIndex <= 38 && obj.lifecycle === 1)
   });
   const myHandArrayW = window.gameState.pack.filter(obj => {
     return (obj.shuffleIndex >= 39 && obj.shuffleIndex <= 51 && obj.lifecycle === 1)
   });
-//console.log('mouse decode');
+  //console.log('mouse decode');
   switch (true) {
     // TABLE TOP aka 12PM
     case (p.mouseY <= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
       p.mouseX >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
       p.mouseX < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
     ):
-    // 12PM cards are ALWAYS 'inverted' aka the correct way up as viewed on device
-    // the map parameters 13, 0 are therefore reversed to 0, 13 to match
-    cardSegmentIndex = p.map(
-      p.mouseX, 
-      cardSegmentHeightToCanvasHeightRatio * g.canvasHeight,
-      (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight,
-      0, // 0, Dummy hand will be reversed
-      13   // 13
-    );
-    // fetch array dependent on card table rotation
-    switch(w.userState.tableRotationDegrees) {
-      case 0:
-        myHandArray = myHandArrayN;
-        break;
-      case 90:
-        myHandArray = myHandArrayW;
-        break;
-      case 180:
-        myHandArray = myHandArrayS;
-        break;
-      case 270:
-        myHandArray = myHandArrayE;
+      // 12PM cards are ALWAYS 'inverted' aka the correct way up as viewed on device
+      // the map parameters 13, 0 are therefore reversed to 0, 13 to match
+      cardSegmentIndex = p.map(
+        p.mouseX,
+        cardSegmentHeightToCanvasHeightRatio * g.canvasHeight,
+        (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight,
+        0, // 0, Dummy hand will be reversed
+        13   // 13
+      );
+      // fetch array dependent on card table rotation
+      switch (w.userState.tableRotationDegrees) {
+        case 0:
+          myHandArray = myHandArrayN;
+          break;
+        case 90:
+          myHandArray = myHandArrayW;
+          break;
+        case 180:
+          myHandArray = myHandArrayS;
+          break;
+        case 270:
+          myHandArray = myHandArrayE;
+          break;
+        default:
+          console.log('Unexpected tableRotationDegrees');
+      }
+      // this floating number needs an offset based on hand array length
+      cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
+      if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
+        // do nothing
+      } else {
+        //console.log('top area, indexAdjustedAndConstrained=' + cardSegmentIndexAdjusted);
+        convertAdjustedIndexToCardKey(cardSegmentIndexAdjusted, myHandArray);
+      }
       break;
-      default:
-        console.log('Unexpected tableRotationDegrees');
-    }
-    // this floating number needs an offset based on hand array length
-    cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
-    if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
-      // do nothing
-    } else {
-      //console.log('top area, indexAdjustedAndConstrained=' + cardSegmentIndexAdjusted);
-      convertAdjustedIndexToCardKey(cardSegmentIndexAdjusted, myHandArray);
-    }
-    break;
     // TABLE RHS
     case (p.mouseX >= (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight &&
-          p.mouseY >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
-          p.mouseY < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
-      ):
+      p.mouseY >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
+      p.mouseY < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
+    ):
       cardSegmentIndex = p.map(
-        p.mouseY, 
+        p.mouseY,
         cardSegmentHeightToCanvasHeightRatio * g.canvasHeight,
         (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight,
         13,
         0
       );
       // this floating number needs an offset based on hand array length
-    // fetch array dependent on card table rotation
-    switch(w.userState.tableRotationDegrees) {
-      case 0:
-        myHandArray = myHandArrayE;
-        break;
-      case 90:
-        myHandArray = myHandArrayN
-        break;
-      case 180:
-        myHandArray = myHandArrayW;
-        break;
-      case 270:
-        myHandArray = myHandArrayS;
-      break;
-      default:
-        console.log('Unexpected tableRotationDegrees');
-    }
+      // fetch array dependent on card table rotation
+      switch (w.userState.tableRotationDegrees) {
+        case 0:
+          myHandArray = myHandArrayE;
+          break;
+        case 90:
+          myHandArray = myHandArrayN
+          break;
+        case 180:
+          myHandArray = myHandArrayW;
+          break;
+        case 270:
+          myHandArray = myHandArrayS;
+          break;
+        default:
+          console.log('Unexpected tableRotationDegrees');
+      }
       cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
       if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
         // do nothing
@@ -102,49 +102,11 @@ let mouseDecode = (p, g, w) => {
       break;
     // TABLE BOTTOM
     case (p.mouseY >= (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight &&
-          p.mouseX >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
-          p.mouseX < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
-        ):
+      p.mouseX >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
+      p.mouseX < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
+    ):
       cardSegmentIndex = p.map(
-        p.mouseX, 
-        cardSegmentHeightToCanvasHeightRatio * g.canvasHeight,
-        (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight,
-        0,
-        13
-      );
-      // this floating number needs an offset based on hand array length
-    // fetch array dependent on card table rotation
-    switch(w.userState.tableRotationDegrees) {
-      case 0:
-        myHandArray = myHandArrayS;
-        break;
-      case 90:
-        myHandArray = myHandArrayE;
-        break;
-      case 180:
-        myHandArray = myHandArrayN;
-        break;
-      case 270:
-        myHandArray = myHandArrayW;
-      break;
-      default:
-        console.log('Unexpected tableRotationDegrees');
-    }
-      cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
-      if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
-        // do nothing
-      } else {
-        //console.log('bottom area, indexAdjustedAndConstrained=' + cardSegmentIndexAdjusted);
-        convertAdjustedIndexToCardKey(cardSegmentIndexAdjusted, myHandArray);
-      }
-    break;
-    // TABLE LHS
-    case (p.mouseX <= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
-          p.mouseY >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
-          p.mouseY < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
-      ):
-      cardSegmentIndex = p.map(
-        p.mouseY, 
+        p.mouseX,
         cardSegmentHeightToCanvasHeightRatio * g.canvasHeight,
         (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight,
         0,
@@ -152,7 +114,45 @@ let mouseDecode = (p, g, w) => {
       );
       // this floating number needs an offset based on hand array length
       // fetch array dependent on card table rotation
-      switch(w.userState.tableRotationDegrees) {
+      switch (w.userState.tableRotationDegrees) {
+        case 0:
+          myHandArray = myHandArrayS;
+          break;
+        case 90:
+          myHandArray = myHandArrayE;
+          break;
+        case 180:
+          myHandArray = myHandArrayN;
+          break;
+        case 270:
+          myHandArray = myHandArrayW;
+          break;
+        default:
+          console.log('Unexpected tableRotationDegrees');
+      }
+      cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
+      if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
+        // do nothing
+      } else {
+        //console.log('bottom area, indexAdjustedAndConstrained=' + cardSegmentIndexAdjusted);
+        convertAdjustedIndexToCardKey(cardSegmentIndexAdjusted, myHandArray);
+      }
+      break;
+    // TABLE LHS
+    case (p.mouseX <= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
+      p.mouseY >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
+      p.mouseY < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
+    ):
+      cardSegmentIndex = p.map(
+        p.mouseY,
+        cardSegmentHeightToCanvasHeightRatio * g.canvasHeight,
+        (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight,
+        0,
+        13
+      );
+      // this floating number needs an offset based on hand array length
+      // fetch array dependent on card table rotation
+      switch (w.userState.tableRotationDegrees) {
         case 0:
           myHandArray = myHandArrayW;
           break;
@@ -164,7 +164,7 @@ let mouseDecode = (p, g, w) => {
           break;
         case 270:
           myHandArray = myHandArrayN;
-        break;
+          break;
         default:
           console.log('Unexpected tableRotationDegrees');
       }
@@ -183,7 +183,7 @@ let mouseDecode = (p, g, w) => {
 
 let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   // sort the array in the same way as cards are displayed
-  myHandArray.sort((a, b) => {return b.handOrder - a.handOrder});
+  myHandArray.sort((a, b) => { return b.handOrder - a.handOrder });
   let myCard = myHandArray[cardSegmentIndexAdjusted];
   //console.log(myCard.fileName);
   // NO - always update via ReasonML action
@@ -206,53 +206,53 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   if (isValidDiscardFromLocalPlayer() && isCardDiscardFollowingSuitWhenPossible()) {
     // prepare a second action after a delay if 3 cards are already discarded
     // because we are about to discard the 4th
-    if (gameState.pack.filter(obj => {return (obj.lifecycle === 2)}).length === 3) {
-      //setTimeout(function(){alert('Yay');}, 750);
-      setTimeout(function(){document.getElementById('btnEndTrick').click();}, 1250);
-    }
+    // if (gameState.pack.filter(obj => { return (obj.lifecycle === 2) }).length === 3) {
+    //   setTimeout(function () { alert('Yay'); }, 1250);
+    //   //setTimeout(function(){document.getElementById('btnEndTrick').click();}, 1250);
+    // }
     // dispatch the Discard action via a hidden key on the sidebar
     document.getElementById('btnDiscard').click();
   }
 };
 
-  // helper function for deciding which discard clicks are valid
-  let isValidDiscardFromLocalPlayer = () => {
-    // may return empty array
-    let userPointOfCompassWrappedInArray = gameState.pointOfCompassAndPlayers.filter(
-      x => x.player === userState.player
-    );
-    if (userPointOfCompassWrappedInArray.length === 0) {
-      console.log('userPointOfCompassWrappedInArray is empty');
-      return false;
-    }
-    let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
-    //console.log('userPointOfCompass: ' + userPointOfCompass);
-    // now we need to know cardPointOfCompass
-    let cardPointOfCompass;
-    let card = gameState.pack.find(obj => obj.fileName === window.discardFileName);
-    if (card.shuffleIndex >= 0 && card.shuffleIndex <= 12 && card.lifecycle === 1) {
-      cardPointOfCompass = 'North';
-    } else if (card.shuffleIndex >= 13 && card.shuffleIndex <= 25 && card.lifecycle === 1) {
-      cardPointOfCompass = 'East';
-    } else if (card.shuffleIndex >= 26 && card.shuffleIndex <= 38 && card.lifecycle === 1) {
-      cardPointOfCompass = 'South';
-    } else if (card.shuffleIndex >= 39 && card.shuffleIndex <= 51 && card.lifecycle === 1) {
-      cardPointOfCompass = 'West';
-    } else {
-      console.log('Unexpected shuffleIndex in window.discardFileName');
-    }
-    return (
-      (
-        userPointOfCompass === cardPointOfCompass 
-        && 
-        gameState.isBiddingCycle === false 
-        // add extra constraint here to avoid multiple discards
-        &&
-        gameState.activePointOfCompass === userPointOfCompass
-        &&
-        // never allow Dummy to discard, Declarer must control
-        gameState.activePointOfCompass !== getDummyPocByDeclarer()
-      )
+// helper function for deciding which discard clicks are valid
+let isValidDiscardFromLocalPlayer = () => {
+  // may return empty array
+  let userPointOfCompassWrappedInArray = gameState.pointOfCompassAndPlayers.filter(
+    x => x.player === userState.player
+  );
+  if (userPointOfCompassWrappedInArray.length === 0) {
+    console.log('userPointOfCompassWrappedInArray is empty');
+    return false;
+  }
+  let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
+  //console.log('userPointOfCompass: ' + userPointOfCompass);
+  // now we need to know cardPointOfCompass
+  let cardPointOfCompass;
+  let card = gameState.pack.find(obj => obj.fileName === window.discardFileName);
+  if (card.shuffleIndex >= 0 && card.shuffleIndex <= 12 && card.lifecycle === 1) {
+    cardPointOfCompass = 'North';
+  } else if (card.shuffleIndex >= 13 && card.shuffleIndex <= 25 && card.lifecycle === 1) {
+    cardPointOfCompass = 'East';
+  } else if (card.shuffleIndex >= 26 && card.shuffleIndex <= 38 && card.lifecycle === 1) {
+    cardPointOfCompass = 'South';
+  } else if (card.shuffleIndex >= 39 && card.shuffleIndex <= 51 && card.lifecycle === 1) {
+    cardPointOfCompass = 'West';
+  } else {
+    console.log('Unexpected shuffleIndex in window.discardFileName');
+  }
+  return (
+    (
+      userPointOfCompass === cardPointOfCompass
+      &&
+      gameState.isBiddingCycle === false
+      // add extra constraint here to avoid multiple discards
+      &&
+      gameState.activePointOfCompass === userPointOfCompass
+      &&
+      // never allow Dummy to discard, Declarer must control
+      gameState.activePointOfCompass !== getDummyPocByDeclarer()
+    )
       ||
       (
         // relax constraint to allow Dummy to be selected by Declarer
@@ -265,12 +265,12 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
         &&
         cardPointOfCompass !== gameState.declarer
       )
-      ? 
-      true 
-      : 
+      ?
+      true
+      :
       false
-    );
-  };
+  );
+};
 
 // helper function for relaxed constraint on dummy when declarer & user coincide
 let getDummyPocByDeclarer = () => {
@@ -287,7 +287,7 @@ let getDummyPocByDeclarer = () => {
     case "West":
       return "East";
       break;
-    default: 
+    default:
       return "Error";
   }
 };
@@ -296,12 +296,12 @@ let getDummyPocByDeclarer = () => {
 let isCardDiscardFollowingSuitWhenPossible = () => {
   let card = gameState.pack.find(obj => obj.fileName === window.discardFileName);
   // we always allow the first discard, whatever the suit
-  if ((gameState.discardIndex + 1) % 4 === 0){
+  if ((gameState.discardIndex + 1) % 4 === 0) {
     return true;
-  // if card follows suit, allow
+    // if card follows suit, allow
   } else if (card.suit === gameState.discardSuit) {
     return true;
-  // if card does not follow suit, only allow if countOfCardsInHandWithDiscardSuit = 0
+    // if card does not follow suit, only allow if countOfCardsInHandWithDiscardSuit = 0
   } else if (countOfCardsInHandWithDiscardSuit(card) === 0) {
     return true;
   } else {
@@ -325,14 +325,14 @@ let countOfCardsInHandWithDiscardSuit = (card) => {
     });
   } else if (index < 39) {
     hand = window.gameState.pack.filter(obj => {
-      return (obj.shuffleIndex >= 26 && obj.shuffleIndex <=38 && obj.lifecycle === 1)
+      return (obj.shuffleIndex >= 26 && obj.shuffleIndex <= 38 && obj.lifecycle === 1)
     });
   } else {
     hand = window.gameState.pack.filter(obj => {
       return (obj.shuffleIndex >= 39 && obj.shuffleIndex <= 51 && obj.lifecycle === 1)
     });
   }
-  let handFilteredBySuit = hand.filter(obj => {return obj.suit === gameState.discardSuit});
+  let handFilteredBySuit = hand.filter(obj => { return obj.suit === gameState.discardSuit });
   //console.log('handFilteredBySuit.length');
   //console.log(handFilteredBySuit.length);
   return handFilteredBySuit.length;
