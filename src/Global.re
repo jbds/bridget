@@ -117,7 +117,7 @@ let reducer = (state: TopLevel.state, action) => {
       discardIndex: state.discardIndex + 1,
       discardPointOfCompass:
         (state.discardIndex + 1) mod 4 === 0
-          ? Some("Fred") : state.discardPointOfCompass,
+          ? Some(discardPoc) : state.discardPointOfCompass,
       discardSuit:
         (state.discardIndex + 1) mod 4 === 0
           ? Some(cardDiscardSuit) : state.discardSuit,
@@ -198,6 +198,9 @@ let reducer = (state: TopLevel.state, action) => {
       "window.gameState.discardSuit"
     ];
     let lastAction: string = [%bs.raw "window.gameState.lastAction"];
+    let discardPointOfCompass: option(string) = [%bs.raw
+      "window.gameState.discardPointOfCompass"
+    ];
     // no need for ...state here as we are replacing all fields with the server gameState fields
     {
       activePointOfCompass: poc,
@@ -207,7 +210,7 @@ let reducer = (state: TopLevel.state, action) => {
       dealIndex,
       declarer,
       discardIndex,
-      discardPointOfCompass: None,
+      discardPointOfCompass,
       discardSuit,
       handVisible: hV,
       isBiddingCycle,

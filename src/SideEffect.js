@@ -168,49 +168,117 @@ let paintHandArray = (p, g) => {
 };
 
 let paintDiscardArray = (p, g, w) => {
+  //console.log('discarding');
   // scale to be reviewed
   let m = 0.75; //0.55;
   let cardWidth = m * g.canvasHeight * g.cardHeightToCanvasHeightRatio / g.cardAspectRatio;
   let cardHeight = m * g.canvasHeight * g.cardHeightToCanvasHeightRatio;
   let cardHeightOffsetFraction = 0.275;
   let cardWidthOffsetFraction = 0.275;
-  // this is the wrong place to sort the order, it should be done at discard action
   // we need to paint the discarded cards in a specific order
   // so sort in-place N, E, S, W for shuffleIndex <=12, <=25, <=38, <=51
-  //g.myDiscardArray.sort((a, b) => (a.shuffleIndex > b.shuffleIndex ? 1 : -1));
+  // the ordering here was corrected empirically!
+  g.myDiscardArray.sort((a, b) => (a.shuffleIndex > b.shuffleIndex ? 1 : -1));
+  // at this point, the ordering gives correct display of cards if discard starts from North
+  //console.log(g.myDiscardArray);
   // now deep copy to avoid messing with myDiscardArray
-  // let arr = JSON.parse(JSON.stringify(g.myDiscardArray));
-  // let poc = w.gameState.activePointOfCompass; // 'North' etc
-  // // arr can be any length between 0 and 4
-  // switch (arr.length) {
-  //   case 0:
-  //     // do nothing
-  //     break;
-  //   case 1:
-  //     // first card will always be 'on top' which is what we want, so do nothing
-  //     break;
-  //   case 2:
-  //     if (
-  //       (arr[1].shuffleIndex >= 0 && arr[1].shuffleIndex <= 12 && poc === 'North') ||
-  //       (arr[1].shuffleIndex >= 13 && arr[1].shuffleIndex <= 25 && poc === 'East') ||
-  //       (arr[1].shuffleIndex >= 26 && arr[1].shuffleIndex <= 38 && poc === 'South') ||
-  //       (arr[1].shuffleIndex >= 39 && arr[1].shuffleIndex <= 51 && poc === 'West')
-  //     ) {
-  //       // this card is in the correct place
-  //     } else {
-  //       // shift right
-  //       let card = arr.pop();
-  //       arr.unshift(card);
-  //     }
-  //     break;
-  //   case 3:
-  //     // to do
-  //     break;
-  //   case 4:
-  //     // to do
-  //     break;
-  // }
-  g.myDiscardArray.forEach((obj, i) => {
+  let arr = JSON.parse(JSON.stringify(g.myDiscardArray));
+  console.log(arr);
+  let initialPoc = w.gameState.discardPointOfCompass; // 'North' etc
+  let arrTemp = [];
+  // arr can be any length between 0 and 4
+  // any changes here must NOT mutate arr
+  switch (arr.length) {
+    case 0:
+      // do nothing use arrTemp as is
+      break;
+    case 1:
+      // first card will always be 'on top' (on bottom too!) which is what we want
+      arrTemp.push(arr[0]);
+      break;
+    case 2:
+      if (initialPoc === 'North') {
+        // the order N then E is fine as-is
+        arrTemp.push(arr[0]);
+        arrTemp.push(arr[1]);
+      } else if (initialPoc === 'East') {
+        // the order E then S is fine as-is
+        arrTemp.push(arr[0]);
+        arrTemp.push(arr[1]);
+      } else if (initialPoc === 'South') {
+        // the order S then W is fine as-is
+        arrTemp.push(arr[0]);
+        arrTemp.push(arr[1]);
+      } else if (initialPoc === 'West') {
+        // the order W N needs adjust
+        arrTemp.push(arr[1]);
+        arrTemp.push(arr[0]);
+      } else {
+        // error
+      }
+      break;
+    case 3:
+      if (initialPoc === 'North') {
+        // the order N E S is fine as-is
+        arrTemp.push(arr[0]);
+        arrTemp.push(arr[1]);
+        arrTemp.push(arr[2]);
+      } else if (initialPoc === 'East') {
+        // the order E S W is fine as-is
+        arrTemp.push(arr[0]);
+        arrTemp.push(arr[1]);
+        arrTemp.push(arr[2]);
+      } else if (initialPoc === 'South') {
+        // the order N S W needs adjusting..
+        arrTemp.push(arr[1]);
+        arrTemp.push(arr[2]);
+        arrTemp.push(arr[0]);
+      } else if (initialPoc === 'West') {
+        // the order N E W needs adjusting..
+        arrTemp.push(arr[2]);
+        arrTemp.push(arr[0]);
+        arrTemp.push(arr[1]);
+      } else {
+        // error
+      }
+      break;
+    case 4:
+      if (initialPoc === 'North') {
+        // the order N E S W is fine as-is
+        arrTemp.push(arr[0]);
+        arrTemp.push(arr[1]);
+        arrTemp.push(arr[2]);
+        arrTemp.push(arr[3]);
+      } else if (initialPoc === 'East') {
+        // the order N E S W needs adjusting..
+        // N needs to go last
+        arrTemp.push(arr[1]);
+        arrTemp.push(arr[2]);
+        arrTemp.push(arr[3]);
+        arrTemp.push(arr[0]);
+      } else if (initialPoc === 'South') {
+        // the order N E S W needs adjusting..
+        arrTemp.push(arr[2]);
+        arrTemp.push(arr[3]);
+        arrTemp.push(arr[0]);
+        arrTemp.push(arr[1]);
+      } else if (initialPoc === 'West') {
+        // the order N E S W needs adjusting..
+        arrTemp.push(arr[3]);
+        arrTemp.push(arr[0]);
+        arrTemp.push(arr[1]);
+        arrTemp.push(arr[2]);
+      } else {
+        // error
+      }
+      break;
+  }
+  // use i for explicit order
+  //arr.forEach((obj, i) => {
+  // reverse the array of objects first
+  //arr.reverse();
+  for (var i = 0; i < arrTemp.length; i++) {
+    let obj = arrTemp[i];
     // now we can draw a card using each fileName in myDiscardArray
     // position of card depends on range of shuffleIndex and rotation
     // but these two variables are orthogonal
@@ -255,7 +323,7 @@ let paintDiscardArray = (p, g, w) => {
     let p5img = g.imgMap.get(obj.fileName);
     p.image(p5img, -cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight);
     p.pop();
-  });
+  }
 };
 
 let drawLabels = (p, g, w) => {

@@ -81,10 +81,12 @@ function App(Props) {
               return false;
             }
           }));
-    if (userPointOfCompassWrappedInArray.length === 0 || !isFourSeatsOccupied(undefined)) {
+    if (userPointOfCompassWrappedInArray.length === 0 || !(isFourSeatsOccupied(undefined) && state.lastAction !== "4 Passes - so fresh cards dealt")) {
       return false;
+    } else if (state.pack.length === 0) {
+      return true;
     } else {
-      return state.lastAction !== "4 Passes - so fresh cards dealt";
+      return state.discardIndex === 51;
     }
   };
   var isUndoVisible = function (param) {

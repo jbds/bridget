@@ -89,7 +89,7 @@ function reducer(state, action) {
                   dealIndex: state.dealIndex,
                   declarer: state.declarer,
                   discardIndex: state.discardIndex + 1 | 0,
-                  discardPointOfCompass: (state.discardIndex + 1 | 0) % 4 === 0 ? "Fred" : state.discardPointOfCompass,
+                  discardPointOfCompass: (state.discardIndex + 1 | 0) % 4 === 0 ? discardPoc : state.discardPointOfCompass,
                   discardSuit: (state.discardIndex + 1 | 0) % 4 === 0 ? cardDiscardSuit : state.discardSuit,
                   handVisible: state.handVisible,
                   isBiddingCycle: state.isBiddingCycle,
@@ -149,6 +149,7 @@ function reducer(state, action) {
           var discardIndex = window.gameState.discardIndex;
           var discardSuit = window.gameState.discardSuit;
           var lastAction = window.gameState.lastAction;
+          var discardPointOfCompass = window.gameState.discardPointOfCompass;
           return {
                   activePointOfCompass: poc$1,
                   bids: bids,
@@ -157,7 +158,7 @@ function reducer(state, action) {
                   dealIndex: dealIndex,
                   declarer: declarer,
                   discardIndex: discardIndex,
-                  discardPointOfCompass: undefined,
+                  discardPointOfCompass: discardPointOfCompass,
                   discardSuit: discardSuit,
                   handVisible: hV,
                   isBiddingCycle: isBiddingCycle,

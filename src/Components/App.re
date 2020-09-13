@@ -104,7 +104,10 @@ let make = () => {
     if (Array.length(userPointOfCompassWrappedInArray) === 0) {
       false;
     } else if (isFourSeatsOccupied()
-               && state.lastAction !== "4 Passes - so fresh cards dealt") {
+               && state.lastAction !== "4 Passes - so fresh cards dealt"
+               && (
+                 Array.length(state.pack) === 0 || state.discardIndex === 51
+               )) {
       true;
     } else {
       false;
