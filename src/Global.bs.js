@@ -110,6 +110,24 @@ function reducer(state, action) {
                   westDiscardX: init$1.westDiscardX
                 };
                 break;
+            case "South" :
+                var init$2 = state.transition;
+                tR = {
+                  northDiscardY: init$2.northDiscardY,
+                  eastDiscardX: init$2.eastDiscardX,
+                  southDiscardY: halfBaizeHeight,
+                  westDiscardX: init$2.westDiscardX
+                };
+                break;
+            case "West" :
+                var init$3 = state.transition;
+                tR = {
+                  northDiscardY: init$3.northDiscardY,
+                  eastDiscardX: init$3.eastDiscardX,
+                  southDiscardY: init$3.southDiscardY,
+                  westDiscardX: -halfBaizeHeight
+                };
+                break;
             default:
               tR = state.transition;
           }

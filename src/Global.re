@@ -123,6 +123,8 @@ let reducer = (state: TopLevel.state, action) => {
       switch (discardPoc) {
       | "North" => {...state.transition, northDiscardY: -. halfBaizeHeight}
       | "East" => {...state.transition, eastDiscardX: halfBaizeHeight}
+      | "South" => {...state.transition, southDiscardY: halfBaizeHeight}
+      | "West" => {...state.transition, westDiscardX: -. halfBaizeHeight}
       | _ => state.transition
       };
     };
