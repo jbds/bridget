@@ -42,6 +42,12 @@ let initialState: TopLevel.state = {
   pack: [||], // Shuffle.initialPack,
   pointOfCompassAndPlayers: [||],
   randomInt: 1,
+  transition: {
+    northDiscardY: 0.0,
+    eastDiscardX: 0.0,
+    southDiscardY: 0.0,
+    westDiscardX: 0.0,
+  },
 };
 
 let reducer = (state: TopLevel.state, action) => {
@@ -161,6 +167,12 @@ let reducer = (state: TopLevel.state, action) => {
       pack: [||],
       pointOfCompassAndPlayers: [||],
       randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
+      transition: {
+        northDiscardY: 0.0,
+        eastDiscardX: 0.0,
+        southDiscardY: 0.0,
+        westDiscardX: 0.0,
+      },
     };
   | LoginSync =>
     // Client state is now ENTIRELY REPLACED with server gameState
@@ -173,6 +185,7 @@ let reducer = (state: TopLevel.state, action) => {
     let dealer: option(string) = [%bs.raw "window.gameState.dealer"];
     let declarer: option(string) = [%bs.raw "window.gameState.declarer"];
     let hV: Shuffle.handVisible = [%bs.raw "window.gameState.handVisible"];
+    let tR: Shuffle.transition = [%bs.raw "window.gameState.transition"];
     let pOCAP: array(Shuffle.pointOfCompassAndPlayer) = [%bs.raw
       "window.gameState.pointOfCompassAndPlayers"
     ];
@@ -222,6 +235,7 @@ let reducer = (state: TopLevel.state, action) => {
       pack,
       pointOfCompassAndPlayers: pOCAP,
       randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
+      transition: tR,
     };
   | Test =>
     // make sure doMessage is NOT called in sidebar component

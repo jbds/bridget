@@ -2,6 +2,7 @@
 
 var List = require("bs-platform/lib/js/list.js");
 var $$Array = require("bs-platform/lib/js/array.js");
+var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 var Belt_List = require("bs-platform/lib/js/belt_List.js");
 var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 var Chicago$ReasonReactExamples = require("../Chicago.bs.js");
@@ -180,36 +181,25 @@ function execute(state) {
     totalTricksWestEast: undefined,
     scoreWestEast: chicagoScoreSheetRecordSubTotal_scoreWestEast
   };
-  return {
-          activePointOfCompass: state.discardIndex !== 51 ? winningDiscardPoc : endOfDealNextPoc,
-          bids: state.bids,
-          chicagoScoreSheet: state.discardIndex !== 51 || scoreSheetRecord.vulnerable !== "All" ? /* :: */[
-              myChicagoScoreSheetRecordWithOptionalScore,
-              chicagoScoreSheetTail
-            ] : /* :: */[
-              chicagoScoreSheetRecordSubTotal,
-              /* :: */[
-                myChicagoScoreSheetRecordWithOptionalScore,
-                chicagoScoreSheetTail
-              ]
-            ],
-          dealer: state.discardIndex !== 51 ? state.dealer : endOfDealNextPoc,
-          dealIndex: state.dealIndex,
-          declarer: state.discardIndex !== 51 ? state.declarer : undefined,
-          discardIndex: state.discardIndex,
-          discardPointOfCompass: state.discardPointOfCompass,
-          discardSuit: state.discardSuit,
-          handVisible: state.handVisible,
-          isBiddingCycle: state.isBiddingCycle,
-          isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
-          isDummyVisible: state.isDummyVisible,
-          isRebootVisible: state.isRebootVisible,
-          isReviewDealVisible: state.discardIndex === 51,
-          lastAction: "End of Trick",
-          pack: myPack,
-          pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-          randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-        };
+  var newrecord = Caml_obj.caml_obj_dup(state);
+  newrecord.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+  newrecord.pack = myPack;
+  newrecord.lastAction = "End of Trick";
+  newrecord.isReviewDealVisible = state.discardIndex === 51;
+  newrecord.declarer = state.discardIndex !== 51 ? state.declarer : undefined;
+  newrecord.dealer = state.discardIndex !== 51 ? state.dealer : endOfDealNextPoc;
+  newrecord.chicagoScoreSheet = state.discardIndex !== 51 || scoreSheetRecord.vulnerable !== "All" ? /* :: */[
+      myChicagoScoreSheetRecordWithOptionalScore,
+      chicagoScoreSheetTail
+    ] : /* :: */[
+      chicagoScoreSheetRecordSubTotal,
+      /* :: */[
+        myChicagoScoreSheetRecordWithOptionalScore,
+        chicagoScoreSheetTail
+      ]
+    ];
+  newrecord.activePointOfCompass = state.discardIndex !== 51 ? winningDiscardPoc : endOfDealNextPoc;
+  return newrecord;
 }
 
 exports.execute = execute;

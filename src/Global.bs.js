@@ -18,6 +18,13 @@ var initialState_pack = [];
 
 var initialState_pointOfCompassAndPlayers = [];
 
+var initialState_transition = {
+  northDiscardY: 0.0,
+  eastDiscardX: 0.0,
+  southDiscardY: 0.0,
+  westDiscardX: 0.0
+};
+
 var initialState = {
   activePointOfCompass: undefined,
   bids: /* [] */0,
@@ -37,7 +44,8 @@ var initialState = {
   lastAction: "None (initialState from Client)",
   pack: initialState_pack,
   pointOfCompassAndPlayers: initialState_pointOfCompassAndPlayers,
-  randomInt: 1
+  randomInt: 1,
+  transition: initialState_transition
 };
 
 function reducer(state, action) {
@@ -81,27 +89,16 @@ function reducer(state, action) {
                   }
                 }), state.pack);
           var poc = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
-          return {
-                  activePointOfCompass: poc,
-                  bids: state.bids,
-                  chicagoScoreSheet: state.chicagoScoreSheet,
-                  dealer: state.dealer,
-                  dealIndex: state.dealIndex,
-                  declarer: state.declarer,
-                  discardIndex: state.discardIndex + 1 | 0,
-                  discardPointOfCompass: (state.discardIndex + 1 | 0) % 4 === 0 ? discardPoc : state.discardPointOfCompass,
-                  discardSuit: (state.discardIndex + 1 | 0) % 4 === 0 ? cardDiscardSuit : state.discardSuit,
-                  handVisible: state.handVisible,
-                  isBiddingCycle: state.isBiddingCycle,
-                  isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
-                  isDummyVisible: discardPoc === pocFollowingDeclarer ? true : state.isDummyVisible,
-                  isRebootVisible: state.isRebootVisible,
-                  isReviewDealVisible: state.isReviewDealVisible,
-                  lastAction: "Discard",
-                  pack: myPack,
-                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-                };
+          var newrecord = Caml_obj.caml_obj_dup(state);
+          newrecord.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+          newrecord.pack = myPack;
+          newrecord.lastAction = "Discard";
+          newrecord.isDummyVisible = discardPoc === pocFollowingDeclarer ? true : state.isDummyVisible;
+          newrecord.discardSuit = (state.discardIndex + 1 | 0) % 4 === 0 ? cardDiscardSuit : state.discardSuit;
+          newrecord.discardPointOfCompass = (state.discardIndex + 1 | 0) % 4 === 0 ? discardPoc : state.discardPointOfCompass;
+          newrecord.discardIndex = state.discardIndex + 1 | 0;
+          newrecord.activePointOfCompass = poc;
+          return newrecord;
       case /* Sync */2 :
           ((window.isLastActionSync = true));
           return {
@@ -128,7 +125,13 @@ function reducer(state, action) {
                   lastAction: "Logout or Server Down",
                   pack: [],
                   pointOfCompassAndPlayers: [],
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
+                  transition: {
+                    northDiscardY: 0.0,
+                    eastDiscardX: 0.0,
+                    southDiscardY: 0.0,
+                    westDiscardX: 0.0
+                  }
                 };
       case /* LoginSync */3 :
           ((window.isLastActionSync = true));
@@ -136,6 +139,7 @@ function reducer(state, action) {
           var dealer = window.gameState.dealer;
           var declarer = window.gameState.declarer;
           var hV = window.gameState.handVisible;
+          var tR = window.gameState.transition;
           var pOCAP = window.gameState.pointOfCompassAndPlayers;
           var pack = window.gameState.pack;
           var dealIndex = window.gameState.dealIndex;
@@ -169,31 +173,15 @@ function reducer(state, action) {
                   lastAction: lastAction,
                   pack: pack,
                   pointOfCompassAndPlayers: pOCAP,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
+                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
+                  transition: tR
                 };
       case /* Test */4 :
           ((window.isLastActionSync = true));
-          return {
-                  activePointOfCompass: state.activePointOfCompass,
-                  bids: state.bids,
-                  chicagoScoreSheet: state.chicagoScoreSheet,
-                  dealer: state.dealer,
-                  dealIndex: state.dealIndex,
-                  declarer: state.declarer,
-                  discardIndex: state.discardIndex,
-                  discardPointOfCompass: state.discardPointOfCompass,
-                  discardSuit: state.discardSuit,
-                  handVisible: state.handVisible,
-                  isBiddingCycle: state.isBiddingCycle,
-                  isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
-                  isDummyVisible: state.isDummyVisible,
-                  isRebootVisible: state.isRebootVisible,
-                  isReviewDealVisible: state.isReviewDealVisible,
-                  lastAction: "Test",
-                  pack: state.pack,
-                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-                };
+          var newrecord$1 = Caml_obj.caml_obj_dup(state);
+          newrecord$1.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+          newrecord$1.lastAction = "Test";
+          return newrecord$1;
       case /* EndTrick */5 :
           return EndTrick$ReasonReactExamples.execute(state);
       
@@ -223,60 +211,29 @@ function reducer(state, action) {
                     return pointOfCompassAndPlayer;
                   }
                 }), myArray1);
-          return {
-                  activePointOfCompass: state.activePointOfCompass,
-                  bids: state.bids,
-                  chicagoScoreSheet: state.chicagoScoreSheet,
-                  dealer: state.dealer,
-                  dealIndex: state.dealIndex,
-                  declarer: state.declarer,
-                  discardIndex: state.discardIndex,
-                  discardPointOfCompass: state.discardPointOfCompass,
-                  discardSuit: state.discardSuit,
-                  handVisible: state.handVisible,
-                  isBiddingCycle: state.isBiddingCycle,
-                  isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
-                  isDummyVisible: state.isDummyVisible,
-                  isRebootVisible: state.isRebootVisible,
-                  isReviewDealVisible: state.isReviewDealVisible,
-                  lastAction: "AssignPlayer",
-                  pack: state.pack,
-                  pointOfCompassAndPlayers: myArray2,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-                };
+          var newrecord$2 = Caml_obj.caml_obj_dup(state);
+          newrecord$2.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+          newrecord$2.pointOfCompassAndPlayers = myArray2;
+          newrecord$2.lastAction = "AssignPlayer";
+          return newrecord$2;
       case /* BidAdd */1 :
           ((window.isLastActionSync = false));
-          return {
-                  activePointOfCompass: state.activePointOfCompass,
-                  bids: /* :: */[
-                    {
-                      contractLevel: action[0],
-                      contractSuit: "",
-                      contractPointOfCompass: state.activePointOfCompass,
-                      isDoubled: false,
-                      isRedoubled: false,
-                      isPass: false
-                    },
-                    state.bids
-                  ],
-                  chicagoScoreSheet: state.chicagoScoreSheet,
-                  dealer: state.dealer,
-                  dealIndex: state.dealIndex,
-                  declarer: state.declarer,
-                  discardIndex: state.discardIndex,
-                  discardPointOfCompass: state.discardPointOfCompass,
-                  discardSuit: state.discardSuit,
-                  handVisible: state.handVisible,
-                  isBiddingCycle: state.isBiddingCycle,
-                  isBiddingHideDenominationButtons: false,
-                  isDummyVisible: state.isDummyVisible,
-                  isRebootVisible: state.isRebootVisible,
-                  isReviewDealVisible: state.isReviewDealVisible,
-                  lastAction: "BidAdd",
-                  pack: state.pack,
-                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-                };
+          var newrecord$3 = Caml_obj.caml_obj_dup(state);
+          newrecord$3.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+          newrecord$3.lastAction = "BidAdd";
+          newrecord$3.isBiddingHideDenominationButtons = false;
+          newrecord$3.bids = /* :: */[
+            {
+              contractLevel: action[0],
+              contractSuit: "",
+              contractPointOfCompass: state.activePointOfCompass,
+              isDoubled: false,
+              isRedoubled: false,
+              isPass: false
+            },
+            state.bids
+          ];
+          return newrecord$3;
       case /* BidUpdate */2 :
           ((window.isLastActionSync = false));
           var bids$1 = state.bids;
@@ -301,27 +258,13 @@ function reducer(state, action) {
             tail
           ];
           var poc$2 = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
-          return {
-                  activePointOfCompass: poc$2,
-                  bids: bidsUpdated,
-                  chicagoScoreSheet: state.chicagoScoreSheet,
-                  dealer: state.dealer,
-                  dealIndex: state.dealIndex,
-                  declarer: state.declarer,
-                  discardIndex: state.discardIndex,
-                  discardPointOfCompass: state.discardPointOfCompass,
-                  discardSuit: state.discardSuit,
-                  handVisible: state.handVisible,
-                  isBiddingCycle: state.isBiddingCycle,
-                  isBiddingHideDenominationButtons: true,
-                  isDummyVisible: state.isDummyVisible,
-                  isRebootVisible: state.isRebootVisible,
-                  isReviewDealVisible: state.isReviewDealVisible,
-                  lastAction: "BidUpdate",
-                  pack: state.pack,
-                  pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                  randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-                };
+          var newrecord$4 = Caml_obj.caml_obj_dup(state);
+          newrecord$4.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+          newrecord$4.lastAction = "BidUpdate";
+          newrecord$4.isBiddingHideDenominationButtons = true;
+          newrecord$4.bids = bidsUpdated;
+          newrecord$4.activePointOfCompass = poc$2;
+          return newrecord$4;
       case /* BidAddSpecial */3 :
           var special = action[0];
           ((window.isLastActionSync = false));
@@ -343,244 +286,162 @@ function reducer(state, action) {
                         })) === /* [] */0) {
                   console.log("detected 4 passes");
                   ((window.isLastActionSync = false));
-                  return {
-                          activePointOfCompass: state.dealer,
-                          bids: /* [] */0,
-                          chicagoScoreSheet: state.chicagoScoreSheet,
-                          dealer: state.dealer,
-                          dealIndex: state.dealIndex,
-                          declarer: undefined,
-                          discardIndex: -1,
-                          discardPointOfCompass: state.discardPointOfCompass,
-                          discardSuit: state.discardSuit,
-                          handVisible: state.handVisible,
-                          isBiddingCycle: true,
-                          isBiddingHideDenominationButtons: true,
-                          isDummyVisible: false,
-                          isRebootVisible: state.isRebootVisible,
-                          isReviewDealVisible: state.isReviewDealVisible,
-                          lastAction: "4 Passes - so fresh cards dealt",
-                          pack: Shuffle$ReasonReactExamples.getShuffledPack(undefined),
-                          pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                          randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-                        };
+                  var newrecord$5 = Caml_obj.caml_obj_dup(state);
+                  newrecord$5.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                  newrecord$5.pack = Shuffle$ReasonReactExamples.getShuffledPack(undefined);
+                  newrecord$5.lastAction = "4 Passes - so fresh cards dealt";
+                  newrecord$5.isDummyVisible = false;
+                  newrecord$5.isBiddingHideDenominationButtons = true;
+                  newrecord$5.isBiddingCycle = true;
+                  newrecord$5.discardIndex = -1;
+                  newrecord$5.declarer = undefined;
+                  newrecord$5.bids = /* [] */0;
+                  newrecord$5.activePointOfCompass = state.dealer;
+                  return newrecord$5;
                 }
-                if (bidsLength < 3) {
-                  return {
-                          activePointOfCompass: poc$3,
-                          bids: /* :: */[
-                            {
-                              contractLevel: undefined,
-                              contractSuit: undefined,
-                              contractPointOfCompass: state.activePointOfCompass,
-                              isDoubled: false,
-                              isRedoubled: false,
-                              isPass: true
-                            },
-                            state.bids
-                          ],
-                          chicagoScoreSheet: state.chicagoScoreSheet,
-                          dealer: state.dealer,
-                          dealIndex: state.dealIndex,
-                          declarer: state.declarer,
-                          discardIndex: state.discardIndex,
-                          discardPointOfCompass: state.discardPointOfCompass,
-                          discardSuit: state.discardSuit,
-                          handVisible: state.handVisible,
-                          isBiddingCycle: state.isBiddingCycle,
-                          isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
-                          isDummyVisible: state.isDummyVisible,
-                          isRebootVisible: state.isRebootVisible,
-                          isReviewDealVisible: state.isReviewDealVisible,
-                          lastAction: "BidAddSpecial",
-                          pack: state.pack,
-                          pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                          randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-                        };
-                }
-                var hd1 = List.hd(state.bids);
-                var tl = List.tl(state.bids);
-                var hd2 = List.hd(tl);
-                if (!(hd1.isPass === true && hd2.isPass === true)) {
-                  return {
-                          activePointOfCompass: poc$3,
-                          bids: /* :: */[
-                            {
-                              contractLevel: undefined,
-                              contractSuit: undefined,
-                              contractPointOfCompass: state.activePointOfCompass,
-                              isDoubled: false,
-                              isRedoubled: false,
-                              isPass: true
-                            },
-                            state.bids
-                          ],
-                          chicagoScoreSheet: state.chicagoScoreSheet,
-                          dealer: state.dealer,
-                          dealIndex: state.dealIndex,
-                          declarer: state.declarer,
-                          discardIndex: state.discardIndex,
-                          discardPointOfCompass: state.discardPointOfCompass,
-                          discardSuit: state.discardSuit,
-                          handVisible: state.handVisible,
-                          isBiddingCycle: state.isBiddingCycle,
-                          isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
-                          isDummyVisible: state.isDummyVisible,
-                          isRebootVisible: state.isRebootVisible,
-                          isReviewDealVisible: state.isReviewDealVisible,
-                          lastAction: "BidAddSpecial",
-                          pack: state.pack,
-                          pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                          randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-                        };
-                }
-                var partnerPocByPoc = function (poc) {
-                  if (poc === undefined) {
-                    return "Error";
+                if (bidsLength >= 3) {
+                  var hd1 = List.hd(state.bids);
+                  var tl = List.tl(state.bids);
+                  var hd2 = List.hd(tl);
+                  if (hd1.isPass === true && hd2.isPass === true) {
+                    var partnerPocByPoc = function (poc) {
+                      if (poc === undefined) {
+                        return "Error";
+                      }
+                      switch (poc) {
+                        case "East" :
+                            return "West";
+                        case "North" :
+                            return "South";
+                        case "South" :
+                            return "North";
+                        case "West" :
+                            return "East";
+                        default:
+                          return "Error";
+                      }
+                    };
+                    var bidsListFiltered = Belt_List.keep(state.bids, (function (x) {
+                            return x.isPass === false;
+                          }));
+                    var bidRecordOfInterest1 = List.hd(bidsListFiltered);
+                    var tailOfInterest = List.tl(bidsListFiltered);
+                    var bidRecordOfInterest2 = bidRecordOfInterest1.contractLevel === undefined && (bidRecordOfInterest1.isDoubled === true || bidRecordOfInterest1.isRedoubled === true) ? List.hd(tailOfInterest) : bidRecordOfInterest1;
+                    var contractLevel = bidRecordOfInterest2.contractLevel;
+                    var contractSuit = bidRecordOfInterest2.contractSuit;
+                    var contractPoc = bidRecordOfInterest2.contractPointOfCompass;
+                    var isDoubled = bidRecordOfInterest1.contractLevel === undefined && bidRecordOfInterest1.isDoubled === true;
+                    var isRedoubled = bidRecordOfInterest1.contractLevel === undefined && bidRecordOfInterest1.isRedoubled === true;
+                    var bidsFilteredBySuitAnd2Poc = Belt_List.keep(state.bids, (function (x) {
+                            if (Caml_obj.caml_equal(x.contractSuit, contractSuit)) {
+                              if (Caml_obj.caml_equal(x.contractPointOfCompass, contractPoc)) {
+                                return true;
+                              } else {
+                                return Caml_obj.caml_equal(x.contractPointOfCompass, partnerPocByPoc(contractPoc));
+                              }
+                            } else {
+                              return false;
+                            }
+                          }));
+                    var bidsFilteredBySuitAnd2PocReversed = Belt_List.reverse(bidsFilteredBySuitAnd2Poc);
+                    var hd3 = List.hd(bidsFilteredBySuitAnd2PocReversed);
+                    var contractDeclarer = hd3.contractPointOfCompass;
+                    var chicagoScoreSheetHead = Belt_List.headExn(state.chicagoScoreSheet);
+                    var chicagoScoreSheetTail = Belt_List.tailExn(state.chicagoScoreSheet);
+                    var myChicagoScoreSheetRecord_vulnerable = chicagoScoreSheetHead.vulnerable;
+                    var myChicagoScoreSheetRecord_totalTricksNorthSouth = 0;
+                    var myChicagoScoreSheetRecord_totalTricksWestEast = 0;
+                    var myChicagoScoreSheetRecord = {
+                      vulnerable: myChicagoScoreSheetRecord_vulnerable,
+                      contractLevel: contractLevel,
+                      contractSuit: contractSuit,
+                      contractDeclarer: contractDeclarer,
+                      isDoubled: isDoubled,
+                      isRedoubled: isRedoubled,
+                      totalTricksNorthSouth: myChicagoScoreSheetRecord_totalTricksNorthSouth,
+                      scoreNorthSouth: undefined,
+                      totalTricksWestEast: myChicagoScoreSheetRecord_totalTricksWestEast,
+                      scoreWestEast: undefined
+                    };
+                    var newrecord$6 = Caml_obj.caml_obj_dup(state);
+                    newrecord$6.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                    newrecord$6.lastAction = contractLevel !== undefined ? "BidAddSpecial- 3 Passes" : "BidAddSpecial- 4 Passes";
+                    newrecord$6.isBiddingCycle = false;
+                    newrecord$6.declarer = contractDeclarer;
+                    newrecord$6.chicagoScoreSheet = contractLevel !== undefined ? /* :: */[
+                        myChicagoScoreSheetRecord,
+                        chicagoScoreSheetTail
+                      ] : chicagoScoreSheetTail;
+                    newrecord$6.activePointOfCompass = Shuffle$ReasonReactExamples.getNextActivePointOfCompass(contractDeclarer);
+                    return newrecord$6;
                   }
-                  switch (poc) {
-                    case "East" :
-                        return "West";
-                    case "North" :
-                        return "South";
-                    case "South" :
-                        return "North";
-                    case "West" :
-                        return "East";
-                    default:
-                      return "Error";
-                  }
-                };
-                var bidsListFiltered = Belt_List.keep(state.bids, (function (x) {
-                        return x.isPass === false;
-                      }));
-                var bidRecordOfInterest1 = List.hd(bidsListFiltered);
-                var tailOfInterest = List.tl(bidsListFiltered);
-                var bidRecordOfInterest2 = bidRecordOfInterest1.contractLevel === undefined && (bidRecordOfInterest1.isDoubled === true || bidRecordOfInterest1.isRedoubled === true) ? List.hd(tailOfInterest) : bidRecordOfInterest1;
-                var contractLevel = bidRecordOfInterest2.contractLevel;
-                var contractSuit = bidRecordOfInterest2.contractSuit;
-                var contractPoc = bidRecordOfInterest2.contractPointOfCompass;
-                var isDoubled = bidRecordOfInterest1.contractLevel === undefined && bidRecordOfInterest1.isDoubled === true;
-                var isRedoubled = bidRecordOfInterest1.contractLevel === undefined && bidRecordOfInterest1.isRedoubled === true;
-                var bidsFilteredBySuitAnd2Poc = Belt_List.keep(state.bids, (function (x) {
-                        if (Caml_obj.caml_equal(x.contractSuit, contractSuit)) {
-                          if (Caml_obj.caml_equal(x.contractPointOfCompass, contractPoc)) {
-                            return true;
-                          } else {
-                            return Caml_obj.caml_equal(x.contractPointOfCompass, partnerPocByPoc(contractPoc));
-                          }
-                        } else {
-                          return false;
-                        }
-                      }));
-                var bidsFilteredBySuitAnd2PocReversed = Belt_List.reverse(bidsFilteredBySuitAnd2Poc);
-                var hd3 = List.hd(bidsFilteredBySuitAnd2PocReversed);
-                var contractDeclarer = hd3.contractPointOfCompass;
-                var chicagoScoreSheetHead = Belt_List.headExn(state.chicagoScoreSheet);
-                var chicagoScoreSheetTail = Belt_List.tailExn(state.chicagoScoreSheet);
-                var myChicagoScoreSheetRecord_vulnerable = chicagoScoreSheetHead.vulnerable;
-                var myChicagoScoreSheetRecord_totalTricksNorthSouth = 0;
-                var myChicagoScoreSheetRecord_totalTricksWestEast = 0;
-                var myChicagoScoreSheetRecord = {
-                  vulnerable: myChicagoScoreSheetRecord_vulnerable,
-                  contractLevel: contractLevel,
-                  contractSuit: contractSuit,
-                  contractDeclarer: contractDeclarer,
-                  isDoubled: isDoubled,
-                  isRedoubled: isRedoubled,
-                  totalTricksNorthSouth: myChicagoScoreSheetRecord_totalTricksNorthSouth,
-                  scoreNorthSouth: undefined,
-                  totalTricksWestEast: myChicagoScoreSheetRecord_totalTricksWestEast,
-                  scoreWestEast: undefined
-                };
-                return {
-                        activePointOfCompass: Shuffle$ReasonReactExamples.getNextActivePointOfCompass(contractDeclarer),
-                        bids: state.bids,
-                        chicagoScoreSheet: contractLevel !== undefined ? /* :: */[
-                            myChicagoScoreSheetRecord,
-                            chicagoScoreSheetTail
-                          ] : chicagoScoreSheetTail,
-                        dealer: state.dealer,
-                        dealIndex: state.dealIndex,
-                        declarer: contractDeclarer,
-                        discardIndex: state.discardIndex,
-                        discardPointOfCompass: state.discardPointOfCompass,
-                        discardSuit: state.discardSuit,
-                        handVisible: state.handVisible,
-                        isBiddingCycle: false,
-                        isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
-                        isDummyVisible: state.isDummyVisible,
-                        isRebootVisible: state.isRebootVisible,
-                        isReviewDealVisible: state.isReviewDealVisible,
-                        lastAction: contractLevel !== undefined ? "BidAddSpecial- 3 Passes" : "BidAddSpecial- 4 Passes",
-                        pack: state.pack,
-                        pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                        randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-                      };
+                  var newrecord$7 = Caml_obj.caml_obj_dup(state);
+                  newrecord$7.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                  newrecord$7.lastAction = "BidAddSpecial";
+                  newrecord$7.bids = /* :: */[
+                    {
+                      contractLevel: undefined,
+                      contractSuit: undefined,
+                      contractPointOfCompass: state.activePointOfCompass,
+                      isDoubled: false,
+                      isRedoubled: false,
+                      isPass: true
+                    },
+                    state.bids
+                  ];
+                  newrecord$7.activePointOfCompass = poc$3;
+                  return newrecord$7;
+                }
+                var newrecord$8 = Caml_obj.caml_obj_dup(state);
+                newrecord$8.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                newrecord$8.lastAction = "BidAddSpecial";
+                newrecord$8.bids = /* :: */[
+                  {
+                    contractLevel: undefined,
+                    contractSuit: undefined,
+                    contractPointOfCompass: state.activePointOfCompass,
+                    isDoubled: false,
+                    isRedoubled: false,
+                    isPass: true
+                  },
+                  state.bids
+                ];
+                newrecord$8.activePointOfCompass = poc$3;
+                return newrecord$8;
             case "X" :
-                return {
-                        activePointOfCompass: poc$3,
-                        bids: /* :: */[
-                          {
-                            contractLevel: undefined,
-                            contractSuit: undefined,
-                            contractPointOfCompass: undefined,
-                            isDoubled: true,
-                            isRedoubled: false,
-                            isPass: false
-                          },
-                          state.bids
-                        ],
-                        chicagoScoreSheet: state.chicagoScoreSheet,
-                        dealer: state.dealer,
-                        dealIndex: state.dealIndex,
-                        declarer: state.declarer,
-                        discardIndex: state.discardIndex,
-                        discardPointOfCompass: state.discardPointOfCompass,
-                        discardSuit: state.discardSuit,
-                        handVisible: state.handVisible,
-                        isBiddingCycle: state.isBiddingCycle,
-                        isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
-                        isDummyVisible: state.isDummyVisible,
-                        isRebootVisible: state.isRebootVisible,
-                        isReviewDealVisible: state.isReviewDealVisible,
-                        lastAction: "BidAddSpecial - X",
-                        pack: state.pack,
-                        pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                        randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-                      };
+                var newrecord$9 = Caml_obj.caml_obj_dup(state);
+                newrecord$9.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                newrecord$9.lastAction = "BidAddSpecial - X";
+                newrecord$9.bids = /* :: */[
+                  {
+                    contractLevel: undefined,
+                    contractSuit: undefined,
+                    contractPointOfCompass: undefined,
+                    isDoubled: true,
+                    isRedoubled: false,
+                    isPass: false
+                  },
+                  state.bids
+                ];
+                newrecord$9.activePointOfCompass = poc$3;
+                return newrecord$9;
             case "XX" :
-                return {
-                        activePointOfCompass: poc$3,
-                        bids: /* :: */[
-                          {
-                            contractLevel: undefined,
-                            contractSuit: undefined,
-                            contractPointOfCompass: state.activePointOfCompass,
-                            isDoubled: false,
-                            isRedoubled: true,
-                            isPass: false
-                          },
-                          state.bids
-                        ],
-                        chicagoScoreSheet: state.chicagoScoreSheet,
-                        dealer: state.dealer,
-                        dealIndex: state.dealIndex,
-                        declarer: state.declarer,
-                        discardIndex: state.discardIndex,
-                        discardPointOfCompass: state.discardPointOfCompass,
-                        discardSuit: state.discardSuit,
-                        handVisible: state.handVisible,
-                        isBiddingCycle: state.isBiddingCycle,
-                        isBiddingHideDenominationButtons: state.isBiddingHideDenominationButtons,
-                        isDummyVisible: state.isDummyVisible,
-                        isRebootVisible: state.isRebootVisible,
-                        isReviewDealVisible: state.isReviewDealVisible,
-                        lastAction: "BidAddSpecial - XX",
-                        pack: state.pack,
-                        pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-                        randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-                      };
+                var newrecord$10 = Caml_obj.caml_obj_dup(state);
+                newrecord$10.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                newrecord$10.lastAction = "BidAddSpecial - XX";
+                newrecord$10.bids = /* :: */[
+                  {
+                    contractLevel: undefined,
+                    contractSuit: undefined,
+                    contractPointOfCompass: state.activePointOfCompass,
+                    isDoubled: false,
+                    isRedoubled: true,
+                    isPass: false
+                  },
+                  state.bids
+                ];
+                newrecord$10.activePointOfCompass = poc$3;
+                return newrecord$10;
             default:
               return state;
           }

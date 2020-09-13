@@ -19,4 +19,5 @@ type state = {
   pack: Shuffle.pack,
   pointOfCompassAndPlayers: array(Shuffle.pointOfCompassAndPlayer),
   randomInt: int,
+  transition: Shuffle.transition,
 };

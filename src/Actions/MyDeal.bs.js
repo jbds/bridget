@@ -1,6 +1,7 @@
 'use strict';
 
 var List = require("bs-platform/lib/js/list.js");
+var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 var Shuffle$ReasonReactExamples = require("../Shuffle.bs.js");
 
 var Online = require('../Online.bs');
@@ -50,30 +51,24 @@ function execute(state) {
     totalTricksWestEast: undefined,
     scoreWestEast: undefined
   };
-  return {
-          activePointOfCompass: state.dealer,
-          bids: /* [] */0,
-          chicagoScoreSheet: /* :: */[
-            chicagoScoreSheetRecord,
-            state.chicagoScoreSheet
-          ],
-          dealer: state.dealer,
-          dealIndex: state.dealIndex,
-          declarer: undefined,
-          discardIndex: -1,
-          discardPointOfCompass: state.discardPointOfCompass,
-          discardSuit: state.discardSuit,
-          handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
-          isBiddingCycle: true,
-          isBiddingHideDenominationButtons: true,
-          isDummyVisible: false,
-          isRebootVisible: state.isRebootVisible,
-          isReviewDealVisible: false,
-          lastAction: "Deal",
-          pack: Shuffle$ReasonReactExamples.getShuffledPack(undefined),
-          pointOfCompassAndPlayers: state.pointOfCompassAndPlayers,
-          randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined)
-        };
+  var newrecord = Caml_obj.caml_obj_dup(state);
+  newrecord.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+  newrecord.pack = Shuffle$ReasonReactExamples.getShuffledPack(undefined);
+  newrecord.lastAction = "Deal";
+  newrecord.isReviewDealVisible = false;
+  newrecord.isDummyVisible = false;
+  newrecord.isBiddingHideDenominationButtons = true;
+  newrecord.isBiddingCycle = true;
+  newrecord.handVisible = Shuffle$ReasonReactExamples.initialHandVisible;
+  newrecord.discardIndex = -1;
+  newrecord.declarer = undefined;
+  newrecord.chicagoScoreSheet = /* :: */[
+    chicagoScoreSheetRecord,
+    state.chicagoScoreSheet
+  ];
+  newrecord.bids = /* [] */0;
+  newrecord.activePointOfCompass = state.dealer;
+  return newrecord;
 }
 
 exports.execute = execute;

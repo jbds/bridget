@@ -18,7 +18,7 @@
   window.userState = {}; // prevent undefined error before p5 starts up
 
   // be certain we have the correct version of bundled file aka index.js
-  document.title = 'Bridget v0.80';
+  document.title = 'Bridget v0.81';
 |};
 
 // all sidebar and biddingWindow events are managed by ReasonReact components (ReasonML)
@@ -115,6 +115,8 @@ const callbackFunctionForP5 = (p) => {
     // waits for preload to complete, then runs once
     g.canvasWidth = p.windowHeight;
     g.canvasHeight = p.windowHeight;
+    w.northDiscardY = -p.windowHeight / 2.0;
+
     //get a handle on the canvas so we can adjust z-index
     g.cnv = p.createCanvas(g.canvasWidth, g.canvasHeight);
     // z-index has no effect unless we set position to absolute too

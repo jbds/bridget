@@ -1,4 +1,3 @@
-
 // original was playingCardRank
 // had extra value NoRank - code smell
 type rank =
@@ -14,28 +13,25 @@ type rank =
   | Five
   | Four
   | Three
-  | Two
-;
+  | Two;
 
 // original was playingCardSuit
 // also had dummy suit NoSuit - code smell
-type suit = 
+type suit =
   | Spades
   | Hearts
   | Diamonds
-  | Clubs
-;
+  | Clubs;
 
 type compassPoint =
   | North
   | East
   | South
-  | West
-;
+  | West;
 
 type pointOfCompassAndPlayer = {
   pointOfCompass: string,
-  player: string
+  player: string,
 };
 
 // all cards start in the dealers hand
@@ -46,40 +42,36 @@ type lifecycle =
   | Dealer
   | Hand
   | Discard
-  | Trick
-;
-
+  | Trick;
 
 // define an individual card as a record type, rather than tuple
 // unique identifier is the noTrumpValue
 type card = {
-  noTrumpValue: int, 
+  noTrumpValue: int,
   handOrder: int,
   shuffleIndex: int,
-  rank: rank,
-  suit: suit, 
+  rank,
+  suit,
   fileName: string,
-  lifecycle: lifecycle
+  lifecycle,
 };
 
 //type pack = list(card);
 type pack = array(card);
 
+type handVisible = {
+  north: bool,
+  east: bool,
+  south: bool,
+  west: bool,
+};
 
-type handVisible = {north: bool, east: bool, south: bool, west: bool};
-
-// this is the game state that we will share amongst all users who are registered at the server
-// it is a single record which will be passed to and broadcast from the server
-// type state = {
-//   pack: pack,
-//   handVisible: handVisible,
-//   dealer: option(compassPoint),
-//   //cardsDealtCount: int,
-//   pointOfCompassAndPlayers: array(pointOfCompassAndPlayer),
-//   randomInt: int
-// };
-
-
+type transition = {
+  northDiscardY: float,
+  eastDiscardX: float,
+  southDiscardY: float,
+  westDiscardX: float,
+};
 
 /** VALUE DEFINITIONS */
 
@@ -97,20 +89,20 @@ let getShuffledPack: unit => pack;
 
 let impureGetTimeBasedSeedUpTo60k: unit => int;
 
-let getNextPointOfCompass: (option(string)) => string;
+let getNextPointOfCompass: option(string) => string;
 
 let getRandomCompassPoint: int => string;
 
 let initialPoc: string;
 
-let pocAsString: (option(string)) => string;
+let pocAsString: option(string) => string;
 
 //let partnerPocAsString: (option(string)) => string;
 
-let optionIntAsString: (option(int)) => string;
+let optionIntAsString: option(int) => string;
 
-let getNextActivePointOfCompass: (option(string)) => option(string);
+let getNextActivePointOfCompass: option(string) => option(string);
 
-let getSuitAsOptionString: (suit) => option(string);
+let getSuitAsOptionString: suit => option(string);
 
-let optionIntAsInt: (option(int)) => int;
+let optionIntAsInt: option(int) => int;
