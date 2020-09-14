@@ -135,7 +135,7 @@ let reducer = (state: TopLevel.state, action) => {
     let myDiscardArray = Belt.Array.keep(myPack, x => x.lifecycle === Discard);
     Js.log("QtyDiscards");
     Js.log(Array.length(myDiscardArray));
-    let myID: int =
+    let _myID: int =
       Array.length(myDiscardArray) === 4
         ? [%raw
           "setTimeout(function(){document.getElementById('btnEndTrick').click();}, 2000)"
