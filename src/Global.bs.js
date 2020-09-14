@@ -138,7 +138,7 @@ function reducer(state, action) {
           console.log("QtyDiscards");
           console.log(myDiscardArray.length);
           if (myDiscardArray.length === 4) {
-            ((setTimeout(function(){document.getElementById('btnEndTrick').click();}, 2000)));
+            ((setTimeout(function(){document.getElementById('btnEndTrick').click();}, 2500)));
           }
           var newrecord = Caml_obj.caml_obj_dup(state);
           newrecord.transition = tR;
