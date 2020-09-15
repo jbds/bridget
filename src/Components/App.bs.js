@@ -180,7 +180,7 @@ function App(Props) {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* EndTrick */5,
+                      action: /* EndTrick */6,
                       label: "End Trick",
                       id: "btnEndTrick",
                       isVisible: false
@@ -192,13 +192,13 @@ function App(Props) {
                       isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Sync */2,
+                      action: /* Sync */3,
                       label: "Sync state with gameState",
                       id: "btnSync",
                       isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* LoginSync */3,
+                      action: /* LoginSync */4,
                       label: "Login sync with server",
                       id: "btnLoginSync",
                       isVisible: false

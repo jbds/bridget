@@ -8,6 +8,7 @@ type action =
   | Shuffle
   //| Flip (Shuffle.compassPoint)
   | Discard
+  | PostDiscard
   | Sync
   | LoginSync
   | Test
@@ -158,6 +159,7 @@ let reducer = (state: TopLevel.state, action) => {
       lastAction: "Discard",
       transition: tR,
     };
+  | PostDiscard => state
   | Sync =>
     // aka Logout or perhaps Server Down
     //Js.log("Action - Sync");

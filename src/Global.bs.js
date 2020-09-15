@@ -151,7 +151,9 @@ function reducer(state, action) {
           newrecord.discardIndex = state.discardIndex + 1 | 0;
           newrecord.activePointOfCompass = poc;
           return newrecord;
-      case /* Sync */2 :
+      case /* PostDiscard */2 :
+          return state;
+      case /* Sync */3 :
           ((window.isLastActionSync = true));
           return {
                   activePointOfCompass: undefined,
@@ -185,7 +187,7 @@ function reducer(state, action) {
                     westDiscardX: 0.0
                   }
                 };
-      case /* LoginSync */3 :
+      case /* LoginSync */4 :
           ((window.isLastActionSync = true));
           var cSS = window.gameState.chicagoScoreSheet;
           var dealer = window.gameState.dealer;
@@ -228,13 +230,13 @@ function reducer(state, action) {
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
                   transition: tR$1
                 };
-      case /* Test */4 :
+      case /* Test */5 :
           ((window.isLastActionSync = true));
           var newrecord$1 = Caml_obj.caml_obj_dup(state);
           newrecord$1.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
           newrecord$1.lastAction = "Test";
           return newrecord$1;
-      case /* EndTrick */5 :
+      case /* EndTrick */6 :
           return EndTrick$ReasonReactExamples.execute(state);
       
     }

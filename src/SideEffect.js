@@ -275,8 +275,6 @@ let paintDiscardArray = (p, g, w) => {
   }
   // use i for explicit order
   //arr.forEach((obj, i) => {
-  // reverse the array of objects first
-  //arr.reverse();
   for (var i = 0; i < arrTemp.length; i++) {
     let obj = arrTemp[i];
     // now we can draw a card using each fileName in myDiscardArray
