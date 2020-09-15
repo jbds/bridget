@@ -214,6 +214,13 @@ let make = () => {
         />
         <ButtonStd
           dispatch
+          action=PostDiscard
+          label="Post Discard"
+          id="btnPostDiscard"
+          isVisible=false
+        />
+        <ButtonStd
+          dispatch
           action=Discard
           label="Discard"
           id="btnDiscard"

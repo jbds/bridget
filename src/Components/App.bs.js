@@ -186,6 +186,12 @@ function App(Props) {
                       isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
+                      action: /* PostDiscard */2,
+                      label: "Post Discard",
+                      id: "btnPostDiscard",
+                      isVisible: false
+                    }), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                      dispatch: dispatch,
                       action: /* Discard */1,
                       label: "Discard",
                       id: "btnDiscard",

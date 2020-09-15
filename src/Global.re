@@ -139,7 +139,7 @@ let reducer = (state: TopLevel.state, action) => {
     let _myID: int =
       Array.length(myDiscardArray) === 4
         ? [%raw
-          "setTimeout(function(){document.getElementById('btnEndTrick').click();}, 2500)"
+          "setTimeout(function(){document.getElementById('btnPostDiscard').click();}, 500)"
         ]
         : 0;
     {
@@ -159,7 +159,11 @@ let reducer = (state: TopLevel.state, action) => {
       lastAction: "Discard",
       transition: tR,
     };
-  | PostDiscard => state
+  | PostDiscard =>
+    let _myID: int = [%raw
+      "setTimeout(function(){document.getElementById('btnEndTrick').click();}, 2000)"
+    ];
+    {...state, lastAction: "PostDiscard"};
   | Sync =>
     // aka Logout or perhaps Server Down
     //Js.log("Action - Sync");
