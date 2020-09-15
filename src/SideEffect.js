@@ -120,9 +120,9 @@ let drawCards = (p, g, w, pointOfCompass) => {
   p.pop();
 }
 
-let paintHandArray = (p, g) => {
-  let cardWidth = g.canvasHeight * g.cardHeightToCanvasHeightRatio / g.cardAspectRatio;
-  let cardHeight = g.canvasHeight * g.cardHeightToCanvasHeightRatio;
+let paintHandArray = (p, g, w) => {
+  let cardWidth = w.canvasHeight * w.cardHeightToCanvasHeightRatio / w.cardAspectRatio;
+  let cardHeight = w.canvasHeight * w.cardHeightToCanvasHeightRatio;
   // 37px max width before honour cards show pic border
   // NB visible segment has 20% added for overlap on all except last card
   let cardVisibleSegmentWidthToCardWidthRatio = 37 / 216;
@@ -139,9 +139,9 @@ let paintHandArray = (p, g) => {
       p.image(
         p5img,
         0,
-        -cardHeight * g.cardSegmentHeightToCardRatio,
+        -cardHeight * w.cardSegmentHeightToCardRatio,
         cardWidth * cardVisibleSegmentWidthToCardWidthRatio * 1.2,
-        cardHeight * g.cardSegmentHeightToCardRatio,
+        cardHeight * w.cardSegmentHeightToCardRatio,
         0,
         0,
         37 * 1.2,
@@ -151,9 +151,9 @@ let paintHandArray = (p, g) => {
       p.image(
         p5img,
         0,
-        -cardHeight * g.cardSegmentHeightToCardRatio,
+        -cardHeight * w.cardSegmentHeightToCardRatio,
         cardWidth * cardVisibleSegmentWidthToCardWidthRatio,
-        cardHeight * g.cardSegmentHeightToCardRatio,
+        cardHeight * w.cardSegmentHeightToCardRatio,
         0,
         0,
         37,
@@ -169,8 +169,8 @@ let paintHandArray = (p, g) => {
 
 let paintDiscardArray = (p, g, w) => {
   //console.log('discarding');
-  let cardWidth = w.m * w.innerHeight * g.cardHeightToCanvasHeightRatio / g.cardAspectRatio;
-  let cardHeight = w.m * w.innerHeight * g.cardHeightToCanvasHeightRatio;
+  let cardWidth = w.m * w.innerHeight * w.cardHeightToCanvasHeightRatio / w.cardAspectRatio;
+  let cardHeight = w.m * w.innerHeight * w.cardHeightToCanvasHeightRatio;
   // we need to paint the discarded cards in a specific order
   // so sort in-place N, E, S, W for shuffleIndex <=12, <=25, <=38, <=51
   // the ordering here was corrected empirically!
