@@ -169,12 +169,8 @@ let paintHandArray = (p, g) => {
 
 let paintDiscardArray = (p, g, w) => {
   //console.log('discarding');
-  // scale to be reviewed
-  //let m = 0.65; //0.55;
-  let cardWidth = w.m * g.canvasHeight * g.cardHeightToCanvasHeightRatio / g.cardAspectRatio;
-  let cardHeight = w.m * g.canvasHeight * g.cardHeightToCanvasHeightRatio;
-  //let cardHeightOffsetFraction = 0.275;
-  //let cardWidthOffsetFraction = 0.50;
+  let cardWidth = w.m * w.innerHeight * g.cardHeightToCanvasHeightRatio / g.cardAspectRatio;
+  let cardHeight = w.m * w.innerHeight * g.cardHeightToCanvasHeightRatio;
   // we need to paint the discarded cards in a specific order
   // so sort in-place N, E, S, W for shuffleIndex <=12, <=25, <=38, <=51
   // the ordering here was corrected empirically!
