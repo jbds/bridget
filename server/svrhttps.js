@@ -1,6 +1,6 @@
 'use strict';
 
-// Last update: 13/09/20
+// Last update: 15/09/20
 
 const session = require('express-session');
 const express = require('express');
@@ -49,7 +49,10 @@ let gameState = {
   pack: [],
   pointOfCompassAndPlayers: [],
   randomInt: -999,
-  transition: { northStartY: 0.0, eastStartX: 0.0, southStartY: 0.0, westStartX: 0.0 }
+  transition: {
+    northStartY: 0.0, eastStartX: 0.0, southStartY: 0.0, westStartX: 0.0,
+    northEndY: 0.0, eastEndX: 0.0, southEndY: 0.0, westEndX: 0.0
+  }
 };
 
 // shallow copy?
