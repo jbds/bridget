@@ -18,7 +18,24 @@
   window.userState = {}; // prevent undefined error before p5 starts up
 
   // be certain we have the correct version of bundled file aka index.js
-  document.title = 'Bridget v0.92';
+  document.title = 'Bridget v0.93';
+
+  // for transitions we need to move card constants up to global scope
+  // std playing card is 3.5in x 2.25in and svg is 336px x 216px
+  window.cardAspectRatio = 3.5 / 2.25;
+  // For card segments on periphery to just meet without overlap
+  // we need cardHeightToCanvasHeightRatio of 336 / (2 * 91 + 13 * 37) or approx 0.507
+  window.cardHeightToCanvasHeightRatio = 336 / 663;
+  // 91px min height that allows visibility of rank and suit
+  window.cardSegmentHeightToCardRatio = 91 / 336;
+  // discarded cards magnification factor
+  window.m = 0.65;
+  // discarded cards relative offset
+  window.cardHeightOffsetFraction = 0.275;
+  window.cardWidthOffsetFraction = 0.50;
+
+
+
 |};
 
 // all sidebar and biddingWindow events are managed by ReasonReact components (ReasonML)

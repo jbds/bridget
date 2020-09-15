@@ -170,11 +170,11 @@ let paintHandArray = (p, g) => {
 let paintDiscardArray = (p, g, w) => {
   //console.log('discarding');
   // scale to be reviewed
-  let m = 0.65; //0.55;
-  let cardWidth = m * g.canvasHeight * g.cardHeightToCanvasHeightRatio / g.cardAspectRatio;
-  let cardHeight = m * g.canvasHeight * g.cardHeightToCanvasHeightRatio;
-  let cardHeightOffsetFraction = 0.275;
-  let cardWidthOffsetFraction = 0.50;
+  //let m = 0.65; //0.55;
+  let cardWidth = w.m * g.canvasHeight * g.cardHeightToCanvasHeightRatio / g.cardAspectRatio;
+  let cardHeight = w.m * g.canvasHeight * g.cardHeightToCanvasHeightRatio;
+  //let cardHeightOffsetFraction = 0.275;
+  //let cardWidthOffsetFraction = 0.50;
   // we need to paint the discarded cards in a specific order
   // so sort in-place N, E, S, W for shuffleIndex <=12, <=25, <=38, <=51
   // the ordering here was corrected empirically!
@@ -303,25 +303,25 @@ let paintDiscardArray = (p, g, w) => {
         // good for all rotations, because x=x and y=y all angles
         //p.translate(0, -cardHeight * cardHeightOffsetFraction);
         //p.translate(0, g.northDiscardInitialY);
-        w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, -cardHeight * cardHeightOffsetFraction, 0.40);
+        w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, -cardHeight * w.cardHeightOffsetFraction, 0.40);
         p.translate(0, w.gameState.transition.northStartY);
         break;
       // E
       case (obj.shuffleIndex < 26):
         //p.translate(cardWidth * cardWidthOffsetFraction, 0);
-        w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, cardWidth * cardWidthOffsetFraction, 0.40);
+        w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, cardWidth * w.cardWidthOffsetFraction, 0.40);
         p.translate(w.gameState.transition.eastStartX, 0);
         break;
       // S
       case (obj.shuffleIndex < 39):
         //p.translate(0, cardHeight * cardHeightOffsetFraction);
-        w.gameState.transition.southStartY = p.lerp(w.gameState.transition.southStartY, cardHeight * cardHeightOffsetFraction, 0.40);
+        w.gameState.transition.southStartY = p.lerp(w.gameState.transition.southStartY, cardHeight * w.cardHeightOffsetFraction, 0.40);
         p.translate(0, w.gameState.transition.southStartY);
         break;
       // W
       case (obj.shuffleIndex < 52):
         //p.translate(-cardWidth * cardWidthOffsetFraction, 0);
-        w.gameState.transition.westStartX = p.lerp(w.gameState.transition.westStartX, -cardWidth * cardWidthOffsetFraction, 0.40);
+        w.gameState.transition.westStartX = p.lerp(w.gameState.transition.westStartX, -cardWidth * w.cardWidthOffsetFraction, 0.40);
         p.translate(w.gameState.transition.westStartX, 0);
         break;
       default:
