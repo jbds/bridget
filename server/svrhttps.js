@@ -49,7 +49,7 @@ let gameState = {
   pack: [],
   pointOfCompassAndPlayers: [],
   randomInt: -999,
-  transition: { northDiscardY: 0.0, eastDiscardX: 0.0, southDiscardY: 0.0, westDiscardX: 0.0 }
+  transition: { northStartY: 0.0, eastStartX: 0.0, southStartY: 0.0, westStartX: 0.0 }
 };
 
 // shallow copy?

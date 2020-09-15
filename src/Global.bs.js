@@ -19,10 +19,10 @@ var initialState_pack = [];
 var initialState_pointOfCompassAndPlayers = [];
 
 var initialState_transition = {
-  northDiscardY: 0.0,
-  eastDiscardX: 0.0,
-  southDiscardY: 0.0,
-  westDiscardX: 0.0
+  northStartY: 0.0,
+  eastStartX: 0.0,
+  southStartY: 0.0,
+  westStartX: 0.0
 };
 
 var initialState = {
@@ -95,37 +95,37 @@ function reducer(state, action) {
             case "East" :
                 var init = state.transition;
                 tR = {
-                  northDiscardY: init.northDiscardY,
-                  eastDiscardX: halfBaizeHeight,
-                  southDiscardY: init.southDiscardY,
-                  westDiscardX: init.westDiscardX
+                  northStartY: init.northStartY,
+                  eastStartX: halfBaizeHeight,
+                  southStartY: init.southStartY,
+                  westStartX: init.westStartX
                 };
                 break;
             case "North" :
                 var init$1 = state.transition;
                 tR = {
-                  northDiscardY: -halfBaizeHeight,
-                  eastDiscardX: init$1.eastDiscardX,
-                  southDiscardY: init$1.southDiscardY,
-                  westDiscardX: init$1.westDiscardX
+                  northStartY: -halfBaizeHeight,
+                  eastStartX: init$1.eastStartX,
+                  southStartY: init$1.southStartY,
+                  westStartX: init$1.westStartX
                 };
                 break;
             case "South" :
                 var init$2 = state.transition;
                 tR = {
-                  northDiscardY: init$2.northDiscardY,
-                  eastDiscardX: init$2.eastDiscardX,
-                  southDiscardY: halfBaizeHeight,
-                  westDiscardX: init$2.westDiscardX
+                  northStartY: init$2.northStartY,
+                  eastStartX: init$2.eastStartX,
+                  southStartY: halfBaizeHeight,
+                  westStartX: init$2.westStartX
                 };
                 break;
             case "West" :
                 var init$3 = state.transition;
                 tR = {
-                  northDiscardY: init$3.northDiscardY,
-                  eastDiscardX: init$3.eastDiscardX,
-                  southDiscardY: init$3.southDiscardY,
-                  westDiscardX: -halfBaizeHeight
+                  northStartY: init$3.northStartY,
+                  eastStartX: init$3.eastStartX,
+                  southStartY: init$3.southStartY,
+                  westStartX: -halfBaizeHeight
                 };
                 break;
             default:
@@ -184,10 +184,10 @@ function reducer(state, action) {
                   pointOfCompassAndPlayers: [],
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
                   transition: {
-                    northDiscardY: 0.0,
-                    eastDiscardX: 0.0,
-                    southDiscardY: 0.0,
-                    westDiscardX: 0.0
+                    northStartY: 0.0,
+                    eastStartX: 0.0,
+                    southStartY: 0.0,
+                    westStartX: 0.0
                   }
                 };
       case /* LoginSync */4 :

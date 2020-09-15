@@ -70,10 +70,10 @@ type handVisible = {
 };
 
 type transition = {
-  northDiscardY: float,
-  eastDiscardX: float,
-  southDiscardY: float,
-  westDiscardX: float,
+  northStartY: float,
+  eastStartX: float,
+  southStartY: float,
+  westStartX: float,
 };
 
 // VALUE DEFINITIONS
@@ -680,9 +680,7 @@ let getNextPointOfCompass = poc => {
   switch (poc) {
   | None =>
     // used on New Game only
-    getRandomCompassPoint(
-      impureGetTimeBasedSeedUpTo60k(),
-    )
+    getRandomCompassPoint(impureGetTimeBasedSeedUpTo60k())
   | Some("North") => "East"
   | Some("East") => "South"
   | Some("South") => "West"

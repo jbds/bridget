@@ -44,10 +44,10 @@ let initialState: TopLevel.state = {
   pointOfCompassAndPlayers: [||],
   randomInt: 1,
   transition: {
-    northDiscardY: 0.0,
-    eastDiscardX: 0.0,
-    southDiscardY: 0.0,
-    westDiscardX: 0.0,
+    northStartY: 0.0,
+    eastStartX: 0.0,
+    southStartY: 0.0,
+    westStartX: 0.0,
   },
 };
 
@@ -122,10 +122,10 @@ let reducer = (state: TopLevel.state, action) => {
     //Js.log(halfBaizeHeight);
     let tR = {
       switch (discardPoc) {
-      | "North" => {...state.transition, northDiscardY: -. halfBaizeHeight}
-      | "East" => {...state.transition, eastDiscardX: halfBaizeHeight}
-      | "South" => {...state.transition, southDiscardY: halfBaizeHeight}
-      | "West" => {...state.transition, westDiscardX: -. halfBaizeHeight}
+      | "North" => {...state.transition, northStartY: -. halfBaizeHeight}
+      | "East" => {...state.transition, eastStartX: halfBaizeHeight}
+      | "South" => {...state.transition, southStartY: halfBaizeHeight}
+      | "West" => {...state.transition, westStartX: -. halfBaizeHeight}
       | _ => state.transition
       };
     };
@@ -199,10 +199,10 @@ let reducer = (state: TopLevel.state, action) => {
       pointOfCompassAndPlayers: [||],
       randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
       transition: {
-        northDiscardY: 0.0,
-        eastDiscardX: 0.0,
-        southDiscardY: 0.0,
-        westDiscardX: 0.0,
+        northStartY: 0.0,
+        eastStartX: 0.0,
+        southStartY: 0.0,
+        westStartX: 0.0,
       },
     };
   | LoginSync =>

@@ -67,10 +67,10 @@ type handVisible = {
 };
 
 type transition = {
-  northDiscardY: float,
-  eastDiscardX: float,
-  southDiscardY: float,
-  westDiscardX: float,
+  northStartY: float,
+  eastStartX: float,
+  southStartY: float,
+  westStartX: float,
 };
 
 /** VALUE DEFINITIONS */
