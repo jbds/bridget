@@ -4,7 +4,8 @@ let drawCards = (p, g, w, pointOfCompass) => {
   let clockPosition;
   p.push();
   // move the origin to table centre
-  p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
+  //p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
+  p.translate(w.innerHeight / 2, w.innerHeight / 2);
   // for debug, indicate this point
   p.stroke(255);
   p.strokeWeight(5);
@@ -113,7 +114,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
       console.log('Unexpected pointOfCompass argument xx');
   }
   if (pointOfCompass != 'Discard') {
-    paintHandArray(p, g);
+    paintHandArray(p, g, w);
   } else {
     paintDiscardArray(p, g, w);
   }
@@ -121,8 +122,8 @@ let drawCards = (p, g, w, pointOfCompass) => {
 }
 
 let paintHandArray = (p, g, w) => {
-  let cardWidth = w.canvasHeight * w.cardHeightToCanvasHeightRatio / w.cardAspectRatio;
-  let cardHeight = w.canvasHeight * w.cardHeightToCanvasHeightRatio;
+  let cardWidth = w.innerHeight * w.cardHeightToCanvasHeightRatio / w.cardAspectRatio;
+  let cardHeight = w.innerHeight * w.cardHeightToCanvasHeightRatio;
   // 37px max width before honour cards show pic border
   // NB visible segment has 20% added for overlap on all except last card
   let cardVisibleSegmentWidthToCardWidthRatio = 37 / 216;
@@ -335,15 +336,16 @@ let drawLabels = (p, g, w) => {
     //console.log('No labels defined, abort drawLabels');
     return;
   }
-  let textHeightToCanvasHeightRatio = g.canvasHeight / 30;
-  let cardSegmentHeight = g.canvasHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio;
+  let textHeightToCanvasHeightRatio = w.innerHeight / 30;
+  let cardSegmentHeight = w.innerHeight * w.cardHeightToCanvasHeightRatio * w.cardSegmentHeightToCardRatio;
   p.textSize(textHeightToCanvasHeightRatio);
   p.textFont('Trebuchet MS');
   p.textAlign(p.CENTER, p.CENTER);
   // white, 50% transparent
   p.fill(255, 128);
   // move the origin to table centre
-  p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
+  //p.translate(g.canvasWidth / 2, g.canvasHeight / 2);
+  p.translate(w.innerHeight / 2, w.innerHeight / 2);
   w.gameState.pointOfCompassAndPlayers.forEach((obj, i) => {
     // ignore Observer
     if (obj.pointOfCompass !== 'Observer') {
@@ -355,7 +357,7 @@ let drawLabels = (p, g, w) => {
       // translate and rotate by clock position
       switch (clockPosition) {
         case '12PM':
-          p.translate(0, -(g.canvasHeight / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
+          p.translate(0, -(w.innerHeight / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
           //p.rotate(p.HALF_PI * 2); 
           break;
         case '3PM':
@@ -363,7 +365,7 @@ let drawLabels = (p, g, w) => {
           p.rotate(p.HALF_PI * 3);
           break;
         case '6PM':
-          p.translate(0, (g.canvasHeight / 2) - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
+          p.translate(0, (w.innerHeight / 2) - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
           p.rotate(0);
           break;
         case '9PM':
@@ -479,7 +481,7 @@ let translateAndRotateByClockPosition = (clockPosition, p, g, isDummyHand) => {
       // p.rotate(p.HALF_PI * 2); 
       // we always want cards at 12PM to be inverted!
       // tweak offset appropriately
-      p.translate(0, -(g.canvasHeight / 2) + (g.canvasHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio));
+      p.translate(0, -(w.innerHeight / 2) + (w.innerHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio));
       // no rotation!
       break;
     case '3PM':
@@ -487,7 +489,7 @@ let translateAndRotateByClockPosition = (clockPosition, p, g, isDummyHand) => {
       p.rotate(p.HALF_PI * 3);
       break;
     case '6PM':
-      p.translate(0, (g.canvasHeight / 2));
+      p.translate(0, (w.innerHeight / 2));
       p.rotate(0);
       break;
     case '9PM':
