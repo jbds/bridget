@@ -146,7 +146,6 @@ let reducer = (state: TopLevel.state, action) => {
     let westEndX = -. cardWidth *. cardWidthOffsetFraction;
     Js.log("cardWidth");
     Js.log(cardWidth);
-    //let cardWidth: int = [%raw "window.m * window.innerHeight * window.cardHeightToCanvasHeightRatio / window.cardAspectRatio];
     let tR = {
       switch (discardPoc) {
       | "North" => {
@@ -178,7 +177,7 @@ let reducer = (state: TopLevel.state, action) => {
     let _myID: int =
       Array.length(myDiscardArray) === 4
         ? [%raw
-          "setTimeout(function(){document.getElementById('btnPostDiscard').click();}, 500)"
+          "setTimeout(function(){document.getElementById('btnPostDiscard').click();}, 2000)"
         ]
         : 0;
     {
@@ -199,10 +198,55 @@ let reducer = (state: TopLevel.state, action) => {
       transition: tR,
     };
   | PostDiscard =>
+    // only triggered after 4 discards detected, so there will be 4 cards to transition
+    // transition is opposite way to a discard,
+    // starts at discard poc and ends at winning poc
+    // transition end, adjust for just off screen
+    let baizeHeight: int = [%raw "window.innerHeight"];
+    let adjustedBaizeHeight = float_of_int(baizeHeight) /. 3.0;
+    //Js.log("halfBaizeHeight");
+    //Js.log(halfBaizeHeight);
+    // transition start
+    let m: float = [%raw "window.m"];
+    let innerHeight: float = [%raw "window.innerHeight"];
+    let cardHeightToCanvasHeightRatio: float = [%raw
+      "window.cardHeightToCanvasHeightRatio"
+    ];
+    let cardAspectRatio: float = [%raw "window.cardAspectRatio"];
+    let cardWidth =
+      m *. innerHeight *. cardHeightToCanvasHeightRatio /. cardAspectRatio;
+    let cardHeight = m *. innerHeight *. cardHeightToCanvasHeightRatio;
+    let cardWidthOffsetFraction: float = [%raw
+      "window.cardWidthOffsetFraction"
+    ];
+    let cardHeightOffsetFraction: float = [%raw
+      "window.cardHeightOffsetFraction"
+    ];
+    // start positions for each card
+    let northStartY = -. cardHeight *. cardHeightOffsetFraction;
+    let eastStartX = cardWidth *. cardWidthOffsetFraction;
+    let southStartY = cardHeight *. cardHeightOffsetFraction;
+    let westStartX = -. cardWidth *. cardWidthOffsetFraction;
+    // test
+    let commonEndPosition = adjustedBaizeHeight;
+    let northEndY = commonEndPosition;
+    let eastEndX = commonEndPosition;
+    let southEndY = commonEndPosition;
+    let westEndX = commonEndPosition;
+    let tR: Shuffle.transition = {
+      northStartY,
+      northEndY,
+      eastStartX,
+      eastEndX,
+      southStartY,
+      southEndY,
+      westStartX,
+      westEndX,
+    };
     let _myID: int = [%raw
       "setTimeout(function(){document.getElementById('btnEndTrick').click();}, 2000)"
     ];
-    {...state, lastAction: "PostDiscard"};
+    {...state, transition: tR, lastAction: "PostDiscard"};
   | Sync =>
     // aka Logout or perhaps Server Down
     //Js.log("Action - Sync");

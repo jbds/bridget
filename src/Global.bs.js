@@ -172,7 +172,7 @@ function reducer(state, action) {
           console.log("QtyDiscards");
           console.log(myDiscardArray.length);
           if (myDiscardArray.length === 4) {
-            ((setTimeout(function(){document.getElementById('btnPostDiscard').click();}, 500)));
+            ((setTimeout(function(){document.getElementById('btnPostDiscard').click();}, 2000)));
           }
           var newrecord = Caml_obj.caml_obj_dup(state);
           newrecord.transition = tR;
@@ -186,8 +186,33 @@ function reducer(state, action) {
           newrecord.activePointOfCompass = poc;
           return newrecord;
       case /* PostDiscard */2 :
+          var baizeHeight$1 = window.innerHeight;
+          var adjustedBaizeHeight = baizeHeight$1 / 3.0;
+          var m$1 = window.m;
+          var innerHeight$1 = window.innerHeight;
+          var cardHeightToCanvasHeightRatio$1 = window.cardHeightToCanvasHeightRatio;
+          var cardAspectRatio$1 = window.cardAspectRatio;
+          var cardWidth$1 = m$1 * innerHeight$1 * cardHeightToCanvasHeightRatio$1 / cardAspectRatio$1;
+          var cardHeight$1 = m$1 * innerHeight$1 * cardHeightToCanvasHeightRatio$1;
+          var cardWidthOffsetFraction$1 = window.cardWidthOffsetFraction;
+          var cardHeightOffsetFraction$1 = window.cardHeightOffsetFraction;
+          var northStartY = -cardHeight$1 * cardHeightOffsetFraction$1;
+          var eastStartX = cardWidth$1 * cardWidthOffsetFraction$1;
+          var southStartY = cardHeight$1 * cardHeightOffsetFraction$1;
+          var westStartX = -cardWidth$1 * cardWidthOffsetFraction$1;
+          var tR$1 = {
+            northStartY: northStartY,
+            eastStartX: eastStartX,
+            southStartY: southStartY,
+            westStartX: westStartX,
+            northEndY: adjustedBaizeHeight,
+            eastEndX: adjustedBaizeHeight,
+            southEndY: adjustedBaizeHeight,
+            westEndX: adjustedBaizeHeight
+          };
           ((setTimeout(function(){document.getElementById('btnEndTrick').click();}, 2000)));
           var newrecord$1 = Caml_obj.caml_obj_dup(state);
+          newrecord$1.transition = tR$1;
           newrecord$1.lastAction = "PostDiscard";
           return newrecord$1;
       case /* Sync */3 :
@@ -234,7 +259,7 @@ function reducer(state, action) {
           var dealer = window.gameState.dealer;
           var declarer = window.gameState.declarer;
           var hV = window.gameState.handVisible;
-          var tR$1 = window.gameState.transition;
+          var tR$2 = window.gameState.transition;
           var pOCAP = window.gameState.pointOfCompassAndPlayers;
           var pack = window.gameState.pack;
           var dealIndex = window.gameState.dealIndex;
@@ -269,7 +294,7 @@ function reducer(state, action) {
                   pack: pack,
                   pointOfCompassAndPlayers: pOCAP,
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
-                  transition: tR$1
+                  transition: tR$2
                 };
       case /* Test */5 :
           ((window.isLastActionSync = true));
