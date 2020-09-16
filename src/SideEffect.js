@@ -298,28 +298,27 @@ let paintDiscardArray = (p, g, w) => {
       // N
       case (obj.shuffleIndex < 13):
         // good for all rotations, because x=x and y=y all angles
-        //p.translate(0, -cardHeight * cardHeightOffsetFraction);
-        //p.translate(0, g.northDiscardInitialY);
-        w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, 0.40);
-        p.translate(0, w.gameState.transition.northStartY);
+        p.translate(0, -cardHeight * cardHeightOffsetFraction);
+        // w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, 0.20);
+        // p.translate(0, w.gameState.transition.northStartY);
         break;
       // E
       case (obj.shuffleIndex < 26):
-        //p.translate(cardWidth * cardWidthOffsetFraction, 0);
-        w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, 0.40);
-        p.translate(w.gameState.transition.eastStartX, 0);
+        p.translate(cardWidth * cardWidthOffsetFraction, 0);
+        // w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, 0.20);
+        // p.translate(w.gameState.transition.eastStartX, 0);
         break;
       // S
       case (obj.shuffleIndex < 39):
-        //p.translate(0, cardHeight * cardHeightOffsetFraction);
-        w.gameState.transition.southStartY = p.lerp(w.gameState.transition.southStartY, w.gameState.transition.southEndY, 0.40);
-        p.translate(0, w.gameState.transition.southStartY);
+        p.translate(0, cardHeight * cardHeightOffsetFraction);
+        // w.gameState.transition.southStartY = p.lerp(w.gameState.transition.southStartY, w.gameState.transition.southEndY, 0.20);
+        // p.translate(0, w.gameState.transition.southStartY);
         break;
       // W
       case (obj.shuffleIndex < 52):
-        //p.translate(-cardWidth * cardWidthOffsetFraction, 0);
-        w.gameState.transition.westStartX = p.lerp(w.gameState.transition.westStartX, w.gameState.transition.westEndX, 0.40);
-        p.translate(w.gameState.transition.westStartX, 0);
+        p.translate(-cardWidth * cardWidthOffsetFraction, 0);
+        // w.gameState.transition.westStartX = p.lerp(w.gameState.transition.westStartX, w.gameState.transition.westEndX, 0.20);
+        // p.translate(w.gameState.transition.westStartX, 0);
         break;
       default:
         console.log('Unexpected shuffleIndex argument');
