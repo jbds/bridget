@@ -103,8 +103,6 @@ function reducer(state, action) {
           var eastEndX = cardWidthNormalized * cardWidthOffsetFraction;
           var southEndY = cardHeightNormalized * cardHeightOffsetFraction;
           var westEndX = -cardWidthNormalized * cardWidthOffsetFraction;
-          console.log("cardWidthNormalized");
-          console.log(cardWidthNormalized);
           var tR;
           switch (discardPoc) {
             case "East" :
@@ -183,29 +181,28 @@ function reducer(state, action) {
           newrecord.activePointOfCompass = poc;
           return newrecord;
       case /* PostDiscard */2 :
-          var baizeHeight = window.innerHeight;
-          var adjustedBaizeHeight = baizeHeight / 3.0;
           var m$1 = window.m;
-          var innerHeight = window.innerHeight;
           var cardHeightToCanvasHeightRatio$1 = window.cardHeightToCanvasHeightRatio;
           var cardAspectRatio$1 = window.cardAspectRatio;
-          var cardWidth = m$1 * innerHeight * cardHeightToCanvasHeightRatio$1 / cardAspectRatio$1;
-          var cardHeight = m$1 * innerHeight * cardHeightToCanvasHeightRatio$1;
+          var cardWidthNormalized$1 = m$1 * cardHeightToCanvasHeightRatio$1 / cardAspectRatio$1;
+          var cardHeightNormalized$1 = m$1 * cardHeightToCanvasHeightRatio$1;
           var cardWidthOffsetFraction$1 = window.cardWidthOffsetFraction;
           var cardHeightOffsetFraction$1 = window.cardHeightOffsetFraction;
-          var northStartY = -cardHeight * cardHeightOffsetFraction$1;
-          var eastStartX = cardWidth * cardWidthOffsetFraction$1;
-          var southStartY = cardHeight * cardHeightOffsetFraction$1;
-          var westStartX = -cardWidth * cardWidthOffsetFraction$1;
+          var northStartY = -cardHeightNormalized$1 * cardHeightOffsetFraction$1;
+          var eastStartX = cardWidthNormalized$1 * cardWidthOffsetFraction$1;
+          var southStartY = cardHeightNormalized$1 * cardHeightOffsetFraction$1;
+          var westStartX = -cardWidthNormalized$1 * cardWidthOffsetFraction$1;
+          var northEndY$1 = -0.5;
+          var westEndX$1 = -0.5;
           var tR$1 = {
             northStartY: northStartY,
             eastStartX: eastStartX,
             southStartY: southStartY,
             westStartX: westStartX,
-            northEndY: adjustedBaizeHeight,
-            eastEndX: adjustedBaizeHeight,
-            southEndY: adjustedBaizeHeight,
-            westEndX: adjustedBaizeHeight
+            northEndY: northEndY$1,
+            eastEndX: 0.5,
+            southEndY: 0.5,
+            westEndX: westEndX$1
           };
           ((setTimeout(function(){document.getElementById('btnEndTrick').click();}, 2000)));
           var newrecord$1 = Caml_obj.caml_obj_dup(state);

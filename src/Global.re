@@ -142,8 +142,8 @@ let reducer = (state: TopLevel.state, action) => {
     let eastEndX = cardWidthNormalized *. cardWidthOffsetFraction;
     let southEndY = cardHeightNormalized *. cardHeightOffsetFraction;
     let westEndX = -. cardWidthNormalized *. cardWidthOffsetFraction;
-    Js.log("cardWidthNormalized");
-    Js.log(cardWidthNormalized);
+    //Js.log("cardWidthNormalized");
+    //Js.log(cardWidthNormalized);
     let tR = {
       switch (discardPoc) {
       | "North" => {...state.transition, northStartY: (-0.5), northEndY}
@@ -187,38 +187,36 @@ let reducer = (state: TopLevel.state, action) => {
     // only triggered after 4 discards detected, so there will be 4 cards to transition
     // transition is opposite way to a discard,
     // starts at discard poc and ends at winning poc
-    // transition end, adjust for just off screen
-    let baizeHeight: int = [%raw "window.innerHeight"];
-    let adjustedBaizeHeight = float_of_int(baizeHeight) /. 3.0;
-    //Js.log("halfBaizeHeight");
-    //Js.log(halfBaizeHeight);
-    // transition start
+    // NB we CANNOT store window.innerHeight as part of state,
+    // because it may vary between both different devices and between states!
+    // All refs here to start and end locations are therefore normalised to
+    // between 0.0 and 1.0 in both the X and Y directions
+    // transition start calcs
     let m: float = [%raw "window.m"];
-    let innerHeight: float = [%raw "window.innerHeight"];
     let cardHeightToCanvasHeightRatio: float = [%raw
       "window.cardHeightToCanvasHeightRatio"
     ];
     let cardAspectRatio: float = [%raw "window.cardAspectRatio"];
-    let cardWidth =
-      m *. innerHeight *. cardHeightToCanvasHeightRatio /. cardAspectRatio;
-    let cardHeight = m *. innerHeight *. cardHeightToCanvasHeightRatio;
+    let cardWidthNormalized =
+      m *. cardHeightToCanvasHeightRatio /. cardAspectRatio;
+    let cardHeightNormalized = m *. cardHeightToCanvasHeightRatio;
     let cardWidthOffsetFraction: float = [%raw
       "window.cardWidthOffsetFraction"
     ];
     let cardHeightOffsetFraction: float = [%raw
       "window.cardHeightOffsetFraction"
     ];
-    // start positions for each card
-    let northStartY = -. cardHeight *. cardHeightOffsetFraction;
-    let eastStartX = cardWidth *. cardWidthOffsetFraction;
-    let southStartY = cardHeight *. cardHeightOffsetFraction;
-    let westStartX = -. cardWidth *. cardWidthOffsetFraction;
+    let northStartY = -. cardHeightNormalized *. cardHeightOffsetFraction;
+    let eastStartX = cardWidthNormalized *. cardWidthOffsetFraction;
+    let southStartY = cardHeightNormalized *. cardHeightOffsetFraction;
+    let westStartX = -. cardWidthNormalized *. cardWidthOffsetFraction;
+
     // test
-    let commonEndPosition = adjustedBaizeHeight;
-    let northEndY = commonEndPosition;
+    let commonEndPosition = 0.5;
+    let northEndY = -. commonEndPosition;
     let eastEndX = commonEndPosition;
     let southEndY = commonEndPosition;
-    let westEndX = commonEndPosition;
+    let westEndX = -. commonEndPosition;
     let tR: Shuffle.transition = {
       northStartY,
       northEndY,
