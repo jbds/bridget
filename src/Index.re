@@ -18,7 +18,7 @@
   window.userState = {}; // prevent undefined error before p5 starts up
 
   // be certain we have the correct version of bundled file aka index.js
-  document.title = 'Bridget v0.99';
+  document.title = 'Bridget v1.00';
 
   // for transitions we need to move card constants up to global scope
   // std playing card is 3.5in x 2.25in and svg is 336px x 216px
@@ -58,13 +58,14 @@ ReactDOMRe.renderToElementWithId(<App />, "root");
     // decalare all other variables specific to drawing process
     // as properies of a 'global' object g
     const g = {
+      // scope of all the following changed to be window scope
       // std playing card is 3.5in x 2.25in and svg is 336px x 216px
-      cardAspectRatio: 3.5 / 2.25,
+      //cardAspectRatio: 3.5 / 2.25,
       // For card segments on periphery to just meet without overlap
       // we need cardHeightToCanvasHeightRatio of 336 / (2 * 91 + 13 * 37) or approx 0.507
-      cardHeightToCanvasHeightRatio: 336 / 663,
+      //cardHeightToCanvasHeightRatio: 336 / 663,
       // 91px min height that allows visibility of rank and suit
-      cardSegmentHeightToCardRatio: 91 / 336,
+      //cardSegmentHeightToCardRatio: 91 / 336,
     };
 
     const w = window;
