@@ -90,6 +90,13 @@ function reducer(state, action) {
                 }), state.pack);
           var baizeHeight = window.innerHeight;
           var halfBaizeHeight = baizeHeight / 2.0;
+          var m = window.m;
+          var innerHeight = window.innerHeight;
+          var cardHeightToCanvasHeightRatio = window.cardHeightToCanvasHeightRatio;
+          var cardAspectRatio = window.cardAspectRatio;
+          var cardWidth = m * innerHeight * cardHeightToCanvasHeightRatio / cardAspectRatio;
+          console.log("cardWidth");
+          console.log(cardWidth);
           var tR;
           switch (discardPoc) {
             case "East" :

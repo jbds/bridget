@@ -115,11 +115,23 @@ let reducer = (state: TopLevel.state, action) => {
         },
         state.pack,
       );
-    // transition
+    // transition start
     let baizeHeight: int = [%raw "window.innerHeight"];
     let halfBaizeHeight = float_of_int(baizeHeight) /. 2.0;
     //Js.log("halfBaizeHeight");
     //Js.log(halfBaizeHeight);
+    // transition end
+    let m: float = [%raw "window.m"];
+    let innerHeight: float = [%raw "window.innerHeight"];
+    let cardHeightToCanvasHeightRatio: float = [%raw
+      "window.cardHeightToCanvasHeightRatio"
+    ];
+    let cardAspectRatio: float = [%raw "window.cardAspectRatio"];
+    let cardWidth =
+      m *. innerHeight *. cardHeightToCanvasHeightRatio /. cardAspectRatio;
+    Js.log("cardWidth");
+    Js.log(cardWidth);
+    //let cardWidth: int = [%raw "window.m * window.innerHeight * window.cardHeightToCanvasHeightRatio / window.cardAspectRatio];
     let tR = {
       switch (discardPoc) {
       | "North" => {...state.transition, northStartY: -. halfBaizeHeight}

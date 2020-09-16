@@ -4,7 +4,7 @@ let mouseDecode = (p, g, w) => {
   // x and y ranges define 4 regions of interest
   // NB 13 segments means lower bound 0 and upper bound 13
   let cardSegmentHeightToCanvasHeightRatio =
-    g.cardSegmentHeightToCardRatio * g.cardHeightToCanvasHeightRatio;
+    w.cardSegmentHeightToCardRatio * w.cardHeightToCanvasHeightRatio;
   let cardSegmentIndex;
   let cardSegmentIndexAdjusted;
   let myHandArray;
