@@ -48,6 +48,10 @@ let initialState: TopLevel.state = {
     eastStartX: 0.0,
     southStartY: 0.0,
     westStartX: 0.0,
+    northEndY: 0.0,
+    eastEndX: 0.0,
+    southEndY: 0.0,
+    westEndX: 0.0,
   },
 };
 
@@ -129,15 +133,38 @@ let reducer = (state: TopLevel.state, action) => {
     let cardAspectRatio: float = [%raw "window.cardAspectRatio"];
     let cardWidth =
       m *. innerHeight *. cardHeightToCanvasHeightRatio /. cardAspectRatio;
+    let cardHeight = m *. innerHeight *. cardHeightToCanvasHeightRatio;
+    let cardWidthOffsetFraction: float = [%raw
+      "window.cardWidthOffsetFraction"
+    ];
+    let cardHeightOffsetFraction: float = [%raw
+      "window.cardHeightOffsetFraction"
+    ];
+    let northEndY = -. cardHeight *. cardHeightOffsetFraction;
+    let eastEndX = cardWidth *. cardWidthOffsetFraction;
+    let southEndY = cardHeight *. cardHeightOffsetFraction;
+    let westEndX = -. cardWidth *. cardWidthOffsetFraction;
     Js.log("cardWidth");
     Js.log(cardWidth);
     //let cardWidth: int = [%raw "window.m * window.innerHeight * window.cardHeightToCanvasHeightRatio / window.cardAspectRatio];
     let tR = {
       switch (discardPoc) {
-      | "North" => {...state.transition, northStartY: -. halfBaizeHeight}
-      | "East" => {...state.transition, eastStartX: halfBaizeHeight}
-      | "South" => {...state.transition, southStartY: halfBaizeHeight}
-      | "West" => {...state.transition, westStartX: -. halfBaizeHeight}
+      | "North" => {
+          ...state.transition,
+          northStartY: -. halfBaizeHeight,
+          northEndY,
+        }
+      | "East" => {...state.transition, eastStartX: halfBaizeHeight, eastEndX}
+      | "South" => {
+          ...state.transition,
+          southStartY: halfBaizeHeight,
+          southEndY,
+        }
+      | "West" => {
+          ...state.transition,
+          westStartX: -. halfBaizeHeight,
+          westEndX,
+        }
       | _ => state.transition
       };
     };
@@ -215,6 +242,10 @@ let reducer = (state: TopLevel.state, action) => {
         eastStartX: 0.0,
         southStartY: 0.0,
         westStartX: 0.0,
+        northEndY: 0.0,
+        eastEndX: 0.0,
+        southEndY: 0.0,
+        westEndX: 0.0,
       },
     };
   | LoginSync =>

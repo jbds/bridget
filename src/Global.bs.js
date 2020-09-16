@@ -22,7 +22,11 @@ var initialState_transition = {
   northStartY: 0.0,
   eastStartX: 0.0,
   southStartY: 0.0,
-  westStartX: 0.0
+  westStartX: 0.0,
+  northEndY: 0.0,
+  eastEndX: 0.0,
+  southEndY: 0.0,
+  westEndX: 0.0
 };
 
 var initialState = {
@@ -95,6 +99,13 @@ function reducer(state, action) {
           var cardHeightToCanvasHeightRatio = window.cardHeightToCanvasHeightRatio;
           var cardAspectRatio = window.cardAspectRatio;
           var cardWidth = m * innerHeight * cardHeightToCanvasHeightRatio / cardAspectRatio;
+          var cardHeight = m * innerHeight * cardHeightToCanvasHeightRatio;
+          var cardWidthOffsetFraction = window.cardWidthOffsetFraction;
+          var cardHeightOffsetFraction = window.cardHeightOffsetFraction;
+          var northEndY = -cardHeight * cardHeightOffsetFraction;
+          var eastEndX = cardWidth * cardWidthOffsetFraction;
+          var southEndY = cardHeight * cardHeightOffsetFraction;
+          var westEndX = -cardWidth * cardWidthOffsetFraction;
           console.log("cardWidth");
           console.log(cardWidth);
           var tR;
@@ -105,7 +116,11 @@ function reducer(state, action) {
                   northStartY: init.northStartY,
                   eastStartX: halfBaizeHeight,
                   southStartY: init.southStartY,
-                  westStartX: init.westStartX
+                  westStartX: init.westStartX,
+                  northEndY: init.northEndY,
+                  eastEndX: eastEndX,
+                  southEndY: init.southEndY,
+                  westEndX: init.westEndX
                 };
                 break;
             case "North" :
@@ -114,7 +129,11 @@ function reducer(state, action) {
                   northStartY: -halfBaizeHeight,
                   eastStartX: init$1.eastStartX,
                   southStartY: init$1.southStartY,
-                  westStartX: init$1.westStartX
+                  westStartX: init$1.westStartX,
+                  northEndY: northEndY,
+                  eastEndX: init$1.eastEndX,
+                  southEndY: init$1.southEndY,
+                  westEndX: init$1.westEndX
                 };
                 break;
             case "South" :
@@ -123,7 +142,11 @@ function reducer(state, action) {
                   northStartY: init$2.northStartY,
                   eastStartX: init$2.eastStartX,
                   southStartY: halfBaizeHeight,
-                  westStartX: init$2.westStartX
+                  westStartX: init$2.westStartX,
+                  northEndY: init$2.northEndY,
+                  eastEndX: init$2.eastEndX,
+                  southEndY: southEndY,
+                  westEndX: init$2.westEndX
                 };
                 break;
             case "West" :
@@ -132,7 +155,11 @@ function reducer(state, action) {
                   northStartY: init$3.northStartY,
                   eastStartX: init$3.eastStartX,
                   southStartY: init$3.southStartY,
-                  westStartX: -halfBaizeHeight
+                  westStartX: -halfBaizeHeight,
+                  northEndY: init$3.northEndY,
+                  eastEndX: init$3.eastEndX,
+                  southEndY: init$3.southEndY,
+                  westEndX: westEndX
                 };
                 break;
             default:
@@ -194,7 +221,11 @@ function reducer(state, action) {
                     northStartY: 0.0,
                     eastStartX: 0.0,
                     southStartY: 0.0,
-                    westStartX: 0.0
+                    westStartX: 0.0,
+                    northEndY: 0.0,
+                    eastEndX: 0.0,
+                    southEndY: 0.0,
+                    westEndX: 0.0
                   }
                 };
       case /* LoginSync */4 :
