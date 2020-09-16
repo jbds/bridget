@@ -119,51 +119,37 @@ let reducer = (state: TopLevel.state, action) => {
         },
         state.pack,
       );
-    // transition start
-    let baizeHeight: int = [%raw "window.innerHeight"];
-    let halfBaizeHeight = float_of_int(baizeHeight) /. 2.0;
-    //Js.log("halfBaizeHeight");
-    //Js.log(halfBaizeHeight);
-    // transition end
+    // NB we CANNOT store window.innerHeight as part of state,
+    // because it may vary between both different devices and between states!
+    // All refs here to start and end locations are therefore normalised to
+    // between 0.0 and 1.0 in both the X and Y directions
+    // transition end calcs
     let m: float = [%raw "window.m"];
-    let innerHeight: float = [%raw "window.innerHeight"];
     let cardHeightToCanvasHeightRatio: float = [%raw
       "window.cardHeightToCanvasHeightRatio"
     ];
     let cardAspectRatio: float = [%raw "window.cardAspectRatio"];
-    let cardWidth =
-      m *. innerHeight *. cardHeightToCanvasHeightRatio /. cardAspectRatio;
-    let cardHeight = m *. innerHeight *. cardHeightToCanvasHeightRatio;
+    let cardWidthNormalized =
+      m *. cardHeightToCanvasHeightRatio /. cardAspectRatio;
+    let cardHeightNormalized = m *. cardHeightToCanvasHeightRatio;
     let cardWidthOffsetFraction: float = [%raw
       "window.cardWidthOffsetFraction"
     ];
     let cardHeightOffsetFraction: float = [%raw
       "window.cardHeightOffsetFraction"
     ];
-    let northEndY = -. cardHeight *. cardHeightOffsetFraction;
-    let eastEndX = cardWidth *. cardWidthOffsetFraction;
-    let southEndY = cardHeight *. cardHeightOffsetFraction;
-    let westEndX = -. cardWidth *. cardWidthOffsetFraction;
-    Js.log("cardWidth");
-    Js.log(cardWidth);
+    let northEndY = -. cardHeightNormalized *. cardHeightOffsetFraction;
+    let eastEndX = cardWidthNormalized *. cardWidthOffsetFraction;
+    let southEndY = cardHeightNormalized *. cardHeightOffsetFraction;
+    let westEndX = -. cardWidthNormalized *. cardWidthOffsetFraction;
+    Js.log("cardWidthNormalized");
+    Js.log(cardWidthNormalized);
     let tR = {
       switch (discardPoc) {
-      | "North" => {
-          ...state.transition,
-          northStartY: -. halfBaizeHeight,
-          northEndY,
-        }
-      | "East" => {...state.transition, eastStartX: halfBaizeHeight, eastEndX}
-      | "South" => {
-          ...state.transition,
-          southStartY: halfBaizeHeight,
-          southEndY,
-        }
-      | "West" => {
-          ...state.transition,
-          westStartX: -. halfBaizeHeight,
-          westEndX,
-        }
+      | "North" => {...state.transition, northStartY: (-0.5), northEndY}
+      | "East" => {...state.transition, eastStartX: 0.5, eastEndX}
+      | "South" => {...state.transition, southStartY: 0.5, southEndY}
+      | "West" => {...state.transition, westStartX: (-0.5), westEndX}
       | _ => state.transition
       };
     };

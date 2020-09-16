@@ -16,7 +16,7 @@ const setVh = () => {
   window.userState = {}; // prevent undefined error before p5 starts up
 
   // be certain we have the correct version of bundled file aka index.js
-  document.title = 'Bridget v1.07';
+  document.title = 'Bridget v1.11';
 
   // for transitions we need to move card constants up to global scope
   // std playing card is 3.5in x 2.25in and svg is 336px x 216px
@@ -161,6 +161,8 @@ ReactDOMRe.renderToElementWithId(React.createElement(App$ReasonReactExamples.mak
       g.canvasWidth = p.windowHeight;
       g.canvasHeight = p.windowHeight;
       p.resizeCanvas(g.canvasWidth, g.canvasHeight);
+      console.log('resize event');
+      console.log(gameState);
     }
 
     p.mousePressed = ()  => {

@@ -92,29 +92,26 @@ function reducer(state, action) {
                     return card;
                   }
                 }), state.pack);
-          var baizeHeight = window.innerHeight;
-          var halfBaizeHeight = baizeHeight / 2.0;
           var m = window.m;
-          var innerHeight = window.innerHeight;
           var cardHeightToCanvasHeightRatio = window.cardHeightToCanvasHeightRatio;
           var cardAspectRatio = window.cardAspectRatio;
-          var cardWidth = m * innerHeight * cardHeightToCanvasHeightRatio / cardAspectRatio;
-          var cardHeight = m * innerHeight * cardHeightToCanvasHeightRatio;
+          var cardWidthNormalized = m * cardHeightToCanvasHeightRatio / cardAspectRatio;
+          var cardHeightNormalized = m * cardHeightToCanvasHeightRatio;
           var cardWidthOffsetFraction = window.cardWidthOffsetFraction;
           var cardHeightOffsetFraction = window.cardHeightOffsetFraction;
-          var northEndY = -cardHeight * cardHeightOffsetFraction;
-          var eastEndX = cardWidth * cardWidthOffsetFraction;
-          var southEndY = cardHeight * cardHeightOffsetFraction;
-          var westEndX = -cardWidth * cardWidthOffsetFraction;
-          console.log("cardWidth");
-          console.log(cardWidth);
+          var northEndY = -cardHeightNormalized * cardHeightOffsetFraction;
+          var eastEndX = cardWidthNormalized * cardWidthOffsetFraction;
+          var southEndY = cardHeightNormalized * cardHeightOffsetFraction;
+          var westEndX = -cardWidthNormalized * cardWidthOffsetFraction;
+          console.log("cardWidthNormalized");
+          console.log(cardWidthNormalized);
           var tR;
           switch (discardPoc) {
             case "East" :
                 var init = state.transition;
                 tR = {
                   northStartY: init.northStartY,
-                  eastStartX: halfBaizeHeight,
+                  eastStartX: 0.5,
                   southStartY: init.southStartY,
                   westStartX: init.westStartX,
                   northEndY: init.northEndY,
@@ -126,7 +123,7 @@ function reducer(state, action) {
             case "North" :
                 var init$1 = state.transition;
                 tR = {
-                  northStartY: -halfBaizeHeight,
+                  northStartY: -0.5,
                   eastStartX: init$1.eastStartX,
                   southStartY: init$1.southStartY,
                   westStartX: init$1.westStartX,
@@ -141,7 +138,7 @@ function reducer(state, action) {
                 tR = {
                   northStartY: init$2.northStartY,
                   eastStartX: init$2.eastStartX,
-                  southStartY: halfBaizeHeight,
+                  southStartY: 0.5,
                   westStartX: init$2.westStartX,
                   northEndY: init$2.northEndY,
                   eastEndX: init$2.eastEndX,
@@ -155,7 +152,7 @@ function reducer(state, action) {
                   northStartY: init$3.northStartY,
                   eastStartX: init$3.eastStartX,
                   southStartY: init$3.southStartY,
-                  westStartX: -halfBaizeHeight,
+                  westStartX: -0.5,
                   northEndY: init$3.northEndY,
                   eastEndX: init$3.eastEndX,
                   southEndY: init$3.southEndY,
@@ -186,20 +183,20 @@ function reducer(state, action) {
           newrecord.activePointOfCompass = poc;
           return newrecord;
       case /* PostDiscard */2 :
-          var baizeHeight$1 = window.innerHeight;
-          var adjustedBaizeHeight = baizeHeight$1 / 3.0;
+          var baizeHeight = window.innerHeight;
+          var adjustedBaizeHeight = baizeHeight / 3.0;
           var m$1 = window.m;
-          var innerHeight$1 = window.innerHeight;
+          var innerHeight = window.innerHeight;
           var cardHeightToCanvasHeightRatio$1 = window.cardHeightToCanvasHeightRatio;
           var cardAspectRatio$1 = window.cardAspectRatio;
-          var cardWidth$1 = m$1 * innerHeight$1 * cardHeightToCanvasHeightRatio$1 / cardAspectRatio$1;
-          var cardHeight$1 = m$1 * innerHeight$1 * cardHeightToCanvasHeightRatio$1;
+          var cardWidth = m$1 * innerHeight * cardHeightToCanvasHeightRatio$1 / cardAspectRatio$1;
+          var cardHeight = m$1 * innerHeight * cardHeightToCanvasHeightRatio$1;
           var cardWidthOffsetFraction$1 = window.cardWidthOffsetFraction;
           var cardHeightOffsetFraction$1 = window.cardHeightOffsetFraction;
-          var northStartY = -cardHeight$1 * cardHeightOffsetFraction$1;
-          var eastStartX = cardWidth$1 * cardWidthOffsetFraction$1;
-          var southStartY = cardHeight$1 * cardHeightOffsetFraction$1;
-          var westStartX = -cardWidth$1 * cardWidthOffsetFraction$1;
+          var northStartY = -cardHeight * cardHeightOffsetFraction$1;
+          var eastStartX = cardWidth * cardWidthOffsetFraction$1;
+          var southStartY = cardHeight * cardHeightOffsetFraction$1;
+          var westStartX = -cardWidth * cardWidthOffsetFraction$1;
           var tR$1 = {
             northStartY: northStartY,
             eastStartX: eastStartX,
