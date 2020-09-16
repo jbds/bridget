@@ -18,7 +18,7 @@
   window.userState = {}; // prevent undefined error before p5 starts up
 
   // be certain we have the correct version of bundled file aka index.js
-  document.title = 'Bridget v0.98';
+  document.title = 'Bridget v0.99';
 
   // for transitions we need to move card constants up to global scope
   // std playing card is 3.5in x 2.25in and svg is 336px x 216px
@@ -164,7 +164,6 @@ ReactDOMRe.renderToElementWithId(<App />, "root");
       SideEffect.drawCards(p, g, w, 'North');
       SideEffect.drawCards(p, g, w, 'Discard');
       SideEffect.drawLabels(p, g, w);
-
     };
 
     p.windowResized = () => {

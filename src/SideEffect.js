@@ -64,7 +64,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'North'
       );
-      translateAndRotateByClockPosition(clockPosition, p, g, isDummyHand);
+      translateAndRotateByClockPosition(clockPosition, p, g, w);
       break;
     case 'East':
       //g.isHandFaceUp = gameState.handVisible.east;
@@ -77,7 +77,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'East'
       );
-      translateAndRotateByClockPosition(clockPosition, p, g, isDummyHand);
+      translateAndRotateByClockPosition(clockPosition, p, g, w);
       break;
     case "South":
       //g.isHandFaceUp = gameState.handVisible.south;
@@ -90,7 +90,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'South'
       );
-      translateAndRotateByClockPosition(clockPosition, p, g, isDummyHand);
+      translateAndRotateByClockPosition(clockPosition, p, g, w);
       break;
     case 'West':
       //g.isHandFaceUp = gameState.handVisible.west;
@@ -103,7 +103,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'West'
       );
-      translateAndRotateByClockPosition(clockPosition, p, g, isDummyHand);
+      translateAndRotateByClockPosition(clockPosition, p, g, w);
       break;
     case 'Discard':
       g.myDiscardArray = window.gameState.pack.filter(obj => {
@@ -466,21 +466,9 @@ let rotationPlusPointOfCompassToClockPosition =
   };
 
 // HELPER FUNCTION FOR drawCards
-let translateAndRotateByClockPosition = (clockPosition, p, g, isDummyHand) => {
+let translateAndRotateByClockPosition = (clockPosition, p, g, w) => {
   switch (clockPosition) {
     case '12PM':
-      // isDummyHand 
-      // ? 
-      // p.translate(0, -(g.canvasHeight / 2) + (g.canvasHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio)) 
-      // : 
-      // p.translate(0, -(g.canvasHeight / 2));
-      // isDummyHand 
-      // ? 
-      // p.rotate(p.HALF_PI * 4) 
-      // : 
-      // p.rotate(p.HALF_PI * 2); 
-      // we always want cards at 12PM to be inverted!
-      // tweak offset appropriately
       p.translate(0, -(w.innerHeight / 2) + (w.innerHeight * g.cardHeightToCanvasHeightRatio * g.cardSegmentHeightToCardRatio));
       // no rotation!
       break;
