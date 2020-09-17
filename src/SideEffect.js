@@ -307,19 +307,22 @@ let paintDiscardArray = (p, g, w) => {
       case (obj.shuffleIndex < 26):
         //p.translate(cardWidth * cardWidthOffsetFraction, 0);
         w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, 0.20);
-        p.translate(w.gameState.transition.eastStartX * w.innerHeight, 0);
+        w.gameState.transition.eastStartY = p.lerp(w.gameState.transition.eastStartY, w.gameState.transition.eastEndY, 0.20);
+        p.translate(w.gameState.transition.eastStartX * w.innerHeight, w.gameState.transition.eastStartY * w.innerHeight, 0.20);
         break;
       // S
       case (obj.shuffleIndex < 39):
         //p.translate(0, cardHeight * cardHeightOffsetFraction);
         w.gameState.transition.southStartY = p.lerp(w.gameState.transition.southStartY, w.gameState.transition.southEndY, 0.20);
-        p.translate(0, w.gameState.transition.southStartY * w.innerHeight);
+        w.gameState.transition.southStartX = p.lerp(w.gameState.transition.southStartX, w.gameState.transition.southEndX, 0.20);
+        p.translate(w.gameState.transition.southStartX * w.innerHeight, w.gameState.transition.southStartY * w.innerHeight);
         break;
       // W
       case (obj.shuffleIndex < 52):
         //p.translate(-cardWidth * cardWidthOffsetFraction, 0);
         w.gameState.transition.westStartX = p.lerp(w.gameState.transition.westStartX, w.gameState.transition.westEndX, 0.20);
-        p.translate(w.gameState.transition.westStartX * w.innerHeight, 0);
+        w.gameState.transition.westStartY = p.lerp(w.gameState.transition.westStartY, w.gameState.transition.westEndY, 0.20);
+        p.translate(w.gameState.transition.westStartX * w.innerHeight, w.gameState.transition.westStartY * w.innerHeight);
         break;
       default:
         console.log('Unexpected shuffleIndex argument');

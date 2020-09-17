@@ -232,16 +232,56 @@ function reducer(state, action) {
           var eastStartX = cardWidthNormalized$1 * cardWidthOffsetFraction$1;
           var southStartY = cardHeightNormalized$1 * cardHeightOffsetFraction$1;
           var westStartX = -cardWidthNormalized$1 * cardWidthOffsetFraction$1;
-          var northEndY$1 = -0.5;
-          var westEndX$1 = -0.5;
+          var match = state.activePointOfCompass;
+          var commonEndPositionY;
+          if (match !== undefined) {
+            switch (match) {
+              case "North" :
+                  commonEndPositionY = 0.5;
+                  break;
+              case "South" :
+                  commonEndPositionY = -0.5;
+                  break;
+              case "East" :
+              case "West" :
+                  commonEndPositionY = 0.0;
+                  break;
+              default:
+                commonEndPositionY = 0.0;
+            }
+          } else {
+            commonEndPositionY = 0.0;
+          }
+          var match$1 = state.activePointOfCompass;
+          var commonEndPositionX;
+          if (match$1 !== undefined) {
+            switch (match$1) {
+              case "East" :
+                  commonEndPositionX = 0.5;
+                  break;
+              case "North" :
+              case "South" :
+                  commonEndPositionX = 0.0;
+                  break;
+              case "West" :
+                  commonEndPositionX = -0.5;
+                  break;
+              default:
+                commonEndPositionX = 0.0;
+            }
+          } else {
+            commonEndPositionX = 0.0;
+          }
+          var northEndY$1 = -commonEndPositionY;
+          var westEndX$1 = -commonEndPositionX;
           var tR$1 = {
             northStartY: northStartY,
             eastStartX: eastStartX,
             southStartY: southStartY,
             westStartX: westStartX,
             northEndY: northEndY$1,
-            eastEndX: 0.5,
-            southEndY: 0.5,
+            eastEndX: commonEndPositionX,
+            southEndY: commonEndPositionY,
             westEndX: westEndX$1,
             northStartX: 0.0,
             eastStartY: 0.0,

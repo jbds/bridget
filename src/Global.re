@@ -220,11 +220,31 @@ let reducer = (state: TopLevel.state, action) => {
     let westStartX = -. cardWidthNormalized *. cardWidthOffsetFraction;
 
     // test
-    let commonEndPosition = 0.5;
-    let northEndY = -. commonEndPosition;
-    let eastEndX = commonEndPosition;
-    let southEndY = commonEndPosition;
-    let westEndX = -. commonEndPosition;
+    // let commonEndPosition = 0.5;
+    let commonEndPositionY = {
+      switch (state.activePointOfCompass) {
+      | Some("North") => 0.5
+      | Some("East") => 0.0
+      | Some("South") => (-0.5)
+      | Some("West") => 0.0
+      | _ => 0.0
+      };
+    };
+    let commonEndPositionX = {
+      switch (state.activePointOfCompass) {
+      | Some("North") => 0.0
+      | Some("East") => 0.5
+      | Some("South") => 0.0
+      | Some("West") => (-0.5)
+      | _ => 0.0
+      };
+    };
+
+    let northEndY = -. commonEndPositionY;
+    let eastEndX = commonEndPositionX;
+    let southEndY = commonEndPositionY;
+    let westEndX = -. commonEndPositionX;
+
     // test
     let northStartX = 0.0;
     let northEndX = 0.0;
