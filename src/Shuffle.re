@@ -78,6 +78,14 @@ type transition = {
   eastEndX: float,
   southEndY: float,
   westEndX: float,
+  northStartX: float,
+  eastStartY: float,
+  southStartX: float,
+  westStartY: float,
+  northEndX: float,
+  eastEndY: float,
+  southEndX: float,
+  westEndY: float,
 };
 
 // VALUE DEFINITIONS

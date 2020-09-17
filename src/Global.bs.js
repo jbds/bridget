@@ -26,7 +26,15 @@ var initialState_transition = {
   northEndY: 0.0,
   eastEndX: 0.0,
   southEndY: 0.0,
-  westEndX: 0.0
+  westEndX: 0.0,
+  northStartX: 0.0,
+  eastStartY: 0.0,
+  southStartX: 0.0,
+  westStartY: 0.0,
+  northEndX: 0.0,
+  eastEndY: 0.0,
+  southEndX: 0.0,
+  westEndY: 0.0
 };
 
 var initialState = {
@@ -115,7 +123,15 @@ function reducer(state, action) {
                   northEndY: init.northEndY,
                   eastEndX: eastEndX,
                   southEndY: init.southEndY,
-                  westEndX: init.westEndX
+                  westEndX: init.westEndX,
+                  northStartX: init.northStartX,
+                  eastStartY: init.eastStartY,
+                  southStartX: init.southStartX,
+                  westStartY: init.westStartY,
+                  northEndX: init.northEndX,
+                  eastEndY: init.eastEndY,
+                  southEndX: init.southEndX,
+                  westEndY: init.westEndY
                 };
                 break;
             case "North" :
@@ -128,7 +144,15 @@ function reducer(state, action) {
                   northEndY: northEndY,
                   eastEndX: init$1.eastEndX,
                   southEndY: init$1.southEndY,
-                  westEndX: init$1.westEndX
+                  westEndX: init$1.westEndX,
+                  northStartX: init$1.northStartX,
+                  eastStartY: init$1.eastStartY,
+                  southStartX: init$1.southStartX,
+                  westStartY: init$1.westStartY,
+                  northEndX: init$1.northEndX,
+                  eastEndY: init$1.eastEndY,
+                  southEndX: init$1.southEndX,
+                  westEndY: init$1.westEndY
                 };
                 break;
             case "South" :
@@ -141,7 +165,15 @@ function reducer(state, action) {
                   northEndY: init$2.northEndY,
                   eastEndX: init$2.eastEndX,
                   southEndY: southEndY,
-                  westEndX: init$2.westEndX
+                  westEndX: init$2.westEndX,
+                  northStartX: init$2.northStartX,
+                  eastStartY: init$2.eastStartY,
+                  southStartX: init$2.southStartX,
+                  westStartY: init$2.westStartY,
+                  northEndX: init$2.northEndX,
+                  eastEndY: init$2.eastEndY,
+                  southEndX: init$2.southEndX,
+                  westEndY: init$2.westEndY
                 };
                 break;
             case "West" :
@@ -154,7 +186,15 @@ function reducer(state, action) {
                   northEndY: init$3.northEndY,
                   eastEndX: init$3.eastEndX,
                   southEndY: init$3.southEndY,
-                  westEndX: westEndX
+                  westEndX: westEndX,
+                  northStartX: init$3.northStartX,
+                  eastStartY: init$3.eastStartY,
+                  southStartX: init$3.southStartX,
+                  westStartY: init$3.westStartY,
+                  northEndX: init$3.northEndX,
+                  eastEndY: init$3.eastEndY,
+                  southEndX: init$3.southEndX,
+                  westEndY: init$3.westEndY
                 };
                 break;
             default:
@@ -202,7 +242,15 @@ function reducer(state, action) {
             northEndY: northEndY$1,
             eastEndX: 0.5,
             southEndY: 0.5,
-            westEndX: westEndX$1
+            westEndX: westEndX$1,
+            northStartX: 0.0,
+            eastStartY: 0.0,
+            southStartX: 0.0,
+            westStartY: 0.0,
+            northEndX: 0.0,
+            eastEndY: 0.0,
+            southEndX: 0.0,
+            westEndY: 0.0
           };
           ((setTimeout(function(){document.getElementById('btnEndTrick').click();}, 2000)));
           var newrecord$1 = Caml_obj.caml_obj_dup(state);
@@ -244,7 +292,15 @@ function reducer(state, action) {
                     northEndY: 0.0,
                     eastEndX: 0.0,
                     southEndY: 0.0,
-                    westEndX: 0.0
+                    westEndX: 0.0,
+                    northStartX: 0.0,
+                    eastStartY: 0.0,
+                    southStartX: 0.0,
+                    westStartY: 0.0,
+                    northEndX: 0.0,
+                    eastEndY: 0.0,
+                    southEndX: 0.0,
+                    westEndY: 0.0
                   }
                 };
       case /* LoginSync */4 :

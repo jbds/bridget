@@ -1,6 +1,6 @@
 'use strict';
 
-// Last update: 15/09/20
+// Last update: 17/09/20
 
 const session = require('express-session');
 const express = require('express');
@@ -51,7 +51,9 @@ let gameState = {
   randomInt: -999,
   transition: {
     northStartY: 0.0, eastStartX: 0.0, southStartY: 0.0, westStartX: 0.0,
-    northEndY: 0.0, eastEndX: 0.0, southEndY: 0.0, westEndX: 0.0
+    northEndY: 0.0, eastEndX: 0.0, southEndY: 0.0, westEndX: 0.0,
+    northStartX: 0.0, eastStartY: 0.0, southStartX: 0.0, westStartY: 0.0,
+    northEndX: 0.0, eastEndY: 0.0, southEndX: 0.0, westEndY: 0.0
   }
 };
 

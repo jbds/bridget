@@ -52,6 +52,14 @@ let initialState: TopLevel.state = {
     eastEndX: 0.0,
     southEndY: 0.0,
     westEndX: 0.0,
+    northStartX: 0.0,
+    eastStartY: 0.0,
+    southStartX: 0.0,
+    westStartY: 0.0,
+    northEndX: 0.0,
+    eastEndY: 0.0,
+    southEndX: 0.0,
+    westEndY: 0.0,
   },
 };
 
@@ -217,6 +225,15 @@ let reducer = (state: TopLevel.state, action) => {
     let eastEndX = commonEndPosition;
     let southEndY = commonEndPosition;
     let westEndX = -. commonEndPosition;
+    // test
+    let northStartX = 0.0;
+    let northEndX = 0.0;
+    let eastStartY = 0.0;
+    let eastEndY = 0.0;
+    let southStartX = 0.0;
+    let southEndX = 0.0;
+    let westStartY = 0.0;
+    let westEndY = 0.0;
     let tR: Shuffle.transition = {
       northStartY,
       northEndY,
@@ -226,6 +243,14 @@ let reducer = (state: TopLevel.state, action) => {
       southEndY,
       westStartX,
       westEndX,
+      northStartX,
+      northEndX,
+      eastStartY,
+      eastEndY,
+      southStartX,
+      southEndX,
+      westStartY,
+      westEndY,
     };
     let _myID: int = [%raw
       "setTimeout(function(){document.getElementById('btnEndTrick').click();}, 2000)"
@@ -274,6 +299,14 @@ let reducer = (state: TopLevel.state, action) => {
         eastEndX: 0.0,
         southEndY: 0.0,
         westEndX: 0.0,
+        northStartX: 0.0,
+        eastStartY: 0.0,
+        southStartX: 0.0,
+        westStartY: 0.0,
+        northEndX: 0.0,
+        eastEndY: 0.0,
+        southEndX: 0.0,
+        westEndY: 0.0,
       },
     };
   | LoginSync =>
