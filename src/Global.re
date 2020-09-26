@@ -273,7 +273,7 @@ let reducer = (state: TopLevel.state, action) => {
       westEndY,
     };
     let _myID: int = [%raw
-      "setTimeout(function(){document.getElementById('btnEndTrick').click();}, 2000)"
+      "setTimeout(function(){document.getElementById('btnEndTrick').click();}, 10000)"
     ];
     {...state, transition: tR, lastAction: "PostDiscard"};
   | Sync =>

@@ -292,7 +292,7 @@ function reducer(state, action) {
             southEndX: 0.0,
             westEndY: 0.0
           };
-          ((setTimeout(function(){document.getElementById('btnEndTrick').click();}, 2000)));
+          ((setTimeout(function(){document.getElementById('btnEndTrick').click();}, 10000)));
           var newrecord$1 = Caml_obj.caml_obj_dup(state);
           newrecord$1.transition = tR$1;
           newrecord$1.lastAction = "PostDiscard";
