@@ -154,10 +154,34 @@ let reducer = (state: TopLevel.state, action) => {
     //Js.log(cardWidthNormalized);
     let tR = {
       switch (discardPoc) {
-      | "North" => {...state.transition, northStartY: (-0.5), northEndY}
-      | "East" => {...state.transition, eastStartX: 0.5, eastEndX}
-      | "South" => {...state.transition, southStartY: 0.5, southEndY}
-      | "West" => {...state.transition, westStartX: (-0.5), westEndX}
+      | "North" => {
+          ...state.transition,
+          northStartY: (-0.5),
+          northEndY,
+          northStartX: 0.0,
+          northEndX: 0.0,
+        }
+      | "East" => {
+          ...state.transition,
+          eastStartX: 0.5,
+          eastEndX,
+          eastStartY: 0.0,
+          eastEndY: 0.0,
+        }
+      | "South" => {
+          ...state.transition,
+          southStartY: 0.5,
+          southEndY,
+          southStartX: 0.0,
+          southEndX: 0.0,
+        }
+      | "West" => {
+          ...state.transition,
+          westStartX: (-0.5),
+          westEndX,
+          westStartY: 0.0,
+          westEndY: 0.0,
+        }
       | _ => state.transition
       };
     };
@@ -221,39 +245,61 @@ let reducer = (state: TopLevel.state, action) => {
 
     // test
     // let commonEndPosition = 0.5;
+    // let commonEndPositionY = {
+    //   switch (state.activePointOfCompass) {
+    //   | Some("North") => 0.5
+    //   | Some("East") => 0.0
+    //   | Some("South") => (-0.5)
+    //   | Some("West") => 0.0
+    //   | _ => 0.0
+    //   };
+    // };
+    // let commonEndPositionX = {
+    //   switch (state.activePointOfCompass) {
+    //   | Some("North") => 0.0
+    //   | Some("East") => 0.5
+    //   | Some("South") => 0.0
+    //   | Some("West") => (-0.5)
+    //   | _ => 0.0
+    //   };
+    // };
+    // actual
+    let winningDiscardPoc = TopLevel.getWinningDiscardPoc(state);
+    let winningDiscardOffset = 0.5;
     let commonEndPositionY = {
-      switch (state.activePointOfCompass) {
-      | Some("North") => 0.5
-      | Some("East") => 0.0
-      | Some("South") => (-0.5)
-      | Some("West") => 0.0
+      switch (winningDiscardPoc) {
+      | "North" => -. winningDiscardOffset
+      | "East" => 0.0
+      | "South" => winningDiscardOffset
+      | "West" => 0.0
       | _ => 0.0
       };
     };
     let commonEndPositionX = {
-      switch (state.activePointOfCompass) {
-      | Some("North") => 0.0
-      | Some("East") => 0.5
-      | Some("South") => 0.0
-      | Some("West") => (-0.5)
+      switch (winningDiscardPoc) {
+      | "North" => 0.0
+      | "East" => winningDiscardOffset
+      | "South" => 0.0
+      | "West" => -. winningDiscardOffset
       | _ => 0.0
       };
     };
 
-    let northEndY = -. commonEndPositionY;
-    let eastEndX = commonEndPositionX;
+    let northEndY = commonEndPositionY;
+    let eastEndY = commonEndPositionY;
     let southEndY = commonEndPositionY;
-    let westEndX = -. commonEndPositionX;
+    let westEndY = commonEndPositionY;
+
+    let northEndX = commonEndPositionX;
+    let eastEndX = commonEndPositionX;
+    let westEndX = commonEndPositionX;
+    let southEndX = commonEndPositionX;
 
     // test
     let northStartX = 0.0;
-    let northEndX = 0.0;
     let eastStartY = 0.0;
-    let eastEndY = 0.0;
     let southStartX = 0.0;
-    let southEndX = 0.0;
     let westStartY = 0.0;
-    let westEndY = 0.0;
     let tR: Shuffle.transition = {
       northStartY,
       northEndY,

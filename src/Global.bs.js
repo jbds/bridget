@@ -10,6 +10,7 @@ var MyDeal$ReasonReactExamples = require("./Actions/MyDeal.bs.js");
 var Chicago$ReasonReactExamples = require("./Chicago.bs.js");
 var Shuffle$ReasonReactExamples = require("./Shuffle.bs.js");
 var EndTrick$ReasonReactExamples = require("./Actions/EndTrick.bs.js");
+var TopLevel$ReasonReactExamples = require("./TopLevel.bs.js");
 
 var Online = require('./Online.bs');
 ;
@@ -125,11 +126,11 @@ function reducer(state, action) {
                   southEndY: init.southEndY,
                   westEndX: init.westEndX,
                   northStartX: init.northStartX,
-                  eastStartY: init.eastStartY,
+                  eastStartY: 0.0,
                   southStartX: init.southStartX,
                   westStartY: init.westStartY,
                   northEndX: init.northEndX,
-                  eastEndY: init.eastEndY,
+                  eastEndY: 0.0,
                   southEndX: init.southEndX,
                   westEndY: init.westEndY
                 };
@@ -145,11 +146,11 @@ function reducer(state, action) {
                   eastEndX: init$1.eastEndX,
                   southEndY: init$1.southEndY,
                   westEndX: init$1.westEndX,
-                  northStartX: init$1.northStartX,
+                  northStartX: 0.0,
                   eastStartY: init$1.eastStartY,
                   southStartX: init$1.southStartX,
                   westStartY: init$1.westStartY,
-                  northEndX: init$1.northEndX,
+                  northEndX: 0.0,
                   eastEndY: init$1.eastEndY,
                   southEndX: init$1.southEndX,
                   westEndY: init$1.westEndY
@@ -168,11 +169,11 @@ function reducer(state, action) {
                   westEndX: init$2.westEndX,
                   northStartX: init$2.northStartX,
                   eastStartY: init$2.eastStartY,
-                  southStartX: init$2.southStartX,
+                  southStartX: 0.0,
                   westStartY: init$2.westStartY,
                   northEndX: init$2.northEndX,
                   eastEndY: init$2.eastEndY,
-                  southEndX: init$2.southEndX,
+                  southEndX: 0.0,
                   westEndY: init$2.westEndY
                 };
                 break;
@@ -190,11 +191,11 @@ function reducer(state, action) {
                   northStartX: init$3.northStartX,
                   eastStartY: init$3.eastStartY,
                   southStartX: init$3.southStartX,
-                  westStartY: init$3.westStartY,
+                  westStartY: 0.0,
                   northEndX: init$3.northEndX,
                   eastEndY: init$3.eastEndY,
                   southEndX: init$3.southEndX,
-                  westEndY: init$3.westEndY
+                  westEndY: 0.0
                 };
                 break;
             default:
@@ -232,65 +233,54 @@ function reducer(state, action) {
           var eastStartX = cardWidthNormalized$1 * cardWidthOffsetFraction$1;
           var southStartY = cardHeightNormalized$1 * cardHeightOffsetFraction$1;
           var westStartX = -cardWidthNormalized$1 * cardWidthOffsetFraction$1;
-          var match = state.activePointOfCompass;
+          var winningDiscardPoc = TopLevel$ReasonReactExamples.getWinningDiscardPoc(state);
           var commonEndPositionY;
-          if (match !== undefined) {
-            switch (match) {
-              case "North" :
-                  commonEndPositionY = 0.5;
-                  break;
-              case "South" :
-                  commonEndPositionY = -0.5;
-                  break;
-              case "East" :
-              case "West" :
-                  commonEndPositionY = 0.0;
-                  break;
-              default:
+          switch (winningDiscardPoc) {
+            case "North" :
+                commonEndPositionY = -0.5;
+                break;
+            case "South" :
+                commonEndPositionY = 0.5;
+                break;
+            case "East" :
+            case "West" :
                 commonEndPositionY = 0.0;
-            }
-          } else {
-            commonEndPositionY = 0.0;
+                break;
+            default:
+              commonEndPositionY = 0.0;
           }
-          var match$1 = state.activePointOfCompass;
           var commonEndPositionX;
-          if (match$1 !== undefined) {
-            switch (match$1) {
-              case "East" :
-                  commonEndPositionX = 0.5;
-                  break;
-              case "North" :
-              case "South" :
-                  commonEndPositionX = 0.0;
-                  break;
-              case "West" :
-                  commonEndPositionX = -0.5;
-                  break;
-              default:
+          switch (winningDiscardPoc) {
+            case "East" :
+                commonEndPositionX = 0.5;
+                break;
+            case "North" :
+            case "South" :
                 commonEndPositionX = 0.0;
-            }
-          } else {
-            commonEndPositionX = 0.0;
+                break;
+            case "West" :
+                commonEndPositionX = -0.5;
+                break;
+            default:
+              commonEndPositionX = 0.0;
           }
-          var northEndY$1 = -commonEndPositionY;
-          var westEndX$1 = -commonEndPositionX;
           var tR$1 = {
             northStartY: northStartY,
             eastStartX: eastStartX,
             southStartY: southStartY,
             westStartX: westStartX,
-            northEndY: northEndY$1,
+            northEndY: commonEndPositionY,
             eastEndX: commonEndPositionX,
             southEndY: commonEndPositionY,
-            westEndX: westEndX$1,
+            westEndX: commonEndPositionX,
             northStartX: 0.0,
             eastStartY: 0.0,
             southStartX: 0.0,
             westStartY: 0.0,
-            northEndX: 0.0,
-            eastEndY: 0.0,
-            southEndX: 0.0,
-            westEndY: 0.0
+            northEndX: commonEndPositionX,
+            eastEndY: commonEndPositionY,
+            southEndX: commonEndPositionX,
+            westEndY: commonEndPositionY
           };
           ((setTimeout(function(){document.getElementById('btnEndTrick').click();}, 10000)));
           var newrecord$1 = Caml_obj.caml_obj_dup(state);
