@@ -7,7 +7,7 @@ var Caml_array = require("bs-platform/lib/js/caml_array.js");
 var initialPack = [
   {
     noTrumpValue: 51,
-    handOrder: 51,
+    handOrder: 651,
     shuffleIndex: 51,
     rank: /* Ace */0,
     suit: /* Spades */0,
@@ -16,7 +16,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 50,
-    handOrder: 50,
+    handOrder: 650,
     shuffleIndex: 50,
     rank: /* King */1,
     suit: /* Spades */0,
@@ -25,7 +25,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 49,
-    handOrder: 49,
+    handOrder: 649,
     shuffleIndex: 49,
     rank: /* Queen */2,
     suit: /* Spades */0,
@@ -34,7 +34,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 48,
-    handOrder: 48,
+    handOrder: 648,
     shuffleIndex: 48,
     rank: /* Jack */3,
     suit: /* Spades */0,
@@ -43,7 +43,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 47,
-    handOrder: 47,
+    handOrder: 647,
     shuffleIndex: 47,
     rank: /* Ten */4,
     suit: /* Spades */0,
@@ -52,7 +52,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 46,
-    handOrder: 46,
+    handOrder: 646,
     shuffleIndex: 46,
     rank: /* Nine */5,
     suit: /* Spades */0,
@@ -61,7 +61,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 45,
-    handOrder: 45,
+    handOrder: 645,
     shuffleIndex: 45,
     rank: /* Eight */6,
     suit: /* Spades */0,
@@ -70,7 +70,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 44,
-    handOrder: 44,
+    handOrder: 644,
     shuffleIndex: 44,
     rank: /* Seven */7,
     suit: /* Spades */0,
@@ -79,7 +79,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 43,
-    handOrder: 43,
+    handOrder: 643,
     shuffleIndex: 43,
     rank: /* Six */8,
     suit: /* Spades */0,
@@ -88,7 +88,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 42,
-    handOrder: 42,
+    handOrder: 642,
     shuffleIndex: 42,
     rank: /* Five */9,
     suit: /* Spades */0,
@@ -97,7 +97,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 41,
-    handOrder: 41,
+    handOrder: 641,
     shuffleIndex: 41,
     rank: /* Four */10,
     suit: /* Spades */0,
@@ -106,7 +106,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 40,
-    handOrder: 40,
+    handOrder: 640,
     shuffleIndex: 40,
     rank: /* Three */11,
     suit: /* Spades */0,
@@ -115,7 +115,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 39,
-    handOrder: 39,
+    handOrder: 639,
     shuffleIndex: 39,
     rank: /* Two */12,
     suit: /* Spades */0,
@@ -124,7 +124,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 38,
-    handOrder: 38,
+    handOrder: 438,
     shuffleIndex: 38,
     rank: /* Ace */0,
     suit: /* Hearts */1,
@@ -133,7 +133,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 37,
-    handOrder: 37,
+    handOrder: 437,
     shuffleIndex: 37,
     rank: /* King */1,
     suit: /* Hearts */1,
@@ -142,7 +142,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 36,
-    handOrder: 36,
+    handOrder: 436,
     shuffleIndex: 36,
     rank: /* Queen */2,
     suit: /* Hearts */1,
@@ -151,7 +151,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 35,
-    handOrder: 35,
+    handOrder: 435,
     shuffleIndex: 35,
     rank: /* Jack */3,
     suit: /* Hearts */1,
@@ -160,7 +160,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 34,
-    handOrder: 34,
+    handOrder: 434,
     shuffleIndex: 34,
     rank: /* Ten */4,
     suit: /* Hearts */1,
@@ -169,7 +169,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 33,
-    handOrder: 33,
+    handOrder: 433,
     shuffleIndex: 33,
     rank: /* Nine */5,
     suit: /* Hearts */1,
@@ -178,7 +178,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 32,
-    handOrder: 32,
+    handOrder: 432,
     shuffleIndex: 32,
     rank: /* Eight */6,
     suit: /* Hearts */1,
@@ -187,7 +187,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 31,
-    handOrder: 31,
+    handOrder: 431,
     shuffleIndex: 31,
     rank: /* Seven */7,
     suit: /* Hearts */1,
@@ -196,7 +196,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 30,
-    handOrder: 30,
+    handOrder: 430,
     shuffleIndex: 30,
     rank: /* Six */8,
     suit: /* Hearts */1,
@@ -205,7 +205,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 29,
-    handOrder: 29,
+    handOrder: 429,
     shuffleIndex: 29,
     rank: /* Five */9,
     suit: /* Hearts */1,
@@ -214,7 +214,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 28,
-    handOrder: 28,
+    handOrder: 428,
     shuffleIndex: 28,
     rank: /* Four */10,
     suit: /* Hearts */1,
@@ -223,7 +223,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 27,
-    handOrder: 27,
+    handOrder: 427,
     shuffleIndex: 27,
     rank: /* Three */11,
     suit: /* Hearts */1,
@@ -232,7 +232,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 26,
-    handOrder: 26,
+    handOrder: 426,
     shuffleIndex: 26,
     rank: /* Two */12,
     suit: /* Hearts */1,
@@ -241,7 +241,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 25,
-    handOrder: 12,
+    handOrder: 225,
     shuffleIndex: 25,
     rank: /* Ace */0,
     suit: /* Diamonds */2,
@@ -250,7 +250,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 24,
-    handOrder: 11,
+    handOrder: 224,
     shuffleIndex: 24,
     rank: /* King */1,
     suit: /* Diamonds */2,
@@ -259,7 +259,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 23,
-    handOrder: 10,
+    handOrder: 223,
     shuffleIndex: 23,
     rank: /* Queen */2,
     suit: /* Diamonds */2,
@@ -268,7 +268,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 22,
-    handOrder: 9,
+    handOrder: 222,
     shuffleIndex: 22,
     rank: /* Jack */3,
     suit: /* Diamonds */2,
@@ -277,7 +277,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 21,
-    handOrder: 8,
+    handOrder: 221,
     shuffleIndex: 21,
     rank: /* Ten */4,
     suit: /* Diamonds */2,
@@ -286,7 +286,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 20,
-    handOrder: 7,
+    handOrder: 220,
     shuffleIndex: 20,
     rank: /* Nine */5,
     suit: /* Diamonds */2,
@@ -295,7 +295,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 19,
-    handOrder: 6,
+    handOrder: 219,
     shuffleIndex: 19,
     rank: /* Eight */6,
     suit: /* Diamonds */2,
@@ -304,7 +304,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 18,
-    handOrder: 5,
+    handOrder: 218,
     shuffleIndex: 18,
     rank: /* Seven */7,
     suit: /* Diamonds */2,
@@ -313,7 +313,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 17,
-    handOrder: 4,
+    handOrder: 217,
     shuffleIndex: 17,
     rank: /* Six */8,
     suit: /* Diamonds */2,
@@ -322,7 +322,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 16,
-    handOrder: 3,
+    handOrder: 216,
     shuffleIndex: 16,
     rank: /* Five */9,
     suit: /* Diamonds */2,
@@ -331,7 +331,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 15,
-    handOrder: 2,
+    handOrder: 215,
     shuffleIndex: 15,
     rank: /* Four */10,
     suit: /* Diamonds */2,
@@ -340,7 +340,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 14,
-    handOrder: 1,
+    handOrder: 214,
     shuffleIndex: 14,
     rank: /* Three */11,
     suit: /* Diamonds */2,
@@ -349,7 +349,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 13,
-    handOrder: 0,
+    handOrder: 213,
     shuffleIndex: 13,
     rank: /* Two */12,
     suit: /* Diamonds */2,
@@ -358,7 +358,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 12,
-    handOrder: 25,
+    handOrder: 12,
     shuffleIndex: 12,
     rank: /* Ace */0,
     suit: /* Clubs */3,
@@ -367,7 +367,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 11,
-    handOrder: 24,
+    handOrder: 11,
     shuffleIndex: 11,
     rank: /* King */1,
     suit: /* Clubs */3,
@@ -376,7 +376,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 10,
-    handOrder: 23,
+    handOrder: 10,
     shuffleIndex: 10,
     rank: /* Queen */2,
     suit: /* Clubs */3,
@@ -385,7 +385,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 9,
-    handOrder: 22,
+    handOrder: 9,
     shuffleIndex: 9,
     rank: /* Jack */3,
     suit: /* Clubs */3,
@@ -394,7 +394,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 8,
-    handOrder: 21,
+    handOrder: 8,
     shuffleIndex: 8,
     rank: /* Ten */4,
     suit: /* Clubs */3,
@@ -403,7 +403,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 7,
-    handOrder: 20,
+    handOrder: 7,
     shuffleIndex: 7,
     rank: /* Nine */5,
     suit: /* Clubs */3,
@@ -412,7 +412,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 6,
-    handOrder: 19,
+    handOrder: 6,
     shuffleIndex: 6,
     rank: /* Eight */6,
     suit: /* Clubs */3,
@@ -421,7 +421,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 5,
-    handOrder: 18,
+    handOrder: 5,
     shuffleIndex: 5,
     rank: /* Seven */7,
     suit: /* Clubs */3,
@@ -430,7 +430,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 4,
-    handOrder: 17,
+    handOrder: 4,
     shuffleIndex: 4,
     rank: /* Six */8,
     suit: /* Clubs */3,
@@ -439,7 +439,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 3,
-    handOrder: 16,
+    handOrder: 3,
     shuffleIndex: 3,
     rank: /* Five */9,
     suit: /* Clubs */3,
@@ -448,7 +448,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 2,
-    handOrder: 15,
+    handOrder: 2,
     shuffleIndex: 2,
     rank: /* Four */10,
     suit: /* Clubs */3,
@@ -457,7 +457,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 1,
-    handOrder: 14,
+    handOrder: 1,
     shuffleIndex: 1,
     rank: /* Three */11,
     suit: /* Clubs */3,
@@ -466,7 +466,7 @@ var initialPack = [
   },
   {
     noTrumpValue: 0,
-    handOrder: 13,
+    handOrder: 0,
     shuffleIndex: 0,
     rank: /* Two */12,
     suit: /* Clubs */3,
