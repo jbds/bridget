@@ -639,12 +639,51 @@ let reducer = (state: TopLevel.state, action) => {
                     : {
                       card;
                     }
+                | Some("Hearts") =>
+                  card.handOrder <= 438 && card.handOrder >= 426
+                    ? {...card, handOrder: card.handOrder + 300}
+                    : {
+                      card;
+                    }
+                | Some("Diamonds") =>
+                  card.handOrder <= 12
+                    ? {...card, handOrder: card.handOrder + 700}
+                    : {
+                      card;
+                    }
+                | Some("Clubs") =>
+                  card.handOrder <= 225 && card.handOrder >= 213
+                    ? {...card, handOrder: card.handOrder + 600}
+                    : {
+                      card;
+                    }
                 | _ => card
                 }
               },
               state.pack,
             );
-
+          // Hearts and Clubs contractSuits only need further adjustment to hand order
+          let myPack2 =
+            Array.map(
+              (card: Shuffle.card) => {
+                switch (contractSuit) {
+                | Some("Hearts") =>
+                  card.handOrder <= 12
+                    ? {...card, handOrder: card.handOrder + 300}
+                    : {
+                      card;
+                    }
+                | Some("Clubs") =>
+                  card.handOrder <= 438 && card.handOrder >= 426
+                    ? {...card, handOrder: card.handOrder + 300}
+                    : {
+                      card;
+                    }
+                | _ => card
+                }
+              },
+              myPack,
+            );
           // return end of bidding, but avoid new row if 4 passes by checking contractLevel
           {
             ...state,
@@ -661,7 +700,7 @@ let reducer = (state: TopLevel.state, action) => {
               contractLevel != None
                 ? "BidAddSpecial- 3 Passes" : "BidAddSpecial- 4 Passes",
             randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
-            pack: myPack,
+            pack: myPack2,
           };
         } else {
           {
