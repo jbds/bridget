@@ -268,9 +268,9 @@ let reducer = (state: TopLevel.state, action) => {
     let winningDiscardOffset = 0.5;
     let commonEndPositionY = {
       switch (winningDiscardPoc) {
-      | "North" => -. winningDiscardOffset
+      | "North" => -. winningDiscardOffset -. cardHeightNormalized *. 0.5
       | "East" => 0.0
-      | "South" => winningDiscardOffset
+      | "South" => winningDiscardOffset +. cardHeightNormalized *. 0.5
       | "West" => 0.0
       | _ => 0.0
       };
@@ -278,9 +278,9 @@ let reducer = (state: TopLevel.state, action) => {
     let commonEndPositionX = {
       switch (winningDiscardPoc) {
       | "North" => 0.0
-      | "East" => winningDiscardOffset
+      | "East" => winningDiscardOffset +. cardWidthNormalized *. 0.5
       | "South" => 0.0
-      | "West" => -. winningDiscardOffset
+      | "West" => -. winningDiscardOffset -. cardWidthNormalized *. 0.5
       | _ => 0.0
       };
     };
@@ -319,7 +319,7 @@ let reducer = (state: TopLevel.state, action) => {
       westEndY,
     };
     let _myID: int = [%raw
-      "setTimeout(function(){document.getElementById('btnEndTrick').click();}, 10000)"
+      "setTimeout(function(){document.getElementById('btnEndTrick').click();}, 500)"
     ];
     {...state, transition: tR, lastAction: "PostDiscard"};
   | Sync =>

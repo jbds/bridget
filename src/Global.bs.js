@@ -237,10 +237,10 @@ function reducer(state, action) {
           var commonEndPositionY;
           switch (winningDiscardPoc) {
             case "North" :
-                commonEndPositionY = -0.5;
+                commonEndPositionY = -0.5 - cardHeightNormalized$1 * 0.5;
                 break;
             case "South" :
-                commonEndPositionY = 0.5;
+                commonEndPositionY = 0.5 + cardHeightNormalized$1 * 0.5;
                 break;
             case "East" :
             case "West" :
@@ -252,14 +252,14 @@ function reducer(state, action) {
           var commonEndPositionX;
           switch (winningDiscardPoc) {
             case "East" :
-                commonEndPositionX = 0.5;
+                commonEndPositionX = 0.5 + cardWidthNormalized$1 * 0.5;
                 break;
             case "North" :
             case "South" :
                 commonEndPositionX = 0.0;
                 break;
             case "West" :
-                commonEndPositionX = -0.5;
+                commonEndPositionX = -0.5 - cardWidthNormalized$1 * 0.5;
                 break;
             default:
               commonEndPositionX = 0.0;
@@ -282,7 +282,7 @@ function reducer(state, action) {
             southEndX: commonEndPositionX,
             westEndY: commonEndPositionY
           };
-          ((setTimeout(function(){document.getElementById('btnEndTrick').click();}, 10000)));
+          ((setTimeout(function(){document.getElementById('btnEndTrick').click();}, 500)));
           var newrecord$1 = Caml_obj.caml_obj_dup(state);
           newrecord$1.transition = tR$1;
           newrecord$1.lastAction = "PostDiscard";
