@@ -798,7 +798,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 25,
-    handOrder: 225,
+    handOrder: 12,
     shuffleIndex: 25,
     rank: Ace,
     suit: Diamonds,
@@ -807,7 +807,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 24,
-    handOrder: 224,
+    handOrder: 11,
     shuffleIndex: 24,
     rank: King,
     suit: Diamonds,
@@ -816,7 +816,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 23,
-    handOrder: 223,
+    handOrder: 10,
     shuffleIndex: 23,
     rank: Queen,
     suit: Diamonds,
@@ -825,7 +825,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 22,
-    handOrder: 222,
+    handOrder: 9,
     shuffleIndex: 22,
     rank: Jack,
     suit: Diamonds,
@@ -834,7 +834,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 21,
-    handOrder: 221,
+    handOrder: 8,
     shuffleIndex: 21,
     rank: Ten,
     suit: Diamonds,
@@ -843,7 +843,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 20,
-    handOrder: 220,
+    handOrder: 7,
     shuffleIndex: 20,
     rank: Nine,
     suit: Diamonds,
@@ -852,7 +852,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 19,
-    handOrder: 219,
+    handOrder: 6,
     shuffleIndex: 19,
     rank: Eight,
     suit: Diamonds,
@@ -861,7 +861,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 18,
-    handOrder: 218,
+    handOrder: 5,
     shuffleIndex: 18,
     rank: Seven,
     suit: Diamonds,
@@ -870,7 +870,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 17,
-    handOrder: 217,
+    handOrder: 4,
     shuffleIndex: 17,
     rank: Six,
     suit: Diamonds,
@@ -879,7 +879,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 16,
-    handOrder: 216,
+    handOrder: 3,
     shuffleIndex: 16,
     rank: Five,
     suit: Diamonds,
@@ -888,7 +888,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 15,
-    handOrder: 215,
+    handOrder: 2,
     shuffleIndex: 15,
     rank: Four,
     suit: Diamonds,
@@ -897,7 +897,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 14,
-    handOrder: 214,
+    handOrder: 1,
     shuffleIndex: 14,
     rank: Three,
     suit: Diamonds,
@@ -906,7 +906,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 13,
-    handOrder: 213,
+    handOrder: 0,
     shuffleIndex: 13,
     rank: Two,
     suit: Diamonds,
@@ -915,7 +915,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 12,
-    handOrder: 12,
+    handOrder: 225,
     shuffleIndex: 12,
     rank: Ace,
     suit: Clubs,
@@ -924,7 +924,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 11,
-    handOrder: 11,
+    handOrder: 224,
     shuffleIndex: 11,
     rank: King,
     suit: Clubs,
@@ -933,7 +933,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 10,
-    handOrder: 10,
+    handOrder: 223,
     shuffleIndex: 10,
     rank: Queen,
     suit: Clubs,
@@ -942,7 +942,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 9,
-    handOrder: 9,
+    handOrder: 222,
     shuffleIndex: 9,
     rank: Jack,
     suit: Clubs,
@@ -951,7 +951,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 8,
-    handOrder: 8,
+    handOrder: 221,
     shuffleIndex: 8,
     rank: Ten,
     suit: Clubs,
@@ -960,7 +960,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 7,
-    handOrder: 7,
+    handOrder: 220,
     shuffleIndex: 7,
     rank: Nine,
     suit: Clubs,
@@ -969,7 +969,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 6,
-    handOrder: 6,
+    handOrder: 219,
     shuffleIndex: 6,
     rank: Eight,
     suit: Clubs,
@@ -978,7 +978,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 5,
-    handOrder: 5,
+    handOrder: 218,
     shuffleIndex: 5,
     rank: Seven,
     suit: Clubs,
@@ -987,7 +987,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 4,
-    handOrder: 4,
+    handOrder: 217,
     shuffleIndex: 4,
     rank: Six,
     suit: Clubs,
@@ -996,7 +996,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 3,
-    handOrder: 3,
+    handOrder: 216,
     shuffleIndex: 3,
     rank: Five,
     suit: Clubs,
@@ -1005,7 +1005,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 2,
-    handOrder: 2,
+    handOrder: 215,
     shuffleIndex: 2,
     rank: Four,
     suit: Clubs,
@@ -1014,7 +1014,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 1,
-    handOrder: 1,
+    handOrder: 214,
     shuffleIndex: 1,
     rank: Three,
     suit: Clubs,
@@ -1023,7 +1023,7 @@ let initialPack = [|
   },
   {
     noTrumpValue: 0,
-    handOrder: 0,
+    handOrder: 213,
     shuffleIndex: 0,
     rank: Two,
     suit: Clubs,

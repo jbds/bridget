@@ -243,27 +243,6 @@ let reducer = (state: TopLevel.state, action) => {
     let southStartY = cardHeightNormalized *. cardHeightOffsetFraction;
     let westStartX = -. cardWidthNormalized *. cardWidthOffsetFraction;
 
-    // test
-    // let commonEndPosition = 0.5;
-    // let commonEndPositionY = {
-    //   switch (state.activePointOfCompass) {
-    //   | Some("North") => 0.5
-    //   | Some("East") => 0.0
-    //   | Some("South") => (-0.5)
-    //   | Some("West") => 0.0
-    //   | _ => 0.0
-    //   };
-    // };
-    // let commonEndPositionX = {
-    //   switch (state.activePointOfCompass) {
-    //   | Some("North") => 0.0
-    //   | Some("East") => 0.5
-    //   | Some("South") => 0.0
-    //   | Some("West") => (-0.5)
-    //   | _ => 0.0
-    //   };
-    // };
-    // actual
     let winningDiscardPoc = TopLevel.getWinningDiscardPoc(state);
     let winningDiscardOffset = 0.5;
     let commonEndPositionY = {
@@ -578,26 +557,6 @@ let reducer = (state: TopLevel.state, action) => {
         let tl = List.tl(state.bids);
         let hd2 = List.hd(tl);
         if (hd1.isPass === true && hd2.isPass === true) {
-          // get vulnerability based on number of scores so far
-          // was mod 4 until subtotal row to account for
-          // now mod 5
-          // show partner as well as declarer
-          // vulnerability is now set at deal time
-          // let vulnerable =
-          //   switch (List.length(state.chicagoScoreSheet) mod 5) {
-          //   | 0 => "None"
-          //   | 1
-          //   | 2 =>
-          //     switch (state.dealer) {
-          //     | Some("North") => "NS"
-          //     | Some("South") => "SN"
-          //     | Some("East") => "EW"
-          //     | Some("West") => "WE"
-          //     | _ => "Err"
-          //     }
-          //   | 3 => "All"
-          //   | _ => "Error"
-          //   };
           // helper func
           let partnerPocByPoc = poc => {
             switch (poc) {
@@ -669,28 +628,28 @@ let reducer = (state: TopLevel.state, action) => {
             totalTricksWestEast,
             scoreWestEast,
           };
-          // replaced with the above
-          // let chicagoScoreSheetRecord: Chicago.chicagoScoreSheetRecord = {
-          //   vulnerable,
-          //   contractLevel,
-          //   contractSuit,
-          //   contractDeclarer,
-          //   isDoubled,
-          //   isRedoubled,
-          //   totalTricksNorthSouth,
-          //   scoreNorthSouth,
-          //   totalTricksWestEast,
-          //   scoreWestEast,
-          // };
+          // also need to adjust the card handOrder to match the contractSuit if any
+          let myPack =
+            Array.map(
+              (card: Shuffle.card) => {
+                switch (contractSuit) {
+                | Some("NoTrumps") =>
+                  card.handOrder <= 12
+                    ? {...card, handOrder: card.handOrder + 300}
+                    : {
+                      card;
+                    }
+                | _ => card
+                }
+              },
+              state.pack,
+            );
+
           // return end of bidding, but avoid new row if 4 passes by checking contractLevel
           {
             ...state,
             activePointOfCompass:
               Shuffle.getNextActivePointOfCompass(contractDeclarer),
-            // chicagoScoreSheet:
-            //   contractLevel != None
-            //     ? [chicagoScoreSheetRecord, ...state.chicagoScoreSheet]
-            //     : state.chicagoScoreSheet,
             // if no contract level, then lose the row created at deal time
             chicagoScoreSheet:
               contractLevel != None
@@ -702,6 +661,7 @@ let reducer = (state: TopLevel.state, action) => {
               contractLevel != None
                 ? "BidAddSpecial- 3 Passes" : "BidAddSpecial- 4 Passes",
             randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
+            pack: myPack,
           };
         } else {
           {

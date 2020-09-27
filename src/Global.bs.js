@@ -563,8 +563,24 @@ function reducer(state, action) {
                       totalTricksWestEast: myChicagoScoreSheetRecord_totalTricksWestEast,
                       scoreWestEast: undefined
                     };
+                    var myPack$1 = $$Array.map((function (card) {
+                            if (contractSuit !== undefined && contractSuit === "NoTrumps" && card.handOrder <= 12) {
+                              return {
+                                      noTrumpValue: card.noTrumpValue,
+                                      handOrder: card.handOrder + 300 | 0,
+                                      shuffleIndex: card.shuffleIndex,
+                                      rank: card.rank,
+                                      suit: card.suit,
+                                      fileName: card.fileName,
+                                      lifecycle: card.lifecycle
+                                    };
+                            } else {
+                              return card;
+                            }
+                          }), state.pack);
                     var newrecord$7 = Caml_obj.caml_obj_dup(state);
                     newrecord$7.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                    newrecord$7.pack = myPack$1;
                     newrecord$7.lastAction = contractLevel !== undefined ? "BidAddSpecial- 3 Passes" : "BidAddSpecial- 4 Passes";
                     newrecord$7.isBiddingCycle = false;
                     newrecord$7.declarer = contractDeclarer;
