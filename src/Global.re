@@ -432,8 +432,16 @@ let reducer = (state: TopLevel.state, action) => {
     // make sure doMessage is called in sidebar component
     let () = [%raw "window.isLastActionSync = false"];
     //Js.log("action AssignPlayer " ++ pOfCAndP.player ++ " to " ++ pOfCAndP.pointOfCompass);
-    //let myNewArray = state.pointOfCompassAndPlayers;
-    //{...state, pointOfCompassAndPlayers: myNewArray}
+    // rotate the user to be seated at 6PM
+    let () = {
+      switch (pOfCAndP.pointOfCompass) {
+      | "South" => Js.log("South 0 deg")
+      | "East" => Js.log("East +90 deg")
+      | "North" => Js.log("North =180 deg")
+      | "West" => Js.log("West +270 deg")
+      | _ => Js.log("Unexpected pOfCAndP.pointOfCompass")
+      };
+    };
     // unassign any existing requested pointOfCompass
     // unless it is an Observer...
     let myArray1 =

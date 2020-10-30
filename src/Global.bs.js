@@ -391,6 +391,23 @@ function reducer(state, action) {
       case /* AssignPlayer */0 :
           var pOfCAndP = action[0];
           ((window.isLastActionSync = false));
+          var match = pOfCAndP.pointOfCompass;
+          switch (match) {
+            case "East" :
+                console.log("East +90 deg");
+                break;
+            case "North" :
+                console.log("North =180 deg");
+                break;
+            case "South" :
+                console.log("South 0 deg");
+                break;
+            case "West" :
+                console.log("West +270 deg");
+                break;
+            default:
+              console.log("Unexpected pOfCAndP.pointOfCompass");
+          }
           var myArray1 = $$Array.map((function (pointOfCompassAndPlayer) {
                   if (pointOfCompassAndPlayer.pointOfCompass === pOfCAndP.pointOfCompass && pointOfCompassAndPlayer.pointOfCompass !== "Observer") {
                     return {
