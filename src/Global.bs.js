@@ -219,7 +219,7 @@ function reducer(state, action) {
           newrecord.discardSuit = (state.discardIndex + 1 | 0) % 4 === 0 ? cardDiscardSuit : state.discardSuit;
           newrecord.discardPointOfCompass = (state.discardIndex + 1 | 0) % 4 === 0 ? discardPoc : state.discardPointOfCompass;
           newrecord.discardIndex = state.discardIndex + 1 | 0;
-          newrecord.activePointOfCompass = poc;
+          newrecord.activePointOfCompass = myDiscardArray.length === 4 ? undefined : poc;
           return newrecord;
       case /* PostDiscard */2 :
           var m$1 = window.m;

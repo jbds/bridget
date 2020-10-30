@@ -200,7 +200,8 @@ let reducer = (state: TopLevel.state, action) => {
         : 0;
     {
       ...state,
-      activePointOfCompass: poc,
+      //activePointOfCompass: poc,
+      activePointOfCompass: Array.length(myDiscardArray) === 4 ? None : poc,
       discardIndex: state.discardIndex + 1,
       discardPointOfCompass:
         (state.discardIndex + 1) mod 4 === 0
