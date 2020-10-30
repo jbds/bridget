@@ -439,8 +439,12 @@ let reducer = (state: TopLevel.state, action) => {
       | "East" =>
         %raw
         "window.userState.tableRotationDegrees = 90"
-      | "North" => Js.log("North =180 deg")
-      | "West" => Js.log("West +270 deg")
+      | "North" =>
+        %raw
+        "window.userState.tableRotationDegrees = 180"
+      | "West" =>
+        %raw
+        "window.userState.tableRotationDegrees = 270"
       | _ => Js.log("Unexpected pOfCAndP.pointOfCompass")
       };
     };

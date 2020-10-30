@@ -397,13 +397,13 @@ function reducer(state, action) {
                 ((window.userState.tableRotationDegrees = 90));
                 break;
             case "North" :
-                console.log("North =180 deg");
+                ((window.userState.tableRotationDegrees = 180));
                 break;
             case "South" :
                 console.log("South 0 deg");
                 break;
             case "West" :
-                console.log("West +270 deg");
+                ((window.userState.tableRotationDegrees = 270));
                 break;
             default:
               console.log("Unexpected pOfCAndP.pointOfCompass");
