@@ -394,7 +394,7 @@ function reducer(state, action) {
           var match = pOfCAndP.pointOfCompass;
           switch (match) {
             case "East" :
-                console.log("East +90 deg");
+                ((window.userState.tableRotationDegrees = 90));
                 break;
             case "North" :
                 console.log("North =180 deg");

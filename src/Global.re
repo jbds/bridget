@@ -436,7 +436,9 @@ let reducer = (state: TopLevel.state, action) => {
     let () = {
       switch (pOfCAndP.pointOfCompass) {
       | "South" => Js.log("South 0 deg")
-      | "East" => Js.log("East +90 deg")
+      | "East" =>
+        %raw
+        "window.userState.tableRotationDegrees = 90"
       | "North" => Js.log("North =180 deg")
       | "West" => Js.log("West +270 deg")
       | _ => Js.log("Unexpected pOfCAndP.pointOfCompass")
