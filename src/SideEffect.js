@@ -328,7 +328,11 @@ let paintDiscardArray = (p, g, w) => {
         console.log('Unexpected shuffleIndex argument');
     }
     let p5img = g.imgMap.get(obj.fileName);
+    //p.image(p5img, -cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight);
+    p.push();
+    p.rotate(p.HALF_PI / 10);
     p.image(p5img, -cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight);
+    p.pop()
     p.pop();
   }
 };
