@@ -431,7 +431,14 @@ let reducer = (state: TopLevel.state, action) => {
     //Js.log("Action-AssignPlayer");
     // make sure doMessage is called in sidebar component
     let () = [%raw "window.isLastActionSync = false"];
-    //Js.log("action AssignPlayer " ++ pOfCAndP.player ++ " to " ++ pOfCAndP.pointOfCompass);
+    Js.log(
+      "action AssignPlayer "
+      ++ pOfCAndP.player
+      ++ " to "
+      ++ pOfCAndP.pointOfCompass,
+    );
+    let thisPlayer = [%raw "window.userState.player"];
+    Js.log("current player: " ++ thisPlayer);
     // rotate the user to be seated at 6PM
     let () = {
       switch (pOfCAndP.pointOfCompass) {

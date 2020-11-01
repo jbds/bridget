@@ -391,6 +391,9 @@ function reducer(state, action) {
       case /* AssignPlayer */0 :
           var pOfCAndP = action[0];
           ((window.isLastActionSync = false));
+          console.log("action AssignPlayer " + (pOfCAndP.player + (" to " + pOfCAndP.pointOfCompass)));
+          var thisPlayer = window.userState.player;
+          console.log("current player: " + thisPlayer);
           var match = pOfCAndP.pointOfCompass;
           switch (match) {
             case "East" :
