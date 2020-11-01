@@ -208,7 +208,7 @@ function reducer(state, action) {
           console.log("QtyDiscards");
           console.log(myDiscardArray.length);
           if (myDiscardArray.length === 4) {
-            ((setTimeout(function(){document.getElementById('btnPostDiscard').click();}, 2000)));
+            ((setTimeout(function(){document.getElementById('btnPostDiscard').click();}, 2250)));
           }
           var newrecord = Caml_obj.caml_obj_dup(state);
           newrecord.transition = tR;
@@ -282,7 +282,7 @@ function reducer(state, action) {
             southEndX: commonEndPositionX,
             westEndY: commonEndPositionY
           };
-          ((setTimeout(function(){document.getElementById('btnEndTrick').click();}, 500)));
+          ((setTimeout(function(){document.getElementById('btnEndTrick').click();}, 250)));
           var newrecord$1 = Caml_obj.caml_obj_dup(state);
           newrecord$1.transition = tR$1;
           newrecord$1.lastAction = "PostDiscard";

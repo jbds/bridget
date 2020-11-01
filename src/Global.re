@@ -195,7 +195,7 @@ let reducer = (state: TopLevel.state, action) => {
     let _myID: int =
       Array.length(myDiscardArray) === 4
         ? [%raw
-          "setTimeout(function(){document.getElementById('btnPostDiscard').click();}, 2000)"
+          "setTimeout(function(){document.getElementById('btnPostDiscard').click();}, 2250)"
         ]
         : 0;
     {
@@ -299,7 +299,7 @@ let reducer = (state: TopLevel.state, action) => {
       westEndY,
     };
     let _myID: int = [%raw
-      "setTimeout(function(){document.getElementById('btnEndTrick').click();}, 500)"
+      "setTimeout(function(){document.getElementById('btnEndTrick').click();}, 250)"
     ];
     {...state, transition: tR, lastAction: "PostDiscard"};
   | Sync =>
