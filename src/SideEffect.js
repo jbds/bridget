@@ -330,7 +330,10 @@ let paintDiscardArray = (p, g, w) => {
     let p5img = g.imgMap.get(obj.fileName);
     //p.image(p5img, -cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight);
     p.push();
-    p.rotate(p.HALF_PI);
+    // rotate the discard if required
+    if (w.gameState.activePointOfCompass == 'East' || w.gameState.activePointOfCompass == 'West') {
+      p.rotate(p.HALF_PI);
+    }
     p.image(p5img, -cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight);
     p.pop()
     p.pop();
