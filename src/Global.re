@@ -435,7 +435,9 @@ let reducer = (state: TopLevel.state, action) => {
     // rotate the user to be seated at 6PM
     let () = {
       switch (pOfCAndP.pointOfCompass) {
-      | "South" => Js.log("South 0 deg")
+      | "South" =>
+        %raw
+        "window.userState.tableRotationDegrees = 0"
       | "East" =>
         %raw
         "window.userState.tableRotationDegrees = 90"

@@ -400,7 +400,7 @@ function reducer(state, action) {
                 ((window.userState.tableRotationDegrees = 180));
                 break;
             case "South" :
-                console.log("South 0 deg");
+                ((window.userState.tableRotationDegrees = 0));
                 break;
             case "West" :
                 ((window.userState.tableRotationDegrees = 270));
