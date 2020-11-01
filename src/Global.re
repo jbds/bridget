@@ -439,24 +439,24 @@ let reducer = (state: TopLevel.state, action) => {
     );
     let thisPlayer = [%raw "window.userState.player"];
     Js.log("current player: " ++ thisPlayer);
-    // rotate the user to be seated at 6PM
-    let () = {
-      switch (pOfCAndP.pointOfCompass) {
-      | "South" =>
-        %raw
-        "window.userState.tableRotationDegrees = 0"
-      | "East" =>
-        %raw
-        "window.userState.tableRotationDegrees = 90"
-      | "North" =>
-        %raw
-        "window.userState.tableRotationDegrees = 180"
-      | "West" =>
-        %raw
-        "window.userState.tableRotationDegrees = 270"
-      | _ => Js.log("Unexpected pOfCAndP.pointOfCompass")
-      };
-    };
+    // rotate the user to be seated at 6PM but only if it is this user
+    pOfCAndP.player == thisPlayer
+      ? switch (pOfCAndP.pointOfCompass) {
+        | "South" =>
+          %raw
+          "window.userState.tableRotationDegrees = 0"
+        | "East" =>
+          %raw
+          "window.userState.tableRotationDegrees = 90"
+        | "North" =>
+          %raw
+          "window.userState.tableRotationDegrees = 180"
+        | "West" =>
+          %raw
+          "window.userState.tableRotationDegrees = 270"
+        | _ => Js.log("Unexpected pOfCAndP.pointOfCompass")
+        }
+      : ();
     // unassign any existing requested pointOfCompass
     // unless it is an Observer...
     let myArray1 =

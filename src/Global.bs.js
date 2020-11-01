@@ -394,22 +394,24 @@ function reducer(state, action) {
           console.log("action AssignPlayer " + (pOfCAndP.player + (" to " + pOfCAndP.pointOfCompass)));
           var thisPlayer = window.userState.player;
           console.log("current player: " + thisPlayer);
-          var match = pOfCAndP.pointOfCompass;
-          switch (match) {
-            case "East" :
-                ((window.userState.tableRotationDegrees = 90));
-                break;
-            case "North" :
-                ((window.userState.tableRotationDegrees = 180));
-                break;
-            case "South" :
-                ((window.userState.tableRotationDegrees = 0));
-                break;
-            case "West" :
-                ((window.userState.tableRotationDegrees = 270));
-                break;
-            default:
-              console.log("Unexpected pOfCAndP.pointOfCompass");
+          if (pOfCAndP.player === thisPlayer) {
+            var match = pOfCAndP.pointOfCompass;
+            switch (match) {
+              case "East" :
+                  ((window.userState.tableRotationDegrees = 90));
+                  break;
+              case "North" :
+                  ((window.userState.tableRotationDegrees = 180));
+                  break;
+              case "South" :
+                  ((window.userState.tableRotationDegrees = 0));
+                  break;
+              case "West" :
+                  ((window.userState.tableRotationDegrees = 270));
+                  break;
+              default:
+                console.log("Unexpected pOfCAndP.pointOfCompass");
+            }
           }
           var myArray1 = $$Array.map((function (pointOfCompassAndPlayer) {
                   if (pointOfCompassAndPlayer.pointOfCompass === pOfCAndP.pointOfCompass && pointOfCompassAndPlayer.pointOfCompass !== "Observer") {
