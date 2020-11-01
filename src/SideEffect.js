@@ -330,9 +330,17 @@ let paintDiscardArray = (p, g, w) => {
     let p5img = g.imgMap.get(obj.fileName);
     //p.image(p5img, -cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight);
     p.push();
-    // rotate the discard if required
-    if (w.gameState.activePointOfCompass == 'East' || w.gameState.activePointOfCompass == 'West') {
-      p.rotate(p.HALF_PI);
+    // rotate the discard if this user pointOfCompass is East or West
+    // may return empty array
+    let userPointOfCompassWrappedInArray = gameState.pointOfCompassAndPlayers.filter(
+      x => x.player === userState.player
+    );
+    if (userPointOfCompassWrappedInArray.length != 0) {
+      let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
+      if (userPointOfCompass == 'East' || userPointOfCompass == 'West') {
+        //p.rotate(p.HALF_PI);
+        p.rotate(p.HALF_PI / 20);
+      }
     }
     p.image(p5img, -cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight);
     p.pop()
