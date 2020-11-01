@@ -338,8 +338,8 @@ let paintDiscardArray = (p, g, w) => {
     if (userPointOfCompassWrappedInArray.length != 0) {
       let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
       if (userPointOfCompass == 'East' || userPointOfCompass == 'West') {
-        //p.rotate(p.HALF_PI);
-        p.rotate(p.HALF_PI / 20);
+        p.rotate(p.HALF_PI);
+        //p.rotate(p.HALF_PI / 20);
       }
     }
     p.image(p5img, -cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight);
