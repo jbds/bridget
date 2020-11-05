@@ -64,76 +64,7 @@ function execute(state) {
   newrecord.declarer = undefined;
   newrecord.chicagoScoreSheet = /* :: */[
     chicagoScoreSheetRecord,
-    /* :: */[
-      chicagoScoreSheetRecord,
-      /* :: */[
-        chicagoScoreSheetRecord,
-        /* :: */[
-          chicagoScoreSheetRecord,
-          /* :: */[
-            chicagoScoreSheetRecord,
-            /* :: */[
-              chicagoScoreSheetRecord,
-              /* :: */[
-                chicagoScoreSheetRecord,
-                /* :: */[
-                  chicagoScoreSheetRecord,
-                  /* :: */[
-                    chicagoScoreSheetRecord,
-                    /* :: */[
-                      chicagoScoreSheetRecord,
-                      /* :: */[
-                        chicagoScoreSheetRecord,
-                        /* :: */[
-                          chicagoScoreSheetRecord,
-                          /* :: */[
-                            chicagoScoreSheetRecord,
-                            /* :: */[
-                              chicagoScoreSheetRecord,
-                              /* :: */[
-                                chicagoScoreSheetRecord,
-                                /* :: */[
-                                  chicagoScoreSheetRecord,
-                                  /* :: */[
-                                    chicagoScoreSheetRecord,
-                                    /* :: */[
-                                      chicagoScoreSheetRecord,
-                                      /* :: */[
-                                        chicagoScoreSheetRecord,
-                                        /* :: */[
-                                          chicagoScoreSheetRecord,
-                                          /* :: */[
-                                            chicagoScoreSheetRecord,
-                                            /* :: */[
-                                              chicagoScoreSheetRecord,
-                                              /* :: */[
-                                                chicagoScoreSheetRecord,
-                                                /* :: */[
-                                                  chicagoScoreSheetRecord,
-                                                  state.chicagoScoreSheet
-                                                ]
-                                              ]
-                                            ]
-                                          ]
-                                        ]
-                                      ]
-                                    ]
-                                  ]
-                                ]
-                              ]
-                            ]
-                          ]
-                        ]
-                      ]
-                    ]
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
+    state.chicagoScoreSheet
   ];
   newrecord.bids = /* [] */0;
   newrecord.activePointOfCompass = state.dealer;
