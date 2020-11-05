@@ -76,7 +76,11 @@ let make = () => {
   };
   let handlerBtnReboot2 = _e => {
     Js.log("btnReboot2 clicked");
-    let () = [%raw "Online.doMessage('Reboot')"];
+    let bln: bool = [%raw
+      "window.confirm('Are you sure you want to delete all scores and start afresh?')"
+    ];
+
+    let () = bln ? [%raw "Online.doMessage('Reboot')"] : ();
     ();
   };
   let handlerBtnReviewDeal = _e => {
