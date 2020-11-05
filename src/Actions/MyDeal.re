@@ -52,7 +52,11 @@ let execute = (state: TopLevel.state) => {
     ...state,
     activePointOfCompass: state.dealer,
     bids: [],
-    chicagoScoreSheet: [chicagoScoreSheetRecord, ...state.chicagoScoreSheet],
+    chicagoScoreSheet: [
+      chicagoScoreSheetRecord,
+      chicagoScoreSheetRecord,
+      ...state.chicagoScoreSheet,
+    ],
     declarer: None,
     discardIndex: (-1),
     handVisible: Shuffle.initialHandVisible,

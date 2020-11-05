@@ -64,7 +64,10 @@ function execute(state) {
   newrecord.declarer = undefined;
   newrecord.chicagoScoreSheet = /* :: */[
     chicagoScoreSheetRecord,
-    state.chicagoScoreSheet
+    /* :: */[
+      chicagoScoreSheetRecord,
+      state.chicagoScoreSheet
+    ]
   ];
   newrecord.bids = /* [] */0;
   newrecord.activePointOfCompass = state.dealer;
