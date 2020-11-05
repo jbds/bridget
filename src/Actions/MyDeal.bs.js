@@ -66,7 +66,73 @@ function execute(state) {
     chicagoScoreSheetRecord,
     /* :: */[
       chicagoScoreSheetRecord,
-      state.chicagoScoreSheet
+      /* :: */[
+        chicagoScoreSheetRecord,
+        /* :: */[
+          chicagoScoreSheetRecord,
+          /* :: */[
+            chicagoScoreSheetRecord,
+            /* :: */[
+              chicagoScoreSheetRecord,
+              /* :: */[
+                chicagoScoreSheetRecord,
+                /* :: */[
+                  chicagoScoreSheetRecord,
+                  /* :: */[
+                    chicagoScoreSheetRecord,
+                    /* :: */[
+                      chicagoScoreSheetRecord,
+                      /* :: */[
+                        chicagoScoreSheetRecord,
+                        /* :: */[
+                          chicagoScoreSheetRecord,
+                          /* :: */[
+                            chicagoScoreSheetRecord,
+                            /* :: */[
+                              chicagoScoreSheetRecord,
+                              /* :: */[
+                                chicagoScoreSheetRecord,
+                                /* :: */[
+                                  chicagoScoreSheetRecord,
+                                  /* :: */[
+                                    chicagoScoreSheetRecord,
+                                    /* :: */[
+                                      chicagoScoreSheetRecord,
+                                      /* :: */[
+                                        chicagoScoreSheetRecord,
+                                        /* :: */[
+                                          chicagoScoreSheetRecord,
+                                          /* :: */[
+                                            chicagoScoreSheetRecord,
+                                            /* :: */[
+                                              chicagoScoreSheetRecord,
+                                              /* :: */[
+                                                chicagoScoreSheetRecord,
+                                                /* :: */[
+                                                  chicagoScoreSheetRecord,
+                                                  state.chicagoScoreSheet
+                                                ]
+                                              ]
+                                            ]
+                                          ]
+                                        ]
+                                      ]
+                                    ]
+                                  ]
+                                ]
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
     ]
   ];
   newrecord.bids = /* [] */0;
