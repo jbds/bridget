@@ -195,7 +195,7 @@ let reducer = (state: TopLevel.state, action) => {
     let _myID: int =
       Array.length(myDiscardArray) === 4
         ? [%raw
-          "setTimeout(function(){document.getElementById('btnPostDiscard').click();}, 2250)"
+          "setTimeout(function(){document.getElementById('btnPostDiscard').click();}, 4500)"
         ]
         : 0;
     {
