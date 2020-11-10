@@ -162,8 +162,11 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
           91
         )
         ;
-      // note that each rotation is cumulative
-      //p.rotate(rotationDeltaRadians);
+      if (i > 0) {
+        if (obj.suit != g.myHandArray[i - 1].suit) {
+          p.translate(0, cardHeight * cardSegmentHeightToCardRatio);
+        }
+      }
       // note that each translation is cumulative
       p.translate(cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
     });
