@@ -501,12 +501,12 @@ let translateAndRotateByClockPosition = (clockPosition, p, g, w, isDummyHand) =>
     case '9PM':
       // special case if dummy
       if (!isDummyHand) {
-        // we do not want to do either of these
-        //p.translate((-g.canvasWidth / 2), 0);
-        //p.rotate(p.HALF_PI);
-      } else {
-        p.translate((-g.canvasWidth / 4), 0);
+        p.translate((-g.canvasWidth / 2), 0);
         p.rotate(p.HALF_PI);
+      } else {
+        // we do not want to do either of these (yet)
+        //p.translate((-g.canvasWidth / 4), 0);
+        //p.rotate(p.HALF_PI);
       }
       break;
     default:
