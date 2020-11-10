@@ -64,7 +64,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'North'
       );
-      translateAndRotateByClockPosition(clockPosition, p, g, w);
+      translateAndRotateByClockPosition(clockPosition, p, g, w, isDummyHand);
       break;
     case 'East':
       //g.isHandFaceUp = gameState.handVisible.east;
@@ -77,7 +77,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'East'
       );
-      translateAndRotateByClockPosition(clockPosition, p, g, w);
+      translateAndRotateByClockPosition(clockPosition, p, g, w, isDummyHand);
       break;
     case "South":
       //g.isHandFaceUp = gameState.handVisible.south;
@@ -90,7 +90,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'South'
       );
-      translateAndRotateByClockPosition(clockPosition, p, g, w);
+      translateAndRotateByClockPosition(clockPosition, p, g, w, isDummyHand);
       break;
     case 'West':
       //g.isHandFaceUp = gameState.handVisible.west;
@@ -103,7 +103,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
         w.userState.tableRotationDegrees,
         'West'
       );
-      translateAndRotateByClockPosition(clockPosition, p, g, w);
+      translateAndRotateByClockPosition(clockPosition, p, g, w, isDummyHand);
       break;
     case 'Discard':
       g.myDiscardArray = window.gameState.pack.filter(obj => {
@@ -484,7 +484,7 @@ let rotationPlusPointOfCompassToClockPosition =
   };
 
 // HELPER FUNCTION FOR drawCards
-let translateAndRotateByClockPosition = (clockPosition, p, g, w) => {
+let translateAndRotateByClockPosition = (clockPosition, p, g, w, isDummyHand) => {
   switch (clockPosition) {
     case '12PM':
       p.translate(0, -(w.innerHeight / 2) + (w.innerHeight * w.cardHeightToCanvasHeightRatio * w.cardSegmentHeightToCardRatio));
@@ -499,8 +499,14 @@ let translateAndRotateByClockPosition = (clockPosition, p, g, w) => {
       p.rotate(0);
       break;
     case '9PM':
-      p.translate((-g.canvasWidth / 2), 0);
-      p.rotate(p.HALF_PI);
+      // special case if dummy
+      if (!isDummyHand) {
+        p.translate((-g.canvasWidth / 2), 0);
+        p.rotate(p.HALF_PI);
+      } else {
+        p.translate((-g.canvasWidth / 4), 0);
+        p.rotate(p.HALF_PI);
+      }
       break;
     default:
       console.log('Unexpected clockPosition argument');
