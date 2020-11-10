@@ -114,14 +114,14 @@ let drawCards = (p, g, w, pointOfCompass) => {
       console.log('Unexpected pointOfCompass argument xx');
   }
   if (pointOfCompass != 'Discard') {
-    paintHandArray(p, g, w, isDummyHand);
+    paintHandArray(p, g, w, isDummyHand, clockPosition);
   } else {
     paintDiscardArray(p, g, w);
   }
   p.pop();
 }
 
-let paintHandArray = (p, g, w, isDummyHand) => {
+let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
   let cardWidth = w.innerHeight * w.cardHeightToCanvasHeightRatio / w.cardAspectRatio;
   let cardHeight = w.innerHeight * w.cardHeightToCanvasHeightRatio;
   // 37px max width before honour cards show pic border
@@ -129,9 +129,9 @@ let paintHandArray = (p, g, w, isDummyHand) => {
   let cardVisibleSegmentWidthToCardWidthRatio = 37 / 216;
   // 13 records or less - need to reorder by handOrder
   g.myHandArray.sort((a, b) => { return b.handOrder - a.handOrder });
-  if (!isDummyHand) {
+  if (isDummyHand && clockPosition == '9PM') {
     // offset the start of card drawing dependent upon qty cards in hand
-    p.translate(-((g.myHandArray.length / 2.0)) * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
+    //p.translate(-((g.myHandArray.length / 2.0)) * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
     g.myHandArray.forEach((obj, i) => {
       // now we can draw a card using each fileName in myHandArray
       let p5img = g.isHandFaceUp ? g.imgMap.get(obj.fileName) : g.imgMap.get('1B');
@@ -169,7 +169,7 @@ let paintHandArray = (p, g, w, isDummyHand) => {
     });
   } else {
     // offset the start of card drawing dependent upon qty cards in hand
-    //p.translate(-((g.myHandArray.length / 2.0)) * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
+    p.translate(-((g.myHandArray.length / 2.0)) * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
     g.myHandArray.forEach((obj, i) => {
       // now we can draw a card using each fileName in myHandArray
       let p5img = g.isHandFaceUp ? g.imgMap.get(obj.fileName) : g.imgMap.get('1B');
