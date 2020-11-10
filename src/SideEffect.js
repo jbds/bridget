@@ -114,14 +114,14 @@ let drawCards = (p, g, w, pointOfCompass) => {
       console.log('Unexpected pointOfCompass argument xx');
   }
   if (pointOfCompass != 'Discard') {
-    paintHandArray(p, g, w);
+    paintHandArray(p, g, w, isDummyHand);
   } else {
     paintDiscardArray(p, g, w);
   }
   p.pop();
 }
 
-let paintHandArray = (p, g, w) => {
+let paintHandArray = (p, g, w, isDummyHand) => {
   let cardWidth = w.innerHeight * w.cardHeightToCanvasHeightRatio / w.cardAspectRatio;
   let cardHeight = w.innerHeight * w.cardHeightToCanvasHeightRatio;
   // 37px max width before honour cards show pic border
@@ -129,43 +129,83 @@ let paintHandArray = (p, g, w) => {
   let cardVisibleSegmentWidthToCardWidthRatio = 37 / 216;
   // 13 records or less - need to reorder by handOrder
   g.myHandArray.sort((a, b) => { return b.handOrder - a.handOrder });
-  // offset the start of card drawing dependent upon qty cards in hand
-  p.translate(-((g.myHandArray.length / 2.0)) * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
-  g.myHandArray.forEach((obj, i) => {
-    // now we can draw a card using each fileName in myHandArray
-    let p5img = g.isHandFaceUp ? g.imgMap.get(obj.fileName) : g.imgMap.get('1B');
-    // last card in hand is a special case, as we do not want the overlap
-    i !== g.myHandArray.length - 1
-      ?
-      p.image(
-        p5img,
-        0,
-        -cardHeight * w.cardSegmentHeightToCardRatio,
-        cardWidth * cardVisibleSegmentWidthToCardWidthRatio * 1.2,
-        cardHeight * w.cardSegmentHeightToCardRatio,
-        0,
-        0,
-        37 * 1.2,
-        91
-      )
-      :
-      p.image(
-        p5img,
-        0,
-        -cardHeight * w.cardSegmentHeightToCardRatio,
-        cardWidth * cardVisibleSegmentWidthToCardWidthRatio,
-        cardHeight * w.cardSegmentHeightToCardRatio,
-        0,
-        0,
-        37,
-        91
-      )
-      ;
-    // note that each rotation is cumulative
-    //p.rotate(rotationDeltaRadians);
-    // note that each translation is cumulative
-    p.translate(cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
-  });
+  if (!isDummyHand) {
+    // offset the start of card drawing dependent upon qty cards in hand
+    p.translate(-((g.myHandArray.length / 2.0)) * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
+    g.myHandArray.forEach((obj, i) => {
+      // now we can draw a card using each fileName in myHandArray
+      let p5img = g.isHandFaceUp ? g.imgMap.get(obj.fileName) : g.imgMap.get('1B');
+      // last card in hand is a special case, as we do not want the overlap
+      i !== g.myHandArray.length - 1
+        ?
+        p.image(
+          p5img,
+          0,
+          -cardHeight * w.cardSegmentHeightToCardRatio,
+          cardWidth * cardVisibleSegmentWidthToCardWidthRatio * 1.2,
+          cardHeight * w.cardSegmentHeightToCardRatio,
+          0,
+          0,
+          37 * 1.2,
+          91
+        )
+        :
+        p.image(
+          p5img,
+          0,
+          -cardHeight * w.cardSegmentHeightToCardRatio,
+          cardWidth * cardVisibleSegmentWidthToCardWidthRatio,
+          cardHeight * w.cardSegmentHeightToCardRatio,
+          0,
+          0,
+          37,
+          91
+        )
+        ;
+      // note that each rotation is cumulative
+      //p.rotate(rotationDeltaRadians);
+      // note that each translation is cumulative
+      p.translate(cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
+    });
+  } else {
+    // offset the start of card drawing dependent upon qty cards in hand
+    //p.translate(-((g.myHandArray.length / 2.0)) * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
+    g.myHandArray.forEach((obj, i) => {
+      // now we can draw a card using each fileName in myHandArray
+      let p5img = g.isHandFaceUp ? g.imgMap.get(obj.fileName) : g.imgMap.get('1B');
+      // last card in hand is a special case, as we do not want the overlap
+      i !== g.myHandArray.length - 1
+        ?
+        p.image(
+          p5img,
+          0,
+          -cardHeight * w.cardSegmentHeightToCardRatio,
+          cardWidth * cardVisibleSegmentWidthToCardWidthRatio * 1.2,
+          cardHeight * w.cardSegmentHeightToCardRatio,
+          0,
+          0,
+          37 * 1.2,
+          91
+        )
+        :
+        p.image(
+          p5img,
+          0,
+          -cardHeight * w.cardSegmentHeightToCardRatio,
+          cardWidth * cardVisibleSegmentWidthToCardWidthRatio,
+          cardHeight * w.cardSegmentHeightToCardRatio,
+          0,
+          0,
+          37,
+          91
+        )
+        ;
+      // note that each rotation is cumulative
+      //p.rotate(rotationDeltaRadians);
+      // note that each translation is cumulative
+      p.translate(cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
+    });
+  }
 };
 
 let paintDiscardArray = (p, g, w) => {
