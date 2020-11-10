@@ -135,6 +135,12 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
     g.myHandArray.forEach((obj, i) => {
       // now we can draw a card using each fileName in myHandArray
       let p5img = g.isHandFaceUp ? g.imgMap.get(obj.fileName) : g.imgMap.get('1B');
+      // this adjustment must happen before the image is drawn
+      if (i > 0) {
+        if (obj.suit != g.myHandArray[i - 1].suit) {
+          p.translate(0, cardHeight * cardSegmentHeightToCardRatio);
+        }
+      }
       // last card in hand is a special case, as we do not want the overlap
       i !== g.myHandArray.length - 1
         ?
@@ -162,11 +168,6 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
           91
         )
         ;
-      if (i > 0) {
-        if (obj.suit != g.myHandArray[i - 1].suit) {
-          p.translate(0, cardHeight * cardSegmentHeightToCardRatio);
-        }
-      }
       // note that each translation is cumulative
       p.translate(cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
     });
