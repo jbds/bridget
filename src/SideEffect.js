@@ -132,6 +132,7 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
   if (isDummyHand && clockPosition == '9PM' && g.isHandFaceUp) {
     // offset the start of card drawing dependent upon qty cards in hand
     //p.translate(-((g.myHandArray.length / 2.0)) * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
+    let j = 0
     g.myHandArray.forEach((obj, i) => {
       // now we can draw a card using each fileName in myHandArray
       let p5img = g.isHandFaceUp ? g.imgMap.get(obj.fileName) : g.imgMap.get('1B');
@@ -139,6 +140,9 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
       if (i > 0) {
         if (obj.suit != g.myHandArray[i - 1].suit) {
           p.translate(0, cardHeight * cardSegmentHeightToCardRatio);
+          p.translate(-cardWidth * cardVisibleSegmentWidthToCardWidthRatio * j, 0);
+          // reset the card counter
+          j = 0;
         }
       }
       // last card in hand is a special case, as we do not want the overlap
@@ -170,6 +174,7 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
         ;
       // note that each translation is cumulative
       p.translate(cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
+      j = j + 1;
     });
   } else {
     // offset the start of card drawing dependent upon qty cards in hand
