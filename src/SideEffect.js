@@ -543,8 +543,8 @@ let translateAndRotateByClockPosition = (clockPosition, p, g, w, isDummyHand) =>
       p.rotate(0);
       break;
     case '9PM':
-      // special case if dummy
-      if (!isDummyHand) {
+      // special case if dummy and not face down
+      if (!isDummyHand || !g.isHandFaceUp) {
         p.translate((-g.canvasWidth / 2), 0);
         p.rotate(p.HALF_PI);
       } else {
