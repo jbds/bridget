@@ -129,7 +129,7 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
   let cardVisibleSegmentWidthToCardWidthRatio = 37 / 216;
   // 13 records or less - need to reorder by handOrder
   g.myHandArray.sort((a, b) => { return b.handOrder - a.handOrder });
-  if (isDummyHand && clockPosition == '9PM') {
+  if (isDummyHand && clockPosition == '9PM' && g.isHandFaceUp) {
     // offset the start of card drawing dependent upon qty cards in hand
     //p.translate(-((g.myHandArray.length / 2.0)) * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
     g.myHandArray.forEach((obj, i) => {
