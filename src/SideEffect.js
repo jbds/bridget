@@ -132,6 +132,8 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
   if (isDummyHand && clockPosition == '9PM' && g.isHandFaceUp) {
     // offset the start of card drawing dependent upon qty cards in hand
     //p.translate(-((g.myHandArray.length / 2.0)) * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
+    // offset vertically by one card height
+    p.translate(0, cardHeight * cardSegmentHeightToCardRatio);
     let j = 0
     g.myHandArray.forEach((obj, i) => {
       // now we can draw a card using each fileName in myHandArray
