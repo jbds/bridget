@@ -451,7 +451,7 @@ let drawLabels = (p, g, w) => {
       // do not draw if dummy hand face up 9PM
       // helper function to see if this is the Dummy hand
       let isDummyHand =
-        pointOfCompass === getDummyPocByDeclarer(w.gameState.declarer) ? true : false;
+        obj.pointOfCompass === getDummyPocByDeclarer(w.gameState.declarer) ? true : false;
       // add dealer if appropriate
       let positionPlayerDealer;
       if (w.gameState.dealer === obj.pointOfCompass && w.gameState.declarer === obj.pointOfCompass) {
