@@ -488,7 +488,7 @@ let drawLabels = (p, g, w) => {
       }
       if (obj.pointOfCompass == undefined || obj.pointOfCompass == '') {
         // skip
-      } else if (isDummyHand && clockPosition == '9PM') {
+      } else if (isDummyHand && (clockPosition == '9PM' || clockPosition == '3PM')) {
         // skip
       } else {
         p.text(
