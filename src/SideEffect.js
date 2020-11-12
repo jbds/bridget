@@ -396,6 +396,10 @@ let paintDiscardArray = (p, g, w) => {
         //p.rotate(p.HALF_PI / 20);
       }
     }
+    // conditionally move the discard pile 3 card segment widths to the East
+    // NB visible segment has 20% added for overlap on all except last card
+    let cardVisibleSegmentWidthToCardWidthRatio = 37 / 216;
+    p.translate(3 * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
     p.image(p5img, -cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight);
     p.pop()
     p.pop();
