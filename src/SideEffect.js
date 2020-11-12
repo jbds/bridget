@@ -475,7 +475,7 @@ let drawLabels = (p, g, w) => {
         // white, 62% transparent
         p.fill(255, 96);
       }
-      if (obj.pointOfCompass = '') {
+      if (obj.pointOfCompass == undefined || obj.pointOfCompass == '') {
         // skip
       } else if (isDummyHand && clockPosition == '9PM') {
         // skip
