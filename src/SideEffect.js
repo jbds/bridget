@@ -562,15 +562,20 @@ let translateAndRotateByClockPosition = (clockPosition, p, g, w, isDummyHand) =>
       // no rotation!
       break;
     case '3PM':
-      p.translate((g.canvasWidth / 2), 0);
-      p.rotate(p.HALF_PI * 3);
+      // special case if dummy and face up
+      if (!isDummyHand || !g.isHandFaceUp) {
+        p.translate((g.canvasWidth / 2), 0);
+        p.rotate(p.HALF_PI * 3);
+      } else {
+        // do nothing (yet)
+      }
       break;
     case '6PM':
       p.translate(0, (w.innerHeight / 2));
       p.rotate(0);
       break;
     case '9PM':
-      // special case if dummy and not face down
+      // special case if dummy and face up
       if (!isDummyHand || !g.isHandFaceUp) {
         p.translate((-g.canvasWidth / 2), 0);
         p.rotate(p.HALF_PI);
