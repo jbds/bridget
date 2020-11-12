@@ -448,6 +448,10 @@ let drawLabels = (p, g, w) => {
           console.log('Unexpected clockPosition argument');
       };
       // do not draw label if pointOfCompass is not known
+      // do not draw if dummy hand face up 9PM
+      // helper function to see if this is the Dummy hand
+      let isDummyHand =
+        pointOfCompass === getDummyPocByDeclarer(w.gameState.declarer) ? true : false;
       // add dealer if appropriate
       let positionPlayerDealer;
       if (w.gameState.dealer === obj.pointOfCompass && w.gameState.declarer === obj.pointOfCompass) {
@@ -471,7 +475,11 @@ let drawLabels = (p, g, w) => {
         // white, 62% transparent
         p.fill(255, 96);
       }
-      if (obj.pointOfCompass != '') {
+      if (obj.pointOfCompass = '') {
+        // skip
+      } else if (isDummyHand && clockPosition == '9PM') {
+        // skip
+      } else {
         p.text(
           positionPlayerDealer,
           -g.canvasWidth / 4,
@@ -479,8 +487,6 @@ let drawLabels = (p, g, w) => {
           g.canvasWidth / 2,
           textHeightToCanvasHeightRatio * 2
         );
-      } else {
-        // skip
       }
       p.pop();
     }
