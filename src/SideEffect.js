@@ -181,6 +181,56 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
       p.translate(cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
       j = j + 1;
     });
+  } else if (isDummyHand && clockPosition == '3PM' && g.isHandFaceUp) {
+    // offset vertically by one card height
+    p.translate(0, -cardHeight * cardSegmentHeightToCardRatio);
+    // offset horiz by half table width
+    //p.translate((g.canvasWidth / 2), 0);
+    // use j to count no of cards before suit changes
+    let j = 0
+    g.myHandArray.forEach((obj, i) => {
+      // now we can draw a card using each fileName in myHandArray
+      let p5img = g.isHandFaceUp ? g.imgMap.get(obj.fileName) : g.imgMap.get('1B');
+      // this adjustment must happen before the image is drawn
+      if (i > 0) {
+        if (obj.suit != g.myHandArray[i - 1].suit) {
+          p.translate(0, cardHeight * cardSegmentHeightToCardRatio);
+          p.translate(-cardWidth * cardVisibleSegmentWidthToCardWidthRatio * j, 0);
+          // reset the card counter
+          j = 0;
+        }
+      }
+      // last card in hand is a special case, as we do not want the overlap
+      i !== g.myHandArray.length - 1
+        ?
+        p.image(
+          p5img,
+          0,
+          -cardHeight * w.cardSegmentHeightToCardRatio,
+          cardWidth * cardVisibleSegmentWidthToCardWidthRatio * 1.2,
+          cardHeight * w.cardSegmentHeightToCardRatio,
+          0,
+          0,
+          37 * 1.2,
+          91
+        )
+        :
+        p.image(
+          p5img,
+          0,
+          -cardHeight * w.cardSegmentHeightToCardRatio,
+          cardWidth * cardVisibleSegmentWidthToCardWidthRatio,
+          cardHeight * w.cardSegmentHeightToCardRatio,
+          0,
+          0,
+          37,
+          91
+        )
+        ;
+      // note that each translation is cumulative
+      p.translate(cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
+      j = j + 1;
+    });
   } else {
     // offset the start of card drawing dependent upon qty cards in hand
     p.translate(-((g.myHandArray.length / 2.0)) * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
