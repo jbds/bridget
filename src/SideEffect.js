@@ -452,9 +452,17 @@ let paintDiscardArray = (p, g, w) => {
     );
     if (userPointOfCompassWrappedInArray.length != 0) {
       let userPointOfCompass = userPointOfCompassWrappedInArray[0].pointOfCompass;
-      if (userPointOfCompass == 'East' || userPointOfCompass == 'West') {
+      if (userPointOfCompass == 'South') {
+        // do not rotate
+      }
+      if (userPointOfCompass == 'West') {
         p.rotate(p.HALF_PI);
-        //p.rotate(p.HALF_PI / 20);
+      }
+      if (userPointOfCompass == 'North') {
+        p.rotate(p.HALF_PI * 2)
+      }
+      if (userPointOfCompass == 'East') {
+        p.rotate(p.HALF_PI * 3)
       }
     }
     // conditionally move the discard pile 3 card segment widths to the East or West
@@ -468,14 +476,14 @@ let paintDiscardArray = (p, g, w) => {
     // ) {
     //   p.translate(3 * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
     // }
-    if (
-      // (userState.tableRotationDegrees == 0 && gameState.declarer == 'West') ||
-      // (userState.tableRotationDegrees == 90 && gameState.declarer == 'South') ||
-      // (userState.tableRotationDegrees == 180 && gameState.declarer == 'East') ||
-      (userState.tableRotationDegrees == 270 && gameState.declarer == 'North')
-    ) {
-      p.translate(-3 * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
-    }
+    // if (
+    //   (userState.tableRotationDegrees == 0 && gameState.declarer == 'West') ||
+    //   (userState.tableRotationDegrees == 90 && gameState.declarer == 'South') ||
+    //   (userState.tableRotationDegrees == 180 && gameState.declarer == 'East') ||
+    //   (userState.tableRotationDegrees == 270 && gameState.declarer == 'North')
+    // ) {
+    //   p.translate(-3 * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
+    // }
     p.image(p5img, -cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight);
     p.pop()
     p.pop();
