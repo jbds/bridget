@@ -185,9 +185,9 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
     // offset vertically by one card height
     p.translate(0, -cardHeight * cardSegmentHeightToCardRatio);
     // offset horiz by half table width
-    //p.translate((g.canvasWidth / 2), 0);
-    // test 5 max by inspection shift 3 cards right
-    p.translate(cardWidth * cardVisibleSegmentWidthToCardWidthRatio * 3, 0);
+    p.translate((g.canvasWidth / 2), 0);
+    // test 5 max means move left 5 card widths
+    p.translate(-cardWidth * cardVisibleSegmentWidthToCardWidthRatio * 5, 0);
     // use j to count no of cards before suit changes
     let j = 0
     g.myHandArray.forEach((obj, i) => {
