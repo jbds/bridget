@@ -195,9 +195,7 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
       if (i > 0) {
         if (obj.suit != g.myHandArray[i - 1].suit) {
           p.translate(0, cardHeight * cardSegmentHeightToCardRatio);
-          //p.translate(-cardWidth * cardVisibleSegmentWidthToCardWidthRatio * j, 0);
-          // to justify right, translate left a fixed amount less j
-          p.translate(-cardWidth * cardVisibleSegmentWidthToCardWidthRatio * (6 - j), 0);
+          p.translate(-cardWidth * cardVisibleSegmentWidthToCardWidthRatio * j, 0);
           // reset the card counter
           j = 0;
         }
