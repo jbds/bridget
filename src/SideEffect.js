@@ -471,8 +471,8 @@ let paintDiscardArray = (p, g, w) => {
     if (
       (userState.tableRotationDegrees == 0 && gameState.declarer == 'East') ||
       (userState.tableRotationDegrees == 90 && gameState.declarer == 'North') ||
-      (userState.tableRotationDegrees == 180 && gameState.declarer == 'West') //||
-      // (userState.tableRotationDegrees == 270 && gameState.declarer == 'South')
+      (userState.tableRotationDegrees == 180 && gameState.declarer == 'West') ||
+      (userState.tableRotationDegrees == 270 && gameState.declarer == 'South')
     ) {
       p.translate(3 * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
     }
