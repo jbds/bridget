@@ -186,8 +186,17 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
     p.translate(0, -cardHeight * cardSegmentHeightToCardRatio);
     // offset horiz by half table width
     p.translate((g.canvasWidth / 2), 0);
-    // test 5 max means move left 5 card widths
-    p.translate(-cardWidth * cardVisibleSegmentWidthToCardWidthRatio * 5, 0);
+    let suitMaxLength = 0;
+    let suit0Length = g.myHandArray.filter(x => { return (x.suit == 0) }).length;
+    let suit1Length = g.myHandArray.filter(x => { return (x.suit == 1) }).length;
+    let suit2Length = g.myHandArray.filter(x => { return (x.suit == 2) }).length;
+    let suit3Length = g.myHandArray.filter(x => { return (x.suit == 3) }).length;
+    if (suit0Length > suitMaxLength) { suitMaxLength = suit0Length; }
+    if (suit1Length > suitMaxLength) { suitMaxLength = suit1Length; }
+    if (suit2Length > suitMaxLength) { suitMaxLength = suit2Length; }
+    if (suit3Length > suitMaxLength) { suitMaxLength = suit3Length; }
+    // move left by suitMaxLength card widths
+    p.translate(-cardWidth * cardVisibleSegmentWidthToCardWidthRatio * suitMaxLength, 0);
     // use j to count no of cards before suit changes
     let j = 0
     g.myHandArray.forEach((obj, i) => {
