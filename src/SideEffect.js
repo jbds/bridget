@@ -469,7 +469,7 @@ let paintDiscardArray = (p, g, w) => {
     // NB visible segment has 20% added for overlap on all except last card
     let cardVisibleSegmentWidthToCardWidthRatio = 37 / 216;
     if (
-      // (userState.tableRotationDegrees == 0 && gameState.declarer == 'East') ||
+      (userState.tableRotationDegrees == 0 && gameState.declarer == 'East') ||
       (userState.tableRotationDegrees == 90 && gameState.declarer == 'North') //||
       // (userState.tableRotationDegrees == 180 && gameState.declarer == 'West') ||
       // (userState.tableRotationDegrees == 270 && gameState.declarer == 'South')
