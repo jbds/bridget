@@ -470,8 +470,8 @@ let paintDiscardArray = (p, g, w) => {
     let cardVisibleSegmentWidthToCardWidthRatio = 37 / 216;
     if (
       (userState.tableRotationDegrees == 0 && gameState.declarer == 'East') ||
-      (userState.tableRotationDegrees == 90 && gameState.declarer == 'North') //||
-      //(userState.tableRotationDegrees == 180 && gameState.declarer == 'West') //||
+      (userState.tableRotationDegrees == 90 && gameState.declarer == 'North') ||
+      (userState.tableRotationDegrees == 180 && gameState.declarer == 'West') //||
       // (userState.tableRotationDegrees == 270 && gameState.declarer == 'South')
     ) {
       p.translate(3 * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
@@ -480,8 +480,7 @@ let paintDiscardArray = (p, g, w) => {
       // (userState.tableRotationDegrees == 0 && gameState.declarer == 'West') ||
       // (userState.tableRotationDegrees == 90 && gameState.declarer == 'South') ||
       (userState.tableRotationDegrees == 180 && gameState.declarer == 'East') ||
-      (userState.tableRotationDegrees == 270 && gameState.declarer == 'North') ||
-      (userState.tableRotationDegrees == 180 && gameState.declarer == 'West')
+      (userState.tableRotationDegrees == 270 && gameState.declarer == 'North')
     ) {
       p.translate(-3 * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
     }
