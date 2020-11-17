@@ -384,6 +384,7 @@ function reducer(state, action) {
           return newrecord$2;
       case /* PostBid */6 :
           var newrecord$3 = Caml_obj.caml_obj_dup(state);
+          newrecord$3.lastAction = "Post Bid after 3 passes";
           newrecord$3.isBiddingCycle = false;
           newrecord$3.activePointOfCompass = Shuffle$ReasonReactExamples.getNextActivePointOfCompass(state.declarer);
           return newrecord$3;

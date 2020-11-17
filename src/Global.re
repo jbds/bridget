@@ -827,6 +827,7 @@ let reducer = (state: TopLevel.state, action) => {
       activePointOfCompass:
         Shuffle.getNextActivePointOfCompass(state.declarer),
       isBiddingCycle: false,
+      lastAction: "Post Bid after 3 passes",
     }
   | EndTrick => EndTrick.execute(state)
   };
