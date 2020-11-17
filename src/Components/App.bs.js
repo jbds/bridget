@@ -54,7 +54,7 @@ function App(Props) {
   };
   var handlerBtnReboot2 = function (_e) {
     console.log("btnReboot2 clicked");
-    var bln = (window.confirm('Are you sure you want to delete all scores and start afresh?'));
+    var bln = (window.confirm('Are you sure you want to DELETE ALL SCORES and start afresh?'));
     if (bln) {
       ((Online.doMessage('Reboot')));
     }
