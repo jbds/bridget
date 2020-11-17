@@ -385,6 +385,7 @@ function reducer(state, action) {
       case /* PostBid */6 :
           var newrecord$3 = Caml_obj.caml_obj_dup(state);
           newrecord$3.isBiddingCycle = false;
+          newrecord$3.activePointOfCompass = Shuffle$ReasonReactExamples.getNextActivePointOfCompass(state.declarer);
           return newrecord$3;
       case /* EndTrick */7 :
           return EndTrick$ReasonReactExamples.execute(state);
@@ -712,7 +713,7 @@ function reducer(state, action) {
                       },
                       state.bids
                     ];
-                    newrecord$8.activePointOfCompass = Shuffle$ReasonReactExamples.getNextActivePointOfCompass(contractDeclarer);
+                    newrecord$8.activePointOfCompass = undefined;
                     return newrecord$8;
                   }
                   var newrecord$9 = Caml_obj.caml_obj_dup(state);

@@ -716,8 +716,10 @@ let reducer = (state: TopLevel.state, action) => {
           // return end of bidding, but avoid new row if 4 passes by checking contractLevel
           {
             ...state,
-            activePointOfCompass:
-              Shuffle.getNextActivePointOfCompass(contractDeclarer),
+            // activePointOfCompass:
+            //   Shuffle.getNextActivePointOfCompass(contractDeclarer),
+            // cannot have active poc just yet, wait until PostBid action
+            activePointOfCompass: None,
             // if no contract level, then lose the row created at deal time
             chicagoScoreSheet:
               contractLevel != None
@@ -820,7 +822,12 @@ let reducer = (state: TopLevel.state, action) => {
       // should never occur, and no change in state
       state
     };
-  | PostBid => {...state, isBiddingCycle: false}
+  | PostBid => {
+      ...state,
+      activePointOfCompass:
+        Shuffle.getNextActivePointOfCompass(state.declarer),
+      isBiddingCycle: false,
+    }
   | EndTrick => EndTrick.execute(state)
   };
 };
