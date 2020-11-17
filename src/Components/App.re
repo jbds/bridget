@@ -244,6 +244,13 @@ let make = () => {
           id="btnLoginSync"
           isVisible=false
         />
+        <ButtonStd
+          dispatch
+          action=PostBid
+          label="Post Bid"
+          id="btnPostBid"
+          isVisible=false
+        />
         <ChicagoScoreTable state />
       </div>
     <div id="sidebar3">

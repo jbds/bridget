@@ -183,7 +183,7 @@ function App(Props) {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* EndTrick */6,
+                      action: /* EndTrick */7,
                       label: "End Trick",
                       id: "btnEndTrick",
                       isVisible: false
@@ -210,6 +210,12 @@ function App(Props) {
                       action: /* LoginSync */4,
                       label: "Login sync with server",
                       id: "btnLoginSync",
+                      isVisible: false
+                    }), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                      dispatch: dispatch,
+                      action: /* PostBid */6,
+                      label: "Post Bid",
+                      id: "btnPostBid",
                       isVisible: false
                     }), React.createElement(ChicagoScoreTable$ReasonReactExamples.make, {
                       state: state

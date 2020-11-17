@@ -16,6 +16,7 @@ type action =
   | BidAdd(option(int))
   | BidUpdate(option(string))
   | BidAddSpecial(option(string))
+  | PostBid
   | EndTrick;
 
 // type state is degined in TopLevel.re to avoid a circular dependency error
@@ -708,6 +709,10 @@ let reducer = (state: TopLevel.state, action) => {
               },
               myPack,
             );
+          // trigger a later PostBid action
+          let _myID: int = [%raw
+            "setTimeout(function(){document.getElementById('btnPostBid').click();}, 2500)"
+          ];
           // return end of bidding, but avoid new row if 4 passes by checking contractLevel
           {
             ...state,
@@ -719,7 +724,8 @@ let reducer = (state: TopLevel.state, action) => {
                 ? [myChicagoScoreSheetRecord, ...chicagoScoreSheetTail]
                 : chicagoScoreSheetTail,
             declarer: contractDeclarer,
-            isBiddingCycle: false,
+            // we now delay the hiding of the bid table until PostBid action
+            //isBiddingCycle: false,
             lastAction:
               contractLevel != None
                 ? "BidAddSpecial- 3 Passes" : "BidAddSpecial- 4 Passes",
@@ -802,6 +808,7 @@ let reducer = (state: TopLevel.state, action) => {
       // should never occur, and no change in state
       state
     };
+  | PostBid => {...state, isBiddingCycle: false}
   | EndTrick => EndTrick.execute(state)
   };
 };
