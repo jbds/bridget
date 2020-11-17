@@ -726,6 +726,18 @@ let reducer = (state: TopLevel.state, action) => {
             declarer: contractDeclarer,
             // we now delay the hiding of the bid table until PostBid action
             //isBiddingCycle: false,
+            // unexpectedly, we need to actually add the last PASS to the bid table so it is visible to players
+            bids: [
+              {
+                contractLevel: None,
+                contractSuit: None,
+                contractPointOfCompass: state.activePointOfCompass,
+                isDoubled: false,
+                isRedoubled: false,
+                isPass: true,
+              },
+              ...state.bids,
+            ],
             lastAction:
               contractLevel != None
                 ? "BidAddSpecial- 3 Passes" : "BidAddSpecial- 4 Passes",

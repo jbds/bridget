@@ -701,6 +701,17 @@ function reducer(state, action) {
                         myChicagoScoreSheetRecord,
                         chicagoScoreSheetTail
                       ] : chicagoScoreSheetTail;
+                    newrecord$8.bids = /* :: */[
+                      {
+                        contractLevel: undefined,
+                        contractSuit: undefined,
+                        contractPointOfCompass: state.activePointOfCompass,
+                        isDoubled: false,
+                        isRedoubled: false,
+                        isPass: true
+                      },
+                      state.bids
+                    ];
                     newrecord$8.activePointOfCompass = Shuffle$ReasonReactExamples.getNextActivePointOfCompass(contractDeclarer);
                     return newrecord$8;
                   }
