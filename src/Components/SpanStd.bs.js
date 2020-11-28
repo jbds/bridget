@@ -8,7 +8,7 @@ function SpanStd(Props) {
   var isWarningOpt = Props.isWarning;
   var fontSizeOpt = Props.fontSize;
   var isWarning = isWarningOpt !== undefined ? isWarningOpt : false;
-  var fontSize = fontSizeOpt !== undefined ? fontSizeOpt : "2.0vh";
+  var fontSize = fontSizeOpt !== undefined ? fontSizeOpt : "1.9vh";
   return React.createElement(React.Fragment, undefined, React.createElement("span", {
                   id: id,
                   style: {

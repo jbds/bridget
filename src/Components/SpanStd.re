@@ -12,7 +12,7 @@ let make =
       id
       style={ReactDOMRe.Style.make(
         ~color={isWarning ? "#C00000" : "#404040"}, // non-warning was 26653B
-        ~{fontSize},
+        ~fontSize,
         ~fontFamily=[@reason.preserve_braces] "Trebuchet MS",
         ~margin=[@reason.preserve_braces] "0vh",
         // bug - borderColor single attribute not recognised

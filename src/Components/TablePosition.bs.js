@@ -18,7 +18,7 @@ function TablePosition(Props) {
                       borderCollapse: "collapse",
                       color: "#404040",
                       fontFamily: "Trebuchet MS",
-                      fontSize: "2.5vh",
+                      fontSize: "1.9vh",
                       margin: "auto",
                       padding: "0px",
                       textAlign: "center",
@@ -30,12 +30,12 @@ function TablePosition(Props) {
                                   backgroundColor: "#f8f8f8",
                                   border: "1px solid #f8f8f8",
                                   borderCollapse: "collapse",
-                                  fontSize: "2.0vh",
+                                  fontSize: "1.5vh",
                                   textAlign: "center",
                                   whiteSpace: "nowrap"
                                 },
                                 colSpan: 2
-                              }, "---------- Table Seating ----------")), Belt_Array.map(state.pointOfCompassAndPlayers, (function (x) {
+                              }, "-------------- Table Seating --------------")), Belt_Array.map(state.pointOfCompassAndPlayers, (function (x) {
                               return React.createElement("tr", {
                                           key: x.player
                                         }, React.createElement("td", {

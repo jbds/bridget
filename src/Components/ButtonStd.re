@@ -15,7 +15,7 @@ let make =
       id
       onClick={_e => dispatch(action)} //Js.log("Clicked shuffle"))
       style={ReactDOMRe.Style.make(
-        ~{color},
+        ~color,
         ~fontSize=[@reason.preserve_braces] "1.9vh",
         ~fontFamily=[@reason.preserve_braces] "Trebuchet MS",
         ~height=[@reason.preserve_braces] "5.0vh",

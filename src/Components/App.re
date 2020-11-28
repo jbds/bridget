@@ -203,6 +203,14 @@ let make = () => {
         onClick=handlerBtnReviewDeal
         isWasteOfSpace={!state.isReviewDealVisible}
       />
+      <SpanStd id="spn8" text=" " />
+      <ButtonStd
+        dispatch
+        action=Shuffle
+        label="Concede"
+        id="btnConcede"
+        isWasteOfSpace=false
+      />
     </div>
     <div id="sidebar2">
       //(s2e("Sidebar2"))
