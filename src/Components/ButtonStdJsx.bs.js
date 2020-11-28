@@ -17,7 +17,7 @@ function ButtonStdJsx(Props) {
                     color: "#26653B",
                     display: isVisible ? "inline" : "none",
                     fontFamily: "Trebuchet MS",
-                    fontSize: "2.0vh",
+                    fontSize: "1.9vh",
                     height: "5.0vh",
                     margin: "0vh 0.5vh 0vh 0vh",
                     visibility: isWasteOfSpace ? "hidden" : "visible",
