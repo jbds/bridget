@@ -185,7 +185,7 @@ function App(Props) {
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Shuffle */0,
-                      label: "\u27F3",
+                      label: "\u1F3F3",
                       id: "btnConcede",
                       isWasteOfSpace: false
                     })), React.createElement("div", {
