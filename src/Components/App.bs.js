@@ -177,7 +177,7 @@ function App(Props) {
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Concede */8,
-                      label: "\u26A1",
+                      label: "\u2691",
                       id: "btnConcede",
                       isWasteOfSpace: false
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
