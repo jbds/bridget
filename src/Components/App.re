@@ -197,19 +197,19 @@ let make = () => {
         isWasteOfSpace={!isUndoVisible()}
       />
       <SpanStd id="spn7" text=" " />
+      <ButtonStd
+        dispatch
+        action=Concede
+        label={js|\u26A1|js}
+        id="btnConcede"
+        isWasteOfSpace=false
+      />
+      <SpanStd id="spn8" text=" " />
       <ButtonStdJsx
         id="btnReviewDeal"
         label="Review"
         onClick=handlerBtnReviewDeal
         isWasteOfSpace={!state.isReviewDealVisible}
-      />
-      <SpanStd id="spn8" text=" " />
-      <ButtonStd
-        dispatch
-        action=Shuffle
-        label={js|\u2691|js}
-        id="btnConcede"
-        isWasteOfSpace=false
       />
     </div>
     <div id="sidebar2">

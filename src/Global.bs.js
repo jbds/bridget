@@ -390,6 +390,9 @@ function reducer(state, action) {
           return newrecord$3;
       case /* EndTrick */7 :
           return EndTrick$ReasonReactExamples.execute(state);
+      case /* Concede */8 :
+          console.log("Concede action");
+          return state;
       
     }
   } else {

@@ -17,7 +17,8 @@ type action =
   | BidUpdate(option(string))
   | BidAddSpecial(option(string))
   | PostBid
-  | EndTrick;
+  | EndTrick
+  | Concede;
 
 // type state is degined in TopLevel.re to avoid a circular dependency error
 
@@ -830,5 +831,8 @@ let reducer = (state: TopLevel.state, action) => {
       lastAction: "Post Bid after 3 passes",
     }
   | EndTrick => EndTrick.execute(state)
+  | Concede =>
+    Js.log("Concede action");
+    state;
   };
 };

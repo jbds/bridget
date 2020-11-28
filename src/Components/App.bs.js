@@ -174,20 +174,20 @@ function App(Props) {
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn7",
                       text: " "
+                    }), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                      dispatch: dispatch,
+                      action: /* Concede */8,
+                      label: "\u26A1",
+                      id: "btnConcede",
+                      isWasteOfSpace: false
+                    }), React.createElement(SpanStd$ReasonReactExamples.make, {
+                      id: "spn8",
+                      text: " "
                     }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "Review",
                       id: "btnReviewDeal",
                       onClick: handlerBtnReviewDeal,
                       isWasteOfSpace: !state.isReviewDealVisible
-                    }), React.createElement(SpanStd$ReasonReactExamples.make, {
-                      id: "spn8",
-                      text: " "
-                    }), React.createElement(ButtonStd$ReasonReactExamples.make, {
-                      dispatch: dispatch,
-                      action: /* Shuffle */0,
-                      label: "\u2691",
-                      id: "btnConcede",
-                      isWasteOfSpace: false
                     })), React.createElement("div", {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
