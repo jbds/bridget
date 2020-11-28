@@ -10,6 +10,18 @@ let doConcede = (state: TopLevel.state) => {
       )
     });
   Js.log(remainingCardsNS);
+  let remainingCardsEW =
+    Belt.Array.keep(state.pack, x => {
+      x.lifecycle === Hand
+      && (
+        x.shuffleIndex >= 13
+        && x.shuffleIndex <= 25
+        || x.shuffleIndex >= 39
+        && x.shuffleIndex <= 51
+      )
+    });
+  Js.log(remainingCardsEW);
+
   state;
 };
 
