@@ -391,13 +391,12 @@ function reducer(state, action) {
       case /* EndTrick */7 :
           return EndTrick$ReasonReactExamples.execute(state);
       case /* Concede */8 :
-          ((alert('Concede action')));
           var bln = (window.confirm('Are you sure you want to CONCEDE remaining tricks to partnership with highest value cards?'));
           if (bln) {
             console.log("do concede action");
             return state;
           } else {
-            console.log("abort conced action");
+            console.log("abort concede action");
             return state;
           }
       

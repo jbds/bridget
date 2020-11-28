@@ -832,7 +832,6 @@ let reducer = (state: TopLevel.state, action) => {
     }
   | EndTrick => EndTrick.execute(state)
   | Concede =>
-    let () = [%raw "alert('Concede action')"];
     let bln: bool = [%raw
       "window.confirm('Are you sure you want to CONCEDE remaining tricks to partnership with highest value cards?')"
     ];
@@ -843,10 +842,9 @@ let reducer = (state: TopLevel.state, action) => {
           state;
         }
         : {
-          Js.log("abort conced action");
+          Js.log("abort concede action");
           state;
         };
-
     returnedState;
   };
 };
