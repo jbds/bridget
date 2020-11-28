@@ -10,6 +10,9 @@ let doConcede = (state: TopLevel.state) => {
       )
     });
   Js.log(remainingCardsNS);
+  let valueCardsArrayNS =
+    Belt.Array.map(remainingCardsNS, x => x.noTrumpValue);
+  Js.log(valueCardsArrayNS);
   let remainingCardsEW =
     Belt.Array.keep(state.pack, x => {
       x.lifecycle === Hand

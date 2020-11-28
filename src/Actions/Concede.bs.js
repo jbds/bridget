@@ -17,6 +17,20 @@ function doConcede(state) {
           }
         }));
   console.log(remainingCardsNS);
+  var remainingCardsEW = Belt_Array.keep(state.pack, (function (x) {
+          if (x.lifecycle === /* Hand */1) {
+            if (x.shuffleIndex >= 13 && x.shuffleIndex <= 25) {
+              return true;
+            } else if (x.shuffleIndex >= 39) {
+              return x.shuffleIndex <= 51;
+            } else {
+              return false;
+            }
+          } else {
+            return false;
+          }
+        }));
+  console.log(remainingCardsEW);
   return state;
 }
 
