@@ -207,7 +207,7 @@ let make = () => {
       <ButtonStd
         dispatch
         action=Shuffle
-        label="Concede"
+        label={js|\u27F3|js}
         id="btnConcede"
         isWasteOfSpace=false
       />
