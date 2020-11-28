@@ -18,7 +18,7 @@ function ButtonObserver(Props) {
                     border: "1px solid #26653B",
                     color: isActive ? "#ffffff" : "#e0e0e0",
                     fontFamily: "Trebuchet MS",
-                    fontSize: "2.5vh",
+                    fontSize: "1.9vh",
                     height: "5.0vh",
                     margin: "0vh",
                     backgroundSize: "100% 100%",
