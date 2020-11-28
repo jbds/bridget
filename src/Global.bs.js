@@ -8,6 +8,7 @@ var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 var Caml_array = require("bs-platform/lib/js/caml_array.js");
 var MyDeal$ReasonReactExamples = require("./Actions/MyDeal.bs.js");
 var Chicago$ReasonReactExamples = require("./Chicago.bs.js");
+var Concede$ReasonReactExamples = require("./Actions/Concede.bs.js");
 var Shuffle$ReasonReactExamples = require("./Shuffle.bs.js");
 var EndTrick$ReasonReactExamples = require("./Actions/EndTrick.bs.js");
 var TopLevel$ReasonReactExamples = require("./TopLevel.bs.js");
@@ -391,14 +392,7 @@ function reducer(state, action) {
       case /* EndTrick */7 :
           return EndTrick$ReasonReactExamples.execute(state);
       case /* Concede */8 :
-          var bln = (window.confirm('Are you sure you want to CONCEDE remaining tricks to partnership with highest value cards?'));
-          if (bln) {
-            console.log("do concede action");
-            return state;
-          } else {
-            console.log("abort concede action");
-            return state;
-          }
+          return Concede$ReasonReactExamples.execute(state);
       
     }
   } else {
