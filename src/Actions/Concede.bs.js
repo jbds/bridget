@@ -36,16 +36,14 @@ function doConcede(state) {
             return false;
           }
         }));
-  console.log(remainingCardsNS);
   var valueCardsArrayNS = Belt_Array.map(remainingCardsNS, (function (x) {
           return x.noTrumpValue;
         }));
-  console.log(valueCardsArrayNS);
   var totalValueCardsNS = Belt_Array.reduce(valueCardsArrayNS, 0, (function (a, b) {
           return a + b | 0;
         }));
   console.log(totalValueCardsNS);
-  Belt_Array.keep(state.pack, (function (x) {
+  var remainingCardsEW = Belt_Array.keep(myAdjustedPackValue, (function (x) {
           if (x.lifecycle === /* Hand */1) {
             if (x.shuffleIndex >= 13 && x.shuffleIndex <= 25) {
               return true;
@@ -58,6 +56,13 @@ function doConcede(state) {
             return false;
           }
         }));
+  var valueCardsArrayEW = Belt_Array.map(remainingCardsEW, (function (x) {
+          return x.noTrumpValue;
+        }));
+  var totalValueCardsEW = Belt_Array.reduce(valueCardsArrayEW, 0, (function (a, b) {
+          return a + b | 0;
+        }));
+  console.log(totalValueCardsEW);
   return state;
 }
 
