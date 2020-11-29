@@ -13,6 +13,9 @@ let doConcede = (state: TopLevel.state) => {
   let valueCardsArrayNS =
     Belt.Array.map(remainingCardsNS, x => x.noTrumpValue);
   Js.log(valueCardsArrayNS);
+  let totalValueCardsNS =
+    Belt.Array.reduce(valueCardsArrayNS, 0, (a, b) => a + b);
+  Js.log(totalValueCardsNS);
   let remainingCardsEW =
     Belt.Array.keep(state.pack, x => {
       x.lifecycle === Hand
@@ -23,7 +26,7 @@ let doConcede = (state: TopLevel.state) => {
         && x.shuffleIndex <= 51
       )
     });
-  Js.log(remainingCardsEW);
+  //Js.log(remainingCardsEW);
 
   state;
 };
