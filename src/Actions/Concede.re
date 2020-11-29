@@ -1,6 +1,23 @@
 let doConcede = (state: TopLevel.state) => {
+  // value adjust for trumps - copied from EndTrick
+  // check contract suit
+  let scoreSheetRecord = List.hd(state.chicagoScoreSheet);
+  let contractSuit = scoreSheetRecord.contractSuit;
+  // get adjusted value of the cards
+  let myAdjustedPackValue =
+    Array.map(
+      (card: Shuffle.card) => {
+        Shuffle.getSuitAsOptionString(card.suit) === contractSuit
+          ? {...card, noTrumpValue: card.noTrumpValue + 52}
+          : {
+            card;
+          }
+      },
+      state.pack,
+    );
+
   let remainingCardsNS =
-    Belt.Array.keep(state.pack, x => {
+    Belt.Array.keep(myAdjustedPackValue, x => {
       x.lifecycle === Hand
       && (
         x.shuffleIndex >= 0
@@ -10,6 +27,7 @@ let doConcede = (state: TopLevel.state) => {
       )
     });
   Js.log(remainingCardsNS);
+
   let valueCardsArrayNS =
     Belt.Array.map(remainingCardsNS, x => x.noTrumpValue);
   Js.log(valueCardsArrayNS);

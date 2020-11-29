@@ -1,9 +1,29 @@
 'use strict';
 
+var List = require("bs-platform/lib/js/list.js");
+var $$Array = require("bs-platform/lib/js/array.js");
 var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
+var Shuffle$ReasonReactExamples = require("../Shuffle.bs.js");
 
 function doConcede(state) {
-  var remainingCardsNS = Belt_Array.keep(state.pack, (function (x) {
+  var scoreSheetRecord = List.hd(state.chicagoScoreSheet);
+  var contractSuit = scoreSheetRecord.contractSuit;
+  var myAdjustedPackValue = $$Array.map((function (card) {
+          if (Shuffle$ReasonReactExamples.getSuitAsOptionString(card.suit) === contractSuit) {
+            return {
+                    noTrumpValue: card.noTrumpValue + 52 | 0,
+                    handOrder: card.handOrder,
+                    shuffleIndex: card.shuffleIndex,
+                    rank: card.rank,
+                    suit: card.suit,
+                    fileName: card.fileName,
+                    lifecycle: card.lifecycle
+                  };
+          } else {
+            return card;
+          }
+        }), state.pack);
+  var remainingCardsNS = Belt_Array.keep(myAdjustedPackValue, (function (x) {
           if (x.lifecycle === /* Hand */1) {
             if (x.shuffleIndex >= 0 && x.shuffleIndex <= 12) {
               return true;
@@ -54,4 +74,4 @@ function execute(state) {
 
 exports.doConcede = doConcede;
 exports.execute = execute;
-/* No side effect */
+/* Shuffle-ReasonReactExamples Not a pure module */
