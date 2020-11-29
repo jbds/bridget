@@ -17,6 +17,10 @@ function doConcede(state) {
           }
         }));
   console.log(remainingCardsNS);
+  var valueCardsArrayNS = Belt_Array.map(remainingCardsNS, (function (x) {
+          return x.noTrumpValue;
+        }));
+  console.log(valueCardsArrayNS);
   var remainingCardsEW = Belt_Array.keep(state.pack, (function (x) {
           if (x.lifecycle === /* Hand */1) {
             if (x.shuffleIndex >= 13 && x.shuffleIndex <= 25) {
