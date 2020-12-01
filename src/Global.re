@@ -18,7 +18,8 @@ type action =
   | BidAddSpecial(option(string))
   | PostBid
   | EndTrick
-  | Concede;
+  | Concede
+  | Post4Passes;
 
 // type state is degined in TopLevel.re to avoid a circular dependency error
 
@@ -563,25 +564,12 @@ let reducer = (state: TopLevel.state, action) => {
         // do same as new deal aka Shuffle
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
-        // bug fix - we must also store this re-real!
-        let () = [%raw
-          "setTimeout(function(){Online.doMessage('StoreDeal');}, 750)"
+        // trigger a later PostBid action
+        let _myID: int = [%raw
+          "setTimeout(function(){document.getElementById('btnPost4Passes').click();}, 2500)"
         ];
-        {
-          ...state,
-          activePointOfCompass: state.dealer,
-          bids: [],
-          //dealer: poc,
-          //dealIndex: state.dealIndex + 1,
-          declarer: None,
-          discardIndex: (-1),
-          isBiddingCycle: true,
-          isBiddingHideDenominationButtons: true,
-          isDummyVisible: false,
-          lastAction: "4 Passes - so fresh cards dealt",
-          pack: Shuffle.getShuffledPack(),
-          randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
-        };
+        // don't change anything just yet
+        state;
       } else if (bidsLength >= 3) {
         let hd1 = List.hd(state.bids);
         let tl = List.tl(state.bids);
@@ -836,5 +824,6 @@ let reducer = (state: TopLevel.state, action) => {
     }
   | EndTrick => EndTrick.execute(state)
   | Concede => Concede.execute(state)
+  | Post4Passes => Post4Passes.execute(state)
   };
 };

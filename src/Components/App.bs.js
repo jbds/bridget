@@ -226,6 +226,12 @@ function App(Props) {
                       label: "Post Bid",
                       id: "btnPostBid",
                       isVisible: false
+                    }), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                      dispatch: dispatch,
+                      action: /* Post4Passes */9,
+                      label: "Post 4 Passes",
+                      id: "btnPost4Passes",
+                      isVisible: false
                     }), React.createElement(ChicagoScoreTable$ReasonReactExamples.make, {
                       state: state
                     })), React.createElement("div", {

@@ -12,6 +12,7 @@ var Concede$ReasonReactExamples = require("./Actions/Concede.bs.js");
 var Shuffle$ReasonReactExamples = require("./Shuffle.bs.js");
 var EndTrick$ReasonReactExamples = require("./Actions/EndTrick.bs.js");
 var TopLevel$ReasonReactExamples = require("./TopLevel.bs.js");
+var Post4Passes$ReasonReactExamples = require("./Actions/Post4Passes.bs.js");
 
 var Online = require('./Online.bs');
 ;
@@ -393,6 +394,8 @@ function reducer(state, action) {
           return EndTrick$ReasonReactExamples.execute(state);
       case /* Concede */8 :
           return Concede$ReasonReactExamples.execute(state);
+      case /* Post4Passes */9 :
+          return Post4Passes$ReasonReactExamples.execute(state);
       
     }
   } else {
@@ -517,19 +520,8 @@ function reducer(state, action) {
                         })) === /* [] */0) {
                   console.log("detected 4 passes");
                   ((window.isLastActionSync = false));
-                  ((setTimeout(function(){Online.doMessage('StoreDeal');}, 750)));
-                  var newrecord$7 = Caml_obj.caml_obj_dup(state);
-                  newrecord$7.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-                  newrecord$7.pack = Shuffle$ReasonReactExamples.getShuffledPack(undefined);
-                  newrecord$7.lastAction = "4 Passes - so fresh cards dealt";
-                  newrecord$7.isDummyVisible = false;
-                  newrecord$7.isBiddingHideDenominationButtons = true;
-                  newrecord$7.isBiddingCycle = true;
-                  newrecord$7.discardIndex = -1;
-                  newrecord$7.declarer = undefined;
-                  newrecord$7.bids = /* [] */0;
-                  newrecord$7.activePointOfCompass = state.dealer;
-                  return newrecord$7;
+                  ((setTimeout(function(){document.getElementById('btnPost4Passes').click();}, 2500)));
+                  return state;
                 }
                 if (bidsLength >= 3) {
                   var hd1 = List.hd(state.bids);
@@ -698,16 +690,16 @@ function reducer(state, action) {
                             }
                           }), myPack$1);
                     ((setTimeout(function(){document.getElementById('btnPostBid').click();}, 2500)));
-                    var newrecord$8 = Caml_obj.caml_obj_dup(state);
-                    newrecord$8.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-                    newrecord$8.pack = myPack2;
-                    newrecord$8.lastAction = contractLevel !== undefined ? "BidAddSpecial- 3 Passes" : "BidAddSpecial- 4 Passes";
-                    newrecord$8.declarer = contractDeclarer;
-                    newrecord$8.chicagoScoreSheet = contractLevel !== undefined ? /* :: */[
+                    var newrecord$7 = Caml_obj.caml_obj_dup(state);
+                    newrecord$7.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                    newrecord$7.pack = myPack2;
+                    newrecord$7.lastAction = contractLevel !== undefined ? "BidAddSpecial- 3 Passes" : "BidAddSpecial- 4 Passes";
+                    newrecord$7.declarer = contractDeclarer;
+                    newrecord$7.chicagoScoreSheet = contractLevel !== undefined ? /* :: */[
                         myChicagoScoreSheetRecord,
                         chicagoScoreSheetTail
                       ] : chicagoScoreSheetTail;
-                    newrecord$8.bids = /* :: */[
+                    newrecord$7.bids = /* :: */[
                       {
                         contractLevel: undefined,
                         contractSuit: undefined,
@@ -718,13 +710,13 @@ function reducer(state, action) {
                       },
                       state.bids
                     ];
-                    newrecord$8.activePointOfCompass = undefined;
-                    return newrecord$8;
+                    newrecord$7.activePointOfCompass = undefined;
+                    return newrecord$7;
                   }
-                  var newrecord$9 = Caml_obj.caml_obj_dup(state);
-                  newrecord$9.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-                  newrecord$9.lastAction = "BidAddSpecial";
-                  newrecord$9.bids = /* :: */[
+                  var newrecord$8 = Caml_obj.caml_obj_dup(state);
+                  newrecord$8.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                  newrecord$8.lastAction = "BidAddSpecial";
+                  newrecord$8.bids = /* :: */[
                     {
                       contractLevel: undefined,
                       contractSuit: undefined,
@@ -735,13 +727,13 @@ function reducer(state, action) {
                     },
                     state.bids
                   ];
-                  newrecord$9.activePointOfCompass = poc$3;
-                  return newrecord$9;
+                  newrecord$8.activePointOfCompass = poc$3;
+                  return newrecord$8;
                 }
-                var newrecord$10 = Caml_obj.caml_obj_dup(state);
-                newrecord$10.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-                newrecord$10.lastAction = "BidAddSpecial";
-                newrecord$10.bids = /* :: */[
+                var newrecord$9 = Caml_obj.caml_obj_dup(state);
+                newrecord$9.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                newrecord$9.lastAction = "BidAddSpecial";
+                newrecord$9.bids = /* :: */[
                   {
                     contractLevel: undefined,
                     contractSuit: undefined,
@@ -752,13 +744,13 @@ function reducer(state, action) {
                   },
                   state.bids
                 ];
-                newrecord$10.activePointOfCompass = poc$3;
-                return newrecord$10;
+                newrecord$9.activePointOfCompass = poc$3;
+                return newrecord$9;
             case "X" :
-                var newrecord$11 = Caml_obj.caml_obj_dup(state);
-                newrecord$11.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-                newrecord$11.lastAction = "BidAddSpecial - X";
-                newrecord$11.bids = /* :: */[
+                var newrecord$10 = Caml_obj.caml_obj_dup(state);
+                newrecord$10.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                newrecord$10.lastAction = "BidAddSpecial - X";
+                newrecord$10.bids = /* :: */[
                   {
                     contractLevel: undefined,
                     contractSuit: undefined,
@@ -769,13 +761,13 @@ function reducer(state, action) {
                   },
                   state.bids
                 ];
-                newrecord$11.activePointOfCompass = poc$3;
-                return newrecord$11;
+                newrecord$10.activePointOfCompass = poc$3;
+                return newrecord$10;
             case "XX" :
-                var newrecord$12 = Caml_obj.caml_obj_dup(state);
-                newrecord$12.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-                newrecord$12.lastAction = "BidAddSpecial - XX";
-                newrecord$12.bids = /* :: */[
+                var newrecord$11 = Caml_obj.caml_obj_dup(state);
+                newrecord$11.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                newrecord$11.lastAction = "BidAddSpecial - XX";
+                newrecord$11.bids = /* :: */[
                   {
                     contractLevel: undefined,
                     contractSuit: undefined,
@@ -786,8 +778,8 @@ function reducer(state, action) {
                   },
                   state.bids
                 ];
-                newrecord$12.activePointOfCompass = poc$3;
-                return newrecord$12;
+                newrecord$11.activePointOfCompass = poc$3;
+                return newrecord$11;
             default:
               return state;
           }

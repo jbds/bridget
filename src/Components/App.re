@@ -259,6 +259,13 @@ let make = () => {
           id="btnPostBid"
           isVisible=false
         />
+        <ButtonStd
+          dispatch
+          action=Post4Passes
+          label="Post 4 Passes"
+          id="btnPost4Passes"
+          isVisible=false
+        />
         <ChicagoScoreTable state />
       </div>
     <div id="sidebar3">
