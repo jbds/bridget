@@ -563,6 +563,10 @@ let reducer = (state: TopLevel.state, action) => {
         // do same as new deal aka Shuffle
         // make sure doMessage is called in sidebar component
         let () = [%raw "window.isLastActionSync = false"];
+        // bug fix - we must also store this re-real!
+        let () = [%raw
+          "setTimeout(function(){Online.doMessage('StoreDeal');}, 750)"
+        ];
         {
           ...state,
           activePointOfCompass: state.dealer,

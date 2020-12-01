@@ -63,11 +63,13 @@ function doConcede(state) {
           return a + b | 0;
         }));
   console.log(totalValueCardsEW);
+  var winningPartnershipAsString = totalValueCardsNS > totalValueCardsEW ? "NS" : "EW";
+  console.log(winningPartnershipAsString);
   return state;
 }
 
 function execute(state) {
-  var bln = (window.confirm('Are you sure you want to CONCEDE remaining tricks to partnership with highest value cards?'));
+  var bln = (window.confirm('Are you sure you want to assign the remaining tricks to the winning partnership?'));
   if (bln) {
     console.log("do concede action");
     return doConcede(state);

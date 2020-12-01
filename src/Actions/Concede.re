@@ -48,13 +48,15 @@ let doConcede = (state: TopLevel.state) => {
   let totalValueCardsEW =
     Belt.Array.reduce(valueCardsArrayEW, 0, (a, b) => a + b);
   Js.log(totalValueCardsEW);
-
+  let winningPartnershipAsString =
+    totalValueCardsNS > totalValueCardsEW ? "NS" : "EW";
+  Js.log(winningPartnershipAsString);
   state;
 };
 
 let execute = (state: TopLevel.state) => {
   let bln: bool = [%raw
-    "window.confirm('Are you sure you want to CONCEDE remaining tricks to partnership with highest value cards?')"
+    "window.confirm('Are you sure you want to assign the remaining tricks to the winning partnership?')"
   ];
   let returnedState =
     bln

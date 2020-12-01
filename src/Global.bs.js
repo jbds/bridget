@@ -517,6 +517,7 @@ function reducer(state, action) {
                         })) === /* [] */0) {
                   console.log("detected 4 passes");
                   ((window.isLastActionSync = false));
+                  ((setTimeout(function(){Online.doMessage('StoreDeal');}, 750)));
                   var newrecord$7 = Caml_obj.caml_obj_dup(state);
                   newrecord$7.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
                   newrecord$7.pack = Shuffle$ReasonReactExamples.getShuffledPack(undefined);
