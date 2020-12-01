@@ -202,7 +202,7 @@ let make = () => {
         action=Concede
         label={js|\uD83C\uDFC1|js}
         id="btnConcede"
-        isWasteOfSpace=false
+        isWasteOfSpace={!isFourSeatsOccupied()}
       />
       <SpanStd id="spn8" text=" " />
       <ButtonStdJsx
