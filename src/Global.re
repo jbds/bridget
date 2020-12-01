@@ -568,8 +568,22 @@ let reducer = (state: TopLevel.state, action) => {
         let _myID: int = [%raw
           "setTimeout(function(){document.getElementById('btnPost4Passes').click();}, 2500)"
         ];
-        // don't change anything just yet
-        state;
+        // don't change anything just yet except for adding the PASS into the bid table
+        {
+          ...state,
+          // unexpectedly, we need to actually add the last PASS to the bid table so it is visible to players
+          bids: [
+            {
+              contractLevel: None,
+              contractSuit: None,
+              contractPointOfCompass: state.activePointOfCompass,
+              isDoubled: false,
+              isRedoubled: false,
+              isPass: true,
+            },
+            ...state.bids,
+          ],
+        };
       } else if (bidsLength >= 3) {
         let hd1 = List.hd(state.bids);
         let tl = List.tl(state.bids);
