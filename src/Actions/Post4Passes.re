@@ -14,7 +14,7 @@ let execute = (state: TopLevel.state) => {
     isBiddingCycle: true,
     isBiddingHideDenominationButtons: true,
     isDummyVisible: false,
-    lastAction: "4 Passes - so fresh cards dealt",
+    lastAction: "Post 4 Passes - so fresh cards dealt",
     pack: Shuffle.getShuffledPack(),
     randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
   };

@@ -583,6 +583,7 @@ let reducer = (state: TopLevel.state, action) => {
             },
             ...state.bids,
           ],
+          lastAction: "4 Passes",
         };
       } else if (bidsLength >= 3) {
         let hd1 = List.hd(state.bids);

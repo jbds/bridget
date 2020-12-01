@@ -8,7 +8,7 @@ function execute(state) {
   var newrecord = Caml_obj.caml_obj_dup(state);
   newrecord.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
   newrecord.pack = Shuffle$ReasonReactExamples.getShuffledPack(undefined);
-  newrecord.lastAction = "4 Passes - so fresh cards dealt";
+  newrecord.lastAction = "Post 4 Passes - so fresh cards dealt";
   newrecord.isDummyVisible = false;
   newrecord.isBiddingHideDenominationButtons = true;
   newrecord.isBiddingCycle = true;

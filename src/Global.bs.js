@@ -522,6 +522,7 @@ function reducer(state, action) {
                   ((window.isLastActionSync = false));
                   ((setTimeout(function(){document.getElementById('btnPost4Passes').click();}, 2500)));
                   var newrecord$7 = Caml_obj.caml_obj_dup(state);
+                  newrecord$7.lastAction = "4 Passes";
                   newrecord$7.bids = /* :: */[
                     {
                       contractLevel: undefined,
