@@ -69,6 +69,11 @@ function doConcede(state) {
 }
 
 function execute(state) {
+  var lifecycleHandCardsArray = Belt_Array.keep(state.pack, (function (x) {
+          return x.lifecycle === /* Hand */1;
+        }));
+  console.log("lifecycleHandCardsArray length");
+  console.log(lifecycleHandCardsArray.length);
   var bln = (window.confirm('Are you sure you want to assign the remaining tricks to the winning partnership?'));
   if (bln) {
     console.log("do concede action");
