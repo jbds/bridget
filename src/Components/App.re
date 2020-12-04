@@ -161,6 +161,11 @@ let make = () => {
       Belt.Array.keep(state.pack, x => {x.lifecycle === Discard});
     Belt.Array.length(lifecycleDiscardCardsArray) === 0;
   };
+  let isQtyCardsInHandLTE12 = () => {
+    let lifecycleHandCardsArray =
+      Belt.Array.keep(state.pack, x => {x.lifecycle === Hand});
+    Belt.Array.length(lifecycleHandCardsArray) <= 12;
+  };
   // fragment
   <>
     <div id="sidebar1">
@@ -214,7 +219,11 @@ let make = () => {
         label={js|\uD83C\uDFC1|js}
         id="btnConcede"
         isWasteOfSpace={
-          !(isQtyCardsInHandsDivFour() && isQtyCardsInDiscardZero())
+          !(
+            isQtyCardsInHandsDivFour()
+            && isQtyCardsInDiscardZero()
+            && isQtyCardsInHandLTE12()
+          )
         }
       />
       <SpanStd id="spn8" text=" " />
