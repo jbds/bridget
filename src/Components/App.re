@@ -150,6 +150,12 @@ let make = () => {
     } else {
       false;
     };
+  // helper to decide if we want to show the Concede button aka Jump to Finish
+  let isQtyCardsInHandsDivFour = () => {
+    let lifecycleHandCardsArray =
+      Belt.Array.keep(state.pack, x => {x.lifecycle === Hand});
+    Belt.Array.length(lifecycleHandCardsArray) mod 4 == 0;
+  };
   // fragment
   <>
     <div id="sidebar1">
@@ -202,7 +208,7 @@ let make = () => {
         action=Concede
         label={js|\uD83C\uDFC1|js}
         id="btnConcede"
-        isWasteOfSpace={!isFourSeatsOccupied()}
+        isWasteOfSpace={!isQtyCardsInHandsDivFour()}
       />
       <SpanStd id="spn8" text=" " />
       <ButtonStdJsx

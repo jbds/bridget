@@ -117,6 +117,12 @@ function App(Props) {
       return false;
     }
   };
+  var isQtyCardsInHandsDivFour = function (param) {
+    var lifecycleHandCardsArray = Belt_Array.keep(state.pack, (function (x) {
+            return x.lifecycle === /* Hand */1;
+          }));
+    return lifecycleHandCardsArray.length % 4 === 0;
+  };
   return React.createElement(React.Fragment, undefined, React.createElement("div", {
                   id: "sidebar1"
                 }, React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
@@ -179,7 +185,7 @@ function App(Props) {
                       action: /* Concede */8,
                       label: "\uD83C\uDFC1",
                       id: "btnConcede",
-                      isWasteOfSpace: !isFourSeatsOccupied(undefined)
+                      isWasteOfSpace: !isQtyCardsInHandsDivFour(undefined)
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn8",
                       text: " "
