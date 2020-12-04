@@ -123,6 +123,12 @@ function App(Props) {
           }));
     return lifecycleHandCardsArray.length % 4 === 0;
   };
+  var isQtyCardsInDiscardZero = function (param) {
+    var lifecycleDiscardCardsArray = Belt_Array.keep(state.pack, (function (x) {
+            return x.lifecycle === /* Discard */2;
+          }));
+    return lifecycleDiscardCardsArray.length === 0;
+  };
   return React.createElement(React.Fragment, undefined, React.createElement("div", {
                   id: "sidebar1"
                 }, React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
@@ -185,7 +191,7 @@ function App(Props) {
                       action: /* Concede */8,
                       label: "\uD83C\uDFC1",
                       id: "btnConcede",
-                      isWasteOfSpace: !isQtyCardsInHandsDivFour(undefined)
+                      isWasteOfSpace: !(isQtyCardsInHandsDivFour(undefined) && isQtyCardsInDiscardZero(undefined))
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn8",
                       text: " "
