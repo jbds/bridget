@@ -51,18 +51,18 @@ let doConcede = (state: TopLevel.state) => {
   let winningPartnershipAsString =
     totalValueCardsNS > totalValueCardsEW ? "NS" : "EW";
   Js.log(winningPartnershipAsString);
+  let qtyTricksToGiveWinningPartnership = () => {
+    let lifecycleHandCardsArray =
+      Belt.Array.keep(state.pack, x => {x.lifecycle === Hand});
+    Belt.Array.length(lifecycleHandCardsArray) / 4;
+  };
+  Js.log("qtyTricksToGiveWinningPartnership");
+  Js.log(qtyTricksToGiveWinningPartnership);
+
   state;
 };
 
 let execute = (state: TopLevel.state) => {
-  let lifecycleHandCardsArray =
-    Belt.Array.keep(state.pack, x => {x.lifecycle === Hand});
-  Js.log("lifecycleHandCardsArray length");
-  Js.log(Belt.Array.length(lifecycleHandCardsArray));
-  let isDivFour = Belt.Array.length(lifecycleHandCardsArray) mod 4 == 0;
-  Js.log("isDivFour");
-  Js.log(isDivFour);
-
   let bln: bool = [%raw
     "window.confirm('Are you sure you want to assign the remaining tricks to the winning partnership?')"
   ];

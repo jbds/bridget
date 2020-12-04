@@ -65,18 +65,18 @@ function doConcede(state) {
   console.log(totalValueCardsEW);
   var winningPartnershipAsString = totalValueCardsNS > totalValueCardsEW ? "NS" : "EW";
   console.log(winningPartnershipAsString);
+  var qtyTricksToGiveWinningPartnership = function (param) {
+    var lifecycleHandCardsArray = Belt_Array.keep(state.pack, (function (x) {
+            return x.lifecycle === /* Hand */1;
+          }));
+    return lifecycleHandCardsArray.length / 4 | 0;
+  };
+  console.log("qtyTricksToGiveWinningPartnership");
+  console.log(qtyTricksToGiveWinningPartnership);
   return state;
 }
 
 function execute(state) {
-  var lifecycleHandCardsArray = Belt_Array.keep(state.pack, (function (x) {
-          return x.lifecycle === /* Hand */1;
-        }));
-  console.log("lifecycleHandCardsArray length");
-  console.log(lifecycleHandCardsArray.length);
-  var isDivFour = lifecycleHandCardsArray.length % 4 === 0;
-  console.log("isDivFour");
-  console.log(isDivFour);
   var bln = (window.confirm('Are you sure you want to assign the remaining tricks to the winning partnership?'));
   if (bln) {
     console.log("do concede action");
