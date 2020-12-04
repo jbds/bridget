@@ -72,7 +72,7 @@ function doConcede(state) {
     return lifecycleHandCardsArray.length / 4 | 0;
   };
   console.log("qtyTricksToGiveWinningPartnership");
-  console.log(qtyTricksToGiveWinningPartnership);
+  console.log(qtyTricksToGiveWinningPartnership(undefined));
   return state;
 }
 

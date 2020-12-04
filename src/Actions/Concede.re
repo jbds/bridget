@@ -57,7 +57,7 @@ let doConcede = (state: TopLevel.state) => {
     Belt.Array.length(lifecycleHandCardsArray) / 4;
   };
   Js.log("qtyTricksToGiveWinningPartnership");
-  Js.log(qtyTricksToGiveWinningPartnership);
+  Js.log(qtyTricksToGiveWinningPartnership());
 
   state;
 };
