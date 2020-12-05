@@ -54,5 +54,10 @@ function getWinningDiscardPoc(state) {
   }
 }
 
+function updateScoreTable(qtyTrickIncrementNS, qtyTrickIncrementEW, state) {
+  return state;
+}
+
 exports.getWinningDiscardPoc = getWinningDiscardPoc;
+exports.updateScoreTable = updateScoreTable;
 /* Shuffle-ReasonReactExamples Not a pure module */

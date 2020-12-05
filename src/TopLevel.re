@@ -23,7 +23,6 @@ type state = {
 };
 
 // put utilities in here too?
-// we are using the Shuffle module as a general utility module here, nothing to do with Shuffle!
 let getWinningDiscardPoc = (state: state) => {
   // based on same code in EndTrick.re
   // check contract suit
@@ -92,4 +91,14 @@ let getWinningDiscardPoc = (state: state) => {
   //Js.log("winningDiscardPoc:");
   //Js.log(winningDiscardPoc);
   winningDiscardPoc;
+};
+
+// this function is called by EndTrick and also by Concede
+// the only difference is that EndTrick only ever increments NS or EW tricks by one
+// but Concede can increment by 1, 2 or 3 tricks
+// need to pass qtyTrickIncrementNS and qtyTrickIncrementEW together with state
+// return new state
+let updateScoreTable =
+    (qtyTrickIncrementNS: int, qtyTrickIncrementEW: int, state: state) => {
+  state;
 };
