@@ -42,7 +42,6 @@ function doConcede(state) {
   var totalValueCardsNS = Belt_Array.reduce(valueCardsArrayNS, 0, (function (a, b) {
           return a + b | 0;
         }));
-  console.log(totalValueCardsNS);
   var remainingCardsEW = Belt_Array.keep(myAdjustedPackValue, (function (x) {
           if (x.lifecycle === /* Hand */1) {
             if (x.shuffleIndex >= 13 && x.shuffleIndex <= 25) {
@@ -62,17 +61,13 @@ function doConcede(state) {
   var totalValueCardsEW = Belt_Array.reduce(valueCardsArrayEW, 0, (function (a, b) {
           return a + b | 0;
         }));
-  console.log(totalValueCardsEW);
   var winningPartnershipAsString = totalValueCardsNS > totalValueCardsEW ? "NS" : "EW";
-  console.log(winningPartnershipAsString);
   var qtyTricksToGiveWinningPartnership = function (param) {
     var lifecycleHandCardsArray = Belt_Array.keep(state.pack, (function (x) {
             return x.lifecycle === /* Hand */1;
           }));
     return lifecycleHandCardsArray.length / 4 | 0;
   };
-  console.log("qtyTricksToGiveWinningPartnership");
-  console.log(qtyTricksToGiveWinningPartnership(undefined));
   var totalTricksNorthSouthIncrement = winningPartnershipAsString === "NS" ? qtyTricksToGiveWinningPartnership(undefined) : 0;
   var totalTricksWestEastIncrement = winningPartnershipAsString === "EW" ? qtyTricksToGiveWinningPartnership(undefined) : 0;
   console.log("totalTricksNorthSouthIncrement");

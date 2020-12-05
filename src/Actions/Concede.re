@@ -32,7 +32,7 @@ let doConcede = (state: TopLevel.state) => {
   //Js.log(valueCardsArrayNS);
   let totalValueCardsNS =
     Belt.Array.reduce(valueCardsArrayNS, 0, (a, b) => a + b);
-  Js.log(totalValueCardsNS);
+  //Js.log(totalValueCardsNS);
   let remainingCardsEW =
     Belt.Array.keep(myAdjustedPackValue, x => {
       x.lifecycle === Hand
@@ -47,17 +47,17 @@ let doConcede = (state: TopLevel.state) => {
     Belt.Array.map(remainingCardsEW, x => x.noTrumpValue);
   let totalValueCardsEW =
     Belt.Array.reduce(valueCardsArrayEW, 0, (a, b) => a + b);
-  Js.log(totalValueCardsEW);
+  //Js.log(totalValueCardsEW);
   let winningPartnershipAsString =
     totalValueCardsNS > totalValueCardsEW ? "NS" : "EW";
-  Js.log(winningPartnershipAsString);
+  //Js.log(winningPartnershipAsString);
   let qtyTricksToGiveWinningPartnership = () => {
     let lifecycleHandCardsArray =
       Belt.Array.keep(state.pack, x => {x.lifecycle === Hand});
     Belt.Array.length(lifecycleHandCardsArray) / 4;
   };
-  Js.log("qtyTricksToGiveWinningPartnership");
-  Js.log(qtyTricksToGiveWinningPartnership());
+  //Js.log("qtyTricksToGiveWinningPartnership");
+  //Js.log(qtyTricksToGiveWinningPartnership());
   let totalTricksNorthSouthIncrement =
     winningPartnershipAsString === "NS"
       ? qtyTricksToGiveWinningPartnership() : 0;
