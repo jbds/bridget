@@ -73,6 +73,12 @@ function doConcede(state) {
   };
   console.log("qtyTricksToGiveWinningPartnership");
   console.log(qtyTricksToGiveWinningPartnership(undefined));
+  var totalTricksNorthSouthIncrement = winningPartnershipAsString === "NS" ? qtyTricksToGiveWinningPartnership(undefined) : 0;
+  var totalTricksWestEastIncrement = winningPartnershipAsString === "EW" ? qtyTricksToGiveWinningPartnership(undefined) : 0;
+  console.log("totalTricksNorthSouthIncrement");
+  console.log(totalTricksNorthSouthIncrement);
+  console.log("totalTricksWestEastIncrement");
+  console.log(totalTricksWestEastIncrement);
   return state;
 }
 

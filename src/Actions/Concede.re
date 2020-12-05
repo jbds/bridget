@@ -58,6 +58,16 @@ let doConcede = (state: TopLevel.state) => {
   };
   Js.log("qtyTricksToGiveWinningPartnership");
   Js.log(qtyTricksToGiveWinningPartnership());
+  let totalTricksNorthSouthIncrement =
+    winningPartnershipAsString === "NS"
+      ? qtyTricksToGiveWinningPartnership() : 0;
+  let totalTricksWestEastIncrement =
+    winningPartnershipAsString === "EW"
+      ? qtyTricksToGiveWinningPartnership() : 0;
+  Js.log("totalTricksNorthSouthIncrement");
+  Js.log(totalTricksNorthSouthIncrement);
+  Js.log("totalTricksWestEastIncrement");
+  Js.log(totalTricksWestEastIncrement);
 
   state;
 };
