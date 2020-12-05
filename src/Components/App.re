@@ -223,6 +223,7 @@ let make = () => {
             isQtyCardsInHandsDivFour()
             && isQtyCardsInDiscardZero()
             && isQtyCardsInHandLTE12()
+            && isFourSeatsOccupied()
           )
         }
       />
