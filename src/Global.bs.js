@@ -390,7 +390,7 @@ function reducer(state, action) {
           newrecord$3.isBiddingCycle = false;
           newrecord$3.activePointOfCompass = Shuffle$ReasonReactExamples.getNextActivePointOfCompass(state.declarer);
           return newrecord$3;
-      case /* EndTrick */7 :
+      case /* EndOneTrick */7 :
           return EndTrick$ReasonReactExamples.execute(state);
       case /* Concede */8 :
           return Concede$ReasonReactExamples.execute(state);

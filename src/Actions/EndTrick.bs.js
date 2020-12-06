@@ -8,60 +8,14 @@ var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 var Chicago$ReasonReactExamples = require("../Chicago.bs.js");
 var Shuffle$ReasonReactExamples = require("../Shuffle.bs.js");
 
-function execute(state) {
-  ((window.isLastActionSync = false));
-  var scoreSheetRecord = List.hd(state.chicagoScoreSheet);
-  var contractSuit = scoreSheetRecord.contractSuit;
-  var myAdjustedPackValue = $$Array.map((function (card) {
-          if (Shuffle$ReasonReactExamples.getSuitAsOptionString(card.suit) === contractSuit) {
-            return {
-                    noTrumpValue: card.noTrumpValue + 52 | 0,
-                    handOrder: card.handOrder,
-                    shuffleIndex: card.shuffleIndex,
-                    rank: card.rank,
-                    suit: card.suit,
-                    fileName: card.fileName,
-                    lifecycle: card.lifecycle
-                  };
-          } else {
-            return card;
-          }
-        }), state.pack);
-  var myFourCards = Belt_Array.keep(myAdjustedPackValue, (function (x) {
-          if (x.lifecycle === /* Discard */2) {
-            if (x.suit === state.discardSuit) {
-              return true;
-            } else {
-              return Shuffle$ReasonReactExamples.getSuitAsOptionString(x.suit) === contractSuit;
-            }
-          } else {
-            return false;
-          }
-        }));
-  console.log("myFourCards:");
-  console.log(myFourCards);
-  var myFourCardsAsList = Belt_List.fromArray(myFourCards);
-  var myFourCardsAsListSorted = Belt_List.sort(myFourCardsAsList, (function (a, b) {
-          return b.noTrumpValue - a.noTrumpValue | 0;
-        }));
-  var optionWinningCard = Belt_List.head(myFourCardsAsListSorted);
-  var winningCardFileName = optionWinningCard !== undefined ? optionWinningCard.fileName : "";
-  console.log("winningCard:");
-  console.log(winningCardFileName);
-  var winningCardShuffleIndex = optionWinningCard !== undefined ? optionWinningCard.shuffleIndex : -1;
-  var winningDiscardPoc = winningCardShuffleIndex === -1 ? "Error" : (
-      winningCardShuffleIndex < 13 ? "North" : (
-          winningCardShuffleIndex < 26 ? "East" : (
-              winningCardShuffleIndex < 39 ? "South" : "West"
-            )
-        )
-    );
-  var totalTricksNorthSouthIncrement = winningDiscardPoc === "North" || winningDiscardPoc === "South" ? 1 : 0;
-  var totalTricksWestEastIncrement = winningDiscardPoc === "West" || winningDiscardPoc === "East" ? 1 : 0;
+function getNextStateFromTricksWonAndWinningPartnership(state, qtyTricksToGiveWinningPartnership, winningDiscardPoc) {
+  var totalTricksNorthSouthIncrement = winningDiscardPoc === "North" || winningDiscardPoc === "South" ? qtyTricksToGiveWinningPartnership : 0;
+  var totalTricksWestEastIncrement = winningDiscardPoc === "West" || winningDiscardPoc === "East" ? qtyTricksToGiveWinningPartnership : 0;
   console.log("totalTricksNorthSouthIncrement:");
   console.log(totalTricksNorthSouthIncrement);
   console.log("totalTricksWestEastIncrement:");
   console.log(totalTricksWestEastIncrement);
+  var scoreSheetRecord = List.hd(state.chicagoScoreSheet);
   var chicagoScoreSheetHead = Belt_List.headExn(state.chicagoScoreSheet);
   var chicagoScoreSheetTail = Belt_List.tailExn(state.chicagoScoreSheet);
   var n = chicagoScoreSheetHead.totalTricksNorthSouth;
@@ -202,5 +156,57 @@ function execute(state) {
   return newrecord;
 }
 
+function execute(state) {
+  ((window.isLastActionSync = false));
+  var scoreSheetRecord = List.hd(state.chicagoScoreSheet);
+  var contractSuit = scoreSheetRecord.contractSuit;
+  var myAdjustedPackValue = $$Array.map((function (card) {
+          if (Shuffle$ReasonReactExamples.getSuitAsOptionString(card.suit) === contractSuit) {
+            return {
+                    noTrumpValue: card.noTrumpValue + 52 | 0,
+                    handOrder: card.handOrder,
+                    shuffleIndex: card.shuffleIndex,
+                    rank: card.rank,
+                    suit: card.suit,
+                    fileName: card.fileName,
+                    lifecycle: card.lifecycle
+                  };
+          } else {
+            return card;
+          }
+        }), state.pack);
+  var myFourCards = Belt_Array.keep(myAdjustedPackValue, (function (x) {
+          if (x.lifecycle === /* Discard */2) {
+            if (x.suit === state.discardSuit) {
+              return true;
+            } else {
+              return Shuffle$ReasonReactExamples.getSuitAsOptionString(x.suit) === contractSuit;
+            }
+          } else {
+            return false;
+          }
+        }));
+  console.log("myFourCards:");
+  console.log(myFourCards);
+  var myFourCardsAsList = Belt_List.fromArray(myFourCards);
+  var myFourCardsAsListSorted = Belt_List.sort(myFourCardsAsList, (function (a, b) {
+          return b.noTrumpValue - a.noTrumpValue | 0;
+        }));
+  var optionWinningCard = Belt_List.head(myFourCardsAsListSorted);
+  var winningCardFileName = optionWinningCard !== undefined ? optionWinningCard.fileName : "";
+  console.log("winningCard:");
+  console.log(winningCardFileName);
+  var winningCardShuffleIndex = optionWinningCard !== undefined ? optionWinningCard.shuffleIndex : -1;
+  var winningDiscardPoc = winningCardShuffleIndex === -1 ? "Error" : (
+      winningCardShuffleIndex < 13 ? "North" : (
+          winningCardShuffleIndex < 26 ? "East" : (
+              winningCardShuffleIndex < 39 ? "South" : "West"
+            )
+        )
+    );
+  return getNextStateFromTricksWonAndWinningPartnership(state, 1, winningDiscardPoc);
+}
+
+exports.getNextStateFromTricksWonAndWinningPartnership = getNextStateFromTricksWonAndWinningPartnership;
 exports.execute = execute;
 /* Shuffle-ReasonReactExamples Not a pure module */

@@ -15,7 +15,6 @@ let doConcede = (state: TopLevel.state) => {
       },
       state.pack,
     );
-
   let remainingCardsNS =
     Belt.Array.keep(myAdjustedPackValue, x => {
       x.lifecycle === Hand

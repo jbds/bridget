@@ -242,8 +242,8 @@ let make = () => {
         //<button id="btn1">(s2e("p5 click listener"))</button>
         <ButtonStd
           dispatch
-          action=EndTrick
-          label="End Trick"
+          action=EndOneTrick
+          label="End One Trick"
           id="btnEndTrick"
           isVisible=false
         />

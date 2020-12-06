@@ -214,8 +214,8 @@ function App(Props) {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* EndTrick */7,
-                      label: "End Trick",
+                      action: /* EndOneTrick */7,
+                      label: "End One Trick",
                       id: "btnEndTrick",
                       isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {

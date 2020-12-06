@@ -17,7 +17,7 @@ type action =
   | BidUpdate(option(string))
   | BidAddSpecial(option(string))
   | PostBid
-  | EndTrick
+  | EndOneTrick
   | Concede
   | Post4Passes;
 
@@ -837,7 +837,7 @@ let reducer = (state: TopLevel.state, action) => {
       isBiddingCycle: false,
       lastAction: "Post Bid after 3 passes",
     }
-  | EndTrick => EndTrick.execute(state)
+  | EndOneTrick => EndTrick.execute(state)
   | Concede => Concede.execute(state)
   | Post4Passes => Post4Passes.execute(state)
   };
