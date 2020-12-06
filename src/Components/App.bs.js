@@ -129,11 +129,11 @@ function App(Props) {
           }));
     return lifecycleDiscardCardsArray.length === 0;
   };
-  var isQtyCardsInHandGT0LTE12 = function (param) {
+  var isQtyCardsInHandGT0LTE16 = function (param) {
     var lifecycleHandCardsArray = Belt_Array.keep(state.pack, (function (x) {
             return x.lifecycle === /* Hand */1;
           }));
-    if (lifecycleHandCardsArray.length <= 12) {
+    if (lifecycleHandCardsArray.length <= 16) {
       return lifecycleHandCardsArray.length !== 0;
     } else {
       return false;
@@ -201,7 +201,7 @@ function App(Props) {
                       action: /* Concede */8,
                       label: "\uD83C\uDFC1",
                       id: "btnConcede",
-                      isWasteOfSpace: !(isQtyCardsInHandsDivFour(undefined) && isQtyCardsInDiscardZero(undefined) && isQtyCardsInHandGT0LTE12(undefined) && isFourSeatsOccupied(undefined))
+                      isWasteOfSpace: !(isQtyCardsInHandsDivFour(undefined) && isQtyCardsInDiscardZero(undefined) && isQtyCardsInHandGT0LTE16(undefined) && isFourSeatsOccupied(undefined))
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn8",
                       text: " "
