@@ -185,7 +185,6 @@ let make = () => {
         isWasteOfSpace={!state.isRebootVisible}
       />
       <br />
-      <br />
       <TablePosition state dispatch />
       <br />
       //<br/>
