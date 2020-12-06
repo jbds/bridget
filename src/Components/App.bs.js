@@ -129,11 +129,15 @@ function App(Props) {
           }));
     return lifecycleDiscardCardsArray.length === 0;
   };
-  var isQtyCardsInHandLTE12 = function (param) {
+  var isQtyCardsInHandGT0LTE12 = function (param) {
     var lifecycleHandCardsArray = Belt_Array.keep(state.pack, (function (x) {
             return x.lifecycle === /* Hand */1;
           }));
-    return lifecycleHandCardsArray.length <= 12;
+    if (lifecycleHandCardsArray.length <= 12) {
+      return lifecycleHandCardsArray.length !== 0;
+    } else {
+      return false;
+    }
   };
   return React.createElement(React.Fragment, undefined, React.createElement("div", {
                   id: "sidebar1"
@@ -197,7 +201,7 @@ function App(Props) {
                       action: /* Concede */8,
                       label: "\uD83C\uDFC1",
                       id: "btnConcede",
-                      isWasteOfSpace: !(isQtyCardsInHandsDivFour(undefined) && isQtyCardsInDiscardZero(undefined) && isQtyCardsInHandLTE12(undefined) && isFourSeatsOccupied(undefined))
+                      isWasteOfSpace: !(isQtyCardsInHandsDivFour(undefined) && isQtyCardsInDiscardZero(undefined) && isQtyCardsInHandGT0LTE12(undefined) && isFourSeatsOccupied(undefined))
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn8",
                       text: " "

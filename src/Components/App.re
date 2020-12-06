@@ -161,10 +161,11 @@ let make = () => {
       Belt.Array.keep(state.pack, x => {x.lifecycle === Discard});
     Belt.Array.length(lifecycleDiscardCardsArray) === 0;
   };
-  let isQtyCardsInHandLTE12 = () => {
+  let isQtyCardsInHandGT0LTE12 = () => {
     let lifecycleHandCardsArray =
       Belt.Array.keep(state.pack, x => {x.lifecycle === Hand});
-    Belt.Array.length(lifecycleHandCardsArray) <= 12;
+    Belt.Array.length(lifecycleHandCardsArray) <= 12
+    && Belt.Array.length(lifecycleHandCardsArray) > 0;
   };
   // fragment
   <>
@@ -221,7 +222,7 @@ let make = () => {
           !(
             isQtyCardsInHandsDivFour()
             && isQtyCardsInDiscardZero()
-            && isQtyCardsInHandLTE12()
+            && isQtyCardsInHandGT0LTE12()
             && isFourSeatsOccupied()
           )
         }
