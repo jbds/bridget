@@ -71,7 +71,7 @@ function doConcede(state) {
     return lifecycleHandCardsArray.length / 4 | 0;
   };
   var newrecord = Caml_obj.caml_obj_dup(state);
-  newrecord.discardIndex = state.discardIndex + qtyTricksToGiveWinningPartnership(undefined) | 0;
+  newrecord.discardIndex = state.discardIndex + (qtyTricksToGiveWinningPartnership(undefined) << 2) | 0;
   return EndTrick$ReasonReactExamples.getNextStateFromTricksWonAndWinningPartnership(newrecord, qtyTricksToGiveWinningPartnership(undefined), winningPocAsString);
 }
 

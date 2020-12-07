@@ -74,7 +74,7 @@ let doConcede = (state: TopLevel.state) => {
   // Js.log(totalTricksWestEastIncrement);
   let modifiedState = {
     ...state,
-    discardIndex: state.discardIndex + qtyTricksToGiveWinningPartnership(),
+    discardIndex: state.discardIndex + qtyTricksToGiveWinningPartnership() * 4,
   };
 
   //this returns the computed new state
