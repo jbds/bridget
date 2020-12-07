@@ -48,37 +48,31 @@ let doConcede = (state: TopLevel.state) => {
     Belt.Array.map(remainingCardsEW, x => x.noTrumpValue);
   let totalValueCardsEW =
     Belt.Array.reduce(valueCardsArrayEW, 0, (a, b) => a + b);
-  //Js.log(totalValueCardsEW);
-  // actually we need to assign to a poc rather than the partnership
-  // just to fit the function call
-  // let winningPartnershipAsString =
-  //   totalValueCardsNS > totalValueCardsEW ? "NS" : "EW";
   // use arrbitrarily North and East (could be equally South and West)
   let winningPocAsString =
     totalValueCardsNS > totalValueCardsEW ? "North" : "East";
-
   let qtyTricksToGiveWinningPartnership = () => {
     let lifecycleHandCardsArray =
       Belt.Array.keep(state.pack, x => {x.lifecycle === Hand});
     Belt.Array.length(lifecycleHandCardsArray) / 4;
   };
-  //Js.log("qtyTricksToGiveWinningPartnership");
-  //Js.log(qtyTricksToGiveWinningPartnership());
-  // let totalTricksNorthSouthIncrement =
-  //   winningPartnershipAsString === "NS"
-  //     ? qtyTricksToGiveWinningPartnership() : 0;
-  // let totalTricksWestEastIncrement =
-  //   winningPartnershipAsString === "EW"
-  //     ? qtyTricksToGiveWinningPartnership() : 0;
-  // Js.log("totalTricksNorthSouthIncrement");
-  // Js.log(totalTricksNorthSouthIncrement);
-  // Js.log("totalTricksWestEastIncrement");
-  // Js.log(totalTricksWestEastIncrement);
+  // move the selected cards from Hand direct to Trick (skipping the Discard phase)
+  let myPack =
+    Array.map(
+      (card: Shuffle.card) => {
+        card.lifecycle === Hand
+          ? {...card, lifecycle: Trick}
+          : {
+            card;
+          }
+      },
+      state.pack,
+    );
   let modifiedState = {
     ...state,
     discardIndex: state.discardIndex + qtyTricksToGiveWinningPartnership() * 4,
+    pack: myPack,
   };
-
   //this returns the computed new state
   EndTrick.getNextStateFromTricksWonAndWinningPartnership(
     modifiedState,

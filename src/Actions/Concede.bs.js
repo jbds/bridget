@@ -71,7 +71,23 @@ function doConcede(state) {
           }));
     return lifecycleHandCardsArray.length / 4 | 0;
   };
+  var myPack = $$Array.map((function (card) {
+          if (card.lifecycle === /* Hand */1) {
+            return {
+                    noTrumpValue: card.noTrumpValue,
+                    handOrder: card.handOrder,
+                    shuffleIndex: card.shuffleIndex,
+                    rank: card.rank,
+                    suit: card.suit,
+                    fileName: card.fileName,
+                    lifecycle: /* Trick */3
+                  };
+          } else {
+            return card;
+          }
+        }), state.pack);
   var newrecord = Caml_obj.caml_obj_dup(state);
+  newrecord.pack = myPack;
   newrecord.discardIndex = state.discardIndex + (qtyTricksToGiveWinningPartnership(undefined) << 2) | 0;
   return EndTrick$ReasonReactExamples.getNextStateFromTricksWonAndWinningPartnership(newrecord, qtyTricksToGiveWinningPartnership(undefined), winningPocAsString);
 }
