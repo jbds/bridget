@@ -1,4 +1,6 @@
 let doConcede = (state: TopLevel.state) => {
+  // make sure doMessage is called in sidebar component
+  let () = [%raw "window.isLastActionSync = false"];
   // value adjust for trumps - copied from EndTrick
   // check contract suit
   let scoreSheetRecord = List.hd(state.chicagoScoreSheet);

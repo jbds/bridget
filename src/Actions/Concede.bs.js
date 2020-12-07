@@ -8,6 +8,7 @@ var Shuffle$ReasonReactExamples = require("../Shuffle.bs.js");
 var EndTrick$ReasonReactExamples = require("./EndTrick.bs.js");
 
 function doConcede(state) {
+  ((window.isLastActionSync = false));
   var scoreSheetRecord = List.hd(state.chicagoScoreSheet);
   var contractSuit = scoreSheetRecord.contractSuit;
   var myAdjustedPackValue = $$Array.map((function (card) {
