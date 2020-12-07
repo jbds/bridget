@@ -83,7 +83,7 @@ let doConcede = (state: TopLevel.state) => {
 
 let execute = (state: TopLevel.state) => {
   let bln: bool = [%raw
-    "window.confirm('Are you sure you want to assign the remaining tricks to the winning partnership?')"
+    "window.confirm('Are you sure you want to concede the remaining tricks?')"
   ];
   let returnedState =
     bln

@@ -93,7 +93,7 @@ function doConcede(state) {
 }
 
 function execute(state) {
-  var bln = (window.confirm('Are you sure you want to assign the remaining tricks to the winning partnership?'));
+  var bln = (window.confirm('Are you sure you want to concede the remaining tricks?'));
   if (bln) {
     console.log("do concede action");
     return doConcede(state);
