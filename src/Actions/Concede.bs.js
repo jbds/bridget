@@ -2,8 +2,10 @@
 
 var List = require("bs-platform/lib/js/list.js");
 var $$Array = require("bs-platform/lib/js/array.js");
+var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 var Shuffle$ReasonReactExamples = require("../Shuffle.bs.js");
+var EndTrick$ReasonReactExamples = require("./EndTrick.bs.js");
 
 function doConcede(state) {
   var scoreSheetRecord = List.hd(state.chicagoScoreSheet);
@@ -61,20 +63,16 @@ function doConcede(state) {
   var totalValueCardsEW = Belt_Array.reduce(valueCardsArrayEW, 0, (function (a, b) {
           return a + b | 0;
         }));
-  var winningPartnershipAsString = totalValueCardsNS > totalValueCardsEW ? "NS" : "EW";
+  var winningPocAsString = totalValueCardsNS > totalValueCardsEW ? "North" : "East";
   var qtyTricksToGiveWinningPartnership = function (param) {
     var lifecycleHandCardsArray = Belt_Array.keep(state.pack, (function (x) {
             return x.lifecycle === /* Hand */1;
           }));
     return lifecycleHandCardsArray.length / 4 | 0;
   };
-  var totalTricksNorthSouthIncrement = winningPartnershipAsString === "NS" ? qtyTricksToGiveWinningPartnership(undefined) : 0;
-  var totalTricksWestEastIncrement = winningPartnershipAsString === "EW" ? qtyTricksToGiveWinningPartnership(undefined) : 0;
-  console.log("totalTricksNorthSouthIncrement");
-  console.log(totalTricksNorthSouthIncrement);
-  console.log("totalTricksWestEastIncrement");
-  console.log(totalTricksWestEastIncrement);
-  return state;
+  var newrecord = Caml_obj.caml_obj_dup(state);
+  newrecord.discardIndex = state.discardIndex + qtyTricksToGiveWinningPartnership(undefined) | 0;
+  return EndTrick$ReasonReactExamples.getNextStateFromTricksWonAndWinningPartnership(newrecord, qtyTricksToGiveWinningPartnership(undefined), winningPocAsString);
 }
 
 function execute(state) {
