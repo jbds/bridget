@@ -42,9 +42,22 @@ function App(Props) {
                     )));
     ((setTimeout(function(){
         //alert('rotate?');
-        window.userState.tableRotationDegrees =
-          (window.userState.tableRotationDegrees + 90) % 360;
-        }, 1500)));
+        // after the delay, we can be certain that the player has been added
+        // but we do not know if a poc has been previously assigned and remembered
+        let arrObj = gameState.pointOfCompassAndPlayers.find(el => el.player === userState.player);
+        // force the player to be at 6PM
+        if (arrObj.pointOfCompass === 'South') {
+          window.userState.tableRotationDegrees = 0;
+        } else if (arrObj.pointOfCompass === 'East') {
+          window.userState.tableRotationDegrees = 90;
+        } else if (arrObj.pointOfCompass === 'North') {
+          window.userState.tableRotationDegrees = 180;
+        } else if (arrObj.pointOfCompass === 'West') {
+          window.userState.tableRotationDegrees = 270;
+        } else {
+          // do nothing
+        }
+      }, 1500)));
     ((Online.doLogin(userState.player)));
     
   };
