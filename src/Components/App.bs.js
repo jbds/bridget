@@ -40,6 +40,11 @@ function App(Props) {
                       'myLoginName',
                       userState.player
                     )));
+    ((setTimeout(function(){
+        //alert('rotate?');
+        window.userState.tableRotationDegrees =
+          (window.userState.tableRotationDegrees + 90) % 360;
+        }, 1500)));
     ((Online.doLogin(userState.player)));
     
   };

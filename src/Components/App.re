@@ -58,6 +58,14 @@ let make = () => {
                       userState.player
                     )"
     ];
+    // prepare to rotate board if necessary
+    let () = [%raw
+      "setTimeout(function(){
+        //alert('rotate?');
+        window.userState.tableRotationDegrees =
+          (window.userState.tableRotationDegrees + 90) % 360;
+        }, 1500)"
+    ];
     let () = [%raw "Online.doLogin(userState.player)"];
     ();
   };
