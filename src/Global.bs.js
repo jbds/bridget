@@ -356,6 +356,37 @@ function reducer(state, action) {
           var discardSuit = window.gameState.discardSuit;
           var lastAction = window.gameState.lastAction;
           var discardPointOfCompass = window.gameState.discardPointOfCompass;
+          var pOCAPlength = pOCAP.length;
+          console.log("pOCAP length");
+          console.log(pOCAPlength);
+          var myName = userState.player;
+          var filteredPocAP = Belt_Array.keep(pOCAP, (function (x) {
+                  return x.player === myName;
+                }));
+          console.log("pOCAPlength");
+          console.log(filteredPocAP);
+          var myPOC = Caml_array.caml_array_get(filteredPocAP, 0).pointOfCompass;
+          console.log("myPoc");
+          console.log(myPOC);
+          switch (myPOC) {
+            case "East" :
+                ((window.userState.tableRotationDegrees = 90));
+                break;
+            case "North" :
+                ((window.userState.tableRotationDegrees = 180));
+                break;
+            case "Observer" :
+                ((window.userState.tableRotationDegrees = 0));
+                break;
+            case "South" :
+                ((window.userState.tableRotationDegrees = 0));
+                break;
+            case "West" :
+                ((window.userState.tableRotationDegrees = 270));
+                break;
+            default:
+              console.log("Unexpected Poc");
+          }
           return {
                   activePointOfCompass: poc$1,
                   bids: bids,
