@@ -385,7 +385,7 @@ function reducer(state, action) {
                 ((window.userState.tableRotationDegrees = 270));
                 break;
             default:
-              console.log("Unexpected Poc");
+              console.log("Poc not assigned");
           }
           return {
                   activePointOfCompass: poc$1,

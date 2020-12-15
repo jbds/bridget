@@ -427,7 +427,7 @@ let reducer = (state: TopLevel.state, action) => {
       | "West" =>
         %bs.raw
         "window.userState.tableRotationDegrees = 270"
-      | _ => Js.log("Unexpected Poc")
+      | _ => Js.log("Poc not assigned")
       };
     // no need for ...state here as we are replacing all fields with the server gameState fields
     {

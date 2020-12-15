@@ -47,9 +47,10 @@ function handleWsOpen(){
       dealIndex: -1,
       isBiddingCycle: false
     }
+    // is this even desirable?
     // and sync state to this (actually, recreate state same as gameState)
-    showMessageInConsole('ws.onclose - dispatch Sync action via hidden key on sidebar');
-    document.getElementById('btnSync').click();
+    //showMessageInConsole('ws.onclose - dispatch Sync action via hidden key on sidebar');
+    //document.getElementById('btnSync').click();
     showMessageInConsole('client ws.onclose fired, so Websocket connection closed');
     ws = null;
   };
