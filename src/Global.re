@@ -402,33 +402,34 @@ let reducer = (state: TopLevel.state, action) => {
     let pOCAPlength = Belt.Array.length(pOCAP);
     Js.log("pOCAP length");
     Js.log(pOCAPlength);
-    let myName = [%bs.raw "userState.player"];
-    let filteredPocAP = Belt.Array.keep(pOCAP, x => x.player === myName);
-    Js.log("pOCAPlength");
-    Js.log(filteredPocAP);
-    let myPOC = filteredPocAP[0].pointOfCompass;
-    Js.log("myPoc");
-    Js.log(myPOC);
-    // use myPoc value to set 6PM
-    let () =
-      switch (myPOC) {
-      | "Observer" =>
-        %bs.raw
-        "window.userState.tableRotationDegrees = 0"
-      | "South" =>
-        %bs.raw
-        "window.userState.tableRotationDegrees = 0"
-      | "East" =>
-        %bs.raw
-        "window.userState.tableRotationDegrees = 90"
-      | "North" =>
-        %bs.raw
-        "window.userState.tableRotationDegrees = 180"
-      | "West" =>
-        %bs.raw
-        "window.userState.tableRotationDegrees = 270"
-      | _ => Js.log("Poc not assigned")
-      };
+    // this may blow up on user logout?
+    // let myName = [%bs.raw "userState.player"];
+    // let filteredPocAP = Belt.Array.keep(pOCAP, x => x.player === myName);
+    // Js.log("pOCAPlength");
+    // Js.log(filteredPocAP);
+    // let myPOC = filteredPocAP[0].pointOfCompass;
+    // Js.log("myPoc");
+    // Js.log(myPOC);
+    // // use myPoc value to set 6PM
+    // let () =
+    //   switch (myPOC) {
+    //   | "Observer" =>
+    //     %bs.raw
+    //     "window.userState.tableRotationDegrees = 0"
+    //   | "South" =>
+    //     %bs.raw
+    //     "window.userState.tableRotationDegrees = 0"
+    //   | "East" =>
+    //     %bs.raw
+    //     "window.userState.tableRotationDegrees = 90"
+    //   | "North" =>
+    //     %bs.raw
+    //     "window.userState.tableRotationDegrees = 180"
+    //   | "West" =>
+    //     %bs.raw
+    //     "window.userState.tableRotationDegrees = 270"
+    //   | _ => Js.log("Poc not assigned")
+    //   };
     // no need for ...state here as we are replacing all fields with the server gameState fields
     {
       activePointOfCompass: poc,
