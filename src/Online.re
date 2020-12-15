@@ -33,20 +33,21 @@ function handleWsOpen(){
   ws.onclose = function() {
     // event fires at doLogout, we want to force gameState to nothing locally
     // it also fires if server goes down!
-    gameState = {
-      activePointOfCompass: "",
-      bids: [],
-      chicagoScoreSheet: [],
-      dealer: 0,
-      handVisible: {},
-      lastAction: 'ws.onclose',  //gets replaced by LogOutOrServerDownSync
-      pack: [],
-      pointOfCompassAndPlayers: [],
-      randomInt: -888,
-      pointOfCompassAndPlayers: [],
-      dealIndex: -1,
-      isBiddingCycle: false
-    }
+    // is this necessary?
+    // gameState = {
+    //   activePointOfCompass: "",
+    //   bids: [],
+    //   chicagoScoreSheet: [],
+    //   dealer: 0,
+    //   handVisible: {},
+    //   lastAction: 'ws.onclose',  //gets replaced by LogOutOrServerDownSync
+    //   pack: [],
+    //   pointOfCompassAndPlayers: [],
+    //   randomInt: -888,
+    //   pointOfCompassAndPlayers: [],
+    //   dealIndex: -1,
+    //   isBiddingCycle: false
+    // }
     // is this even desirable?
     // and sync state to this (actually, recreate state same as gameState)
     //showMessageInConsole('ws.onclose - dispatch Sync action via hidden key on sidebar');
