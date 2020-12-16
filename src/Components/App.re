@@ -84,7 +84,8 @@ let make = () => {
   };
   let handlerBtnLogout = _e => {
     //Js.log("btnLogout clicked");
-    let () = [%raw "window.userState.player = '?'"];
+    // NO! - this causes a low level react js error re index out of bounds
+    //let () = [%raw "window.userState.player = '?'"];
     let () = [%raw
       "Online.doLogout((document.getElementById('txtMyLoginName').value).toUpperCase())"
     ];

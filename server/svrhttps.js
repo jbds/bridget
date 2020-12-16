@@ -1,6 +1,6 @@
 'use strict';
 
-// Last update:  17/09/20
+// Last update:  16/12/20
 
 const session = require('express-session');
 const express = require('express');
@@ -13,12 +13,12 @@ const fs = require('fs');
 const WebSocket = require('ws');
 
 const app = express();
-app.use(express.static(__dirname + '/public', {dotfiles: 'allow'}));
+app.use(express.static(__dirname + '/public', { dotfiles: 'allow' }));
 
 const options = {
-        key: fs.readFileSync('/etc/letsencrypt/live/98765.co.uk/privkey.pem'),
-        cert: fs.readFileSync('/etc/letsencrypt/live/98765.co.uk/cert.pem'),
-        ca: fs.readFileSync('/etc/letsencrypt/live/98765.co.uk/chain.pem')
+  key: fs.readFileSync('/etc/letsencrypt/live/98765.co.uk/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/98765.co.uk/cert.pem'),
+  ca: fs.readFileSync('/etc/letsencrypt/live/98765.co.uk/chain.pem')
 };
 
 
@@ -39,7 +39,7 @@ let gameState = {
   discardIndex: -1,
   discardPointOfCompass: undefined,
   discardSuit: undefined,
-  handVisible: {north: false, east: false, south: false, west: false},
+  handVisible: { north: false, east: false, south: false, west: false },
   isBiddingCycle: false,
   isBiddingHideDenominationButtons: true,
   isDummyVisible: false,
@@ -49,12 +49,12 @@ let gameState = {
   pack: [],
   pointOfCompassAndPlayers: [],
   randomInt: -999,
-  transition: { 
-	northStartY: 0.0, eastStartX: 0.0, southStartY: 0.0, westStartX: 0.0,
-	northEndY: 0.0, eastEndX: 0.0, southEndY: 0.0, westEndX: 0.0,
-	northStartX: 0.0, eastStartY: 0.0, southStartX: 0.0, westStartY: 0.0,
-	northEndX: 0.0, eastEndY: 0.0, southEndX: 0.0, westEndY: 0.0 
-	},
+  transition: {
+    northStartY: 0.0, eastStartX: 0.0, southStartY: 0.0, westStartX: 0.0,
+    northEndY: 0.0, eastEndX: 0.0, southEndY: 0.0, westEndX: 0.0,
+    northStartX: 0.0, eastStartY: 0.0, southStartX: 0.0, westStartY: 0.0,
+    northEndX: 0.0, eastEndY: 0.0, southEndX: 0.0, westEndY: 0.0
+  },
 };
 
 // shallow copy?
@@ -68,7 +68,7 @@ let arrGameStates = [gameState];
 let packAsDealt = [];
 
 // and a global function for rebroadcast, called by login and logout
-function broadcastGameStateToAll(gS){
+function broadcastGameStateToAll(gS) {
   //WebSocket.Server.clients property is only added when the clientTracking is truthy.    
   // broadcast to all clients
   wss.clients.forEach(function each(client) {
@@ -96,7 +96,7 @@ function broadcastGameStateToAll(gS){
 
 // and a global function for rebroadcast, called by message
 // (client !== ws) caused error until we passed this variable into the func
-function broadcastGameStateToOthers(gS, ws){
+function broadcastGameStateToOthers(gS, ws) {
   //WebSocket.Server.clients property is only added when the clientTracking is truthy.    
   // broadcast to all clients
   wss.clients.forEach(function each(client) {
@@ -140,7 +140,7 @@ app.use(express.static('public'));
 app.use(sessionParser);
 app.use(bodyParser.json());
 
-app.post('/login', function(req, res) {
+app.post('/login', function (req, res) {
   //
   // "Log in" user and set userId to session.
   //
@@ -156,7 +156,7 @@ app.post('/login', function(req, res) {
   // but might happen more than once, so check array first
   let arrObj = gameState.pointOfCompassAndPlayers.find(el => el.player == id);
   if (!arrObj) {
-    gameState.pointOfCompassAndPlayers.push({pointOfCompass: "", player: id});
+    gameState.pointOfCompassAndPlayers.push({ pointOfCompass: "", player: id });
   }
   // we need to set activePointofCompass and dealer too
   // ideally random
@@ -164,25 +164,25 @@ app.post('/login', function(req, res) {
   if (gameState.activePointOfCompass == undefined || gameState.dealer == undefined) {
     let rnd = Math.floor(Math.random() * 4);
     let poc;
-    switch(rnd) {
+    switch (rnd) {
       case 0: poc = "West";
-      break;
+        break;
       case 1: poc = "North";
-      break;
+        break;
       case 2: poc = "East";
-      break;
+        break;
       case 3: poc = "South";
-      break;
+        break;
       default: poc = "West";
     }
     gameState.activePointOfCompass = poc;
     gameState.dealer = poc;
   }
-  res.send({ result: 'OK', message: `Session created/updated for ${id}`});
+  res.send({ result: 'OK', message: `Session created/updated for ${id}` });
   //console.log(gameState);
 });
 
-app.delete('/logout', function(req, response) {
+app.delete('/logout', function (req, response) {
   // identify the logout user
   console.log(JSON.stringify(req.body));
   // we will want to echo the logout username
@@ -195,11 +195,13 @@ app.delete('/logout', function(req, response) {
     return obj.player !== oldId;
   });
   // and broadcast to all
-  broadcastGameStateToAll(gameState);
+  //broadcastGameStateToAll(gameState);
+  // just to the others, initiator can clean up locally
+  broadcastGameStateToOthers(gameState, ws);
 
 
   console.log('Destroying session');
-  req.session.destroy(function() {
+  req.session.destroy(function () {
     if (ws) ws.close();
     response.send({ result: 'OK', message: `Session destroyed for ${oldId}` });
   });
@@ -212,7 +214,7 @@ const httpsServer = https.createServer(options, app);
 //WebSocket.Server.clients property is only added when the clientTracking is truthy.
 const wss = new WebSocket.Server({ clientTracking: true, noServer: true });
 
-httpsServer.on('upgrade', function(req, socket, head) {
+httpsServer.on('upgrade', function (req, socket, head) {
   console.log('Parsing session from req...');
 
   sessionParser(req, {}, () => {
@@ -223,13 +225,13 @@ httpsServer.on('upgrade', function(req, socket, head) {
 
     console.log('Session is parsed!');
 
-    wss.handleUpgrade(req, socket, head, function(ws) {
+    wss.handleUpgrade(req, socket, head, function (ws) {
       wss.emit('connection', ws, req);
     });
   });
 });
 
-wss.on('connection', function(ws, req) {
+wss.on('connection', function (ws, req) {
   const userId = req.session.userId;
 
   // each userId is just the userName string used as a key
@@ -237,10 +239,10 @@ wss.on('connection', function(ws, req) {
   map.set(userId, ws);
 
   //inspect all users
-  map.forEach(function(v, k) {
-      console.log(k);
+  map.forEach(function (v, k) {
+    console.log(k);
 
-    }
+  }
   );
 
   console.log('about to broadcast gameState to ALL');
@@ -274,7 +276,7 @@ wss.on('connection', function(ws, req) {
 
 
 
-  ws.on('message', function(message) {
+  ws.on('message', function (message) {
     //
     // Here we can now use session parameters.
     //
@@ -286,7 +288,7 @@ wss.on('connection', function(ws, req) {
     if (message === '"Undo"') {
       console.log('Undo - check arrGameStates.length');
       console.log(arrGameStates.length);
-      if(arrGameStates.length !== 0) {
+      if (arrGameStates.length !== 0) {
         gameState = arrGameStates.pop();
         broadcastGameStateToAll(gameState);
       }
@@ -306,7 +308,7 @@ wss.on('connection', function(ws, req) {
     } else if (message === '"ReviewDeal"') {
       // restore the pack
       gameState.pack = packAsDealt;
-      gameState.handVisible = {north: true, east: true, south: true, west: true};
+      gameState.handVisible = { north: true, east: true, south: true, west: true };
       broadcastGameStateToAll(gameState);
     } else {
       // push the state on to the history stack
@@ -322,7 +324,7 @@ wss.on('connection', function(ws, req) {
 
   });
 
-  ws.on('close', function() {
+  ws.on('close', function () {
     map.delete(userId);
     //broadcastUserList();
   });
@@ -331,7 +333,7 @@ wss.on('connection', function(ws, req) {
 //
 // Start the https server.
 //
-httpsServer.listen(443, function() {
+httpsServer.listen(443, function () {
   console.log('Listening on https://localhost:443');
 });
 
@@ -339,11 +341,11 @@ httpsServer.listen(443, function() {
 // Start an http server and redirect all http to https
 //
 const httpServer = http.createServer((req, res) => {
-	res.writeHead(301,
-		{"Location": "https://" + req.headers['host'] + req.url});
-	res.end();
+  res.writeHead(301,
+    { "Location": "https://" + req.headers['host'] + req.url });
+  res.end();
 });
 
 httpServer.listen(80, () => {
-	console.log('Redirecting on http://localhost:80');
+  console.log('Redirecting on http://localhost:80');
 });
