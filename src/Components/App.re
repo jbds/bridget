@@ -89,6 +89,10 @@ let make = () => {
     let () = [%raw
       "Online.doLogout((document.getElementById('txtMyLoginName').value).toUpperCase())"
     ];
+    // nothing more expected from server, so clean up locally
+    // crude way would be just to reload the app from scratch
+    //let () = [%raw "alert('time to reload!')"]();
+    let () = [%raw "location.reload()"];
     ();
   };
   let handlerBtnUndo = _e => {

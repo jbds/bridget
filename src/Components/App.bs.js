@@ -63,6 +63,7 @@ function App(Props) {
   };
   var handlerBtnLogout = function (_e) {
     ((Online.doLogout((document.getElementById('txtMyLoginName').value).toUpperCase())));
+    ((location.reload()));
     
   };
   var handlerBtnUndo = function (_e) {
