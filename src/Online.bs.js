@@ -58,7 +58,7 @@ function handleWsOpen(){
   };
   ws.onmessage = function(e) {
     // add detection of message received from server
-    //showMessageInConsole('client ws.onmessage fired, see Websocket message received below:');
+    showMessageInConsole('client ws.onmessage fired, see Websocket message received below:');
     window.jbObj = JSON.parse(e.data);
     //showMessageInConsole(window.jbObj);
     //showMessageInConsole('will now update gameState with jbObj');

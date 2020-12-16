@@ -1,6 +1,6 @@
 'use strict';
 
-// Last update:  16/12/20
+// Last update:  16/12/20 20:06
 
 const session = require('express-session');
 const express = require('express');
@@ -203,7 +203,8 @@ app.delete('/logout', function (req, response) {
   console.log('Destroying session');
   req.session.destroy(function () {
     if (ws) ws.close();
-    response.send({ result: 'OK', message: `Session destroyed for ${oldId}` });
+    // avoid sending a message as this triggers a sync which we do not want
+    //response.send({ result: 'OK', message: `Session destroyed for ${oldId}` });
   });
 });
 
