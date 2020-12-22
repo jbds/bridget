@@ -676,7 +676,7 @@ let rotationPlusPointOfCompassToClockPosition =
 let translateAndRotateByClockPosition = (clockPosition, p, g, w, isDummyHand) => {
   switch (clockPosition) {
     case '12PM':
-      p.translate(0, -(w.innerHeight / 2) + (w.innerHeight * w.cardHeightToCanvasHeightRatio * w.cardSegmentHeightToCardRatio));
+      p.translate(0, -(w.innerHeight / 2) + (w.innerHeight * w.cardHeightToCanvasHeightRatio * w.cardSegmentHeightToCardRatio * w.twelvePMsixPMgrowthFactor));
       // no rotation!
       break;
     case '3PM':
