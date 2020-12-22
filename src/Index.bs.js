@@ -16,7 +16,7 @@ const setVh = () => {
   window.userState = {}; // prevent undefined error before p5 starts up
 
   // be certain we have the correct version of bundled file aka index.js
-  document.title = 'Bridget v2.94';
+  document.title = 'Bridget v2.95';
 
   // for transitions we need to move card constants up to global scope
   // std playing card is 3.5in x 2.25in and svg is 336px x 216px
@@ -32,6 +32,10 @@ const setVh = () => {
   window.cardHeightOffsetFraction = 0.275;
   window.cardWidthOffsetFraction = 0.5;
   // for refs to canvasHeight and canvasWidth just use window.innerHeight
+  // smaller cards at 3PM and 9PM
+  window.threePMninePMshrinkFactor = 0.83;
+  // expanded cards at 12PM and 6PM
+  window.twelvePMsixPMgrowFactor = 1.28;
 ;
 
 ReactDOMRe.renderToElementWithId(React.createElement(App$ReasonReactExamples.make, { }), "root");

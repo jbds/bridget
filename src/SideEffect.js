@@ -563,7 +563,7 @@ let drawLabels = (p, g, w) => {
           //p.rotate(p.HALF_PI * 2); 
           break;
         case '3PM':
-          p.translate((g.canvasWidth / 2) - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75), 0);
+          p.translate((g.canvasWidth / 2) - (cardSegmentHeight * w.threePMninePMshrinkFactor) - (textHeightToCanvasHeightRatio * 0.75), 0);
           p.rotate(p.HALF_PI * 3);
           break;
         case '6PM':
@@ -571,7 +571,7 @@ let drawLabels = (p, g, w) => {
           p.rotate(0);
           break;
         case '9PM':
-          p.translate((-g.canvasWidth / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75), 0);
+          p.translate((-g.canvasWidth / 2) + (cardSegmentHeight * w.threePMninePMshrinkFactor) + (textHeightToCanvasHeightRatio * 0.75), 0);
           p.rotate(p.HALF_PI);
           break;
         default:
