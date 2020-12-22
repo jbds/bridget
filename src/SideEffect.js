@@ -242,7 +242,49 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
       p.translate(cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
       j = j + 1;
     });
+  } else if (clockPosition == '3PM' || clockPosition == '9PM') {
+    // REDUCE SIZE OF CARDS RELATIVE TO NOMINAL BY 0.83
+    let shrinkFactor = 0.83;
+    // offset the start of card drawing dependent upon qty cards in hand
+    p.translate(-((g.myHandArray.length / 2.0)) * cardWidth * cardVisibleSegmentWidthToCardWidthRatio * shrinkFactor, 0);
+    g.myHandArray.forEach((obj, i) => {
+      // now we can draw a card using each fileName in myHandArray
+      let p5img = g.isHandFaceUp ? g.imgMap.get(obj.fileName) : g.imgMap.get('1B');
+      // last card in hand is a special case, as we do not want the overlap
+      i !== g.myHandArray.length - 1
+        ?
+        p.image(
+          p5img,
+          0,
+          -cardHeight * w.cardSegmentHeightToCardRatio * shrinkFactor,
+          cardWidth * cardVisibleSegmentWidthToCardWidthRatio * 1.2 * shrinkFactor,
+          cardHeight * w.cardSegmentHeightToCardRatio * shrinkFactor,
+          0,
+          0,
+          37 * 1.2,
+          91
+        )
+        :
+        p.image(
+          p5img,
+          0,
+          -cardHeight * w.cardSegmentHeightToCardRatio * shrinkFactor,
+          cardWidth * cardVisibleSegmentWidthToCardWidthRatio * shrinkFactor,
+          cardHeight * w.cardSegmentHeightToCardRatio * shrinkFactor,
+          0,
+          0,
+          37,
+          91
+        )
+        ;
+      // note that each rotation is cumulative
+      //p.rotate(rotationDeltaRadians);
+      // note that each translation is cumulative
+      p.translate(cardWidth * cardVisibleSegmentWidthToCardWidthRatio * shrinkFactor, 0);
+    });
   } else {
+    // must be 12PM or 6PM
+    // INCREASE SIZE OF CARDS RELATIVE TO NOMINAL BY 1.28 - TO DO
     // offset the start of card drawing dependent upon qty cards in hand
     p.translate(-((g.myHandArray.length / 2.0)) * cardWidth * cardVisibleSegmentWidthToCardWidthRatio, 0);
     g.myHandArray.forEach((obj, i) => {
