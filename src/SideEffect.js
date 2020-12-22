@@ -559,7 +559,7 @@ let drawLabels = (p, g, w) => {
       // translate and rotate by clock position
       switch (clockPosition) {
         case '12PM':
-          p.translate(0, -(w.innerHeight / 2) + cardSegmentHeight + (textHeightToCanvasHeightRatio * 0.75));
+          p.translate(0, -(w.innerHeight / 2) + (cardSegmentHeight * w.twelvePMsixPMgrowthFactor) + (textHeightToCanvasHeightRatio * 0.75));
           //p.rotate(p.HALF_PI * 2); 
           break;
         case '3PM':
@@ -567,7 +567,7 @@ let drawLabels = (p, g, w) => {
           p.rotate(p.HALF_PI * 3);
           break;
         case '6PM':
-          p.translate(0, (w.innerHeight / 2) - cardSegmentHeight - (textHeightToCanvasHeightRatio * 0.75));
+          p.translate(0, (w.innerHeight / 2) - (cardSegmentHeight * w.twelvePMsixPMgrowthFactor) - (textHeightToCanvasHeightRatio * 0.75));
           p.rotate(0);
           break;
         case '9PM':
