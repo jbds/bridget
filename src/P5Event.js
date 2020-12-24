@@ -115,6 +115,7 @@ let mouseDecode = (p, g, w) => {
       p.mouseX >= cardHalfWidthToCanvasHeightExpandedRatio * g.canvasHeight &&
       p.mouseX < (1 - cardHalfWidthToCanvasHeightExpandedRatio) * g.canvasHeight
     ):
+      console.log('BOTTOM HAND CLICKED: greater than ' + cardHalfWidthToCanvasHeightExpandedRatio * g.canvasHeight);
       cardSegmentIndex = p.map(
         p.mouseX,
         cardHalfWidthToCanvasHeightExpandedRatio * g.canvasHeight,
@@ -187,7 +188,7 @@ let mouseDecode = (p, g, w) => {
       }
       break;
     default:
-    //console.log('Do-nothing mouseX or mouseY argument')
+      console.log('Do-nothing mouseX or mouseY argument')
   };
 };
 
