@@ -112,10 +112,10 @@ let mouseDecode = (p, g, w) => {
       break;
     // TABLE BOTTOM
     case (p.mouseY >= (1 - cardHeightToCanvasHeightExpandedRatio) * g.canvasHeight &&
-      p.mouseX >= cardWidthToCanvasHeightExpandedRatio * g.canvasHeight &&
-      p.mouseX < (1 - cardWidthToCanvasHeightExpandedRatio) * g.canvasHeight
+      p.mouseX >= cardWidthToCanvasHeightExpandedRatio * 0.5 * g.canvasHeight &&
+      p.mouseX < (1 - (cardWidthToCanvasHeightExpandedRatio * 0.5)) * g.canvasHeight
     ):
-      console.log('BOTTOM HAND CLICKED: greater than ' + cardWidthToCanvasHeightExpandedRatio * g.canvasHeight);
+      console.log('BOTTOM HAND CLICKED: greater than ' + cardWidthToCanvasHeightExpandedRatio * 0.5 * g.canvasHeight);
       cardSegmentIndex = p.map(
         p.mouseX,
         cardWidthToCanvasHeightExpandedRatio * g.canvasHeight,
