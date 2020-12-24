@@ -22,11 +22,11 @@ let mouseDecode = (p, g, w) => {
   });
   //console.log('mouse decode');
   let cardHeightToCanvasHeightExpandedRatio = cardSegmentHeightToCanvasHeightRatio * w.twelvePMsixPMgrowthFactor;
-  let cardWidthToCanvasHeightExpandedRatio = (cardSegmentWidthToCardHeightRatio * w.twelvePMsixPMgrowthFactor);
+  let cardWidthToCanvasHeightRatio = (cardSegmentWidthToCardHeightRatio * cardSegmentHeightToCanvasHeightRatio);
   //console.log('cardHeightToCanvasHeightExpandedRatio');
   //console.log(cardHeightToCanvasHeightExpandedRatio);
-  console.log('cardWidthToCanvasHeightExpandedRatio');
-  console.log(cardWidthToCanvasHeightExpandedRatio)
+  console.log('cardWidthToCanvasHeightRatio');
+  console.log(cardWidthToCanvasHeightRatio)
   //console.log('mouseY/canvasHeight:');
   //console.log(p.mouseY / g.canvasHeight);
   console.log('mouseX/canvasHeight:');
