@@ -22,11 +22,11 @@ let mouseDecode = (p, g, w) => {
   });
   //console.log('mouse decode');
   let cardHeightToCanvasHeightExpandedRatio = cardSegmentHeightToCanvasHeightRatio * w.twelvePMsixPMgrowthFactor;
-  let cardHalfWidthToCanvasHeightExpandedRatio = (cardSegmentWidthToCardHeightRatio * w.twelvePMsixPMgrowthFactor * 0.5);
+  let cardWidthToCanvasHeightExpandedRatio = (cardSegmentWidthToCardHeightRatio * w.twelvePMsixPMgrowthFactor);
   //console.log('cardHeightToCanvasHeightExpandedRatio');
   //console.log(cardHeightToCanvasHeightExpandedRatio);
-  console.log('cardHalfWidthToCanvasHeightExpandedRatio');
-  console.log(cardHalfWidthToCanvasHeightExpandedRatio)
+  console.log('cardWidthToCanvasHeightExpandedRatio');
+  console.log(cardWidthToCanvasHeightExpandedRatio)
   //console.log('mouseY/canvasHeight:');
   //console.log(p.mouseY / g.canvasHeight);
   console.log('mouseX/canvasHeight:');
@@ -34,15 +34,15 @@ let mouseDecode = (p, g, w) => {
   switch (true) {
     // TABLE TOP aka 12PM
     case (p.mouseY <= cardHeightToCanvasHeightExpandedRatio * g.canvasHeight &&
-      p.mouseX >= cardHalfWidthToCanvasHeightExpandedRatio * g.canvasHeight &&
-      p.mouseX < (1 - cardHalfWidthToCanvasHeightExpandedRatio) * g.canvasHeight
+      p.mouseX >= cardWidthToCanvasHeightExpandedRatio * g.canvasHeight &&
+      p.mouseX < (1 - cardWidthToCanvasHeightExpandedRatio) * g.canvasHeight
     ):
       // 12PM cards are ALWAYS 'inverted' aka the correct way up as viewed on device
       // the map parameters 13, 0 are therefore reversed to 0, 13 to match
       cardSegmentIndex = p.map(
         p.mouseX,
-        cardHalfWidthToCanvasHeightExpandedRatio * g.canvasHeight,
-        (1 - cardHalfWidthToCanvasHeightExpandedRatio) * g.canvasHeight,
+        cardWidthToCanvasHeightExpandedRatio * g.canvasHeight,
+        (1 - cardWidthToCanvasHeightExpandedRatio) * g.canvasHeight,
         0, // 0, Dummy hand will be reversed
         13   // 13
       );
@@ -112,14 +112,14 @@ let mouseDecode = (p, g, w) => {
       break;
     // TABLE BOTTOM
     case (p.mouseY >= (1 - cardHeightToCanvasHeightExpandedRatio) * g.canvasHeight &&
-      p.mouseX >= cardHalfWidthToCanvasHeightExpandedRatio * g.canvasHeight &&
-      p.mouseX < (1 - cardHalfWidthToCanvasHeightExpandedRatio) * g.canvasHeight
+      p.mouseX >= cardWidthToCanvasHeightExpandedRatio * g.canvasHeight &&
+      p.mouseX < (1 - cardWidthToCanvasHeightExpandedRatio) * g.canvasHeight
     ):
-      console.log('BOTTOM HAND CLICKED: greater than ' + cardHalfWidthToCanvasHeightExpandedRatio * g.canvasHeight);
+      console.log('BOTTOM HAND CLICKED: greater than ' + cardWidthToCanvasHeightExpandedRatio * g.canvasHeight);
       cardSegmentIndex = p.map(
         p.mouseX,
-        cardHalfWidthToCanvasHeightExpandedRatio * g.canvasHeight,
-        (1 - cardHalfWidthToCanvasHeightExpandedRatio) * g.canvasHeight,
+        cardWidthToCanvasHeightExpandedRatio * g.canvasHeight,
+        (1 - cardWidthToCanvasHeightExpandedRatio) * g.canvasHeight,
         0,
         13
       );
