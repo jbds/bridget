@@ -18,7 +18,7 @@
   window.userState = {}; // prevent undefined error before p5 starts up
 
   // be certain we have the correct version of bundled file aka index.js
-  document.title = 'Bridget v3.06';
+  document.title = 'Bridget v3.08';
 
   // for transitions we need to move card constants up to global scope
   // std playing card is 3.5in x 2.25in and svg is 336px x 216px
@@ -38,7 +38,8 @@
   window.threePMninePMshrinkFactor = 0.83;
   // expanded cards at 12PM and 6PM
   window.twelvePMsixPMgrowthFactor = 1.28;
-
+  //
+  window.cardSegmentWidthToCardHeightRatio = 37 / 336;
 
 
 
