@@ -21,18 +21,20 @@ let mouseDecode = (p, g, w) => {
     return (obj.shuffleIndex >= 39 && obj.shuffleIndex <= 51 && obj.lifecycle === 1)
   });
   //console.log('mouse decode');
+  let cardHeightToCanvasHeightExpandedRatio = cardSegmentHeightToCanvasHeightRatio * w.twelvePMsixPMgrowthFactor;
+  let cardHalfWidthToCanvasHeightExpandedRatio = ((cardSegmentHeightToCanvasHeightRatio * w.twelvePMsixPMgrowthFactor * 0.5) / w.cardAspectRatio);
   switch (true) {
     // TABLE TOP aka 12PM
-    case (p.mouseY <= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
-      p.mouseX >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
-      p.mouseX < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
+    case (p.mouseY <= cardHeightToCanvasHeightExpandedRatio * g.canvasHeight &&
+      p.mouseX >= cardHalfWidthToCanvasHeightExpandedRatio * g.canvasHeight &&
+      p.mouseX < (1 - cardHalfWidthToCanvasHeightExpandedRatio) * g.canvasHeight
     ):
       // 12PM cards are ALWAYS 'inverted' aka the correct way up as viewed on device
       // the map parameters 13, 0 are therefore reversed to 0, 13 to match
       cardSegmentIndex = p.map(
         p.mouseX,
-        cardSegmentHeightToCanvasHeightRatio * g.canvasHeight,
-        (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight,
+        cardHalfWidthToCanvasHeightExpandedRatio * g.canvasHeight,
+        (1 - cardHalfWidthToCanvasHeightExpandedRatio) * g.canvasHeight,
         0, // 0, Dummy hand will be reversed
         13   // 13
       );
@@ -62,7 +64,7 @@ let mouseDecode = (p, g, w) => {
         convertAdjustedIndexToCardKey(cardSegmentIndexAdjusted, myHandArray);
       }
       break;
-    // TABLE RHS
+    // TABLE RHS - NEVER USED NOW!
     case (p.mouseX >= (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight &&
       p.mouseY >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
       p.mouseY < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
@@ -101,14 +103,14 @@ let mouseDecode = (p, g, w) => {
       }
       break;
     // TABLE BOTTOM
-    case (p.mouseY >= (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight &&
-      p.mouseX >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
-      p.mouseX < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
+    case (p.mouseY >= (1 - cardHeightToCanvasHeightExpandedRatio) * g.canvasHeight &&
+      p.mouseX >= cardHalfWidthToCanvasHeightExpandedRatio * g.canvasHeight &&
+      p.mouseX < (1 - cardHalfWidthToCanvasHeightExpandedRatio) * g.canvasHeight
     ):
       cardSegmentIndex = p.map(
         p.mouseX,
-        cardSegmentHeightToCanvasHeightRatio * g.canvasHeight,
-        (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight,
+        cardHalfWidthToCanvasHeightExpandedRatio * g.canvasHeight,
+        (1 - cardHalfWidthToCanvasHeightExpandedRatio) * g.canvasHeight,
         0,
         13
       );
@@ -138,7 +140,7 @@ let mouseDecode = (p, g, w) => {
         convertAdjustedIndexToCardKey(cardSegmentIndexAdjusted, myHandArray);
       }
       break;
-    // TABLE LHS
+    // TABLE LHS - NEVER USED NOW!
     case (p.mouseX <= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
       p.mouseY >= cardSegmentHeightToCanvasHeightRatio * g.canvasHeight &&
       p.mouseY < (1 - cardSegmentHeightToCanvasHeightRatio) * g.canvasHeight
