@@ -25,12 +25,12 @@ let mouseDecode = (p, g, w) => {
   let cardWidthToCanvasHeightRatio = 1.0 / 14;
   //console.log('cardHeightToCanvasHeightExpandedRatio');
   //console.log(cardHeightToCanvasHeightExpandedRatio);
-  console.log('cardWidthToCanvasHeightRatio');
-  console.log(cardWidthToCanvasHeightRatio)
+  //console.log('cardWidthToCanvasHeightRatio');
+  //console.log(cardWidthToCanvasHeightRatio)
   //console.log('mouseY/canvasHeight:');
   //console.log(p.mouseY / g.canvasHeight);
-  console.log('mouseX/canvasHeight:');
-  console.log(p.mouseX / g.canvasHeight);
+  //console.log('mouseX/canvasHeight:');
+  //console.log(p.mouseX / g.canvasHeight);
   switch (true) {
     // TABLE TOP aka 12PM
     case (p.mouseY <= cardHeightToCanvasHeightExpandedRatio * g.canvasHeight &&
@@ -115,7 +115,7 @@ let mouseDecode = (p, g, w) => {
       p.mouseX >= cardWidthToCanvasHeightRatio * 0.5 * g.canvasHeight &&
       p.mouseX < (1 - (cardWidthToCanvasHeightRatio * 0.5)) * g.canvasHeight
     ):
-      console.log('BOTTOM HAND CLICKED: greater than ' + cardWidthToCanvasHeightRatio * 0.5 * g.canvasHeight);
+      //console.log('BOTTOM HAND CLICKED: greater than ' + cardWidthToCanvasHeightRatio * 0.5 * g.canvasHeight);
       cardSegmentIndex = p.map(
         p.mouseX,
         cardWidthToCanvasHeightRatio * g.canvasHeight,
@@ -123,6 +123,7 @@ let mouseDecode = (p, g, w) => {
         0,
         13
       );
+      console.log('Unadjusted card segment index: ' + cardSegmentIndex);
       // this floating number needs an offset based on hand array length
       // fetch array dependent on card table rotation
       switch (w.userState.tableRotationDegrees) {
