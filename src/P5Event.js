@@ -33,16 +33,21 @@ let mouseDecode = (p, g, w) => {
   //console.log(p.mouseX / g.canvasHeight);
   switch (true) {
     // TABLE TOP aka 12PM
-    case (p.mouseY <= cardHeightToCanvasHeightExpandedRatio * g.canvasHeight &&
-      p.mouseX >= cardWidthToCanvasHeightRatio * g.canvasHeight &&
-      p.mouseX < (1 - cardWidthToCanvasHeightRatio) * g.canvasHeight
+    // case (p.mouseY <= cardHeightToCanvasHeightExpandedRatio * g.canvasHeight &&
+    //   p.mouseX >= cardWidthToCanvasHeightRatio * g.canvasHeight &&
+    //   p.mouseX < (1 - cardWidthToCanvasHeightRatio) * g.canvasHeight
+    // ):
+    case (p.mouseY >= (1 - cardHeightToCanvasHeightExpandedRatio) * g.canvasHeight &&
+      p.mouseX >= cardWidthToCanvasHeightRatio * 0.5 * g.canvasHeight &&
+      p.mouseX < (1 - (cardWidthToCanvasHeightRatio * 0.5)) * g.canvasHeight
     ):
       // 12PM cards are ALWAYS 'inverted' aka the correct way up as viewed on device
       // the map parameters 13, 0 are therefore reversed to 0, 13 to match
+      // end points are on 1/2 card width boundary
       cardSegmentIndex = p.map(
         p.mouseX,
-        cardWidthToCanvasHeightRatio * g.canvasHeight,
-        (1 - cardWidthToCanvasHeightRatio) * g.canvasHeight,
+        cardWidthToCanvasHeightRatio * 0.5 * g.canvasHeight,
+        (1 - (cardWidthToCanvasHeightRatio * 0.5)) * g.canvasHeight,
         0, // 0, Dummy hand will be reversed
         13   // 13
       );
@@ -65,6 +70,7 @@ let mouseDecode = (p, g, w) => {
       }
       // this floating number needs an offset based on hand array length
       cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
+      console.log('Adjusted card segment index: ' + cardSegmentIndexAdjusted);
       if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
         // do nothing
       } else {
@@ -115,7 +121,7 @@ let mouseDecode = (p, g, w) => {
       p.mouseX >= cardWidthToCanvasHeightRatio * 0.5 * g.canvasHeight &&
       p.mouseX < (1 - (cardWidthToCanvasHeightRatio * 0.5)) * g.canvasHeight
     ):
-      // end points are on 1/2 caed width boundary
+      // end points are on 1/2 card width boundary
       cardSegmentIndex = p.map(
         p.mouseX,
         cardWidthToCanvasHeightRatio * 0.5 * g.canvasHeight,
