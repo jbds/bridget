@@ -142,7 +142,8 @@ let mouseDecode = (p, g, w) => {
         default:
           console.log('Unexpected tableRotationDegrees');
       }
-      cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
+      // add 1/2 card width to floating point index value before rounding down
+      cardSegmentIndexAdjusted = Math.floor(0.5 + cardSegmentIndex - ((13 - myHandArray.length) / 2));
       console.log('Adjusted card segment index: ' + cardSegmentIndexAdjusted);
       if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
         // do nothing
