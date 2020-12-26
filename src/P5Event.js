@@ -115,11 +115,11 @@ let mouseDecode = (p, g, w) => {
       p.mouseX >= cardWidthToCanvasHeightRatio * 0.5 * g.canvasHeight &&
       p.mouseX < (1 - (cardWidthToCanvasHeightRatio * 0.5)) * g.canvasHeight
     ):
-      //console.log('BOTTOM HAND CLICKED: greater than ' + cardWidthToCanvasHeightRatio * 0.5 * g.canvasHeight);
+      // end points are on 1/2 caed width boundary
       cardSegmentIndex = p.map(
         p.mouseX,
-        cardWidthToCanvasHeightRatio * g.canvasHeight,
-        (1 - cardWidthToCanvasHeightRatio) * g.canvasHeight,
+        cardWidthToCanvasHeightRatio * 0.5 * g.canvasHeight,
+        (1 - (cardWidthToCanvasHeightRatio * 0.5)) * g.canvasHeight,
         0,
         13
       );
@@ -142,8 +142,7 @@ let mouseDecode = (p, g, w) => {
         default:
           console.log('Unexpected tableRotationDegrees');
       }
-      // add 1/2 card width to floating point index value before rounding down
-      cardSegmentIndexAdjusted = Math.floor(0.5 + cardSegmentIndex - ((13 - myHandArray.length) / 2));
+      cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
       console.log('Adjusted card segment index: ' + cardSegmentIndexAdjusted);
       if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
         // do nothing
