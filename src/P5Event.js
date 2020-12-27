@@ -37,7 +37,8 @@ let mouseDecode = (p, g, w) => {
     //   p.mouseX >= cardWidthToCanvasHeightRatio * g.canvasHeight &&
     //   p.mouseX < (1 - cardWidthToCanvasHeightRatio) * g.canvasHeight
     // ):
-    case (p.mouseY >= (1 - cardHeightToCanvasHeightExpandedRatio) * g.canvasHeight &&
+    // beware copy and paste! wrong criteria here produced unexpected behaviour
+    case (p.mouseY <= cardHeightToCanvasHeightExpandedRatio * g.canvasHeight &&
       p.mouseX >= cardWidthToCanvasHeightRatio * 0.5 * g.canvasHeight &&
       p.mouseX < (1 - (cardWidthToCanvasHeightRatio * 0.5)) * g.canvasHeight
     ):
@@ -70,7 +71,7 @@ let mouseDecode = (p, g, w) => {
       }
       // this floating number needs an offset based on hand array length
       cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
-      console.log('Adjusted card segment index: ' + cardSegmentIndexAdjusted);
+      //console.log('Adjusted card segment index: ' + cardSegmentIndexAdjusted);
       if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
         // do nothing
       } else {
@@ -129,7 +130,7 @@ let mouseDecode = (p, g, w) => {
         0,
         13
       );
-      console.log('Unadjusted card segment index: ' + cardSegmentIndex);
+      //console.log('Unadjusted card segment index: ' + cardSegmentIndex);
       // this floating number needs an offset based on hand array length
       // fetch array dependent on card table rotation
       switch (w.userState.tableRotationDegrees) {
@@ -149,7 +150,7 @@ let mouseDecode = (p, g, w) => {
           console.log('Unexpected tableRotationDegrees');
       }
       cardSegmentIndexAdjusted = Math.floor(cardSegmentIndex - ((13 - myHandArray.length) / 2));
-      console.log('Adjusted card segment index: ' + cardSegmentIndexAdjusted);
+      //console.log('Adjusted card segment index: ' + cardSegmentIndexAdjusted);
       if (cardSegmentIndexAdjusted < 0 || cardSegmentIndexAdjusted > (myHandArray.length - 1)) {
         // do nothing
       } else {
@@ -196,7 +197,7 @@ let mouseDecode = (p, g, w) => {
       }
       break;
     default:
-      console.log('Do-nothing mouseX or mouseY argument')
+    //console.log('Do-nothing mouseX or mouseY argument')
   };
 };
 
@@ -218,6 +219,7 @@ let convertAdjustedIndexToCardKey = (cardSegmentIndexAdjusted, myHandArray) => {
   // });
 
   window.discardFileName = myCard.fileName
+  //console.log(window.discardFileName);
   // console.log('isValidDiscardFromLocalPlayer:');
   // console.log(isValidDiscardFromLocalPlayer());
   // console.log('isCardDiscardFollowingSuitWhenPossible:');
