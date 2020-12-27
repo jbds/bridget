@@ -42,6 +42,7 @@ let mouseDecode = (p, g, w) => {
       p.mouseX >= cardWidthToCanvasHeightRatio * 0.5 * g.canvasHeight &&
       p.mouseX < (1 - (cardWidthToCanvasHeightRatio * 0.5)) * g.canvasHeight
     ):
+      console.log("EVENT AT 12PM");
       // 12PM cards are ALWAYS 'inverted' aka the correct way up as viewed on device
       // the map parameters 13, 0 are therefore reversed to 0, 13 to match
       // end points are on 1/2 card width boundary
@@ -51,6 +52,15 @@ let mouseDecode = (p, g, w) => {
         (1 - (cardWidthToCanvasHeightRatio * 0.5)) * g.canvasHeight,
         0, // 0, Dummy hand will be reversed
         13   // 13
+      );
+      // do another mapping just for the transition start position
+      // crude offset of about 1/2 card segment in 14 segments total
+      window.discardStartPositionIndex = p.map(
+        p.mouseX,
+        0,
+        g.canvasHeight,
+        0.5 - (0.5 / 14),
+        -0.5 - (0.5 / 14)
       );
       // fetch array dependent on card table rotation
       switch (w.userState.tableRotationDegrees) {
@@ -122,6 +132,7 @@ let mouseDecode = (p, g, w) => {
       p.mouseX >= cardWidthToCanvasHeightRatio * 0.5 * g.canvasHeight &&
       p.mouseX < (1 - (cardWidthToCanvasHeightRatio * 0.5)) * g.canvasHeight
     ):
+      console.log("EVENT AT 6PM");
       // end points are on 1/2 card width boundary
       cardSegmentIndex = p.map(
         p.mouseX,
@@ -131,12 +142,13 @@ let mouseDecode = (p, g, w) => {
         13
       );
       // do another mapping just for the transition start position
+      // crude offset of about 1/2 card segment in 14 segments total
       window.discardStartPositionIndex = p.map(
         p.mouseX,
-        cardWidthToCanvasHeightRatio * 0.5 * g.canvasHeight,
-        (1 - (cardWidthToCanvasHeightRatio * 0.5)) * g.canvasHeight,
-        -0.5,
-        0.5
+        0,
+        g.canvasHeight,
+        -0.5 - (0.5 / 14),
+        0.5 - (0.5 / 14)
       );
       //console.log('discardStartPositionIndex' + window.discardStartPositionIndex);
       // this floating number needs an offset based on hand array length

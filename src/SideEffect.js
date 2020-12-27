@@ -450,34 +450,35 @@ let paintDiscardArray = (p, g, w) => {
       default:
         console.log('Unexpected tableRotation argument ');
     }
+    let lerpDelta = 0.10;
     switch (true) {
       // N
       case (obj.shuffleIndex < 13):
         // good for all rotations, because x=x and y=y all angles
         //p.translate(0, -cardHeight * cardHeightOffsetFraction);
-        w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, 0.20);
-        w.gameState.transition.northStartX = p.lerp(w.gameState.transition.northStartX, w.gameState.transition.northEndX, 0.20);
+        w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
+        w.gameState.transition.northStartX = p.lerp(w.gameState.transition.northStartX, w.gameState.transition.northEndX, lerpDelta);
         p.translate(w.gameState.transition.northStartX * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
         break;
       // E
       case (obj.shuffleIndex < 26):
         //p.translate(cardWidth * cardWidthOffsetFraction, 0);
-        w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, 0.20);
-        w.gameState.transition.eastStartY = p.lerp(w.gameState.transition.eastStartY, w.gameState.transition.eastEndY, 0.20);
-        p.translate(w.gameState.transition.eastStartX * w.innerHeight, w.gameState.transition.eastStartY * w.innerHeight, 0.20);
+        w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, lerpDelta);
+        w.gameState.transition.eastStartY = p.lerp(w.gameState.transition.eastStartY, w.gameState.transition.eastEndY, lerpDelta);
+        p.translate(w.gameState.transition.eastStartX * w.innerHeight, w.gameState.transition.eastStartY * w.innerHeight);
         break;
       // S
       case (obj.shuffleIndex < 39):
         //p.translate(0, cardHeight * cardHeightOffsetFraction);
-        w.gameState.transition.southStartY = p.lerp(w.gameState.transition.southStartY, w.gameState.transition.southEndY, 0.20);
-        w.gameState.transition.southStartX = p.lerp(w.gameState.transition.southStartX, w.gameState.transition.southEndX, 0.20);
+        w.gameState.transition.southStartY = p.lerp(w.gameState.transition.southStartY, w.gameState.transition.southEndY, lerpDelta);
+        w.gameState.transition.southStartX = p.lerp(w.gameState.transition.southStartX, w.gameState.transition.southEndX, lerpDelta);
         p.translate(w.gameState.transition.southStartX * w.innerHeight, w.gameState.transition.southStartY * w.innerHeight);
         break;
       // W
       case (obj.shuffleIndex < 52):
         //p.translate(-cardWidth * cardWidthOffsetFraction, 0);
-        w.gameState.transition.westStartX = p.lerp(w.gameState.transition.westStartX, w.gameState.transition.westEndX, 0.20);
-        w.gameState.transition.westStartY = p.lerp(w.gameState.transition.westStartY, w.gameState.transition.westEndY, 0.20);
+        w.gameState.transition.westStartX = p.lerp(w.gameState.transition.westStartX, w.gameState.transition.westEndX, lerpDelta);
+        w.gameState.transition.westStartY = p.lerp(w.gameState.transition.westStartY, w.gameState.transition.westEndY, lerpDelta);
         p.translate(w.gameState.transition.westStartX * w.innerHeight, w.gameState.transition.westStartY * w.innerHeight);
         break;
       default:
