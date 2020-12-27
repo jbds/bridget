@@ -155,6 +155,11 @@ let reducer = (state: TopLevel.state, action) => {
     let westEndX = -. cardWidthNormalized *. cardWidthOffsetFraction;
     //Js.log("cardWidthNormalized");
     //Js.log(cardWidthNormalized);
+    let discardStartPositionIndex: int = [%raw
+      "window.discardStartPositionIndex"
+    ];
+    Js.log("discardStartPositionIndex");
+    Js.log(discardStartPositionIndex);
     let tR = {
       switch (discardPoc) {
       | "North" => {

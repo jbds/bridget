@@ -114,6 +114,9 @@ function reducer(state, action) {
           var eastEndX = cardWidthNormalized * cardWidthOffsetFraction;
           var southEndY = cardHeightNormalized * cardHeightOffsetFraction;
           var westEndX = -cardWidthNormalized * cardWidthOffsetFraction;
+          var discardStartPositionIndex = window.discardStartPositionIndex;
+          console.log("discardStartPositionIndex");
+          console.log(discardStartPositionIndex);
           var tR;
           switch (discardPoc) {
             case "East" :
