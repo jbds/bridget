@@ -155,7 +155,7 @@ let reducer = (state: TopLevel.state, action) => {
     let westEndX = -. cardWidthNormalized *. cardWidthOffsetFraction;
     //Js.log("cardWidthNormalized");
     //Js.log(cardWidthNormalized);
-    let discardStartPositionIndex: int = [%raw
+    let discardStartPositionIndex: float = [%raw
       "window.discardStartPositionIndex"
     ];
     Js.log("discardStartPositionIndex");
