@@ -130,8 +130,15 @@ let mouseDecode = (p, g, w) => {
         0,
         13
       );
-      console.log('Unadjusted card segment index: ' + cardSegmentIndex);
-      window.discardStartPositionIndex = cardSegmentIndex;
+      // do another mapping just for the transition start position
+      window.discardStartPositionIndex = p.map(
+        p.mouseX,
+        cardWidthToCanvasHeightRatio * 0.5 * g.canvasHeight,
+        (1 - (cardWidthToCanvasHeightRatio * 0.5)) * g.canvasHeight,
+        -0.5,
+        0.5
+      );
+      //console.log('discardStartPositionIndex' + window.discardStartPositionIndex);
       // this floating number needs an offset based on hand array length
       // fetch array dependent on card table rotation
       switch (w.userState.tableRotationDegrees) {
