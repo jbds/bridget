@@ -456,7 +456,7 @@ let paintDiscardArray = (p, g, w, isDummyHand, clockPosition) => {
       case (obj.shuffleIndex < 13):
         // good for all rotations, because x=x and y=y all angles
         //p.translate(0, -cardHeight * cardHeightOffsetFraction);
-        if (isDummy && clockPosition == '6PM') {
+        if (isDummyHand && clockPosition == '6PM') {
           w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
           w.gameState.transition.northStartXInv = p.lerp(w.gameState.transition.northStartXInv, w.gameState.transition.northEndX, lerpDelta);
           p.translate(w.gameState.transition.northStartXInv * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
