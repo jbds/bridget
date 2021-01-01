@@ -50,6 +50,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
   // helper function to see if this is the Dummy hand
   let isDummyHand =
     pointOfCompass === getDummyPocByDeclarer(w.gameState.declarer) ? true : false;
+  //console.log('drawHand isDummy: ' + isDummyHand);
   // fetch 1/4 of the card pack or less
   switch (pointOfCompass) {
     case 'North':
@@ -116,7 +117,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
   if (pointOfCompass != 'Discard') {
     paintHandArray(p, g, w, isDummyHand, clockPosition);
   } else {
-    paintDiscardArray(p, g, w, isDummyHand, clockPosition);
+    paintDiscardArray(p, g, w, isDummyHand, clockPosition, pointOfCompass);
   }
   p.pop();
 }
@@ -324,8 +325,10 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
   }
 };
 
-let paintDiscardArray = (p, g, w, isDummyHand, clockPosition) => {
-  //console.log('discarding');
+let paintDiscardArray = (p, g, w, isDummyHand, clockPosition, pointOfcompass) => {
+  console.log('discarding');
+  console.log('poc: ' + pointOfcompass)
+  //console.log('isDummyHand: ' + isDummyHand);
   let cardWidth = w.m * w.innerHeight * w.cardHeightToCanvasHeightRatio / w.cardAspectRatio;
   let cardHeight = w.m * w.innerHeight * w.cardHeightToCanvasHeightRatio;
   // we need to paint the discarded cards in a specific order
@@ -457,12 +460,12 @@ let paintDiscardArray = (p, g, w, isDummyHand, clockPosition) => {
         // good for all rotations, because x=x and y=y all angles
         //p.translate(0, -cardHeight * cardHeightOffsetFraction);
         if (isDummyHand && clockPosition == '6PM') {
-          console.log('isDummyHandAnd6PM');
+          //console.log('isDummyHandAnd6PM');
           w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
           w.gameState.transition.northStartXInv = p.lerp(w.gameState.transition.northStartXInv, w.gameState.transition.northEndX, lerpDelta);
           p.translate(w.gameState.transition.northStartXInv * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
         } else {
-          console.log('isNOTDummyHandAnd6PM');
+          //console.log('isNOTDummyHandAnd6PM');
           w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
           w.gameState.transition.northStartX = p.lerp(w.gameState.transition.northStartX, w.gameState.transition.northEndX, lerpDelta);
           p.translate(w.gameState.transition.northStartX * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
