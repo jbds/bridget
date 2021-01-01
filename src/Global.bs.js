@@ -34,6 +34,10 @@ var initialState_transition = {
   eastStartY: 0.0,
   southStartX: 0.0,
   westStartY: 0.0,
+  northStartXInv: 0.0,
+  eastStartYInv: 0.0,
+  southStartXInv: 0.0,
+  westStartYInv: 0.0,
   northEndX: 0.0,
   eastEndY: 0.0,
   southEndX: 0.0,
@@ -120,88 +124,36 @@ function reducer(state, action) {
           var tR;
           switch (discardPoc) {
             case "East" :
-                var init = state.transition;
-                tR = {
-                  northStartY: init.northStartY,
-                  eastStartX: 0.5,
-                  southStartY: init.southStartY,
-                  westStartX: init.westStartX,
-                  northEndY: init.northEndY,
-                  eastEndX: eastEndX,
-                  southEndY: init.southEndY,
-                  westEndX: init.westEndX,
-                  northStartX: init.northStartX,
-                  eastStartY: -discardStartPositionIndex,
-                  southStartX: init.southStartX,
-                  westStartY: init.westStartY,
-                  northEndX: init.northEndX,
-                  eastEndY: 0.0,
-                  southEndX: init.southEndX,
-                  westEndY: init.westEndY
-                };
+                var newrecord = Caml_obj.caml_obj_dup(state.transition);
+                newrecord.eastEndY = 0.0;
+                newrecord.eastStartY = -discardStartPositionIndex;
+                newrecord.eastEndX = eastEndX;
+                newrecord.eastStartX = 0.5;
+                tR = newrecord;
                 break;
             case "North" :
-                var init$1 = state.transition;
-                tR = {
-                  northStartY: -0.5,
-                  eastStartX: init$1.eastStartX,
-                  southStartY: init$1.southStartY,
-                  westStartX: init$1.westStartX,
-                  northEndY: northEndY,
-                  eastEndX: init$1.eastEndX,
-                  southEndY: init$1.southEndY,
-                  westEndX: init$1.westEndX,
-                  northStartX: -discardStartPositionIndex,
-                  eastStartY: init$1.eastStartY,
-                  southStartX: init$1.southStartX,
-                  westStartY: init$1.westStartY,
-                  northEndX: 0.0,
-                  eastEndY: init$1.eastEndY,
-                  southEndX: init$1.southEndX,
-                  westEndY: init$1.westEndY
-                };
+                var newrecord$1 = Caml_obj.caml_obj_dup(state.transition);
+                newrecord$1.northEndX = 0.0;
+                newrecord$1.northStartX = -discardStartPositionIndex;
+                newrecord$1.northEndY = northEndY;
+                newrecord$1.northStartY = -0.5;
+                tR = newrecord$1;
                 break;
             case "South" :
-                var init$2 = state.transition;
-                tR = {
-                  northStartY: init$2.northStartY,
-                  eastStartX: init$2.eastStartX,
-                  southStartY: 0.5,
-                  westStartX: init$2.westStartX,
-                  northEndY: init$2.northEndY,
-                  eastEndX: init$2.eastEndX,
-                  southEndY: southEndY,
-                  westEndX: init$2.westEndX,
-                  northStartX: init$2.northStartX,
-                  eastStartY: init$2.eastStartY,
-                  southStartX: discardStartPositionIndex,
-                  westStartY: init$2.westStartY,
-                  northEndX: init$2.northEndX,
-                  eastEndY: init$2.eastEndY,
-                  southEndX: 0.0,
-                  westEndY: init$2.westEndY
-                };
+                var newrecord$2 = Caml_obj.caml_obj_dup(state.transition);
+                newrecord$2.southEndX = 0.0;
+                newrecord$2.southStartX = discardStartPositionIndex;
+                newrecord$2.southEndY = southEndY;
+                newrecord$2.southStartY = 0.5;
+                tR = newrecord$2;
                 break;
             case "West" :
-                var init$3 = state.transition;
-                tR = {
-                  northStartY: init$3.northStartY,
-                  eastStartX: init$3.eastStartX,
-                  southStartY: init$3.southStartY,
-                  westStartX: -0.5,
-                  northEndY: init$3.northEndY,
-                  eastEndX: init$3.eastEndX,
-                  southEndY: init$3.southEndY,
-                  westEndX: westEndX,
-                  northStartX: init$3.northStartX,
-                  eastStartY: init$3.eastStartY,
-                  southStartX: init$3.southStartX,
-                  westStartY: discardStartPositionIndex,
-                  northEndX: init$3.northEndX,
-                  eastEndY: init$3.eastEndY,
-                  southEndX: init$3.southEndX,
-                  westEndY: 0.0
-                };
+                var newrecord$3 = Caml_obj.caml_obj_dup(state.transition);
+                newrecord$3.westEndY = 0.0;
+                newrecord$3.westStartY = discardStartPositionIndex;
+                newrecord$3.westEndX = westEndX;
+                newrecord$3.westStartX = -0.5;
+                tR = newrecord$3;
                 break;
             default:
               tR = state.transition;
@@ -215,17 +167,17 @@ function reducer(state, action) {
           if (myDiscardArray.length === 4) {
             ((setTimeout(function(){document.getElementById('btnPostDiscard').click();}, 2250)));
           }
-          var newrecord = Caml_obj.caml_obj_dup(state);
-          newrecord.transition = tR;
-          newrecord.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-          newrecord.pack = myPack;
-          newrecord.lastAction = "Discard";
-          newrecord.isDummyVisible = discardPoc === pocFollowingDeclarer ? true : state.isDummyVisible;
-          newrecord.discardSuit = (state.discardIndex + 1 | 0) % 4 === 0 ? cardDiscardSuit : state.discardSuit;
-          newrecord.discardPointOfCompass = (state.discardIndex + 1 | 0) % 4 === 0 ? discardPoc : state.discardPointOfCompass;
-          newrecord.discardIndex = state.discardIndex + 1 | 0;
-          newrecord.activePointOfCompass = myDiscardArray.length === 4 ? undefined : poc;
-          return newrecord;
+          var newrecord$4 = Caml_obj.caml_obj_dup(state);
+          newrecord$4.transition = tR;
+          newrecord$4.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+          newrecord$4.pack = myPack;
+          newrecord$4.lastAction = "Discard";
+          newrecord$4.isDummyVisible = discardPoc === pocFollowingDeclarer ? true : state.isDummyVisible;
+          newrecord$4.discardSuit = (state.discardIndex + 1 | 0) % 4 === 0 ? cardDiscardSuit : state.discardSuit;
+          newrecord$4.discardPointOfCompass = (state.discardIndex + 1 | 0) % 4 === 0 ? discardPoc : state.discardPointOfCompass;
+          newrecord$4.discardIndex = state.discardIndex + 1 | 0;
+          newrecord$4.activePointOfCompass = myDiscardArray.length === 4 ? undefined : poc;
+          return newrecord$4;
       case /* PostDiscard */2 :
           var m$1 = window.m;
           var cardHeightToCanvasHeightRatio$1 = window.cardHeightToCanvasHeightRatio;
@@ -282,16 +234,20 @@ function reducer(state, action) {
             eastStartY: 0.0,
             southStartX: 0.0,
             westStartY: 0.0,
+            northStartXInv: 0.0,
+            eastStartYInv: 0.0,
+            southStartXInv: 0.0,
+            westStartYInv: 0.0,
             northEndX: commonEndPositionX,
             eastEndY: commonEndPositionY,
             southEndX: commonEndPositionX,
             westEndY: commonEndPositionY
           };
           ((setTimeout(function(){document.getElementById('btnEndTrick').click();}, 375)));
-          var newrecord$1 = Caml_obj.caml_obj_dup(state);
-          newrecord$1.transition = tR$1;
-          newrecord$1.lastAction = "PostDiscard";
-          return newrecord$1;
+          var newrecord$5 = Caml_obj.caml_obj_dup(state);
+          newrecord$5.transition = tR$1;
+          newrecord$5.lastAction = "PostDiscard";
+          return newrecord$5;
       case /* Sync */3 :
           ((window.isLastActionSync = true));
           return {
@@ -332,6 +288,10 @@ function reducer(state, action) {
                     eastStartY: 0.0,
                     southStartX: 0.0,
                     westStartY: 0.0,
+                    northStartXInv: 0.0,
+                    eastStartYInv: 0.0,
+                    southStartXInv: 0.0,
+                    westStartYInv: 0.0,
                     northEndX: 0.0,
                     eastEndY: 0.0,
                     southEndX: 0.0,
@@ -416,16 +376,16 @@ function reducer(state, action) {
                 };
       case /* Test */5 :
           ((window.isLastActionSync = true));
-          var newrecord$2 = Caml_obj.caml_obj_dup(state);
-          newrecord$2.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-          newrecord$2.lastAction = "Test";
-          return newrecord$2;
+          var newrecord$6 = Caml_obj.caml_obj_dup(state);
+          newrecord$6.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+          newrecord$6.lastAction = "Test";
+          return newrecord$6;
       case /* PostBid */6 :
-          var newrecord$3 = Caml_obj.caml_obj_dup(state);
-          newrecord$3.lastAction = "Post Bid after 3 passes";
-          newrecord$3.isBiddingCycle = false;
-          newrecord$3.activePointOfCompass = Shuffle$ReasonReactExamples.getNextActivePointOfCompass(state.declarer);
-          return newrecord$3;
+          var newrecord$7 = Caml_obj.caml_obj_dup(state);
+          newrecord$7.lastAction = "Post Bid after 3 passes";
+          newrecord$7.isBiddingCycle = false;
+          newrecord$7.activePointOfCompass = Shuffle$ReasonReactExamples.getNextActivePointOfCompass(state.declarer);
+          return newrecord$7;
       case /* EndOneTrick */7 :
           return EndTrick$ReasonReactExamples.execute(state);
       case /* Concede */8 :
@@ -481,18 +441,18 @@ function reducer(state, action) {
                     return pointOfCompassAndPlayer;
                   }
                 }), myArray1);
-          var newrecord$4 = Caml_obj.caml_obj_dup(state);
-          newrecord$4.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-          newrecord$4.pointOfCompassAndPlayers = myArray2;
-          newrecord$4.lastAction = "AssignPlayer";
-          return newrecord$4;
+          var newrecord$8 = Caml_obj.caml_obj_dup(state);
+          newrecord$8.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+          newrecord$8.pointOfCompassAndPlayers = myArray2;
+          newrecord$8.lastAction = "AssignPlayer";
+          return newrecord$8;
       case /* BidAdd */1 :
           ((window.isLastActionSync = false));
-          var newrecord$5 = Caml_obj.caml_obj_dup(state);
-          newrecord$5.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-          newrecord$5.lastAction = "BidAdd";
-          newrecord$5.isBiddingHideDenominationButtons = false;
-          newrecord$5.bids = /* :: */[
+          var newrecord$9 = Caml_obj.caml_obj_dup(state);
+          newrecord$9.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+          newrecord$9.lastAction = "BidAdd";
+          newrecord$9.isBiddingHideDenominationButtons = false;
+          newrecord$9.bids = /* :: */[
             {
               contractLevel: action[0],
               contractSuit: "",
@@ -503,7 +463,7 @@ function reducer(state, action) {
             },
             state.bids
           ];
-          return newrecord$5;
+          return newrecord$9;
       case /* BidUpdate */2 :
           ((window.isLastActionSync = false));
           var bids$1 = state.bids;
@@ -528,13 +488,13 @@ function reducer(state, action) {
             tail
           ];
           var poc$2 = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
-          var newrecord$6 = Caml_obj.caml_obj_dup(state);
-          newrecord$6.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-          newrecord$6.lastAction = "BidUpdate";
-          newrecord$6.isBiddingHideDenominationButtons = true;
-          newrecord$6.bids = bidsUpdated;
-          newrecord$6.activePointOfCompass = poc$2;
-          return newrecord$6;
+          var newrecord$10 = Caml_obj.caml_obj_dup(state);
+          newrecord$10.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+          newrecord$10.lastAction = "BidUpdate";
+          newrecord$10.isBiddingHideDenominationButtons = true;
+          newrecord$10.bids = bidsUpdated;
+          newrecord$10.activePointOfCompass = poc$2;
+          return newrecord$10;
       case /* BidAddSpecial */3 :
           var special = action[0];
           ((window.isLastActionSync = false));
@@ -557,9 +517,9 @@ function reducer(state, action) {
                   console.log("detected 4 passes");
                   ((window.isLastActionSync = false));
                   ((setTimeout(function(){document.getElementById('btnPost4Passes').click();}, 2500)));
-                  var newrecord$7 = Caml_obj.caml_obj_dup(state);
-                  newrecord$7.lastAction = "4 Passes";
-                  newrecord$7.bids = /* :: */[
+                  var newrecord$11 = Caml_obj.caml_obj_dup(state);
+                  newrecord$11.lastAction = "4 Passes";
+                  newrecord$11.bids = /* :: */[
                     {
                       contractLevel: undefined,
                       contractSuit: undefined,
@@ -570,7 +530,7 @@ function reducer(state, action) {
                     },
                     state.bids
                   ];
-                  return newrecord$7;
+                  return newrecord$11;
                 }
                 if (bidsLength >= 3) {
                   var hd1 = List.hd(state.bids);
@@ -739,16 +699,16 @@ function reducer(state, action) {
                             }
                           }), myPack$1);
                     ((setTimeout(function(){document.getElementById('btnPostBid').click();}, 2500)));
-                    var newrecord$8 = Caml_obj.caml_obj_dup(state);
-                    newrecord$8.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-                    newrecord$8.pack = myPack2;
-                    newrecord$8.lastAction = contractLevel !== undefined ? "BidAddSpecial- 3 Passes" : "BidAddSpecial- 4 Passes";
-                    newrecord$8.declarer = contractDeclarer;
-                    newrecord$8.chicagoScoreSheet = contractLevel !== undefined ? /* :: */[
+                    var newrecord$12 = Caml_obj.caml_obj_dup(state);
+                    newrecord$12.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                    newrecord$12.pack = myPack2;
+                    newrecord$12.lastAction = contractLevel !== undefined ? "BidAddSpecial- 3 Passes" : "BidAddSpecial- 4 Passes";
+                    newrecord$12.declarer = contractDeclarer;
+                    newrecord$12.chicagoScoreSheet = contractLevel !== undefined ? /* :: */[
                         myChicagoScoreSheetRecord,
                         chicagoScoreSheetTail
                       ] : chicagoScoreSheetTail;
-                    newrecord$8.bids = /* :: */[
+                    newrecord$12.bids = /* :: */[
                       {
                         contractLevel: undefined,
                         contractSuit: undefined,
@@ -759,13 +719,13 @@ function reducer(state, action) {
                       },
                       state.bids
                     ];
-                    newrecord$8.activePointOfCompass = undefined;
-                    return newrecord$8;
+                    newrecord$12.activePointOfCompass = undefined;
+                    return newrecord$12;
                   }
-                  var newrecord$9 = Caml_obj.caml_obj_dup(state);
-                  newrecord$9.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-                  newrecord$9.lastAction = "BidAddSpecial";
-                  newrecord$9.bids = /* :: */[
+                  var newrecord$13 = Caml_obj.caml_obj_dup(state);
+                  newrecord$13.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                  newrecord$13.lastAction = "BidAddSpecial";
+                  newrecord$13.bids = /* :: */[
                     {
                       contractLevel: undefined,
                       contractSuit: undefined,
@@ -776,13 +736,13 @@ function reducer(state, action) {
                     },
                     state.bids
                   ];
-                  newrecord$9.activePointOfCompass = poc$3;
-                  return newrecord$9;
+                  newrecord$13.activePointOfCompass = poc$3;
+                  return newrecord$13;
                 }
-                var newrecord$10 = Caml_obj.caml_obj_dup(state);
-                newrecord$10.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-                newrecord$10.lastAction = "BidAddSpecial";
-                newrecord$10.bids = /* :: */[
+                var newrecord$14 = Caml_obj.caml_obj_dup(state);
+                newrecord$14.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                newrecord$14.lastAction = "BidAddSpecial";
+                newrecord$14.bids = /* :: */[
                   {
                     contractLevel: undefined,
                     contractSuit: undefined,
@@ -793,13 +753,13 @@ function reducer(state, action) {
                   },
                   state.bids
                 ];
-                newrecord$10.activePointOfCompass = poc$3;
-                return newrecord$10;
+                newrecord$14.activePointOfCompass = poc$3;
+                return newrecord$14;
             case "X" :
-                var newrecord$11 = Caml_obj.caml_obj_dup(state);
-                newrecord$11.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-                newrecord$11.lastAction = "BidAddSpecial - X";
-                newrecord$11.bids = /* :: */[
+                var newrecord$15 = Caml_obj.caml_obj_dup(state);
+                newrecord$15.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                newrecord$15.lastAction = "BidAddSpecial - X";
+                newrecord$15.bids = /* :: */[
                   {
                     contractLevel: undefined,
                     contractSuit: undefined,
@@ -810,13 +770,13 @@ function reducer(state, action) {
                   },
                   state.bids
                 ];
-                newrecord$11.activePointOfCompass = poc$3;
-                return newrecord$11;
+                newrecord$15.activePointOfCompass = poc$3;
+                return newrecord$15;
             case "XX" :
-                var newrecord$12 = Caml_obj.caml_obj_dup(state);
-                newrecord$12.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
-                newrecord$12.lastAction = "BidAddSpecial - XX";
-                newrecord$12.bids = /* :: */[
+                var newrecord$16 = Caml_obj.caml_obj_dup(state);
+                newrecord$16.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+                newrecord$16.lastAction = "BidAddSpecial - XX";
+                newrecord$16.bids = /* :: */[
                   {
                     contractLevel: undefined,
                     contractSuit: undefined,
@@ -827,8 +787,8 @@ function reducer(state, action) {
                   },
                   state.bids
                 ];
-                newrecord$12.activePointOfCompass = poc$3;
-                return newrecord$12;
+                newrecord$16.activePointOfCompass = poc$3;
+                return newrecord$16;
             default:
               return state;
           }

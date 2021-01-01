@@ -1,6 +1,6 @@
 'use strict';
 
-// Last update: 17/09/20
+// Last update:  16/12/20 20:06
 
 const session = require('express-session');
 const express = require('express');
@@ -54,7 +54,7 @@ let gameState = {
     northEndY: 0.0, eastEndX: 0.0, southEndY: 0.0, westEndX: 0.0,
     northStartX: 0.0, eastStartY: 0.0, southStartX: 0.0, westStartY: 0.0,
     northEndX: 0.0, eastEndY: 0.0, southEndX: 0.0, westEndY: 0.0
-  }
+  },
 };
 
 // shallow copy?
@@ -195,13 +195,16 @@ app.delete('/logout', function (req, response) {
     return obj.player !== oldId;
   });
   // and broadcast to all
-  broadcastGameStateToAll(gameState);
+  //broadcastGameStateToAll(gameState);
+  // just to the others, initiator can clean up locally
+  broadcastGameStateToOthers(gameState, ws);
 
 
   console.log('Destroying session');
   req.session.destroy(function () {
     if (ws) ws.close();
-    response.send({ result: 'OK', message: `Session destroyed for ${oldId}` });
+    // avoid sending a message as this triggers a sync which we do not want
+    //response.send({ result: 'OK', message: `Session destroyed for ${oldId}` });
   });
 });
 
