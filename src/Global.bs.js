@@ -134,6 +134,7 @@ function reducer(state, action) {
             case "North" :
                 var newrecord$1 = Caml_obj.caml_obj_dup(state.transition);
                 newrecord$1.northEndX = 0.0;
+                newrecord$1.northStartXInv = discardStartPositionIndex;
                 newrecord$1.northStartX = -discardStartPositionIndex;
                 newrecord$1.northEndY = northEndY;
                 newrecord$1.northStartY = -0.5;

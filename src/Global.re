@@ -171,6 +171,7 @@ let reducer = (state: TopLevel.state, action) => {
           northStartY: (-0.5),
           northEndY,
           northStartX: -. discardStartPositionIndex,
+          northStartXInv: discardStartPositionIndex,
           northEndX: 0.0,
         }
       | "East" => {
