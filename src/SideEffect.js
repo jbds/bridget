@@ -116,7 +116,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
   if (pointOfCompass != 'Discard') {
     paintHandArray(p, g, w, isDummyHand, clockPosition);
   } else {
-    paintDiscardArray(p, g, w);
+    paintDiscardArray(p, g, w, isDummyHand, clockPosition);
   }
   p.pop();
 }
@@ -324,7 +324,7 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
   }
 };
 
-let paintDiscardArray = (p, g, w) => {
+let paintDiscardArray = (p, g, w, isDummyHand, clockPosition) => {
   //console.log('discarding');
   let cardWidth = w.m * w.innerHeight * w.cardHeightToCanvasHeightRatio / w.cardAspectRatio;
   let cardHeight = w.m * w.innerHeight * w.cardHeightToCanvasHeightRatio;
