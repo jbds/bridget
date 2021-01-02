@@ -7,7 +7,8 @@
     "clean": "bsb -clean-world",
     "server": "moduleserve ./ --port 8000",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "upload": "./node_modules/.bin/webpack && scp ./bundleOutput/index.js jon@98765.co.uk:/home/jon/express-session-parse/public/bundleOutput/"
+    "upload": "./node_modules/.bin/webpack && scp ./bundleOutput/index.js jon@98765.co.uk:/home/jon/express-session-parse/public/bundleOutput/",
+    "uploadsvr": "scp ./server/svrhttps.js jon@98765.co.uk:/home/jon/express-session-parse/"
   },
   "keywords": [
     "BuckleScript",

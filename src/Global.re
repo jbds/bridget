@@ -171,15 +171,15 @@ let reducer = (state: TopLevel.state, action) => {
           ...state.transition,
           northStartY: (-0.5),
           northEndY,
-          northStartX: -. discardStartPositionIndex,
-          northStartXInv: discardStartPositionIndex,
+          northStartX: discardStartPositionIndex,
+          northStartXInv: -. discardStartPositionIndex,
           northEndX: 0.0,
         }
       | "East" => {
           ...state.transition,
           eastStartX: 0.5,
           eastEndX,
-          eastStartY: -. discardStartPositionIndex,
+          eastStartY: discardStartPositionIndex,
           eastEndY: 0.0,
         }
       | "South" => {
@@ -220,6 +220,7 @@ let reducer = (state: TopLevel.state, action) => {
       discardPointOfCompass:
         (state.discardIndex + 1) mod 4 === 0
           ? Some(discardPoc) : state.discardPointOfCompass,
+      discardPocForTransition: Some(discardPoc),
       discardSuit:
         (state.discardIndex + 1) mod 4 === 0
           ? Some(cardDiscardSuit) : state.discardSuit,

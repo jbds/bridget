@@ -127,7 +127,7 @@ function reducer(state, action) {
             case "East" :
                 var newrecord = Caml_obj.caml_obj_dup(state.transition);
                 newrecord.eastEndY = 0.0;
-                newrecord.eastStartY = -discardStartPositionIndex;
+                newrecord.eastStartY = discardStartPositionIndex;
                 newrecord.eastEndX = eastEndX;
                 newrecord.eastStartX = 0.5;
                 tR = newrecord;
@@ -135,8 +135,8 @@ function reducer(state, action) {
             case "North" :
                 var newrecord$1 = Caml_obj.caml_obj_dup(state.transition);
                 newrecord$1.northEndX = 0.0;
-                newrecord$1.northStartXInv = discardStartPositionIndex;
-                newrecord$1.northStartX = -discardStartPositionIndex;
+                newrecord$1.northStartXInv = -discardStartPositionIndex;
+                newrecord$1.northStartX = discardStartPositionIndex;
                 newrecord$1.northEndY = northEndY;
                 newrecord$1.northStartY = -0.5;
                 tR = newrecord$1;
@@ -176,6 +176,7 @@ function reducer(state, action) {
           newrecord$4.lastAction = "Discard";
           newrecord$4.isDummyVisible = discardPoc === pocFollowingDeclarer ? true : state.isDummyVisible;
           newrecord$4.discardSuit = (state.discardIndex + 1 | 0) % 4 === 0 ? cardDiscardSuit : state.discardSuit;
+          newrecord$4.discardPocForTransition = discardPoc;
           newrecord$4.discardPointOfCompass = (state.discardIndex + 1 | 0) % 4 === 0 ? discardPoc : state.discardPointOfCompass;
           newrecord$4.discardIndex = state.discardIndex + 1 | 0;
           newrecord$4.activePointOfCompass = myDiscardArray.length === 4 ? undefined : poc;

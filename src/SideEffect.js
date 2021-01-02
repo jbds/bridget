@@ -117,7 +117,7 @@ let drawCards = (p, g, w, pointOfCompass) => {
   if (pointOfCompass != 'Discard') {
     paintHandArray(p, g, w, isDummyHand, clockPosition);
   } else {
-    paintDiscardArray(p, g, w, isDummyHand, clockPosition);
+    paintDiscardArray(p, g, w);
   }
   p.pop();
 }
@@ -325,11 +325,9 @@ let paintHandArray = (p, g, w, isDummyHand, clockPosition) => {
   }
 };
 
-let paintDiscardArray = (p, g, w, isDummyHand, clockPosition) => {
-  console.log('discarding');
-  console.log(gameState.discardPointOfCompass);
-  //console.log('poc: ' + pointOfcompass)
-  //console.log('isDummyHand: ' + isDummyHand);
+let paintDiscardArray = (p, g, w) => {
+  //console.log('discarding');
+  //console.log(gameState.discardPocForTransition);
   let cardWidth = w.m * w.innerHeight * w.cardHeightToCanvasHeightRatio / w.cardAspectRatio;
   let cardHeight = w.m * w.innerHeight * w.cardHeightToCanvasHeightRatio;
   // we need to paint the discarded cards in a specific order
@@ -455,22 +453,32 @@ let paintDiscardArray = (p, g, w, isDummyHand, clockPosition) => {
         console.log('Unexpected tableRotation argument ');
     }
     let lerpDelta = 0.10;
+    let clockPosition;
     switch (true) {
       // N
       case (obj.shuffleIndex < 13):
         // good for all rotations, because x=x and y=y all angles
         //p.translate(0, -cardHeight * cardHeightOffsetFraction);
-        if (isDummyHand && clockPosition == '6PM') {
-          //console.log('isDummyHandAnd6PM');
-          w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
-          w.gameState.transition.northStartXInv = p.lerp(w.gameState.transition.northStartXInv, w.gameState.transition.northEndX, lerpDelta);
-          p.translate(w.gameState.transition.northStartXInv * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
-        } else {
-          //console.log('isNOTDummyHandAnd6PM');
-          w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
-          w.gameState.transition.northStartX = p.lerp(w.gameState.transition.northStartX, w.gameState.transition.northEndX, lerpDelta);
-          p.translate(w.gameState.transition.northStartX * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
-        }
+        console.log('discardPocForTransition: ' + w.gameState.discardPocForTransition);
+        clockPosition = rotationPlusPointOfCompassToClockPosition(
+          w.userState.tableRotationDegrees,
+          'North'
+        );
+        console.log('clockPosition: ' + clockPosition);
+        // if (w.gameState.discardPocForTransition == 'North' && clockPosition == '6PM') {
+        //   console.log('isNorthandAnd6PM');
+        //   w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
+        //   w.gameState.transition.northStartXInv = p.lerp(w.gameState.transition.northStartXInv, w.gameState.transition.northEndX, lerpDelta);
+        //   p.translate(w.gameState.transition.northStartXInv * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
+        // } else {
+        //   console.log('isNorthandAndNOT6PM');
+        //   w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
+        //   w.gameState.transition.northStartX = p.lerp(w.gameState.transition.northStartX, w.gameState.transition.northEndX, lerpDelta);
+        //   p.translate(w.gameState.transition.northStartX * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
+        // }
+        w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
+        w.gameState.transition.northStartX = p.lerp(w.gameState.transition.northStartX, w.gameState.transition.northEndX, lerpDelta);
+        p.translate(w.gameState.transition.northStartX * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
         break;
       // E
       case (obj.shuffleIndex < 26):
