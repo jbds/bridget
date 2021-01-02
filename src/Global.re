@@ -64,6 +64,10 @@ let initialState: TopLevel.state = {
     eastStartYInv: 0.0,
     southStartXInv: 0.0,
     westStartYInv: 0.0,
+    northStartYInv: 0.0,
+    eastStartXInv: 0.0,
+    southStartYInv: 0.0,
+    westStartXInv: 0.0,
     northEndX: 0.0,
     eastEndY: 0.0,
     southEndX: 0.0,
@@ -300,6 +304,10 @@ let reducer = (state: TopLevel.state, action) => {
     let eastStartYInv = 0.0;
     let southStartXInv = 0.0;
     let westStartYInv = 0.0;
+    let northStartYInv = 0.0;
+    let eastStartXInv = 0.0;
+    let southStartYInv = 0.0;
+    let westStartXInv = 0.0;
     let tR: Shuffle.transition = {
       northStartY,
       northEndY,
@@ -321,6 +329,10 @@ let reducer = (state: TopLevel.state, action) => {
       eastStartYInv,
       southStartXInv,
       westStartYInv,
+      northStartYInv,
+      eastStartXInv,
+      southStartYInv,
+      westStartXInv,
     };
     let _myID: int = [%raw
       "setTimeout(function(){document.getElementById('btnEndTrick').click();}, 375)"
@@ -378,6 +390,10 @@ let reducer = (state: TopLevel.state, action) => {
         eastStartYInv: 0.0,
         southStartXInv: 0.0,
         westStartYInv: 0.0,
+        northStartYInv: 0.0,
+        eastStartXInv: 0.0,
+        southStartYInv: 0.0,
+        westStartXInv: 0.0,
         northEndX: 0.0,
         eastEndY: 0.0,
         southEndX: 0.0,
