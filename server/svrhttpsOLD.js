@@ -53,6 +53,7 @@ let gameState = {
     northStartY: 0.0, eastStartX: 0.0, southStartY: 0.0, westStartX: 0.0,
     northEndY: 0.0, eastEndX: 0.0, southEndY: 0.0, westEndX: 0.0,
     northStartX: 0.0, eastStartY: 0.0, southStartX: 0.0, westStartY: 0.0,
+    northStartXInv: 0.0, eastStartYInv: 0.0, southStartXInv: 0.0, westStartYInv: 0.0,
     northEndX: 0.0, eastEndY: 0.0, southEndX: 0.0, westEndY: 0.0
   },
 };

@@ -38,6 +38,7 @@ let gameState = {
   declarer: undefined,
   discardIndex: -1,
   discardPointOfCompass: undefined,
+  discardPocForTransition: undefined,
   discardSuit: undefined,
   handVisible: { north: false, east: false, south: false, west: false },
   isBiddingCycle: false,

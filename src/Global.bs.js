@@ -53,6 +53,7 @@ var initialState = {
   declarer: undefined,
   discardIndex: -1,
   discardPointOfCompass: undefined,
+  discardPocForTransition: undefined,
   discardSuit: undefined,
   handVisible: Shuffle$ReasonReactExamples.initialHandVisible,
   isBiddingCycle: false,
@@ -260,6 +261,7 @@ function reducer(state, action) {
                   declarer: undefined,
                   discardIndex: -1,
                   discardPointOfCompass: undefined,
+                  discardPocForTransition: undefined,
                   discardSuit: undefined,
                   handVisible: {
                     north: false,
@@ -320,6 +322,7 @@ function reducer(state, action) {
           var discardSuit = window.gameState.discardSuit;
           var lastAction = window.gameState.lastAction;
           var discardPointOfCompass = window.gameState.discardPointOfCompass;
+          var discardPocForTransition = window.gameState.discardPocForTransition;
           var pOCAPlength = pOCAP.length;
           console.log("pOCAP length");
           console.log(pOCAPlength);
@@ -362,6 +365,7 @@ function reducer(state, action) {
                   declarer: declarer,
                   discardIndex: discardIndex,
                   discardPointOfCompass: discardPointOfCompass,
+                  discardPocForTransition: discardPocForTransition,
                   discardSuit: discardSuit,
                   handVisible: hV,
                   isBiddingCycle: isBiddingCycle,

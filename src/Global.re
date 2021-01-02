@@ -36,6 +36,7 @@ let initialState: TopLevel.state = {
   discardIndex: (-1),
   discardSuit: None,
   discardPointOfCompass: None,
+  discardPocForTransition: None,
   handVisible: Shuffle.initialHandVisible,
   isBiddingCycle: false,
   isBiddingHideDenominationButtons: true,
@@ -342,6 +343,7 @@ let reducer = (state: TopLevel.state, action) => {
       declarer: None,
       discardIndex: (-1),
       discardPointOfCompass: None,
+      discardPocForTransition: None,
       discardSuit: None,
       handVisible: {
         north: false,
@@ -421,6 +423,9 @@ let reducer = (state: TopLevel.state, action) => {
     let discardPointOfCompass: option(string) = [%bs.raw
       "window.gameState.discardPointOfCompass"
     ];
+    let discardPocForTransition: option(string) = [%bs.raw
+      "window.gameState.discardPocForTransition"
+    ];
     // use reason code, not js
     let pOCAPlength = Belt.Array.length(pOCAP);
     Js.log("pOCAP length");
@@ -471,6 +476,7 @@ let reducer = (state: TopLevel.state, action) => {
       declarer,
       discardIndex,
       discardPointOfCompass,
+      discardPocForTransition,
       discardSuit,
       handVisible: hV,
       isBiddingCycle,

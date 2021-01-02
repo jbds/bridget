@@ -8,6 +8,7 @@ type state = {
   declarer: option(string),
   discardIndex: int,
   discardPointOfCompass: option(string),
+  discardPocForTransition: option(string),
   discardSuit: option(Shuffle.suit),
   handVisible: Shuffle.handVisible,
   isBiddingCycle: bool,
