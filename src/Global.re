@@ -175,29 +175,32 @@ let reducer = (state: TopLevel.state, action) => {
           ...state.transition,
           northStartY: (-0.5),
           northEndY,
-          northStartX: discardStartPositionIndex,
-          northStartXInv: -. discardStartPositionIndex,
+          northStartX: 0.0,
+          northStartXInv: 0.0,
           northEndX: 0.0,
         }
       | "East" => {
           ...state.transition,
           eastStartX: 0.5,
           eastEndX,
-          eastStartY: discardStartPositionIndex,
+          eastStartY: 0.0,
+          eastStartYInv: 0.0,
           eastEndY: 0.0,
         }
       | "South" => {
           ...state.transition,
           southStartY: 0.5,
           southEndY,
-          southStartX: discardStartPositionIndex,
+          southStartX: 0.0,
+          southStartXInv: 0.0,
           southEndX: 0.0,
         }
       | "West" => {
           ...state.transition,
           westStartX: (-0.5),
           westEndX,
-          westStartY: discardStartPositionIndex,
+          westStartY: 0.0,
+          westStartYInv: 0.0,
           westEndY: 0.0,
         }
       | _ => state.transition

@@ -459,26 +459,18 @@ let paintDiscardArray = (p, g, w) => {
       case (obj.shuffleIndex < 13):
         // good for all rotations, because x=x and y=y all angles
         //p.translate(0, -cardHeight * cardHeightOffsetFraction);
-        //console.log('discardPocForTransition: ' + w.gameState.discardPocForTransition);
         clockPosition = rotationPlusPointOfCompassToClockPosition(
           w.userState.tableRotationDegrees,
           'North'
         );
-        console.log('clockPosition: ' + clockPosition);
-        if (w.gameState.discardPocForTransition == 'North' && clockPosition == '12PM') {
-          //console.log('isNorthandAnd6PM');
-          w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
-          w.gameState.transition.northStartXInv = p.lerp(w.gameState.transition.northStartXInv, w.gameState.transition.northEndX, lerpDelta);
-          p.translate(w.gameState.transition.northStartXInv * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
+        // if (w.gameState.discardPocForTransition == 'North' && clockPosition == '12PM')
+        if (false) {
+
         } else {
-          //console.log('isNorthandAndNOT6PM');
           w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
           w.gameState.transition.northStartX = p.lerp(w.gameState.transition.northStartX, w.gameState.transition.northEndX, lerpDelta);
           p.translate(w.gameState.transition.northStartX * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
         }
-        // w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
-        // w.gameState.transition.northStartX = p.lerp(w.gameState.transition.northStartX, w.gameState.transition.northEndX, lerpDelta);
-        // p.translate(w.gameState.transition.northStartX * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
         break;
       // E
       case (obj.shuffleIndex < 26):
@@ -486,15 +478,12 @@ let paintDiscardArray = (p, g, w) => {
           w.userState.tableRotationDegrees,
           'East'
         );
-        // flip?!
-        if (w.gameState.discardPocForTransition == 'East' && clockPosition == '12PM') {
+        if (false) {
+
+        } else {
           w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, lerpDelta);
           w.gameState.transition.eastStartY = p.lerp(w.gameState.transition.eastStartY, w.gameState.transition.eastEndY, lerpDelta);
           p.translate(w.gameState.transition.eastStartX * w.innerHeight, w.gameState.transition.eastStartY * w.innerHeight);
-        } else {
-          w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, lerpDelta);
-          w.gameState.transition.eastStartYInv = p.lerp(w.gameState.transition.eastStartYInv, w.gameState.transition.eastEndY, lerpDelta);
-          p.translate(w.gameState.transition.eastStartX * w.innerHeight, w.gameState.transition.eastStartYInv * w.innerHeight);
         }
         break;
       // S
@@ -503,10 +492,8 @@ let paintDiscardArray = (p, g, w) => {
           w.userState.tableRotationDegrees,
           'South'
         );
-        if (w.gameState.discardPocForTransition == 'South' && clockPosition == '12PM') {
-          w.gameState.transition.southStartY = p.lerp(w.gameState.transition.southStartY, w.gameState.transition.southEndY, lerpDelta);
-          w.gameState.transition.southStartXInv = p.lerp(w.gameState.transition.southStartXInv, w.gameState.transition.southEndX, lerpDelta);
-          p.translate(w.gameState.transition.southStartXInv * w.innerHeight, w.gameState.transition.southStartY * w.innerHeight);
+        if (false) {
+
         } else {
           w.gameState.transition.southStartY = p.lerp(w.gameState.transition.southStartY, w.gameState.transition.southEndY, lerpDelta);
           w.gameState.transition.southStartX = p.lerp(w.gameState.transition.southStartX, w.gameState.transition.southEndX, lerpDelta);
@@ -519,10 +506,8 @@ let paintDiscardArray = (p, g, w) => {
           w.userState.tableRotationDegrees,
           'West'
         );
-        if (w.gameState.discardPocForTransition == 'West' && clockPosition == '12PM') {
-          w.gameState.transition.westStartX = p.lerp(w.gameState.transition.westStartX, w.gameState.transition.westEndX, lerpDelta);
-          w.gameState.transition.westStartYInv = p.lerp(w.gameState.transition.westStartYInv, w.gameState.transition.westEndY, lerpDelta);
-          p.translate(w.gameState.transition.westStartX * w.innerHeight, w.gameState.transition.westStartYInv * w.innerHeight);
+        if (false) {
+
         } else {
           w.gameState.transition.westStartX = p.lerp(w.gameState.transition.westStartX, w.gameState.transition.westEndX, lerpDelta);
           w.gameState.transition.westStartY = p.lerp(w.gameState.transition.westStartY, w.gameState.transition.westEndY, lerpDelta);
