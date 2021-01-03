@@ -175,16 +175,16 @@ let reducer = (state: TopLevel.state, action) => {
           ...state.transition,
           northStartY: (-0.5),
           northEndY,
-          northStartX: 0.0,
-          northStartXInv: 0.0,
+          northStartX: discardStartPositionIndex,
+          northStartXInv: -. discardStartPositionIndex,
           northEndX: 0.0,
         }
       | "East" => {
           ...state.transition,
           eastStartX: 0.5,
           eastEndX,
-          eastStartY: -. discardStartPositionIndex,
-          eastStartYInv: 0.0,
+          eastStartY: discardStartPositionIndex,
+          eastStartYInv: -. discardStartPositionIndex,
           eastEndY: 0.0,
         }
       | "South" => {
@@ -192,15 +192,15 @@ let reducer = (state: TopLevel.state, action) => {
           southStartY: 0.5,
           southEndY,
           southStartX: discardStartPositionIndex,
-          southStartXInv: 0.0,
+          southStartXInv: -. discardStartPositionIndex,
           southEndX: 0.0,
         }
       | "West" => {
           ...state.transition,
           westStartX: (-0.5),
           westEndX,
-          westStartY: -. discardStartPositionIndex,
-          westStartYInv: 0.0,
+          westStartY: discardStartPositionIndex,
+          westStartYInv: -. discardStartPositionIndex,
           westEndY: 0.0,
         }
       | _ => state.transition
@@ -447,20 +447,20 @@ let reducer = (state: TopLevel.state, action) => {
       "window.gameState.discardPocForTransition"
     ];
     // use reason code, not js
-    let pOCAPlength = Belt.Array.length(pOCAP);
-    Js.log("pOCAP length");
-    Js.log(pOCAPlength);
+    //let pOCAPlength = Belt.Array.length(pOCAP);
+    // Js.log("pOCAP length");
+    // Js.log(pOCAPlength);
     let myName = [%bs.raw "userState.player"];
     let filteredPocAP = Belt.Array.keep(pOCAP, x => x.player === myName);
-    Js.log("pOCAP array");
-    Js.log(filteredPocAP);
+    // Js.log("pOCAP array");
+    // Js.log(filteredPocAP);
     // this may blow up on user logout? - yes it does
     let () =
       Belt.Array.length(filteredPocAP) != 0
         ? {
           let myPOC = filteredPocAP[0].pointOfCompass;
-          Js.log("myPoc");
-          Js.log(myPOC);
+          // Js.log("myPoc");
+          // Js.log(myPOC);
           // use myPoc value to set 6PM
           let () =
             switch (myPOC) {

@@ -131,8 +131,8 @@ function reducer(state, action) {
             case "East" :
                 var newrecord = Caml_obj.caml_obj_dup(state.transition);
                 newrecord.eastEndY = 0.0;
-                newrecord.eastStartYInv = 0.0;
-                newrecord.eastStartY = -discardStartPositionIndex;
+                newrecord.eastStartYInv = -discardStartPositionIndex;
+                newrecord.eastStartY = discardStartPositionIndex;
                 newrecord.eastEndX = eastEndX;
                 newrecord.eastStartX = 0.5;
                 tR = newrecord;
@@ -140,8 +140,8 @@ function reducer(state, action) {
             case "North" :
                 var newrecord$1 = Caml_obj.caml_obj_dup(state.transition);
                 newrecord$1.northEndX = 0.0;
-                newrecord$1.northStartXInv = 0.0;
-                newrecord$1.northStartX = 0.0;
+                newrecord$1.northStartXInv = -discardStartPositionIndex;
+                newrecord$1.northStartX = discardStartPositionIndex;
                 newrecord$1.northEndY = northEndY;
                 newrecord$1.northStartY = -0.5;
                 tR = newrecord$1;
@@ -149,7 +149,7 @@ function reducer(state, action) {
             case "South" :
                 var newrecord$2 = Caml_obj.caml_obj_dup(state.transition);
                 newrecord$2.southEndX = 0.0;
-                newrecord$2.southStartXInv = 0.0;
+                newrecord$2.southStartXInv = -discardStartPositionIndex;
                 newrecord$2.southStartX = discardStartPositionIndex;
                 newrecord$2.southEndY = southEndY;
                 newrecord$2.southStartY = 0.5;
@@ -158,8 +158,8 @@ function reducer(state, action) {
             case "West" :
                 var newrecord$3 = Caml_obj.caml_obj_dup(state.transition);
                 newrecord$3.westEndY = 0.0;
-                newrecord$3.westStartYInv = 0.0;
-                newrecord$3.westStartY = -discardStartPositionIndex;
+                newrecord$3.westStartYInv = -discardStartPositionIndex;
+                newrecord$3.westStartY = discardStartPositionIndex;
                 newrecord$3.westEndX = westEndX;
                 newrecord$3.westStartX = -0.5;
                 tR = newrecord$3;
@@ -339,19 +339,12 @@ function reducer(state, action) {
           var lastAction = window.gameState.lastAction;
           var discardPointOfCompass = window.gameState.discardPointOfCompass;
           var discardPocForTransition = window.gameState.discardPocForTransition;
-          var pOCAPlength = pOCAP.length;
-          console.log("pOCAP length");
-          console.log(pOCAPlength);
           var myName = userState.player;
           var filteredPocAP = Belt_Array.keep(pOCAP, (function (x) {
                   return x.player === myName;
                 }));
-          console.log("pOCAP array");
-          console.log(filteredPocAP);
           if (filteredPocAP.length !== 0) {
             var myPOC = Caml_array.caml_array_get(filteredPocAP, 0).pointOfCompass;
-            console.log("myPoc");
-            console.log(myPOC);
             switch (myPOC) {
               case "East" :
                   ((window.userState.tableRotationDegrees = 90));
