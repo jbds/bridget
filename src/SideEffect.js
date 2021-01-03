@@ -467,8 +467,9 @@ let paintDiscardArray = (p, g, w) => {
         // if (w.gameState.discardPocForTransition == 'North' && clockPosition == '12PM')
         if (
           // (w.gameState.discardPocForTransition == 'North' && clockPosition == '6PM') ||
-          // (w.gameState.discardPocForTransition == 'North' && clockPosition == '3PM') ||
-          (w.gameState.discardPocForTransition == 'North' && clockPosition == '12PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'North')
+          (w.gameState.discardPocForTransition == 'North' && clockPosition == '3PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'North') ||
+          (w.gameState.discardPocForTransition == 'North' && clockPosition == '12PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'North') ||
+          (w.gameState.discardPocForTransition == 'North' && clockPosition == '6PM' && getDummyPocByDeclarer(w.gameState.declarer) != 'North')
         ) {
           console.log('invert North cardIndex');
           w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
