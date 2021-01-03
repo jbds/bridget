@@ -463,7 +463,7 @@ let paintDiscardArray = (p, g, w) => {
           w.userState.tableRotationDegrees,
           'North'
         );
-        console.log('discard from North with Dummy = ' + getDummyPocByDeclarer(w.gameState.declarer));
+        //console.log('discard from North with Dummy = ' + getDummyPocByDeclarer(w.gameState.declarer));
         // if (w.gameState.discardPocForTransition == 'North' && clockPosition == '12PM')
         if (
           // (w.gameState.discardPocForTransition == 'North' && clockPosition == '6PM') ||
@@ -471,7 +471,7 @@ let paintDiscardArray = (p, g, w) => {
           (w.gameState.discardPocForTransition == 'North' && clockPosition == '12PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'North') ||
           (w.gameState.discardPocForTransition == 'North' && clockPosition == '6PM' && getDummyPocByDeclarer(w.gameState.declarer) != 'North')
         ) {
-          console.log('invert North cardIndex');
+          //console.log('invert North cardIndex');
           w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
           w.gameState.transition.northStartXInv = p.lerp(w.gameState.transition.northStartXInv, w.gameState.transition.northEndX, lerpDelta);
           p.translate(w.gameState.transition.northStartXInv * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
@@ -489,7 +489,8 @@ let paintDiscardArray = (p, g, w) => {
         );
         if (
           (w.gameState.discardPocForTransition == 'East' && clockPosition == '12PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'East') ||
-          (w.gameState.discardPocForTransition == 'East' && clockPosition == '3PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'East')
+          (w.gameState.discardPocForTransition == 'East' && clockPosition == '3PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'East') ||
+          (w.gameState.discardPocForTransition == 'East' && clockPosition == '6PM' && getDummyPocByDeclarer(w.gameState.declarer) != 'East')
         ) {
           w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, lerpDelta);
           w.gameState.transition.eastStartYInv = p.lerp(w.gameState.transition.eastStartYInv, w.gameState.transition.eastEndY, lerpDelta);
@@ -506,8 +507,13 @@ let paintDiscardArray = (p, g, w) => {
           w.userState.tableRotationDegrees,
           'South'
         );
-        if (false) {
-
+        if (
+          (w.gameState.discardPocForTransition == 'South' && clockPosition == '6PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'South') ||
+          (w.gameState.discardPocForTransition == 'South' && clockPosition == '9PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'South')
+        ) {
+          w.gameState.transition.southStartY = p.lerp(w.gameState.transition.southStartY, w.gameState.transition.southEndY, lerpDelta);
+          w.gameState.transition.southStartXInv = p.lerp(w.gameState.transition.southStartXInv, w.gameState.transition.southEndX, lerpDelta);
+          p.translate(w.gameState.transition.southStartXInv * w.innerHeight, w.gameState.transition.southStartY * w.innerHeight);
         } else {
           w.gameState.transition.southStartY = p.lerp(w.gameState.transition.southStartY, w.gameState.transition.southEndY, lerpDelta);
           w.gameState.transition.southStartX = p.lerp(w.gameState.transition.southStartX, w.gameState.transition.southEndX, lerpDelta);
