@@ -463,14 +463,15 @@ let paintDiscardArray = (p, g, w) => {
           w.userState.tableRotationDegrees,
           'North'
         );
+        console.log('discard from North with Dummy = ' + getDummyPocByDeclarer(w.gameState.declarer));
         // if (w.gameState.discardPocForTransition == 'North' && clockPosition == '12PM')
         if (
-          (w.gameState.discardPocForTransition == 'North' && clockPosition == '6PM') ||
-          (w.gameState.discardPocForTransition == 'North' && clockPosition == '3PM') ||
-          (w.gameState.discardPocForTransition == 'North' && clockPosition == '12PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'North') ||
-          true
+          // (w.gameState.discardPocForTransition == 'North' && clockPosition == '6PM') ||
+          // (w.gameState.discardPocForTransition == 'North' && clockPosition == '3PM') ||
+          // (w.gameState.discardPocForTransition == 'North' && clockPosition == '12PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'North') ||
+          false
         ) {
-          console.log('invert North cardIndex')
+          //console.log('invert North cardIndex');
           w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
           w.gameState.transition.northStartXInv = p.lerp(w.gameState.transition.northStartXInv, w.gameState.transition.northEndX, lerpDelta);
           p.translate(w.gameState.transition.northStartXInv * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
