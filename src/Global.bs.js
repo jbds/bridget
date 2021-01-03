@@ -132,7 +132,7 @@ function reducer(state, action) {
                 var newrecord = Caml_obj.caml_obj_dup(state.transition);
                 newrecord.eastEndY = 0.0;
                 newrecord.eastStartYInv = 0.0;
-                newrecord.eastStartY = 0.0;
+                newrecord.eastStartY = -discardStartPositionIndex;
                 newrecord.eastEndX = eastEndX;
                 newrecord.eastStartX = 0.5;
                 tR = newrecord;
@@ -150,7 +150,7 @@ function reducer(state, action) {
                 var newrecord$2 = Caml_obj.caml_obj_dup(state.transition);
                 newrecord$2.southEndX = 0.0;
                 newrecord$2.southStartXInv = 0.0;
-                newrecord$2.southStartX = 0.0;
+                newrecord$2.southStartX = discardStartPositionIndex;
                 newrecord$2.southEndY = southEndY;
                 newrecord$2.southStartY = 0.5;
                 tR = newrecord$2;
@@ -159,7 +159,7 @@ function reducer(state, action) {
                 var newrecord$3 = Caml_obj.caml_obj_dup(state.transition);
                 newrecord$3.westEndY = 0.0;
                 newrecord$3.westStartYInv = 0.0;
-                newrecord$3.westStartY = 0.0;
+                newrecord$3.westStartY = -discardStartPositionIndex;
                 newrecord$3.westEndX = westEndX;
                 newrecord$3.westStartX = -0.5;
                 tR = newrecord$3;

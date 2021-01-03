@@ -183,7 +183,7 @@ let reducer = (state: TopLevel.state, action) => {
           ...state.transition,
           eastStartX: 0.5,
           eastEndX,
-          eastStartY: 0.0,
+          eastStartY: -. discardStartPositionIndex,
           eastStartYInv: 0.0,
           eastEndY: 0.0,
         }
@@ -191,7 +191,7 @@ let reducer = (state: TopLevel.state, action) => {
           ...state.transition,
           southStartY: 0.5,
           southEndY,
-          southStartX: 0.0,
+          southStartX: discardStartPositionIndex,
           southStartXInv: 0.0,
           southEndX: 0.0,
         }
@@ -199,7 +199,7 @@ let reducer = (state: TopLevel.state, action) => {
           ...state.transition,
           westStartX: (-0.5),
           westEndX,
-          westStartY: 0.0,
+          westStartY: -. discardStartPositionIndex,
           westStartYInv: 0.0,
           westEndY: 0.0,
         }
