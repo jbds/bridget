@@ -509,7 +509,8 @@ let paintDiscardArray = (p, g, w) => {
         );
         if (
           (w.gameState.discardPocForTransition == 'South' && clockPosition == '6PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'South') ||
-          (w.gameState.discardPocForTransition == 'South' && clockPosition == '9PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'South')
+          (w.gameState.discardPocForTransition == 'South' && clockPosition == '9PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'South') ||
+          (w.gameState.discardPocForTransition == 'South' && clockPosition == '12PM' && getDummyPocByDeclarer(w.gameState.declarer) != 'South')
         ) {
           w.gameState.transition.southStartY = p.lerp(w.gameState.transition.southStartY, w.gameState.transition.southEndY, lerpDelta);
           w.gameState.transition.southStartXInv = p.lerp(w.gameState.transition.southStartXInv, w.gameState.transition.southEndX, lerpDelta);
@@ -526,8 +527,14 @@ let paintDiscardArray = (p, g, w) => {
           w.userState.tableRotationDegrees,
           'West'
         );
-        if (false) {
-
+        if (
+          (w.gameState.discardPocForTransition == 'West' && clockPosition == '6PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'West') ||
+          (w.gameState.discardPocForTransition == 'West' && clockPosition == '9PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'West') ||
+          (w.gameState.discardPocForTransition == 'West' && clockPosition == '12PM' && getDummyPocByDeclarer(w.gameState.declarer) != 'West')
+        ) {
+          w.gameState.transition.westStartX = p.lerp(w.gameState.transition.westStartX, w.gameState.transition.westEndX, lerpDelta);
+          w.gameState.transition.westStartYInv = p.lerp(w.gameState.transition.westStartYInv, w.gameState.transition.westEndY, lerpDelta);
+          p.translate(w.gameState.transition.westStartX * w.innerHeight, w.gameState.transition.westStartYInv * w.innerHeight);
         } else {
           w.gameState.transition.westStartX = p.lerp(w.gameState.transition.westStartX, w.gameState.transition.westEndX, lerpDelta);
           w.gameState.transition.westStartY = p.lerp(w.gameState.transition.westStartY, w.gameState.transition.westEndY, lerpDelta);
