@@ -4,8 +4,8 @@
   var Online = require('../Online.bs');
 |};
 
-let execute = (state: TopLevel.state) => {
-  // aka "New Deal" aka "My Deal"
+let executeWithShuffle = (state: TopLevel.state) => {
+  // aka btn "My Deal"
   //Js.log("Action-Shuffle");
   // make sure doMessage is called in sidebar component
   let () = [%raw "window.isLastActionSync = false"];
@@ -65,3 +65,15 @@ let execute = (state: TopLevel.state) => {
     randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
   };
 };
+
+let executeWithoutShuffle = (state: TopLevel.state) => {
+  Js.log("Action-Shuffle triggered from Replay");
+  state;
+};
+
+let execute = (state: TopLevel.state, isMyDeal: bool) =>
+  if (isMyDeal == true) {
+    executeWithShuffle(state);
+  } else {
+    executeWithoutShuffle(state);
+  };

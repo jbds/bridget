@@ -7,7 +7,7 @@ var Shuffle$ReasonReactExamples = require("../Shuffle.bs.js");
 var Online = require('../Online.bs');
 ;
 
-function execute(state) {
+function executeWithShuffle(state) {
   ((window.isLastActionSync = false));
   ((setTimeout(function(){Online.doMessage('StoreDeal');}, 750)));
   var match = List.length(state.chicagoScoreSheet) % 5;
@@ -71,5 +71,21 @@ function execute(state) {
   return newrecord;
 }
 
+function executeWithoutShuffle(state) {
+  console.log("Action-Shuffle triggered from Replay");
+  return state;
+}
+
+function execute(state, isMyDeal) {
+  if (isMyDeal === true) {
+    return executeWithShuffle(state);
+  } else {
+    console.log("Action-Shuffle triggered from Replay");
+    return state;
+  }
+}
+
+exports.executeWithShuffle = executeWithShuffle;
+exports.executeWithoutShuffle = executeWithoutShuffle;
 exports.execute = execute;
 /*  Not a pure module */

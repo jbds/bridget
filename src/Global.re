@@ -5,7 +5,7 @@
 
 type action =
   //| NewGame
-  | Shuffle
+  | Shuffle(bool)
   //| Flip (Shuffle.compassPoint)
   | Discard
   | PostDiscard
@@ -81,7 +81,7 @@ let reducer = (state: TopLevel.state, action) => {
   // | NewGame => {
   //   // aka Reboot aka Restart
   // }
-  | Shuffle => MyDeal.execute(state)
+  | Shuffle(isMyDeal) => MyDeal.execute(state, isMyDeal)
   // | Flip (compassPoint) => {
   //  became redundant
   // }

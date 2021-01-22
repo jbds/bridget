@@ -1,5 +1,6 @@
 'use strict';
 
+var Block = require("bs-platform/lib/js/block.js");
 var React = require("react");
 var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
@@ -191,7 +192,7 @@ function App(Props) {
                       dispatch: dispatch
                     }), React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Shuffle */0,
+                      action: /* Shuffle */Block.__(0, [true]),
                       label: "My Deal",
                       id: "btnShuffle",
                       isWasteOfSpace: !isDealButtonVisible(undefined)
@@ -216,7 +217,7 @@ function App(Props) {
                       text: "\u200A"
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Concede */8,
+                      action: /* Concede */7,
                       label: "\uD83C\uDFC1",
                       id: "btnConcede",
                       isVisible: isQtyCardsInHandsDivFour(undefined) && isQtyCardsInDiscardZero(undefined) && isQtyCardsInHandGT0LTE16(undefined) && isFourSeatsOccupied(undefined)
@@ -233,7 +234,7 @@ function App(Props) {
                       text: "\u200A"
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Shuffle */0,
+                      action: /* Shuffle */Block.__(0, [false]),
                       label: "Replay",
                       id: "btnReplay",
                       isWasteOfSpace: !isDealButtonVisible(undefined) || state.isReviewDealVisible
@@ -241,43 +242,43 @@ function App(Props) {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* EndOneTrick */7,
+                      action: /* EndOneTrick */6,
                       label: "End One Trick",
                       id: "btnEndTrick",
                       isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* PostDiscard */2,
+                      action: /* PostDiscard */1,
                       label: "Post Discard",
                       id: "btnPostDiscard",
                       isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Discard */1,
+                      action: /* Discard */0,
                       label: "Discard",
                       id: "btnDiscard",
                       isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Sync */3,
+                      action: /* Sync */2,
                       label: "Sync state with gameState",
                       id: "btnSync",
                       isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* LoginSync */4,
+                      action: /* LoginSync */3,
                       label: "Login sync with server",
                       id: "btnLoginSync",
                       isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* PostBid */6,
+                      action: /* PostBid */5,
                       label: "Post Bid",
                       id: "btnPostBid",
                       isVisible: false
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
-                      action: /* Post4Passes */9,
+                      action: /* Post4Passes */8,
                       label: "Post 4 Passes",
                       id: "btnPost4Passes",
                       isVisible: false

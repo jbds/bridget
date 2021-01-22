@@ -217,7 +217,7 @@ let make = () => {
       //<br/>
       <ButtonStd
         dispatch
-        action=Shuffle
+        action={Shuffle(true)}
         label="My Deal"
         id="btnShuffle"
         isWasteOfSpace={!isDealButtonVisible()}
@@ -261,7 +261,7 @@ let make = () => {
       <SpanStd id="spn8" text={js|\u200A|js} />
       <ButtonStd
         dispatch
-        action=Shuffle
+        action={Shuffle(false)}
         label="Replay"
         id="btnReplay"
         isWasteOfSpace={!isDealButtonVisible() || state.isReviewDealVisible}

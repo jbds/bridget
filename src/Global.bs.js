@@ -75,9 +75,7 @@ var initialState = {
 function reducer(state, action) {
   if (typeof action === "number") {
     switch (action) {
-      case /* Shuffle */0 :
-          return MyDeal$ReasonReactExamples.execute(state);
-      case /* Discard */1 :
+      case /* Discard */0 :
           ((window.isLastActionSync = false));
           var discardFileName = window.discardFileName;
           var cardWrappedInArray = Belt_Array.keep(state.pack, (function (x) {
@@ -188,7 +186,7 @@ function reducer(state, action) {
           newrecord$4.discardIndex = state.discardIndex + 1 | 0;
           newrecord$4.activePointOfCompass = myDiscardArray.length === 4 ? undefined : poc;
           return newrecord$4;
-      case /* PostDiscard */2 :
+      case /* PostDiscard */1 :
           var m$1 = window.m;
           var cardHeightToCanvasHeightRatio$1 = window.cardHeightToCanvasHeightRatio;
           var cardAspectRatio$1 = window.cardAspectRatio;
@@ -262,7 +260,7 @@ function reducer(state, action) {
           newrecord$5.transition = tR$1;
           newrecord$5.lastAction = "PostDiscard";
           return newrecord$5;
-      case /* Sync */3 :
+      case /* Sync */2 :
           ((window.isLastActionSync = true));
           return {
                   activePointOfCompass: undefined,
@@ -317,7 +315,7 @@ function reducer(state, action) {
                     westEndY: 0.0
                   }
                 };
-      case /* LoginSync */4 :
+      case /* LoginSync */3 :
           ((window.isLastActionSync = true));
           var cSS = window.gameState.chicagoScoreSheet;
           var dealer = window.gameState.dealer;
@@ -388,29 +386,31 @@ function reducer(state, action) {
                   randomInt: Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined),
                   transition: tR$2
                 };
-      case /* Test */5 :
+      case /* Test */4 :
           ((window.isLastActionSync = true));
           var newrecord$6 = Caml_obj.caml_obj_dup(state);
           newrecord$6.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
           newrecord$6.lastAction = "Test";
           return newrecord$6;
-      case /* PostBid */6 :
+      case /* PostBid */5 :
           var newrecord$7 = Caml_obj.caml_obj_dup(state);
           newrecord$7.lastAction = "Post Bid after 3 passes";
           newrecord$7.isBiddingCycle = false;
           newrecord$7.activePointOfCompass = Shuffle$ReasonReactExamples.getNextActivePointOfCompass(state.declarer);
           return newrecord$7;
-      case /* EndOneTrick */7 :
+      case /* EndOneTrick */6 :
           return EndTrick$ReasonReactExamples.execute(state);
-      case /* Concede */8 :
+      case /* Concede */7 :
           return Concede$ReasonReactExamples.execute(state);
-      case /* Post4Passes */9 :
+      case /* Post4Passes */8 :
           return Post4Passes$ReasonReactExamples.execute(state);
       
     }
   } else {
     switch (action.tag | 0) {
-      case /* AssignPlayer */0 :
+      case /* Shuffle */0 :
+          return MyDeal$ReasonReactExamples.execute(state, action[0]);
+      case /* AssignPlayer */1 :
           var pOfCAndP = action[0];
           ((window.isLastActionSync = false));
           console.log("action AssignPlayer " + (pOfCAndP.player + (" to " + pOfCAndP.pointOfCompass)));
@@ -460,7 +460,7 @@ function reducer(state, action) {
           newrecord$8.pointOfCompassAndPlayers = myArray2;
           newrecord$8.lastAction = "AssignPlayer";
           return newrecord$8;
-      case /* BidAdd */1 :
+      case /* BidAdd */2 :
           ((window.isLastActionSync = false));
           var newrecord$9 = Caml_obj.caml_obj_dup(state);
           newrecord$9.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
@@ -478,7 +478,7 @@ function reducer(state, action) {
             state.bids
           ];
           return newrecord$9;
-      case /* BidUpdate */2 :
+      case /* BidUpdate */3 :
           ((window.isLastActionSync = false));
           var bids$1 = state.bids;
           var head = List.hd(bids$1);
@@ -509,7 +509,7 @@ function reducer(state, action) {
           newrecord$10.bids = bidsUpdated;
           newrecord$10.activePointOfCompass = poc$2;
           return newrecord$10;
-      case /* BidAddSpecial */3 :
+      case /* BidAddSpecial */4 :
           var special = action[0];
           ((window.isLastActionSync = false));
           var poc$3 = Shuffle$ReasonReactExamples.getNextPointOfCompass(state.activePointOfCompass);
