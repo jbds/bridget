@@ -193,6 +193,8 @@ let make = () => {
     Belt.Array.length(lifecycleHandCardsArray) <= 16
     && Belt.Array.length(lifecycleHandCardsArray) > 0;
   };
+  // helper to decide if we want to force hide of Replay button
+  let isFirstRound = List.length(state.chicagoScoreSheet) == 0 ? true : false;
   // fragment
   <>
     <div id="sidebar1">
@@ -264,7 +266,9 @@ let make = () => {
         action={Shuffle(false)}
         label="Replay"
         id="btnReplay"
-        isWasteOfSpace={!isDealButtonVisible() || state.isReviewDealVisible}
+        isWasteOfSpace={
+          !isDealButtonVisible() || state.isReviewDealVisible || isFirstRound
+        }
       />
     </div>
     <div id="sidebar2">

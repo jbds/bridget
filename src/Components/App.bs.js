@@ -1,5 +1,6 @@
 'use strict';
 
+var List = require("bs-platform/lib/js/list.js");
 var Block = require("bs-platform/lib/js/block.js");
 var React = require("react");
 var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
@@ -158,6 +159,7 @@ function App(Props) {
       return false;
     }
   };
+  var isFirstRound = List.length(state.chicagoScoreSheet) === 0;
   return React.createElement(React.Fragment, undefined, React.createElement("div", {
                   id: "sidebar1"
                 }, React.createElement("br", undefined), React.createElement(SpanStd$ReasonReactExamples.make, {
@@ -237,7 +239,7 @@ function App(Props) {
                       action: /* Shuffle */Block.__(0, [false]),
                       label: "Replay",
                       id: "btnReplay",
-                      isWasteOfSpace: !isDealButtonVisible(undefined) || state.isReviewDealVisible
+                      isWasteOfSpace: !isDealButtonVisible(undefined) || state.isReviewDealVisible || isFirstRound
                     })), React.createElement("div", {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
