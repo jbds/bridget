@@ -223,7 +223,7 @@ let make = () => {
         isWasteOfSpace={!isDealButtonVisible()}
       />
       //<SpacerStd spacerWidth="1vh" />
-      <SpanStd id="spn5" text=" " />
+      <SpanStd id="spn5" text={js|\u200A|js} />
       <ButtonStdJsx
         id="btnRotateTable"
         label={js|\u27F3|js}

@@ -197,7 +197,7 @@ function App(Props) {
                       isWasteOfSpace: !isDealButtonVisible(undefined)
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn5",
-                      text: " "
+                      text: "\u200A"
                     }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "\u27F3",
                       id: "btnRotateTable",
