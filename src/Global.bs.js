@@ -597,7 +597,9 @@ function reducer(state, action) {
                     var chicagoScoreSheetTail = Belt_List.tailExn(state.chicagoScoreSheet);
                     var myChicagoScoreSheetRecord_vulnerable = chicagoScoreSheetHead.vulnerable;
                     var myChicagoScoreSheetRecord_totalTricksNorthSouth = 0;
+                    var myChicagoScoreSheetRecord_scoreNorthSouth = chicagoScoreSheetHead.scoreNorthSouth;
                     var myChicagoScoreSheetRecord_totalTricksWestEast = 0;
+                    var myChicagoScoreSheetRecord_scoreWestEast = chicagoScoreSheetHead.scoreWestEast;
                     var myChicagoScoreSheetRecord = {
                       vulnerable: myChicagoScoreSheetRecord_vulnerable,
                       contractLevel: contractLevel,
@@ -606,9 +608,9 @@ function reducer(state, action) {
                       isDoubled: isDoubled,
                       isRedoubled: isRedoubled,
                       totalTricksNorthSouth: myChicagoScoreSheetRecord_totalTricksNorthSouth,
-                      scoreNorthSouth: undefined,
+                      scoreNorthSouth: myChicagoScoreSheetRecord_scoreNorthSouth,
                       totalTricksWestEast: myChicagoScoreSheetRecord_totalTricksWestEast,
-                      scoreWestEast: undefined
+                      scoreWestEast: myChicagoScoreSheetRecord_scoreWestEast
                     };
                     var myPack$1 = $$Array.map((function (card) {
                             if (contractSuit === undefined) {

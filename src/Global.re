@@ -715,9 +715,10 @@ let reducer = (state: TopLevel.state, action) => {
             bidRecordOfInterest1.contractLevel === None
             && bidRecordOfInterest1.isRedoubled === true;
           let totalTricksNorthSouth = Some(0);
-          let scoreNorthSouth = None;
+          // removed so we can see Some(0) set by Replay
+          //let scoreNorthSouth = None;
           let totalTricksWestEast = Some(0);
-          let scoreWestEast = None;
+          //let scoreWestEast = None;
           let bidsFilteredBySuitAnd2Poc =
             Belt.List.keep(state.bids, x => {
               x.contractSuit == contractSuit
@@ -746,9 +747,7 @@ let reducer = (state: TopLevel.state, action) => {
             isDoubled,
             isRedoubled,
             totalTricksNorthSouth,
-            scoreNorthSouth,
             totalTricksWestEast,
-            scoreWestEast,
           };
           // also need to adjust the card handOrder to match the contractSuit if any
           let myPack =
