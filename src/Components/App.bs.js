@@ -228,6 +228,15 @@ function App(Props) {
                       id: "btnReviewDeal",
                       onClick: handlerBtnReviewDeal,
                       isWasteOfSpace: !state.isReviewDealVisible
+                    }), React.createElement(SpanStd$ReasonReactExamples.make, {
+                      id: "spn8",
+                      text: "\u200A"
+                    }), React.createElement(ButtonStd$ReasonReactExamples.make, {
+                      dispatch: dispatch,
+                      action: /* Shuffle */0,
+                      label: "Replay",
+                      id: "btnReplay",
+                      isWasteOfSpace: !isDealButtonVisible(undefined)
                     })), React.createElement("div", {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {
