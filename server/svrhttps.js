@@ -1,6 +1,6 @@
 'use strict';
 
-// Last update:  16/12/20 20:06
+// Last update:  22/01/21 11:xx
 
 const session = require('express-session');
 const express = require('express');
@@ -310,9 +310,10 @@ wss.on('connection', function (ws, req) {
       // deepcopy array of objects
       packAsDealt = JSON.parse(JSON.stringify(gameState.pack));
     } else if (message === '"ReviewDeal"') {
-      // restore the pack
+      // restore the pack and hide button
       gameState.pack = packAsDealt;
       gameState.handVisible = { north: true, east: true, south: true, west: true };
+      gameState.isReviewDealVisible = false;
       broadcastGameStateToAll(gameState);
     } else {
       // push the state on to the history stack
