@@ -74,6 +74,20 @@ function executeWithShuffle(state) {
 function executeWithoutShuffle(state) {
   ((window.isLastActionSync = false));
   ((setTimeout(function(){Online.doMessage('StoreDeal');}, 750)));
+  var chicagoScoreSheetHead = List.hd(state.chicagoScoreSheet);
+  var chicagoScoreSheetRecord_vulnerable = chicagoScoreSheetHead.vulnerable;
+  var chicagoScoreSheetRecord = {
+    vulnerable: chicagoScoreSheetRecord_vulnerable,
+    contractLevel: undefined,
+    contractSuit: undefined,
+    contractDeclarer: undefined,
+    isDoubled: false,
+    isRedoubled: false,
+    totalTricksNorthSouth: undefined,
+    scoreNorthSouth: undefined,
+    totalTricksWestEast: undefined,
+    scoreWestEast: undefined
+  };
   var lastDealer = Shuffle$ReasonReactExamples.getLastActivePointOfCompass(state.dealer);
   var newrecord = Caml_obj.caml_obj_dup(state);
   newrecord.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
@@ -86,18 +100,7 @@ function executeWithoutShuffle(state) {
   newrecord.discardIndex = -1;
   newrecord.declarer = undefined;
   newrecord.chicagoScoreSheet = /* :: */[
-    {
-      vulnerable: "TBD",
-      contractLevel: undefined,
-      contractSuit: undefined,
-      contractDeclarer: undefined,
-      isDoubled: false,
-      isRedoubled: false,
-      totalTricksNorthSouth: undefined,
-      scoreNorthSouth: undefined,
-      totalTricksWestEast: undefined,
-      scoreWestEast: undefined
-    },
+    chicagoScoreSheetRecord,
     state.chicagoScoreSheet
   ];
   newrecord.bids = /* [] */0;

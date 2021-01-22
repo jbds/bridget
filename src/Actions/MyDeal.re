@@ -77,8 +77,10 @@ let executeWithoutShuffle = (state: TopLevel.state) => {
     "setTimeout(function(){Online.doMessage('StoreDeal');}, 750)"
   ];
   // do NOT change vulnerability for a Replay, use previous value
+  // should never fail as btn Replay is hidden on first round
+  let chicagoScoreSheetHead = List.hd(state.chicagoScoreSheet);
   let chicagoScoreSheetRecord: Chicago.chicagoScoreSheetRecord = {
-    vulnerable: "TBD",
+    vulnerable: chicagoScoreSheetHead.vulnerable,
     contractLevel: None,
     contractSuit: None,
     contractDeclarer: None,
