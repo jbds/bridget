@@ -100,28 +100,30 @@ let getNextStateFromTricksWonAndWinningPartnership =
       // some redundancy here, possibility of a bug
       // state.declarer and contract.declarer SHOULD always be the same
       // put -ve scores to opposition
+      // NEVER return None, because we flag Replay by Some(0)
       scoreLookup >= 0
         ? {
           ...myChicagoScoreSheetRecord,
           scoreNorthSouth:
             state.declarer === Some("North")
             || state.declarer === Some("South")
-              ? Some(scoreLookup) : None,
+              ? Some(scoreLookup) : myChicagoScoreSheetRecord.scoreNorthSouth,
           scoreWestEast:
             state.declarer === Some("West")
             || state.declarer === Some("East")
-              ? Some(scoreLookup) : None,
+              ? Some(scoreLookup) : myChicagoScoreSheetRecord.scoreWestEast,
         }
         : {
           ...myChicagoScoreSheetRecord,
           scoreNorthSouth:
             state.declarer === Some("West")
             || state.declarer === Some("East")
-              ? Some(- scoreLookup) : None,
+              ? Some(- scoreLookup)
+              : myChicagoScoreSheetRecord.scoreNorthSouth,
           scoreWestEast:
             state.declarer === Some("North")
             || state.declarer === Some("South")
-              ? Some(- scoreLookup) : None,
+              ? Some(- scoreLookup) : myChicagoScoreSheetRecord.scoreWestEast,
         };
     } else {
       myChicagoScoreSheetRecord;

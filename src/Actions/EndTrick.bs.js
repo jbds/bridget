@@ -67,9 +67,9 @@ function getNextStateFromTricksWonAndWinningPartnership(state, qtyTricksToGiveWi
           isDoubled: myChicagoScoreSheetRecord_isDoubled,
           isRedoubled: myChicagoScoreSheetRecord_isRedoubled,
           totalTricksNorthSouth: myChicagoScoreSheetRecord_totalTricksNorthSouth,
-          scoreNorthSouth: state.declarer === "North" || state.declarer === "South" ? scoreLookup : undefined,
+          scoreNorthSouth: state.declarer === "North" || state.declarer === "South" ? scoreLookup : myChicagoScoreSheetRecord_scoreNorthSouth,
           totalTricksWestEast: myChicagoScoreSheetRecord_totalTricksWestEast,
-          scoreWestEast: state.declarer === "West" || state.declarer === "East" ? scoreLookup : undefined
+          scoreWestEast: state.declarer === "West" || state.declarer === "East" ? scoreLookup : myChicagoScoreSheetRecord_scoreWestEast
         }) : ({
           vulnerable: myChicagoScoreSheetRecord_vulnerable,
           contractLevel: myChicagoScoreSheetRecord_contractLevel,
@@ -78,9 +78,9 @@ function getNextStateFromTricksWonAndWinningPartnership(state, qtyTricksToGiveWi
           isDoubled: myChicagoScoreSheetRecord_isDoubled,
           isRedoubled: myChicagoScoreSheetRecord_isRedoubled,
           totalTricksNorthSouth: myChicagoScoreSheetRecord_totalTricksNorthSouth,
-          scoreNorthSouth: state.declarer === "West" || state.declarer === "East" ? -scoreLookup | 0 : undefined,
+          scoreNorthSouth: state.declarer === "West" || state.declarer === "East" ? -scoreLookup | 0 : myChicagoScoreSheetRecord_scoreNorthSouth,
           totalTricksWestEast: myChicagoScoreSheetRecord_totalTricksWestEast,
-          scoreWestEast: state.declarer === "North" || state.declarer === "South" ? -scoreLookup | 0 : undefined
+          scoreWestEast: state.declarer === "North" || state.declarer === "South" ? -scoreLookup | 0 : myChicagoScoreSheetRecord_scoreWestEast
         });
   } else {
     myChicagoScoreSheetRecordWithOptionalScore = myChicagoScoreSheetRecord;

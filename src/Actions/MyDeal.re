@@ -14,6 +14,20 @@ let executeWithShuffle = (state: TopLevel.state) => {
   let () = [%raw
     "setTimeout(function(){Online.doMessage('StoreDeal');}, 750)"
   ];
+  // if there has been a Replay, then we need to remove the head of the scoresheet
+  // avoid an empty list
+  let chicagoScoreSheetAdjusted =
+    if (List.length(state.chicagoScoreSheet) > 0) {
+      let chicagoScoreSheetHead = List.hd(state.chicagoScoreSheet);
+      if (chicagoScoreSheetHead.scoreNorthSouth == Some(0)
+          || chicagoScoreSheetHead.scoreWestEast == Some(0)) {
+        List.tl(state.chicagoScoreSheet);
+      } else {
+        state.chicagoScoreSheet;
+      };
+    } else {
+      state.chicagoScoreSheet;
+    };
   // do change of dealer at end of deal ie 52 cards out
   // also set BiddingCycle to true here
   // force activePointOfCompass to be dealer
@@ -22,7 +36,7 @@ let executeWithShuffle = (state: TopLevel.state) => {
   // ref Gill - show chicagoScoreSheetRecord at deal time so vulnerability is known
   // show partner as well as declarer
   let vulnerable =
-    switch (List.length(state.chicagoScoreSheet) mod 5) {
+    switch (List.length(chicagoScoreSheetAdjusted) mod 5) {
     | 0 => "None"
     | 1
     | 2 =>
@@ -52,7 +66,10 @@ let executeWithShuffle = (state: TopLevel.state) => {
     ...state,
     activePointOfCompass: state.dealer,
     bids: [],
-    chicagoScoreSheet: [chicagoScoreSheetRecord, ...state.chicagoScoreSheet],
+    chicagoScoreSheet: [
+      chicagoScoreSheetRecord,
+      ...chicagoScoreSheetAdjusted,
+    ],
     declarer: None,
     discardIndex: (-1),
     handVisible: Shuffle.initialHandVisible,

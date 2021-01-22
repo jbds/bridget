@@ -10,7 +10,14 @@ var Online = require('../Online.bs');
 function executeWithShuffle(state) {
   ((window.isLastActionSync = false));
   ((setTimeout(function(){Online.doMessage('StoreDeal');}, 750)));
-  var match = List.length(state.chicagoScoreSheet) % 5;
+  var chicagoScoreSheetAdjusted;
+  if (List.length(state.chicagoScoreSheet) > 0) {
+    var chicagoScoreSheetHead = List.hd(state.chicagoScoreSheet);
+    chicagoScoreSheetAdjusted = Caml_obj.caml_equal(chicagoScoreSheetHead.scoreNorthSouth, 0) || Caml_obj.caml_equal(chicagoScoreSheetHead.scoreWestEast, 0) ? List.tl(state.chicagoScoreSheet) : state.chicagoScoreSheet;
+  } else {
+    chicagoScoreSheetAdjusted = state.chicagoScoreSheet;
+  }
+  var match = List.length(chicagoScoreSheetAdjusted) % 5;
   var vulnerable;
   if (match > 2 || match < 0) {
     vulnerable = match !== 3 ? "Error" : "All";
@@ -64,7 +71,7 @@ function executeWithShuffle(state) {
   newrecord.declarer = undefined;
   newrecord.chicagoScoreSheet = /* :: */[
     chicagoScoreSheetRecord,
-    state.chicagoScoreSheet
+    chicagoScoreSheetAdjusted
   ];
   newrecord.bids = /* [] */0;
   newrecord.activePointOfCompass = state.dealer;
