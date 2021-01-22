@@ -236,7 +236,7 @@ function App(Props) {
                       action: /* Shuffle */0,
                       label: "Replay",
                       id: "btnReplay",
-                      isWasteOfSpace: !isDealButtonVisible(undefined)
+                      isWasteOfSpace: !isDealButtonVisible(undefined) || state.isReviewDealVisible
                     })), React.createElement("div", {
                   id: "sidebar2"
                 }, React.createElement("br", undefined), React.createElement(ButtonStd$ReasonReactExamples.make, {

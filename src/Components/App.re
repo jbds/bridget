@@ -264,7 +264,7 @@ let make = () => {
         action=Shuffle
         label="Replay"
         id="btnReplay"
-        isWasteOfSpace={!isDealButtonVisible()}
+        isWasteOfSpace={!isDealButtonVisible() || state.isReviewDealVisible}
       />
     </div>
     <div id="sidebar2">
