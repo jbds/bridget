@@ -205,7 +205,7 @@ function App(Props) {
                       isWasteOfSpace: !isFourSeatsOccupied(undefined)
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn6",
-                      text: " "
+                      text: "\u200A"
                     }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "Undo",
                       id: "btnUndo",
@@ -213,7 +213,7 @@ function App(Props) {
                       isWasteOfSpace: !isUndoVisible(undefined)
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn7",
-                      text: " "
+                      text: "\u200A"
                     }), React.createElement(ButtonStd$ReasonReactExamples.make, {
                       dispatch: dispatch,
                       action: /* Concede */8,
@@ -222,7 +222,7 @@ function App(Props) {
                       isWasteOfSpace: !(isQtyCardsInHandsDivFour(undefined) && isQtyCardsInDiscardZero(undefined) && isQtyCardsInHandGT0LTE16(undefined) && isFourSeatsOccupied(undefined))
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn8",
-                      text: " "
+                      text: "\u200A"
                     }), React.createElement(ButtonStdJsx$ReasonReactExamples.make, {
                       label: "Review",
                       id: "btnReviewDeal",

@@ -231,14 +231,14 @@ let make = () => {
         isWasteOfSpace={!isFourSeatsOccupied()}
       />
       //<SpacerStd spacerWidth="1.5vh" />
-      <SpanStd id="spn6" text=" " />
+      <SpanStd id="spn6" text={js|\u200A|js} />
       <ButtonStdJsx
         id="btnUndo"
         label="Undo"
         onClick=handlerBtnUndo
         isWasteOfSpace={!isUndoVisible()}
       />
-      <SpanStd id="spn7" text=" " />
+      <SpanStd id="spn7" text={js|\u200A|js} />
       <ButtonStd
         dispatch
         action=Concede
@@ -253,7 +253,7 @@ let make = () => {
           )
         }
       />
-      <SpanStd id="spn8" text=" " />
+      <SpanStd id="spn8" text={js|\u200A|js} />
       <ButtonStdJsx
         id="btnReviewDeal"
         label="Review"
