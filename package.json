@@ -10,6 +10,10 @@
     "upload": "./node_modules/.bin/webpack && scp ./bundleOutput/index.js jon@98765.co.uk:/home/jon/express-session-parse/public/bundleOutput/",
     "uploadsvr": "scp ./server/svrhttps.js jon@98765.co.uk:/home/jon/express-session-parse/"
   },
+  "scriptsComments": {
+    "uploadsvr": "Must restart webserver after server file change",
+    "cli reminder": "Login as root, systemctl stop nodewebserver, systemctl daemon-reload, systemctl start nodewebserver"
+  },
   "keywords": [
     "BuckleScript",
     "ReasonReact",
