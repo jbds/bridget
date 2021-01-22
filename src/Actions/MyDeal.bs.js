@@ -76,6 +76,8 @@ function executeWithoutShuffle(state) {
   ((setTimeout(function(){Online.doMessage('StoreDeal');}, 750)));
   var chicagoScoreSheetHead = List.hd(state.chicagoScoreSheet);
   var chicagoScoreSheetRecord_vulnerable = chicagoScoreSheetHead.vulnerable;
+  var chicagoScoreSheetRecord_totalTricksNorthSouth = 0;
+  var chicagoScoreSheetRecord_totalTricksWestEast = 0;
   var chicagoScoreSheetRecord = {
     vulnerable: chicagoScoreSheetRecord_vulnerable,
     contractLevel: undefined,
@@ -83,9 +85,9 @@ function executeWithoutShuffle(state) {
     contractDeclarer: undefined,
     isDoubled: false,
     isRedoubled: false,
-    totalTricksNorthSouth: undefined,
+    totalTricksNorthSouth: chicagoScoreSheetRecord_totalTricksNorthSouth,
     scoreNorthSouth: undefined,
-    totalTricksWestEast: undefined,
+    totalTricksWestEast: chicagoScoreSheetRecord_totalTricksWestEast,
     scoreWestEast: undefined
   };
   var lastDealer = Shuffle$ReasonReactExamples.getLastActivePointOfCompass(state.dealer);
