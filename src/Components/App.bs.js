@@ -227,7 +227,7 @@ function App(Props) {
                       label: "Review",
                       id: "btnReviewDeal",
                       onClick: handlerBtnReviewDeal,
-                      isWasteOfSpace: !state.isReviewDealVisible
+                      isWasteOfSpace: !isDealButtonVisible(undefined) || !state.isReviewDealVisible
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn8",
                       text: "\u200A"

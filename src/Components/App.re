@@ -256,7 +256,7 @@ let make = () => {
         id="btnReviewDeal"
         label="Review"
         onClick=handlerBtnReviewDeal
-        isWasteOfSpace={!state.isReviewDealVisible}
+        isWasteOfSpace={!isDealButtonVisible() || !state.isReviewDealVisible}
       />
       <SpanStd id="spn8" text={js|\u200A|js} />
       <ButtonStd
