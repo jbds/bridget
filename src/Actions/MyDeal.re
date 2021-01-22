@@ -78,8 +78,8 @@ let executeWithoutShuffle = (state: TopLevel.state) => {
   ];
   // do NOT change vulnerability for a Replay, use previous value
   // should never fail as btn Replay is hidden on first round
-  // identify Replay by setting totalTricksXX to Some(0) rather than None (bodge)
-  // then on any MyDeal we can check the head record, and if one of the totalTricks is still zero
+  // identify Replay by setting scoreXX to Some(0) rather than None (bodge)
+  // then on any MyDeal we can check the head record, and if one of the scoreXX is still zero
   // then delete the entire row
   let chicagoScoreSheetHead = List.hd(state.chicagoScoreSheet);
   let chicagoScoreSheetRecord: Chicago.chicagoScoreSheetRecord = {
@@ -89,10 +89,10 @@ let executeWithoutShuffle = (state: TopLevel.state) => {
     contractDeclarer: None,
     isDoubled: false,
     isRedoubled: false,
-    totalTricksNorthSouth: Some(0),
-    scoreNorthSouth: None,
-    totalTricksWestEast: Some(0),
-    scoreWestEast: None,
+    totalTricksNorthSouth: None,
+    scoreNorthSouth: Some(0),
+    totalTricksWestEast: None,
+    scoreWestEast: Some(0),
   };
   // we need to move the dealer back one position!
   let lastDealer = Shuffle.getLastActivePointOfCompass(state.dealer);
