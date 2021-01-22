@@ -219,7 +219,7 @@ function App(Props) {
                       action: /* Concede */8,
                       label: "\uD83C\uDFC1",
                       id: "btnConcede",
-                      isWasteOfSpace: !(isQtyCardsInHandsDivFour(undefined) && isQtyCardsInDiscardZero(undefined) && isQtyCardsInHandGT0LTE16(undefined) && isFourSeatsOccupied(undefined))
+                      isVisible: isQtyCardsInHandsDivFour(undefined) && isQtyCardsInDiscardZero(undefined) && isQtyCardsInHandGT0LTE16(undefined) && isFourSeatsOccupied(undefined)
                     }), React.createElement(SpanStd$ReasonReactExamples.make, {
                       id: "spn8",
                       text: "\u200A"

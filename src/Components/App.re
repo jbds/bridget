@@ -244,13 +244,11 @@ let make = () => {
         action=Concede
         label={js|\uD83C\uDFC1|js}
         id="btnConcede"
-        isWasteOfSpace={
-          !(
-            isQtyCardsInHandsDivFour()
-            && isQtyCardsInDiscardZero()
-            && isQtyCardsInHandGT0LTE16()
-            && isFourSeatsOccupied()
-          )
+        isVisible={
+          isQtyCardsInHandsDivFour()
+          && isQtyCardsInDiscardZero()
+          && isQtyCardsInHandGT0LTE16()
+          && isFourSeatsOccupied()
         }
       />
       <SpanStd id="spn8" text={js|\u200A|js} />
