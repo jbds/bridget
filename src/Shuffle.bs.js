@@ -648,6 +648,24 @@ function getNextActivePointOfCompass(poc) {
   }
 }
 
+function getLastActivePointOfCompass(poc) {
+  if (poc === undefined) {
+    return "West";
+  }
+  switch (poc) {
+    case "East" :
+        return "North";
+    case "North" :
+        return "West";
+    case "South" :
+        return "East";
+    case "West" :
+        return "South";
+    default:
+      return "West";
+  }
+}
+
 function getSuitAsOptionString(suit) {
   switch (suit) {
     case /* Spades */0 :
@@ -679,6 +697,7 @@ exports.initialPoc = initialPoc;
 exports.pocAsString = pocAsString;
 exports.optionIntAsString = optionIntAsString;
 exports.getNextActivePointOfCompass = getNextActivePointOfCompass;
+exports.getLastActivePointOfCompass = getLastActivePointOfCompass;
 exports.getSuitAsOptionString = getSuitAsOptionString;
 exports.optionIntAsInt = optionIntAsInt;
 /* initialPoc Not a pure module */

@@ -67,8 +67,45 @@ let executeWithShuffle = (state: TopLevel.state) => {
 };
 
 let executeWithoutShuffle = (state: TopLevel.state) => {
-  Js.log("Action-Shuffle triggered from Replay");
-  state;
+  // aka btn Replay
+  //Js.log("Action-Shuffle triggered from Replay");
+  // make sure doMessage is called in sidebar component
+  let () = [%raw "window.isLastActionSync = false"];
+  // prepare another message alerting server to store the pack
+  // benign?
+  let () = [%raw
+    "setTimeout(function(){Online.doMessage('StoreDeal');}, 750)"
+  ];
+  // do NOT change vulnerability for a Replay, use previous value
+  let chicagoScoreSheetRecord: Chicago.chicagoScoreSheetRecord = {
+    vulnerable: "TBD",
+    contractLevel: None,
+    contractSuit: None,
+    contractDeclarer: None,
+    isDoubled: false,
+    isRedoubled: false,
+    totalTricksNorthSouth: None, //Some(0),
+    scoreNorthSouth: None,
+    totalTricksWestEast: None, //Some(0),
+    scoreWestEast: None,
+  };
+  // we need to move the dealer back one position!
+  let lastDealer = Shuffle.getLastActivePointOfCompass(state.dealer);
+  {
+    ...state,
+    activePointOfCompass: lastDealer,
+    bids: [],
+    chicagoScoreSheet: [chicagoScoreSheetRecord, ...state.chicagoScoreSheet],
+    declarer: None,
+    discardIndex: (-1),
+    handVisible: Shuffle.initialHandVisible,
+    isBiddingCycle: true,
+    isBiddingHideDenominationButtons: true,
+    isDummyVisible: false,
+    isReviewDealVisible: false,
+    lastAction: "Replay",
+    randomInt: Shuffle.impureGetTimeBasedSeedUpTo60k(),
+  };
 };
 
 let execute = (state: TopLevel.state, isMyDeal: bool) =>

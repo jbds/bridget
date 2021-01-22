@@ -123,6 +123,8 @@ let optionIntAsString: option(int) => string;
 
 let getNextActivePointOfCompass: option(string) => option(string);
 
+let getLastActivePointOfCompass: option(string) => option(string);
+
 let getSuitAsOptionString: suit => option(string);
 
 let optionIntAsInt: option(int) => int;

@@ -1230,6 +1230,17 @@ let getNextActivePointOfCompass = poc => {
   };
 };
 
+// for Replay
+let getLastActivePointOfCompass = poc => {
+  switch (poc) {
+  | Some("North") => Some("West")
+  | Some("East") => Some("North")
+  | Some("South") => Some("East")
+  | Some("West") => Some("South")
+  | _ => Some("West")
+  };
+};
+
 let getSuitAsOptionString = (suit: suit) => {
   switch (suit) {
   | Spades => Some("Spades")

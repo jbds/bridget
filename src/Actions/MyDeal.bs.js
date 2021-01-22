@@ -72,16 +72,44 @@ function executeWithShuffle(state) {
 }
 
 function executeWithoutShuffle(state) {
-  console.log("Action-Shuffle triggered from Replay");
-  return state;
+  ((window.isLastActionSync = false));
+  ((setTimeout(function(){Online.doMessage('StoreDeal');}, 750)));
+  var lastDealer = Shuffle$ReasonReactExamples.getLastActivePointOfCompass(state.dealer);
+  var newrecord = Caml_obj.caml_obj_dup(state);
+  newrecord.randomInt = Shuffle$ReasonReactExamples.impureGetTimeBasedSeedUpTo60k(undefined);
+  newrecord.lastAction = "Replay";
+  newrecord.isReviewDealVisible = false;
+  newrecord.isDummyVisible = false;
+  newrecord.isBiddingHideDenominationButtons = true;
+  newrecord.isBiddingCycle = true;
+  newrecord.handVisible = Shuffle$ReasonReactExamples.initialHandVisible;
+  newrecord.discardIndex = -1;
+  newrecord.declarer = undefined;
+  newrecord.chicagoScoreSheet = /* :: */[
+    {
+      vulnerable: "TBD",
+      contractLevel: undefined,
+      contractSuit: undefined,
+      contractDeclarer: undefined,
+      isDoubled: false,
+      isRedoubled: false,
+      totalTricksNorthSouth: undefined,
+      scoreNorthSouth: undefined,
+      totalTricksWestEast: undefined,
+      scoreWestEast: undefined
+    },
+    state.chicagoScoreSheet
+  ];
+  newrecord.bids = /* [] */0;
+  newrecord.activePointOfCompass = lastDealer;
+  return newrecord;
 }
 
 function execute(state, isMyDeal) {
   if (isMyDeal === true) {
     return executeWithShuffle(state);
   } else {
-    console.log("Action-Shuffle triggered from Replay");
-    return state;
+    return executeWithoutShuffle(state);
   }
 }
 
