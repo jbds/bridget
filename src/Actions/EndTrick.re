@@ -215,15 +215,18 @@ let getNextStateFromTricksWonAndWinningPartnership =
       state.discardIndex !== 51
         ? Some(winningDiscardPoc) : Some(endOfDealNextPoc),
     chicagoScoreSheet:
-      state.discardIndex !== 51
-      || scoreSheetRecord.vulnerable !== "All"
-      && scoreSheetRecord.vulnerable !== ""
+      state.discardIndex == 51
+      && scoreSheetRecord.vulnerable == "All"
+      && (
+        scoreSheetRecord.scoreNorthSouth == None
+        || scoreSheetRecord.scoreWestEast == None
+      )
         ? [
+          chicagoScoreSheetRecordSubTotal,
           myChicagoScoreSheetRecordWithOptionalScore,
           ...chicagoScoreSheetTail,
         ]
         : [
-          chicagoScoreSheetRecordSubTotal,
           myChicagoScoreSheetRecordWithOptionalScore,
           ...chicagoScoreSheetTail,
         ],

@@ -142,15 +142,15 @@ function getNextStateFromTricksWonAndWinningPartnership(state, qtyTricksToGiveWi
   newrecord.isReviewDealVisible = state.discardIndex === 51;
   newrecord.declarer = state.discardIndex !== 51 ? state.declarer : undefined;
   newrecord.dealer = state.discardIndex !== 51 ? state.dealer : endOfDealNextPoc;
-  newrecord.chicagoScoreSheet = state.discardIndex !== 51 || scoreSheetRecord.vulnerable !== "All" && scoreSheetRecord.vulnerable !== "" ? /* :: */[
-      myChicagoScoreSheetRecordWithOptionalScore,
-      chicagoScoreSheetTail
-    ] : /* :: */[
+  newrecord.chicagoScoreSheet = state.discardIndex === 51 && scoreSheetRecord.vulnerable === "All" && (scoreSheetRecord.scoreNorthSouth === undefined || scoreSheetRecord.scoreWestEast === undefined) ? /* :: */[
       chicagoScoreSheetRecordSubTotal,
       /* :: */[
         myChicagoScoreSheetRecordWithOptionalScore,
         chicagoScoreSheetTail
       ]
+    ] : /* :: */[
+      myChicagoScoreSheetRecordWithOptionalScore,
+      chicagoScoreSheetTail
     ];
   newrecord.activePointOfCompass = state.discardIndex !== 51 ? winningDiscardPoc : endOfDealNextPoc;
   return newrecord;
