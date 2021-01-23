@@ -142,7 +142,7 @@ function getNextStateFromTricksWonAndWinningPartnership(state, qtyTricksToGiveWi
   newrecord.isReviewDealVisible = state.discardIndex === 51;
   newrecord.declarer = state.discardIndex !== 51 ? state.declarer : undefined;
   newrecord.dealer = state.discardIndex !== 51 ? state.dealer : endOfDealNextPoc;
-  newrecord.chicagoScoreSheet = state.discardIndex !== 51 || scoreSheetRecord.vulnerable !== "All" ? /* :: */[
+  newrecord.chicagoScoreSheet = state.discardIndex !== 51 || scoreSheetRecord.vulnerable !== "All" && scoreSheetRecord.vulnerable !== "" ? /* :: */[
       myChicagoScoreSheetRecordWithOptionalScore,
       chicagoScoreSheetTail
     ] : /* :: */[
