@@ -81,8 +81,7 @@ function executeWithShuffle(state) {
 function executeWithoutShuffle(state) {
   ((window.isLastActionSync = false));
   ((setTimeout(function(){Online.doMessage('StoreDeal');}, 750)));
-  var chicagoScoreSheetHead = List.hd(state.chicagoScoreSheet);
-  var chicagoScoreSheetRecord_vulnerable = chicagoScoreSheetHead.vulnerable;
+  var chicagoScoreSheetRecord_vulnerable = List.hd(state.chicagoScoreSheet).vulnerable === "" ? List.hd(List.tl(state.chicagoScoreSheet)).vulnerable : List.hd(state.chicagoScoreSheet).vulnerable;
   var chicagoScoreSheetRecord_scoreNorthSouth = 0;
   var chicagoScoreSheetRecord_scoreWestEast = 0;
   var chicagoScoreSheetRecord = {

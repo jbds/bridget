@@ -94,13 +94,16 @@ let executeWithoutShuffle = (state: TopLevel.state) => {
     "setTimeout(function(){Online.doMessage('StoreDeal');}, 750)"
   ];
   // do NOT change vulnerability for a Replay, use previous value
+  // where previous value ignores any subtotal record
   // should never fail as btn Replay is hidden on first round
   // identify Replay by setting scoreXX to Some(0) rather than None (bodge)
   // then on any MyDeal we can check the head record, and if one of the scoreXX is still zero
   // then delete the entire row
-  let chicagoScoreSheetHead = List.hd(state.chicagoScoreSheet);
   let chicagoScoreSheetRecord: Chicago.chicagoScoreSheetRecord = {
-    vulnerable: chicagoScoreSheetHead.vulnerable,
+    vulnerable:
+      List.hd(state.chicagoScoreSheet).vulnerable == ""
+        ? List.hd(List.tl(state.chicagoScoreSheet)).vulnerable
+        : List.hd(state.chicagoScoreSheet).vulnerable,
     contractLevel: None,
     contractSuit: None,
     contractDeclarer: None,
