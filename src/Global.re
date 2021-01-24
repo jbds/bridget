@@ -169,38 +169,75 @@ let reducer = (state: TopLevel.state, action) => {
     ];
     Js.log("discardStartPositionIndex");
     Js.log(discardStartPositionIndex);
+    // let tR = {
+    //   switch (discardPoc) {
+    //   | "North" => {
+    //       ...state.transition,
+    //       northStartY: (-0.5),
+    //       northEndY,
+    //       northStartX: discardStartPositionIndex,
+    //       northStartXInv: -. discardStartPositionIndex,
+    //       northEndX: 0.0,
+    //     }
+    //   | "East" => {
+    //       ...state.transition,
+    //       eastStartX: 0.5,
+    //       eastEndX,
+    //       eastStartY: discardStartPositionIndex,
+    //       eastStartYInv: -. discardStartPositionIndex,
+    //       eastEndY: 0.0,
+    //     }
+    //   | "South" => {
+    //       ...state.transition,
+    //       southStartY: 0.5,
+    //       southEndY,
+    //       southStartX: discardStartPositionIndex,
+    //       southStartXInv: -. discardStartPositionIndex,
+    //       southEndX: 0.0,
+    //     }
+    //   | "West" => {
+    //       ...state.transition,
+    //       westStartX: (-0.5),
+    //       westEndX,
+    //       westStartY: discardStartPositionIndex,
+    //       westStartYInv: -. discardStartPositionIndex,
+    //       westEndY: 0.0,
+    //     }
+    //   | _ => state.transition
+    //   };
+    // };
     let tR = {
       switch (discardPoc) {
       | "North" => {
           ...state.transition,
           northStartY: (-0.5),
           northEndY,
-          northStartX: discardStartPositionIndex,
-          northStartXInv: -. discardStartPositionIndex,
+          northStartX: 0.0,
+          northStartXInv: 0.0,
           northEndX: 0.0,
         }
       | "East" => {
           ...state.transition,
           eastStartX: 0.5,
           eastEndX,
-          eastStartY: discardStartPositionIndex,
-          eastStartYInv: -. discardStartPositionIndex,
+          eastStartY: 0.0,
+          eastStartYInv: 0.0,
           eastEndY: 0.0,
         }
       | "South" => {
           ...state.transition,
           southStartY: 0.5,
           southEndY,
-          southStartX: discardStartPositionIndex,
-          southStartXInv: -. discardStartPositionIndex,
+          southStartX: 0.0,
+          southStartXInv: 0.0,
           southEndX: 0.0,
         }
       | "West" => {
           ...state.transition,
           westStartX: (-0.5),
           westEndX,
-          westStartY: discardStartPositionIndex,
-          westStartYInv: -. discardStartPositionIndex,
+          westStartY: 0.0,
+          westStartYInv: 0.0,
           westEndY: 0.0,
         }
       | _ => state.transition
