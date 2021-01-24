@@ -483,19 +483,19 @@ let paintDiscardArray = (p, g, w) => {
           w.userState.tableRotationDegrees,
           'East'
         );
-        // if (
-        //   (w.gameState.discardPocForTransition == 'East' && clockPosition == '12PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'East') ||
-        //   (w.gameState.discardPocForTransition == 'East' && clockPosition == '3PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'East') ||
-        //   (w.gameState.discardPocForTransition == 'East' && clockPosition == '6PM' && getDummyPocByDeclarer(w.gameState.declarer) != 'East')
-        // ) {
-        // w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, lerpDelta);
-        // w.gameState.transition.eastStartYInv = p.lerp(w.gameState.transition.eastStartYInv, w.gameState.transition.eastEndY, lerpDelta);
-        // p.translate(w.gameState.transition.eastStartX * w.innerHeight, w.gameState.transition.eastStartYInv * w.innerHeight);
-        // } else {
-        w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, lerpDelta);
-        w.gameState.transition.eastStartY = p.lerp(w.gameState.transition.eastStartY, w.gameState.transition.eastEndY, lerpDelta);
-        p.translate(w.gameState.transition.eastStartX * w.innerHeight, w.gameState.transition.eastStartY * w.innerHeight);
-        // }
+        if (
+          (w.gameState.discardPocForTransition == 'East' && clockPosition == '12PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'East') ||
+          (w.gameState.discardPocForTransition == 'East' && clockPosition == '3PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'East') ||
+          (w.gameState.discardPocForTransition == 'East' && clockPosition == '6PM' && getDummyPocByDeclarer(w.gameState.declarer) != 'East')
+        ) {
+          w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, lerpDelta);
+          w.gameState.transition.eastStartYInv = p.lerp(w.gameState.transition.eastStartYInv, w.gameState.transition.eastEndY, lerpDelta);
+          p.translate(w.gameState.transition.eastStartX * w.innerHeight, w.gameState.transition.eastStartYInv * w.innerHeight);
+        } else {
+          w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, lerpDelta);
+          w.gameState.transition.eastStartY = p.lerp(w.gameState.transition.eastStartY, w.gameState.transition.eastEndY, lerpDelta);
+          p.translate(w.gameState.transition.eastStartX * w.innerHeight, w.gameState.transition.eastStartY * w.innerHeight);
+        }
         // replace above with just the end state, which is the same for either transition
         //p.translate(w.gameState.transition.eastEndX * w.innerHeight, w.gameState.transition.eastEndY * w.innerHeight);
         break;
