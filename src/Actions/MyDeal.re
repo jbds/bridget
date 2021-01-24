@@ -90,9 +90,10 @@ let executeWithoutShuffle = (state: TopLevel.state) => {
   let () = [%raw "window.isLastActionSync = false"];
   // prepare another message alerting server to store the pack
   // benign?
-  let () = [%raw
-    "setTimeout(function(){Online.doMessage('StoreDeal');}, 750)"
-  ];
+  // NO - because this is a temporary replay, we do NOT want to store the same deal
+  // let () = [%raw
+  //   "setTimeout(function(){Online.doMessage('StoreDeal');}, 750)"
+  // ];
   // do NOT change vulnerability for a Replay, use previous value
   // where previous value ignores any subtotal record
   // should never fail as btn Replay is hidden on first round
