@@ -457,21 +457,15 @@ let paintDiscardArray = (p, g, w) => {
     switch (true) {
       // N
       case (obj.shuffleIndex < 13):
-        // good for all rotations, because x=x and y=y all angles
-        //p.translate(0, -cardHeight * cardHeightOffsetFraction);
         clockPosition = rotationPlusPointOfCompassToClockPosition(
           w.userState.tableRotationDegrees,
           'North'
         );
-        //console.log('discard from North with Dummy = ' + getDummyPocByDeclarer(w.gameState.declarer));
-        // if (w.gameState.discardPocForTransition == 'North' && clockPosition == '12PM')
         if (
-          // (w.gameState.discardPocForTransition == 'North' && clockPosition == '6PM') ||
           (w.gameState.discardPocForTransition == 'North' && clockPosition == '3PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'North') ||
           (w.gameState.discardPocForTransition == 'North' && clockPosition == '12PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'North') ||
           (w.gameState.discardPocForTransition == 'North' && clockPosition == '6PM' && getDummyPocByDeclarer(w.gameState.declarer) != 'North')
         ) {
-          //console.log('invert North cardIndex');
           w.gameState.transition.northStartY = p.lerp(w.gameState.transition.northStartY, w.gameState.transition.northEndY, lerpDelta);
           w.gameState.transition.northStartXInv = p.lerp(w.gameState.transition.northStartXInv, w.gameState.transition.northEndX, lerpDelta);
           p.translate(w.gameState.transition.northStartXInv * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
@@ -480,6 +474,8 @@ let paintDiscardArray = (p, g, w) => {
           w.gameState.transition.northStartX = p.lerp(w.gameState.transition.northStartX, w.gameState.transition.northEndX, lerpDelta);
           p.translate(w.gameState.transition.northStartX * w.innerHeight, w.gameState.transition.northStartY * w.innerHeight);
         }
+        // replace above with just the end state, which is the same for either transition
+        //p.translate(w.gameState.transition.northEndX * w.innerHeight, w.gameState.transition.northEndY * w.innerHeight);
         break;
       // E
       case (obj.shuffleIndex < 26):
@@ -487,19 +483,21 @@ let paintDiscardArray = (p, g, w) => {
           w.userState.tableRotationDegrees,
           'East'
         );
-        if (
-          (w.gameState.discardPocForTransition == 'East' && clockPosition == '12PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'East') ||
-          (w.gameState.discardPocForTransition == 'East' && clockPosition == '3PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'East') ||
-          (w.gameState.discardPocForTransition == 'East' && clockPosition == '6PM' && getDummyPocByDeclarer(w.gameState.declarer) != 'East')
-        ) {
-          w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, lerpDelta);
-          w.gameState.transition.eastStartYInv = p.lerp(w.gameState.transition.eastStartYInv, w.gameState.transition.eastEndY, lerpDelta);
-          p.translate(w.gameState.transition.eastStartX * w.innerHeight, w.gameState.transition.eastStartYInv * w.innerHeight);
-        } else {
-          w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, lerpDelta);
-          w.gameState.transition.eastStartY = p.lerp(w.gameState.transition.eastStartY, w.gameState.transition.eastEndY, lerpDelta);
-          p.translate(w.gameState.transition.eastStartX * w.innerHeight, w.gameState.transition.eastStartY * w.innerHeight);
-        }
+        // if (
+        //   (w.gameState.discardPocForTransition == 'East' && clockPosition == '12PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'East') ||
+        //   (w.gameState.discardPocForTransition == 'East' && clockPosition == '3PM' && getDummyPocByDeclarer(w.gameState.declarer) == 'East') ||
+        //   (w.gameState.discardPocForTransition == 'East' && clockPosition == '6PM' && getDummyPocByDeclarer(w.gameState.declarer) != 'East')
+        // ) {
+        w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, lerpDelta);
+        w.gameState.transition.eastStartYInv = p.lerp(w.gameState.transition.eastStartYInv, w.gameState.transition.eastEndY, lerpDelta);
+        p.translate(w.gameState.transition.eastStartX * w.innerHeight, w.gameState.transition.eastStartYInv * w.innerHeight);
+        // } else {
+        //   w.gameState.transition.eastStartX = p.lerp(w.gameState.transition.eastStartX, w.gameState.transition.eastEndX, lerpDelta);
+        //   w.gameState.transition.eastStartY = p.lerp(w.gameState.transition.eastStartY, w.gameState.transition.eastEndY, lerpDelta);
+        //   p.translate(w.gameState.transition.eastStartX * w.innerHeight, w.gameState.transition.eastStartY * w.innerHeight);
+        // }
+        // replace above with just the end state, which is the same for either transition
+        //p.translate(w.gameState.transition.eastEndX * w.innerHeight, w.gameState.transition.eastEndY * w.innerHeight);
         break;
       // S
       case (obj.shuffleIndex < 39):
